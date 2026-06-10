@@ -58,25 +58,25 @@ export default function Header() {
                 PACKAGES
               </button>
               <div className="absolute hidden group-hover:block bg-white shadow-lg rounded py-2 w-56 z-50">
-                <Link href="/packages/fat-freezing" className="block px-4 py-2 hover:bg-gray-50 text-sm">
+                <Link href="/packages/fat-freezing" className="block px-4 py-2 hover:bg-gray-50 text-sm" style={{ color: '#9B8D83' }}>
                   Fat Freezing
                 </Link>
-                <Link href="/packages/fat-dissolving" className="block px-4 py-2 hover:bg-gray-50 text-sm">
+                <Link href="/packages/fat-dissolving" className="block px-4 py-2 hover:bg-gray-50 text-sm" style={{ color: '#9B8D83' }}>
                   Fat Dissolving
                 </Link>
-                <Link href="/packages/muscle-stimulation" className="block px-4 py-2 hover:bg-gray-50 text-sm">
+                <Link href="/packages/muscle-stimulation" className="block px-4 py-2 hover:bg-gray-50 text-sm" style={{ color: '#9B8D83' }}>
                   Muscle Stimulation
                 </Link>
-                <Link href="/packages/skin-tightening" className="block px-4 py-2 hover:bg-gray-50 text-sm">
+                <Link href="/packages/skin-tightening" className="block px-4 py-2 hover:bg-gray-50 text-sm" style={{ color: '#9B8D83' }}>
                   Skin Tightening
                 </Link>
-                <Link href="/packages/lipocavitation" className="block px-4 py-2 hover:bg-gray-50 text-sm">
+                <Link href="/packages/lipocavitation" className="block px-4 py-2 hover:bg-gray-50 text-sm" style={{ color: '#9B8D83' }}>
                   Lipocavitation
                 </Link>
-                <Link href="/packages/anti-cellulite" className="block px-4 py-2 hover:bg-gray-50 text-sm">
+                <Link href="/packages/anti-cellulite" className="block px-4 py-2 hover:bg-gray-50 text-sm" style={{ color: '#9B8D83' }}>
                   Anti Cellulite
                 </Link>
-                <Link href="/packages/lymphatic-drainage" className="block px-4 py-2 hover:bg-gray-50 text-sm">
+                <Link href="/packages/lymphatic-drainage" className="block px-4 py-2 hover:bg-gray-50 text-sm" style={{ color: '#9B8D83' }}>
                   Lymphatic Drainage
                 </Link>
               </div>

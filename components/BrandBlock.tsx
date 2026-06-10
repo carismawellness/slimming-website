@@ -50,19 +50,19 @@ export default function BrandBlock() {
             const photoFirst = i % 2 === 0;
             const photo = (
               <div key="photo" className="md:w-1/2 flex justify-center">
-                <div style={{ borderRadius: '16px', overflow: 'hidden', width: '100%', maxWidth: '343px', aspectRatio: '343 / 456' }}>
+                <div style={{ borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', overflow: 'hidden', width: '100%', maxWidth: '343px', aspectRatio: '343 / 456', boxShadow: '16px -16px 0 #CBDEC5' }}>
                   <img src={doc.img} alt={doc.photo} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }} />
                 </div>
               </div>
             );
             const text = (
               <div key="text" className="md:w-1/2 flex flex-col justify-center">
-                <h3 className="mb-3 pb-3" style={{ color: TAUPE, fontFamily: 'Trajan Pro, serif', fontSize: '24px', fontWeight: 400, letterSpacing: '1px', borderBottom: '1px solid #E6E1DC' }}>{doc.name}</h3>
-                <p style={{ color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '12px', lineHeight: 1.65 }}>{doc.bio}</p>
+                <h3 className="mb-4 pb-3" style={{ color: '#7ba587', fontFamily: 'Trajan Pro, serif', fontSize: '28px', fontWeight: 400, letterSpacing: '1px', textTransform: 'uppercase', borderBottom: '1px solid #A9C6A2' }}>{doc.name}</h3>
+                <p style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: 1.75 }}>{doc.bio}</p>
               </div>
             );
             return (
-              <div key={doc.name} className="flex flex-col md:flex-row gap-10 items-center">
+              <div key={doc.name} className="flex flex-col md:flex-row gap-12 items-center" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderRadius: '28px', padding: '40px' }}>
                 {photoFirst ? [photo, text] : [text, photo]}
               </div>
             );

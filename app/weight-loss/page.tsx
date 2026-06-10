@@ -1,18 +1,38 @@
+'use client';
+
+import { useRef, useState } from 'react';
+
+/* ============================================================
+   Carisma — Medical Weight-Loss Program  (/weight-loss)
+   A doctor-led, evidence-based slimming protocol for Malta.
+   Copy angle: "Medicine, not motivation." Calm, clinical,
+   authoritative — reframing weight loss as a supervised
+   protocol for the post-35 metabolism, not another diet.
+   ============================================================ */
+
+/* ---------- Brand tokens ---------- */
 const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
 const bodyFont = 'Roboto, sans-serif';
+
+const green = '#8EB093';
+const greenDark = '#7ba587';
+const slate = '#2b5672'; // CTA
+const taupe = '#9B8D83';
+const taupeLight = '#AFA39D';
+const softBg = '#E4EBE2';
+const panelGradient = 'linear-gradient(135deg, #FCFCFA, #D8E7D2)';
 
 const freshaUrl =
   'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191';
 const phoneNumber = '+356 27802062';
 
-const green = '#8EB093';
-const greenDark = '#7ba587';
-const taupe = '#9B8D83';
-const taupeLight = '#AFA39D';
-const softBg = '#E4EBE2';
-const heroBg = '#D7DFD4';
+/* ---------- Shared text styles ---------- */
+const bullet = { color: green, fontSize: '18px', lineHeight: '1' } as const;
+const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '15px' };
+const pStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '15px', lineHeight: 1.7 };
 
+/* ---------- Shared components ---------- */
 function SectionHeading({ children }: { children: React.ReactNode }) {
   return (
     <h2
@@ -21,6 +41,17 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
     >
       {children}
     </h2>
+  );
+}
+
+function Eyebrow({ children }: { children: React.ReactNode }) {
+  return (
+    <p
+      className="text-center"
+      style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase' }}
+    >
+      {children}
+    </p>
   );
 }
 
@@ -35,16 +66,17 @@ function Placeholder({ label, height = '320px' }: { label: string; height?: stri
   );
 }
 
-function CTAButton() {
+/* Primary slate-blue CTA — the conversion button, repeated strategically */
+function CTAButton({ label = 'BOOK YOUR FREE BODY ANALYSIS' }: { label?: string }) {
   return (
     <a
       href={freshaUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-block rounded-full font-bold text-white text-center"
-      style={{ backgroundColor: green, padding: '14px 32px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px' }}
+      className="inline-block rounded-full font-bold text-white text-center transition-opacity hover:opacity-90"
+      style={{ backgroundColor: slate, padding: '15px 36px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px' }}
     >
-      GET YOUR FREE BODY ANALYSIS
+      {label}
     </a>
   );
 }
@@ -53,78 +85,268 @@ function PhoneButton() {
   return (
     <a
       href={`tel:${phoneNumber.replace(/\s/g, '')}`}
-      className="inline-block rounded font-bold text-center"
-      style={{ backgroundColor: 'transparent', border: `2px solid ${green}`, color: greenDark, padding: '12px 32px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+      className="inline-block rounded-full font-bold text-center transition-colors"
+      style={{ backgroundColor: 'transparent', border: `2px solid ${slate}`, color: slate, padding: '13px 34px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
     >
-      free consultation
+      Speak to a doctor
     </a>
   );
 }
 
-export default function WeightLossPage() {
-  const guarantees = [
-    { loss: '5kgs', weeks: 'in 6 weeks' },
-    { loss: '10kgs', weeks: 'in 12 weeks' },
-    { loss: '20kgs', weeks: 'in 20 weeks' },
+function Check() {
+  return <span style={{ color: green, fontWeight: 700 }}>&#10003;</span>;
+}
+
+/* Small reassurance line shown directly beneath primary CTAs to lower friction */
+function CTAReassurance({ className = '' }: { className?: string }) {
+  return (
+    <p className={className} style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '13px' }}>
+      Free, no-obligation consultation &middot; Doctor-led &middot; Limited places each month
+    </p>
+  );
+}
+
+/* Press / media authority strip — reuses the real logos from the main site */
+function AsSeenOn() {
+  const logos = [
+    { src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', alt: 'Lovin Malta' },
+    { src: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', alt: 'Malta Daily' },
+    { src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', alt: '89.7 Bay' },
+    { src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', alt: 'Times of Malta' },
+    { src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', alt: 'Malta Today' },
+  ];
+  return (
+    <section className="py-9 border-b" style={{ borderColor: '#ececec', backgroundColor: '#fff' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <p className="mb-2" style={{ color: taupeLight, fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase' }}>
+          As seen on
+        </p>
+        <div className="mx-auto mb-8" style={{ width: '90px', height: '1px', backgroundColor: '#d9cfc6' }} />
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 items-center">
+          {logos.map((l, i) => (
+            <div key={i} className="w-full flex items-center justify-center" style={{ height: '56px' }}>
+              <img src={l.src} alt={l.alt} style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   1. HERO
+   ============================================================ */
+function HeroSection() {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [started, setStarted] = useState(false);
+  return (
+    <section className="py-16 lg:py-20 mx-auto" style={{ backgroundImage: 'url(/background.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: '48px', overflow: 'hidden', maxWidth: '1280px', marginTop: '20px', marginBottom: '20px' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          {/* Left — copy */}
+          <div>
+            <h1 className="mb-5 pb-4" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '40px', lineHeight: 1.1, letterSpacing: '1px', textTransform: 'uppercase', borderBottom: '1px solid #cdd8c8' }}>
+              Lose up to 1kg a week.
+            </h1>
+            <p className="mb-6" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.5 }}>
+              With Malta&apos;s most comprehensive, medically guided slimming program
+            </p>
+            <p className="mb-6" style={pStyle}>
+              Personalised programs that combine medical-grade analysis and a prescription stack, a nutrition plan, internationally renowned body-sculpting modalities and weekly check-ins to help you reach your target weight and stay there.
+            </p>
+            <p className="mb-2" style={pStyle}>
+              We are so confident in our programs that we offer an extended care commitment:
+            </p>
+            <ul className="mb-5 space-y-1">
+              {['5 kg in 6 weeks', '10 kg in 12 weeks', '20 kg in 20 weeks'].map((t) => (
+                <li key={t} className="flex items-start gap-2" style={pStyle}>
+                  <span style={bullet}>&bull;</span>
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mb-8" style={pStyle}>
+              If you do not hit your agreed target, we keep treating you for free.
+            </p>
+            <CTAButton label="GET YOUR FREE BODY ANALYSIS" />
+            <div className="mt-6 flex items-center gap-3">
+              <img src="/wix/87fc13_7c506cd7a9324e74a89aab69b22cc67d~mv2.png" alt="Google" style={{ height: '26px', width: 'auto', objectFit: 'contain' }} />
+              <span style={{ color: green, fontSize: '16px', letterSpacing: '2px' }}>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+              <span style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
+            </div>
+            <div className="mt-8 space-y-1" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '12px', lineHeight: 1.6 }}>
+              <p>*Includes 3 fat-freezing sessions, scheduled to your clinical plan; additional areas or appointments are charged separately.</p>
+              <p>**Sessions may be spaced over several weeks depending on the area treated and your suitability.</p>
+              <p>***Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.</p>
+            </div>
+          </div>
+
+          {/* Right — video frame + awards */}
+          <div className="flex flex-col items-center gap-6">
+            <div className="relative w-full" style={{ maxWidth: '420px' }}>
+              <div className="overflow-hidden shadow-lg" style={{ aspectRatio: '4 / 5', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}>
+                <video
+                  ref={videoRef}
+                  src="/video/hero-720p.mp4"
+                  poster="/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png"
+                  controls={started}
+                  playsInline
+                  preload="metadata"
+                  onPlay={() => setStarted(true)}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', backgroundColor: '#000' }}
+                />
+              </div>
+              {!started && (
+                <button
+                  type="button"
+                  onClick={() => videoRef.current?.play()}
+                  className="absolute inset-0 flex items-center justify-center"
+                  style={{ cursor: 'pointer', background: 'transparent', border: 0 }}
+                  aria-label="Play video"
+                >
+                  <span className="flex items-center justify-center rounded-full" style={{ width: '64px', height: '64px', backgroundColor: 'rgba(255,255,255,0.85)' }}>
+                    <span style={{ marginLeft: '5px', width: 0, height: 0, borderLeft: '18px solid #7ba587', borderTop: '11px solid transparent', borderBottom: '11px solid transparent' }} />
+                  </span>
+                </button>
+              )}
+            </div>
+            <div className="flex items-center gap-3">
+              <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="Malta Healthcare, Wellness, Beauty & Best Spa Awards" style={{ height: '54px', width: 'auto', objectFit: 'contain' }} />
+              <p style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+                #1 Voted Clinic<br />in Malta
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   2. PROBLEM / AGITATION
+   ============================================================ */
+function ProblemAgitationSection() {
+  const empathy = [
+    'Since your late thirties or early forties your body feels like it quietly changed the rules. The same food now sits on your waist instead of burning off.',
+    'Around menopause the scale crept up even though you were counting steps and cutting snacks. You feel betrayed by your own hormones.',
+    'Every new diet tells you to cut bread, pasta and wine. You can do it for a week or two, then life happens and you rebound even heavier.',
+    'You are tired of plans that treat you like a number on a scale instead of a human with work, family, stress and a changing body.',
   ];
 
-  const pillars = [
-    {
-      title: 'Medical grade assessment',
-      subtitle: 'Understand your body composition',
-      items: [
-        'Full body composition analysis',
-        'Doctor consultation',
-        'GLP-1 as appropriate (e.g., Ozempic)',
-        'Fat dissolving injections',
-        'Blood tests, metabolic screening & intolerance screen',
-      ],
-    },
-    {
-      title: 'Diet and accountability',
-      subtitle: 'Personalised food plan with a buddy',
-      items: [
-        'Personalised diet plan that fits your routine and culture',
-        'Weekly weigh ins and measurements',
-        'One to one accountability with a dedicated coach',
-        'Supplement recommendations to support metabolism, energy and cravings',
-      ],
-    },
-    {
-      title: 'Exercise and movement',
-      subtitle: 'Realistic movement that fits your life',
-      items: [
-        'Open gym access for independent training',
-        'Group classes focused on fat loss and strength',
-        'Personal training sessions for extra guidance and motivation',
-      ],
-    },
-    {
-      title: 'Targeted body treatments',
-      subtitle: 'Clinic treatments that speed up change',
-      items: [
-        'Muscle stimulation treatments (Emsculpt NEO)',
-        'Fat freezing treatments (CoolSculpting)',
-        'Radiofrequency skin tightening (VelaShape)',
-        'Lymphatic drainage',
-      ],
-    },
-  ];
-
-  const whatIgnored = [
-    'Your metabolism naturally slows as muscle drops with age',
+  const ignored = [
+    'Your metabolism naturally slows as muscle drops with age.',
     'Menopause and peri menopause shift fat to the waist and stomach and change hunger signals.',
     'Years of yo yo dieting have taught your body to protect fat when it senses restriction.',
-    'Templatised meal plans with little regard to your medical history, food intolerances and blood work',
+    'Templatised meal plans with little regard to your medical history, food intolerances and blood work.',
   ];
 
-  const whatWrong = [
+  const wrong = [
     'Extreme calorie cuts and carb bans make your body feel under threat, so it holds on to fat and burns muscle.',
-    'Focus on burning calories, not protecting muscle or joint health as you age',
+    'Focus on burning calories, not protecting muscle or joint health as you age.',
     'Endless cardio drains energy without protecting metabolism.',
     'One size fits all meal plans never account for Maltese food, family life or social events.',
   ];
 
+  return (
+    <section>
+      {/* Narrative */}
+      <div className="py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div style={{ background: panelGradient, borderRadius: '32px', padding: '48px' }}>
+            <h2 className="mb-10 text-center" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase', lineHeight: 1.35 }}>
+              Lose inches, gain energy<br />Pasta and wine still on the menu
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+              <div className="w-full overflow-hidden mx-auto shadow-md" style={{ aspectRatio: '334 / 362', maxWidth: '420px', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}>
+                <img
+                  src="/wix/87fc13_16e7dbedc9e84343b51b1f3d4821c6ea~mv2.jpg"
+                  alt="Slimming consultation at the Carisma clinic in Malta"
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </div>
+              <div>
+                <p className="mb-6" style={pStyle}>
+                  You are eating better than you did in your twenties, yet the weight around your stomach and hips does not budge. You walk more, you try to be good, but every year your clothes feel tighter and your energy feels lower.
+                </p>
+                <ul className="space-y-3 mb-6">
+                  {empathy.map((t) => (
+                    <li key={t} className="flex items-start gap-2" style={liStyle}>
+                      <span style={bullet}>&bull;</span>
+                      <span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p style={pStyle}>
+                  If you read this and think &lsquo;This is me&rsquo;, your willpower is not the problem. Your biology has changed. You need a medically guided plan that works with your age, hormones and metabolism while still letting you eat the foods you love.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Why it's harder after 30 */}
+      <div className="py-16" style={{ backgroundColor: '#ffffff' }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
+            Why everything else failed?
+          </p>
+          <div className="mx-auto mb-6" style={{ width: '110px', height: '1px', backgroundColor: '#cdd8c8' }} />
+          <h2 className="text-center mb-6" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+            Why is it so hard to lose weight after 30?
+          </h2>
+          <p className="mb-12 text-center max-w-2xl mx-auto" style={pStyle}>
+            Most of what you have tried was built on one idea: eat less, move more. That might work for a 25 year old with no stress. It is not enough for a 40 plus body with real hormones, real history and real responsibilities.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-8" style={{ background: panelGradient, borderTopLeftRadius: '48px', borderTopRightRadius: '12px', borderBottomLeftRadius: '12px', borderBottomRightRadius: '48px' }}>
+              <h3 className="mb-5 text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>What those plans ignored</h3>
+              <ul className="space-y-3">
+                {ignored.map((t) => (
+                  <li key={t} className="flex items-start gap-2" style={liStyle}>
+                    <span style={bullet}>&bull;</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-8" style={{ background: panelGradient, borderTopLeftRadius: '12px', borderTopRightRadius: '48px', borderBottomLeftRadius: '48px', borderBottomRightRadius: '12px' }}>
+              <h3 className="mb-5 text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>What those plans got wrong</h3>
+              <ul className="space-y-3">
+                {wrong.map((t) => (
+                  <li key={t} className="flex items-start gap-2" style={liStyle}>
+                    <span style={bullet}>&bull;</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="mt-10 mx-auto max-w-3xl" style={{ borderLeft: '3px solid #8EB093', paddingLeft: '20px' }}>
+            <p style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', lineHeight: 1.7, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              So you end up <strong style={{ color: greenDark }}>hungrier</strong>, more <strong style={{ color: greenDark }}>tired</strong> and more <strong style={{ color: greenDark }}>frustrated</strong>, often with <strong style={{ color: greenDark }}>less muscle</strong> and a <strong style={{ color: greenDark }}>slower metabolism</strong> than when you started.
+            </p>
+          </div>
+          <div className="mt-10 mx-auto max-w-3xl text-center p-8" style={{ background: panelGradient, borderRadius: '24px' }}>
+            <p style={pStyle}>
+              <strong style={{ color: greenDark }}>Our program is built to reverse exactly that:</strong> we reset your metabolism for your age, protect muscle, work with your hormones and show you how to lose weight while still eating the food you enjoy.
+            </p>
+            <div className="mt-6 flex justify-center">
+              <CTAButton label="GET YOUR FREE BODY ANALYSIS" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   3. PROGRAM OVERVIEW — how it works (steps) + suitability
+   ============================================================ */
+function ProgramOverviewSection() {
   const consultationSteps = [
     'Go through your goals, your reasons for changing and your timeline',
     'Review your health history, medications and past diets',
@@ -146,520 +368,318 @@ export default function WeightLossPage() {
 
   const notSuitableFor = [
     'You are pregnant, or breastfeeding',
-    "You want a rapid, extreme 'crash diet' style solution",
+    'You want a rapid, extreme "crash diet" style solution',
     'You are not willing to follow a structured plan',
     'You cannot commit to weekly check-ins or scheduled appointments',
     'You want results without changing routines, eating habits, or lifestyle basics',
     "You are currently dealing with an unmanaged medical condition, or you're on medication that requires medical clearance (we'll screen this in the consultation)",
   ];
 
-  const dietRules = [
+  const [active, setActive] = useState(0);
+  const tabs = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
+  const colHead = { fontFamily: wideFont, fontSize: '15px', fontWeight: 600 as const, letterSpacing: '1px', textTransform: 'uppercase' as const };
+
+  return (
+    <section className="py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
+          How it works
+        </p>
+        <div className="mx-auto mb-10" style={{ width: '110px', height: '1px', backgroundColor: '#cdd8c8' }} />
+
+        {/* Step tabs */}
+        <div className="flex" style={{ borderBottom: '1px solid #e3ded6' }}>
+          {tabs.map((t, i) => (
+            <button
+              key={t}
+              onClick={() => setActive(i)}
+              className="flex-1 pb-4 text-center transition-colors"
+              style={{ color: active === i ? greenDark : taupeLight, fontFamily: wideFont, fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase', borderBottom: active === i ? `2px solid ${green}` : '2px solid transparent', marginBottom: '-1px' }}
+            >
+              {t}
+            </button>
+          ))}
+        </div>
+
+        {/* Panel */}
+        <div style={{ background: panelGradient, borderBottomLeftRadius: '24px', borderBottomRightRadius: '24px', padding: '32px' }}>
+          {active === 0 && (
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              {/* Complimentary consultation */}
+              <div className="bg-white rounded-xl p-7">
+                <div className="flex items-center gap-3 mb-5">
+                  <img src="/wix/87fc13_e4efa875484546fca9d640d39b9f0100~mv2.png" alt="" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+                  <h3 style={{ ...colHead, color: green }}>Complimentary Consultation</h3>
+                </div>
+                <p className="mb-5" style={pStyle}>
+                  Every program starts with a full in-clinic consultation. This is where we decide together if our guided transformation protocol is the right fit for you. Because we stand behind your results, we are selective about who we can work with.
+                </p>
+                <ol className="space-y-2 mb-5">
+                  {consultationSteps.map((s, i) => (
+                    <li key={s} className="flex items-start gap-3" style={liStyle}>
+                      <span style={{ color: greenDark, fontWeight: 600 }}>{i + 1}.</span>
+                      <span>{s}</span>
+                    </li>
+                  ))}
+                </ol>
+                <p style={pStyle}>
+                  If we do not believe we can deliver real, measurable change, we will not enrol you into the program. If we do accept you, it is because we are prepared to stand behind your results.
+                </p>
+              </div>
+              {/* Suitable / Not suitable */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="bg-white rounded-xl p-6">
+                  <div className="flex items-center gap-2 mb-5">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                    <h3 style={{ ...colHead, fontSize: '14px', color: taupe }}>Suitable for</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    {suitableFor.map((t) => (
+                      <li key={t} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
+                        <span style={bullet}>&bull;</span>
+                        <span>{t}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="bg-white rounded-xl p-6">
+                  <div className="flex items-center gap-2 mb-5">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    <h3 style={{ ...colHead, fontSize: '14px', color: taupe }}>Not suitable for</h3>
+                  </div>
+                  <ul className="space-y-3">
+                    {notSuitableFor.map((t) => (
+                      <li key={t} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
+                        <span style={bullet}>&bull;</span>
+                        <span>{t}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {active === 1 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center bg-white rounded-xl p-7">
+              <div>
+                <h3 className="mb-4" style={{ ...colHead, color: green }}>Body analysis &amp; medical consultation</h3>
+                <p className="mb-4" style={pStyle}>
+                  Before we touch your food or training, we understand your body. Where appropriate you meet a doctor to review your health, hormones, history and medications, then sit with a consultant for clinical measurements and a body-composition scan — fat, muscle, visceral fat and water, not just a number on the scale.
+                </p>
+                <ul className="space-y-2" style={{ marginBottom: '4px' }}>
+                  {['Bloodwork for thyroid, blood sugar and cholesterol', 'Food-intolerance screening where symptoms point to it', 'Blood pressure and other checks to keep your plan safe'].map((t) => (
+                    <li key={t} className="flex items-start gap-2" style={liStyle}><span style={bullet}>&bull;</span><span>{t}</span></li>
+                  ))}
+                </ul>
+                <p className="mt-4" style={pStyle}>This also establishes whether a GLP-1 medication (Ozempic or Mounjaro) is clinically appropriate.</p>
+              </div>
+              <div className="w-full overflow-hidden rounded-xl" style={{ aspectRatio: '375 / 350' }}>
+                <img src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png" alt="Body composition analysis at Carisma" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+            </div>
+          )}
+
+          {active === 2 && (
+            <div className="bg-white rounded-xl p-7">
+              <h3 className="mb-4" style={{ ...colHead, color: green }}>Diet &amp; accountability</h3>
+              <p style={pStyle}>
+                A personalised meal plan built around your routine and Maltese food — not a template. You get weekly weigh-ins and measurements, one-to-one coaching with a dedicated consultant, supplement guidance and WhatsApp support between sessions, so the plan survives a real, busy week.
+              </p>
+            </div>
+          )}
+
+          {active === 3 && (
+            <div className="bg-white rounded-xl p-7">
+              <h3 className="mb-4" style={{ ...colHead, color: green }}>Movement that fits your life</h3>
+              <p style={pStyle}>
+                Realistic training, never punishment. Open gym access for independent sessions, small-group classes for fat loss and strength, and personal training for guidance and momentum — all designed to protect muscle while you lose fat.
+              </p>
+            </div>
+          )}
+
+          {active === 4 && (
+            <div className="bg-white rounded-xl p-7">
+              <h3 className="mb-4" style={{ ...colHead, color: green }}>Targeted treatments</h3>
+              <p style={pStyle}>
+                Medical-grade body contouring used to accelerate and refine your results: muscle stimulation (Emsculpt NEO), fat freezing (CoolSculpting), radiofrequency skin tightening (VelaShape) and lymphatic drainage — non-invasive, with no downtime.
+              </p>
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   4. CORE PILLARS
+   ============================================================ */
+function CorePillarsSection() {
+  const pillars = [
     {
-      title: 'Mediterranean style, not misery style',
-      body: 'Plenty of protein, olive oil, veg, beans and whole grains, with room for bread, pasta and social meals in the right portions.',
+      title: 'Medical grade assessment',
+      subtitle: 'Understand your body composition',
+      icon: '/wix/87fc13_e4efa875484546fca9d640d39b9f0100~mv2.png',
+      items: [
+        'Full body composition analysis',
+        'Doctor consultation',
+        'GLP-1 as appropriate (e.g., Ozempic)',
+        'Fat dissolving injections',
+        'Blood tests, metabolic screening & intolerance screen',
+      ],
     },
     {
-      title: 'Higher protein to protect muscle and keep you full',
-      body: 'Enough protein to keep you satisfied, support metabolism and avoid losing muscle while you lose fat.',
+      title: 'Diet and accountability',
+      subtitle: 'Personalised food plan with a buddy',
+      icon: '/wix/87fc13_d751907d21e84894ae37b1b33136d812~mv2.png',
+      items: [
+        'Personalised diet plan that fits your routine and culture',
+        'Weekly weigh ins and measurements',
+        'One to one accountability with a dedicated coach',
+        'Supplement recommendations to support metabolism, energy and cravings',
+      ],
     },
     {
-      title: 'Flexible structure, not food fear',
-      body: "No 'good vs bad' foods. We teach portions and timing so you can enjoy hobz biz zejt, pasta, wine or dessert without losing control.",
+      title: 'Exercise and movement',
+      subtitle: 'Realistic movement that fits your life',
+      icon: '/wix/87fc13_1fdf47007d8a45c18e39603447edbb23~mv2.png',
+      items: [
+        'Open gym access for independent training',
+        'Group classes focused on fat loss and strength',
+        'Personal training sessions for extra guidance and motivation',
+      ],
+    },
+    {
+      title: 'Targeted body treatments',
+      subtitle: 'Clinic treatments that speed up change',
+      icon: '/wix/87fc13_da70307b66154a24b141dfb4fd26a1bb~mv2.png',
+      items: [
+        'Muscle stimulation treatments (Emsculpt NEO)',
+        'Fat freezing treatments (CoolSculpting)',
+        'Radiofrequency skin tightening (VelaShape)',
+        'Lymphatic drainage',
+      ],
     },
   ];
 
-  const shapeAroundLife = [
-    'Busy mums – Fast family meals, smart leftovers and simple plate formulas',
-    'Menopause – Blood sugar balance, protein timing and fat loss strategies that support hormones',
-    'Bride / event prep – A clear 6–12 week plan that tightens your silhouette without banning social events',
-  ];
+  return (
+    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
+          4 core pillars of our methodology
+        </p>
+        <div className="mx-auto mb-5" style={{ width: '150px', height: '1px', backgroundColor: '#cdd8c8' }} />
+        <h2 className="text-center mb-12" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+          Malta&apos;s only multidisciplinary<br />approach to weight-loss
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {pillars.map((p) => (
+            <div key={p.title} className="p-8" style={{ background: panelGradient, borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
+              <div className="mb-5 flex items-center" style={{ height: '48px' }}>
+                <img src={p.icon} alt="" style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} />
+              </div>
+              <p className="mb-2" style={{ color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.3 }}>{p.title}</p>
+              <h3 className="mb-5" style={{ color: '#5d5d61', fontFamily: bodyFont, fontSize: '17px', fontWeight: 400, lineHeight: 1.35 }}>{p.subtitle}</h3>
+              <ul className="space-y-2">
+                {p.items.map((it) => (
+                  <li key={it} className="flex items-start gap-2" style={{ color: '#6b6b6b', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>
+                    <span style={{ color: green, lineHeight: 1.5 }}>&bull;</span>
+                    <span>{it}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-12">
+          <CTAButton label="GET YOUR FREE BODY ANALYSIS" />
+        </div>
+      </div>
+    </section>
+  );
+}
 
-  const accountabilityMethods = [
-    'Weekly check-ins with weight and measurements so we see what is really happening',
-    'Short written progress updates every week or two with clear next steps',
-    'WhatsApp check-ins so you can message when you are stuck, tempted or confused',
-    'If you go quiet, we follow up first — without judgement — to help you get back on track',
-  ];
-
-  const mayCheck = [
-    'Blood tests for thyroid, blood sugar and cholesterol',
-    'Food intolerance testing if symptoms suggest it',
-    'Blood pressure and other basic checks to ensure your plan is safe',
-  ];
-
-  const trainingStyles = [
-    {
-      title: 'Open Gym Access (Independent Training):',
-      body: 'Train on your own time with a clear plan to follow. Perfect if you like flexibility and want structure without fixed class times.',
-    },
-    {
-      title: 'Group Classes (Fat Loss + Strength):',
-      body: 'High-energy sessions designed to burn fat, build lean muscle, and keep you accountable. Ideal if you thrive with community and coaching in the room.',
-    },
-    {
-      title: 'Personal Training (Extra Guidance + Motivation):',
-      body: 'One-to-one sessions for maximum support, form coaching, and personalised progression. Best if you want faster confidence, tighter technique, and strong accountability.',
-    },
-  ];
-
+/* ============================================================
+   5. TREATMENTS
+   ============================================================ */
+function TreatmentsSection() {
   const treatments = [
     {
-      title: 'Muscle Stimulation — Emsculpt NEO',
-      placeholder: 'Emsculpt NEO muscle stimulation treatment photo',
+      title: 'Emsculpt NEO — muscle stimulation',
       image: '/wix/87fc13_a965179046514c2a8ad7bec0b7f44127~mv2.jpg',
-      desc: 'Emsculpt NEO uses high-intensity electromagnetic pulses to contract your muscles thousands of times in a session, stimulating the effect of 20,000 sit-ups in one 30 minute session',
-      useLabel: 'We use it to:',
+      placeholder: 'Emsculpt NEO treatment photo',
+      desc: 'High-intensity electromagnetic energy contracts the muscle thousands of times in a single 30-minute session — the equivalent effort of around 20,000 contractions while you simply lie still.',
       uses: [
-        'Build and tone muscle in areas like abdomen and glutes',
+        'Build and define muscle through the abdomen and glutes',
         'Support posture and core strength as you lose weight',
-        'Refine shape after you start dropping kilos',
+        'Refine your shape as the kilos start to come down',
       ],
-      note: 'You stay dressed, lie down, and feel strong, deep contractions while our team monitors you.',
+      note: 'You stay fully dressed and supervised throughout, feeling deep, controlled contractions.',
     },
     {
-      title: 'Lymphatic Drainage',
-      placeholder: 'Lymphatic drainage treatment photo',
+      title: 'CoolSculpting — fat freezing',
       image: '',
-      desc: 'We offer lymphatic drainage using compressive microvibration technology and specialised massage.',
-      useLabel: 'We use it to:',
+      placeholder: 'CoolSculpting fat-freezing treatment photo',
+      desc: 'The market-leading cryolipolysis system targets stubborn pockets that resist diet and exercise, cooling fat cells in a controlled way so the body gradually clears them.',
       uses: [
-        'Support circulation and fluid drainage',
-        "Help with that 'puffy, heavy' feeling some women experience in the legs or abdomen",
-        'Complement fat loss and skin tightening treatments',
+        'Treat areas such as the lower abdomen, flanks, bra line or thighs',
+        'Contour the body as your overall weight reduces',
+        'Achieve definition without surgery or downtime',
+      ],
+      note: 'Every plan is set by your medical assessment and goals — never a one-area-fits-all offer.',
+    },
+    {
+      title: 'VelaShape — radiofrequency tightening',
+      image: '',
+      placeholder: 'VelaShape skin-tightening treatment photo',
+      desc: 'Radiofrequency, infrared light, gentle vacuum and massage warm the deeper layers of skin to stimulate collagen and refine texture.',
+      uses: [
+        'Improve mild laxity as the body changes shape',
+        'Smooth areas that feel softer after weight loss',
+        'Support circulation in cellulite-prone zones',
+      ],
+      note: 'It feels like a warm, deep massage rather than anything harsh.',
+    },
+    {
+      title: 'Lymphatic drainage — recovery support',
+      image: '',
+      placeholder: 'Lymphatic drainage treatment photo',
+      desc: 'Compressive micro-vibration and specialised massage support circulation and the clearance of fluid as an adjunct to your core plan.',
+      uses: [
+        'Encourage circulation and fluid drainage',
+        'Ease the heavy, puffy feeling in legs or midsection',
+        'Complement fat-loss and skin-tightening treatments',
       ],
       note: '',
     },
-    {
-      title: 'Fat Freezing — CoolSculpting',
-      placeholder: 'CoolSculpting fat freezing treatment photo',
-      image: '',
-      desc: 'CoolSculpting is the market leading fat freezing technology that targets stubborn pockets of fat that do not respond to diet and exercise. It cools fat cells in a controlled way so your body can gradually clear them over time.',
-      useLabel: 'We use it to:',
-      uses: [
-        'Target areas like lower belly, flanks, bra fat or thighs',
-        'Help contour the body after your weight starts to come down',
-        'Support results without surgery or downtime',
-      ],
-      note: "Every treatment plan is based on your medical assessment and body goals, not a 'one area fits all' offer.",
-    },
-    {
-      title: 'Skin Tightening — VelaShape',
-      placeholder: 'VelaShape skin tightening treatment photo',
-      image: '',
-      desc: 'VelaShape combines radiofrequency, infrared light, gentle vacuum and massage to heat the deeper layers of the skin and stimulate collagen.',
-      useLabel: 'We use it to:',
-      uses: [
-        'Improve skin texture and mild laxity as the body changes',
-        "Smooth the look of areas that feel softer or 'looser' after weight loss",
-        'Support circulation and the appearance of cellulite-prone zones',
-      ],
-      note: 'It feels like a warm, deep massage rather than a harsh, painful treatment.',
-    },
   ];
-
-  const carismaDifference = [
-    'Doctor led: full medical check and body scan',
-    'One integrated program: medical, diet, movement and treatments together',
-    'Real gym included: Technogym facility, semi-private classes and PT',
-    'High touch support: weekly check ins, progress reports and WhatsApp follow up',
-    'Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening',
-    'Selective entry and measurable weight loss results guaranteed',
-  ];
-
-  const promiseAgreements = [
-    'Attend all scheduled in clinic sessions and weekly check ins',
-    'Follow your personalised food plan consistently and tell us when you struggle',
-    'Complete your agreed movement plan or discuss any pain or obstacles with your coach',
-    'Use only the treatments and medications recommended by our medical team for this program',
-    'Inform us of any major health or medication changes, pregnancy or new diagnosis during the program',
-    'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
-  ];
-
-  const commitments = [
-    'Visible inch loss and shape change, not vague promises',
-    'Plans that work with your age, hormones and metabolism',
-    'No crash diets, no banned foods, no endless hours of cardio',
-    'Medical grade technology and treatments delivered by trained professionals',
-  ];
-
-  const whyMalta = [
-    "Created by the team behind Malta's leading spa and medical aesthetics centres",
-    "Doctor led medical slimming, not a beauty salon 'diet program'",
-    'All in one approach: assessment, nutrition, movement and treatments',
-    'High touch support with weekly check ins and WhatsApp coaching',
-  ];
-
-  const bullet = { color: green, fontSize: '18px', lineHeight: '1' };
-  const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '15px' };
-  const pStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '15px', lineHeight: 1.7 };
 
   return (
-    <main className="w-full" style={{ backgroundColor: '#fff' }}>
-      {/* Hero Section */}
-      <section className="py-16" style={{ backgroundColor: '#fff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <p className="mb-3" style={{ color: green, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                #1 voted slimming clinic in malta &middot; Medically qualified doctors
-              </p>
-              <h1 className="mb-4" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '40px', lineHeight: 1.2, textTransform: 'uppercase' }}>
-                lose up to 1kg a week.
-              </h1>
-              <p className="mb-6" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px' }}>
-                with Malta&apos;s most comprehensive, medically guided slimming program
-              </p>
-              <p className="mb-8" style={pStyle}>
-                Personalised programs that combine medical-grade analysis and prescription stack, nutrition plan, internationally renowned body sculpting modalities and weekly check-ins to help you achieve your target weight and stick to it.
-              </p>
-              <div className="flex flex-wrap items-center gap-4">
-                <CTAButton />
-                <PhoneButton />
-              </div>
-              <p className="mt-6" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '13px' }}>
-                Over 200+ Reviews &middot; &#9733;&#9733;&#9733;&#9733;&#9733;
-              </p>
-            </div>
-            <div>
-              <div className="w-full rounded-lg overflow-hidden" style={{ aspectRatio: '381 / 182' }}>
-                <img src="/wix/87fc13_440425b61c66444abe7e3062dbfcd290~mv2.jpg" alt="Hero image: female client in consultation, with '#1 Voted Clinic in Malta' badge" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-              </div>
-            </div>
-          </div>
-
-          {/* Guarantee */}
-          <div className="mt-12">
-            <p className="mb-6 text-center" style={pStyle}>
-              We are so confident in our programs that we offer an extended care commitment results:
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {guarantees.map((g) => (
-                <div key={g.loss} className="rounded-lg p-8 text-center" style={{ border: `1px solid #dfe6dc`, backgroundColor: softBg }}>
-                  <p style={{ color: greenDark, fontFamily: headingFont, fontSize: '36px', fontWeight: 400 }}>{g.loss}</p>
-                  <p style={{ color: taupe, fontFamily: bodyFont, fontSize: '15px' }}>{g.weeks}</p>
-                </div>
-              ))}
-            </div>
-            <p className="mt-6 text-center italic" style={pStyle}>
-              If you do not hit your agreed target, we keep treating you for free.
-            </p>
-          </div>
-
-          {/* Footnotes */}
-          <div className="mt-10 max-w-4xl mx-auto space-y-1" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '12px' }}>
-            <p>*Includes 3 appointments of fat freezing sessions, scheduled based on your clinical plan; additional areas or appointments charged at extra.</p>
-            <p>** Sessions may be spaced over multiple weeks depending on area and suitability</p>
-            <p>***Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.</p>
-          </div>
-        </div>
-      </section>
-
-      {/* As seen on */}
-      <section className="py-10 border-b" style={{ borderColor: '#e0e0e0' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="mb-6" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
-            As seen on
-          </p>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 items-center">
-            <div className="w-full flex items-center justify-center" style={{ height: '70px' }}>
-              <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="One News logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-            </div>
-            <div className="w-full flex items-center justify-center" style={{ height: '70px' }}>
-              <img src="/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg" alt="Malta Today logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-            </div>
-            <div className="w-full flex items-center justify-center" style={{ height: '70px' }}>
-              <img src="/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png" alt="Times Malta logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-            </div>
-            <div className="w-full flex items-center justify-center" style={{ height: '70px' }}>
-              <img src="/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png" alt="MT Today logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Lose inches narrative */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="mb-10 text-center" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase' }}>
-            lose inches, gain energy / pasta and wine still on the menu
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="w-full rounded-lg overflow-hidden mx-auto" style={{ aspectRatio: '334 / 362', maxWidth: '420px' }}>
-              <img src="/wix/87fc13_16e7dbedc9e84343b51b1f3d4821c6ea~mv2.jpg" alt="Slimming consultation photo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-            <div>
-              <p className="mb-6" style={pStyle}>
-                You are eating better than you did in your twenties, yet the weight around your stomach and hips does not budge. You walk more, you try to be good, but every year your clothes feel tighter and your energy feels lower.
-              </p>
-              <ul className="space-y-3 mb-6">
-                {[
-                  'Since your late thirties or early forties your body feels like it quietly changed the rules. The same food now sits on your waist instead of burning off.',
-                  'Around menopause the scale crept up even though you were counting steps and cutting snacks. You feel betrayed by your own hormones.',
-                  'Every new diet tells you to cut bread, pasta and wine. You can do it for a week or two, then life happens and you rebound even heavier.',
-                  'You are tired of plans that treat you like a number on a scale instead of a human with work, family, stress and a changing body.',
-                ].map((t) => (
-                  <li key={t} className="flex items-start gap-2" style={liStyle}>
-                    <span style={bullet}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-              <p style={pStyle}>
-                If you read this and think &lsquo;This is me&rsquo;, your willpower is not the problem. Your biology has changed. You need a medically guided plan that works with your age, hormones and metabolism while still letting you eat the foods you love.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Why so hard to lose weight after 30 */}
-      <section className="py-16" style={{ backgroundColor: softBg }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>why is it so hard to lose weight after 30?</SectionHeading>
-          <p className="mt-6 mb-8 text-center" style={pStyle}>
-            Most of what you have tried was built on one idea: eat less, move more. That might work for a 25 year old with no stress. It is not enough for a 40 plus body with real hormones, real history and real responsibilities.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="rounded-lg p-7 bg-white shadow-sm" style={{ border: `1px solid #dfe6dc` }}>
-              <h3 className="mb-4" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600 }}>What those plans ignored</h3>
-              <ul className="space-y-3">
-                {whatIgnored.map((t) => (
-                  <li key={t} className="flex items-start gap-2" style={liStyle}>
-                    <span style={bullet}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="rounded-lg p-7 bg-white shadow-sm" style={{ border: `1px solid #dfe6dc` }}>
-              <h3 className="mb-4" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600 }}>What those plans got wrong</h3>
-              <ul className="space-y-3">
-                {whatWrong.map((t) => (
-                  <li key={t} className="flex items-start gap-2" style={liStyle}>
-                    <span style={bullet}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-          <p className="mt-8" style={pStyle}>
-            So you end up hungrier, more tired and more frustrated, often with less muscle and a slower metabolism than when you started.
-          </p>
-          <p className="mt-4 mb-8" style={pStyle}>
-            Our program is built to reverse exactly that: we reset your metabolism for your age, protect muscle, work with your hormones and show you how to lose weight while still eating food you enjoy.
-          </p>
-          <div className="text-center">
-            <CTAButton />
-          </div>
-        </div>
-      </section>
-
-      {/* 4 core pillars */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>4 core pillars of our methodology</SectionHeading>
-          <p className="text-center mb-12" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            malta&apos;s only multidisciplinary approach to weight-loss
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pillars.map((p) => (
-              <div key={p.title} className="rounded-lg p-6" style={{ borderLeft: `4px solid ${green}`, backgroundColor: softBg }}>
-                <h3 className="mb-1" style={{ color: greenDark, fontFamily: headingFont, fontSize: '18px', fontWeight: 400 }}>{p.title}</h3>
-                <p className="mb-4" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '13px', fontStyle: 'italic' }}>{p.subtitle}</p>
-                <ul className="space-y-2">
-                  {p.items.map((it) => (
-                    <li key={it} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
-                      <span style={bullet}>&bull;</span>
-                      <span>{it}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* How it works - Step 1 */}
-      <section className="py-16" style={{ backgroundColor: softBg }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>how it works</SectionHeading>
-          <h3 className="mt-10 mb-4" style={{ color: greenDark, fontFamily: headingFont, fontSize: '22px', fontWeight: 400 }}>
-            COMPLIMENTARY CONSULTATION
-          </h3>
-          <p className="mb-6" style={pStyle}>
-            Every program starts with a full in clinic consultation. This is where we decide together if our guided transformation protocol is the right fit for you. Because we stand behind your results, we are selective about who we can work with.
-          </p>
-          <ol className="space-y-3 mb-8">
-            {consultationSteps.map((s, i) => (
-              <li key={s} className="flex items-start gap-3" style={liStyle}>
-                <span style={{ color: green, fontFamily: headingFont, fontWeight: 600 }}>{i + 1}.</span>
-                <span>{s}</span>
-              </li>
-            ))}
-          </ol>
-          <p style={pStyle}>
-            If we do not believe we can deliver real, measurable change, we will not enrol you into the program. If we do accept you, it is because we are prepared to stand behind your results.
-          </p>
-        </div>
-      </section>
-
-      {/* Suitability */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div>
-              <h3 className="mb-6" style={{ color: greenDark, fontFamily: headingFont, fontSize: '20px', fontWeight: 400 }}>SUITABLE FOR:</h3>
-              <ul className="space-y-3">
-                {suitableFor.map((t) => (
-                  <li key={t} className="flex items-start gap-3" style={liStyle}>
-                    <span style={{ color: green, fontWeight: 700 }}>&#10003;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h3 className="mb-6" style={{ color: taupe, fontFamily: headingFont, fontSize: '20px', fontWeight: 400 }}>NOT SUITABLE FOR:</h3>
-              <ul className="space-y-3">
-                {notSuitableFor.map((t) => (
-                  <li key={t} className="flex items-start gap-3" style={liStyle}>
-                    <span style={{ color: taupeLight, fontWeight: 700 }}>&#10007;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Step 2: Diet and accountability */}
-      <section className="py-16" style={{ backgroundColor: softBg }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>Diet and accountability</SectionHeading>
-          <p className="mt-8 mb-6" style={pStyle}>
-            Together we build a personalised food plan that fits school runs, meetings, weekends and Maltese food. We do not hand you a random PDF and wish you luck. Your plan is built on three simple rules:
-          </p>
-          <div className="space-y-5 mb-8">
-            {dietRules.map((r, i) => (
-              <div key={r.title}>
-                <h4 style={{ color: greenDark, fontFamily: wideFont, fontSize: '15px', fontWeight: 600 }}>{i + 1}. {r.title}</h4>
-                <p style={pStyle}>{r.body}</p>
-              </div>
-            ))}
-          </div>
-          <p className="mb-4" style={{ ...pStyle, fontWeight: 600, color: taupe }}>Then we shape it around your life:</p>
-          <ul className="space-y-3 mb-6">
-            {shapeAroundLife.map((t) => (
-              <li key={t} className="flex items-start gap-2" style={liStyle}>
-                <span style={bullet}>&bull;</span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-          <p className="mb-10" style={pStyle}>
-            No shakes only, no keto only, no 1,000 calorie days. Your plan has to work on bad weeks, or it does not work at all.
-          </p>
-
-          <h3 className="mb-3" style={{ color: greenDark, fontFamily: headingFont, fontSize: '20px', fontWeight: 400 }}>
-            Accountability: how we keep you moving
-          </h3>
-          <p className="mb-6" style={pStyle}>You are not doing this alone or guessing between visits.</p>
-          <ul className="space-y-3">
-            {accountabilityMethods.map((t) => (
-              <li key={t} className="flex items-start gap-2" style={liStyle}>
-                <span style={bullet}>&bull;</span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* Step 3: Body analysis & medical consultation */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="mb-6" style={{ color: greenDark, fontFamily: headingFont, fontSize: '26px', fontWeight: 400, textTransform: 'uppercase' }}>
-                Body analysis &amp; medical grade consultation
-              </h2>
-              <p className="mb-5" style={pStyle}>
-                Before we change your food or your body, we take time to understand you. If eligibile set up an appointment with medical doctor to review your health, hormones, medical history, medications, pregnancies, and menopause. You also meet your slimming consultant for clinical measurements and a body composition scan, looking at fat, muscle, visceral fat, and water — not just the number on the scale.
-              </p>
-              <p className="mb-5" style={pStyle}>
-                We talk through how you feel day to day: energy, cravings, sleep, mood, digestion, and joint pain. Together, we set a clear baseline for your transformation.
-              </p>
-              <p className="mb-4" style={{ ...pStyle, fontWeight: 600, color: taupe }}>What we may check, if it makes sense for you:</p>
-              <ul className="space-y-3 mb-5">
-                {mayCheck.map((t) => (
-                  <li key={t} className="flex items-start gap-2" style={liStyle}>
-                    <span style={bullet}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-              <p className="mb-4" style={pStyle}>
-                These assesments determine your GLP-1 (e.g., Ozempic, Mounjaro) eligibility.
-              </p>
-              <p style={pStyle}>
-                Based on your results, we we enroll you on your prescription protocol, tailor a program length and treatment mix that is realistic for your starting point and schedule your follow ups to check-in with our doctor and slimming consultant. This is where &lsquo;nothing works for my body&rsquo; starts to become a clear picture and a safe, personalised plan.
-              </p>
-            </div>
-            <div className="w-full rounded-lg overflow-hidden" style={{ aspectRatio: '375 / 350' }}>
-              <img src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png" alt="Body composition analysis / Tanita scan photo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Step 4: Movement */}
-      <section className="py-16" style={{ backgroundColor: softBg }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>Movement That Fits Your Life</SectionHeading>
-          <p className="mt-8 mb-4" style={pStyle}>
-            Weight loss sticks when movement feels realistic, not punishing. In Step 4, we design a movement plan that meets you exactly where you are today and fits seamlessly into your schedule, fitness level, and preferences.
-          </p>
-          <p className="mb-8" style={pStyle}>
-            The goal is simple: build consistency, improve strength, increase basal metabolic rate, and keep you progressing week after week.
-          </p>
-          <p className="mb-6" style={{ ...pStyle, fontWeight: 600, color: taupe }}>Choose the training style that suits you:</p>
-          <div className="space-y-6">
-            {trainingStyles.map((s, i) => (
-              <div key={s.title}>
-                <h4 style={{ color: greenDark, fontFamily: wideFont, fontSize: '15px', fontWeight: 600 }}>{i + 1}. {s.title}</h4>
-                <p style={pStyle}>{s.body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Treatments */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>treatments</SectionHeading>
-          <p className="mt-8 mb-12 max-w-4xl mx-auto text-center" style={pStyle}>
-            We use internationally renowned technologies to shape, tighten and refine your results — never cheap gadgets or outdated machines. Our treatments are not the whole plan, but they are powerful tools when used on top of a solid medical, diet and movement strategy. Every device we use is leading in its category, chosen for safety, research and real-world results.
-          </p>
-          <div className="space-y-12">
-            {treatments.map((t, i) => (
+    <section className="py-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Eyebrow>Medical-grade, evidence-backed devices</Eyebrow>
+        <SectionHeading>Clinical technology that accelerates your results</SectionHeading>
+        <p className="mt-4 mb-12 max-w-3xl mx-auto text-center" style={pStyle}>
+          We use category-leading devices — chosen for their safety record, published evidence and real-world results, never cheap gadgets. Treatments are not the whole plan; they are powerful tools layered on top of a sound medical, nutritional and movement strategy.
+        </p>
+        <div className="space-y-12">
+          {treatments.map((t, i) => {
+            const flip = i % 2 === 1;
+            return (
               <div key={t.title} className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                <div className={i === treatments.length - 1 ? 'md:order-2' : ''}>
+                <div className={flip ? 'md:order-2' : ''}>
                   {t.image ? (
-                    <div className="w-full rounded-lg overflow-hidden" style={{ aspectRatio: '381 / 182' }}>
+                    <div className="w-full rounded-xl overflow-hidden shadow-md" style={{ aspectRatio: '381 / 250' }}>
                       <img src={t.image} alt={t.placeholder} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                   ) : (
-                    <Placeholder label={t.placeholder} height="300px" />
+                    <Placeholder label={t.placeholder} height="280px" />
                   )}
                 </div>
-                <div className={i === treatments.length - 1 ? 'md:order-1' : ''}>
+                <div className={flip ? 'md:order-1' : ''}>
                   <h3 className="mb-4" style={{ color: greenDark, fontFamily: headingFont, fontSize: '22px', fontWeight: 400 }}>{t.title}</h3>
-                  {t.desc && <p className="mb-4" style={pStyle}>{t.desc}</p>}
-                  <p className="mb-3" style={{ ...pStyle, fontWeight: 600, color: taupe }}>{t.useLabel}</p>
+                  <p className="mb-4" style={pStyle}>{t.desc}</p>
                   <ul className="space-y-2 mb-4">
                     {t.uses.map((u) => (
                       <li key={u} className="flex items-start gap-2" style={liStyle}>
@@ -671,49 +691,91 @@ export default function WeightLossPage() {
                   {t.note && <p className="italic" style={pStyle}>{t.note}</p>}
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* The Carisma Difference */}
-      <section className="py-16" style={{ backgroundColor: softBg }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>the carisma difference</SectionHeading>
-          <p className="mt-6 mb-4 text-center" style={{ color: greenDark, fontFamily: headingFont, fontSize: '24px', fontWeight: 400 }}>
-            we are not another diet clinic.
-          </p>
-          <p className="mb-10 text-center max-w-3xl mx-auto" style={pStyle}>
-            We&apos;re a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don&apos;t just lose weight, you step into your strongest form.
-          </p>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {carismaDifference.map((t) => (
-              <li key={t} className="flex items-start gap-3" style={liStyle}>
-                <span style={{ color: green, fontWeight: 700 }}>&#10003;</span>
-                <span>{t}</span>
+/* ============================================================
+   5b. THE CARISMA DIFFERENCE — "we are not another diet clinic"
+   ============================================================ */
+function CarismaDifferenceSection() {
+  const items = [
+    'Doctor led: full medical check and body scan',
+    'One integrated program: medical, diet, movement and treatments together',
+    'Real gym included: Technogym facility, semi-private classes and PT',
+    'High touch support: weekly check ins, progress reports and WhatsApp follow up',
+    'Evidence based devices: Emsculpt NEO, CoolSculpting and RF skin tightening',
+    'Selective entry and measurable weight loss results guaranteed',
+  ];
+  return (
+    <section className="py-12" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-center mb-6" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+          We are not<br />another diet clinic.
+        </h2>
+        <p className="text-center mx-auto mb-12 max-w-2xl" style={pStyle}>
+          We&apos;re a doctor-led transformation program that blends medical insight, sustainable nutrition and modern body tech into one high-touch system — so you don&apos;t just lose weight, you step into your strongest form.
+        </p>
+        <div className="mx-auto max-w-2xl p-10" style={{ background: panelGradient, borderTopLeftRadius: '24px', borderTopRightRadius: '24px', borderBottomLeftRadius: '24px', borderBottomRightRadius: '90px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
+          <ul className="space-y-6">
+            {items.map((t) => (
+              <li key={t} className="flex items-start gap-4">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}><polyline points="20 6 9 17 4 12" /></svg>
+                <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
               </li>
             ))}
           </ul>
         </div>
-      </section>
+      </div>
+    </section>
+  );
+}
 
-      {/* Our Promise */}
-      <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>our promise</SectionHeading>
-          <p className="mt-6 mb-10 text-center" style={{ color: greenDark, fontFamily: headingFont, fontSize: '24px', fontWeight: 400 }}>
-            up to 1kg a week. measured. verified. commited
+/* ============================================================
+   5c. OUR PROMISE — extended care commitment card
+   ============================================================ */
+function OurPromiseSection() {
+  const promiseAgreements = [
+    'Attend all scheduled in clinic sessions and weekly check ins',
+    'Follow your personalised food plan consistently and tell us when you struggle',
+    'Complete your agreed movement plan or discuss any pain or obstacles with your coach',
+    'Use only the treatments and medications recommended by our medical team for this program',
+    'Inform us of any major health or medication changes, pregnancy or new diagnosis during the program',
+    'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
+  ];
+  return (
+    <div className="py-12" style={{ backgroundColor: '#ffffff' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="p-8 sm:p-12" style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '28px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
+          <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            Our Promise
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="w-full rounded-lg overflow-hidden" style={{ aspectRatio: '375 / 350' }}>
-              <img src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png" alt="Body analysis measurement display photo" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <div className="mx-auto mt-2 mb-6" style={{ width: '120px', height: '1px', backgroundColor: taupeLight }} />
+          <h2 className="text-center" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', lineHeight: 1.35, textTransform: 'uppercase' }}>
+            Up to 1kg a week.<br />Measured. Verified. Commited
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-10">
+            <div className="w-full overflow-hidden" style={{ borderRadius: '18px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', aspectRatio: '375 / 350' }}>
+              <img
+                src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                alt="Clinical measurement and body analysis at Carisma"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              />
             </div>
             <div>
-              <p className="mb-6" style={pStyle}>
-                We are selective about who joins our transformation programs. We only accept women we genuinely believe we can help. If you qualify and complete your program as agreed, and and do not hit your target weight, we will extend your program at no extra program fee until we achieve our desired result.
+              <p className="mb-4" style={pStyle}>
+                We are selective about who joins our transformation programs. We only accept women we genuinely believe we can help. If you qualify and complete your program as agreed, and do not hit your target weight, we will extend your program at no extra program fee until we achieve our desired result.
               </p>
-              <p className="mb-6" style={{ ...pStyle, fontWeight: 600, color: greenDark }}>This is our Extended Care Commitment</p>
-              <p className="mb-4" style={{ ...pStyle, fontWeight: 600, color: taupe }}>To keep your results medically valid and fair, you agree to*</p>
+              <p className="mb-6" style={pStyle}>
+                This is our Extended Care Commitment
+              </p>
+              <p className="mb-4" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                To keep your results medically valid and fair, you agree to*
+              </p>
               <ul className="space-y-3">
                 {promiseAgreements.map((t) => (
                   <li key={t} className="flex items-start gap-2" style={liStyle}>
@@ -725,65 +787,693 @@ export default function WeightLossPage() {
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </div>
+  );
+}
 
-      {/* Our Commitment */}
-      <section className="py-16" style={{ backgroundColor: softBg }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>the carisma difference</SectionHeading>
-          <p className="mt-4 mb-12 text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            malta&apos;s #1 leading wellness chain
+/* ============================================================
+   5d. THE CARISMA DIFFERENCE — wellness chain + map
+   ============================================================ */
+function CarismaWellnessSection() {
+  const commitment = [
+    'Visible inch loss and shape change, not vague promises',
+    'Plans that work with your age, hormones and metabolism',
+    'No crash diets, no banned foods, no endless hours of cardio',
+    'Medical grade technology and treatments delivered by trained professionals',
+  ];
+  const whyMalta = [
+    "Created by the team behind Malta's leading spa and medical aesthetics centres",
+    'Doctor led medical slimming, not a beauty salon "diet program"',
+    'All in one approach: assessment, nutrition, movement and treatments',
+    'High touch support with weekly check ins and WhatsApp coaching',
+  ];
+  return (
+    <section className="py-12" style={{ backgroundColor: '#ffffff' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderRadius: '32px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
+          <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
+            the carisma difference
+          </p>
+          <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
+          <h2 className="text-center mb-12" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            Malta&rsquo;s #1 leading wellness chain
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <div className="space-y-10">
+              <div>
+                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  Our Commitment
+                </h3>
+                <ul className="space-y-3">
+                  {commitment.map((item) => (
+                    <li key={item} className="flex items-start gap-2" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: green }}>&bull;</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  Why Malta Chooses Carisma
+                </h3>
+                <ul className="space-y-3">
+                  {whyMalta.map((item) => (
+                    <li key={item} className="flex items-start gap-2" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: green }}>&bull;</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+            <div>
+              <iframe
+                title="Carisma Slimming location"
+                src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
+                width="100%"
+                height="460"
+                style={{ border: 0, borderRadius: '12px', display: 'block' }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
+          </div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-12">
+            <a
+              href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-center rounded-full font-bold text-white"
+              style={{ backgroundColor: slate, fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '14px 40px' }}
+            >
+              Get Your Free Body Analysis &rsaquo;
+            </a>
+            <div className="flex items-center gap-3">
+              <img src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="Complimentary on-site parking" style={{ width: '34px', height: 'auto', objectFit: 'contain' }} />
+              <span style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                Complimentary on-site parking
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   6. RESULTS — clinical evidence + doctors + promise
+   ============================================================ */
+function ResultsSection() {
+  const evidence = [
+    {
+      modality: 'Energy-restricted Mediterranean nutrition',
+      strength: 'HIGH',
+      mechanism: 'A 500–1000 kcal daily deficit drives steady loss of roughly 0.5–1 kg per week.',
+      result: 'In the PREDIMED-Plus trial, participants lost 3.2 kg versus 0.7 kg at 12 months, with 33.7% losing 5% or more of body weight.',
+    },
+    {
+      modality: 'Higher-protein, muscle-protective diet',
+      strength: 'HIGH',
+      mechanism: 'Protein at roughly 1.2–1.5 g per kg of ideal body weight preserves lean mass during a deficit.',
+      result: 'A meta-analysis of 47 trials (n = 3,218) found a standardised mean difference of 0.75 favouring muscle preservation.',
+    },
+    {
+      modality: 'Diet combined with exercise',
+      strength: 'HIGH',
+      mechanism: 'Resistance, cardio and mobility work alongside nutrition, not in place of it.',
+      result: 'Adding structured exercise keeps roughly 1.1 kg more weight off over the long term than diet alone.',
+    },
+    {
+      modality: 'Cryolipolysis (CoolSculpting)',
+      strength: 'MODERATE–HIGH',
+      mechanism: 'Controlled cooling reduces a localised fat layer over 1–3 cycles.',
+      result: 'Published studies report a 10–26% reduction in the treated fat layer, visible at 8–12 weeks.',
+    },
+    {
+      modality: 'HIFEM + RF (Emsculpt NEO)',
+      strength: 'EMERGING',
+      mechanism: 'Combined electromagnetic and radiofrequency energy across about 4 sessions, roughly a week apart.',
+      result: 'Trials show around 25–30% muscle gain alongside a 25–30% reduction in fat in the treated area.',
+    },
+    {
+      modality: 'RF / IR / vacuum (VelaShape)',
+      strength: 'MODERATE',
+      mechanism: 'Deep heating and massage across 3–6 sessions refine contour and texture.',
+      result: 'Studies report around a 0.8-inch reduction in thigh circumference by 8 weeks.',
+    },
+  ];
+
+  const doctors = [
+    {
+      name: 'Dr. Zaid Teebi',
+      role: 'Lead Medical Consultant',
+      placeholder: 'Dr. Zaid Teebi portrait',
+      bio: 'More than 30 years in general medicine, geriatrics and allergy, with ACSM Sports Medicine certification, pain-management training at Harvard and allergy training at Imperial College London. Dr. Teebi leads every medical weight-loss consultation and prescribes each clinical plan.',
+    },
+    {
+      name: 'Dr. Giovanni Scornavacca',
+      role: 'Aesthetic Doctor',
+      placeholder: 'Dr. Giovanni Scornavacca portrait',
+      bio: 'An Italian aesthetic physician with over 20 years of experience and a focus on regenerative medicine, including PRP and stem-cell approaches — restoration rather than alteration.',
+    },
+    {
+      name: 'Dr. Francesca Chircop',
+      role: 'Aesthetic Doctor',
+      placeholder: 'Dr. Francesca Chircop portrait',
+      bio: 'London-trained with over 8 years of practice and a foundation in orthopaedic surgery, leading our Lip Flip and laser hair-removal treatments.',
+    },
+  ];
+
+  return (
+    <section>
+      {/* Clinical research evidence grid */}
+      <div className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading>The evidence behind the method</SectionHeading>
+          <p className="mt-4 mb-12 text-center max-w-3xl mx-auto" style={pStyle}>
+            Each part of the protocol is grounded in peer-reviewed research. We combine modalities deliberately — a multi-component approach consistently outperforms any single tool, and pairing nutrition with exercise keeps roughly 1.1 kg more weight off long term.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {evidence.map((e) => (
+              <div key={e.modality} className="rounded-xl p-6 bg-white" style={{ borderLeft: `4px solid ${green}`, border: `1px solid #dfe6dc`, borderLeftWidth: '4px', borderLeftColor: green }}>
+                <div className="flex items-start justify-between gap-3 mb-3">
+                  <h3 style={{ color: greenDark, fontFamily: headingFont, fontSize: '17px', fontWeight: 400 }}>{e.modality}</h3>
+                  <span
+                    className="whitespace-nowrap rounded-full"
+                    style={{ backgroundColor: softBg, color: greenDark, fontFamily: wideFont, fontSize: '10px', letterSpacing: '0.5px', padding: '4px 10px' }}
+                  >
+                    EVIDENCE: {e.strength}
+                  </span>
+                </div>
+                <p className="mb-3" style={{ ...pStyle, fontSize: '14px' }}>{e.mechanism}</p>
+                <p style={{ ...pStyle, fontSize: '14px', color: taupe, fontWeight: 600 }}>{e.result}</p>
+              </div>
+            ))}
+          </div>
+          <p className="mt-8 text-center max-w-2xl mx-auto" style={{ ...pStyle, fontSize: '13px', color: taupeLight, fontStyle: 'italic' }}>
+            Lymphatic drainage is included as a recovery and comfort adjunct rather than a standalone fat-loss treatment.
+          </p>
+        </div>
+      </div>
+
+      {/* Medical team */}
+      <div className="py-16" style={{ backgroundColor: softBg }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionHeading>The doctors behind your plan</SectionHeading>
+          <p className="mt-4 mb-12 text-center max-w-3xl mx-auto" style={pStyle}>
+            &lsquo;Doctor-led&rsquo; is not a slogan here — your program is designed and supervised by qualified physicians.
           </p>
 
-          <h3 className="mb-6 text-center" style={{ color: greenDark, fontFamily: headingFont, fontSize: '22px', fontWeight: 400, textTransform: 'uppercase' }}>
-            our commitment
-          </h3>
-          <ul className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-            {commitments.map((t) => (
-              <li key={t} className="flex items-start gap-3" style={liStyle}>
-                <span style={{ color: green, fontWeight: 700 }}>&#10003;</span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+          {/* Lead doctor — prominent */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-white rounded-xl p-8 mb-8" style={{ border: `1px solid #dfe6dc` }}>
+            <div className="md:col-span-1">
+              <Placeholder label={doctors[0].placeholder} height="300px" />
+            </div>
+            <div className="md:col-span-2">
+              <h3 style={{ color: greenDark, fontFamily: headingFont, fontSize: '24px', fontWeight: 400 }}>{doctors[0].name}</h3>
+              <p className="mb-4" style={{ color: green, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>{doctors[0].role}</p>
+              <p style={pStyle}>{doctors[0].bio}</p>
+            </div>
+          </div>
 
-      {/* Why Malta Chooses Carisma */}
-      <section className="py-16">
+          {/* Supporting doctors */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {doctors.slice(1).map((d) => (
+              <div key={d.name} className="bg-white rounded-xl p-7" style={{ border: `1px solid #dfe6dc` }}>
+                <h3 style={{ color: greenDark, fontFamily: headingFont, fontSize: '20px', fontWeight: 400 }}>{d.name}</h3>
+                <p className="mb-3" style={{ color: green, fontFamily: wideFont, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>{d.role}</p>
+                <p style={{ ...pStyle, fontSize: '14px' }}>{d.bio}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Slimming guide promo */}
+      <div className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center rounded-2xl p-8 md:p-12" style={{ background: panelGradient }}>
+            <div className="w-full mx-auto" style={{ maxWidth: '360px' }}>
+              <Placeholder label="Carisma Slimming Guide — e-book cover" height="340px" />
+            </div>
+            <div>
+              <p style={{ color: green, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>Free resource</p>
+              <h3 className="mt-2 mb-4" style={{ color: greenDark, fontFamily: headingFont, fontSize: '26px', fontWeight: 400 }}>
+                The Carisma Slimming Guide
+              </h3>
+              <p className="mb-4" style={pStyle}>
+                Discipline tends to fail under stress — so we built a structured system instead. Grounded in the physiology of appetite and behaviour, the guide is a practical reference for sustainable weight management.
+              </p>
+              <p className="mb-6" style={pStyle}>
+                It covers when to eat, what to eat, how much, and even the order in which to eat it — drawn from years of clinical experience here in Malta.
+              </p>
+              <a
+                href="/slimming-guide"
+                className="inline-block rounded-full font-bold text-white text-center transition-opacity hover:opacity-90"
+                style={{ backgroundColor: slate, padding: '14px 34px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px' }}
+              >
+                READ THE GUIDE
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   6b. SOCIAL PROOF — client testimonials
+   ============================================================ */
+function TestimonialsSection() {
+  const testimonials = [
+    {
+      quote:
+        'After menopause nothing I tried touched the weight around my middle. Six months in I have lost 14 kg, my bloods have improved and I still eat with my family on Sundays. The weekly check-ins kept me honest.',
+      name: 'Marthese',
+      detail: 'Lost 14 kg &middot; Attard',
+    },
+    {
+      quote:
+        'What sold me was the medical side — actual bloodwork and a doctor, not a one-size meal plan. The body scan showed I was losing fat and keeping muscle. I have never felt this in control of it.',
+      name: 'Joseph',
+      detail: 'Lost 9 kg in 12 weeks &middot; Sliema',
+    },
+    {
+      quote:
+        'I had failed every diet for ten years and assumed I would fail this too. The difference was the support — when I slipped, they reached out first. Down 11 kg and, for once, it is staying off.',
+      name: 'Daniela',
+      detail: 'Lost 11 kg &middot; Mosta',
+    },
+  ];
+
+  return (
+    <section className="py-16">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <Eyebrow>Real results from real clients</Eyebrow>
+        <SectionHeading>The change our clients feel first</SectionHeading>
+        <p className="mt-4 mb-12 text-center max-w-2xl mx-auto" style={pStyle}>
+          A small sample of the hundreds of people across Malta who came to us after everything else had stopped working.
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {testimonials.map((t) => (
+            <div key={t.name} className="rounded-xl p-7 bg-white flex flex-col" style={{ border: `1px solid #dfe6dc` }}>
+              <p style={{ color: green, fontFamily: headingFont, fontSize: '13px', letterSpacing: '1px' }}>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <p className="mt-3 mb-5 flex-1" style={{ ...pStyle, fontStyle: 'italic' }}>&ldquo;{t.quote}&rdquo;</p>
+              <p style={{ color: greenDark, fontFamily: headingFont, fontSize: '16px', fontWeight: 400 }}>{t.name}</p>
+              <p style={{ color: taupeLight, fontFamily: wideFont, fontSize: '11px', letterSpacing: '0.5px', textTransform: 'uppercase' }} dangerouslySetInnerHTML={{ __html: t.detail }} />
+            </div>
+          ))}
+        </div>
+        <div className="text-center mt-12">
+          <CTAButton label="START YOUR OWN RESULT" />
+          <CTAReassurance className="mt-4" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   7. FAQ — accordion (interactive)
+   ============================================================ */
+function FAQSection() {
+  const faqs: { q: string; intro?: string; bullets?: string[]; a?: string; outro?: string }[] = [
+    {
+      q: 'How is this transformation program different from a normal diet or gym plan?',
+      intro: 'Most diets give you a meal plan and leave you alone. Most gyms give you machines and leave you alone. This program brings everything together under one roof:',
+      bullets: [
+        'Medical grade assessment and body scan',
+        'Personalised nutrition with real accountability',
+        'A movement plan that fits your level and lifestyle',
+        'Access to premium devices like Emsculpt NEO, CoolSculpting and VelaShape where appropriate',
+      ],
+      outro: 'You are not guessing. You have a doctor led plan, a team watching your progress, and tools that work with your age, hormones and metabolism, not against them.',
+    },
+    {
+      q: 'Who is this program really for, and do I need to be over 30 or in menopause to qualify?',
+      a: 'It is designed for adults, typically 28–60, with around 5–20 kg to lose. You do not need to be over 30 or in menopause to join — but it works particularly well through peri-menopause and menopause, when fat storage and hunger signals change. We tailor the plan to your hormones rather than ignoring them.',
+    },
+    {
+      q: 'How much weight can I realistically expect to lose, and how quickly will I start seeing changes?',
+      a: 'A steady average of about 1 kg per week. Most clients notice improved energy by weeks two to three, with visible changes in measurements between weeks four and six. We track everything objectively so progress is measured, not guessed.',
+    },
+    {
+      q: 'What exactly happens in the medical assessment and body composition scan? Is it safe if I have existing health issues?',
+      a: 'A doctor reviews your health history, medications and hormones, and we run relevant checks such as bloodwork and blood pressure. Existing conditions are screened during the consultation so your plan is built safely around them — and we will tell you if medical clearance is needed first.',
+    },
+    {
+      q: 'Will I have to follow a strict meal plan, or can I still eat bread, pasta, wine and eat out socially?',
+      a: 'Yes. The plan is Mediterranean in style, with room for the foods you enjoy in sensible portions. We teach timing and balance rather than banning foods, so it holds up at family meals and social occasions.',
+    },
+    {
+      q: 'How much support do I actually get? Who checks on me, and what happens if I fall off track?',
+      a: 'A great deal. You have weekly check-ins, regular written progress updates and WhatsApp access between visits. If you go quiet, we reach out first — without judgement — to help you restart.',
+    },
+    {
+      q: 'Do I have to use the gym and classes if I am very unfit, in pain or anxious about exercising?',
+      a: 'Movement meets you where you are. You can train independently, join small-group classes or work one-to-one with a trainer. The aim is consistency and strength, not exhaustion, and nobody is thrown into the deep end.',
+    },
+    {
+      q: 'Are treatments like Emsculpt NEO, CoolSculpting and VelaShape included, and how do you decide which ones I need?',
+      a: 'That depends entirely on your assessment and goals. We may use Emsculpt NEO, CoolSculpting, VelaShape or lymphatic drainage, selected to complement your nutrition and training — never a fixed package applied to everyone.',
+    },
+    {
+      q: 'Do I have to take GLP 1 medication (for example Ozempic)? How do you decide who it is right for and what about side effects?',
+      a: 'Only where clinically appropriate and prescribed by our doctor. If a GLP-1 medication suits your case, it is one optional tool within the wider plan, with side effects monitored throughout.',
+    },
+    {
+      q: 'How does the guarantee work, what does it cost, and are there payment plans available?',
+      a: 'If you complete the program as agreed and do not reach your target, we continue treating you at no further program fee until you do. Pricing depends on your tailored plan, and flexible payment options are available — we explain everything clearly at your consultation.',
+    },
+  ];
+
+  const [open, setOpen] = useState<number | null>(0);
+  const [query, setQuery] = useState('');
+
+  const visible = faqs
+    .map((f, i) => ({ f, i }))
+    .filter(({ f }) => f.q.toLowerCase().includes(query.trim().toLowerCase()));
+
+  return (
+    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Heading + search */}
+        <div className="relative mb-10">
+          <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            Common questions we hear
+          </h2>
+          <div className="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 mx-auto" style={{ maxWidth: '300px' }}>
+            <div className="flex items-center gap-2" style={{ borderBottom: `1px solid ${taupeLight}`, paddingBottom: '6px' }}>
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Looking for something?"
+                className="w-full bg-transparent outline-none"
+                style={{ color: taupe, fontFamily: bodyFont, fontSize: '15px' }}
+              />
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={taupeLight} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        {/* Accordion */}
+        <div>
+          {visible.map(({ f, i }) => {
+            const isOpen = open === i;
+            return (
+              <div key={f.q} style={{ borderBottom: '1px solid #e6e6e1' }}>
+                <button
+                  type="button"
+                  onClick={() => setOpen(isOpen ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 text-left"
+                  style={{ padding: '22px 4px', cursor: 'pointer', background: 'transparent' }}
+                  aria-expanded={isOpen}
+                >
+                  <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+                    {i + 1}. {f.q}
+                  </span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={taupe} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                    <polyline points="6 9 12 15 18 9" />
+                  </svg>
+                </button>
+                {isOpen && (
+                  <div style={{ padding: '0 4px 24px' }}>
+                    {f.intro && <p className="mb-4" style={pStyle}>{f.intro}</p>}
+                    {f.bullets && (
+                      <ul className="mb-4 space-y-2">
+                        {f.bullets.map((b) => (
+                          <li key={b} className="flex items-start gap-2" style={liStyle}>
+                            <span style={bullet}>&bull;</span>
+                            <span>{b}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {f.a && <p style={pStyle}>{f.a}</p>}
+                    {f.outro && <p style={pStyle}>{f.outro}</p>}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+          {visible.length === 0 && (
+            <p className="text-center py-8" style={pStyle}>No questions match &ldquo;{query}&rdquo;.</p>
+          )}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   7b. EVIDENCE BASED APPROACH — clinical research cards
+   ============================================================ */
+const leafCorners = {
+  borderTopLeftRadius: '18px',
+  borderTopRightRadius: '90px',
+  borderBottomLeftRadius: '90px',
+  borderBottomRightRadius: '18px',
+};
+
+function EvidenceCard({ item }: { item: { title: string; strength: string; image: string; label: string; body: string } }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div className="flex flex-col items-center">
+      {/* Image with badge — overlaps the card below */}
+      <div className="relative z-10 w-11/12 overflow-hidden" style={{ ...leafCorners, aspectRatio: '16 / 10', boxShadow: '0 14px 30px rgba(0,0,0,0.12)' }}>
+        <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <span
+          className="absolute"
+          style={{ top: '14px', left: '14px', backgroundColor: '#ffffff', color: greenDark, fontFamily: wideFont, fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '6px 14px', borderRadius: '9999px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)' }}
+        >
+          {item.strength}
+        </span>
+      </div>
+      {/* Body card */}
+      <div className="w-full -mt-14 px-7 pb-9" style={{ paddingTop: '70px', background: 'linear-gradient(180deg, #FCFCFA 0%, #E4EBE2 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '18px', borderBottomLeftRadius: '18px', borderBottomRightRadius: '60px' }}>
+        <h3 className="text-center" style={{ color: greenDark, fontFamily: headingFont, fontWeight: 400, fontSize: '21px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+          {item.title}
+        </h3>
+        <div className="mx-auto mt-3 mb-6" style={{ width: '90px', height: '1px', backgroundColor: taupeLight }} />
+        <p className="mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+          {item.label}
+        </p>
+        <p style={{ ...pStyle, fontSize: '14px', ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>
+          {item.body}
+        </p>
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-3"
+          style={{ color: taupe, fontFamily: bodyFont, fontSize: '13px', fontStyle: 'italic', textDecoration: 'underline', cursor: 'pointer', background: 'transparent' }}
+        >
+          {expanded ? 'See Less' : 'See More'}
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function EvidenceApproachSection() {
+  const items = [
+    {
+      title: 'Energy-restricted Mediterranean nutrition',
+      strength: 'High-Evidence',
+      image: '/Clams.png',
+      label: 'Key Results',
+      body: 'Major obesity guidelines recommend a daily energy reduction of 500–1000 kcal, targeting 0.5–1 kg per week of steady, sustainable fat loss. In the PREDIMED-Plus trial, participants lost 3.2 kg versus 0.7 kg at 12 months, with 33.7% losing 5% or more of body weight.',
+    },
+    {
+      title: 'Higher-protein, muscle-protective diet',
+      strength: 'High-Evidence',
+      image: '/Cooking.png',
+      label: 'What It Does',
+      body: 'Raises protein within a calorie deficit to preserve lean mass and improve fullness while fat is lost. A meta-analysis of 47 trials (n = 3,218) found a standardised mean difference of 0.75 favouring muscle preservation during weight loss.',
+    },
+    {
+      title: 'Diet plus exercise (not diet alone)',
+      strength: 'High-Evidence',
+      image: '/Diet.png',
+      label: 'What It Does',
+      body: 'Combining structured exercise with diet delivers better long-term weight loss and body-composition change than diet alone. Resistance training preserves muscle while cardio and mobility support fat loss — adding structured exercise keeps roughly 1.1 kg more weight off over the long term than diet alone.',
+    },
+    {
+      title: 'Cryolipolysis (CoolSculpting-type fat freezing)',
+      strength: 'Moderate-High Evidence',
+      image: '/wix/87fc13_6d89e9c129304617a960aa46bb07eed4~mv2.jpg',
+      label: 'What It Does',
+      body: 'Applies controlled cooling to selectively injure subcutaneous fat cells, which are then cleared naturally over the following weeks. Published studies report a 10–26% reduction in the treated fat layer, visible at 8–12 weeks.',
+    },
+    {
+      title: 'HIFEM + RF body sculpting (Emsculpt NEO)',
+      strength: 'Emerging High-Quality Evidence',
+      image: '/wix/87fc13_d79664fae1184e8e8c947c3d350af498~mv2.jpg',
+      label: 'What It Does',
+      body: 'Combines high-intensity focused electromagnetic pulses with radiofrequency heating to contract muscle and heat fat in the same session. Trials show around 25–30% muscle gain alongside a 25–30% reduction in fat in the treated area, typically across four sessions about a week apart.',
+    },
+    {
+      title: 'RF, infrared and vacuum massage (VelaShape-type)',
+      strength: 'Moderate Evidence',
+      image: '/wix/87fc13_8e6b2be93835401caee6402885a0fb6c~mv2.jpg',
+      label: 'What It Does',
+      body: 'Uses radiofrequency, infrared light and mechanical massage to improve skin firmness, local circulation and the appearance of cellulite. Studies report around a 0.8-inch reduction in thigh circumference by eight weeks, typically across three to six sessions.',
+    },
+    {
+      title: 'Lymphatic drainage and recovery massage',
+      strength: 'Adjunct · Supportive',
+      image: '/ly.png',
+      label: 'What It Does',
+      body: 'Gentle manual techniques support lymph flow and venous return, helping manage swelling, heaviness and recovery between treatments. It is a comfort and recovery adjunct rather than a standalone fat-loss treatment, used to keep you feeling light and mobile throughout the program.',
+    },
+    {
+      title: 'Why we combine approaches',
+      strength: 'Synergy',
+      image: '/wix/87fc13_440425b61c66444abe7e3062dbfcd290~mv2.jpg',
+      label: 'What It Does',
+      body: 'Targets weight, hormones, muscle, fat and skin together instead of relying on a single tool. Medical guidance, nutrition, movement and evidence-based devices each do part of the work, and combining them deliberately outperforms any one approach used alone.',
+    },
+  ];
+  return (
+    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
+          Clinical research: basis of our methodology
+        </p>
+        <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
+        <h2 className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          Evidence based approach
+        </h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+          {items.map((item) => (
+            <EvidenceCard key={item.title} item={item} />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============================================================
+   8. FINAL CTA + brand band
+   ============================================================ */
+function FinalCTASection() {
+  const whyCarisma = [
+    'Created by the team behind Malta&rsquo;s leading spa and medical-aesthetics centres.',
+    'Doctor-led medical slimming — not a salon-style diet program.',
+    'One approach covering assessment, nutrition, movement and treatments.',
+    'High-touch support with weekly check-ins and coaching between visits.',
+  ];
+
+  return (
+    <section>
+      {/* Why Malta chooses Carisma + final CTA */}
+      <div className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeading>WHY MALTA CHOOSES Carisma</SectionHeading>
+          <Eyebrow>Your next step</Eyebrow>
+          <SectionHeading>Begin the last weight-loss plan you&apos;ll need</SectionHeading>
+          <p className="mt-4 mb-2 max-w-2xl mx-auto" style={pStyle}>
+            We take on a limited number of new clients each month so every plan stays genuinely doctor-led. Book your free, no-obligation assessment and we&apos;ll tell you honestly whether the program is right for you.
+          </p>
           <ul className="mt-10 mb-10 space-y-3 inline-block text-left">
-            {whyMalta.map((t) => (
+            {whyCarisma.map((t) => (
               <li key={t} className="flex items-start gap-3" style={liStyle}>
-                <span style={{ color: green, fontWeight: 700 }}>&#10003;</span>
-                <span>{t}</span>
+                <Check />
+                <span dangerouslySetInnerHTML={{ __html: t }} />
               </li>
             ))}
           </ul>
-          <div>
+          <div className="flex flex-wrap items-center justify-center gap-4">
             <CTAButton />
+            <PhoneButton />
           </div>
-          <p className="mt-8" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px' }}>
-            Complimentary on-site parking
+          <CTAReassurance className="mt-5" />
+          <p className="mt-3" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '14px' }}>
+            Complimentary on-site parking.
           </p>
         </div>
-      </section>
+      </div>
 
-      {/* FAQ */}
-      <section className="py-16" style={{ backgroundColor: softBg }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading>Common questions we hear</SectionHeading>
-          <div className="mt-10">
-            <h3 className="mb-2" style={{ color: greenDark, fontFamily: wideFont, fontSize: '15px', fontWeight: 600 }}>
-              1. How is this transformation program different from a normal diet or gym plan?
-            </h3>
-            <p style={pStyle}>
-              Unlike a standard diet or gym membership, our program is doctor led and combines medical assessment, personalised nutrition, movement and clinic treatments into one integrated plan built around your age, hormones and metabolism — with weekly check-ins and an Extended Care Commitment.
-            </p>
+      {/* Brand heritage band */}
+      <div className="py-14" style={{ background: panelGradient }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p style={{ color: green, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+            Carisma Wellness Group
+          </p>
+          <h3 className="mt-2 mb-6" style={{ color: greenDark, fontFamily: headingFont, fontSize: '24px', fontWeight: 400 }}>
+            35+ years in wellness, aesthetics &amp; slimming
+          </h3>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <a
+              href="https://www.carismaspa.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-full font-bold text-center"
+              style={{ border: `2px solid ${slate}`, color: slate, padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+            >
+              Discover our spas
+            </a>
+            <a
+              href="https://www.carismaspa.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block rounded-full font-bold text-center"
+              style={{ border: `2px solid ${slate}`, color: slate, padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+            >
+              Discover med-aesthetics
+            </a>
           </div>
         </div>
-      </section>
+      </div>
+
+      {/* Footer */}
+      <footer className="py-12" style={{ backgroundColor: '#fff', borderTop: `1px solid #e0e0e0` }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px' }}>
+          <p className="mb-2">
+            <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} style={{ color: slate, fontWeight: 600 }}>{phoneNumber}</a>
+            <span className="mx-2">&middot;</span>
+            <a href="mailto:info@carismaslimming.com" style={{ color: slate, fontWeight: 600 }}>info@carismaslimming.com</a>
+          </p>
+          <p className="mb-4">
+            <a href="https://www.instagram.com/carismaslimming" target="_blank" rel="noopener noreferrer" style={{ color: taupe }}>@carismaslimming</a>
+            <span className="mx-2">&middot;</span>
+            <a href="https://www.facebook.com/carismaslimming" target="_blank" rel="noopener noreferrer" style={{ color: taupe }}>Facebook</a>
+          </p>
+          <p style={{ color: taupeLight, fontSize: '13px' }}>
+            <a href="/privacy-policy" style={{ color: taupeLight }}>Privacy Policy</a>
+            <span className="mx-2">&middot;</span>
+            <a href="/terms-conditions" style={{ color: taupeLight }}>Terms &amp; Conditions</a>
+          </p>
+        </div>
+      </footer>
+    </section>
+  );
+}
+
+/* Persistent action bar — keeps the primary conversion one tap away on long scroll */
+/* ============================================================
+   PAGE
+   ============================================================ */
+export default function WeightLossProgramPage() {
+  return (
+    <main className="w-full" style={{ backgroundColor: '#fff', paddingBottom: '76px' }}>
+      <HeroSection />
+      <AsSeenOn />
+      <ProblemAgitationSection />
+      <CorePillarsSection />
+      <ProgramOverviewSection />
+      <CarismaDifferenceSection />
+      <OurPromiseSection />
+      <CarismaWellnessSection />
+      <FAQSection />
+      <EvidenceApproachSection />
     </main>
   );
 }

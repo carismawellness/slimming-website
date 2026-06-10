@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import HeroVideo from '@/components/HeroVideo';
+import ResultsCarousel from '@/components/ResultsCarousel';
 
 export default function GLP1Page() {
   const addresses = [
@@ -56,6 +58,22 @@ export default function GLP1Page() {
     'Currently pregnant or trying to conceive',
   ];
 
+  const suitableFor = [
+    'You have lines that deepen when you smile, frown, or raise your brows',
+    'You want a subtle refresh that still looks like you',
+    'You are open to a personalised approach based on your facial movement',
+    "You would like to soften specific areas such as crow's feet, forehead, or frown lines",
+    'You are comfortable with a quick treatment and minimal downtime',
+  ];
+
+  const notIdeal = [
+    'You are looking for volume restoration rather than line softening',
+    'You prefer results that are visible immediately on day one',
+    'You are pregnant, breastfeeding, or managing certain neurological conditions',
+    'You expect every line to disappear completely',
+    'You are not yet ready for an in-person consultation to assess suitability',
+  ];
+
   const headingFont = 'Trajan Pro, serif';
   const wideFont = 'Novecento Wide Book, sans-serif';
   const bodyFont = 'Roboto, sans-serif';
@@ -63,7 +81,7 @@ export default function GLP1Page() {
   return (
     <main className="w-full" style={{ backgroundColor: '#ffffff' }}>
       {/* Hero Section */}
-      <section className="py-16" style={{ backgroundColor: '#EEF3F0' }}>
+      <section className="py-16 mx-auto" style={{ backgroundImage: 'url(/background.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: '48px', overflow: 'hidden', maxWidth: '1280px', marginTop: '20px', marginBottom: '20px' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
@@ -155,26 +173,47 @@ export default function GLP1Page() {
               className="flex items-center justify-center text-center w-full overflow-hidden"
               style={{ aspectRatio: '383 / 526', maxWidth: '420px', marginLeft: 'auto', marginRight: 'auto', borderTopLeftRadius: '120px', borderBottomRightRadius: '120px', borderTopRightRadius: '16px', borderBottomLeftRadius: '16px' }}
             >
-              <img src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png" alt="Hero image / patient photo (medical weight loss with Ozempic & Mounjaro)" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <HeroVideo src="/video/hero-720p.mp4" poster="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Medical Weight Loss Results */}
+      <ResultsCarousel />
+
+      {/* Is this suitable for you */}
       <section className="py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2
-            className="text-center mb-10 uppercase"
-            style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
-          >
-            medical weight loss results
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center" style={{ color: '#9B8D83', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            Is this suitable for you?
           </h2>
-          <div
-            className="flex items-center justify-center text-center w-full mx-auto overflow-hidden"
-            style={{ aspectRatio: '176 / 168', maxWidth: '352px', borderRadius: '24px' }}
-          >
-            <img src="/wix/87fc13_de24c77f8dcf436699a6eeac3645088c~mv2.jpg" alt="Medical weight loss before/after results image" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <p className="text-center mx-auto mt-5 mb-12" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '780px' }}>
+            Every face moves differently. Botox is most effective when tailored to your unique facial anatomy, targeting the lines that bother you while preserving your natural expressions. A free consultation with one of our doctors helps us understand what will work for you.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="p-9" style={{ background: 'linear-gradient(180deg, #FBFBFA 0%, #F1F3EF 100%)', borderTopLeftRadius: '90px', borderBottomLeftRadius: '90px', borderTopRightRadius: '24px', borderBottomRightRadius: '24px', boxShadow: '0 14px 34px rgba(0,0,0,0.05)' }}>
+              <h3 className="mb-7" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Suitable for you if</h3>
+              <ul className="space-y-5">
+                {suitableFor.map((t) => (
+                  <li key={t} className="flex items-start gap-4">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8EB093" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}><polyline points="20 6 9 17 4 12" /></svg>
+                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.55 }}>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="p-9" style={{ background: 'linear-gradient(180deg, #FBFBFA 0%, #F1F3EF 100%)', borderTopRightRadius: '90px', borderBottomRightRadius: '90px', borderTopLeftRadius: '24px', borderBottomLeftRadius: '24px', boxShadow: '0 14px 34px rgba(0,0,0,0.05)' }}>
+              <h3 className="mb-7" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>May not be ideal if</h3>
+              <ul className="space-y-5">
+                {notIdeal.map((t) => (
+                  <li key={t} className="flex items-start gap-4">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#AEC1A6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.55 }}>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>

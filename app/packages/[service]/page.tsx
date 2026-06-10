@@ -102,8 +102,8 @@ export default async function ServicePage({ params }: Props) {
           copy lives in a left text panel on a soft sage gradient (no dark scrim,
           bright and airy) and the treatment photo fills the right column. */}
       <section
-        className="relative"
-        style={{ background: `linear-gradient(135deg, ${CREAM} 0%, ${SAGE_LIGHT} 100%)` }}
+        className="relative mx-auto"
+        style={{ backgroundImage: 'url(/background.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: '48px', overflow: 'hidden', maxWidth: '1280px', marginTop: '20px', marginBottom: '20px' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12 py-12 md:py-16">
