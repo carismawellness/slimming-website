@@ -449,6 +449,64 @@ export default function GLP1Page() {
         </div>
       </section>
 
+      {/* Safety, side effects & our system */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F8F7F3 35%)', borderRadius: '28px', padding: '48px' }}>
+            <h2 className="text-center" style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', lineHeight: 1.4 }}>
+              Safety, side effects,<br />and our system
+            </h2>
+            <p className="mt-6 mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              As part of our program, we prescribe Ozempic and Mounjaro with strict screening, clear education, and ongoing monitoring. Most side effects are manageable when dosing and nutrition are structured, and follow-ups are consistent.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div>
+                <p className="mb-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px' }}>Common side effects and how we reduce them:</p>
+                <ul className="space-y-2 mb-7">
+                  {[
+                    { label: 'Nausea', text: 'slow titration, protein-first meals, hydration and electrolytes, injection timing guidance' },
+                    { label: 'Constipation', text: 'tolerance-based fibre targets, fluids, daily movement, magnesium support when appropriate' },
+                    { label: 'Diarrhoea', text: 'simple meal sequencing, trigger-food control, temporary dose stabilisation' },
+                    { label: 'Fatigue', text: 'minimum calorie floors, protein and micronutrient monitoring, strength habits to protect energy' },
+                    { label: 'Reflux', text: 'smaller structured portions, meal timing rules, behavioural guidance' },
+                  ].map((s) => (
+                    <li key={s.label} className="flex items-start gap-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#AFA39D' }}>&bull;</span>
+                      <span><strong style={{ color: '#7d7066' }}>{s.label}:</strong> {s.text}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p className="mb-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7 }}>
+                  <strong style={{ color: '#7d7066' }}>The biggest clinical mistake:</strong> prescribing Ozempic or Mounjaro without a structured clinical system. Medication can quiet appetite, but it does not build muscle, teach eating habits, address emotional drivers, or create long-term maintenance. That is why our program pairs Ozempic or Mounjaro with strength training, protein-first nutrition structure, behavioural coaching, accountability, and a defined maintenance plan.
+                </p>
+                <a
+                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block text-center rounded-lg font-bold text-white"
+                  style={{ backgroundColor: '#2b5672', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '16px 40px' }}
+                >
+                  Book your medical consultation
+                </a>
+              </div>
+              <div className="flex flex-col gap-5">
+                <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 11' }}>
+                  <img src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="Ozempic pen for medical weight loss" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <div className="grid grid-cols-2 gap-5">
+                  <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '1 / 1' }}>
+                    <img src="/wix/87fc13_de24c77f8dcf436699a6eeac3645088c~mv2.jpg" alt="Consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '1 / 1' }}>
+                    <img src="/wix/87fc13_59abc443a8274e1c90646831cbc819c5~mv2.jpg" alt="Movement assessment with a Carisma practitioner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Eligibility */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
