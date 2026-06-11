@@ -542,6 +542,7 @@ export default function FatReductionPage() {
             style={{
               marginTop: 36,
               marginLeft: 'auto',
+              marginRight: 'auto',
               maxWidth: 560,
               background: 'linear-gradient(150deg, #eef2ec 0%, #e0e8df 100%)',
               borderRadius: 18,
