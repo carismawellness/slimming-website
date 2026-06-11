@@ -2,7 +2,8 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { services, getOrderedServices, BOOKING_URL } from '@/lib/services';
 import { notFound } from 'next/navigation';
-import FatReductionPage from '@/components/FatReductionPage';
+import PackagePage from '@/components/PackagePage';
+import { packageContent } from '@/lib/packages';
 
 interface Props {
   params: Promise<{ service: string }>;
@@ -89,10 +90,12 @@ export default async function ServicePage({ params }: Props) {
     notFound();
   }
 
-  // The Fat Freezing (CoolSculpting) page is a pixel-faithful recreation of the
-  // live /fat-reduction page and uses its own dedicated layout component.
-  if (service.id === 'fat-freezing') {
-    return <FatReductionPage />;
+  // Every slimming package now renders through the shared, pixel-faithful
+  // PackagePage template, driven by per-package content extracted from the
+  // matching live carismaslimming.com page.
+  const content = packageContent[service.id];
+  if (content) {
+    return <PackagePage content={content} />;
   }
 
   const related = getOrderedServices().filter((s) => s.id !== service.id);
