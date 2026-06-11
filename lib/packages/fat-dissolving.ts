@@ -158,9 +158,61 @@ export const fatDissolving: PackageContent = {
     },
   ],
 
-  // The live /fatdissolving page is streamlined: it has no treatable-areas,
-  // "we are not another diet clinic", package-treatments, leading-wellness-chain
-  // or standalone Evidence Based Approach sections (the offer card carries the
-  // pricing). Hide those so the page matches the live structure.
-  hide: { eligibility: true, difference: true, packageCard: true, wellness: true, evidence: true },
+  // The live /fatdissolving page is streamlined and bespoke: hide the standard
+  // template sections it does not use; the dedicated valueProps / commitmentPanel
+  // / offer blocks below recreate its actual layout.
+  hide: { eligibility: true, difference: true, packageCard: true, wellness: true, evidence: true, dual: true },
+
+  valueProps: {
+    heading: 'created for those who value confidence, safety & natural contour',
+    bullets: [
+      'Because you want targeted fat reduction that enhances your shape, not changes who you are.',
+      'Because stubborn fat deserves precision treatment, not extreme measures.',
+      'Because you expect your procedure to be performed by qualified aesthetic medical professionals.',
+      'Because your safety, comfort, and long-term results matter more than quick fixes.',
+    ],
+    image: W + '87fc13_6ac670fc080e4fe4a974d6701eed38a8~mv2.jpg',
+  },
+
+  commitmentPanel: {
+    eyebrow: 'the carisma difference',
+    heading: '35+ years delivering results',
+    leftHeading: 'OUR MEDICAL COMMITMENT',
+    left: [
+      'Targeted Fat Reduction – Precision treatments designed to reduce stubborn fat safely and effectively.',
+      'Tightened, Firmer Skin – Advanced protocols that support smoother, more defined contours.',
+      'No Surgery. No General Anesthesia. Minimal Downtime.',
+      'Medical-Grade Technology – Performed by certified aesthetic professionals using clinically approved methods.',
+    ],
+    rightHeading: 'WHY MALTA CHOOSES CARISMA',
+    right: [
+      'Over 30 years of experience',
+      'Medical-grade technology trusted by medical doctors',
+      'Personalised fat-reduction plans for every body area',
+      'Proven results with high client satisfaction',
+    ],
+  },
+
+  offer: {
+    introHeading: 'secure your exclusive fat dissolving offer',
+    introParas: [
+      'Our limited-time launch offer is available for selected treatment areas. Once full, standard pricing applies.',
+      'Experience targeted fat reduction performed by qualified aesthetic medical professionals now from €199 (regularly €450).',
+      'In just one session, you begin the process of permanently breaking down stubborn fat for a slimmer, more refined contour.',
+    ],
+    introImage: W + '87fc13_3b881cbf9132429a94159c9ebf160a1d~mv2.jpg',
+    tagline: 'Naturally sculpted. Medically performed.',
+    subline: 'A targeted fat-dissolving treatment designed to permanently break down unwanted fat — no surgery, no general anesthesia, minimal downtime.',
+    includes: [
+      '3x Lemon Bottle Fat-Dissolving Injection (€450)',
+      '3x access to spa & fitness facilities (€105)',
+      'Tanita Body Composition Analysis (€60)',
+      '€25 Carisma Aesthetics Credit (€25)',
+      'Complimentary Parking Validation',
+    ],
+    totalValue: '€650',
+    todayPrice: '€199 ONLY',
+    buttonLabel: 'Book Your Consultation Now',
+    cardImage: W + '87fc13_e4992fcc322c43c79922384b826fdc9c~mv2.jpg',
+  },
 };

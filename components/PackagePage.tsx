@@ -339,6 +339,66 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       </section>
       )}
 
+      {/* ===== 4b. VALUE PROPS ("created for those who value…") ===== */}
+      {c.valueProps && (
+      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+        <div style={CONTAINER}>
+          <SectionHeading>{c.valueProps.heading}</SectionHeading>
+          <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 48, alignItems: 'center', marginTop: 40 }} className="fr-2col">
+            <div>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
+                {c.valueProps.bullets.map((b) => (
+                  <li key={b} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <span style={{ color: TAUPE_LT, fontSize: 18, lineHeight: 1.1, flexShrink: 0 }}>&bull;</span>
+                    <span style={{ ...body, fontSize: 14 }}>{b}</span>
+                  </li>
+                ))}
+              </ul>
+              <CTA variant="blue" />
+              <div style={{ marginTop: 18 }}><Stars withGoogle /></div>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={c.valueProps.image} alt={c.valueProps.heading} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
+          </div>
+        </div>
+      </section>
+      )}
+
+      {/* ===== 4c. COMMITMENT PANEL ("35+ years delivering results") ===== */}
+      {c.commitmentPanel && (
+      <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 40, paddingBottom: 56 }}>
+        <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 24, padding: '48px 48px 44px' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={WELL_BG} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <Eyebrow>{c.commitmentPanel.eyebrow}</Eyebrow>
+            <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
+            <SectionHeading>{c.commitmentPanel.heading}</SectionHeading>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginTop: 40, alignItems: 'start', maxWidth: 880, marginInline: 'auto' }} className="fr-2col">
+              {[{ h: c.commitmentPanel.leftHeading, items: c.commitmentPanel.left }, { h: c.commitmentPanel.rightHeading, items: c.commitmentPanel.right }].map((col) => (
+                <div key={col.h}>
+                  <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>{col.h}</h3>
+                  <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {col.items.map((x) => (
+                      <li key={x} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}><span style={{ color: TAUPE_LT }}>&bull;</span><span>{x}</span></li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, marginTop: 40, flexWrap: 'wrap' }}>
+              <CTA variant="blue" />
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: TAUPE, fontFamily: WIDE, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={PARKING} alt="" style={{ width: 22, height: 'auto' }} />
+                Complimentary on-site parking
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+      )}
+
       {/* ===================== 5. ELIGIBILITY ===================== */}
       {!hidden.eligibility && c.areas.length > 0 && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
@@ -463,6 +523,45 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 <Stars withGoogle />
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+      )}
+
+      {/* ===== 8b. OFFER (bespoke; intro block + pricing card) ===== */}
+      {c.offer && (
+      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+        <div style={CONTAINER}>
+          <SectionHeading>{c.offer.introHeading}</SectionHeading>
+          <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 44, alignItems: 'center', marginTop: 36 }} className="fr-2col">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={c.offer.introImage} alt={c.offer.introHeading} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
+            <div>
+              {c.offer.introParas.map((p) => (<p key={p} style={{ ...body, fontSize: 14, marginBottom: 14 }}>{p}</p>))}
+              <div style={{ marginTop: 8 }}><CTA variant="blue" /></div>
+            </div>
+          </div>
+
+          {/* pricing card */}
+          <div style={{ marginTop: 40, background: 'linear-gradient(150deg, #f1f3ee 0%, #e3eadf 100%)', borderRadius: 22, padding: 22, display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 22, alignItems: 'stretch' }} className="fr-2col">
+            <div style={{ backgroundColor: '#fff', borderRadius: 16, padding: '32px 30px' }}>
+              <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 8px' }}>{c.offer.tagline}</p>
+              <p style={{ ...body, fontSize: 13.5, marginBottom: 18 }}>{c.offer.subline}</p>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {c.offer.includes.map((it) => (
+                  <li key={it} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5 }}>
+                    <span style={{ color: TAUPE_LT, lineHeight: 1.2 }}>&bull;</span><span>{it}</span>
+                  </li>
+                ))}
+              </ul>
+              <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 16px' }}>
+                TOTAL VALUE: {c.offer.totalValue} TODAY: <span style={{ color: GREEN }}>{c.offer.todayPrice}</span>
+              </p>
+              <div style={{ marginBottom: 14 }}><CTA variant="blue" full>{c.offer.buttonLabel}</CTA></div>
+              <Stars withGoogle />
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={c.offer.cardImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 16, display: 'block' }} />
           </div>
         </div>
       </section>

@@ -103,6 +103,32 @@ export interface PackageContent {
   /* ---- shared-section overrides (rarely needed) ---- */
   differenceBullets?: string[];
 
+  /* ---- optional bespoke sections (used by pages whose live layout differs) ---- */
+  /** "Created for those who value…" — bullets left, photo right. Renders after benefits. */
+  valueProps?: { heading: string; bullets: string[]; image: string };
+  /** A two-column commitment panel on the rose watermark (no map), e.g. "35+ years delivering results". */
+  commitmentPanel?: {
+    eyebrow: string;
+    heading: string;
+    leftHeading: string;
+    left: string[];
+    rightHeading: string;
+    right: string[];
+  };
+  /** A bespoke offer section (intro block + pricing card) used in place of the dual/starter section. */
+  offer?: {
+    introHeading: string;
+    introParas: string[];
+    introImage: string;
+    tagline: string;
+    subline: string;
+    includes: string[];
+    totalValue: string;
+    todayPrice: string;
+    buttonLabel: string;
+    cardImage: string;
+  };
+
   /* ---- per-page section visibility ----
      Some live pages omit standard sections; set the matching key true to
      hide that section on this package only. (hero / secret+carousel / press
