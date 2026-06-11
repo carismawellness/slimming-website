@@ -1,3 +1,5 @@
+import GoogleReviews from './GoogleReviews';
+
 const GREEN = '#8EB093';
 const TAUPE = '#9B8D83';
 const FRESHA = 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=4994308&oiid=sv%3A25969858&share=true&pId=2708191';
@@ -43,6 +45,9 @@ const BRANDS = [
 export default function BrandBlock() {
   return (
     <div>
+      {/* Google reviews — real reviews from the clinic's Google listing */}
+      <GoogleReviews />
+
       {/* Doctor Profiles — stacked 2-column rows, alternating photo side */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-16">
