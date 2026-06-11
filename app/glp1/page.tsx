@@ -537,6 +537,66 @@ export default function GLP1Page() {
         </div>
       </section>
 
+      {/* 4 core pillars — programme built to last */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            4 core pillars of our methodology
+          </p>
+          <div className="mx-auto mt-2 mb-6" style={{ width: '210px', height: '1px', backgroundColor: '#B9A99E' }} />
+          <h2 className="text-center mb-12" style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', letterSpacing: '1px', lineHeight: 1.4, textTransform: 'uppercase' }}>
+            A doctor-led medical weight loss<br />programme built to last
+          </h2>
+          <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', borderRadius: '28px', padding: '28px' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="bg-white rounded-2xl p-8 space-y-7">
+                {[
+                  { icon: '/wix/87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'Medical eligibility & assessment', body: 'Every journey begins with a full medical consultation to assess Ozempic or Mounjaro suitability, health history, and individual goals before any treatment is considered.' },
+                  { icon: '/wix/87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'Appetite & metabolic support', body: 'GLP-1 medication is used to support natural fullness signals and reduce food noise, helping make portion control and consistency feel more manageable.' },
+                  { icon: '/wix/87fc13_c4cf7001e0324fbd84551191d2a27bd1~mv2.png', title: 'Safe, long-term approach', body: 'This is not a crash diet or quick fix. Our approach always uses Ozempic or Mounjaro as part of a wider lifestyle plan designed for sustainable, steady fat reduction.' },
+                ].map((f) => (
+                  <div key={f.title} className="flex items-start gap-4">
+                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: '46px', height: '46px', borderRadius: '12px', border: '1px solid #e3ded6' }}>
+                      <img src={f.icon} alt="" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+                    </div>
+                    <div>
+                      <h3 className="mb-2" style={{ color: '#7ba587', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{f.title}</h3>
+                      <p style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{f.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <div className="bg-white rounded-2xl p-8">
+                <div className="w-full overflow-hidden rounded-xl mb-6" style={{ aspectRatio: '16 / 10' }}>
+                  <img src="/wix/87fc13_56eec505c9f9433db5846a0aeae07c7f~mv2.jpg" alt="Medical consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                </div>
+                <ul className="space-y-2 mb-6">
+                  {['Initial Medical Consultation & Eligibility Review', 'Personalised GLP-1 Treatment Planning', 'Ongoing Medical Monitoring & Reviews', 'Nutrition & Lifestyle Support Integration'].map((t) => (
+                    <li key={t} className="flex items-start gap-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#AFA39D' }}>&bull;</span><span>{t}</span>
+                    </li>
+                  ))}
+                </ul>
+                <a
+                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full text-center rounded-lg font-bold text-white mb-5"
+                  style={{ backgroundColor: '#2b5672', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px' }}
+                >
+                  Book your medical consultation
+                </a>
+                <div className="flex items-center justify-center gap-2">
+                  <img src="/wix/87fc13_7c506cd7a9324e74a89aab69b22cc67d~mv2.png" alt="Google" style={{ height: '22px', width: 'auto' }} />
+                  <span style={{ color: '#8EB093', fontSize: '16px', letterSpacing: '2px' }}>★★★★★</span>
+                  <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Eligibility */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
