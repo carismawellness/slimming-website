@@ -27,7 +27,7 @@ export const fatDissolving: PackageContent = {
     '** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
   heroImage: W + '87fc13_903ec2f7efdd4c428a6b3c4debbd86a8~mv2.png',
-  heroVideo: W + '87fc13_d455089124694edb96940d4cd650622a_720p.mp4',
+  heroVideo: W + '87fc13_c00bb74576c042dfa16be066b6141289_720p.mp4',
   heroImageRatio: '398 / 682',
 
   secretHeading: ['the secret to a more defined,', 'confident look'],

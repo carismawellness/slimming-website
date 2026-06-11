@@ -25,7 +25,7 @@ export const lymphaticDrainage: PackageContent = {
     '* Eligibility and treatment recommendations depend on your health history and individual needs. A clear plan will always be discussed during your consultation before starting. Lymphatic drainage is a supportive wellness therapy and may not be suitable for certain medical conditions. Treatment is provided following professional assessment by our medical team.',
   ],
   heroImage: W + '87fc13_48415cf7a9494953959c243e2171a5c4~mv2.png',
-  heroVideo: W + '87fc13_d455089124694edb96940d4cd650622a_720p.mp4',
+  heroVideo: W + '87fc13_b8ef9f4370b04873b78136d790535752_720p.mp4',
   heroImageRatio: '398 / 682',
 
   secretHeading: ['THE SECRET TO A MORE DEFINED,', 'CONFIDENT LOOK'],

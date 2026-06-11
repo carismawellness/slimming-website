@@ -27,7 +27,7 @@ export const skinTightening: PackageContent = {
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
   heroImage: W + '87fc13_76c7882984cf42de95304b10e6fd263f~mv2.png',
-  heroVideo: W + '87fc13_d455089124694edb96940d4cd650622a_720p.mp4',
+  heroVideo: W + '87fc13_0419491a053744b29ebbff7932e268e5_720p.mp4',
   heroImageRatio: '398 / 682',
 
   secretHeading: ['THE SECRET TO A MORE DEFINED,', 'CONFIDENT LOOK'],

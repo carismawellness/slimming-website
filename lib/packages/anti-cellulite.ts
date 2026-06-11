@@ -27,7 +27,7 @@ export const antiCellulite: PackageContent = {
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
   heroImage: W + '87fc13_f82efb98dbd94826bf80c4ce3c3ee604~mv2.png',
-  heroVideo: W + '87fc13_d455089124694edb96940d4cd650622a_720p.mp4',
+  heroVideo: W + '87fc13_acf34576a18744be8eff908bf00f55a6_720p.mp4',
   heroImageRatio: '398 / 682',
 
   secretHeading: ['the secret to a more defined,', 'confident look'],

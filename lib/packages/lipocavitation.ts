@@ -27,7 +27,7 @@ export const lipocavitation: PackageContent = {
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
   heroImage: W + 'f940f0_e59104c7159440e4bb3ce6643acd584e~mv2.png',
-  heroVideo: W + '87fc13_d455089124694edb96940d4cd650622a_720p.mp4',
+  heroVideo: undefined,
   heroImageRatio: '398 / 682',
 
   secretHeading: ['some fat simply doesn’t respond to effort.', 'that’s not a personal failing.'],
