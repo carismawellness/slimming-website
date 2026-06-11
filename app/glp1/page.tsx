@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import HeroVideo from '@/components/HeroVideo';
 import ResultsCarousel from '@/components/ResultsCarousel';
+import HowItWorks from '@/components/HowItWorks';
 
 export default function GLP1Page() {
   const addresses = [
@@ -353,6 +354,9 @@ export default function GLP1Page() {
           </div>
         </div>
       </section>
+
+      {/* How it works */}
+      <HowItWorks />
 
       {/* Eligibility */}
       <section className="py-16">
