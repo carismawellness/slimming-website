@@ -2,6 +2,7 @@ import Link from 'next/link';
 import HeroVideo from '@/components/HeroVideo';
 import ResultsCarousel from '@/components/ResultsCarousel';
 import HowItWorks from '@/components/HowItWorks';
+import FAQAccordion from '@/components/FAQAccordion';
 
 export default function GLP1Page() {
   const addresses = [
@@ -662,6 +663,9 @@ export default function GLP1Page() {
           </div>
         </div>
       </section>
+
+      {/* FAQ */}
+      <FAQAccordion />
 
       {/* Eligibility */}
       <section className="py-16">
