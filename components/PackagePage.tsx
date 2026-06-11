@@ -30,6 +30,7 @@ import {
   SHARED_COMMITMENT,
   SHARED_WHY_MALTA,
 } from '@/lib/packages/types';
+import { testimonials as TESTIMONIALS, Testimonial } from '@/lib/packages/testimonials';
 
 /* ---------- palette / fonts (shared with the site) ---------- */
 const GREEN = '#8EB093';
@@ -107,6 +108,55 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
       <span style={{ color: GREEN, fontSize: size, letterSpacing: 2, lineHeight: 1 }}>{'★'.repeat(5)}</span>
       <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14 }}>Over 200+ Reviews</span>
     </span>
+  );
+}
+
+/* ---------- before/after testimonial carousel ----------
+   Faithful recreation of the live Wix HTML embed (Slick carousel):
+   each slide is a combined before/after image with an overlapping
+   quote card, three shown at a time on desktop. */
+function TestimonialCard({ t }: { t: Testimonial }) {
+  const [expanded, setExpanded] = useState(false);
+  return (
+    <div style={{ background: '#fff', borderRadius: 16, padding: '20px 10px', margin: '0 10px', boxSizing: 'border-box' }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={t.image} alt={`${t.name} before and after`} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
+      <div style={{ background: 'linear-gradient(178deg, #F8F6F2 42%, #C9D8C1 100%)', borderRadius: 16, padding: '15px', paddingTop: 70, marginTop: -91 }}>
+        <p
+          style={{
+            color: '#9B8C81', fontFamily: BODY, fontSize: 14, lineHeight: 1.5, margin: '0 0 5px',
+            ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }),
+          }}
+        >
+          {t.quote}
+        </p>
+        <button type="button" onClick={() => setExpanded((v) => !v)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 14, textDecoration: 'underline', color: '#9B8C81', fontFamily: BODY }}>
+          {expanded ? 'Read less' : 'Read more'}
+        </button>
+        <h3 style={{ fontSize: 16, fontWeight: 500, color: '#9B8C81', margin: '24px 0 5px', fontFamily: BODY }}>{t.name}</h3>
+      </div>
+    </div>
+  );
+}
+
+function TestimonialCarousel({ items }: { items: Testimonial[] }) {
+  const [start, setStart] = useState(0);
+  const n = items.length;
+  const per = Math.min(3, n);
+  const visible = Array.from({ length: per }, (_, i) => items[(start + i) % n]);
+  const arrow: React.CSSProperties = { position: 'absolute', top: '38%', transform: 'translateY(-50%)', width: 36, height: 36, borderRadius: '50%', border: 'none', cursor: 'pointer', background: 'rgba(0,0,0,0)', color: GREEN, fontSize: 24, lineHeight: 1, zIndex: 2 };
+  return (
+    <div style={{ position: 'relative', padding: '0 36px', marginTop: 36 }}>
+      <button type="button" aria-label="Previous" onClick={() => setStart((start - 1 + n) % n)} style={{ ...arrow, left: 0 }}>&#8249;</button>
+      <div className="fr-testi" style={{ display: 'flex' }}>
+        {visible.map((t, i) => (
+          <div key={`${start}-${i}`} style={{ flex: '1 1 0', minWidth: 0 }}>
+            <TestimonialCard t={t} />
+          </div>
+        ))}
+      </div>
+      <button type="button" aria-label="Next" onClick={() => setStart((start + 1) % n)} style={{ ...arrow, right: 0 }}>&#8250;</button>
+    </div>
   );
 }
 
@@ -217,11 +267,19 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         </div>
       </section>
 
-      {/* ===================== 2. SECRET ===================== */}
+      {/* ===================== 2. SECRET (+ before/after testimonials) ===================== */}
       <section style={{ paddingTop: 56, paddingBottom: 56 }}>
-        <div style={CONTAINER}>
+        <div style={{ ...CONTAINER, maxWidth: 1180 }}>
           <SectionHeading>{c.secretHeading.map((l, i) => (<span key={i}>{l}{i < c.secretHeading.length - 1 && <br />}</span>))}</SectionHeading>
-          <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 16, letterSpacing: '0.5px', textTransform: 'uppercase', textAlign: 'center', margin: '16px 0 0' }}>{c.secretSubheading}</p>
+          <div style={{ width: 280, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '18px auto 0' }} />
+
+          {TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
+            <TestimonialCarousel items={TESTIMONIALS[c.id]} />
+          )}
+        </div>
+
+        <div style={{ ...CONTAINER, marginTop: 56 }}>
+          <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 16, letterSpacing: '0.5px', textTransform: 'uppercase', textAlign: 'center', margin: 0 }}>{c.secretSubheading}</p>
 
           <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 40 }} className="fr-2col">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -502,6 +560,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         @media (max-width: 860px) {
           .fr-hero-grid, .fr-2col, .fr-benefits, .fr-evgrid { grid-template-columns: 1fr !important; }
           .fr-evgrid > div { grid-column: auto !important; }
+          .fr-testi { flex-direction: column !important; }
         }
         @media (max-width: 560px) { .fr-benefits { grid-template-columns: 1fr !important; } }
       `}</style>
