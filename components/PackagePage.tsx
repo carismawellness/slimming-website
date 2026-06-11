@@ -21,7 +21,7 @@
      11 Evidence based approach (research cards)
    ============================================================ */
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { BOOKING_URL } from '@/lib/services';
 import {
   PackageContent,
@@ -115,6 +115,21 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
 export default function PackagePage({ content: c }: { content: PackageContent }) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [openEv, setOpenEv] = useState<number | null>(null);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+  const [heroMuted, setHeroMuted] = useState(true);
+
+  const toggleHeroSound = () => {
+    const v = heroVideoRef.current;
+    if (!v) return;
+    const next = !v.muted;
+    v.muted = next;
+    if (!next) {
+      // unmuting: make sure it is audible and playing
+      v.volume = 1;
+      void v.play().catch(() => {});
+    }
+    setHeroMuted(next);
+  };
 
   const body: React.CSSProperties = { color: TAUPE, fontFamily: BODY, fontSize: 15, lineHeight: 1.7, margin: 0 };
   const differenceBullets = c.differenceBullets ?? SHARED_DIFFERENCE_BULLETS;
@@ -163,8 +178,31 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
               {c.heroVideo ? (
-                <video src={c.heroVideo} poster={c.heroImage} autoPlay muted loop playsInline aria-label={c.heroSubheading}
-                  style={{ width: '100%', maxWidth: 360, aspectRatio: c.heroImageRatio ?? '398 / 682', objectFit: 'cover', borderRadius: 18, display: 'block', backgroundColor: '#dce6dc' }} />
+                <div style={{ position: 'relative', width: '100%', maxWidth: 360 }}>
+                  <video ref={heroVideoRef} src={c.heroVideo} poster={c.heroImage} autoPlay muted loop playsInline aria-label={c.heroSubheading}
+                    style={{ width: '100%', aspectRatio: c.heroImageRatio ?? '398 / 682', objectFit: 'cover', borderRadius: 18, display: 'block', backgroundColor: '#dce6dc' }} />
+                  <button
+                    type="button"
+                    onClick={toggleHeroSound}
+                    aria-label={heroMuted ? 'Unmute video' : 'Mute video'}
+                    title={heroMuted ? 'Tap to hear the doctor' : 'Mute'}
+                    style={{ position: 'absolute', bottom: 12, right: 12, width: 42, height: 42, borderRadius: '50%', border: 'none', cursor: 'pointer', backgroundColor: 'rgba(40,44,40,0.55)', backdropFilter: 'blur(2px)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', padding: 0 }}
+                  >
+                    {heroMuted ? (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none" />
+                        <line x1="23" y1="9" x2="17" y2="15" />
+                        <line x1="17" y1="9" x2="23" y2="15" />
+                      </svg>
+                    ) : (
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+                        <path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none" />
+                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
+                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
                 <img src={c.heroImage} alt={c.heroSubheading} style={{ width: '100%', maxWidth: 360, aspectRatio: c.heroImageRatio ?? '398 / 560', objectFit: 'cover', borderRadius: 18, display: 'block' }} />
