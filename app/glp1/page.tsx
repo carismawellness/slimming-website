@@ -44,6 +44,13 @@ export default function GLP1Page() {
     },
   ];
 
+  const pillarIcons = [
+    '/wix/87fc13_729173bc08764a74bee017b037d95d5b~mv2.png',
+    '/wix/87fc13_82ddf84b6c664402b6d02dfacfa0d14f~mv2.png',
+    '/wix/87fc13_a3a9f733a463406abf5b5177ef3aaa51~mv2.png',
+    '/wix/87fc13_b4783b8ab4ad480fa01394e449f91d34~mv2.png',
+  ];
+
   const suitable = [
     'BMI ≥27',
     'Insulin resistence',
@@ -268,53 +275,81 @@ export default function GLP1Page() {
         </div>
       </section>
 
-      {/* Trust */}
-      <section className="py-16">
+      {/* Malta's trusted clinic — press logos + program pillars */}
+      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
-            className="text-center mb-10 uppercase"
-            style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '24px' }}
+            className="text-center"
+            style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '26px', textTransform: 'uppercase', lineHeight: 1.35 }}
           >
-            malta&apos;s trusted clinic for doctor-led, medical weight loss
+            malta&apos;s trusted clinic for<br />doctor-led, medical weight loss
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+
+          {/* Press logos */}
+          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 mt-10 mb-16">
             {[
-              { label: 'Malta Today logo', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg' },
-              { label: 'Press publication logo', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg' },
-              { label: 'Press publication logo', src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg' },
-              { label: 'Times of Malta logo', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png' },
-              { label: 'MaltaToday logo', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png' },
-              { label: 'Certification badge', src: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png' },
-            ].map((logo, i) => (
+              { label: 'Malta Daily', src: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png' },
+              { label: '89.7 Bay', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg' },
+              { label: 'Lovin Malta', src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg' },
+              { label: 'Times of Malta', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png' },
+              { label: 'Malta Today', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg' },
+            ].map((logo) => (
+              <div key={logo.label} className="flex items-center justify-center" style={{ height: '54px' }}>
+                <img src={logo.src} alt={logo.label} style={{ maxHeight: '54px', width: 'auto', objectFit: 'contain' }} />
+              </div>
+            ))}
+          </div>
+
+          {/* Program pillars */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {pillars.map((pillar, i) => (
               <div
                 key={i}
-                className="flex items-center justify-center text-center text-xs overflow-hidden"
-                style={{ height: '70px' }}
+                className="p-8"
+                style={{ background: 'linear-gradient(180deg, #F5F8F3 0%, #DEE8DA 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '80px', borderBottomRightRadius: '16px' }}
               >
-                <img src={logo.src} alt={logo.label} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+                <img src={pillarIcons[i]} alt="" style={{ width: '54px', height: '54px', objectFit: 'contain', marginBottom: '20px' }} />
+                <h3 className="mb-3" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                  {pillar.title}
+                </h3>
+                <p style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.7 }}>
+                  {pillar.body}
+                </p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Program Pillars */}
-      <section className="py-20" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pillars.map((pillar, i) => (
-              <div key={i} className="rounded-2xl p-8" style={{ backgroundColor: '#EEF3F0' }}>
-                <div className="mb-5 flex items-center justify-center" style={{ width: '48px', height: '48px', borderRadius: '12px', backgroundColor: '#ffffff' }}>
-                  <span style={{ color: '#8EB093', fontWeight: 700, fontSize: '20px' }}>✦</span>
-                </div>
-                <h3 className="mb-3 uppercase tracking-wide" style={{ color: '#7ba587', fontFamily: wideFont, fontWeight: 600, fontSize: '13px' }}>
-                  {pillar.title}
-                </h3>
-                <p style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '13px', lineHeight: '1.7' }}>
-                  {pillar.body}
-                </p>
-              </div>
-            ))}
+      {/* We are not another diet clinic */}
+      <section className="py-16" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            The Carisma Difference
+          </p>
+          <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#8EB093' }} />
+          <h2 className="text-center mb-6" style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+            We are not<br />another diet clinic.
+          </h2>
+          <p className="text-center mx-auto mb-12" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '760px' }}>
+            We are a doctor-led medical weight loss clinic in Malta that blends medical insight, sustainable nutrition, and modern body technology into one high-touch system. So you do not just lose weight, you build a stronger, healthier version of yourself.
+          </p>
+          <div className="mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', borderBottomLeftRadius: '24px', borderBottomRightRadius: '90px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
+            <ul className="space-y-6">
+              {[
+                'Doctor-led medical weight loss: full check, body scan, and blood work',
+                'One integrated program: medical support, nutrition, movement, and treatments together',
+                'Real gym included: Technogym facility, semi-private classes, and personal training',
+                'High-touch support: weekly check-ins, progress reports, and WhatsApp follow-up',
+                'Evidence-based devices: Emsculpt NEO, CoolSculpting, and RF skin tightening',
+                'Selective entry and measurable weight loss results guaranteed',
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-4">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8EB093" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}><polyline points="20 6 9 17 4 12" /></svg>
+                  <span style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </section>
