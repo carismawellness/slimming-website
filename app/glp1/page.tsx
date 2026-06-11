@@ -58,22 +58,6 @@ export default function GLP1Page() {
     'Currently pregnant or trying to conceive',
   ];
 
-  const suitableFor = [
-    'You have lines that deepen when you smile, frown, or raise your brows',
-    'You want a subtle refresh that still looks like you',
-    'You are open to a personalised approach based on your facial movement',
-    "You would like to soften specific areas such as crow's feet, forehead, or frown lines",
-    'You are comfortable with a quick treatment and minimal downtime',
-  ];
-
-  const notIdeal = [
-    'You are looking for volume restoration rather than line softening',
-    'You prefer results that are visible immediately on day one',
-    'You are pregnant, breastfeeding, or managing certain neurological conditions',
-    'You expect every line to disappear completely',
-    'You are not yet ready for an in-person consultation to assess suitability',
-  ];
-
   const headingFont = 'Trajan Pro, serif';
   const wideFont = 'Novecento Wide Book, sans-serif';
   const bodyFont = 'Roboto, sans-serif';
@@ -182,103 +166,58 @@ export default function GLP1Page() {
       {/* Medical Weight Loss Results */}
       <ResultsCarousel />
 
-      {/* Is this suitable for you */}
-      <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center" style={{ color: '#9B8D83', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            Is this suitable for you?
-          </h2>
-          <p className="text-center mx-auto mt-5 mb-12" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '780px' }}>
-            Every face moves differently. Botox is most effective when tailored to your unique facial anatomy, targeting the lines that bother you while preserving your natural expressions. A free consultation with one of our doctors helps us understand what will work for you.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="p-9" style={{ background: 'linear-gradient(180deg, #FBFBFA 0%, #F1F3EF 100%)', borderTopLeftRadius: '90px', borderBottomLeftRadius: '90px', borderTopRightRadius: '24px', borderBottomRightRadius: '24px', boxShadow: '0 14px 34px rgba(0,0,0,0.05)' }}>
-              <h3 className="mb-7" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Suitable for you if</h3>
-              <ul className="space-y-5">
-                {suitableFor.map((t) => (
-                  <li key={t} className="flex items-start gap-4">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#8EB093" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}><polyline points="20 6 9 17 4 12" /></svg>
-                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.55 }}>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="p-9" style={{ background: 'linear-gradient(180deg, #FBFBFA 0%, #F1F3EF 100%)', borderTopRightRadius: '90px', borderBottomRightRadius: '90px', borderTopLeftRadius: '24px', borderBottomLeftRadius: '24px', boxShadow: '0 14px 34px rgba(0,0,0,0.05)' }}>
-              <h3 className="mb-7" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>May not be ideal if</h3>
-              <ul className="space-y-5">
-                {notIdeal.map((t) => (
-                  <li key={t} className="flex items-start gap-4">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#AEC1A6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.55 }}>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* What is Medical Weight Loss */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2
-            className="text-center mb-3 uppercase"
-            style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
-          >
-            what is medical weight loss?
-          </h2>
-          <p
-            className="text-center mb-8"
-            style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '14px' }}
-          >
-            clarity before you start. What does medical weight loss really mean?
+          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            What is medical weight loss?
           </p>
-          <p className="mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
-            Medical weight loss is a doctor-supervised approach to losing weight that goes beyond diets and
-            willpower. At our weight loss clinic in Malta, it means a full medical assessment, personalised
-            nutrition planning, body composition monitoring, and, where clinically appropriate, GLP-1
-            prescription support to regulate appetite and reduce cravings. Our doctors prescribe Ozempic
-            (semaglutide) and Mounjaro (tirzepatide) for weight loss as part of a structured programme, not
-            as a standalone prescription. This approach works because it treats the biological, behavioural,
-            and lifestyle factors that make losing weight difficult.
+          <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
+          <h2 className="text-center" style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', lineHeight: 1.3 }}>
+            Clarity before you start.<br />What does medical weight loss really mean?
+          </h2>
+          <p className="mt-8 mb-6" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
+            Medical weight loss is a doctor-supervised approach to losing weight that goes beyond diets and willpower. At our weight loss clinic in Malta, it means a full medical assessment, personalised nutrition planning, body composition monitoring, and, where clinically appropriate, GLP-1 prescription support to regulate appetite and reduce cravings.
+          </p>
+          <p className="mb-12" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
+            Our doctors prescribe Ozempic (semaglutide) and Mounjaro (tirzepatide) for weight loss as part of a structured programme, not as a standalone prescription. This approach works because it treats the biological, behavioural, and lifestyle factors that make losing weight difficult.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="px-2">
-              <h3 className="mb-6 uppercase tracking-wide" style={{ color: '#7ba587', fontFamily: wideFont, fontWeight: 500, fontSize: '13px' }}>
+              <h3 className="mb-6" style={{ color: '#7ba587', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 What a medical weight loss program addresses
               </h3>
               <ul className="space-y-4">
                 {addresses.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px' }}>
-                    <span style={{ color: '#8EB093', fontWeight: 700 }}>✓</span>
-                    <span>{item}</span>
+                  <li key={i} className="flex items-start gap-3">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8EB093" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><polyline points="20 6 9 17 4 12" /></svg>
+                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="px-2">
-              <h3 className="mb-6 uppercase tracking-wide" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 500, fontSize: '13px' }}>
-                What medication alone cannot do
+              <h3 className="mb-6" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                What medication alone cannot do:
               </h3>
               <ul className="space-y-4">
                 {cannotDo.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px' }}>
-                    <span style={{ color: '#b06b6b', fontWeight: 700 }}>✗</span>
-                    <span>{item}</span>
+                  <li key={i} className="flex items-start gap-3">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AEC1A6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <p className="mt-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
-            That is why our program in Malta combines Ozempic or Mounjaro support (if clinically appropriate)
-            with nutrition structure, strength training guidance, weekly tracking, and a defined maintenance
-            plan.
+          <p className="mt-12 text-center mx-auto" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, maxWidth: '720px' }}>
+            That is why our program in Malta combines Ozempic or Mounjaro support (if clinically appropriate) with nutrition structure, strength training guidance, weekly tracking, and a defined maintenance plan.
           </p>
         </div>
       </section>
+
 
       {/* Sustainability */}
       <section className="py-16" style={{ backgroundColor: '#EEF3F0' }}>

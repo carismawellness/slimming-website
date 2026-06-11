@@ -43,7 +43,7 @@ function ResultCard({ r }: { r: Result }) {
   return (
     <div
       className="flex-shrink-0 overflow-hidden"
-      style={{ width: '380px', maxWidth: '85vw', background: 'linear-gradient(180deg, #DCE7D7 0%, #C4D7BC 100%)', borderTopLeftRadius: '20px', borderTopRightRadius: '60px', borderBottomLeftRadius: '60px', borderBottomRightRadius: '20px', scrollSnapAlign: 'start' }}
+      style={{ width: '380px', maxWidth: '85vw', background: 'linear-gradient(180deg, #95B598 0%, #AEC5AC 45%, #B8CDB2 100%)', borderTopLeftRadius: '20px', borderTopRightRadius: '60px', borderBottomLeftRadius: '60px', borderBottomRightRadius: '20px', scrollSnapAlign: 'start' }}
     >
       {/* Combined before / after image */}
       <div style={{ borderTopLeftRadius: '20px', borderTopRightRadius: '60px', overflow: 'hidden' }}>
