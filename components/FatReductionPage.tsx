@@ -38,7 +38,8 @@ const BODY = 'Roboto, sans-serif';
 const W = '/wix/';
 const IMG = {
   heroBg: W + '87fc13_f0e92ac188af4582a4dcab0d17d5d2ed~mv2.png',
-  hero: W + '87fc13_0d95ebc4241644a88912c30f5f6fa882~mv2.jpg',
+  hero: W + '87fc13_0d95ebc4241644a88912c30f5f6fa882~mv2.jpg', // poster frame for the hero video
+  heroVideo: W + '87fc13_d455089124694edb96940d4cd650622a_720p.mp4',
   badge: W + 'f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png',
   google: W + '87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png',
   sec2: W + '87fc13_af546d93467e47d790f061caff13348a~mv2.png',
@@ -380,11 +381,16 @@ export default function FatReductionPage() {
 
             {/* right image + badge */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src={IMG.hero}
-                alt="CoolSculpting fat freezing treatment at Carisma, Malta"
-                style={{ width: '100%', maxWidth: 360, aspectRatio: '398 / 560', objectFit: 'cover', borderRadius: 18, display: 'block' }}
+              {/* Hero is a looping video on the live page; the jpg is its poster frame. */}
+              <video
+                src={IMG.heroVideo}
+                poster={IMG.hero}
+                autoPlay
+                muted
+                loop
+                playsInline
+                aria-label="CoolSculpting fat freezing treatment at Carisma, Malta"
+                style={{ width: '100%', maxWidth: 360, aspectRatio: '398 / 682', objectFit: 'cover', borderRadius: 18, display: 'block', backgroundColor: '#dce6dc' }}
               />
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
