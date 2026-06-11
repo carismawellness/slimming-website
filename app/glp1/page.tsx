@@ -400,6 +400,55 @@ export default function GLP1Page() {
         </div>
       </section>
 
+      {/* Our promise — extended care commitment */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            Our Promise
+          </p>
+          <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
+          <h2 className="text-center mb-12" style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '32px', letterSpacing: '2px', lineHeight: 1.35, textTransform: 'uppercase' }}>
+            Up to 1kg per week<br />Measured. Verified. Comitted.
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div
+              className="p-12 flex items-center"
+              style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', minHeight: '240px' }}
+            >
+              <p style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '22px', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.6 }}>
+                Only weight loss clinic <span style={{ color: '#5f7d63', fontWeight: 600 }}>in Malta</span> to offer an extended care commitment
+              </p>
+            </div>
+            <div>
+              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+                We are selective about who joins our programs. We only accept those we genuinely believe we can help reach their healthy weight with Ozempic, Mounjaro, or non-medication pathways.
+              </p>
+              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+                If you qualify and complete your program and do not hit your target weight, we will extend your weight management program at no extra program fee until we achieve your desired result.
+              </p>
+              <p className="mb-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+                *To ensure results remain measurable and medically valid, patients must:
+              </p>
+              <ul className="space-y-2">
+                {[
+                  'Attend all scheduled in clinic sessions and weekly check ins',
+                  'Follow your personalised food plan consistently and tell us when you struggle',
+                  'Complete your agreed physical activities & discuss any pain or obstacles',
+                  'Use only the treatments and medications recommended by our medical team',
+                  'Inform us of any major health (e.g., heart disease) or medication changes',
+                  'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                    <span style={{ color: '#AFA39D' }}>&bull;</span>
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Eligibility */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
