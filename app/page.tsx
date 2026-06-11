@@ -2,9 +2,9 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Script from 'next/script';
 
 export default function Home() {
-  const [formData, setFormData] = useState({ firstName: '', lastName: '' });
   const modalitiesRef = useRef<HTMLDivElement>(null);
   const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(false);
@@ -19,16 +19,6 @@ export default function Home() {
     window.addEventListener('resize', updateArrows);
     return () => window.removeEventListener('resize', updateArrows);
   }, []);
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log('Form submitted:', formData);
-  };
 
   return (
     <div className="w-full">
@@ -68,88 +58,31 @@ export default function Home() {
                 </li>
               </ul>
 
-              {/* Form Section */}
+              {/* Form Section — GoHighLevel (LeadConnector) embedded web form.
+                  Submissions create a lead in the Carisma GHL system. */}
               <h2 className="text-xl mb-6" style={{ color: '#8EB093', fontSize: '16px', fontWeight: '500', letterSpacing: '0.5px' }}>
                 BOOK YOUR FREE CONSULTATION
               </h2>
-              <form onSubmit={handleSubmit} className="space-y-4" style={{ backgroundColor: '#EEF3F0', padding: '24px', borderRadius: '8px' }}>
-                <div>
-                  <label className="block text-sm font-semibold mb-2" style={{ color: '#8B8B8B', fontSize: '14px' }}>
-                    First Name
-                  </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your first name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded bg-white focus:outline-none text-sm"
-                    style={{ borderColor: '#ddd' }}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2" style={{ color: '#8B8B8B', fontSize: '14px' }}>
-                    Last Name
-                  </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    placeholder="Enter your last name"
-                    className="w-full px-4 py-2 border border-gray-300 rounded bg-white focus:outline-none text-sm"
-                    style={{ borderColor: '#ddd' }}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2" style={{ color: '#8B8B8B', fontSize: '14px' }}>
-                    Email *
-                  </label>
-                  <input
-                    type="email"
-                    placeholder="your@email.com"
-                    className="w-full px-4 py-2 border border-gray-300 rounded bg-white focus:outline-none text-sm"
-                    style={{ borderColor: '#ddd' }}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2" style={{ color: '#8B8B8B', fontSize: '14px' }}>
-                    Phone *
-                  </label>
-                  <div className="flex">
-                    <span className="inline-flex items-center px-3 bg-white border border-gray-300 border-r-0 rounded-l" style={{ color: '#666' }}>
-                      🇲🇹 +356
-                    </span>
-                    <input
-                      type="tel"
-                      placeholder="phone number"
-                      className="flex-1 px-4 py-2 border border-gray-300 rounded-r bg-white focus:outline-none text-sm"
-                      style={{ borderColor: '#ddd' }}
-                    />
-                  </div>
-                </div>
-                <div>
-                  <label className="block text-sm font-semibold mb-2" style={{ color: '#8B8B8B', fontSize: '14px' }}>
-                    Interested Treatment
-                  </label>
-                  <select className="w-full px-4 py-2 border border-gray-300 rounded bg-white focus:outline-none text-sm" style={{ borderColor: '#ddd', color: '#999' }}>
-                    <option>Select an option</option>
-                    <option>Weight Loss Program</option>
-                    <option>GLP-1 Medications</option>
-                    <option>Fat Freezing</option>
-                    <option>Muscle Stimulation</option>
-                  </select>
-                </div>
-                <div className="flex items-start gap-2">
-                  <input type="checkbox" id="consent" className="mt-1" />
-                  <label htmlFor="consent" className="text-xs" style={{ color: '#999' }}>
-                    By checking this box, I commit to attending my scheduled free Tanita body composition analysis and acknowledge that a no-show may disqualify me from future sessions.
-                  </label>
-                </div>
-                <button type="submit" className="w-full py-3 rounded font-bold text-white text-sm" style={{ backgroundColor: '#9B8D83' }}>
-                  Submit
-                </button>
-              </form>
+              <div style={{ borderRadius: '8px', overflow: 'hidden', backgroundColor: '#EEF3F0' }}>
+                <iframe
+                  src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
+                  style={{ width: '100%', height: '760px', border: 'none', borderRadius: '8px' }}
+                  id="inline-Z3VHJCJwj5mBGmqcdmpE"
+                  data-layout="{'id':'INLINE'}"
+                  data-trigger-type="alwaysShow"
+                  data-trigger-value=""
+                  data-activation-type="alwaysActivated"
+                  data-activation-value=""
+                  data-deactivation-type="neverDeactivate"
+                  data-deactivation-value=""
+                  data-form-name="WEB FORM"
+                  data-height="1093"
+                  data-layout-iframe-id="inline-Z3VHJCJwj5mBGmqcdmpE"
+                  data-form-id="Z3VHJCJwj5mBGmqcdmpE"
+                  title="WEB FORM"
+                />
+              </div>
+              <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
             </div>
 
             {/* Right Side - Image and Badge */}
