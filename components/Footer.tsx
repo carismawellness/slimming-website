@@ -38,7 +38,7 @@ function ContactRow({
 
 export default function Footer() {
   return (
-    <footer style={{ backgroundColor: '#FBFAF8' }}>
+    <footer style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)' }}>
       {/* Search Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
         <div className="relative">
