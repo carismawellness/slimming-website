@@ -358,6 +358,48 @@ export default function GLP1Page() {
       {/* How it works */}
       <HowItWorks />
 
+      {/* Led by expertise — Dr Zaid Teebi */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            Expert <span style={{ color: '#C4B8AE' }}>medical weight loss</span> care
+          </p>
+          <div className="mx-auto mt-2 mb-6" style={{ width: '170px', height: '1px', backgroundColor: '#B9A99E' }} />
+          <h2 className="text-center mb-12" style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '32px', letterSpacing: '3px', lineHeight: 1.4 }}>
+            Led by expertise.<br />Driven by results.
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div
+              className="w-full overflow-hidden mx-auto"
+              style={{ maxWidth: '430px', aspectRatio: '430 / 470', borderTopLeftRadius: '90px', borderTopRightRadius: '18px', borderBottomLeftRadius: '18px', borderBottomRightRadius: '90px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}
+            >
+              <img src="/wix/87fc13_130b2a48c11a4658bad12952342d1eb4~mv2.jpeg" alt="Dr Zaid Teebi, lead medical weight loss doctor at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+            <div>
+              <h3 className="mb-4" style={{ color: '#7ba587', fontFamily: wideFont, fontSize: '18px', letterSpacing: '1px', textTransform: 'uppercase' }}>Dr Zaid Teebi</h3>
+              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+                Dr. Zaid Teebi is the lead medical weight loss doctor at Carisma Slimming with over 30 years of clinical experience and an evidence-based focus on medical weight management and metabolic health. A graduate of Imperial College London, he combines medical rigour with a calm, human approach.
+              </p>
+              <p className="mb-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+                His consultations are structured and personalised, with safety screening, clear expectations, and ongoing monitoring. Where clinically appropriate, he prescribes Ozempic or Mounjaro as part of a wider programme that includes nutrition structure, habit-based strength training to protect metabolism, and a long-term weight maintenance plan.
+              </p>
+              <p className="mb-8" style={{ color: '#AFA39D', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
+                Medical weight loss should never be guesswork. Every body tells a story, and our job is to turn it into a plan that lasts&rdquo; &ndash; Dr. Teebi
+              </p>
+              <a
+                href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center rounded-lg font-bold text-white"
+                style={{ backgroundColor: '#8EB093', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '16px 48px' }}
+              >
+                Book your medical consultation
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Eligibility */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
