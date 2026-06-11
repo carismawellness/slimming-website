@@ -70,7 +70,7 @@ export const lipocavitation: PackageContent = {
     'Non-invasive: No needles, no surgery, no anaesthesia and no downtime — you can return to your normal day immediately after each session.',
     'Comfortable sessions: Most clients describe the sensation as a warm, gentle vibration. Each session lasts approximately 30 to 45 minutes.',
   ],
-  ptImage: W + '87fc13_134b655cd7f945a9a2847030229e46a1~mv2.png',
+  ptImage: W + '87fc13_056fc4bfc20b42c1ad5b0fbaddb94718~mv2.png',
   ptImage2: W + '87fc13_8c638b6d5ad142b7914059b0806693c2~mv2.png',
 
   dualHeading: ['malta’s targeted fat contouring starter pack'],

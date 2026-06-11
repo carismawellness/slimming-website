@@ -184,6 +184,8 @@ export default function PackagePage({ content: c }: { content: PackageContent })
   const differenceBullets = c.differenceBullets ?? SHARED_DIFFERENCE_BULLETS;
   const commitment = c.commitment ?? SHARED_COMMITMENT;
   const whyMalta = c.whyMalta ?? SHARED_WHY_MALTA;
+  // A section renders unless explicitly hidden for this package.
+  const hidden = c.hide ?? {};
 
   return (
     <div style={{ backgroundColor: '#ffffff', fontFamily: BODY }}>
@@ -320,6 +322,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       </section>
 
       {/* ===================== 4. BENEFITS ===================== */}
+      {!hidden.benefits && c.benefits.length > 0 && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={{ ...CONTAINER, maxWidth: 1180 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 22 }} className="fr-benefits">
@@ -334,8 +337,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </div>
         </div>
       </section>
+      )}
 
       {/* ===================== 5. ELIGIBILITY ===================== */}
+      {!hidden.eligibility && c.areas.length > 0 && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
           <Eyebrow>{c.eligEyebrow ?? 'eligibility criteria'}</Eyebrow>
@@ -356,8 +361,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </div>
         </div>
       </section>
+      )}
 
       {/* ===================== 6. DIFFERENCE ===================== */}
+      {!hidden.difference && (
       <section style={{ position: 'relative', paddingTop: 48, paddingBottom: 64, overflow: 'hidden' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={DIFF_BG} alt="" aria-hidden style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.5, pointerEvents: 'none', zIndex: 0 }} />
@@ -377,8 +384,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </div>
         </div>
       </section>
+      )}
 
       {/* ===================== 7. PACKAGE TREATMENTS ===================== */}
+      {!hidden.packageCard && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
           <Eyebrow>{c.ptEyebrow}</Eyebrow>
@@ -411,8 +420,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </div>
         </div>
       </section>
+      )}
 
       {/* ===================== 8. DUAL / STARTER PACK ===================== */}
+      {!hidden.dual && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
           <SectionHeading>{c.dualHeading.map((l, i) => (<span key={i}>{l}{i < c.dualHeading.length - 1 && <br />}</span>))}</SectionHeading>
@@ -455,8 +466,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </div>
         </div>
       </section>
+      )}
 
       {/* ===================== 9. WELLNESS CHAIN + MAP ===================== */}
+      {!hidden.wellness && (
       <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 40, paddingBottom: 56 }}>
         <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 24, padding: '48px 48px 44px' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -493,6 +506,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </div>
         </div>
       </section>
+      )}
 
       {/* ===================== 10. FAQ ===================== */}
       <section style={{ paddingTop: 56, paddingBottom: 56 }}>
@@ -516,6 +530,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       </section>
 
       {/* ===================== 11. EVIDENCE ===================== */}
+      {!hidden.evidence && c.evidence.length > 0 && (
       <section style={{ paddingTop: 32, paddingBottom: 64 }}>
         <div style={{ ...CONTAINER, maxWidth: 1100 }}>
           <Eyebrow>{c.evidenceEyebrow}</Eyebrow>
@@ -560,6 +575,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}><CTA variant="blue">Claim my spot now</CTA></div>
         </div>
       </section>
+      )}
 
       <style>{`
         @media (max-width: 860px) {

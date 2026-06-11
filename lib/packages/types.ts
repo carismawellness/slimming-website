@@ -102,6 +102,20 @@ export interface PackageContent {
 
   /* ---- shared-section overrides (rarely needed) ---- */
   differenceBullets?: string[];
+
+  /* ---- per-page section visibility ----
+     Some live pages omit standard sections; set the matching key true to
+     hide that section on this package only. (hero / secret+carousel / press
+     / FAQ are always shown.) */
+  hide?: {
+    benefits?: boolean;
+    eligibility?: boolean;
+    difference?: boolean;
+    packageCard?: boolean;
+    dual?: boolean;
+    wellness?: boolean;
+    evidence?: boolean;
+  };
 }
 
 /* ---------- shared boilerplate defaults ---------- */

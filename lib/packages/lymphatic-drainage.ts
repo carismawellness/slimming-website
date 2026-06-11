@@ -159,4 +159,7 @@ export const lymphaticDrainage: PackageContent = {
       foot: 'Gentle & non-invasive Requires basic screening Comfort-first approach',
     },
   ],
+
+  // The live /lymphatic-drainage page has no treatable-areas / eligibility section.
+  hide: { eligibility: true },
 };

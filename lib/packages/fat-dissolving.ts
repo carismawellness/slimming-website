@@ -157,4 +157,10 @@ export const fatDissolving: PackageContent = {
       foot: 'Starter Pack uses Lemon Bottle fat dissolving on a single key area · Final protocol set after in person medical consultation and photos · Additional sessions available later based on response',
     },
   ],
+
+  // The live /fatdissolving page is streamlined: it has no treatable-areas,
+  // "we are not another diet clinic", package-treatments, leading-wellness-chain
+  // or standalone Evidence Based Approach sections (the offer card carries the
+  // pricing). Hide those so the page matches the live structure.
+  hide: { eligibility: true, difference: true, packageCard: true, wellness: true, evidence: true },
 };
