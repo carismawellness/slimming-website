@@ -327,7 +327,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         <div style={{ ...CONTAINER, maxWidth: 1180 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 22 }} className="fr-benefits">
             {c.benefits.map((b) => (
-              <div key={b.title} style={{ background: 'linear-gradient(150deg, #eef2ea 0%, #dfe7da 100%)', borderRadius: '22px 22px 0 22px', padding: '28px 24px 34px' }}>
+              <div key={b.title} style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #E7EFE1 100%)', borderRadius: '22px 22px 0 22px', padding: '28px 24px 34px' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={b.icon} alt="" style={{ width: 52, height: 52, objectFit: 'contain', marginBottom: 18 }} />
                 <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px', lineHeight: 1.3 }}>{b.title}</h3>
@@ -650,7 +650,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 30, border: `2px solid ${GREEN}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                   </div>
                   {/* gradient card sitting behind the lower part of the image */}
-                  <div style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #E3EADF 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
+                  <div style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #E7EFE1 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
                     <h3 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', margin: 0 }}>{e.title}</h3>
                     <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
                     <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>What it does</p>
