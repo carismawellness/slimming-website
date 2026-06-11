@@ -575,7 +575,7 @@ function CorePillarsSection() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {pillars.map((p) => (
-            <div key={p.title} className="p-8" style={{ background: panelGradient, borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
+            <div key={p.title} className="p-8" style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FAFCF9 45%, #D8E7D2 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
               <div className="mb-5 flex items-center" style={{ height: '48px' }}>
                 <img src={p.icon} alt="" style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} />
               </div>
