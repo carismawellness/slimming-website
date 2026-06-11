@@ -507,6 +507,36 @@ export default function GLP1Page() {
         </div>
       </section>
 
+      {/* The science behind GLP-1 — video */}
+      <section className="py-16">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.6 }}>
+            Why weight loss is biological,<br />not just behavioural
+          </p>
+          <div className="mx-auto mt-4 mb-6" style={{ width: '120px', height: '1px', backgroundColor: '#B9A99E' }} />
+          <h2 className="text-center mb-8" style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+            The science behind GLP-1
+          </h2>
+          <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+            Obesity is influenced by hormones, environment, and evolutionary biology, not willpower alone.
+          </p>
+          <p className="mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+            In this video, you will understand how GLP-1 regulates appetite, blood sugar, and metabolic signals, and why modern therapies like Ozempic and Mounjaro are reshaping long-term weight management. When used with medical guidance and structured lifestyle support, Ozempic or Mounjaro becomes a tool within a structured program, not a shortcut.
+          </p>
+          <div className="w-full" style={{ border: '5px solid #B6CCB0', borderRadius: '12px', overflow: 'hidden' }}>
+            <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
+              <iframe
+                src="https://www.youtube.com/embed/9t5m33ccUYA"
+                title="The Uncomfortable Truth About Ozempic — Kurzgesagt"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Eligibility */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
