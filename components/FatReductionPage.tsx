@@ -678,76 +678,59 @@ export default function FatReductionPage() {
         </div>
       </section>
 
-      {/* ===================== 8b. LOCATION / MAP ===================== */}
-      <section style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#f4f1ea', paddingTop: 56, paddingBottom: 60 }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={IMG.wellBg} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: 640, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ ...CONTAINER, position: 'relative', zIndex: 1, maxWidth: 960 }}>
-          <Eyebrow>visit the clinic</Eyebrow>
-          <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
-          <SectionHeading size={24}>find us in malta</SectionHeading>
+      {/* ===================== 9. LEADING WELLNESS CHAIN (with location map) ===================== */}
+      <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 40, paddingBottom: 56 }}>
+        <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 24, padding: '48px 48px 44px' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={IMG.wellBg} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
+          <div style={{ position: 'relative', zIndex: 1 }}>
+            <Eyebrow>the carisma difference</Eyebrow>
+            <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
+            <SectionHeading>malta&rsquo;s #1 leading wellness chain</SectionHeading>
 
-          <div style={{ marginTop: 32, borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 28px rgba(120,114,104,0.18)' }}>
-            <iframe
-              title="Carisma clinic location in Malta"
-              src="https://www.google.com/maps?q=Carisma%20Aesthetics%2C%20St%20Julian%27s%2C%20Malta&output=embed"
-              width="100%"
-              height="380"
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              style={{ border: 0, display: 'block' }}
-            />
-          </div>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginTop: 40, alignItems: 'start' }} className="fr-2col">
+              {/* left: commitment + why malta (stacked) */}
+              <div>
+                <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>our commitment</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 30px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {COMMITMENT.map((c) => (
+                    <li key={c} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}>
+                      <span style={{ color: TAUPE_LT }}>&bull;</span><span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+                <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>why malta chooses carisma</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {WHY_MALTA.map((c) => (
+                    <li key={c} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}>
+                      <span style={{ color: TAUPE_LT }}>&bull;</span><span>{c}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 22 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={IMG.parking} alt="" style={{ width: 22, height: 'auto' }} />
-            <span style={{ color: TAUPE, fontFamily: WIDE, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase' }}>
-              Complimentary on-site parking
-            </span>
-          </div>
-        </div>
-      </section>
-
-      {/* ===================== 9. LEADING WELLNESS CHAIN ===================== */}
-      <section style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#f4f1ea', paddingTop: 56, paddingBottom: 64 }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={IMG.wellBg} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '38%', transform: 'translateX(-50%)', width: 620, opacity: 0.25, pointerEvents: 'none', zIndex: 0 }} />
-        <div style={{ ...CONTAINER, position: 'relative', zIndex: 1 }}>
-          <Eyebrow>the carisma difference</Eyebrow>
-          <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
-          <SectionHeading>malta&rsquo;s #1 leading wellness chain</SectionHeading>
-
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 56, marginTop: 40, maxWidth: 860, marginInline: 'auto' }} className="fr-2col">
-            <div>
-              <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>our commitment</h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {COMMITMENT.map((c) => (
-                  <li key={c} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}>
-                    <span style={{ color: TAUPE_LT }}>&bull;</span><span>{c}</span>
-                  </li>
-                ))}
-              </ul>
+              {/* right: location map */}
+              <div style={{ borderRadius: 14, overflow: 'hidden', boxShadow: '0 8px 26px rgba(120,114,104,0.18)' }}>
+                <iframe
+                  title="Carisma Slimming clinic location in Malta"
+                  src="https://www.google.com/maps?q=Carisma%20Slimming%2C%20Malta&output=embed"
+                  width="100%"
+                  height="360"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  style={{ border: 0, display: 'block' }}
+                />
+              </div>
             </div>
-            <div>
-              <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>why malta chooses carisma</h3>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                {WHY_MALTA.map((c) => (
-                  <li key={c} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}>
-                    <span style={{ color: TAUPE_LT }}>&bull;</span><span>{c}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
 
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 36, marginTop: 44, flexWrap: 'wrap' }}>
-            <CTA variant="blue" />
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: TAUPE, fontFamily: WIDE, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={IMG.parking} alt="" style={{ width: 22, height: 'auto' }} />
-              Complimentary on-site parking
-            </span>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, marginTop: 40, flexWrap: 'wrap' }}>
+              <CTA variant="blue" />
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: TAUPE, fontFamily: WIDE, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={IMG.parking} alt="" style={{ width: 22, height: 'auto' }} />
+                Complimentary on-site parking
+              </span>
+            </div>
           </div>
         </div>
       </section>
