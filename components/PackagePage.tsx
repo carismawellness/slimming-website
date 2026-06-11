@@ -526,26 +526,31 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               const open = openEv === i;
               const centerLast = i === c.evidence.length - 1 && c.evidence.length % 2 === 1;
               return (
-                <div key={e.title} style={{ backgroundColor: '#f7f5f1', borderRadius: 16, overflow: 'hidden', gridColumn: centerLast ? '1 / -1' : 'auto', maxWidth: centerLast ? 540 : undefined, justifySelf: centerLast ? 'center' : 'stretch', width: centerLast ? '100%' : undefined }}>
-                  <div style={{ position: 'relative' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={e.img} alt="" style={{ width: '100%', height: 168, objectFit: 'cover', display: 'block' }} />
-                    <span style={{ position: 'absolute', top: 12, left: 12, backgroundColor: 'rgba(255,255,255,0.92)', color: TAUPE_DK, fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '5px 12px', borderRadius: 20 }}>{e.tag}</span>
+                <div key={e.title} style={{ position: 'relative', paddingTop: 16, gridColumn: centerLast ? '1 / -1' : 'auto', maxWidth: centerLast ? 560 : undefined, justifySelf: centerLast ? 'center' : 'stretch', width: centerLast ? '100%' : undefined }}>
+                  {/* petal-shaped, green-bordered image poking above the card, with overlapping tag pill */}
+                  <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
+                    <div style={{ border: `2px solid ${GREEN}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: GREEN }}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={e.img} alt="" style={{ width: '100%', height: 186, objectFit: 'cover', display: 'block' }} />
+                    </div>
+                    <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 30, border: `2px solid ${GREEN}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                   </div>
-                  <div style={{ padding: '24px 26px 28px' }}>
-                    <h3 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 17, lineHeight: 1.35, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 16px' }}>{e.title}</h3>
+                  {/* gradient card sitting behind the lower part of the image */}
+                  <div style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #E3EADF 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
+                    <h3 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', margin: 0 }}>{e.title}</h3>
+                    <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
                     <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>What it does</p>
-                    <p style={{ ...body, fontSize: 14, marginBottom: 16 }}>{e.does}</p>
+                    <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.6, margin: '0 0 6px', ...(open ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>{e.does}</p>
                     {open && (
                       <>
-                        <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>Key results</p>
+                        <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '14px 0 8px' }}>Key results</p>
                         <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
                           {e.results.map((r) => (<li key={r} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}><span style={{ color: TAUPE_LT }}>&bull;</span><span style={{ ...body, fontSize: 13.5 }}>{r}</span></li>))}
                         </ul>
-                        <p style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 12.5, lineHeight: 1.6, margin: 0 }}>{e.foot}</p>
+                        {e.foot && <p style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 12.5, lineHeight: 1.6, margin: 0 }}>{e.foot}</p>}
                       </>
                     )}
-                    <button onClick={() => setOpenEv(open ? null : i)} style={{ marginTop: 14, background: 'none', border: 'none', cursor: 'pointer', color: GREEN, fontFamily: WIDE, fontSize: 12.5, letterSpacing: '0.5px', textTransform: 'uppercase', padding: 0 }}>{open ? 'Read less' : 'Read more'}</button>
+                    <button onClick={() => setOpenEv(open ? null : i)} style={{ marginTop: open ? 14 : 8, background: 'none', border: 'none', cursor: 'pointer', color: TAUPE, fontFamily: BODY, fontSize: 15, fontStyle: 'italic', textDecoration: 'underline', padding: 0, display: 'block' }}>{open ? 'Read less' : 'Read more'}</button>
                   </div>
                 </div>
               );
