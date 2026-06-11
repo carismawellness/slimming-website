@@ -54,20 +54,6 @@ export default function GLP1Page() {
     '/wix/87fc13_b4783b8ab4ad480fa01394e449f91d34~mv2.png',
   ];
 
-  const suitable = [
-    'BMI ≥27',
-    'Insulin resistence',
-    'Emotional eating or Long dieting history',
-    'Menopause-related weight gain',
-  ];
-
-  const unsuitable = [
-    'Eating disorders',
-    'Very lean patients',
-    'Those unwilling to attend check-ins',
-    'Currently pregnant or trying to conceive',
-  ];
-
   const headingFont = 'Trajan Pro, serif';
   const wideFont = 'Novecento Wide Book, sans-serif';
   const bodyFont = 'Roboto, sans-serif';
@@ -671,81 +657,6 @@ export default function GLP1Page() {
       {/* Evidence based approach */}
       <EvidenceCards />
 
-      {/* Eligibility */}
-      <section className="py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2
-            className="text-center mb-3 uppercase"
-            style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
-          >
-            medical weight loss eligibility
-          </h2>
-          <p
-            className="text-center mb-10 uppercase"
-            style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px' }}
-          >
-            selective by intention successful by design
-          </p>
-          <p className="mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
-            Ozempic and Mounjaro can be powerful, but only when prescribed as part of a structured,
-            doctor-supervised approach. Eligibility is determined through a thorough medical assessment,
-            including blood tests, food-intolerance screening, safety checks, and clear protocols, to ensure
-            your program is appropriate, monitored, and adjusted responsibly.
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="px-2">
-              <h3 className="mb-6 uppercase tracking-wide" style={{ color: '#7ba587', fontFamily: wideFont, fontWeight: 500, fontSize: '13px' }}>
-                Suitable for
-              </h3>
-              <ul className="space-y-4">
-                {suitable.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px' }}>
-                    <span style={{ color: '#8EB093', fontWeight: 700 }}>✓</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="px-2">
-              <h3 className="mb-6 uppercase tracking-wide" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 500, fontSize: '13px' }}>
-                Unsuitable for
-              </h3>
-              <ul className="space-y-4">
-                {unsuitable.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px' }}>
-                    <span style={{ color: '#b06b6b', fontWeight: 700 }}>✗</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <p className="mt-10" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '12px', lineHeight: '1.7', fontStyle: 'italic' }}>
-            * Eligibility and exact costs depend on your health, lab results, and the support you need. You
-            will always receive a clear plan and pricing in your medical weight loss consultation before
-            starting. Important: GLP-1 medications are prescription-only and not suitable for everyone. This
-            program is offered only after a full medical assessment by our doctor.
-          </p>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16" style={{ backgroundColor: '#8EB093' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="mb-6 uppercase text-white" style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '26px' }}>
-            book your medical weight loss consultation
-          </h2>
-          <Link
-            href="/consultation"
-            className="inline-block uppercase tracking-wide font-bold rounded"
-            style={{ backgroundColor: '#ffffff', color: '#7ba587', padding: '14px 32px', fontFamily: wideFont, fontSize: '13px' }}
-          >
-            book your medical consultation
-          </Link>
-        </div>
-      </section>
     </main>
   );
 }
