@@ -9,65 +9,34 @@ const green = '#8EB093';
 const greenDark = '#7ba587';
 const taupe = '#9B8D83';
 
-type Result = { name: string; before: string; after: string; quote: string };
+type Result = { name: string; image: string; quote: string };
 
 const RESULTS: Result[] = [
   {
+    name: 'Anna Lindström',
+    image: '/wix/87fc13_7fc62a3875154ae2a204387f87a61814~mv2.png',
+    quote:
+      "My issue wasn't just weight, it was how heavy my body felt to carry. Walking, stairs, even getting through the day felt harder than it should. This program gave me back my lightness and my energy.",
+  },
+  {
     name: 'Nicole Farrugia',
-    before: '/results/nicole-before.png',
-    after: '/results/nicole-after.png',
+    image: '/wix/87fc13_859aab08ea744d8c997b5cfd312823a5~mv2.png',
     quote:
       'I struggled with my weight for a long time and it was affecting my confidence and energy. The team built a plan around my real life and actually listened. For the first time the weight came off steadily — and it stayed off.',
   },
   {
     name: 'Laura Bennett',
-    before: '/results/laura-before.png',
-    after: '/results/laura-after.png',
+    image: '/wix/87fc13_671e0f2c983242c5ad4711a7d5a7ce91~mv2.png',
     quote:
       'I had tried dieting on and off for years but my weight always came back. This helped me understand my body and hormones, and the weekly support kept me consistent even through the hard weeks.',
   },
   {
     name: 'Mary Kowalska',
-    before: '/results/mary-before.png',
-    after: '/results/mary-after.png',
+    image: '/wix/87fc13_c617250be48e4af7ba36007603d8533b~mv2.png',
     quote:
       'My goal was not to be skinny but to feel healthier and more toned. The change has been incredible — I have more energy, my clothes fit better and I finally feel like myself again.',
   },
-  {
-    name: 'Sarah Vella',
-    before: '/results/sarah-before.png',
-    after: '/results/sarah-after.png',
-    quote:
-      'After two pregnancies I thought this was just my body now. The medical approach made the difference — proper guidance, real food and treatments that actually worked alongside the plan.',
-  },
 ];
-
-function LeafBadge() {
-  return (
-    <span
-      className="absolute"
-      style={{ top: '10px', right: '10px', width: '26px', height: '26px', borderRadius: '9999px', backgroundColor: 'rgba(255,255,255,0.9)', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 2px 6px rgba(0,0,0,0.15)' }}
-    >
-      <svg width="14" height="14" viewBox="0 0 24 24" fill={green} aria-hidden>
-        <path d="M12 2C7 6 4 10 4 15a8 8 0 0 0 16 0c0-5-3-9-8-13Zm0 4c3 2.5 5 5.5 5 9a5 5 0 0 1-5 5V6Z" />
-      </svg>
-    </span>
-  );
-}
-
-function BAImage({ src, label }: { src: string; label: string }) {
-  return (
-    <div
-      className="relative w-1/2"
-      style={{ aspectRatio: '3 / 4', backgroundColor: '#A9C0A1', backgroundImage: `url(${src})`, backgroundSize: 'cover', backgroundPosition: 'center top' }}
-    >
-      <div className="absolute inset-x-0 bottom-0" style={{ height: '40%', background: 'linear-gradient(to top, rgba(0,0,0,0.35), transparent)' }} />
-      <span className="absolute" style={{ bottom: '10px', left: '0', right: '0', textAlign: 'center', color: '#fff', fontFamily: wideFont, fontSize: '11px', letterSpacing: '1px', textTransform: 'uppercase' }}>
-        {label}
-      </span>
-    </div>
-  );
-}
 
 function ResultCard({ r }: { r: Result }) {
   const [expanded, setExpanded] = useState(false);
@@ -76,11 +45,9 @@ function ResultCard({ r }: { r: Result }) {
       className="flex-shrink-0 overflow-hidden"
       style={{ width: '380px', maxWidth: '85vw', background: 'linear-gradient(180deg, #DCE7D7 0%, #C4D7BC 100%)', borderTopLeftRadius: '20px', borderTopRightRadius: '60px', borderBottomLeftRadius: '60px', borderBottomRightRadius: '20px', scrollSnapAlign: 'start' }}
     >
-      {/* Before / After pair */}
-      <div className="relative flex" style={{ borderTopLeftRadius: '20px', borderTopRightRadius: '60px', overflow: 'hidden' }}>
-        <BAImage src={r.before} label="Before" />
-        <BAImage src={r.after} label="After" />
-        <LeafBadge />
+      {/* Combined before / after image */}
+      <div style={{ borderTopLeftRadius: '20px', borderTopRightRadius: '60px', overflow: 'hidden' }}>
+        <img src={r.image} alt={`${r.name} before and after`} style={{ width: '100%', height: 'auto', display: 'block' }} />
       </div>
       {/* Quote + name */}
       <div className="px-6 pt-5 pb-7">
@@ -138,23 +105,21 @@ export default function ResultsCarousel() {
         <div className="mx-auto mt-3 mb-10" style={{ width: '180px', height: '1px', backgroundColor: '#B9A99E' }} />
 
         <div className="relative">
-          {/* Left arrow */}
           <button
             type="button"
             onClick={() => scrollBy(-1)}
             aria-label="Previous"
             className="absolute z-10 items-center justify-center rounded-full"
-            style={{ display: atStart ? 'none' : 'flex', left: '-6px', top: '40%', width: '38px', height: '38px', backgroundColor: greenDark, color: '#fff', opacity: 0.5, cursor: 'pointer', border: 0 }}
+            style={{ display: atStart ? 'none' : 'flex', left: '-6px', top: '38%', width: '38px', height: '38px', backgroundColor: greenDark, color: '#fff', opacity: 0.5, cursor: 'pointer', border: 0 }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6" /></svg>
           </button>
-          {/* Right arrow */}
           <button
             type="button"
             onClick={() => scrollBy(1)}
             aria-label="Next"
             className="absolute z-10 items-center justify-center rounded-full"
-            style={{ display: atEnd ? 'none' : 'flex', right: '-6px', top: '40%', width: '38px', height: '38px', backgroundColor: greenDark, color: '#fff', opacity: 0.5, cursor: 'pointer', border: 0 }}
+            style={{ display: atEnd ? 'none' : 'flex', right: '-6px', top: '38%', width: '38px', height: '38px', backgroundColor: greenDark, color: '#fff', opacity: 0.5, cursor: 'pointer', border: 0 }}
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6" /></svg>
           </button>
