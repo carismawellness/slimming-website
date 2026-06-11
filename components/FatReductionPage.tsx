@@ -678,6 +678,37 @@ export default function FatReductionPage() {
         </div>
       </section>
 
+      {/* ===================== 8b. LOCATION / MAP ===================== */}
+      <section style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#f4f1ea', paddingTop: 56, paddingBottom: 60 }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={IMG.wellBg} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%, -50%)', width: 640, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
+        <div style={{ ...CONTAINER, position: 'relative', zIndex: 1, maxWidth: 960 }}>
+          <Eyebrow>visit the clinic</Eyebrow>
+          <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
+          <SectionHeading size={24}>find us in malta</SectionHeading>
+
+          <div style={{ marginTop: 32, borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 28px rgba(120,114,104,0.18)' }}>
+            <iframe
+              title="Carisma clinic location in Malta"
+              src="https://www.google.com/maps?q=Carisma%20Aesthetics%2C%20St%20Julian%27s%2C%20Malta&output=embed"
+              width="100%"
+              height="380"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              style={{ border: 0, display: 'block' }}
+            />
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, marginTop: 22 }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={IMG.parking} alt="" style={{ width: 22, height: 'auto' }} />
+            <span style={{ color: TAUPE, fontFamily: WIDE, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase' }}>
+              Complimentary on-site parking
+            </span>
+          </div>
+        </div>
+      </section>
+
       {/* ===================== 9. LEADING WELLNESS CHAIN ===================== */}
       <section style={{ position: 'relative', overflow: 'hidden', backgroundColor: '#f4f1ea', paddingTop: 56, paddingBottom: 64 }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
