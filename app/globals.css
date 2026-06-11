@@ -1,5 +1,49 @@
 @import "tailwindcss";
 
+/* ---- Real Carisma brand fonts (self-hosted from the live Wix site) ---- */
+@font-face {
+  font-family: 'Trajan Pro';
+  src: url('/fonts/trajan-pro.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Novecento Wide Book';
+  src: url('/fonts/novecento-wide-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Novecento Wide Book';
+  src: url('/fonts/novecento-wide-medium.woff2') format('woff2');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Novecento Wide';
+  src: url('/fonts/novecento-wide-normal.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Novecento Wide';
+  src: url('/fonts/novecento-wide-medium.woff2') format('woff2');
+  font-weight: 500 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Roboto';
+  src: url('/fonts/roboto.woff2') format('woff2');
+  font-weight: 300 500;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   --primary-navy: #1a1a1a;
   --primary-gold: #d4af37;

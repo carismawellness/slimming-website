@@ -37,7 +37,6 @@ const BLUE = '#6391AB';
 const TAUPE = '#9B8D83';
 const TAUPE_DK = '#7C7268';
 const TAUPE_LT = '#AFA39D';
-const INK = '#5b5650';
 
 const SERIF = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
 const WIDE = 'Novecento Wide Book, Novecento Wide, sans-serif';
@@ -65,7 +64,7 @@ const CONTAINER: React.CSSProperties = { maxWidth: 1040, marginLeft: 'auto', mar
 /* ---------- shared pieces ---------- */
 function Eyebrow({ children, align = 'center' }: { children: React.ReactNode; align?: 'center' | 'left' }) {
   return (
-    <p style={{ color: TAUPE_LT, fontFamily: WIDE, fontSize: 13, letterSpacing: '2px', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
+    <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 13, fontWeight: 400, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
       {children}
     </p>
   );
@@ -73,7 +72,7 @@ function Eyebrow({ children, align = 'center' }: { children: React.ReactNode; al
 
 function SectionHeading({ children, align = 'center', size = 28 }: { children: React.ReactNode; align?: 'center' | 'left'; size?: number }) {
   return (
-    <h2 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: size, lineHeight: 1.4, letterSpacing: '1.5px', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
+    <h2 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: size, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
       {children}
     </h2>
   );
@@ -144,25 +143,26 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 48, alignItems: 'center' }} className="fr-hero-grid">
             <div>
               <Eyebrow align="left">{c.heroEyebrow}</Eyebrow>
-              <h1 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 32, lineHeight: 1.25, letterSpacing: '1.5px', textTransform: 'uppercase', margin: '10px 0 14px' }}>
+              <h1 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 28, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', margin: '12px 0 0' }}>
                 {c.heroTitle}
               </h1>
-              <p style={{ color: INK, fontFamily: WIDE, fontWeight: 700, fontSize: 18, letterSpacing: '0.5px', margin: '0 0 14px' }}>{c.heroSubheading}</p>
-              <p style={{ ...body, marginBottom: 20 }}>{c.heroDescription}</p>
+              <div style={{ width: 300, maxWidth: '70%', height: 1, backgroundColor: '#d9d2ca', margin: '12px 0 18px' }} />
+              <p style={{ color: TAUPE, fontFamily: WIDE, fontWeight: 400, fontSize: 15, letterSpacing: 'normal', margin: '0 0 16px' }}>{c.heroSubheading}</p>
+              <p style={{ color: TAUPE, fontFamily: BODY, fontWeight: 400, fontSize: 14, lineHeight: 1.55, margin: '0 0 22px' }}>{c.heroDescription}</p>
 
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {c.heroIncludes.map((it) => (
-                  <li key={it} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <Tick size={17} />
-                    <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14.5 }}>{it}</span>
+                  <li key={it} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <span style={{ color: TAUPE_LT, fontSize: 18, lineHeight: 1.1, flexShrink: 0 }}>&bull;</span>
+                    <span style={{ color: TAUPE, fontFamily: BODY, fontWeight: 400, fontSize: 14 }}>{it}</span>
                   </li>
                 ))}
               </ul>
 
-              <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', margin: '0 0 4px' }}>
-                TOTAL VALUE: {c.heroTotalValue}&nbsp;&nbsp;&nbsp;TODAY: <span style={{ color: GREEN }}>{c.heroTodayPrice}</span>
+              <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 15, letterSpacing: 'normal', margin: '0 0 2px' }}>
+                <span style={{ fontWeight: 700 }}>TOTAL VALUE:</span> {c.heroTotalValue} <span style={{ fontWeight: 700 }}>TODAY:</span> {c.heroTodayPrice}
               </p>
-              {c.heroPriceNote && <p style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 13, margin: '0 0 20px' }}>{c.heroPriceNote}</p>}
+              {c.heroPriceNote && <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12, letterSpacing: 'normal', textTransform: 'uppercase', margin: '0 0 20px' }}>{c.heroPriceNote}</p>}
 
               <div style={{ marginBottom: 16, marginTop: c.heroPriceNote ? 0 : 16 }}>
                 <CTA variant="green">Claim your spot now</CTA>
