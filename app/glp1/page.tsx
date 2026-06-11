@@ -3,6 +3,7 @@ import HeroVideo from '@/components/HeroVideo';
 import ResultsCarousel from '@/components/ResultsCarousel';
 import HowItWorks from '@/components/HowItWorks';
 import FAQAccordion from '@/components/FAQAccordion';
+import EvidenceCards from '@/components/EvidenceCards';
 
 export default function GLP1Page() {
   const addresses = [
@@ -666,6 +667,9 @@ export default function GLP1Page() {
 
       {/* FAQ */}
       <FAQAccordion />
+
+      {/* Evidence based approach */}
+      <EvidenceCards />
 
       {/* Eligibility */}
       <section className="py-16">
