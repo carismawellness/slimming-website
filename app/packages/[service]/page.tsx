@@ -2,6 +2,7 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { services, getOrderedServices, BOOKING_URL } from '@/lib/services';
 import { notFound } from 'next/navigation';
+import FatReductionPage from '@/components/FatReductionPage';
 
 interface Props {
   params: Promise<{ service: string }>;
@@ -86,6 +87,12 @@ export default async function ServicePage({ params }: Props) {
 
   if (!service) {
     notFound();
+  }
+
+  // The Fat Freezing (CoolSculpting) page is a pixel-faithful recreation of the
+  // live /fat-reduction page and uses its own dedicated layout component.
+  if (service.id === 'fat-freezing') {
+    return <FatReductionPage />;
   }
 
   const related = getOrderedServices().filter((s) => s.id !== service.id);
