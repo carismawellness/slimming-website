@@ -597,6 +597,72 @@ export default function GLP1Page() {
         </div>
       </section>
 
+      {/* The Carisma difference — wellness chain + map */}
+      <section className="py-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div style={{ background: 'linear-gradient(135deg, #FBFBF7 0%, #DDE8D6 100%)', borderRadius: '32px', padding: '48px' }}>
+            <p className="text-center mb-2" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
+              the carisma difference
+            </p>
+            <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
+            <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              Malta&rsquo;s #1 leading wellness chain
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+              <div className="space-y-10">
+                <div>
+                  <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Our Commitment</h3>
+                  <ul className="space-y-3">
+                    {[
+                      'Visible inch loss and shape change through medical weight loss, not vague promises',
+                      'Plans that work with your age, hormones and metabolism',
+                      'No crash diets, no banned foods, no endless hours of cardio',
+                      'Medical-grade technology and treatments delivered by qualified doctors',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                        <span style={{ color: '#8EB093' }}>&bull;</span><span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Why Malta Chooses Carisma</h3>
+                  <ul className="space-y-3">
+                    {[
+                      "Created by the team behind Malta's leading spa and medical aesthetics centres",
+                      'Doctor-led Ozempic and Mounjaro programs, not a beauty salon "diet program"',
+                      'All-in-one approach: medical assessment, nutrition, movement, and treatments',
+                      'High-touch support with weekly check-ins and WhatsApp coaching',
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                        <span style={{ color: '#8EB093' }}>&bull;</span><span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+              <div>
+                <iframe
+                  title="Carisma Slimming location"
+                  src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
+                  width="100%"
+                  height="380"
+                  style={{ border: 0, borderRadius: '12px', display: 'block' }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <div className="flex items-center justify-center gap-3 mt-8">
+                  <img src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="Complimentary on-site parking" style={{ width: '34px', height: 'auto', objectFit: 'contain' }} />
+                  <span style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    Complimentary on-site parking
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Eligibility */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
