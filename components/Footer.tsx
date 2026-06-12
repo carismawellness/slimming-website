@@ -2,7 +2,6 @@ import Link from 'next/link';
 
 const GREEN = '#8EB093';
 const TAUPE = '#9B8D83';
-const BORDER = '#E0DAD3';
 
 function ContactRow({
   href,
@@ -24,11 +23,11 @@ function ContactRow({
       className="flex items-center gap-3 group"
     >
       <span className="flex-shrink-0">{icon}</span>
-      <span className="flex flex-col leading-tight">
-        <span style={{ color: '#7A6F66', fontFamily: 'Roboto, sans-serif', fontSize: '12px', letterSpacing: '2px', fontWeight: 600 }}>
+      <span className="flex items-baseline gap-2 leading-tight">
+        <span style={{ color: '#7A6F66', fontFamily: 'Roboto, sans-serif', fontSize: '16px', letterSpacing: '1px' }}>
           {label}
         </span>
-        <span className="transition group-hover:opacity-70" style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '14px', letterSpacing: '1px' }}>
+        <span className="transition group-hover:opacity-70" style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '16px', letterSpacing: '1px' }}>
           {value}
         </span>
       </span>
@@ -46,11 +45,11 @@ export default function Footer() {
             type="text"
             placeholder="WHAT ARE YOU LOOKING FOR?"
             aria-label="Search"
-            className="w-full bg-white outline-none"
-            style={{ border: `1px solid ${BORDER}`, borderRadius: '8px', padding: '16px 52px 16px 20px', color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '13px', letterSpacing: '2px' }}
+            className="w-full bg-white outline-none placeholder:text-[#8EB093]"
+            style={{ border: '1px solid #A9C6A2', borderRadius: '999px', padding: '16px 52px 16px 20px', color: GREEN, fontFamily: 'Roboto, sans-serif', fontSize: '13px', letterSpacing: '2px' }}
           />
           <span className="absolute top-1/2 -translate-y-1/2" style={{ right: '18px', pointerEvents: 'none' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#B8AEA5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <circle cx="11" cy="11" r="7"></circle>
               <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
             </svg>
@@ -59,9 +58,10 @@ export default function Footer() {
       </div>
 
       {/* STAY IN TOUCH */}
-      <h4 className="text-center" style={{ color: TAUPE, fontFamily: '"Trajan Pro", serif', fontSize: '15px', letterSpacing: '4px', marginTop: '48px', marginBottom: '40px' }}>
+      <h4 className="text-center" style={{ color: GREEN, fontFamily: '"Trajan Pro", serif', fontSize: '15px', letterSpacing: '4px', marginTop: '48px', marginBottom: '14px' }}>
         STAY IN TOUCH
       </h4>
+      <div className="mx-auto" style={{ width: '290px', height: '1px', backgroundColor: GREEN, marginBottom: '40px' }} />
 
       {/* Contact Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
@@ -107,8 +107,8 @@ export default function Footer() {
               label="FACEBOOK"
               value="CARISMA SLIMMING"
               icon={
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill={GREEN}>
+                  <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.45 9-4.7 9-9.95z"></path>
                 </svg>
               }
             />

@@ -65,18 +65,18 @@ export default function GLP1Page() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div>
-              <h1
-                className="mb-3 uppercase leading-tight"
-                style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
+              <p
+                className="mb-3 uppercase tracking-wide"
+                style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '14px', fontWeight: 500 }}
               >
                 ultimate weight loss protocol in malta
-              </h1>
-              <p
-                className="mb-6 uppercase tracking-wide"
-                style={{ color: '#8EB093', fontFamily: wideFont, fontSize: '14px', fontWeight: 500 }}
+              </p>
+              <h1
+                className="mb-6 uppercase leading-tight"
+                style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
               >
                 doctor-led medical weight loss in malta
-              </p>
+              </h1>
               <p className="mb-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.7' }}>
                 Struggling with constant hunger, stalled progress, and weight that keeps coming back?
                 Our programs combine full medical assessment, personalised nutrition, body composition
@@ -222,7 +222,7 @@ export default function GLP1Page() {
             className="text-center mb-12 uppercase"
             style={{ color: '#7ba587', fontFamily: headingFont, fontWeight: 400, fontSize: '26px' }}
           >
-            we don&apos;t sell weight loss. we build sustainability.
+            we don&apos;t sell weight loss.<br />we build sustainability.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div

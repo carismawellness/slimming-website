@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Script from 'next/script';
+import GoogleReviews from '@/components/GoogleReviews';
 
 export default function Home() {
   const modalitiesRef = useRef<HTMLDivElement>(null);
@@ -28,7 +29,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-stretch">
             {/* Left Content */}
             <div>
-              <h1 className="mb-6 leading-tight pb-6 border-b" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '28px', borderColor: '#e0e0e0', lineHeight: '1.25' }}>
+              <h1 className="mb-6 leading-tight pb-6 border-b" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '28px', borderColor: '#e0e0e0', lineHeight: '1.4' }}>
                 DOCTOR-LED SLIMMING<br />& WEIGHT LOSS IN MALTA
               </h1>
 
@@ -123,10 +124,9 @@ export default function Home() {
                   </div>
                 </div>
 
-                {/* Google Review - No Stars */}
+                {/* Google Review — image already contains G + stars + "Over 200+ Reviews" */}
                 <div className="flex items-center justify-center gap-2">
-                  <img src="/Google review.png" alt="Google Review" style={{ height: '32px', width: 'auto', flexShrink: 0 }} />
-                  <span style={{ color: '#8EB093', fontSize: '13px', fontWeight: '500' }}>Over 200+ Reviews</span>
+                  <img src="/Google review.png" alt="Google Review — Over 200+ Reviews" style={{ height: '32px', width: 'auto', flexShrink: 0 }} />
                 </div>
               </div>
             </div>
@@ -137,39 +137,36 @@ export default function Home() {
       {/* (1) Media / Press Strip */}
       <section className="py-10" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center mb-6" style={{ color: '#8EB093', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', fontWeight: '600', letterSpacing: '1px' }}>
+          <p className="text-center mb-2" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', textTransform: 'uppercase' }}>
             As seen on
           </p>
-          <div className="grid grid-cols-2 md:grid-cols-5 gap-6 items-center">
+          <div className="mx-auto mb-6" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />
+          <div className="flex flex-wrap items-center justify-center" style={{ gap: '20px' }}>
             {[
-              { label: 'Malta Today logo', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg' },
-              { label: 'Bay Radio Malta logo', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg' },
-              { label: 'Lovin Malta logo', src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg' },
-              { label: 'Times of Malta logo', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png' },
-              { label: 'MT Today logo', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png' },
+              { label: 'Malta Today logo', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', height: '31px' },
+              { label: 'Bay Radio Malta logo', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', height: '31px' },
+              { label: 'Lovin Malta logo', src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', height: '37px' },
+              { label: 'Times of Malta logo', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', height: '31px' },
+              { label: 'MT Today logo', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', height: '31px' },
             ].map((logo) => (
-              <div
+              <img
                 key={logo.label}
-                className="flex items-center justify-center"
-                style={{ height: '70px', borderRadius: '8px' }}
-              >
-                <img
-                  src={logo.src}
-                  alt={`${logo.label} — Carisma Slimming featured`}
-                  style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
-                />
-              </div>
+                src={logo.src}
+                alt={`${logo.label} — Carisma Slimming featured`}
+                style={{ height: logo.height, width: 'auto', objectFit: 'contain' }}
+              />
             ))}
           </div>
         </div>
       </section>
 
       {/* (2) 4 Core Pillars of Our Weight Loss Methodology */}
-      <section className="py-16" style={{ backgroundColor: '#F7F5F3' }}>
+      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h4 className="text-center mb-2" style={{ color: '#8EB093', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '600', fontSize: '16px', letterSpacing: '0.5px' }}>
+          <h4 className="text-center mb-2" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
             4 core pillars of our weight loss methodology
           </h4>
+          <div className="mx-auto mb-4" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />
           <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.3', textTransform: 'uppercase' }}>
             malta&rsquo;s only multidisciplinary<br />approach to slimming &amp; weight-loss
           </h2>
@@ -177,7 +174,8 @@ export default function Home() {
             {[
               {
                 subheading: 'Know your body before starting any program',
-                title: 'Medical weight loss assessment',
+                // [sic] live site renders "assessmen" without the final "t" — kept for pixel fidelity
+                title: 'Medical weight loss assessmen',
                 icon: '/wix/87fc13_e4efa875484546fca9d640d39b9f0100~mv2.png',
                 iconAlt: 'Medical weight loss assessment icon',
                 items: [
@@ -232,10 +230,10 @@ export default function Home() {
                 <div className="mb-5 flex items-center" style={{ height: '48px' }}>
                   <img src={pillar.icon} alt={pillar.iconAlt} style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} />
                 </div>
-                <p className="mb-2" style={{ color: '#8EB093', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: '1.3' }}>
+                <p className="mb-2" style={{ color: '#8EB093', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: '1.3' }}>
                   {pillar.title}
                 </p>
-                <h3 className="mb-5" style={{ color: '#5d5d61', fontFamily: 'Roboto, sans-serif', fontSize: '17px', fontWeight: '400', lineHeight: '1.35' }}>
+                <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400', lineHeight: '1.4' }}>
                   {pillar.subheading}
                 </h3>
                 <ul className="space-y-2">
@@ -254,10 +252,10 @@ export default function Home() {
               href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block py-3 px-8 rounded font-bold text-white"
-              style={{ backgroundColor: '#2b5672', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+              className="inline-flex items-center justify-center font-bold text-white"
+              style={{ backgroundColor: '#6391AB', borderRadius: '10px', width: '444px', maxWidth: '100%', height: '40px', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
             >
-              Get Your Free Body Analysis →
+              Get Your Free Body Analysis ›
             </a>
           </div>
         </div>
@@ -267,7 +265,7 @@ export default function Home() {
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="mb-3" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '600', fontSize: '18px', letterSpacing: '4px', textTransform: 'uppercase' }}>
+            <h2 className="mb-3" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
               Explore our modalities
             </h2>
             <div className="mx-auto" style={{ width: '120px', height: '1px', backgroundColor: '#C9B8AE' }} />
@@ -276,7 +274,7 @@ export default function Home() {
             {!atStart && (
               <button onClick={() => modalitiesRef.current?.scrollBy({ left: -340, behavior: 'smooth' })} aria-label="Previous" className="hidden md:flex items-center justify-center absolute z-20" style={{ left: '-10px', top: '42%', transform: 'translateY(-50%)', width: '52px', height: '52px', backgroundColor: '#ffffff', boxShadow: '0 4px 16px rgba(0,0,0,0.12)', color: '#9B8D83', fontSize: '22px', opacity: 0.5 }}>‹</button>
             )}
-            <div ref={modalitiesRef} onScroll={updateArrows} className="flex gap-6 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none' }}>
+            <div ref={modalitiesRef} onScroll={updateArrows} className="flex overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden" style={{ gap: '10px', scrollSnapType: 'x mandatory', scrollbarWidth: 'none' }}>
             {[
               {
                 title: 'Weight Loss',
@@ -284,6 +282,7 @@ export default function Home() {
                 href: '/packages',
                 placeholder: 'Weight Loss modality image',
                 src: '/wix/87fc13_08e868147da2475ba4b9638849be145e~mv2.jpg',
+                focal: '51% 22%',
               },
               {
                 title: 'GLP-1 (Mounjaro & Ozempic)',
@@ -320,12 +319,12 @@ export default function Home() {
                 placeholder: 'Anti-Cellulite modality image',
                 src: '/wix/87fc13_5dde946fd77046908ec6b65db211836a~mv2.jpg',
               },
-            ].map((card) => (
-              <Link key={card.title} href={card.href} className="relative block overflow-hidden flex-shrink-0" style={{ width: '300px', aspectRatio: '343 / 470', borderRadius: '6px', scrollSnapAlign: 'start' }}>
+            ].map((card: { title: string; desc: string; href: string; placeholder: string; src: string; focal?: string }) => (
+              <Link key={card.title} href={card.href} className="relative block overflow-hidden flex-shrink-0" style={{ width: '349px', aspectRatio: '349 / 465', borderRadius: '6px', scrollSnapAlign: 'start' }}>
                 <img
                   src={card.src}
                   alt={card.placeholder}
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: card.focal ?? 'center' }}
                 />
                 <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, rgba(95,85,75,0.15) 0%, rgba(85,76,66,0.5) 50%, rgba(63,56,49,0.9) 100%)' }} />
                 <div className="absolute inset-x-0 bottom-0 p-6">
@@ -554,6 +553,10 @@ export default function Home() {
           </h2>
         </div>
       </section>
+
+      {/* (8) Google reviews — live homepage shows the reviews widget between the
+          "real people, real reviews" heading and the doctor profiles (homepage only) */}
+      <GoogleReviews />
 
     </div>
   );

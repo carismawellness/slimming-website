@@ -1,5 +1,3 @@
-import GoogleReviews from './GoogleReviews';
-
 const GREEN = '#8EB093';
 const TAUPE = '#9B8D83';
 const FRESHA = 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=4994308&oiid=sv%3A25969858&share=true&pId=2708191';
@@ -31,6 +29,7 @@ const BRANDS = [
     img: '/wix/87fc13_a62cc8038b274204a2fe70fd3d4879d0~mv2.png',
     logo: '/wix/87fc13_e2e5f077c0024cbc9a3d975e4a009b7e~mv2.png',
     cta: 'DISCOVER OUR SPAS',
+    btnColor: '#B79E61',
     reviews: false,
   },
   {
@@ -38,6 +37,7 @@ const BRANDS = [
     img: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.png',
     logo: '/wix/87fc13_b5a7ec4b11f445b4879c36d7268ba6d1~mv2.png',
     cta: 'DISCOVER MED-AESTHETICS',
+    btnColor: '#96B2B2',
     reviews: true,
   },
 ];
@@ -45,9 +45,6 @@ const BRANDS = [
 export default function BrandBlock() {
   return (
     <div>
-      {/* Google reviews — real reviews from the clinic's Google listing */}
-      <GoogleReviews />
-
       {/* Doctor Profiles — stacked 2-column rows, alternating photo side */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-16">
@@ -79,7 +76,7 @@ export default function BrandBlock() {
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="flex items-center justify-center" style={{ height: '360px' }}>
+            <div className="flex items-center justify-center" style={{ height: '487px' }}>
               <img src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.png" alt="Carisma Slimming Guide cover image" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             </div>
             <div>
@@ -99,50 +96,49 @@ export default function BrandBlock() {
       {/* #1 Voted Clinic in Malta + Sister Brands */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-3" style={{ color: GREEN, fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '24px', letterSpacing: '1px' }}>
-            #1 VOTED CLINIC IN MALTA
-          </h2>
-          <p className="text-center mx-auto mb-12" style={{ color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '13px', lineHeight: 1.7, maxWidth: '640px' }}>
-            Carisma Wellness Group brings over 35+ years of expertise in wellness, aesthetics and slimming. Guided by medical excellence and a passion for confidence, our treatments are designed to help you look and feel your best.
-          </p>
-          <div className="flex flex-col gap-6">
+          {/* Awards badge + heading/paragraph — two-column row matching the live layout */}
+          <div className="flex flex-col md:flex-row items-center justify-center mb-12" style={{ gap: '40px' }}>
+            <img
+              src="/wix/f940f0_2376c935184343478e49eeec5ca6fc51~mv2.png"
+              alt="Malta Healthcare, Wellness, Beauty & Best Spa Awards"
+              style={{ width: '205px', height: '132px', objectFit: 'cover', flexShrink: 0 }}
+            />
+            <div className="hidden md:block self-stretch" style={{ width: '1px', backgroundColor: '#E0DAD3' }} />
+            <div style={{ maxWidth: '470px' }}>
+              <h2 style={{ color: GREEN, fontFamily: 'Roboto, sans-serif', fontSize: '19px', lineHeight: '1.8em', letterSpacing: '0.05em' }}>
+                <span style={{ fontWeight: 700 }}>#1 VOTED CLINIC </span>IN MALTA
+              </h2>
+              <p style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.8em' }}>
+                Carisma Wellness Group brings <span style={{ fontWeight: 700 }}>over 35+ years</span> of expertise in <span style={{ fontWeight: 700 }}>wellness, aesthetics and slimming</span>. Guided by medical excellence and a passion for confidence, our treatments are designed to help you <span style={{ fontWeight: 700 }}>look</span> and <span style={{ fontWeight: 700 }}>feel your best</span>.
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-col" style={{ gap: '44px' }}>
             {BRANDS.map((card) => (
-              <div
-                key={card.title}
-                className="relative flex overflow-hidden"
-                style={{ borderRadius: '10px', height: '230px' }}
-              >
-                {/* Left logo block overlapping */}
-                <div
-                  className="flex flex-col items-center justify-center text-center px-10"
-                  style={{
-                    width: '42%',
-                    background: card.reviews
-                      ? 'linear-gradient(135deg, #A7B9A3 0%, #8EB093 100%)'
-                      : 'linear-gradient(135deg, #C9B173 0%, #A8924E 100%)',
-                  }}
-                >
-                  <img src={card.logo} alt={card.title} style={{ height: '70px', width: 'auto', objectFit: 'contain' }} />
+              <div key={card.title} className="relative" style={{ height: '287px' }}>
+                {/* Full-width card background (gradient panel is part of the image) */}
+                <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '10px' }} />
+                {/* Overlaid white logo (+ Google reviews line on the Aesthetics card) */}
+                <div className="absolute flex flex-col justify-center" style={{ left: '64px', top: 0, bottom: 0 }}>
+                  <img src={card.logo} alt={card.title} style={{ width: '218px', height: '122px', objectFit: 'contain' }} />
                   {card.reviews && (
-                    <div className="flex items-center gap-2 mt-4">
-                      <span style={{ color: '#ffffff', fontSize: '13px', letterSpacing: '2px' }}>★★★★★</span>
-                      <span style={{ color: '#ffffff', fontFamily: 'Roboto, sans-serif', fontSize: '11px', letterSpacing: '0.5px' }}>Over 2500+ Reviews</span>
-                    </div>
+                    <img
+                      src="/wix/87fc13_6e75c766df9749f48a8a564a1a88f57b~mv2.png"
+                      alt="Google five-star rating — over 3500+ reviews"
+                      style={{ width: '213px', height: '25px', marginTop: '2px' }}
+                    />
                   )}
                 </div>
-                {/* Right photo */}
-                <div style={{ width: '58%', position: 'relative' }}>
-                  <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-                  <a
-                    href={FRESHA}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="absolute py-2 px-6 font-bold text-white"
-                    style={{ right: '16px', bottom: '16px', backgroundColor: TAUPE, fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '11px', letterSpacing: '0.5px', borderRadius: '2px' }}
-                  >
-                    {card.cta}
-                  </a>
-                </div>
+                {/* CTA button hanging off the card's bottom-right edge */}
+                <a
+                  href={FRESHA}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute flex items-center justify-center text-white"
+                  style={{ right: 0, bottom: '-20px', width: '278px', height: '40px', backgroundColor: card.btnColor, fontFamily: '"Novecento Wide", sans-serif', fontSize: '12px', fontWeight: 700, letterSpacing: '0.5px', borderRadius: '5px' }}
+                >
+                  {card.cta}
+                </a>
               </div>
             ))}
           </div>

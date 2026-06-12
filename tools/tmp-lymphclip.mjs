@@ -1,0 +1,13 @@
+﻿import puppeteer from 'puppeteer-core';
+const EDGE = 'C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe';
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const b = await puppeteer.launch({ executablePath: EDGE, headless: 'new', args: ['--no-sandbox', '--disable-gpu', '--hide-scrollbars'] });
+const p = await b.newPage();
+await p.setViewport({ width: 1440, height: 1000 });
+await p.goto('https://www.carismaslimming.com/lymphatic-drainage', { waitUntil: 'networkidle2', timeout: 60000 }).catch(() => {});
+await sleep(3000);
+await p.evaluate(() => window.scrollTo(0, 1000));
+await sleep(6000);
+await p.screenshot({ path: 'shots/cmp-lymph-live-carousel.png', clip: { x: 0, y: 1000, width: 1440, height: 700 } });
+console.log('OK');
+await b.close();

@@ -1,0 +1,23 @@
+import puppeteer from 'puppeteer-core';
+const EDGE = 'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe';
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const b = await puppeteer.launch({ executablePath: EDGE, headless: 'new', args: ['--no-sandbox', '--disable-gpu'] });
+const pg = await b.newPage();
+await pg.setViewport({ width: 1440, height: 1000 });
+await pg.goto('https://www.carismaslimming.com/anti-cellulite', { waitUntil: 'networkidle2', timeout: 60000 }).catch(() => {});
+await sleep(3000);
+await pg.evaluate(async () => { await new Promise((res) => { let y = 0; const s = () => { window.scrollBy(0, 900); y += 900; if (y < document.body.scrollHeight) setTimeout(s, 120); else res(); }; s(); }); });
+await sleep(1500);
+const out = await pg.evaluate(() => {
+  const r = {};
+  const find = (re) => Array.from(document.querySelectorAll('h1,h2,h3,h4,span,p')).filter(e => re.test(e.textContent) && e.textContent.length < 120).slice(0,2).map(e => { const b = e.getBoundingClientRect(); const s = getComputedStyle(e); return { tag: e.tagName, y: Math.round(b.top + window.scrollY), h: Math.round(b.height), size: s.fontSize, color: s.color, text: e.textContent.trim().slice(0,70) }; });
+  r.secretHeading = find(/the secret to a more defined/i);
+  r.heroCardBottom = (() => { const v = document.querySelector('video'); if (!v) return null; const b = v.getBoundingClientRect(); return Math.round(b.bottom + window.scrollY); })();
+  const fr = Array.from(document.querySelectorAll('iframe')).map(f => { const b = f.getBoundingClientRect(); return { src: (f.src||'').slice(0,90), y: Math.round(b.top + window.scrollY), h: Math.round(b.height), x: Math.round(b.left), w: Math.round(b.width) }; });
+  r.iframes = fr;
+  r.trusted = find(/trusted clinic for/i);
+  r.faqHeading = find(/frequently asked/i);
+  return r;
+});
+console.log(JSON.stringify(out, null, 1));
+await b.close();
