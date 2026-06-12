@@ -33,7 +33,7 @@ function PanelTitle({ icon, children }: { icon: string; children: React.ReactNod
   return (
     <div className="flex items-center gap-3 mb-5">
       <img src={icon} alt="" style={{ width: '40px', height: '40px', objectFit: 'contain' }} />
-      <h3 style={{ color: GREEN, fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '1px', textTransform: 'uppercase' }}>{children}</h3>
+      <h3 style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '18px', letterSpacing: '1px', textTransform: 'uppercase' }}>{children}</h3>
     </div>
   );
 }
@@ -198,12 +198,12 @@ export default function HowItWorksTabs() {
             <div className="bg-white rounded-2xl p-7" style={{ boxShadow: '0 6px 18px rgba(0,0,0,0.04)' }}>
               <div className="flex items-center gap-2 mb-5">
                 <Check />
-                <h3 style={{ color: GREEN, fontFamily: wideFont, fontWeight: 600, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase' }}>Suitable For</h3>
+                <h3 style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '16px', letterSpacing: '1px', textTransform: 'uppercase' }}>Suitable For</h3>
               </div>
               <ul className="space-y-3">
                 {suitableStep1.map((t) => (
                   <li key={t} className="flex items-start gap-2" style={body14}>
-                    <Check />
+                    <span style={{ color: CHECK, fontSize: '18px', lineHeight: 1 }}>&bull;</span>
                     <span>{t}</span>
                   </li>
                 ))}
@@ -212,12 +212,12 @@ export default function HowItWorksTabs() {
             <div className="bg-white rounded-2xl p-7" style={{ boxShadow: '0 6px 18px rgba(0,0,0,0.04)' }}>
               <div className="flex items-center gap-2 mb-5">
                 <Cross />
-                <h3 style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase' }}>Not Suitable For</h3>
+                <h3 style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '16px', letterSpacing: '1px', textTransform: 'uppercase' }}>Not Suitable For</h3>
               </div>
               <ul className="space-y-3">
                 {notSuitableStep1.map((t) => (
                   <li key={t} className="flex items-start gap-2" style={body14}>
-                    <Cross />
+                    <span style={{ color: '#AFA39D', fontSize: '18px', lineHeight: 1 }}>&bull;</span>
                     <span>{t}</span>
                   </li>
                 ))}

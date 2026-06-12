@@ -2,14 +2,18 @@ export default function PrivacyPolicyPage() {
   return (
     <main className="w-full">
       {/* Title + Content */}
-      <section className="pt-16 pb-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section style={{ paddingTop: '41px', paddingBottom: '95px' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-0" style={{ maxWidth: '980px' }}>
           <h1
-            className="text-center"
-            style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '50px', lineHeight: '70px', marginBottom: '52px' }}
+            className="text-center text-[40px] leading-[56px] md:text-[50px] md:leading-[70px]"
+            style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: '400', marginBottom: '0px' }}
           >
             privacy policy
           </h1>
+          <div
+            aria-hidden="true"
+            style={{ width: '399px', maxWidth: '100%', borderTop: '1px solid #B0A68F', margin: '0 auto 53px' }}
+          />
 
           <p
             style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '21px', marginBottom: '21px' }}

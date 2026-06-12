@@ -37,7 +37,7 @@ export default function TermsPage() {
     <main className="w-full">
       {/* Title */}
       <section className="bg-white">
-        <div className="text-center px-4" style={{ paddingTop: '56px' }}>
+        <div className="text-center px-4" style={{ paddingTop: '42px' }}>
           <h1 style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '30px', lineHeight: '42px' }}>
             Terms &amp; Conditions
           </h1>
@@ -46,8 +46,8 @@ export default function TermsPage() {
       </section>
 
       {/* Content */}
-      <section className="bg-white" style={{ paddingTop: '30px', paddingBottom: '64px' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '980px' }}>
+      <section className="bg-white" style={{ paddingTop: '30px', paddingBottom: '40px' }}>
+        <div className="mx-auto px-4 lg:px-0" style={{ maxWidth: '980px' }}>
 
           <Para>TERMS AND CONDITIONS</Para>
           <Para>Carisma Aesthetics Ltd., trading as Carisma Slimming</Para>

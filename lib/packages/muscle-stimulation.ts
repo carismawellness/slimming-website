@@ -57,18 +57,24 @@ export const muscleStimulation: PackageContent = {
   areas: ['ABDOMEN / CORE', 'GLUTES / BUTTOCKS', 'THIGHS (FRONT AND BACK)', 'CALVES', 'UPPER ARMS (BICEPS AND TRICEPS)'],
 
   ptEyebrow: 'our technology',
-  ptHeading: 'internationally renowned, fda-approved modalities',
+  /* live: heading is constrained to ~521px at 25px and wraps after "fda-" */
+  ptHeading: 'internationally renowned, fda-\napproved modalities',
+  ptTitleStyle: 'serif',
   ptCardEyebrow: 'emsculpt neo',
   ptCardTag: 'Muscle strengthening, tone & metabolic support',
   ptParas: [
     'Builds muscle, burns fat and tightens skin in one 30 minute treatment.',
     'EMSculpt NEO combines high-intensity focused electromagnetic (HIFEM) pulses with radiofrequency heating. The RF gently warms the tissue and fat, while HIFEM drives thousands of powerful muscle contractions that you could never achieve in a normal workout. Over the next weeks your body responds by building muscle fibres, using local fat as fuel and firming the area.',
-    'Clinical studies show up to about 30 percent fat reduction, 25 percent muscle growth and around 29 percent increase in muscle strength in the treated area after a standard course.',
-    'Each session delivers up to 20,000 supra-maximal contractions for the chosen muscle group.',
-    'Results typically start to show from 4–12 weeks after the final session as muscle adapts and fat reduces. No needles, no surgery and little to no downtime for most people. You lie back while the device does the work, with each treatment lasting about 30 minutes.',
   ],
   ptEfficacyTitle: 'Proven efficacy',
-  ptEfficacyBullets: [],
+  /* live: these four lines are indented bullet items under "Proven efficacy"
+     (the last sentence is split across two bullets on live, after "No needles,") */
+  ptEfficacyBullets: [
+    'Clinical studies show up to about 30 percent fat reduction, 25 percent muscle growth and around 29 percent increase in muscle strength in the treated area after a standard course.',
+    'Each session delivers up to 20,000 supra-maximal contractions for the chosen muscle group.',
+    'Results typically start to show from 4–12 weeks after the final session as muscle adapts and fat reduces. No needles,',
+    'no surgery and little to no downtime for most people. You lie back while the device does the work, with each treatment lasting about 30 minutes.',
+  ],
   ptImage: W + '87fc13_1a54a17987f64e6fb275b2721b8dc7f4~mv2.png',
   ptImage2: W + '87fc13_134b655cd7f945a9a2847030229e46a1~mv2.png',
 

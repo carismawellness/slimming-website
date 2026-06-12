@@ -46,8 +46,8 @@ export const lipocavitation: PackageContent = {
   benefits: [
     { icon: W + '87fc13_010fe195cd7146cd8569b0d7aa447125~mv2.png', title: 'ultrasound precision', body: 'Low-frequency ultrasound waves are directed to targeted areas beneath the skin. The energy is specific enough to act on fat cell membranes without affecting the surrounding tissue.' },
     { icon: W + '87fc13_d4665eee701b4f84b1d08c331fb0b1da~mv2.png', title: 'natural fat elimination', body: "The disrupted fat cells release their contents, which are then processed and cleared by your body's own lymphatic system — a natural, gradual elimination process that continues working between sessions." },
-    { icon: W + '87fc13_729173bc08764a74bee017b037d95d5b~mv2.png', title: 'visible, measurable results', body: "As your body eliminates the broken-down fat, you'll notice a reduction in inches and circumference in the treated area, along with smoother, firmer-looking skin texture over the course of your treatment plan." },
-    { icon: W + '87fc13_b4783b8ab4ad480fa01394e449f91d34~mv2.png', title: 'SAFE AND CLINICALLY CERTIFIED', body: 'All treatments are performed by trained medical professionals using EU-approved, clinically tested technology with no surgery and no downtime.' },
+    { icon: W + '87fc13_b4783b8ab4ad480fa01394e449f91d34~mv2.png', title: 'visible, measurable results', body: "As your body eliminates the broken-down fat, you'll notice a reduction in inches and circumference in the treated area, along with smoother, firmer-looking skin texture over the course of your treatment plan." },
+    { icon: W + '87fc13_729173bc08764a74bee017b037d95d5b~mv2.png', title: 'SAFE AND CLINICALLY CERTIFIED', body: 'All treatments are performed by trained medical professionals using EU-approved, clinically tested technology with no surgery and no downtime.' },
   ],
 
   eligEyebrow: 'eligibility criteria',
@@ -57,9 +57,13 @@ export const lipocavitation: PackageContent = {
   areas: ['TUMMY / ABDOMEN', 'Back Fat & Bra Line', 'Flanks & Love Handles', 'hips', 'Buttocks & Banana Roll', 'THIGHS (FRONT, BACK, INNER AND OUTER)'],
 
   ptEyebrow: 'our technology',
-  ptHeading: 'INTERNATIONALLY RECOGNISED, CLINICALLY PROVEN TECHNOLOGY',
+  ptHeading: 'INTERNATIONALLY RECOGNISED,\nCLINICALLY PROVEN TECHNOLOGY',
   ptCardEyebrow: 'ULTRASOUND CAVITATION',
   ptCardTag: 'TARGETED FAT CELL DISRUPTION & BODY CONTOURING',
+  // live lipocavitation card header: green serif title | vertical rule | bold taupe tag + hairline below
+  ptTitleStyle: 'serif',
+  // live renders the first card paragraph bold
+  ptLeadBold: true,
   ptParas: [
     'Breaks down localised fat cells using precision ultrasound energy — no surgery, no needles, no recovery time',
     "Lipocavitation works by directing low-frequency ultrasound waves into the targeted fat layer beneath the skin. This creates a process called acoustic cavitation — microscopic bubbles form and implode around fat cell membranes, causing them to break down and release their contents. The liquefied fat is then transported to the liver and eliminated naturally by the body's lymphatic system, the same process your body uses to clear waste every day. Surrounding skin, nerves and blood vessels are unaffected throughout. The result is a gradual, measurable reduction in the volume and circumference of the treated area.",

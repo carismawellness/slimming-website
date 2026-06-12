@@ -55,10 +55,12 @@ export const fatFreezing: PackageContent = {
   eligHeading: 'selective by intention successful by design',
   eligImage: W + '87fc13_bda5e64e4bcb4471b28a919528af71bc~mv2.png',
   eligIntro: 'Treat visible fat bulges in 7 areas of the body',
-  areas: ['STOMACH – BELLY FAT', 'LOVE HANDLES', 'UPPER ARMS', 'THIGHS', 'BANANA ROLL', 'BACK FAT, BRA FAT', 'DOUBLE CHIN / THE JAWLINE'],
+  // live page chip literally reads "THIGS" (Wix typo) — kept for pixel parity
+  areas: ['STOMACH – BELLY FAT', 'LOVE HANDLES', 'UPPER ARMS', 'THIGS', 'BANANA ROLL', 'BACK FAT, BRA FAT', 'DOUBLE CHIN / THE JAWLINE'],
 
   ptEyebrow: 'package treatments',
-  ptHeading: 'malta’s only mustlidisciplinary approach to weightloss',
+  // \n matches the live 2-line wrap (template renders ptHeading with white-space: pre-line)
+  ptHeading: 'malta’s only mustlidisciplinary\napproach to weightloss',
   ptCardEyebrow: 'coolsculpting',
   ptCardTag: 'targeted-fat reduction',
   ptParas: [

@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import HowItWorksTabs from './HowItWorksTabs';
+import TestimonialsSlider from './TestimonialsSlider';
 
 export const metadata: Metadata = {
   title: "Medical weight loss Malta | Malta's #1 Weight-Loss Clinic",
@@ -14,7 +16,7 @@ const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
 const bodyFont = 'Roboto, sans-serif';
 
-const GREEN = '#7ba587';
+const GREEN = '#8EB093'; // live LP serif headings compute to rgb(142,176,147)
 const TAUPE = '#9B8D83';
 const CHECK = '#8EB093';
 const BLUE = '#6391AB';
@@ -172,7 +174,7 @@ export default function MedicalWeightLossLpPage() {
     <div className="w-full" style={{ backgroundColor: '#ffffff' }}>
       {/* LP minimal header (this landing page does not use the global site header) */}
       <header className="bg-white">
-        <div className="max-w-[1100px] mx-auto px-4 flex items-center justify-between" style={{ height: '64px' }}>
+        <div className="max-w-[980px] mx-auto px-4 flex items-center justify-between" style={{ height: '64px' }}>
           <img src="/wix/87fc13_7685319028a14ef0ace54298d2e74acb~mv2.png" alt="Group 1707481377.png" className="h-8 w-auto" />
           <a href="tel:+35627802062" className="flex items-center gap-2">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{ color: CHECK }}>
@@ -194,33 +196,35 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Hero — doctor-led medical weight loss */}
       <section
-        className="mx-auto py-14"
+        className="mx-auto"
         style={{
-          maxWidth: '1320px',
+          maxWidth: '1340px',
           backgroundImage: 'url(/wix/87fc13_f0e92ac188af4582a4dcab0d17d5d2ed~mv2.png)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           borderRadius: '24px',
           overflow: 'hidden',
+          paddingTop: '50px',
+          paddingBottom: '16px',
         }}
       >
-        <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <div className="grid grid-cols-1 md:grid-cols-[1.25fr_1fr] gap-12 items-start">
+        <div className="mx-auto px-6 xl:px-0" style={{ maxWidth: '970px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_398px] items-start" style={{ gap: '46px' }}>
             <div>
-              <p className="mb-3 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', fontWeight: 500, letterSpacing: '2px' }}>
+              <p className="mb-2 uppercase" style={{ color: CHECK, fontFamily: wideFont, fontSize: '13px', fontWeight: 500, letterSpacing: '2px' }}>
                 ultimate weight loss protocol in malta
               </p>
-              <h1 className="mb-6 uppercase leading-snug" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', letterSpacing: '1px' }}>
+              <h1 className="mb-5 uppercase leading-snug" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px' }}>
                 doctor-led medical weight loss in Malta
               </h1>
-              <p className="mb-4" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              <p className="mb-3" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 Struggling with constant hunger, stalled progress and weight that creeps back every time you stop dieting?
               </p>
-              <p className="mb-8" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              <p className="mb-5" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 Clinician-guided weight loss combining assessment, eligibility review, nutrition, and weekly tracking to help you lose fat safely and keep it off.
               </p>
-              <ul className="space-y-4">
+              <ul className="space-y-3">
                 {heroBullets.map((b) => (
                   <li key={b.label} className="flex items-start gap-3" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
                     <span style={{ color: CHECK, fontWeight: 700 }}>✓</span>
@@ -231,21 +235,48 @@ export default function MedicalWeightLossLpPage() {
                   </li>
                 ))}
               </ul>
+
+              {/* GoHighLevel (LeadConnector) lead form — same embedded web form
+                  as the live LP hero (filesusr 3dbfd5_1eed50f1…). */}
+              <div className="mt-6">
+                <iframe
+                  src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
+                  style={{ width: '100%', height: '814px', border: 'none', borderRadius: '8px' }}
+                  id="inline-Z3VHJCJwj5mBGmqcdmpE"
+                  data-layout="{'id':'INLINE'}"
+                  data-trigger-type="alwaysShow"
+                  data-trigger-value=""
+                  data-activation-type="alwaysActivated"
+                  data-activation-value=""
+                  data-deactivation-type="neverDeactivate"
+                  data-deactivation-value=""
+                  data-form-name="WEB FORM"
+                  data-height="751"
+                  data-layout-iframe-id="inline-Z3VHJCJwj5mBGmqcdmpE"
+                  data-form-id="Z3VHJCJwj5mBGmqcdmpE"
+                  title="WEB FORM"
+                />
+              </div>
+              <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
             </div>
 
             <div>
-              <div className="w-full overflow-hidden" style={{ borderRadius: '20px', aspectRatio: '2299 / 2796' }}>
-                <img
-                  src="/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png"
-                  alt="Dr. Zaid Teebi at Carisma Slimming"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+              <div className="w-full overflow-hidden" style={{ borderRadius: '20px', aspectRatio: '398 / 569' }}>
+                <video
+                  src="/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4"
+                  poster="/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                 />
               </div>
               <p className="mt-5" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '11px', lineHeight: 1.6 }}>
                 * Eligibility and exact costs depend on your health, lab results and the serving you need. You will always receive a clear plan and pricing in your consultation before starting. Important: medical weight management programs are observation only and not suitable for everyone. This protocol is offered only after a full medical assessment by our doctor
               </p>
               <div className="mt-5 flex items-center gap-3">
-                <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="Screen-Shot-2024-12-16-at-09.58.11-300x183-removebg-preview.png" style={{ width: '76px', height: '48px', objectFit: 'contain' }} />
+                <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="Screen-Shot-2024-12-16-at-09.58.11-300x183-removebg-preview.png" style={{ width: '114px', height: '72px', objectFit: 'contain' }} />
                 <p className="uppercase" style={{ color: CHECK, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, lineHeight: 1.4, letterSpacing: '1px' }}>
                   #1 Voted Clinic<br />in Malta
                 </p>
@@ -264,30 +295,23 @@ export default function MedicalWeightLossLpPage() {
         </div>
       </section>
 
-      {/* The secret to a more defined, confident look */}
+      {/* The secret to a more defined, confident look — testimonial carousel */}
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
             the secret to a more defined,<br />confident look
           </h2>
           <div className="mx-auto mt-4" style={{ width: '170px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <div className="mx-auto mt-12 overflow-hidden" style={{ maxWidth: '270px', borderRadius: '12px' }}>
-            <video
-              src="/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4"
-              autoPlay
-              muted
-              loop
-              playsInline
-              style={{ width: '100%', height: 'auto', display: 'block', aspectRatio: '1080 / 1920', objectFit: 'cover' }}
-            />
-          </div>
+        </div>
+        <div className="mt-4">
+          <TestimonialsSlider />
         </div>
       </section>
 
       {/* Clarity before you start */}
       <section className="py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '740px' }}>
+          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
             What are medical weight management program?
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
@@ -335,13 +359,13 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Philosophy — we build the conditions for it to last */}
       <section className="py-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="p-8 sm:p-12" style={{ background: 'linear-gradient(180deg, #D8E3D9 0%, #F8F6F2 100%)', borderRadius: '24px' }}>
-            <h2 className="text-center mb-12 uppercase" style={{ color: '#8aa491', fontFamily: headingFont, fontWeight: 400, fontSize: '26px', letterSpacing: '2px', lineHeight: 1.6 }}>
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
+          <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #D8E3D9 0%, #F8F6F2 100%)', borderRadius: '24px' }}>
+            <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.6 }}>
               we don&rsquo;t recommend weight loss.<br />we build the conditions for it to last.
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="w-full overflow-hidden" style={{ borderRadius: '16px', aspectRatio: '4 / 3' }}>
+            <div className="grid grid-cols-1 md:grid-cols-[362px_1fr] gap-12 items-center">
+              <div className="w-full overflow-hidden" style={{ borderRadius: '16px', aspectRatio: '362 / 424', maxWidth: '362px' }}>
                 <img src="/wix/87fc13_bb5a3aed956d422ab510f702f736643b~mv2.jpg" alt="CarismaSlim_Batch2-003.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
               <div>
@@ -372,14 +396,14 @@ export default function MedicalWeightLossLpPage() {
       {/* Press logos + four differentiators */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '26px', letterSpacing: '2px', lineHeight: 1.5 }}>
+          <h2 className="text-center uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
             malta&rsquo;s trusted clinic for<br />doctor led, medical weight loss
           </h2>
 
-          <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-6 mt-10 mb-16">
+          <div className="flex flex-wrap items-center justify-center gap-x-7 gap-y-6 mt-10 mb-16">
             {pressLogos.map((logo) => (
-              <div key={logo.label} className="flex items-center justify-center" style={{ height: '54px' }}>
-                <img src={logo.src} alt={logo.label} style={{ maxHeight: '54px', width: 'auto', objectFit: 'contain' }} />
+              <div key={logo.label} className="flex items-center justify-center" style={{ height: '64px' }}>
+                <img src={logo.src} alt={logo.label} style={{ maxHeight: logo.label === 'Lovin Malta' ? '64px' : '54px', width: 'auto', objectFit: 'contain' }} />
               </div>
             ))}
           </div>
@@ -391,8 +415,8 @@ export default function MedicalWeightLossLpPage() {
                 className="p-8"
                 style={{ background: 'linear-gradient(180deg, #F5F8F3 0%, #DEE8DA 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '80px', borderBottomRightRadius: '16px' }}
               >
-                <img src={card.icon} alt="" style={{ width: '54px', height: '54px', objectFit: 'contain', marginBottom: '20px' }} />
-                <h3 className="mb-3 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '0.5px' }}>
+                <img src={card.icon} alt="" style={{ width: 'auto', height: '66px', objectFit: 'contain', marginBottom: '20px' }} />
+                <h3 className="mb-3 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '0.5px' }}>
                   {card.title}
                 </h3>
                 <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.7 }}>{card.body}</p>
@@ -404,12 +428,12 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Eligibility criteria */}
       <section className="py-16">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '740px' }}>
+          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
             eligibility criteria
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '130px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-8 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '26px', letterSpacing: '3px' }}>
+          <h2 className="text-center mb-8 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '3px' }}>
             selective by intention successful by design
           </h2>
           <p className="mb-10" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
@@ -462,10 +486,15 @@ export default function MedicalWeightLossLpPage() {
       {/* The carisma difference — not another diet clinic (checklist card) */}
       <section
         className="py-16"
-        style={{ backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}
+        style={{
+          backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)',
+          backgroundSize: '2068px 1063px',
+          backgroundPosition: 'calc(50% - 71px) 248px',
+          backgroundRepeat: 'no-repeat',
+        }}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
             the carisma difference
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
@@ -475,14 +504,14 @@ export default function MedicalWeightLossLpPage() {
           <p className="text-center mx-auto mb-12" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7, maxWidth: '760px' }}>
             We&rsquo;re a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don&rsquo;t just lose weight, you step into your strongest form.
           </p>
-          <div className="mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', borderBottomLeftRadius: '24px', borderBottomRightRadius: '90px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
-            <ul className="space-y-6">
+          <div className="mx-auto p-9" style={{ maxWidth: '470px', background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', borderBottomLeftRadius: '24px', borderBottomRightRadius: '90px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
+            <ul className="space-y-5">
               {differenceChecklist.map((t) => (
                 <li key={t} className="flex items-start gap-4">
-                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={CHECK} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }}>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={CHECK} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}>
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
-                  <span className="uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px', lineHeight: 1.5 }}>{t}</span>
+                  <span className="uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', letterSpacing: '0.5px', lineHeight: 1.5 }}>{t}</span>
                 </li>
               ))}
             </ul>
@@ -493,7 +522,7 @@ export default function MedicalWeightLossLpPage() {
       {/* How it works — 5-step tabs */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '4px' }}>
+          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '4px' }}>
             how it works
           </p>
           <div className="mx-auto mt-3 mb-10" style={{ width: '190px', height: '1px', backgroundColor: '#B9A99E' }} />
@@ -503,20 +532,28 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Expert care — Dr Zaid Teebi */}
       <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '970px' }}>
+          <p className="text-center uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '20px', letterSpacing: '2px' }}>
             expert care
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', letterSpacing: '3px', lineHeight: 1.4 }}>
-            led by expertise.<br />driven by results.
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="w-full overflow-hidden mx-auto" style={{ maxWidth: '430px', aspectRatio: '430 / 470', borderRadius: '24px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
+          <div className="relative" style={{ width: 'fit-content', margin: '0 auto' }}>
+            <h2 className="relative text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '3px', lineHeight: 1.3, zIndex: 1 }}>
+              led by expertise.<br />driven by results.
+            </h2>
+            <img
+              src="/wix/87fc13_d170f070d1d64560b77dd6ce085f4221~mv2.png"
+              alt=""
+              className="absolute hidden md:block"
+              style={{ width: '69px', height: '87px', objectFit: 'contain', left: 'calc(50% + 14px)', top: '-12px', zIndex: 0, pointerEvents: 'none' }}
+            />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-[448px_1fr] gap-12 items-center">
+            <div className="w-full overflow-hidden mx-auto" style={{ maxWidth: '448px', aspectRatio: '448 / 479', borderRadius: '24px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
               <img src="/wix/87fc13_130b2a48c11a4658bad12952342d1eb4~mv2.jpeg" alt="C8DFC042-B799-481E-82AD-DF24558C5019.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div>
-              <h3 className="mb-4 uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '18px', letterSpacing: '1px' }}>Dr Zaid Teebi</h3>
+              <h3 className="mb-4 uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '15px', letterSpacing: '1px' }}>Dr Zaid Teebi</h3>
               <p className="mb-5" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 Dr. Zaid Teebi is a medical doctor at Carisma Slimming with over 15 years of clinical experience and an evidence-based focus on medical weight loss and metabolic health. A graduate of Imperial College London, he combines medical rigour with a calm, human approach.
               </p>
@@ -526,7 +563,16 @@ export default function MedicalWeightLossLpPage() {
               <p className="mb-8" style={{ color: '#AFA39D', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
                 &ldquo;Medical weight loss should never be guesswork. Every body tells a story, and our job is to turn it into a plan that lasts&rdquo; &mdash; Dr. Teebi
               </p>
-              <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
+              {/* Live LP uses a green (not blue) CTA in this section */}
+              <a
+                href={FRESHA_ANALYSIS}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-block text-center font-bold text-white"
+                style={{ backgroundColor: CHECK, borderRadius: '5px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 36px' }}
+              >
+                Get Your Free Body Analysis &rsaquo;
+              </a>
             </div>
           </div>
         </div>
@@ -534,12 +580,12 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Results-driven approach — performance assurance */}
       <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '970px' }}>
+          <p className="text-center uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '20px', letterSpacing: '2px' }}>
             our results-driven approach
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '200px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '3px', lineHeight: 1.5 }}>
+          <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '27px', letterSpacing: '3px', lineHeight: 1.5 }}>
             support weight loss progress weekly<br />measured. verified.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -579,15 +625,15 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Safety, side effects, and our system */}
       <section className="py-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ background: 'linear-gradient(180deg, #B7CBB2 0%, #F4F2EC 38%, #FFFFFF 100%)', borderRadius: '28px', padding: '48px' }}>
-            <h2 className="text-center uppercase" style={{ color: '#ffffff', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '1104px' }}>
+          <div className="p-8 sm:py-12 sm:px-20" style={{ background: 'linear-gradient(180deg, #B7CBB2 0%, #F4F2EC 38%, #FFFFFF 100%)', borderRadius: '28px' }}>
+            <h2 className="text-center uppercase" style={{ color: TAUPE, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
               safety, side effects,<br />and our system
             </h2>
             <p className="mt-6 mb-10" style={{ color: '#8d8378', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
               Treatment may be considered after assessment Medical weight loss with strict screening, clear education, and ongoing monitoring. Most side effects are manageable when amount and nutrition are structured, and follow-ups are consistent.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="grid grid-cols-1 md:grid-cols-[1fr_477px] gap-12">
               <div>
                 <p className="mb-3" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px' }}>Common side effects and how we reduce them:</p>
                 <ul className="space-y-2 mb-7">
@@ -605,12 +651,17 @@ export default function MedicalWeightLossLpPage() {
                 </p>
                 <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
               </div>
-              <div className="flex flex-col gap-5">
-                <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 11' }}>
+              <div className="flex flex-col gap-7">
+                <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '477 / 270' }}>
                   <img src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="ozempic-_edited.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
-                <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '16 / 11' }}>
-                  <img src="/wix/87fc13_d0cbf25ddb0e465ab3edebcddd7cb3e3~mv2.jpg" alt="CarismaSlim_Batch2-016.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <div className="flex gap-4">
+                  <div className="overflow-hidden rounded-2xl" style={{ width: '38%', aspectRatio: '176 / 168' }}>
+                    <img src="/wix/87fc13_d0cbf25ddb0e465ab3edebcddd7cb3e3~mv2.jpg" alt="CarismaSlim_Batch2-016.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
+                  <div className="overflow-hidden rounded-2xl" style={{ width: '62%', aspectRatio: '281 / 168' }}>
+                    <img src="/wix/87fc13_47c25306549d4b6e9322f160244d03b6~mv2.png" alt="CarismaSlim_Batch2-002 1.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  </div>
                 </div>
               </div>
             </div>
@@ -620,12 +671,12 @@ export default function MedicalWeightLossLpPage() {
 
       {/* 4 core pillars of our methodology */}
       <section className="py-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
           <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
             4 core plllars of our methodology
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '210px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
+          <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px', lineHeight: 1.5 }}>
             a doctor-led Medical weight loss<br />programme built to last
           </h2>
           <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', borderRadius: '28px', padding: '28px' }}>
@@ -644,8 +695,9 @@ export default function MedicalWeightLossLpPage() {
                 ))}
               </div>
               <div className="bg-white rounded-2xl p-8">
-                <div className="w-full overflow-hidden rounded-xl mb-6" style={{ aspectRatio: '2036 / 1528' }}>
-                  <img src="/wix/87fc13_47c25306549d4b6e9322f160244d03b6~mv2.png" alt="CarismaSlim_Batch2-002 1.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                {/* Live crops the top of CarismaSlim_Batch2-008 2.png (crop y_236 h_602 of 1194x1592) */}
+                <div className="w-full overflow-hidden rounded-xl mb-6" style={{ aspectRatio: '1194 / 602' }}>
+                  <img src="/wix/87fc13_8cc64ffa7b4345f0a20daba3955f4954~mv2.png" alt="CarismaSlim_Batch2-008 2.png" style={{ width: '100%', height: 'auto', display: 'block', marginTop: '-19.77%' }} />
                 </div>
                 <ul className="space-y-2 mb-6">
                   {integrationBullets.map((t) => (
@@ -659,8 +711,8 @@ export default function MedicalWeightLossLpPage() {
                   href={FRESHA_ANALYSIS}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-center font-bold text-white mb-5"
-                  style={{ backgroundColor: BLUE, borderRadius: '10px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px' }}
+                  className="block text-center font-bold text-white mb-5 mx-auto"
+                  style={{ backgroundColor: BLUE, borderRadius: '10px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px', maxWidth: '356px' }}
                 >
                   Get Your Free Body Analysis &rsaquo;
                 </a>
@@ -681,46 +733,68 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Malta's #1 leading wellness chain */}
       <section className="py-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ background: 'linear-gradient(180deg, #F4F7F2 0%, #E9EFE6 100%)', borderRadius: '32px', padding: '48px' }}>
-            <p className="text-center mb-2 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '2px' }}>
-              the carisma difference
-            </p>
-            <div className="mx-auto mb-6" style={{ width: '140px', height: '1px', backgroundColor: '#B9A99E' }} />
-            <h2 className="text-center mb-12 uppercase" style={{ color: CHECK, fontFamily: headingFont, fontWeight: 400, fontSize: '26px', letterSpacing: '2px' }}>
-              malta&rsquo;s #1 leading wellness chain
-            </h2>
-            <div className="space-y-10">
-              <div>
-                <h3 className="mb-5 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px' }}>our commitment</h3>
-                <ul className="space-y-3">
-                  {commitment.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                      <span style={{ color: CHECK }}>&bull;</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
+        <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
+          <div className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #F4F7F2 0%, #E9EFE6 100%)', borderRadius: '32px', padding: '40px 33px' }}>
+            {/* soft rose watermark behind the card content (live: f940f0_9f944ed5, 678x579) */}
+            <img
+              src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png"
+              alt=""
+              className="absolute"
+              style={{ width: '678px', height: '579px', left: '50%', top: '37px', transform: 'translateX(-50%)', objectFit: 'fill', pointerEvents: 'none', zIndex: 0 }}
+            />
+            <div className="relative" style={{ zIndex: 1 }}>
+              <p className="text-center mb-2 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '2px' }}>
+                the carisma difference
+              </p>
+              <div className="mx-auto mb-6" style={{ width: '140px', height: '1px', backgroundColor: '#B9A99E' }} />
+              <h2 className="text-center mb-12 uppercase" style={{ color: CHECK, fontFamily: headingFont, fontWeight: 400, fontSize: '26px', letterSpacing: '2px' }}>
+                malta&rsquo;s #1 leading wellness chain
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-[1fr_428px] gap-12 items-start">
+                <div className="space-y-10">
+                  <div>
+                    <h3 className="mb-5 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px' }}>our commitment</h3>
+                    <ul className="space-y-3">
+                      {commitment.map((item) => (
+                        <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                          <span style={{ color: CHECK }}>&bull;</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="mb-5 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px' }}>WHY MALTA CHOOSES Carisma</h3>
+                    <ul className="space-y-3">
+                      {whyCarisma.map((item) => (
+                        <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                          <span style={{ color: CHECK }}>&bull;</span>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+                <div className="w-full overflow-hidden" style={{ borderRadius: '12px', height: '359px' }}>
+                  <iframe
+                    title="Carisma Slimming clinic location in Malta"
+                    src={`https://www.google.com/maps?q=${encodeURIComponent('Carisma Slimming, Malta')}&output=embed`}
+                    width="100%"
+                    height="359"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    style={{ border: 0, display: 'block' }}
+                  />
+                </div>
               </div>
-              <div>
-                <h3 className="mb-5 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px' }}>WHY MALTA CHOOSES Carisma</h3>
-                <ul className="space-y-3">
-                  {whyCarisma.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                      <span style={{ color: CHECK }}>&bull;</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div className="mt-12 flex flex-wrap items-center justify-between gap-6">
-              <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
-              <div className="flex items-center gap-3">
-                <img src="/wix/87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png" alt="parking-sign (1).png" style={{ width: '30px', height: 'auto', objectFit: 'contain' }} />
-                <span className="uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
-                  Complimentary on-site parking
-                </span>
+              <div className="mt-12 flex flex-wrap items-center justify-between gap-6">
+                <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
+                <div className="flex items-center gap-3">
+                  <img src="/wix/87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png" alt="parking-sign (1).png" style={{ width: '30px', height: 'auto', objectFit: 'contain' }} />
+                  <span className="uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
+                    Complimentary on-site parking
+                  </span>
+                </div>
               </div>
             </div>
           </div>
@@ -730,17 +804,22 @@ export default function MedicalWeightLossLpPage() {
       {/* Closing — photo collage + contact + LP footer */}
       <section
         className="py-16"
-        style={{ backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center top', backgroundRepeat: 'no-repeat' }}
+        style={{
+          backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)',
+          backgroundSize: '2068px 1063px',
+          backgroundPosition: 'calc(50% + 27px) 217px',
+          backgroundRepeat: 'no-repeat',
+        }}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-6 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '24px', letterSpacing: '2px' }}>
+          <h2 className="text-center mb-6 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px' }}>
             we are not another diet clinic.
           </h2>
           <p className="text-center mx-auto mb-12" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7, maxWidth: '720px' }}>
             We&rsquo;re a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don&rsquo;t just lose weight, you step into your strongest form.
           </p>
 
-          <div className="mx-auto grid grid-cols-2 gap-3" style={{ maxWidth: '620px' }}>
+          <div className="mx-auto grid grid-cols-2" style={{ maxWidth: '572px', gap: '4px' }}>
             {collageTiles.map((src, i) => (
               <img key={src} src={src} alt={`${i + 1}g.png`} style={{ width: '100%', height: 'auto', display: 'block' }} />
             ))}
@@ -753,17 +832,17 @@ export default function MedicalWeightLossLpPage() {
             </p>
             <div className="space-y-4">
               <p>
-                <a href="tel:+35627802062" className="uppercase underline" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+                <a href="tel:+35627802062" className="uppercase underline" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
                   Tel: +356 27802062
                 </a>
               </p>
               <p>
-                <a href="mailto:info@carismaslimming.com" className="uppercase underline" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+                <a href="mailto:info@carismaslimming.com" className="uppercase underline" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
                   Email: info@carismaslimming.com
                 </a>
               </p>
               <p>
-                <a href="/privacy-policy" className="uppercase underline" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
+                <a href="/privacy-policy" className="uppercase underline" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
                   Privicy Policy
                 </a>
               </p>
@@ -771,7 +850,7 @@ export default function MedicalWeightLossLpPage() {
           </div>
 
           {/* bottom strip */}
-          <div className="mt-12 overflow-hidden" style={{ borderRadius: '16px' }}>
+          <div className="mt-12 mx-auto overflow-hidden" style={{ borderRadius: '16px', maxWidth: '980px' }}>
             <img src="/wix/87fc13_940a68fd38fc42b88f55048f0dc395fd~mv2.png" alt="Frame 1707483099.png" style={{ width: '100%', height: 'auto', display: 'block' }} />
           </div>
         </div>

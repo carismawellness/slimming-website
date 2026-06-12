@@ -24,28 +24,34 @@ export default function ConsultationPage() {
       {/* CONTACT US banner */}
       <section
         className="flex items-center justify-center"
-        style={{ backgroundColor: GREEN, minHeight: '116px' }}
+        style={{ backgroundColor: GREEN, minHeight: '112px' }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h1
-            className="uppercase tracking-[0.3em] text-white"
-            style={{ fontFamily: "'Trajan Pro', serif", fontSize: '28px' }}
+            className="uppercase"
+            style={{ fontFamily: "'Trajan Pro', serif", fontSize: '28px', fontWeight: 400, color: '#FFFFFF' }}
           >
             Contact Us
           </h1>
+          <div style={{ width: '284px', height: '1px', backgroundColor: '#FFFFFF', margin: '7px auto 0' }} />
         </div>
       </section>
 
       {/* BOOK YOUR SLIMMING CONSULTATION heading bar */}
       <section className="py-12" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '980px' }}>
+        <div className="mx-auto px-4 md:px-0" style={{ maxWidth: '980px' }}>
           <div
             className="flex items-center justify-center text-center px-6"
-            style={{ backgroundColor: GREEN, minHeight: '122px' }}
+            style={{ backgroundColor: '#95AF95', minHeight: '120px' }}
           >
             <h2
-              className="uppercase font-bold text-2xl md:text-5xl text-white"
-              style={{ fontFamily: "'Trajan Pro', serif" }}
+              className="uppercase"
+              style={{
+                fontFamily: '"Novecento Wide", sans-serif',
+                fontWeight: 500,
+                color: '#FFFFFF',
+                fontSize: 'clamp(24px, 4.5vw, 40px)',
+              }}
             >
               Book Your Slimming Consultation
             </h2>
@@ -54,7 +60,7 @@ export default function ConsultationPage() {
       </section>
 
       {/* Collage + booking form */}
-      <section className="relative pb-12" style={{ backgroundColor: '#FFFFFF' }}>
+      <section className="relative pb-12 pt-9" style={{ backgroundColor: '#FFFFFF' }}>
         {/* Faint decorative wavy-lines graphic bleeding off the left edge */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -62,12 +68,12 @@ export default function ConsultationPage() {
           alt=""
           aria-hidden="true"
           className="absolute pointer-events-none hidden md:block"
-          style={{ left: '-50px', top: '92px', width: '1039px', height: '380px', zIndex: 0 }}
+          style={{ left: '-50px', top: '128px', width: '1039px', height: '380px', zIndex: 0 }}
         />
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={{ zIndex: 10 }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             {/* Photo collage — tight 2x2 cluster of Wix petal shapes */}
-            <div className="grid grid-cols-2 gap-1 mx-auto w-full" style={{ maxWidth: '538px' }}>
+            <div className="hidden md:grid grid-cols-2 gap-1 mx-auto w-full" style={{ maxWidth: '538px' }}>
               {COLLAGE.map((src, i) => (
                 <div
                   key={i}
@@ -111,10 +117,10 @@ export default function ConsultationPage() {
       </section>
 
       {/* Opening hours + contact icons */}
-      <section className="py-14" style={{ backgroundColor: '#FFFFFF' }}>
+      <section className="pb-14" style={{ backgroundColor: '#FFFFFF', paddingTop: '88px' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
-            className="uppercase mb-6"
+            className="uppercase mb-2"
             style={{
               fontFamily: "'Trajan Pro', serif",
               fontSize: '25px',
@@ -126,39 +132,45 @@ export default function ConsultationPage() {
           </p>
           <div
             className="flex justify-center items-center gap-8 mb-2"
-            style={{ fontSize: '15px', color: TAUPE }}
+            style={{ fontSize: '15px', color: TAUPE, fontFamily: 'Roboto, sans-serif' }}
           >
             <p>Mon - Sun</p>
             <p>8:00 am – 8:00 pm</p>
           </div>
-          <p className="mb-10" style={{ fontSize: '15px' }}>
+          <p className="mb-5">
             <a
               href="mailto:info@carismaslimming.com"
-              className="transition hover:opacity-80"
-              style={{ color: TAUPE }}
+              className="uppercase transition hover:opacity-80"
+              style={{ color: '#B0A68F', fontFamily: '"Novecento Wide", sans-serif', fontSize: '16px' }}
             >
               info@carismaslimming.com
             </a>
           </p>
 
-          <div className="flex justify-center items-start gap-10">
-            <div className="flex flex-col items-center gap-2">
+          <div className="flex flex-col md:flex-row justify-center items-center md:items-end gap-8 md:gap-0">
+            <div className="flex flex-col items-center gap-2 md:w-[209px]">
               <a
                 href="mailto:info@carismaaesthetics.com?subject=Get%20in%20touch%20with%20us!"
                 aria-label="Email"
                 className="transition hover:opacity-80"
                 style={{ color: GREEN }}
               >
-                <svg width="47" height="47" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="2" y="4" width="20" height="16" rx="2" />
-                  <path d="m2 6 10 7L22 6" />
+                <svg width="51" height="37" viewBox="0 0 26 19" fill="none" stroke="currentColor" strokeWidth="1.5">
+                  <rect x="1" y="1" width="24" height="17" rx="2" />
+                  <path d="m1.5 2.5 11.5 8.5 11.5-8.5" />
+                  <path d="m2 17 8-6.8" />
+                  <path d="m24 17-8-6.8" />
                 </svg>
               </a>
-              <span className="text-sm" style={{ color: TAUPE }}>
+              <a
+                href="mailto:info@carismaslimming.com"
+                className="transition hover:opacity-80"
+                style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}
+              >
                 info@carismaslimming.com
-              </span>
+              </a>
             </div>
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2 md:w-[209px]">
               <a
                 href="https://www.instagram.com/carismaaesthetics/?hl=en"
                 target="_blank"
@@ -173,11 +185,11 @@ export default function ConsultationPage() {
                   <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
                 </svg>
               </a>
-              <span className="text-sm" style={{ color: TAUPE }}>
+              <span style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}>
                 carismaslimming
               </span>
             </div>
-            <div className="flex flex-col items-center gap-2">
+            <div className="flex flex-col items-center gap-2 md:w-[209px]">
               <a
                 href="https://www.facebook.com/carismaaesthetics/"
                 target="_blank"
@@ -186,11 +198,15 @@ export default function ConsultationPage() {
                 className="transition hover:opacity-80"
                 style={{ color: GREEN }}
               >
-                <svg width="47" height="47" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M13.5 21v-7h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.4V5.6c-.3 0-1.1-.1-2.1-.1-2 0-3.4 1.2-3.4 3.5v2.2H8.4V14h2.4v7h2.7Z" />
+                <svg width="47" height="47" viewBox="0 0 24 24">
+                  <circle cx="12" cy="12" r="12" fill="currentColor" />
+                  <path
+                    fill="#FFFFFF"
+                    d="M13.5 23v-9h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.4V5.6c-.3 0-1.1-.1-2.1-.1-2 0-3.4 1.2-3.4 3.5v2.2H8.4V14h2.4v9h2.7Z"
+                  />
                 </svg>
               </a>
-              <span className="text-sm" style={{ color: TAUPE }}>
+              <span style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}>
                 Carisma Slimming
               </span>
             </div>

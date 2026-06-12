@@ -6,10 +6,12 @@ export default function HeroVideo({
   src,
   poster,
   playColor = '#7ba587',
+  hideButton = false,
 }: {
   src: string;
   poster: string;
   playColor?: string;
+  hideButton?: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [started, setStarted] = useState(false);
@@ -32,9 +34,11 @@ export default function HeroVideo({
           aria-label="Play video"
           style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', background: 'transparent', border: 0 }}
         >
-          <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', width: '64px', height: '64px', backgroundColor: 'rgba(255,255,255,0.85)' }}>
-            <span style={{ marginLeft: '5px', width: 0, height: 0, borderLeft: `18px solid ${playColor}`, borderTop: '11px solid transparent', borderBottom: '11px solid transparent' }} />
-          </span>
+          {!hideButton && (
+            <span style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '9999px', width: '64px', height: '64px', backgroundColor: 'rgba(255,255,255,0.85)' }}>
+              <span style={{ marginLeft: '5px', width: 0, height: 0, borderLeft: `18px solid ${playColor}`, borderTop: '11px solid transparent', borderBottom: '11px solid transparent' }} />
+            </span>
+          )}
         </button>
       )}
     </div>

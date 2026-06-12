@@ -99,7 +99,14 @@ const whyCarisma = [
 ];
 
 const headingFont = 'Trajan Pro, serif';
-const wideFont = 'Novecento Wide Book, Novecento Wide, sans-serif';
+// Page-local font mapping: the woff2 named "normal" is the heavy face and the one
+// named "medium" is the light Book face, so map 400 -> medium file, 700 -> normal file
+// to match the live site (regular text light, <strong> heavy).
+const wideFont = 'Novecento Wide Guide, Novecento Wide Book, Novecento Wide, sans-serif';
+const localFontCss = `
+@font-face{font-family:'Novecento Wide Guide';src:url('/fonts/novecento-wide-medium.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:'Novecento Wide Guide';src:url('/fonts/novecento-wide-normal.woff2') format('woff2');font-weight:500 700;font-style:normal;font-display:swap;}
+`;
 const bodyFont = 'Roboto, sans-serif';
 const GREEN = '#8EB093';
 const TAUPE = '#9B8D83';
@@ -137,7 +144,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
       ))}
       <span
         className="ml-2"
-        style={{ color: light ? '#DCE5DC' : GREEN, fontFamily: bodyFont, fontSize: '14px' }}
+        style={{ color: light ? TAUPE : GREEN, fontFamily: bodyFont, fontSize: '16px' }}
       >
         Over 200+ Reviews
       </span>
@@ -148,6 +155,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
 export default function SlimmingGuidePage() {
   return (
     <main className="w-full" style={{ fontFamily: bodyFont, color: TAUPE }}>
+      <style dangerouslySetInnerHTML={{ __html: localFontCss }} />
       {/* Hero Section — inset rounded dark-green card with wave-line banner */}
       <section className="bg-white px-4 sm:px-6 lg:px-10 pt-4 pb-8">
         <div
@@ -160,12 +168,12 @@ export default function SlimmingGuidePage() {
           }}
         >
           <div className="px-6 sm:px-12 lg:px-20 pt-14">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-[740px_1fr] gap-10 items-center">
               {/* Left content */}
               <div>
                 <h1
                   className="mb-5 uppercase"
-                  style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '40px', lineHeight: 1.2 }}
+                  style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '40px', lineHeight: '40px' }}
                 >
                   <span style={{ color: '#FFFFFF' }}>the weight-loss guide</span>
                   <br />
@@ -173,13 +181,14 @@ export default function SlimmingGuidePage() {
                 </h1>
                 <p
                   className="mb-5 uppercase"
-                  style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', lineHeight: 1.7 }}
+                  style={{ color: TAUPE, fontFamily: wideFont, fontSize: '16px', lineHeight: 1.3, letterSpacing: '3.2px', maxWidth: '640px' }}
                 >
                   Recipes, meal timing &amp; a structured plan. Designed around{' '}
-                  <strong>the Mediterranean diet</strong>, <strong>the festa season</strong>, &amp;{' '}
-                  <strong>busy Maltese weeks</strong>.
+                  <strong style={{ color: '#FFFFFF' }}>the Mediterranean diet</strong>,{' '}
+                  <strong style={{ color: '#FFFFFF' }}>the festa season</strong>, &amp;{' '}
+                  <strong style={{ color: '#FFFFFF' }}>busy Maltese weeks</strong>.
                 </p>
-                <p className="mb-6" style={{ color: '#E5EBE2', fontSize: '15px' }}>
+                <p className="mb-6" style={{ color: '#E5EBE2', fontSize: '15px', maxWidth: '590px' }}>
                   The Carisma Slimming Guide gives you a doctor-backed system you can actually follow, no crash
                   diets, no calorie counting.
                 </p>
@@ -193,7 +202,7 @@ export default function SlimmingGuidePage() {
                       />
                       <p
                         className="uppercase"
-                        style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', lineHeight: 1.6 }}
+                        style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '14px', lineHeight: 1.8, letterSpacing: '0.7px' }}
                       >
                         <span style={{ fontWeight: 700 }}>{f.label}</span> {f.text}
                       </p>
@@ -206,9 +215,10 @@ export default function SlimmingGuidePage() {
                     color: '#FFFFFF',
                     fontFamily: wideFont,
                     fontSize: '20px',
+                    lineHeight: '34px',
                     letterSpacing: '1px',
                     border: '1px solid #FFFFFF',
-                    padding: '10px 20px',
+                    padding: '0px 14px',
                   }}
                 >
                   FOR ONLY €30
@@ -219,7 +229,7 @@ export default function SlimmingGuidePage() {
                   style={{
                     backgroundColor: GREEN,
                     borderRadius: '10px',
-                    maxWidth: '550px',
+                    maxWidth: '455px',
                     padding: '14px 24px',
                     fontFamily: wideFont,
                     fontSize: '15px',
@@ -232,8 +242,8 @@ export default function SlimmingGuidePage() {
                 <GoogleReviewsRow light />
               </div>
 
-              {/* Right - product mockup */}
-              <div className="flex justify-center">
+              {/* Right - product mockup (in-flow below lg; large absolute version on desktop) */}
+              <div className="flex justify-center lg:hidden">
                 <img
                   src="/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.png"
                   alt="3D mockup of the Carisma Slimming Guide product (Guide 3D 01.jpg.png)"
@@ -251,21 +261,31 @@ export default function SlimmingGuidePage() {
               />
               <p
                 className="uppercase"
-                style={{ color: GREEN, fontFamily: wideFont, fontSize: '19px', letterSpacing: '2px' }}
+                style={{ color: GREEN, fontFamily: bodyFont, fontSize: '14px', letterSpacing: '0.5px' }}
               >
                 #1 Voted Clinic in Malta
               </p>
             </div>
           </div>
+          {/* Large product mockup pinned over the right half of the hero card (desktop) */}
+          <img
+            src="/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.png"
+            alt=""
+            className="hidden lg:block absolute pointer-events-none"
+            style={{ left: '731px', top: '-169px', width: '735px', aspectRatio: '679 / 943', objectFit: 'contain' }}
+          />
         </div>
       </section>
 
       {/* Main Narrative / Pain Point Section */}
       <section className="py-16" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4" style={{ maxWidth: '1032px' }}>
           <div
             className="px-6 py-10 sm:px-12 sm:py-12"
-            style={{ backgroundColor: '#F4F1E9', borderRadius: '16px' }}
+            style={{
+              background: 'linear-gradient(170deg, #F7F4ED 0%, #F0EFE5 55%, #D8E4D6 100%)',
+              borderRadius: '16px',
+            }}
           >
             <h2
               className="text-center mb-10 lowercase"
@@ -273,44 +293,47 @@ export default function SlimmingGuidePage() {
             >
               it was never about discipline.
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            <div className="grid grid-cols-1 md:grid-cols-[338px_1fr] gap-8 items-start">
               <div className="flex flex-col gap-6">
                 <img
                   src="/wix/11062b_926c2ba259264b22bed8a16f8021e64b~mv2.jpg"
                   alt="Woman Eating Pizza"
-                  style={{ width: '100%', aspectRatio: '338 / 386', objectFit: 'cover', objectPosition: 'center top', borderRadius: '160px 160px 12px 12px' }}
+                  style={{ width: '338px', maxWidth: '100%', aspectRatio: '338 / 386', objectFit: 'cover', objectPosition: 'center top', borderRadius: '160px 160px 12px 60px' }}
                 />
               </div>
-              <div>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
-                You started on a Monday. You were ready. The rules were clear. The commitment felt real.
+              <div style={{ maxWidth: '540px' }}>
+              <p style={{ color: TAUPE, fontSize: '13px' }}>
+                You started on a Monday. You were ready.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
+                The rules were clear. The commitment felt real.
+              </p>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
                 By Wednesday, life happened. A dinner you didn&apos;t plan for. A week that ran away from you. A
                 moment where you were tired and hungry and the willpower just wasn&apos;t there.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
                 So you started again the following Monday.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
                 Then again. Then again.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
                 Here is what that pattern actually tells you: not that you lack discipline, but that the system
                 you were following required too much of it. Every single day. Perfect decisions. Perfect
                 portions. Perfect meals. On days that are never perfect.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
                 You know what happens when a difficult week meets a fragile plan. The plan breaks. And somehow,
                 the story you end up telling yourself is that you broke it.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p style={{ color: TAUPE, fontSize: '13px' }}>
                 You didn&apos;t.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
                 Not your effort. Not your intention. Not your character.
               </p>
-              <p className="mb-2" style={{ color: TAUPE, fontSize: '16px' }}>
+              <p className="mb-2" style={{ color: TAUPE, fontSize: '13px' }}>
                 The plan was fragile. That is where this starts.
               </p>
               </div>
@@ -319,15 +342,17 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
+      {/* Built To Hold band + What This Is + Method share a wrapper so the tilted
+          paper mockups can overlap section boundaries like on the live site */}
+      <div className="relative overflow-hidden">
       {/* Built To Hold Band */}
       <section
-        className="py-14"
-        style={{ background: 'linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, #6D8A72 100%)' }}
+        style={{ background: 'linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, #6D8A72 100%)', padding: '38px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
             className="uppercase"
-            style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '30px', lineHeight: 1.5 }}
+            style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
           >
             THIS IS A SYSTEM <strong>BUILT TO HOLD.</strong>
             <br />
@@ -337,28 +362,21 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* What This Is Section */}
-      <section className="py-16 relative overflow-hidden bg-white">
-        {/* Tilted A4 mockup accent pinned to the top-right edge */}
-        <img
-          src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.png"
-          alt="A4 paper mockup of the guide (A4 Papdfgfder Mockup V1.0.png)"
-          className="hidden lg:block absolute pointer-events-none"
-          style={{ width: '771px', aspectRatio: '771 / 618', objectFit: 'contain', top: '-160px', right: '-480px' }}
-        />
+      <section className="py-16 relative bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
-          <Kicker centered>WHAT THIS IS</Kicker>
+          <Kicker centered rule>WHAT THIS IS</Kicker>
           <h2
             className="mb-8 lowercase"
             style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
           >
             this is not a diet.
           </h2>
-          <p className="mb-6" style={{ color: TAUPE, fontSize: '16px' }}>
+          <p className="mb-6 text-left" style={{ color: TAUPE, fontSize: '14px' }}>
             Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use
             it. The Carisma Slimming Guide is a behaviour system. Built from real clinic practice. Designed for
             the life you actually have.
           </p>
-          <p className="mb-8" style={{ color: TAUPE, fontSize: '16px' }}>
+          <p className="mb-8 text-left" style={{ color: TAUPE, fontSize: '14px' }}>
             The principle it runs on is this: what you can repeat consistently will always outperform what you
             can do once brilliantly. Not the perfect week. A structure stable enough to survive the imperfect
             one.
@@ -368,14 +386,14 @@ export default function SlimmingGuidePage() {
             style={{
               color: TAUPE,
               fontFamily: wideFont,
-              fontSize: '15px',
+              fontSize: '13px',
               border: '1px solid #B5AB9F',
-              padding: '14px 22px',
+              padding: '12px 20px',
             }}
           >
             Adherence over perfection. Structure over willpower. That is the whole system
           </p>
-          <p className="mb-8" style={{ color: TAUPE, fontSize: '16px' }}>
+          <p className="mb-8" style={{ color: TAUPE, fontSize: '14px' }}>
             That is what this guide builds. And when that structure holds, weight loss stops being something you
             fight for. It becomes a result that follows.
           </p>
@@ -399,34 +417,30 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Method Section */}
-      <section className="py-16 relative overflow-hidden bg-white">
-        {/* Recipe page + guide cover stack pinned to the left edge */}
-        <img
-          src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.png"
-          alt="The Method flyer image (Freedfvvdfv Flyer 02.png)"
-          className="hidden lg:block absolute pointer-events-none"
-          style={{ width: '771px', aspectRatio: '771 / 708', objectFit: 'contain', top: '-120px', left: '-350px' }}
-        />
+      <section className="py-16 relative bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto mb-10">
-            <Kicker centered>THE METHOD</Kicker>
+            <Kicker centered rule>THE METHOD</Kicker>
             <h2
-              className="mb-6 lowercase"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
+              className="mb-6 lowercase mx-auto"
+              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', maxWidth: '500px' }}
             >
               the reason other plans fell apart is not a mystery.
             </h2>
-            <p style={{ color: TAUPE, fontSize: '16px' }}>
+            <p style={{ color: TAUPE, fontSize: '14px' }}>
               Every plan that has ever failed you asked for too many decisions made under pressure. This method
               does the opposite. It reduces decisions. Four questions. One clear answer to each. That is the
               entire structure.
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+          <div
+            className="grid grid-cols-1 md:grid-cols-2 mx-auto"
+            style={{ maxWidth: '802px', columnGap: '90px', rowGap: '40px' }}
+          >
             {methodPillars.map((p) => (
               <div
                 key={p.lead}
-                className="px-8 pt-10 pb-8"
+                className="px-7 pt-8 pb-7"
                 style={{
                   background: 'linear-gradient(180deg, #CBDCC9 0%, #FBFBF8 55%)',
                   borderRadius: '12px',
@@ -434,14 +448,14 @@ export default function SlimmingGuidePage() {
                 }}
               >
                 <h3
-                  className="mb-6 uppercase text-center"
+                  className="mb-4 uppercase text-center"
                   style={{ color: GREEN, fontFamily: wideFont, fontSize: '25px' }}
                 >
                   <span style={{ fontWeight: 700 }}>{p.lead}</span>{' '}
-                  <span style={{ fontWeight: 400 }}>{p.rest}</span>
+                  <span style={{ fontWeight: 400, color: '#FFFFFF' }}>{p.rest}</span>
                 </h3>
                 {p.paragraphs.map((t, i) => (
-                  <p key={i} className={i < p.paragraphs.length - 1 ? 'mb-4' : ''} style={{ color: TAUPE, fontSize: '15px' }}>
+                  <p key={i} className={i < p.paragraphs.length - 1 ? 'mb-4' : ''} style={{ color: TAUPE, fontSize: '13px' }}>
                     {t}
                   </p>
                 ))}
@@ -450,6 +464,22 @@ export default function SlimmingGuidePage() {
           </div>
         </div>
       </section>
+
+      {/* Tilted A4 mockup overlapping the band + What This Is (right edge) */}
+      <img
+        src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.png"
+        alt="A4 paper mockup of the guide (A4 Papdfgfder Mockup V1.0.png)"
+        className="hidden lg:block absolute pointer-events-none"
+        style={{ width: '771px', aspectRatio: '771 / 618', objectFit: 'contain', top: '0px', right: '-305px' }}
+      />
+      {/* Recipe page + guide cover stack overlapping What This Is + Method (left edge) */}
+      <img
+        src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.png"
+        alt="The Method flyer image (Freedfvvdfv Flyer 02.png)"
+        className="hidden lg:block absolute pointer-events-none"
+        style={{ width: '771px', aspectRatio: '771 / 708', objectFit: 'contain', top: '330px', left: '-305px' }}
+      />
+      </div>{/* end decorative wrapper */}
 
       {/* Success Outcomes Section — STEP 1-4 stepper */}
       <section className="py-16 bg-white">
@@ -461,6 +491,7 @@ export default function SlimmingGuidePage() {
                 color: TAUPE,
                 fontFamily: wideFont,
                 fontSize: '16px',
+                fontWeight: 400,
                 letterSpacing: '3.2px',
                 borderBottom: '1px solid #C9C0B8',
               }}
@@ -474,13 +505,12 @@ export default function SlimmingGuidePage() {
 
       {/* Stabilise Band */}
       <section
-        className="py-14"
-        style={{ background: 'linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, #6D8A72 100%)' }}
+        style={{ background: 'linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, #6D8A72 100%)', padding: '38px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
             className="uppercase"
-            style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '30px', lineHeight: 1.5 }}
+            style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
           >
             WHEN THESE FOUR FOUNDATIONS <strong>STABILISE</strong>
             <br />
@@ -506,7 +536,7 @@ export default function SlimmingGuidePage() {
           <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10 items-start mb-10">
             {/* Left text column */}
             <div>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '14px' }}>
+              <p style={{ color: TAUPE, fontSize: '14px' }}>
                 Maltese life is specific. You know what it looks like.
               </p>
               <p className="mb-4" style={{ color: TAUPE, fontSize: '14px' }}>
@@ -551,12 +581,12 @@ export default function SlimmingGuidePage() {
             That is the system. Rhythm, interrupted and resumed. Not perfection. Just the structure, picked back
             up.
           </p>
-          <p className="mb-10" style={{ color: TAUPE, fontSize: '15px' }}>
+          <p className="mb-10 lg:mb-[88px]" style={{ color: TAUPE, fontSize: '15px' }}>
             The guide includes recipes built for real Maltese kitchens. Practical, familiar dishes built within
             the method so they work without adaptation. Nothing aspirational. Nothing that requires ingredients
             you would not already have.
           </p>
-          <div className="flex justify-center mb-12">
+          <div className="flex justify-center mb-12 lg:mb-[185px]">
             <p
               className="uppercase"
               style={{
@@ -572,15 +602,15 @@ export default function SlimmingGuidePage() {
           </div>
           {/* 'Most people who come to us...' highlight card */}
           <div
-            className="px-8 py-11 sm:px-14"
+            className="px-8 py-11 lg:-mx-10"
             style={{
               background: 'linear-gradient(180deg, #CDDCCA 0%, #F7F7F3 85%)',
               borderRadius: '24px',
             }}
           >
             <p
-              className="uppercase mb-7"
-              style={{ color: TAUPE, fontFamily: wideFont, fontSize: '18px', lineHeight: 1.6 }}
+              className="uppercase mb-6"
+              style={{ color: TAUPE, fontFamily: wideFont, fontSize: '18px', lineHeight: 1.5 }}
             >
               Most people who come to us have <strong>already tried something</strong>. A diet that worked{' '}
               <strong>for a while</strong>. An app they <strong>stopped opening</strong>. A plan that felt right
@@ -588,7 +618,7 @@ export default function SlimmingGuidePage() {
             </p>
             <p
               className="uppercase"
-              style={{ color: TAUPE, fontFamily: wideFont, fontSize: '18px', lineHeight: 1.6 }}
+              style={{ color: TAUPE, fontFamily: wideFont, fontSize: '18px', lineHeight: 1.5 }}
             >
               This guide was written for <strong>what comes after that.</strong>
             </p>
@@ -613,7 +643,7 @@ export default function SlimmingGuidePage() {
               className="p-9"
               style={{
                 background: 'linear-gradient(180deg, #F7F5F0 0%, #E3EADF 45%, #C9DAC8 100%)',
-                borderRadius: '30px 90px 30px 90px',
+                borderRadius: '90px 30px 90px 30px',
                 boxShadow: '0 6px 16px rgba(0,0,0,0.07)',
               }}
             >
@@ -627,12 +657,12 @@ export default function SlimmingGuidePage() {
                   style={{ width: '34px', height: '34px', objectFit: 'contain' }}
                 />
               </div>
-              <ul className="space-y-2 list-disc pl-5">
+              <ul className="list-disc pl-5" style={{ maxWidth: '400px' }}>
                 {forYou.map((item) => (
                   <li
                     key={item}
                     className="uppercase"
-                    style={{ color: GREEN, fontSize: '14px', lineHeight: 1.6 }}
+                    style={{ color: GREEN, fontSize: '16px', lineHeight: '30px' }}
                   >
                     {item}
                   </li>
@@ -643,7 +673,7 @@ export default function SlimmingGuidePage() {
               className="p-9"
               style={{
                 background: 'linear-gradient(180deg, #F7F5F0 0%, #E3EADF 45%, #C9DAC8 100%)',
-                borderRadius: '30px 90px 30px 90px',
+                borderRadius: '90px 30px 90px 30px',
                 boxShadow: '0 6px 16px rgba(0,0,0,0.07)',
               }}
             >
@@ -657,12 +687,12 @@ export default function SlimmingGuidePage() {
                   style={{ width: '34px', height: '34px', objectFit: 'contain' }}
                 />
               </div>
-              <ul className="space-y-2 list-disc pl-5">
+              <ul className="list-disc pl-5" style={{ maxWidth: '400px' }}>
                 {notForYou.map((item) => (
                   <li
                     key={item}
                     className="uppercase"
-                    style={{ color: GREEN, fontSize: '14px', lineHeight: 1.6 }}
+                    style={{ color: GREEN, fontSize: '16px', lineHeight: '30px' }}
                   >
                     {item}
                   </li>
@@ -670,15 +700,15 @@ export default function SlimmingGuidePage() {
               </ul>
             </div>
           </div>
-          <div className="flex justify-center mt-14">
+          <div className="flex justify-center mt-14 lg:mt-[88px]">
             <p
               className="uppercase"
               style={{
                 color: TAUPE,
                 fontFamily: wideFont,
-                fontSize: '15px',
-                lineHeight: 1.7,
-                maxWidth: '620px',
+                fontSize: '13px',
+                lineHeight: 1.6,
+                maxWidth: '640px',
                 borderLeft: `3px solid ${GREEN}`,
                 paddingLeft: '16px',
               }}
@@ -692,7 +722,7 @@ export default function SlimmingGuidePage() {
 
       {/* Final Call-to-Action Section — full-width dark green band */}
       <section
-        className="py-16"
+        className="py-16 relative overflow-hidden"
         style={{ background: 'linear-gradient(90deg, #3E483E 0%, #57695A 50%, #6D8A72 100%)' }}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -734,8 +764,8 @@ export default function SlimmingGuidePage() {
               </a>
               <GoogleReviewsRow light />
             </div>
-            {/* Right — guide mockup */}
-            <div className="flex justify-center">
+            {/* Right — guide mockup (in-flow below lg; large absolute version on desktop) */}
+            <div className="flex justify-center lg:hidden">
               <img
                 src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.png"
                 alt="Guide preview image (Guide 3fD 01.jpg.png)"
@@ -744,25 +774,18 @@ export default function SlimmingGuidePage() {
             </div>
           </div>
         </div>
+        {/* Large scattered-pages mockup pinned to the right half (desktop) */}
+        <img
+          src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.png"
+          alt=""
+          className="hidden lg:block absolute pointer-events-none"
+          style={{ left: '433px', top: '-64px', width: '964px', height: '752px', objectFit: 'contain' }}
+        />
       </section>
 
       {/* Carisma Difference Section */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-3">
-            <h3
-              className="uppercase"
-              style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '3.2px' }}
-            >
-              the carisma difference
-            </h3>
-          </div>
-          <h2
-            className="text-center mb-12 lowercase"
-            style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
-          >
-            malta&apos;s #1 leading wellness chain
-          </h2>
           <div
             className="max-w-5xl mx-auto px-8 py-10 sm:px-14"
             style={{
@@ -771,10 +794,24 @@ export default function SlimmingGuidePage() {
               boxShadow: '0 6px 16px rgba(0,0,0,0.06)',
             }}
           >
+            <div className="text-center mb-3">
+              <h3
+                className="uppercase"
+                style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', letterSpacing: '2.4px' }}
+              >
+                the carisma difference
+              </h3>
+            </div>
+            <h2
+              className="text-center mb-8 lowercase"
+              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '24px' }}
+            >
+              malta&apos;s #1 leading wellness chain
+            </h2>
             <h3 className="uppercase mb-4" style={{ color: TAUPE, fontSize: '15px', fontWeight: 700 }}>
               our commitment
             </h3>
-            <ul className="space-y-2 list-disc pl-5 mb-8">
+            <ul className="space-y-2 list-disc pl-5 mb-8" style={{ maxWidth: '430px' }}>
               {carismaCommitments.map((item) => (
                 <li key={item} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
                   {item}
@@ -784,7 +821,7 @@ export default function SlimmingGuidePage() {
             <h3 className="uppercase mb-4" style={{ color: TAUPE, fontSize: '15px', fontWeight: 700 }}>
               WHY MALTA CHOOSES Carisma
             </h3>
-            <ul className="space-y-2 list-disc pl-5 mb-10">
+            <ul className="space-y-2 list-disc pl-5 mb-10" style={{ maxWidth: '430px' }}>
               {whyCarisma.map((item) => (
                 <li key={item} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
                   {item}
@@ -816,7 +853,7 @@ export default function SlimmingGuidePage() {
                 />
                 <p
                   className="uppercase whitespace-nowrap"
-                  style={{ color: GREEN, fontFamily: wideFont, fontSize: '13px', fontWeight: 700 }}
+                  style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', fontWeight: 700 }}
                 >
                   Complimentary on-site parking
                 </p>

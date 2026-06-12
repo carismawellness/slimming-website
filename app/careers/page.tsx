@@ -3,6 +3,8 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: 'Join the Team at Carisma Slimming | #1 Award Winning Chain',
+  description:
+    "Join the team at Carisma Slimming and take your career to the next level. We are Malta's number one award winning chain, offering top-quality slimming treatments.",
 };
 
 const headingFont = 'Trajan Pro, serif';
@@ -24,7 +26,7 @@ export default function CareersPage() {
   return (
     <main className="w-full overflow-x-hidden" style={{ backgroundColor: '#FFFFFF' }}>
       {/* HERO — Join the team */}
-      <section className="relative" style={{ paddingTop: '56px' }}>
+      <section className="relative" style={{ paddingTop: '85px' }}>
         {/* Heading (live DOM is uppercase; Trajan renders it exactly) */}
         <div className="px-4">
           <h1
@@ -45,7 +47,7 @@ export default function CareersPage() {
         {/* Thin vertical divider (overlaps the cream band top, as on live) */}
         <div
           className="relative mx-auto"
-          style={{ width: '1px', height: '83px', backgroundColor: TAUPE, marginTop: '47px', zIndex: 10 }}
+          style={{ width: '1px', height: '83px', backgroundColor: TAUPE, marginTop: '44px', zIndex: 10 }}
         />
 
         {/* Photo with full-bleed cream band behind its upper part */}
@@ -82,7 +84,7 @@ export default function CareersPage() {
               lineHeight: '35px',
               textAlign: 'justify',
               maxWidth: '735px',
-              marginTop: '51px',
+              marginTop: '49px',
             }}
           >
             our company is growing fast, and we are always on the look out for ambitious and talented people.
@@ -91,9 +93,9 @@ export default function CareersPage() {
       </section>
 
       {/* IF YOU... requirements + Apply */}
-      <section style={{ paddingTop: '52px', paddingBottom: '64px' }}>
+      <section style={{ paddingTop: '50px', paddingBottom: '64px' }}>
         <div className="mx-auto" style={{ maxWidth: '980px' }}>
-          <div className="flex flex-col lg:flex-row lg:items-start">
+          <div className="relative flex flex-col lg:flex-row lg:items-start">
             {/* Handshake photo — bleeds 150px left of the 980px grid on desktop */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -102,9 +104,16 @@ export default function CareersPage() {
               className="w-full object-cover lg:flex-none lg:w-[883px] lg:h-[585px] lg:-ml-[150px]"
             />
 
-            {/* Right column — overlaps the photo's bright blurred edge on desktop */}
-            <div className="relative z-10 px-4 mt-10 lg:flex-none lg:px-0 lg:mt-[137px] lg:w-[474px] lg:-ml-[186px]">
+            {/* White panel overlapping the photo's right edge, behind the text (as on live) */}
+            <div
+              className="absolute hidden lg:block"
+              style={{ left: '491px', top: '76px', width: '639px', height: '653px', backgroundColor: '#FFFFFF' }}
+            />
+
+            {/* Right column — sits on the white panel on desktop */}
+            <div className="relative z-10 px-4 mt-10 lg:flex-none lg:px-0 lg:mt-[134px] lg:w-[516px] lg:-ml-[186px]">
               <h2
+                className="lg:pl-[19px]"
                 style={{
                   color: TAUPE,
                   fontFamily: wideFont,
@@ -117,13 +126,13 @@ export default function CareersPage() {
                 IF YOU...
               </h2>
 
-              <div className="relative" style={{ marginTop: '74px', paddingLeft: '19px' }}>
+              <div className="relative" style={{ marginTop: '71px', paddingLeft: '19px' }}>
                 {/* Decorative pale rules, evenly spaced every 96px as on live */}
                 {[0, 96, 192, 288].map((t) => (
                   <div
                     key={t}
                     className="absolute"
-                    style={{ left: 0, top: `${t - 15}px`, width: '5px', height: '49px', backgroundColor: RULE }}
+                    style={{ left: 0, top: `${t - 9}px`, width: '5px', height: '49px', backgroundColor: RULE }}
                   />
                 ))}
                 {REQUIREMENTS.map((line, i) => (
@@ -148,7 +157,7 @@ export default function CareersPage() {
           </div>
 
           {/* APPLY NOW — live links to /contact, which is local /consultation */}
-          <div className="flex justify-center" style={{ marginTop: '74px' }}>
+          <div className="flex justify-center" style={{ marginTop: '67px' }}>
             <Link
               href="/consultation"
               className="flex items-center justify-center transition hover:opacity-90"

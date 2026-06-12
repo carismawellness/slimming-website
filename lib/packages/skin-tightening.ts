@@ -78,7 +78,10 @@ export const skinTightening: PackageContent = {
     'Comfortable sessions: Feels like a warm, deep massage with each treatment lasting about 30 minutes.',
   ],
   ptImage: W + '87fc13_056fc4bfc20b42c1ad5b0fbaddb94718~mv2.png',
-  ptImage2: W + '87fc13_134b655cd7f945a9a2847030229e46a1~mv2.png',
+  // live shows the pear photo (268x268, 87fc13_8c638b6d…) sitting on a white wave
+  // backdrop (515x308, 87fc13_134b655c…); the template has a single decorative slot,
+  // so render the salient pear (same as live anti-cellulite / lipocavitation).
+  ptImage2: W + '87fc13_8c638b6d5ad142b7914059b0806693c2~mv2.png',
 
   dualHeading: ['malta’s most effective 4-in-1 skin', 'tightening starter protocol'],
   dualMini: [
@@ -102,6 +105,9 @@ export const skinTightening: PackageContent = {
   ],
 
   mapQuery: 'Carisma Slimming, Malta',
+
+  // live FAQ CTA reads "claim your spot now" (not the template default "Claim my spot now")
+  faqCtaLabel: 'Claim your spot now',
 
   faqs: [
     { q: '1. What is included in the 4-in-1 Skin Tightening Protocol?', a: 'The protocol includes four VelaShape III sessions combining radiofrequency, infrared heat, vacuum suction, and mechanical massage. Together, these technologies work to tighten skin, smooth uneven texture, and improve firmness.' },

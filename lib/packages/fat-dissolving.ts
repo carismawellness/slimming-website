@@ -57,7 +57,11 @@ export const fatDissolving: PackageContent = {
   eligIntro: 'Treat minimal to moderate localised fat in these areas of the body',
   areas: ['DOUBLE CHIN', 'BACK FAT', 'ARM FAT (BINGO WING AREA)', 'STOMACH FAT & SIX-PACK DEFINITION', 'FLANKS AND WAIST', 'INNER AND OUTER THIGHS', 'UNDER THE BUTTOCKS', 'FAT ABOVE KNEES'],
 
-  ptEyebrow: 'package treatments',
+  // live /fatdissolving has NO 'package treatments' eyebrow anywhere (verified
+  // 2026-06-12: the standard package-treatments card is absent on live; the
+  // hide.packageCard flag below suppresses the whole section, and the eyebrow
+  // text must stay empty so it can never leak in if that flag changes).
+  ptEyebrow: '',
   ptHeading: 'secure your exclusive fat dissolving offer',
   ptCardEyebrow: 'lemon bottle',
   ptCardTag: 'targeted-fat reduction',
@@ -168,14 +172,20 @@ export const fatDissolving: PackageContent = {
   hide: { eligibility: true, difference: true, packageCard: true, wellness: true, evidence: true, dual: true },
 
   valueProps: {
-    heading: 'created for those who value confidence, safety & natural contour',
+    // live breaks with an explicit <br> after "confidence," (wixui-rich-text span,
+    // verified 2026-06-12). Rendered via whiteSpace pre-line in PackagePage; until
+    // that lands the \n collapses to a space, identical to the previous string.
+    heading: 'created for those who value confidence,\nsafety & natural contour',
     bullets: [
       'Because you want targeted fat reduction that enhances your shape, not changes who you are.',
       'Because stubborn fat deserves precision treatment, not extreme measures.',
       'Because you expect your procedure to be performed by qualified aesthetic medical professionals.',
       'Because your safety, comfort, and long-term results matter more than quick fixes.',
     ],
-    image: W + '87fc13_6ac670fc080e4fe4a974d6701eed38a8~mv2.jpg',
+    // live serves this image with a Wix crop (x_0,y_645,w_2250,h_2121 of the
+    // original, filled to a 384x362 box) — the uncropped portrait shows a blue
+    // lattice ceiling that live cuts off. _crop.jpg is that exact crop @2x.
+    image: W + '87fc13_6ac670fc080e4fe4a974d6701eed38a8~mv2_crop.jpg',
   },
 
   commitmentPanel: {

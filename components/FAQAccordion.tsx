@@ -35,7 +35,7 @@ export default function FAQAccordion() {
     <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative mb-10">
-          <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+          <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '22px', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Frequently asked questions
           </h2>
           <div className="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 mx-auto" style={{ maxWidth: '300px' }}>
@@ -68,10 +68,10 @@ export default function FAQAccordion() {
                   style={{ padding: '22px 4px', cursor: 'pointer', background: 'transparent' }}
                   aria-expanded={isOpen}
                 >
-                  <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+                  <span style={{ color: green, fontFamily: bodyFont, fontSize: '15px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>
                     {i + 1}. {f.q}
                   </span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={taupe} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </button>

@@ -29,8 +29,8 @@ const phoneNumber = '+356 27802062';
 
 /* ---------- Shared text styles ---------- */
 const bullet = { color: green, fontSize: '18px', lineHeight: '1' } as const;
-const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '15px' };
-const pStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '15px', lineHeight: 1.7 };
+const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '14px', lineHeight: 1.6 };
+const pStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '14px', lineHeight: 1.6 };
 
 /* ---------- Shared components ---------- */
 function SectionHeading({ children }: { children: React.ReactNode }) {
@@ -109,14 +109,14 @@ function CTAReassurance({ className = '' }: { className?: string }) {
 /* Press / media authority strip — reuses the real logos from the main site */
 function AsSeenOn() {
   const logos = [
-    { src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', alt: 'Lovin Malta', h: 44 },
-    { src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', alt: 'Malta Daily', h: 33 },
-    { src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', alt: '89.7 Bay', h: 44 },
-    { src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', alt: 'Times of Malta', h: 44 },
-    { src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', alt: 'maltatoday', h: 44 },
+    { src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', alt: 'Lovin Malta', w: 149, h: 44 },
+    { src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', alt: 'Malta Daily', w: 113, h: 33 },
+    { src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', alt: '89.7 Bay', w: 52, h: 44 },
+    { src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', alt: 'Times of Malta', w: 52, h: 44 },
+    { src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', alt: 'maltatoday', w: 75, h: 44 },
   ];
   return (
-    <section className="py-9 border-b" style={{ borderColor: '#ececec', backgroundColor: '#fff' }}>
+    <section className="pt-7 pb-3" style={{ backgroundColor: '#fff' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p className="mb-2" style={{ color: taupeLight, fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase' }}>
           As seen on
@@ -124,7 +124,7 @@ function AsSeenOn() {
         <div className="mx-auto mb-8" style={{ width: '90px', height: '1px', backgroundColor: '#d9cfc6' }} />
         <div className="flex flex-wrap items-center justify-center" style={{ gap: '12px' }}>
           {logos.map((l, i) => (
-            <img key={i} src={l.src} alt={l.alt} style={{ height: `${l.h}px`, width: 'auto', objectFit: 'contain' }} />
+            <img key={i} src={l.src} alt={l.alt} style={{ width: `${l.w}px`, height: `${l.h}px`, objectFit: 'cover' }} />
           ))}
         </div>
       </div>
@@ -250,16 +250,16 @@ function ProblemAgitationSection() {
   return (
     <section>
       {/* Narrative */}
-      <div className="py-16">
+      <div className="pt-9 pb-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ background: '#F2F1EC', borderRadius: '32px', padding: '48px' }}>
-            <h2 className="mb-10 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.35 }}>
+          <div className="mx-auto" style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #D3E0D4 100%)', border: '1px solid #E5E5E3', borderRadius: '24px', padding: '40px', maxWidth: '976px' }}>
+            <h2 className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
               Lose inches, gain energy<br />Pasta and wine still on the menu
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-              <div className="w-full overflow-hidden mx-auto shadow-md" style={{ aspectRatio: '334 / 362', maxWidth: '420px', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}>
+              <div className="overflow-hidden mx-auto shadow-md" style={{ width: '334px', maxWidth: '100%', height: '362px', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}>
                 <img
-                  src="/wix/87fc13_16e7dbedc9e84343b51b1f3d4821c6ea~mv2.jpg"
+                  src="/wix/87fc13_16e7dbed_consult_668x724.jpg"
                   alt="Slimming consultation at the Carisma clinic in Malta"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
@@ -292,10 +292,10 @@ function ProblemAgitationSection() {
             Why everything else failed?
           </p>
           <div className="mx-auto mb-6" style={{ width: '110px', height: '1px', backgroundColor: '#cdd8c8' }} />
-          <h2 className="text-center mb-6" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
-            Why is it so hard to lose weight after 30?
+          <h2 className="text-center mb-6" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+            Why is it so hard to lose<br />weight after 30?
           </h2>
-          <p className="mb-12 text-center max-w-2xl mx-auto" style={pStyle}>
+          <p className="mb-12 text-center mx-auto" style={{ ...pStyle, maxWidth: '520px' }}>
             Most of what you have tried was built on one idea: eat less, move more. That might work for a 25 year old with no stress. It is not enough for a 40 plus body with real hormones, real history and real responsibilities.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -322,13 +322,13 @@ function ProblemAgitationSection() {
               </ul>
             </div>
           </div>
-          <div className="mt-10 mx-auto max-w-3xl text-center">
-            <p style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', lineHeight: 1.7, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+          <div className="mt-10 mx-auto text-center" style={{ maxWidth: '600px' }}>
+            <p style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', lineHeight: 1.4, textTransform: 'uppercase', letterSpacing: '0.5px' }}>
               So you end up <strong style={{ color: greenDark }}>hungrier</strong>, more <strong style={{ color: greenDark }}>tired</strong> and more <strong style={{ color: greenDark }}>frustrated</strong>, often with <strong style={{ color: greenDark }}>less muscle</strong> and a <strong style={{ color: greenDark }}>slower metabolism</strong> than when you started.
             </p>
           </div>
           <div className="mt-10 mx-auto max-w-3xl text-center p-8" style={{ background: panelGradient, borderRadius: '24px' }}>
-            <p style={pStyle}>
+            <p style={{ ...pStyle, fontSize: '15px', lineHeight: 1.4 }}>
               <strong style={{ color: greenDark }}>Our program is built to reverse exactly that:</strong> we reset your metabolism for your age, protect muscle, work with your hormones and show you how to lose weight while still eating food you enjoy.
             </p>
             <div className="mt-6 flex justify-center">
@@ -375,12 +375,15 @@ function ProgramOverviewSection() {
 
   const [active, setActive] = useState(0);
   const tabs = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
-  const colHead = { color: taupe, fontFamily: wideFont, fontSize: '18px', fontWeight: 700 as const, letterSpacing: '1px', textTransform: 'uppercase' as const };
+  const colHead = { color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 700 as const, letterSpacing: '1px', textTransform: 'uppercase' as const };
   const stepTitle = { ...colHead, fontWeight: 400 as const };
+  // live page renders step-panel copy smaller and tighter than the rest of the page
+  const pStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '13px', lineHeight: 1.4 };
+  const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '13px', lineHeight: 1.4 };
 
   return (
     <section className="py-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '992px' }}>
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           How it works
         </p>
@@ -434,7 +437,7 @@ function ProgramOverviewSection() {
                   </div>
                   <ul className="space-y-3">
                     {suitableFor.map((t) => (
-                      <li key={t} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
+                      <li key={t} className="flex items-start gap-2" style={liStyle}>
                         <span style={bullet}>&bull;</span>
                         <span>{t}</span>
                       </li>
@@ -448,7 +451,7 @@ function ProgramOverviewSection() {
                   </div>
                   <ul className="space-y-3">
                     {notSuitableFor.map((t) => (
-                      <li key={t} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
+                      <li key={t} className="flex items-start gap-2" style={liStyle}>
                         <span style={bullet}>&bull;</span>
                         <span>{t}</span>
                       </li>
@@ -701,7 +704,7 @@ function CorePillarsSection() {
 
   return (
     <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           4 core pillars of our methodology
         </p>
@@ -709,18 +712,18 @@ function CorePillarsSection() {
         <h2 className="text-center mb-12" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
           Malta&apos;s only multidisciplinary<br />approach to weight-loss
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {pillars.map((p) => (
-            <div key={p.title} className="p-8" style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
+            <div key={p.title} className="p-6" style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
               <div className="mb-5 flex items-center" style={{ height: '48px' }}>
                 <img src={p.icon} alt="" style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} />
               </div>
-              <p className="mb-2" style={{ color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.3 }}>{p.title}</p>
-              <h3 className="mb-5" style={{ color: '#5d5d61', fontFamily: bodyFont, fontSize: '17px', fontWeight: 400, lineHeight: 1.35 }}>{p.subtitle}</h3>
+              <p className="mb-2" style={{ color: green, fontFamily: wideFont, fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>{p.title}</p>
+              <h3 className="mb-5" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', fontWeight: 400, lineHeight: 1.4 }}>{p.subtitle}</h3>
               <ul className="space-y-2">
                 {p.items.map((it) => (
-                  <li key={it} className="flex items-start gap-2" style={{ color: '#6b6b6b', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>
-                    <span style={{ color: green, lineHeight: 1.5 }}>&bull;</span>
+                  <li key={it} className="flex items-start gap-2" style={{ color: taupe, fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.4 }}>
+                    <span style={{ color: green, lineHeight: 1.4 }}>&bull;</span>
                     <span>{it}</span>
                   </li>
                 ))}
@@ -886,8 +889,8 @@ function OurPromiseSection() {
   ];
   return (
     <div className="py-12" style={{ backgroundColor: '#ffffff' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-8 sm:p-12" style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '28px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
+      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
+        <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '28px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
           <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Our Promise
           </p>
@@ -896,7 +899,7 @@ function OurPromiseSection() {
             Up to 1kg a week.<br />Measured. Verified. Commited
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-10">
-            <div className="w-full overflow-hidden" style={{ borderRadius: '18px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', aspectRatio: '375 / 350' }}>
+            <div className="overflow-hidden" style={{ borderRadius: '18px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', width: '375px', maxWidth: '100%', height: '350px' }}>
               <img
                 src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
                 alt="Clinical measurement and body analysis at Carisma"
@@ -910,7 +913,7 @@ function OurPromiseSection() {
               <p className="mb-6" style={pStyle}>
                 This is our Extended Care Commitment
               </p>
-              <p className="mb-4" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+              <p className="mb-4" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                 To keep your results medically valid and fair, you agree to*
               </p>
               <ul className="space-y-3">
@@ -947,7 +950,7 @@ function CarismaWellnessSection() {
   ];
   return (
     <section className="py-12" style={{ backgroundColor: '#ffffff' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
         <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderRadius: '32px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
           <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
             the carisma difference
@@ -959,12 +962,12 @@ function CarismaWellnessSection() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             <div className="space-y-10">
               <div>
-                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
                   Our Commitment
                 </h3>
                 <ul className="space-y-3">
                   {commitment.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                    <li key={item} className="flex items-start gap-2" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.8 }}>
                       <span style={{ color: green }}>&bull;</span>
                       <span>{item}</span>
                     </li>
@@ -972,12 +975,12 @@ function CarismaWellnessSection() {
                 </ul>
               </div>
               <div>
-                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
                   Why Malta Chooses Carisma
                 </h3>
                 <ul className="space-y-3">
                   {whyMalta.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                    <li key={item} className="flex items-start gap-2" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.8 }}>
                       <span style={{ color: green }}>&bull;</span>
                       <span>{item}</span>
                     </li>
@@ -989,9 +992,9 @@ function CarismaWellnessSection() {
               <iframe
                 title="Carisma Slimming location"
                 src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
-                width="100%"
-                height="460"
-                style={{ border: 0, borderRadius: '12px', display: 'block' }}
+                width="428"
+                height="359"
+                style={{ border: 0, borderRadius: '12px', display: 'block', maxWidth: '100%' }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
@@ -1009,7 +1012,7 @@ function CarismaWellnessSection() {
             </a>
             <div className="flex items-center gap-3">
               <img src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="Complimentary on-site parking" style={{ width: '34px', height: 'auto', objectFit: 'contain' }} />
-              <span style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
                 Complimentary on-site parking
               </span>
             </div>
@@ -1321,6 +1324,10 @@ function FAQSection() {
   const [open, setOpen] = useState<number | null>(0);
   const [query, setQuery] = useState('');
 
+  // live FAQ answers render at 13px / 1.5
+  const pStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '13px', lineHeight: 1.5 };
+  const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '13px', lineHeight: 1.5 };
+
   const visible = faqs
     .map((f, i) => ({ f, i }))
     .filter(({ f }) => f.q.toLowerCase().includes(query.trim().toLowerCase()));
@@ -1333,7 +1340,7 @@ function FAQSection() {
           <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '24px', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Common questions we hear
           </h2>
-          <div className="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 mx-auto" style={{ maxWidth: '300px' }}>
+          <div className="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 mx-auto" style={{ width: '256px', maxWidth: '100%' }}>
             <div className="flex items-center gap-2" style={{ borderBottom: `1px solid ${taupeLight}`, paddingBottom: '6px' }}>
               <input
                 type="text"
@@ -1419,18 +1426,18 @@ function EvidenceCard({ item }: { item: { title: string; strength: string; image
   return (
     <div className="flex flex-col items-center">
       {/* Image with badge — overlaps the card below */}
-      <div className="relative z-10 w-11/12 overflow-hidden" style={{ ...leafCorners, aspectRatio: '16 / 10', boxShadow: '0 14px 30px rgba(0,0,0,0.12)' }}>
+      <div className="relative z-10 overflow-hidden" style={{ ...leafCorners, width: '381px', maxWidth: '92%', height: '182px', boxShadow: '0 14px 30px rgba(0,0,0,0.12)' }}>
         <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
         <span
           className="absolute"
-          style={{ top: '14px', left: '14px', backgroundColor: '#ffffff', color: greenDark, fontFamily: wideFont, fontSize: '11px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '6px 14px', borderRadius: '9999px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)' }}
+          style={{ top: '14px', left: '14px', backgroundColor: '#ffffff', color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '9999px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)' }}
         >
           {item.strength}
         </span>
       </div>
       {/* Body card */}
       <div className="w-full -mt-14 px-7 pb-9" style={{ paddingTop: '70px', background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '18px', borderBottomLeftRadius: '18px', borderBottomRightRadius: '60px' }}>
-        <h3 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+        <h3 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
           {item.title}
         </h3>
         <div className="mx-auto mt-3 mb-6" style={{ width: '90px', height: '1px', backgroundColor: taupeLight }} />
@@ -1575,7 +1582,7 @@ function EvidenceApproachSection() {
   ];
   return (
     <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '970px' }}>
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our metodology
         </p>
@@ -1583,7 +1590,7 @@ function EvidenceApproachSection() {
         <h2 className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
           Evidence based approach
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-9 gap-y-12">
           {items.map((item) => (
             <EvidenceCard key={item.title} item={item} />
           ))}
@@ -1695,7 +1702,7 @@ function FinalCTASection() {
    ============================================================ */
 export default function WeightLossProgramPage() {
   return (
-    <main className="w-full" style={{ backgroundColor: '#fff', paddingBottom: '76px' }}>
+    <main className="w-full" style={{ backgroundColor: '#fff' }}>
       <HeroSection />
       <AsSeenOn />
       <ProblemAgitationSection />

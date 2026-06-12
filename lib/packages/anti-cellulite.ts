@@ -98,7 +98,7 @@ export const antiCellulite: PackageContent = {
   dualTotalValue: '€625.', // live: "Total Value: €625. Today:" — period after the value
   dualTodayPrice: '€199 ONLY',
   dualFineprint: [
-    '* Includes four sessions to be followed over the course of 2 weeks',
+    '* Includes four sessions to be followed over the course of 2-4 weeks',
     '** Additional sessions of Velashape III may be booked at €100 per session',
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
