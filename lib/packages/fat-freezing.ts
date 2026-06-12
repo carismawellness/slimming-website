@@ -58,7 +58,7 @@ export const fatFreezing: PackageContent = {
   areas: ['STOMACH – BELLY FAT', 'LOVE HANDLES', 'UPPER ARMS', 'THIGHS', 'BANANA ROLL', 'BACK FAT, BRA FAT', 'DOUBLE CHIN / THE JAWLINE'],
 
   ptEyebrow: 'package treatments',
-  ptHeading: 'malta’s only multidisciplinary approach to weightloss',
+  ptHeading: 'malta’s only mustlidisciplinary approach to weightloss',
   ptCardEyebrow: 'coolsculpting',
   ptCardTag: 'targeted-fat reduction',
   ptParas: [
@@ -110,6 +110,7 @@ export const fatFreezing: PackageContent = {
     { q: '9. Are there any risks or side effects?', a: 'As with all medical procedures there are possible risks, such as temporary swelling, bruising, numbness, tenderness or small lumps in the treated area. Your doctor will discuss all potential side effects and safety information before you decide.' },
     { q: '10. How does the €25 Carisma Aesthetics credit work?', a: 'Your €25 credit is applied to a future treatment at Carisma Aesthetics, such as body contouring or injectables, within a set time frame that will be clearly written on your booking and confirmation.' },
   ],
+  faqCtaLabel: 'Claim your spot now',
 
   evidenceEyebrow: 'clinical research: basis of our methodology',
   evidence: [

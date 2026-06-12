@@ -310,6 +310,61 @@ export default function GLP1Page() {
         </div>
       </section>
 
+      {/* Medical weight loss eligibility */}
+      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '760px' }}>
+          <p className="text-center" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            medical weight loss eligibility
+          </p>
+          <div className="mx-auto mt-2 mb-6" style={{ width: '124px', height: '1px', backgroundColor: '#9B8D83' }} />
+          <h2 className="text-center mb-6" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+            selective by intention successful by design
+          </h2>
+          <p className="mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+            Ozempic and Mounjaro can be powerful, but only when prescribed as part of a structured, doctor-supervised approach. Eligibility is determined through a thorough medical assessment, including blood tests, food-intolerance screening, safety checks, and clear protocols, to ensure your program is appropriate, monitored, and adjusted responsibly.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+            <div>
+              <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                Suitable for:
+              </h3>
+              <ul className="space-y-5">
+                {['BMI ≥27', 'Insulin resistence', 'Emotional eating or Long dieting history', 'Menopause-related weight gain'].map((item) => (
+                  <li key={item} className="flex items-start gap-2">
+                    <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '26px', height: '28px', objectFit: 'contain', flexShrink: 0, marginTop: '-2px' }} />
+                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                Unsuitable for:
+              </h3>
+              <ul className="space-y-5">
+                {['Eating disorders', 'Very lean patients', 'Those unwilling to attend check-ins', 'Currently pregnant or trying to conceive'].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <img src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png" alt="" style={{ width: '19px', height: '19px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} />
+                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          <div className="text-center mt-14">
+            <a
+              href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5084222&oiid=sv%3A26105577&share=true&pId=2708191"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block text-center font-bold text-white"
+              style={{ backgroundColor: '#6391AB', borderRadius: '10px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1.4px', textTransform: 'uppercase', padding: '13px 24px', width: '474px', maxWidth: '100%' }}
+            >
+              book your medical consultation
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* We are not another diet clinic */}
       <section className="py-16" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

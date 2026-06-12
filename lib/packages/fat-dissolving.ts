@@ -28,7 +28,7 @@ export const fatDissolving: PackageContent = {
   ],
   heroImage: W + '87fc13_903ec2f7efdd4c428a6b3c4debbd86a8~mv2.png',
   heroVideo: W + '87fc13_c00bb74576c042dfa16be066b6141289_720p.mp4',
-  heroImageRatio: '398 / 682',
+  heroImageRatio: '398 / 667',
 
   secretHeading: ['the secret to a more defined,', 'confident look'],
   secretSubheading: 'so your contours feel like yours again',
@@ -120,6 +120,10 @@ export const fatDissolving: PackageContent = {
     { q: 'Who is a suitable candidate for Fat Dissolving treatment?', a: "Fat dissolving is ideal for individuals with minimal to moderate localizes fat who want to improve the appearance without surgery. It is not suitable for those with severe localized fat or individuals with loose, sagging skin in the treatment area. A thorough consultation with a qualified practitioner is necessary to determine if it's the right treatment for you." },
     { q: 'What parts of the body you can treat with Fat Dissolving?', a: 'Some of the areas we can treat with fat dissolving are: Double chin, Back fat, Arm fat (bingo wing area), stomach fat and six-pack definition, Flanks and waist, Inner and outer thighs, under the buttocks, fat above knees and other areas that have minimal to moderate localized fat.' },
   ],
+  // The live /fatdissolving FAQ flows straight into the doctors section — no
+  // "Claim my spot now" CTA after the list (verified: no visible button between
+  // the FAQ and "dr. zaid teebi" on the live desktop page).
+  faqCtaLabel: '',
 
   evidenceEyebrow: 'clinical research: basis of our methodology',
   evidence: [
@@ -211,7 +215,7 @@ export const fatDissolving: PackageContent = {
       'Complimentary Parking Validation',
     ],
     totalValue: '€650',
-    todayPrice: '€199 ONLY',
+    todayPrice: '€199 ONLY.',
     buttonLabel: 'Book Your Consultation Now',
     cardImage: W + '87fc13_e4992fcc322c43c79922384b826fdc9c~mv2.jpg',
   },

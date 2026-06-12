@@ -18,7 +18,7 @@ export const muscleStimulation: PackageContent = {
     '€25 Carisma Aesthetics credit (€25)',
     'Complimentary Parking Validation',
   ],
-  heroTotalValue: '€625',
+  heroTotalValue: '€625.',
   heroTodayPrice: '€199 for 4 sessions',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
@@ -27,7 +27,7 @@ export const muscleStimulation: PackageContent = {
   ],
   heroImage: W + '87fc13_f53e802992e6488ab2500d202525df9a~mv2.png',
   heroVideo: W + '87fc13_cce6f68254674bf1bdc055ce87736992_720p.mp4',
-  heroImageRatio: '398 / 682',
+  heroImageRatio: '398 / 622',
 
   secretHeading: ['the secret to a more defined,', 'confident look'],
   secretSubheading: 'sculpt, tighten and define stubborn areas with precision',
@@ -112,7 +112,7 @@ export const muscleStimulation: PackageContent = {
   evidence: [
     {
       img: W + '87fc13_0b07a9fc055e494aa7490b9c55eb935b~mv2.png',
-      tag: 'EVIDENCE-BACKED PROTOCOL',
+      tag: 'SCIENCE-BACKED PROTOCOL',
       title: 'clinically proven body contouring results',
       does: 'Uses a combination of high-intensity focused electromagnetic (HIFEM) energy and radiofrequency (RF) heating to simultaneously stimulate powerful muscle contractions and heat fat cells. This dual action helps build muscle, reduce fat thickness, and improve skin firmness in targeted areas without surgery or downtime.',
       results: [

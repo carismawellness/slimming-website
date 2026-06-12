@@ -1,94 +1,68 @@
-const headingStyle: React.CSSProperties = {
-  color: '#8EB093',
-  fontFamily: 'Trajan Pro, serif',
-  fontWeight: 400,
-  fontSize: '22px',
-  letterSpacing: '0.5px',
-};
-
-const subHeadingStyle: React.CSSProperties = {
-  color: '#9B8D83',
-  fontFamily: 'Novecento Wide Book, sans-serif',
-  fontWeight: 600,
-  fontSize: '15px',
-  letterSpacing: '0.5px',
-};
-
 const bodyStyle: React.CSSProperties = {
   color: '#9B8D83',
   fontFamily: 'Roboto, sans-serif',
-  fontSize: '15px',
-  lineHeight: 1.8,
+  fontSize: '12px',
+  lineHeight: 1.4,
 };
 
+/* Live renders the entire T&C as one continuous block of plain 12px body
+   lines — headings, subheadings and enumerations have no special styling,
+   no bullets, no indentation and no extra margins. */
 function Para({ children }: { children: React.ReactNode }) {
-  return (
-    <p className="mb-5" style={bodyStyle}>
-      {children}
-    </p>
-  );
+  return <p style={bodyStyle}>{children}</p>;
 }
 
 function Heading({ children }: { children: React.ReactNode }) {
-  return (
-    <h2 className="mt-12 mb-5" style={headingStyle}>
-      {children}
-    </h2>
-  );
+  return <p style={bodyStyle}>{children}</p>;
 }
 
 function SubHeading({ children }: { children: React.ReactNode }) {
-  return (
-    <h3 className="mt-7 mb-3" style={subHeadingStyle}>
-      {children}
-    </h3>
-  );
+  return <p style={bodyStyle}>{children}</p>;
 }
 
 function List({ items }: { items: React.ReactNode[] }) {
   return (
-    <ul className="mb-5 space-y-2 pl-6" style={{ listStyleType: 'disc' }}>
+    <>
       {items.map((item, i) => (
-        <li key={i} style={bodyStyle}>
+        <p key={i} style={bodyStyle}>
           {item}
-        </li>
+        </p>
       ))}
-    </ul>
+    </>
   );
 }
 
 export default function TermsPage() {
   return (
     <main className="w-full">
-      {/* Hero / Title */}
-      <section className="py-16" style={{ backgroundColor: '#EEF3F0' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1
-            className="leading-tight"
-            style={{ color: '#7ba587', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '40px', letterSpacing: '1px' }}
-          >
+      {/* Title */}
+      <section className="bg-white">
+        <div className="text-center px-4" style={{ paddingTop: '56px' }}>
+          <h1 style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '30px', lineHeight: '42px' }}>
             Terms &amp; Conditions
           </h1>
-          <p className="mt-4" style={{ color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '14px' }}>
-            Last updated: 12 February, 2026
-          </p>
+          <div className="mx-auto" style={{ width: '541px', maxWidth: '100%', borderTop: '1px solid #B0A68F' }} />
         </div>
       </section>
 
       {/* Content */}
-      <section className="py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="bg-white" style={{ paddingTop: '30px', paddingBottom: '64px' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '980px' }}>
+
+          <Para>TERMS AND CONDITIONS</Para>
+          <Para>Carisma Aesthetics Ltd., trading as Carisma Slimming</Para>
+          <Para>Last updated: 12 February, 2026</Para>
 
           {/* ====================== PART A ====================== */}
-          <h2 className="mb-6" style={{ ...headingStyle, fontSize: '26px' }}>PART A: GENERAL TERMS</h2>
+          <Para>PART A: GENERAL TERMS</Para>
 
           <Heading>1. Acceptance of Terms</Heading>
-          <Para>1.1. By booking, attending, or using any of our slimming, weight management, body contouring, or related wellness services, you agree to be bound by these Terms and Conditions (&quot;Terms&quot;), our Cancellation and Rescheduling Policy (Section 18), our Privacy Notice (Part B), and any clinic instructions provided to you.</Para>
+          <Para>1.1. By booking, attending, or using any of our slimming, weight management, body contouring, or related wellness services, you agree to be bound by these Terms and Conditions (“Terms”), our Cancellation and Rescheduling Policy (Section 18), our Privacy Notice (Part B), and any clinic instructions provided to you.</Para>
           <Para>1.2. These Terms should be read in conjunction with any Patient Consent Form signed by you. In the event of any conflict between these Terms and the Patient Consent Form, the Patient Consent Form shall prevail to the extent of the conflict, unless these Terms provide greater protection to you.</Para>
           <Para>1.3. If you do not agree to these Terms, you should not book or attend any appointments or use any of our services.</Para>
 
           <Heading>2. About the Clinic</Heading>
-          <Para>2.1. Carisma Aesthetics Ltd. (the &quot;Clinic&quot;, &quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) is a private limited liability company incorporated under the laws of Malta, with company registration number C 106006, and has its registered address at 35/16B Hever Court, Triq Moletta, Swieqi, SWQ 3532, Malta.</Para>
+          <Para>2.1. Carisma Aesthetics Ltd. (the “Clinic”, “we”, “us”, or “our”) is a private limited liability company incorporated under the laws of Malta, with company registration number C 106006, and has its registered address at 35/16B Hever Court, Triq Moletta, Swieqi, SWQ 3532, Malta.</Para>
 
           <Heading>3. Definitions</Heading>
           <Para>3.1. In these Terms, the following definitions apply:</Para>
@@ -111,13 +85,11 @@ export default function TermsPage() {
             ['Treating Practitioner', 'means a registered health professional who delivers elements of the Treatment under the direction and supervision of the Prescribing Clinician.'],
             ['Weight Loss Guarantee Treatment', 'means the weight loss guarantee programme, if offered as part of the Patient’s package, subject to the terms in Section 16.'],
           ].map(([term, def], i) => (
-            <Para key={i}>
-              <span style={{ color: '#9B8D83', fontWeight: 600 }}>&ldquo;{term}&rdquo;</span> {def}
-            </Para>
+            <Para key={i}>&ldquo;{term}&rdquo; {def}</Para>
           ))}
 
           <Heading>4. Services</Heading>
-          <Para>4.1. We provide elective medical and aesthetic weight-management services, which may include body contouring treatments, weight management support, nutrition and lifestyle guidance, and related wellness services (the &quot;Services&quot;).</Para>
+          <Para>4.1. We provide elective medical and aesthetic weight-management services, which may include body contouring treatments, weight management support, nutrition and lifestyle guidance, and related wellness services (the “Services”).</Para>
           <Para>4.2. Specific treatments and suitability vary by individual and may change as our offerings evolve.</Para>
           <Para>4.3. The Services do not constitute emergency medical care. The Clinic does not provide emergency medical services, and participation in the Treatment does not replace care from your general practitioner, doctors, or any other health specialist providers.</Para>
           <Para>4.4. All Medication is prescribed by a registered medical practitioner. Other elements of the Treatment may be delivered by registered health professionals (including aesthetic practitioners) operating under the direction and supervision of the Prescribing Clinician. The Prescribing Clinician retains clinical responsibility for the Treatment.</Para>
@@ -129,7 +101,7 @@ export default function TermsPage() {
           <Para>5.4. The Clinician may, in their professional judgment, delay, modify, or discontinue the Treatment at any time if it is deemed unsafe, inappropriate, or not in your best interests.</Para>
           <Para>5.5. You must inform the Clinic and/or the Clinician of any pre-existing medical conditions, contra-indications, allergies (including drug allergies and latex allergies), or changes to your health at the Consultation and at any time during the Treatment.</Para>
           <Para>5.6. You must inform the Clinic of any previous weight loss surgery, bariatric procedures, or other weight management treatments, as these may affect the suitability, safety, and expected outcomes of the Treatment.</Para>
-          <Para>5.7. We acknowledge that weight management programmes may affect psychological wellbeing and body image. You agree to inform the Clinic of any history of eating disorders, disordered eating, depression, anxiety, or other mental health conditions. The Clinic may recommend psychological support or decline certain elements of the Treatment if, in the Clinician&apos;s professional judgment, they may pose a risk to your mental health.</Para>
+          <Para>5.7. We acknowledge that weight management programmes may affect psychological wellbeing and body image. You agree to inform the Clinic of any history of eating disorders, disordered eating, depression, anxiety, or other mental health conditions. The Clinic may recommend psychological support or decline certain elements of the Treatment if, in the Clinician’s professional judgment, they may pose a risk to your mental health.</Para>
 
           <Heading>6. The Treatment</Heading>
           <Para>6.1. At the start of the Treatment, the Clinic will provide you with a Slimming Card to record participation in scheduled sessions, check-ins, and adherence to nutrition, lifestyle and exercise plans. You agree to bring the Slimming Card to every in-clinic session or scheduled check-in. The Clinic will review and date-stamp the Slimming Card at each visit to confirm attendance and participation.</Para>
@@ -141,7 +113,7 @@ export default function TermsPage() {
             'Nutrition, lifestyle and exercise plans, coaching and monitoring (“Lifestyle Intervention”); and',
             'Where appropriate, supportive therapies such as lymphatic drainage massage (“Supportive Therapy”).',
           ]} />
-          <Para>6.3. Medication, Body Contouring Devices, Injections, and Supportive Therapy shall only be prescribed or recommended if, in the Clinician&apos;s professional opinion, they are appropriate for you. The Clinician reserves the right to change the Treatment based on your response, any side effects, safety monitoring, and the availability of products.</Para>
+          <Para>6.3. Medication, Body Contouring Devices, Injections, and Supportive Therapy shall only be prescribed or recommended if, in the Clinician’s professional opinion, they are appropriate for you. The Clinician reserves the right to change the Treatment based on your response, any side effects, safety monitoring, and the availability of products.</Para>
           <Para>6.4. The Treatment may not be appropriate during pregnancy. You agree to immediately inform the Clinic and/or the Clinician if you are pregnant, think you may be pregnant, are planning a pregnancy, or if you become pregnant at any stage of the Treatment. Should you become pregnant, the Treatment may be discontinued, and medical advice from your personal doctor must be obtained.</Para>
           <Para>6.5. Not all Treatments are compatible with breastfeeding. If you are breastfeeding, you agree to disclose this to the Clinic/Clinician. Your Clinician will advise accordingly.</Para>
           <Para>6.6. If you experience severe or potentially life-threatening symptoms, including but not limited to severe chest pain, shortness of breath, fainting, severe abdominal pain, signs of an allergic reaction, or symptoms of low blood sugar, you must seek immediate medical attention from an appropriate healthcare provider or by calling Malta emergency services. You agree to inform the Clinic of any such event as soon as reasonably possible.</Para>
@@ -157,7 +129,7 @@ export default function TermsPage() {
           <Para>7.3. The Clinic does not claim to diagnose and/or cure any existing medical concern. The Medication is not a cure for obesity and does not replace proper nutrition, physical activity, and/or lifestyle changes.</Para>
           <Para>7.4. The duration of the use of the Medication varies between individuals and cannot be predicted or guaranteed. Ongoing or long-term use of the Medication may be required to ensure and maintain Treatment outcomes.</Para>
           <Para>7.5. There is no guarantee of permanent weight loss. Discontinuation, reduction, or misuse of the Medication may result in weight regain. You agree to follow the dosing schedule and escalation plan as prescribed by the Clinician and not self-adjust doses.</Para>
-          <Para>7.6. You acknowledge that certain Medications may be prescribed for uses, doses, or patient populations that differ from the uses for which they have been formally approved by regulatory authorities (commonly referred to as &quot;off-label&quot; prescribing). Where this applies, the Clinician will inform you and explain the reasons for the off-label use, the expected benefits, and any additional risks.</Para>
+          <Para>7.6. You acknowledge that certain Medications may be prescribed for uses, doses, or patient populations that differ from the uses for which they have been formally approved by regulatory authorities (commonly referred to as “off-label” prescribing). Where this applies, the Clinician will inform you and explain the reasons for the off-label use, the expected benefits, and any additional risks.</Para>
 
           <SubHeading>Side Effects of Medication</SubHeading>
           <Para>7.7. Side effects vary between individuals and may occur even when the Medication is used correctly and as prescribed. The Clinician will discuss the potential side effects most relevant to your individual circumstances during the Consultation. Without limiting the generality of the foregoing, you acknowledge the following known side effects and risks:</Para>
@@ -196,11 +168,11 @@ export default function TermsPage() {
           <Para>7.10. The Medication may interact with other medicines, supplements, or substances. You agree to inform the Clinician of all current medications, including over-the-counter medicines, herbal supplements, and vitamins, and to inform the Clinician before starting any new medication during the Treatment. The Medication may affect the absorption of other oral medicines taken at the same time.</Para>
 
           <SubHeading>Anaesthesia and Surgical Procedures</SubHeading>
-          <Para>7.11. Due to the Medication&apos;s delaying of gastric emptying, the risk of regurgitation or aspiration while under general anaesthesia or deep sedation is increased. Any medical professional conducting a medical intervention involving anaesthesia or sedation must be informed by you of your use of the Medication.</Para>
-          <Para>7.12. You shall inform the Clinic and/or the Clinician of any surgery or other medical procedures (&quot;Medical Procedures&quot;) that may be undertaken by you. The Clinician may advise pausing or discontinuing use of the Medication before such Medical Procedures, depending on the current clinical guidance and your individual risk profile.</Para>
+          <Para>7.11. Due to the Medication’s delaying of gastric emptying, the risk of regurgitation or aspiration while under general anaesthesia or deep sedation is increased. Any medical professional conducting a medical intervention involving anaesthesia or sedation must be informed by you of your use of the Medication.</Para>
+          <Para>7.12. You shall inform the Clinic and/or the Clinician of any surgery or other medical procedures (“Medical Procedures”) that may be undertaken by you. The Clinician may advise pausing or discontinuing use of the Medication before such Medical Procedures, depending on the current clinical guidance and your individual risk profile.</Para>
 
           <SubHeading>Medication Supply</SubHeading>
-          <Para>7.13. Prescription weight management Medications may be subject to supply chain disruptions, shortages, or changes in availability that are outside the Clinic&apos;s control. In such cases, the Clinician may recommend an alternative Medication, adjust the dosing schedule, or temporarily pause the Medication component of the Treatment. The Clinic shall not be liable for delays or interruptions caused by medication shortages.</Para>
+          <Para>7.13. Prescription weight management Medications may be subject to supply chain disruptions, shortages, or changes in availability that are outside the Clinic’s control. In such cases, the Clinician may recommend an alternative Medication, adjust the dosing schedule, or temporarily pause the Medication component of the Treatment. The Clinic shall not be liable for delays or interruptions caused by medication shortages.</Para>
           <Para>7.14. You agree to contact the Clinic and/or Clinician promptly should you experience side effects. Should you experience severe symptoms, you should seek immediate urgent care. You must not discontinue, reduce or adjust the dosage of the Medication without first consulting the Clinician, except in an emergency.</Para>
 
           <Heading>8. Body Contouring Devices</Heading>
@@ -229,7 +201,7 @@ export default function TermsPage() {
           <Para>Failure to disclose relevant medical information may increase the risk of adverse effects and may result in the Treatment being declined or discontinued for safety reasons.</Para>
           <Para>8.4. The use of Body Contouring Devices may cause side effects or adverse reactions. These are not experienced by all patients and may vary in type, severity, and duration. Common side effects include but are not limited to: redness, swelling, bruising, tenderness, skin irritation, uneven results and contour irregularity, temporary numbness, and/or altered skin sensation in the treated area.</Para>
           <Para>8.5. Although uncommon, more serious adverse reactions and complications may occur, including but not limited to: blistering, burns, prolonged pain, nerve irritation, scarring, persistent numbness or altered sensation, skin ulceration, and/or fat necrosis.</Para>
-          <Para>8.6. In the case of Body Contouring Devices using cryolipolysis, a rare but recognised complication known as paradoxical adipose hyperplasia (&quot;PAH&quot;) may occur. PAH is a condition in which fatty tissue in the treated area enlarges rather than reduces and may require medical or surgical intervention to correct.</Para>
+          <Para>8.6. In the case of Body Contouring Devices using cryolipolysis, a rare but recognised complication known as paradoxical adipose hyperplasia (“PAH”) may occur. PAH is a condition in which fatty tissue in the treated area enlarges rather than reduces and may require medical or surgical intervention to correct.</Para>
           <Para>8.7. This list is not exhaustive and unforeseen complications may occur. The risk of adverse reactions may be increased by undisclosed medical conditions, failure to follow post-Treatment instructions, and/or individual physiological response.</Para>
 
           <Heading>9. Injections</Heading>
@@ -249,17 +221,17 @@ export default function TermsPage() {
           <Heading>10. Lifestyle Intervention</Heading>
           <Para>10.1. Any Lifestyle Intervention provided by the Clinic is for educational and informational purposes only. These services are intended to complement and support general wellness, healthy habits, and fitness goals, and are not a substitute for medical advice or diagnosis.</Para>
           <Para>10.2. Any plan or monitoring provided by the Clinic may be adapted or updated based on your progress, health, and/or new information.</Para>
-          <Para>10.3. You agree to actively participate and attend all scheduled in-clinic sessions and weekly check-ins, follow the personalised food plan, and perform the physical exercise set by the Clinician. Failure to follow these responsibilities may reduce the effectiveness of the programme, increase the risk of adverse outcomes, and limit the Clinic&apos;s ability to achieve intended results.</Para>
+          <Para>10.3. You agree to actively participate and attend all scheduled in-clinic sessions and weekly check-ins, follow the personalised food plan, and perform the physical exercise set by the Clinician. Failure to follow these responsibilities may reduce the effectiveness of the programme, increase the risk of adverse outcomes, and limit the Clinic’s ability to achieve intended results.</Para>
           <Para>10.4. You agree to avoid crash diets, extreme caloric restriction, or any outside weight loss treatments that could negatively impact your safety, wellbeing, or the effectiveness of the programme. The Clinic is not responsible for adverse outcomes resulting from failure to follow safe practices or from interventions outside the approved programme.</Para>
           <Para>10.5. You agree to promptly inform the Clinic of any difficulties, challenges, injuries, pain, or other health-related issues encountered while following the Lifestyle Intervention, including but not limited to inability to follow the food plan, discomfort during physical activity, or changes in health status.</Para>
 
           <Heading>11. Supportive Therapy</Heading>
           <Para>11.1. The Clinic may offer Supportive Therapy, such as lymphatic drainage massage, to complement any other form of Treatment. These therapies are intended to support circulation, reduce fluid retention, and assist in the overall effectiveness of the Treatment, but are not guaranteed to provide specific results.</Para>
-          <Para>11.2. Supportive Therapy will only be provided when, in the Clinician&apos;s professional judgment, it is safe, appropriate, and likely to benefit you. The Clinician may decline or postpone such therapies if there are medical, procedural, or safety concerns.</Para>
+          <Para>11.2. Supportive Therapy will only be provided when, in the Clinician’s professional judgment, it is safe, appropriate, and likely to benefit you. The Clinician may decline or postpone such therapies if there are medical, procedural, or safety concerns.</Para>
           <Para>11.3. While generally low-risk, Supportive Therapy may occasionally cause mild side effects such as temporary redness, tenderness, soreness, or mild bruising. Serious complications are uncommon but may occur. You agree to promptly inform the Clinic of any discomfort or adverse reactions.</Para>
 
           <Heading>12. Results and Expectations</Heading>
-          <Para>12.1. Results vary between individuals and depend on factors including baseline health, adherence to the Treatment, lifestyle, individual physiology, and other variables beyond the Clinic&apos;s control.</Para>
+          <Para>12.1. Results vary between individuals and depend on factors including baseline health, adherence to the Treatment, lifestyle, individual physiology, and other variables beyond the Clinic’s control.</Para>
           <Para>12.2. Unless you are following the Weight Loss Guarantee Treatment as per Section 16, the Clinic makes no representations, warranties, or guarantees regarding the degree of fat reduction, body contour, weight change, aesthetic improvement, or any other specific outcome.</Para>
           <Para>12.3. We do not guarantee specific outcomes including exact weight loss, inch loss, or body composition changes. Any progress estimates are guidance only.</Para>
 
@@ -285,7 +257,7 @@ export default function TermsPage() {
           <Heading>15. Fees and Payment</Heading>
           <Para>15.1. Treatment fees, prescribed Medication, laboratory tests, diagnostic services, and Injections or Body Contouring Device-based sessions may be charged separately, depending on the package selected.</Para>
           <Para>15.2. Payment is due as communicated at the time of booking or service. We accept cash and major credit cards and any additional methods stated at reception or online. Packages, memberships, or multi-session programmes must be paid according to the agreed schedule.</Para>
-          <Para>15.3. Where Medications, laboratory testing, or other services are supplied by a pharmacy or third party, the Clinic is not responsible for third-party pricing, availability, delays, or manufacturer defects. Any fees charged by third parties are payable directly by you in accordance with the third party&apos;s terms and conditions.</Para>
+          <Para>15.3. Where Medications, laboratory testing, or other services are supplied by a pharmacy or third party, the Clinic is not responsible for third-party pricing, availability, delays, or manufacturer defects. Any fees charged by third parties are payable directly by you in accordance with the third party’s terms and conditions.</Para>
           <Para>15.4. Where a deposit is required to secure a booking, the deposit will be applied towards the cost of the Treatment. Deposits are non-refundable except: (i) where you cancel within the fourteen (14) day cooling-off period and no services have been provided; (ii) where the Clinic cancels the appointment or discontinues the Treatment for clinical or operational reasons; or (iii) where required by applicable law.</Para>
           <SubHeading>Packages and Prepaid Sessions</SubHeading>
           <Para>15.5. If you purchase a package or programme:</Para>
@@ -299,16 +271,16 @@ export default function TermsPage() {
           <SubHeading>Withdrawal from a Package</SubHeading>
           <Para>15.6. If you wish to withdraw from a prepaid package:</Para>
           <List items={[
-            <><span style={{ fontWeight: 600 }}>Within the cooling-off period:</span> If you cancel the package within fourteen (14) days of purchase, and no sessions have been commenced, you are entitled to a full refund of all amounts paid. If one or more sessions have been commenced within the cooling-off period with your express consent, you will be charged for sessions used at the individual session rate, and the remainder will be refunded.</>,
-            <><span style={{ fontWeight: 600 }}>After the cooling-off period:</span> You will be charged for sessions completed at the individual session rate (which may be higher than the per-session package rate). The non-refundable deposit, if applicable, will not be refunded. Any remaining balance, after deducting the individual session costs and the deposit, will be refunded within thirty (30) days.</>,
+            'Within the cooling-off period: If you cancel the package within fourteen (14) days of purchase, and no sessions have been commenced, you are entitled to a full refund of all amounts paid. If one or more sessions have been commenced within the cooling-off period with your express consent, you will be charged for sessions used at the individual session rate, and the remainder will be refunded.',
+            'After the cooling-off period: You will be charged for sessions completed at the individual session rate (which may be higher than the per-session package rate). The non-refundable deposit, if applicable, will not be refunded. Any remaining balance, after deducting the individual session costs and the deposit, will be refunded within thirty (30) days.',
           ]} />
           <Para>15.7. Where the Treatment has been discontinued by the Clinic for clinical reasons, a pro-rata refund will be provided for unused sessions.</Para>
           <Para>15.8. Refunds are not provided for completed services, except where required by applicable law.</Para>
 
           <Heading>16. Weight Loss Guarantee Treatment</Heading>
-          <Para>16.1. Where the Clinic offers a weight loss guarantee as part of the package (the &quot;Weight Loss Guarantee Treatment&quot;), you acknowledge that the guarantee is subject to all terms and conditions outlined in this section.</Para>
+          <Para>16.1. Where the Clinic offers a weight loss guarantee as part of the package (the “Weight Loss Guarantee Treatment”), you acknowledge that the guarantee is subject to all terms and conditions outlined in this section.</Para>
           <Para>16.2. The guarantee is intended to provide additional guidance and support, and does not constitute a promise, warranty, or assurance of a specific medical or aesthetic outcome.</Para>
-          <Para>16.3. Individual results may vary based on factors including adherence to the programme, medical history, lifestyle, and other variables outside the Clinic&apos;s control.</Para>
+          <Para>16.3. Individual results may vary based on factors including adherence to the programme, medical history, lifestyle, and other variables outside the Clinic’s control.</Para>
           <SubHeading>Setting the Target</SubHeading>
           <Para>16.4. During the Baseline Date, you and the Clinician will set the following in writing:</Para>
           <List items={[
@@ -339,8 +311,8 @@ export default function TermsPage() {
             'the Clinician determines, in their professional judgment, that further escalation or continuation of the Treatment is unsafe or not clinically appropriate.',
           ]} />
           <SubHeading>Extension Period</SubHeading>
-          <Para>16.10. The Clinic acknowledges that, due to individual physiology and other medical factors, you may be eligible for the Weight Loss Guarantee Treatment but not achieve the agreed weight loss target within the initial measurement period. In such cases, provided you have met all eligibility requirements, the Clinic will provide an additional four (4) weeks of support (the &quot;Extension Period&quot;). During the Extension Period, an additional Consultation with the Clinician will be held and, where necessary, a revised Treatment plan will be provided. The Extension Period includes weekly check-ins and nutrition coaching. The cost of Medications or any third-party services shall not be included in the Extension Period unless expressly confirmed in writing by the Clinic prior to commencement.</Para>
-          <Para>16.11. If the agreed weight loss target is not achieved by the end of the Extension Period despite full compliance with all eligibility requirements, the Clinic will discuss next steps with you, which may include a further revised Treatment plan or other options at the Clinic&apos;s discretion.</Para>
+          <Para>16.10. The Clinic acknowledges that, due to individual physiology and other medical factors, you may be eligible for the Weight Loss Guarantee Treatment but not achieve the agreed weight loss target within the initial measurement period. In such cases, provided you have met all eligibility requirements, the Clinic will provide an additional four (4) weeks of support (the “Extension Period”). During the Extension Period, an additional Consultation with the Clinician will be held and, where necessary, a revised Treatment plan will be provided. The Extension Period includes weekly check-ins and nutrition coaching. The cost of Medications or any third-party services shall not be included in the Extension Period unless expressly confirmed in writing by the Clinic prior to commencement.</Para>
+          <Para>16.11. If the agreed weight loss target is not achieved by the end of the Extension Period despite full compliance with all eligibility requirements, the Clinic will discuss next steps with you, which may include a further revised Treatment plan or other options at the Clinic’s discretion.</Para>
           <Para>16.12. The Weight Loss Guarantee Treatment is personal to you, non-transferable, and may not be assigned, transferred, or exchanged for cash or any other benefit, except where required by applicable law.</Para>
 
           <Heading>17. Consumer Rights and Cooling-Off Period</Heading>
@@ -353,36 +325,10 @@ export default function TermsPage() {
           <SubHeading>General</SubHeading>
           <Para>18.1. This Cancellation, Rescheduling and Attendance Policy applies to all appointments, sessions, check-ins, and consultations booked with the Clinic, whether booked by telephone, in person, online, or through any other channel.</Para>
           <Para>18.2. By booking an appointment with the Clinic, you agree to be bound by the terms of this section.</Para>
-          <Para>18.3. All references to &quot;session fee&quot; in this section mean the fee applicable to the specific appointment, session, or service being cancelled. Where you have purchased a package, the session fee shall be calculated as the total package price divided by the number of sessions included in the package.</Para>
+          <Para>18.3. All references to “session fee” in this section mean the fee applicable to the specific appointment, session, or service being cancelled. Where you have purchased a package, the session fee shall be calculated as the total package price divided by the number of sessions included in the package.</Para>
           <SubHeading>Cancellations</SubHeading>
-          <Para>18.4. You may cancel a scheduled appointment by contacting the Clinic by telephone, email (info@carismaslimming.com), or in person during the Clinic&apos;s opening hours. Cancellations made outside of opening hours will be treated as received at the start of the next business day.</Para>
-          <Para>18.5. Cancellation fees are determined by the notice period provided before the scheduled appointment time. These fees reflect the Clinic&apos;s genuine pre-estimate of the loss incurred due to the late cancellation, including the Clinician&apos;s allocated time, preparation, and the inability to offer the appointment to another patient at short notice:</Para>
-          <table className="mb-5 w-full border-collapse" style={{ ...bodyStyle, lineHeight: 1.6 }}>
-            <thead>
-              <tr>
-                <th className="p-3 text-left" style={{ border: '1px solid #d8d2cc', backgroundColor: '#EEF3F0', color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 600, fontSize: '14px' }}>
-                  Notice Period
-                </th>
-                <th className="p-3 text-left" style={{ border: '1px solid #d8d2cc', backgroundColor: '#EEF3F0', color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 600, fontSize: '14px' }}>
-                  Cancellation Fee
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td className="p-3" style={{ border: '1px solid #d8d2cc' }}>24 hours or more before the appointment</td>
-                <td className="p-3" style={{ border: '1px solid #d8d2cc' }}>No fee</td>
-              </tr>
-              <tr>
-                <td className="p-3" style={{ border: '1px solid #d8d2cc' }}>12 to 24 hours before the appointment</td>
-                <td className="p-3" style={{ border: '1px solid #d8d2cc' }}>50% of the session fee</td>
-              </tr>
-              <tr>
-                <td className="p-3" style={{ border: '1px solid #d8d2cc' }}>Less than 12 hours before the appointment</td>
-                <td className="p-3" style={{ border: '1px solid #d8d2cc' }}>100% of the session fee</td>
-              </tr>
-            </tbody>
-          </table>
+          <Para>18.4. You may cancel a scheduled appointment by contacting the Clinic by telephone, email (info@carismaslimming.com), or in person during the Clinic’s opening hours. Cancellations made outside of opening hours will be treated as received at the start of the next business day.</Para>
+          <Para>18.5. Cancellation fees are determined by the notice period provided before the scheduled appointment time. These fees reflect the Clinic’s genuine pre-estimate of the loss incurred due to the late cancellation, including the Clinician’s allocated time, preparation, and the inability to offer the appointment to another patient at short notice:</Para>
           <Para>18.6. Cancellation fees will be deducted from any prepaid balance or charged to your account, as applicable. Cancellation fees are non-refundable.</Para>
           <Para>18.7. The Clinic reserves the right to waive or reduce a cancellation fee at its discretion, including in cases of:</Para>
           <List items={[
@@ -394,7 +340,7 @@ export default function TermsPage() {
           <Para>Requests for a fee waiver must be made in writing within seven (7) days of the missed appointment.</Para>
           <SubHeading>Rescheduling</SubHeading>
           <Para>18.8. You may reschedule a scheduled appointment by contacting the Clinic using the methods described above. Rescheduling is subject to availability, and the rescheduled appointment must be booked within fourteen (14) days of the original appointment date.</Para>
-          <Para>18.9. The first reschedule made with at least 24 hours&apos; notice before the original appointment is free of charge. Subsequent rescheduling fees are set out in the table above.</Para>
+          <Para>18.9. The first reschedule made with at least 24 hours’ notice before the original appointment is free of charge. Subsequent rescheduling fees are set out in the table above.</Para>
           <Para>18.10. If a rescheduled appointment is subsequently cancelled or rescheduled again, the applicable fee will be calculated based on the notice period provided before the rescheduled appointment time.</Para>
           <SubHeading>Late Arrivals</SubHeading>
           <Para>18.11. You are expected to arrive at the Clinic at your scheduled appointment time, or at such earlier time as may be communicated by the Clinic for preparation purposes.</Para>
@@ -405,7 +351,7 @@ export default function TermsPage() {
           <SubHeading>Clinic-Initiated Cancellations</SubHeading>
           <Para>18.15. The Clinic may cancel or reschedule an appointment due to Clinician unavailability, equipment failure, or other operational reasons. In such cases, we will provide as much notice as reasonably practicable and offer an alternative appointment at no additional cost.</Para>
           <Para>18.16. If the Clinic cancels an appointment and you do not wish to reschedule, or no alternative appointment is available within a reasonable period, you will receive a full refund of any fee paid for that session.</Para>
-          <Para>18.17. The Clinic may also cancel or postpone an appointment where, in the Clinician&apos;s professional judgment, it is not clinically appropriate to proceed. In such cases, you will not be charged.</Para>
+          <Para>18.17. The Clinic may also cancel or postpone an appointment where, in the Clinician’s professional judgment, it is not clinically appropriate to proceed. In such cases, you will not be charged.</Para>
 
           <Heading>19. Medical Emergencies</Heading>
           <Para>19.1. If you experience concerning symptoms or a medical emergency, seek immediate medical help by calling Malta emergency services. We may provide basic assistance on-site where appropriate, but we do not replace emergency services.</Para>
@@ -413,11 +359,11 @@ export default function TermsPage() {
           <Heading>20. Client Conduct and Clinic Rules</Heading>
           <Para>20.1. You must behave respectfully toward staff and other guests.</Para>
           <Para>20.2. We may refuse service or ask you to leave if there is abusive, threatening, unsafe, or inappropriate behaviour, or if clinic rules are not followed.</Para>
-          <Para>20.3. Persistent non-compliance with clinic rules, repeated failure to attend appointments, non-payment of fees, or conduct that, in the Clinic&apos;s reasonable opinion, is detrimental to the safe operation of the Clinic may result in termination of the Treatment in accordance with Section 22.</Para>
+          <Para>20.3. Persistent non-compliance with clinic rules, repeated failure to attend appointments, non-payment of fees, or conduct that, in the Clinic’s reasonable opinion, is detrimental to the safe operation of the Clinic may result in termination of the Treatment in accordance with Section 22.</Para>
 
           <Heading>21. Photography and Progress Tracking</Heading>
           <Para>21.1. We may offer to take before/after photos and measurements for progress monitoring. These are for clinical tracking and form part of your clinical record unless you give separate written consent for marketing use.</Para>
-          <Para>21.2. You may decline to have photographs taken, and such refusal will not affect your access to treatment or care. However, declining photographs may limit the Clinic&apos;s ability to assess and document visual progress.</Para>
+          <Para>21.2. You may decline to have photographs taken, and such refusal will not affect your access to treatment or care. However, declining photographs may limit the Clinic’s ability to assess and document visual progress.</Para>
           <Para>21.3. Where you consent to the use of photographs for marketing, promotional, educational, or publication purposes, you may withdraw that consent at any time by notifying the Clinic in writing. Upon withdrawal of marketing consent, the Clinic will remove your images from its marketing materials within thirty (30) days, to the extent reasonably practicable.</Para>
 
           <Heading>22. Refusal or Termination of Services</Heading>
@@ -426,7 +372,7 @@ export default function TermsPage() {
 
           <Heading>23. Limitation of Liability</Heading>
           <Para>23.1. You acknowledge that the Treatments, procedures, and programmes carry inherent risks, including but not limited to side effects, allergic reactions, or unexpected outcomes, and agree that participation is voluntary. You further acknowledge that the Clinic has provided information on known risks and reasonable precautions and that you have had the opportunity to ask questions before commencing the Treatment.</Para>
-          <Para>23.2. To the maximum extent permitted by law, the Clinic&apos;s liability to you for any loss, injury, claim, or damage arising out of or in connection with treatments, services, or advice provided is limited to the amount of fees actually paid by you for the specific service giving rise to the claim. The Clinic shall not be liable for:</Para>
+          <Para>23.2. To the maximum extent permitted by law, the Clinic’s liability to you for any loss, injury, claim, or damage arising out of or in connection with treatments, services, or advice provided is limited to the amount of fees actually paid by you for the specific service giving rise to the claim. The Clinic shall not be liable for:</Para>
           <List items={[
             'indirect, consequential, or economic loss;',
             'adverse outcomes caused by factors outside the Clinic’s control, including individual physiology, adherence, lifestyle, medical conditions, or third-party actions;',
@@ -442,7 +388,7 @@ export default function TermsPage() {
           <Para>24.3. You acknowledge that failure to provide accurate information or to follow the prescribed Treatment plan may increase the risk of adverse outcomes and may affect the results of the Treatment.</Para>
 
           <Heading>25. Intellectual Property</Heading>
-          <Para>25.1. All treatment plans, food plans, exercise programmes, and materials provided by the Clinic are the intellectual property of the Clinic and are provided for your personal use only. You agree not to reproduce, distribute, or share these materials without the Clinic&apos;s written consent.</Para>
+          <Para>25.1. All treatment plans, food plans, exercise programmes, and materials provided by the Clinic are the intellectual property of the Clinic and are provided for your personal use only. You agree not to reproduce, distribute, or share these materials without the Clinic’s written consent.</Para>
 
           <Heading>26. Force Majeure</Heading>
           <Para>26.1. The Clinic shall not be liable for any delay or failure to provide the Treatment caused by circumstances beyond its reasonable control, including but not limited to supply chain disruptions, medication shortages, regulatory changes, pandemics, severe weather, civil unrest, or other force majeure events. In such cases, the Clinic will use reasonable efforts to provide an alternative treatment or reschedule.</Para>
@@ -454,8 +400,8 @@ export default function TermsPage() {
 
           <Heading>28. Governing Law and Disputes</Heading>
           <Para>28.1. These Terms shall be governed by and construed in accordance with the laws of Malta.</Para>
-          <Para>28.2. Before commencing any formal proceedings, both parties will first attempt to resolve any concerns or disputes promptly through the Clinic&apos;s internal complaint and resolution process.</Para>
-          <Para>28.3. If a dispute cannot be resolved through the Clinic&apos;s complaint process within a reasonable period, either party may propose submission to arbitration at the Maltese Arbitration Centre (the &quot;MAC&quot;), in accordance with its rules. Both parties must agree to arbitration. Nothing in this clause prevents either party from pursuing their rights through the competent courts of Malta.</Para>
+          <Para>28.2. Before commencing any formal proceedings, both parties will first attempt to resolve any concerns or disputes promptly through the Clinic’s internal complaint and resolution process.</Para>
+          <Para>28.3. If a dispute cannot be resolved through the Clinic’s complaint process within a reasonable period, either party may propose submission to arbitration at the Maltese Arbitration Centre (the “MAC”), in accordance with its rules. Both parties must agree to arbitration. Nothing in this clause prevents either party from pursuing their rights through the competent courts of Malta.</Para>
           <Para>28.4. Nothing in these Terms limits your right to bring a complaint before the Malta Competition and Consumer Affairs Authority (MCCAA) or any other competent regulatory body.</Para>
 
           <Heading>29. Severability</Heading>
@@ -465,7 +411,7 @@ export default function TermsPage() {
           <Para>30.1. These Terms, together with any Patient Consent Form, treatment plans, and policies referenced herein, constitute the entire agreement between you and the Clinic in relation to the Treatment. You acknowledge that you have not relied on any oral or written representations, warranties, or promises not contained in these Terms or the Patient Consent Form.</Para>
 
           <Heading>31. Updates to These Terms</Heading>
-          <Para>31.1. The Clinic reserves the right to update these Terms from time to time. The current version will always be available on the Clinic&apos;s website at www.carismaslimming.com.</Para>
+          <Para>31.1. The Clinic reserves the right to update these Terms from time to time. The current version will always be available on the Clinic’s website at www.carismaslimming.com.</Para>
           <Para>31.2. Material changes will be communicated to existing patients by email or at their next appointment. Changes will not apply retrospectively to appointments already booked or packages already purchased at the time of the change, unless the change is more favourable to you.</Para>
 
           <Heading>32. Language</Heading>
@@ -481,7 +427,7 @@ export default function TermsPage() {
             'additional age-specific risk disclosures will be provided where the Medication or Treatment is being used outside its approved age indications; and',
             'the Clinic reserves the right to decline treatment of a minor where, in the Clinician’s professional judgment, the Treatment is not appropriate.',
           ]} />
-          <Para>33.3. These Terms apply to the parent or legal guardian in respect of any minor patient, and all references to &quot;you&quot; and &quot;Patient&quot; shall be read accordingly.</Para>
+          <Para>33.3. These Terms apply to the parent or legal guardian in respect of any minor patient, and all references to “you” and “Patient” shall be read accordingly.</Para>
 
           <Heading>34. Contact</Heading>
           <Para>34.1. For any queries about these Terms, or to contact the Clinic:</Para>
@@ -489,7 +435,8 @@ export default function TermsPage() {
           <Para>Address: 114 Triq il-Mizura, Swieqi, Malta</Para>
 
           {/* ====================== PART B ====================== */}
-          <h2 className="mt-16 mb-6" style={{ ...headingStyle, fontSize: '26px' }}>PART B: PRIVACY NOTICE</h2>
+          <p style={bodyStyle}>&nbsp;</p>
+          <Para>PART B: PRIVACY NOTICE</Para>
 
           <Heading>1. Data Controller</Heading>
           <Para>1.1. The data controller for your Personal Data is Carisma Aesthetics Ltd. (C 106006), trading as Carisma Slimming, with its registered address at 35/16B Hever Court, Triq Moletta, Swieqi, SWQ 3532, Malta.</Para>
@@ -505,7 +452,7 @@ export default function TermsPage() {
             'payment and billing information; and',
             'emergency contact details.',
           ]} />
-          <Para>2.2. Health data constitutes a &quot;special category&quot; of personal data under GDPR and is subject to enhanced protections.</Para>
+          <Para>2.2. Health data constitutes a “special category” of personal data under GDPR and is subject to enhanced protections.</Para>
 
           <Heading>3. Legal Bases for Processing</Heading>
           <Para>3.1. The processing of your Personal Data is carried out on the following legal bases:</Para>
@@ -540,7 +487,7 @@ export default function TermsPage() {
           <Para>5.2. Any third-party service providers involved in the processing of Personal Data shall be bound by contractual obligations to ensure equivalent standards of data protection and confidentiality.</Para>
 
           <Heading>6. International Data Transfers</Heading>
-          <Para>6.1. Personal Data may be processed using cloud-based systems. Where data is transferred outside the European Economic Area (&quot;EEA&quot;), appropriate safeguards are in place in accordance with GDPR Article 46, including Standard Contractual Clauses or adequacy decisions.</Para>
+          <Para>6.1. Personal Data may be processed using cloud-based systems. Where data is transferred outside the European Economic Area (“EEA”), appropriate safeguards are in place in accordance with GDPR Article 46, including Standard Contractual Clauses or adequacy decisions.</Para>
           <Para>6.2. You may request information about the specific safeguards applied to international data transfers by contacting us at info@carismaslimming.com.</Para>
 
           <Heading>7. Data Storage and Security</Heading>
@@ -572,10 +519,6 @@ export default function TermsPage() {
           <Para>11.1. For any data protection queries, requests to exercise your rights, or complaints, please contact:</Para>
           <Para>Email: info@carismaslimming.com</Para>
           <Para>Address: Carisma Aesthetics Ltd., 114 Triq il-Mizura, Swieqi, Malta</Para>
-
-          <p className="mt-12 pt-8" style={{ borderTop: '1px solid #e0e0e0', color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '13px', textAlign: 'center' }}>
-            © - Carisma slimming All Rights reserved.
-          </p>
         </div>
       </section>
     </main>

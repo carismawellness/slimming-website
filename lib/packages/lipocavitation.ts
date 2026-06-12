@@ -18,7 +18,7 @@ export const lipocavitation: PackageContent = {
     '€25 Carisma Aesthetics credit (€25)',
     'Complimentary Parking Validation',
   ],
-  heroTotalValue: '€625',
+  heroTotalValue: '€625.',
   heroTodayPrice: '€199 for 4 sessions',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
@@ -30,8 +30,8 @@ export const lipocavitation: PackageContent = {
   heroVideo: undefined,
   heroImageRatio: '398 / 682',
 
-  secretHeading: ['some fat simply doesn’t respond to effort.', 'that’s not a personal failing.'],
-  secretSubheading: 'the secret to a more defined, confident look',
+  secretHeading: ['the secret to a more defined,', 'confident look'],
+  secretSubheading: 'some fat simply doesn’t respond to effort. that’s not a personal failing.',
   secretImage: W + 'f940f0_3959a9b1203c41b09ca238cd2c75ee35~mv2.png',
   secretIntro:
     "You've been consistent. You eat well, you move your body, you've put in the work — and for the most part, it shows. But there are areas that just won't shift. The lower belly. The flanks. The inner thighs. No matter what you do, they stay exactly where they are.",
@@ -40,6 +40,8 @@ export const lipocavitation: PackageContent = {
   ],
   secretClosing:
     "Most of the women who come to us aren't starting from scratch. They're already doing the right things. They just want support in the one area where effort alone isn't enough. That's exactly what we're here for.",
+
+  pressHeading: ['malta’s trusted clinic for', 'non surgical body contouring'],
 
   benefits: [
     { icon: W + '87fc13_010fe195cd7146cd8569b0d7aa447125~mv2.png', title: 'ultrasound precision', body: 'Low-frequency ultrasound waves are directed to targeted areas beneath the skin. The energy is specific enough to act on fat cell membranes without affecting the surrounding tissue.' },
@@ -62,7 +64,7 @@ export const lipocavitation: PackageContent = {
     'Breaks down localised fat cells using precision ultrasound energy — no surgery, no needles, no recovery time',
     "Lipocavitation works by directing low-frequency ultrasound waves into the targeted fat layer beneath the skin. This creates a process called acoustic cavitation — microscopic bubbles form and implode around fat cell membranes, causing them to break down and release their contents. The liquefied fat is then transported to the liver and eliminated naturally by the body's lymphatic system, the same process your body uses to clear waste every day. Surrounding skin, nerves and blood vessels are unaffected throughout. The result is a gradual, measurable reduction in the volume and circumference of the treated area.",
   ],
-  ptEfficacyTitle: 'Proven efficacy',
+  ptEfficacyTitle: '',
   ptEfficacyBullets: [
     'Precision targeting: Ultrasound energy selectively disrupts fat cell membranes without affecting surrounding skin, nerves or blood vessels.',
     "Natural elimination: Released fat is processed and cleared by the body's own lymphatic system — no extraction, no incisions, no intervention.",
@@ -73,7 +75,7 @@ export const lipocavitation: PackageContent = {
   ptImage: W + '87fc13_056fc4bfc20b42c1ad5b0fbaddb94718~mv2.png',
   ptImage2: W + '87fc13_8c638b6d5ad142b7914059b0806693c2~mv2.png',
 
-  dualHeading: ['malta’s targeted fat contouring starter pack'],
+  dualHeading: ['malta’s targeted fat contouring', 'starter pack'],
   dualMini: [
     { icon: W + 'f940f0_5d528cb2d0ad4c86bf19428948598716~mv2.png', title: 'TARGETED FAT CONTOURING', body: "Four lipocavitation sessions focused on your priority areas — whether that's the tummy, flanks, thighs or arms — each visit tailored to your goals." },
     { icon: W + 'f940f0_32bb31b8ebf8486fa96cc4209fd89686~mv2.png', title: 'VISIBLE, MEASURABLE RESULTS', body: 'Most clients notice a reduction in inches and circumference in the treated area over the course of sessions — results you can see in how your clothes fit, not just on a scale.' },
@@ -106,8 +108,9 @@ export const lipocavitation: PackageContent = {
     { q: 'Is there any downtime?', a: 'None at all. You can return to work, exercise, or your normal routine immediately after your session. There is no redness, swelling, or recovery period.' },
     { q: 'Who is not a suitable candidate?', a: 'Lipocavitation is not suitable during pregnancy or breastfeeding, or for anyone with a pacemaker, active implanted electronic device, active cancer, severe liver or kidney disease, metal implants in the treatment area, or active skin conditions or open wounds at the target site. Suitability is always confirmed by our doctor before treatment begins.' },
   ],
+  faqCtaLabel: 'Claim your spot now',
 
-  evidenceEyebrow: 'evidence based approach',
+  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METhODOLOGY',
   evidence: [
     {
       img: W + '87fc13_d160679a5a4f4729ac97ef7172222e36~mv2.png',

@@ -58,6 +58,15 @@ export interface PackageContent {
   secretIntro: string;
   secretBullets: string[];
   secretClosing: string;
+  /** phrase inside secretClosing rendered bold (live lymphatic-drainage bolds “lymphatic system”). */
+  secretClosingBold?: string;
+  /** optional extra closing paragraph with a bold green lead (live lymphatic-drainage). */
+  secretClosing2?: { lead?: string; text: string };
+
+  /* ---- 3. press strip heading override ----
+     defaults to ["malta's trusted clinic for", "non surgical fat reduction"];
+     some live pages swap the second line (e.g. "non surgical body contouring"). */
+  pressHeading?: string[];
 
   /* ---- 4. four named benefits ---- */
   benefits: IconCopy[];
@@ -68,25 +77,45 @@ export interface PackageContent {
   eligImage: string;
   eligIntro: string;
   areas: string[];
+  /** 'pills' (default): uppercase grid boxes. 'checks': vertical sentence-case list with green check icons (live lymphatic-drainage). */
+  eligListStyle?: 'pills' | 'checks';
 
-  /* ---- 7. package-treatments card ---- */
+  /* ---- 7. package-treatments card ----
+     Empty-string ptEyebrow / ptHeading / ptCardTag / ptEfficacyTitle are skipped. */
   ptEyebrow: string;
   ptHeading: string;
   ptCardEyebrow: string;
   ptCardTag: string;
   ptParas: string[];
+  /** render ptParas[0] bold, as on live anti-cellulite. */
+  ptLeadBold?: boolean;
+  /** 'serif' renders the card header as 18px green serif title | vertical rule | plain bold taupe tag,
+      with a hairline below (live anti-cellulite). Default: taupe title + green outlined tag pill. */
+  ptTitleStyle?: 'serif';
+  /** 'centered' = white card, centered serif title + centered intro paragraphs, text left / images right,
+      closing paragraph and in-card blue CTA (live lymphatic-drainage). */
+  ptLayout?: 'centered';
   ptEfficacyTitle: string;
   ptEfficacyBullets: string[];
+  /** closing paragraph rendered after the bullets. */
+  ptClosing?: string;
+  /** label of a blue CTA rendered inside the card (omitted when not set). */
+  ptCardCta?: string;
   ptImage: string; // before/after
   ptImage2?: string; // small decorative
+  ptImage3?: string; // second close-up (centered layout renders ptImage2 + ptImage3 side by side)
 
   /* ---- 8. dual / starter pack ---- */
+  /** small taupe eyebrow above the dual heading (live lymphatic-drainage: "4 CORE PILLARS OF OUR METHODOLOGY"). */
+  dualEyebrow?: string;
   dualHeading: string[];
   dualMini: IconCopy[];
   dualIncludes: string[];
   dualTotalValue: string;
   dualTodayPrice: string;
   dualFineprint: string[];
+  /** label of the blue CTA in the dual price box; default "Claim your spot now". */
+  dualCtaLabel?: string;
 
   /* ---- 9. wellness chain (with location map) ---- */
   mapQuery: string; // Google-Maps embed query, e.g. "Carisma Slimming, Malta"
@@ -95,10 +124,14 @@ export interface PackageContent {
 
   /* ---- 10. FAQ ---- */
   faqs: Faq[];
+  /** label of the centered blue CTA after the FAQ list; default "Claim my spot now". */
+  faqCtaLabel?: string;
 
   /* ---- 11. evidence based approach ---- */
   evidenceEyebrow: string;
   evidence: EvidenceCard[];
+  /** label of the centered blue CTA after the evidence cards; default "Claim my spot now". */
+  evidenceCtaLabel?: string;
 
   /* ---- shared-section overrides (rarely needed) ---- */
   differenceBullets?: string[];
@@ -134,6 +167,8 @@ export interface PackageContent {
      hide that section on this package only. (hero / secret+carousel / press
      / FAQ are always shown.) */
   hide?: {
+    /** hides the hero divider + subheading line (live anti-cellulite has neither). */
+    heroSubheading?: boolean;
     benefits?: boolean;
     eligibility?: boolean;
     difference?: boolean;

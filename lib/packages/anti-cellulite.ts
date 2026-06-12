@@ -28,7 +28,10 @@ export const antiCellulite: PackageContent = {
   ],
   heroImage: W + '87fc13_f82efb98dbd94826bf80c4ce3c3ee604~mv2.png',
   heroVideo: W + '87fc13_acf34576a18744be8eff908bf00f55a6_720p.mp4',
-  heroImageRatio: '398 / 682',
+  heroImageRatio: '398 / 600',
+
+  // live hero has no subheading line / divider between title and description
+  hide: { heroSubheading: true },
 
   secretHeading: ['the secret to a more defined,', 'confident look'],
   secretSubheading: 'smooth stubborn cellulite and uneven texture with precision',
@@ -66,7 +69,9 @@ export const antiCellulite: PackageContent = {
     'CelluLift uses VelaShape III vacuum roller technology to target the structural causes of visible cellulite. Each session combines radiofrequency, infrared heat, vacuum suction and mechanical rollers to soften fibrous tissue, boost circulation and support lymphatic flow. This multi-action approach helps smooth uneven texture and improve the overall look and feel of the skin.',
     'Over the weeks following treatment, skin can appear more even, firmer and refined — particularly in areas prone to cellulite such as the thighs, hips and bum.',
   ],
-  ptEfficacyTitle: 'Proven efficacy',
+  ptLeadBold: true,
+  ptTitleStyle: 'serif',
+  ptEfficacyTitle: '', // live card has no "Proven efficacy" label — bullets follow the paragraphs directly
   ptEfficacyBullets: [
     'Clinically proven approach: VelaShape technology has been shown in studies to improve the appearance of cellulite and uneven skin texture.',
     'Visible smoothing: Vacuum and mechanical massage encourage blood flow and lymphatic drainage for a lighter, smoother feel.',
@@ -77,7 +82,7 @@ export const antiCellulite: PackageContent = {
   ptImage: W + '87fc13_056fc4bfc20b42c1ad5b0fbaddb94718~mv2.png',
   ptImage2: W + '87fc13_8c638b6d5ad142b7914059b0806693c2~mv2.png',
 
-  dualHeading: ['malta’s most advanced cellulite smoothing', '& contouring protocol'],
+  dualHeading: ['malta’s most advanced cellulite', 'smoothing & contouring protocol'],
   dualMini: [
     { icon: W + '87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'Targeted CELLULITE CONTOURING', body: 'Adjustable Intensity for Comfort & Results' },
     { icon: W + '87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'VISIBLE, NOTICEABLE SMOOTHING', body: 'Improvements you can see and feel. Skin appears smoother, more even, and more refined in clothes and movement — not just immediately after treatment, but progressively over sessions.' },
@@ -90,7 +95,7 @@ export const antiCellulite: PackageContent = {
     '€25 Carisma Aesthetics credit (€25)',
     'Complimentary Parking Validation',
   ],
-  dualTotalValue: '€625',
+  dualTotalValue: '€625.', // live: "Total Value: €625. Today:" — period after the value
   dualTodayPrice: '€199 ONLY',
   dualFineprint: [
     '* Includes four sessions to be followed over the course of 2 weeks',
@@ -113,7 +118,7 @@ export const antiCellulite: PackageContent = {
     { q: '10. Can CelluLift be combined with other treatments?', a: 'Yes. CelluLift is often combined with skin tightening or body contouring treatments to enhance overall results. Your practitioner will advise what combinations are suitable.' },
   ],
 
-  evidenceEyebrow: 'evidence based approach',
+  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METODOLOGY', // sic — live typo "METODOLOGY"
   evidence: [
     {
       img: W + '87fc13_be8c4316bfbb46e9898da45f3e483bb2~mv2.png',

@@ -18,7 +18,7 @@ export const skinTightening: PackageContent = {
     '€25 Carisma Aesthetics credit (€25)',
     'Complimentary Parking Validation',
   ],
-  heroTotalValue: '€625',
+  heroTotalValue: '€625.',
   heroTodayPrice: '€199 for 4 sessions',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
@@ -58,16 +58,20 @@ export const skinTightening: PackageContent = {
   areas: ['TUMMY / ABDOMEN', 'NECK', 'ARMS', 'BUTTOCKS AND UNDER-BUTT CREASE', 'THIGHS (FRONT, BACK, INNER AND OUTER)'],
 
   ptEyebrow: 'our technology',
-  ptHeading: 'internationally renowned, fda-approved modalities',
+  // live has an explicit <br> after the comma (see deferred-skin-tight.md — needs whiteSpace: 'pre-line' in PackagePage)
+  ptHeading: 'internationally renowned,\nfda-approved modalities',
   ptCardEyebrow: 'velashape iii',
-  ptCardTag: 'Muscle strengthening, tone & metabolic support',
+  // live source is mixed case but renders all-caps; serif header branch applies no transform, so type it uppercase
+  ptCardTag: 'MUSCLE STRENGTHENING, TONE & METABOLIC SUPPORT',
+  ptTitleStyle: 'serif',
+  ptLeadBold: true,
   ptParas: [
     'Smooths cellulite, tightens skin and improves contour in one comfortable treatment.',
     'VelaShape III combines four technologies in a single session: radiofrequency, infrared heat, vacuum suction and mechanical rollers. The heat stimulates collagen, the suction boosts circulation and lymph flow, and the mechanical massage smooths the surface of the skin. Over the next weeks your skin becomes firmer, tighter and more even looking.',
   ],
-  ptEfficacyTitle: 'Proven efficacy',
+  ptEfficacyTitle: '', // live card has no standalone "Proven efficacy" label — it is the lead of the first bullet
   ptEfficacyBullets: [
-    'Shown to reduce the appearance of cellulite and improve skin firmness in clinical studies.',
+    'Proven efficacy: Shown to reduce the appearance of cellulite and improve skin firmness in clinical studies.',
     'Visible smoothing: Skin can look more even and refined after a short series of treatments.',
     'Gentle tightening: Helps mild loose skin from weight loss, pregnancy or natural ageing.',
     'Non invasive: No needles, no surgery and no downtime for most people.',
@@ -128,7 +132,7 @@ export const skinTightening: PackageContent = {
     {
       img: W + '87fc13_c7f1f5fa97a24c65b42f750c0d47af08~mv2.png',
       tag: 'MODERATE EVIDENCE',
-      title: 'circumference reduction & body contouring',
+      title: 'circumference reduction\n& body contouring', // live has an explicit <br> here
       does: 'Combines heat, vacuum suction, and mechanical massage to enhance circulation and support lymphatic drainage in treated areas. This process can contribute to temporary fluid reduction and gradual improvements in body contour appearance.',
       results: [
         'Clinical evaluations of multi-modality RF and vacuum-assisted treatments have reported measurable reductions in body circumference after a series of sessions, particularly in the abdomen and thighs. Aesthetic Technology Clinical Evaluations',
@@ -150,7 +154,7 @@ export const skinTightening: PackageContent = {
     {
       img: W + '87fc13_880b5c63634f410b999a6d5b329e67d8~mv2.png',
       tag: 'STRONG SAFETY PROFILE',
-      title: 'non-surgical treatment with minimal downtime',
+      title: 'non-surgical treatment\nwith minimal downtime', // live has an explicit <br> here
       does: 'Delivers controlled energy and mechanical stimulation without surgery, needles, or incisions. Treatments are designed to be comfortable, allowing most people to return to normal daily activities immediately afterward.',
       results: [
         'Clinical reports describe the procedure as well tolerated, with common effects limited to temporary warmth, redness, or mild tenderness in the treated area. Clinical Safety Reviews',

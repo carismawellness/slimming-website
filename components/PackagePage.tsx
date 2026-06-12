@@ -21,7 +21,7 @@
      11 Evidence based approach (research cards)
    ============================================================ */
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { BOOKING_URL } from '@/lib/services';
 import {
   PackageContent,
@@ -52,20 +52,22 @@ const CHECK = W + '87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png';
 const DIFF_BG = W + '87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png';
 const WELL_BG = W + 'f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png';
 const PARKING = W + '87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png';
-const PRESS = {
-  maltaDaily: W + 'f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg',
-  maltaToday: W + 'f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg',
-  lovin: W + 'f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg',
-  times: W + 'f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png',
-  mtToday: W + 'f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png',
-};
+/* live order + rendered sizes (measured on carismaslimming.com: 173x54, 61x54, 204x64, 61x54, 86x54) */
+const PRESS = [
+  { src: W + 'f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', alt: 'Malta Daily', h: 54 },
+  { src: W + 'f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', alt: '89.7 Bay', h: 54 },
+  { src: W + 'f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', alt: 'Lovin Malta', h: 64 },
+  { src: W + 'f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', alt: 'Times of Malta', h: 54 },
+  { src: W + 'f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', alt: 'Malta Today', h: 54 },
+];
+const PRESS_HEADING_DEFAULT = ['malta’s trusted clinic for', 'non surgical fat reduction'];
 
 const CONTAINER: React.CSSProperties = { maxWidth: 1040, marginLeft: 'auto', marginRight: 'auto', paddingLeft: 24, paddingRight: 24 };
 
 /* ---------- shared pieces ---------- */
-function Eyebrow({ children, align = 'center' }: { children: React.ReactNode; align?: 'center' | 'left' }) {
+function Eyebrow({ children, align = 'center', size = 15 }: { children: React.ReactNode; align?: 'center' | 'left'; size?: number }) {
   return (
-    <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 13, fontWeight: 400, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
+    <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: size, fontWeight: 400, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
       {children}
     </p>
   );
@@ -79,14 +81,14 @@ function SectionHeading({ children, align = 'center', size = 28 }: { children: R
   );
 }
 
-function CTA({ variant = 'blue', children = 'Claim your spot now', full = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean }) {
+function CTA({ variant = 'blue', children = 'Claim your spot now', full = false, wide = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean; wide?: boolean }) {
   const isGreen = variant === 'green';
   return (
     <a
       href={BOOKING_URL}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ display: full ? 'block' : 'inline-block', backgroundColor: isGreen ? GREEN : BLUE, color: '#fff', fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', textAlign: 'center', textDecoration: 'none', padding: '15px 38px', borderRadius: isGreen ? 5 : 10 }}
+      style={{ display: full ? 'block' : 'inline-block', backgroundColor: isGreen ? GREEN : BLUE, color: '#fff', fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', textAlign: 'center', textDecoration: 'none', padding: wide ? '15px 70px' : '15px 38px', borderRadius: isGreen ? 5 : 10 }}
     >
       {children}
     </a>
@@ -98,12 +100,40 @@ function Tick({ size = 18 }: { size?: number }) {
   return <img src={CHECK} alt="" style={{ width: size, height: 'auto', flexShrink: 0, marginTop: 3 }} />;
 }
 
+/* Plain round bullet — the live pages use simple dots (not check icons) everywhere
+   except the "we are not another diet clinic" card. */
+function Dot() {
+  return <span style={{ color: TAUPE_LT, fontSize: 18, lineHeight: 1.1, flexShrink: 0 }}>&bull;</span>;
+}
+
+/* Social share row shown under an expanded FAQ answer (live Wix FAQ widget). */
+function ShareIcons({ url }: { url: string }) {
+  const ic: React.CSSProperties = { color: TAUPE, display: 'inline-flex', alignItems: 'center' };
+  const enc = encodeURIComponent(url);
+  return (
+    <span style={{ display: 'inline-flex', alignItems: 'center', gap: 18 }}>
+      <a href={`https://www.facebook.com/sharer/sharer.php?u=${enc}`} target="_blank" rel="noopener noreferrer" aria-label="Share on Facebook" style={ic}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M13.5 21v-8.2h2.8l.4-3.2h-3.2V7.6c0-.9.3-1.6 1.6-1.6h1.7V3.1c-.3 0-1.3-.1-2.5-.1-2.5 0-4.1 1.5-4.1 4.3v2.3H7.4v3.2h2.8V21h3.3z" /></svg>
+      </a>
+      <a href={`https://twitter.com/intent/tweet?url=${enc}`} target="_blank" rel="noopener noreferrer" aria-label="Share on X" style={ic}>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M18.9 2H22l-6.8 7.8L23.2 22h-6.3l-4.9-6.4L6.4 22H3.3l7.3-8.3L1.6 2H8l4.4 5.9L18.9 2zm-1.1 18.1h1.7L7.1 3.8H5.3l12.5 16.3z" /></svg>
+      </a>
+      <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc}`} target="_blank" rel="noopener noreferrer" aria-label="Share on LinkedIn" style={ic}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3V9zm6.5 0h3.8v1.7h.1c.5-1 1.8-2 3.7-2 4 0 4.7 2.6 4.7 6V21h-4v-5.5c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9V21h-4V9z" /></svg>
+      </a>
+      <button type="button" aria-label="Copy link" onClick={() => { void navigator.clipboard?.writeText(url); }} style={{ ...ic, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" /><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" /></svg>
+      </button>
+    </span>
+  );
+}
+
 function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: boolean }) {
   return (
     <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6 }}>
       {withGoogle && (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={GOOGLE} alt="Google" style={{ width: size + 4, height: size + 4 }} />
+        <img src={GOOGLE} alt="Google" style={{ width: size + 1, height: size + 1 }} />
       )}
       <span style={{ color: GREEN, fontSize: size, letterSpacing: 2, lineHeight: 1 }}>{'★'.repeat(5)}</span>
       <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14 }}>Over 200+ Reviews</span>
@@ -141,13 +171,20 @@ function TestimonialCard({ t }: { t: Testimonial }) {
 
 function TestimonialCarousel({ items }: { items: Testimonial[] }) {
   const [start, setStart] = useState(0);
+  const [paused, setPaused] = useState(false);
   const n = items.length;
   const per = Math.min(3, n);
   const visible = Array.from({ length: per }, (_, i) => items[(start + i) % n]);
+  // The live Wix embed is a Slick carousel with autoplay: true, autoplaySpeed: 3000.
+  useEffect(() => {
+    if (paused) return;
+    const id = setInterval(() => setStart((s) => (s + 1) % n), 3000);
+    return () => clearInterval(id);
+  }, [paused, n]);
   const arrow: React.CSSProperties = { position: 'absolute', top: '38%', transform: 'translateY(-50%)', width: 36, height: 36, borderRadius: '50%', border: 'none', cursor: 'pointer', background: 'rgba(0,0,0,0)', color: GREEN, fontSize: 24, lineHeight: 1, zIndex: 2 };
   return (
-    <div style={{ position: 'relative', padding: '0 36px', marginTop: 36 }}>
-      <button type="button" aria-label="Previous" onClick={() => setStart((start - 1 + n) % n)} style={{ ...arrow, left: 0 }}>&#8249;</button>
+    <div style={{ position: 'relative', padding: '0 36px', marginTop: 36 }} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
+      <button type="button" aria-label="Previous" onClick={() => setStart((start - 1 + n) % n)} style={{ ...arrow, left: 0 }}>&#8592;</button>
       <div className="fr-testi" style={{ display: 'flex' }}>
         {visible.map((t, i) => (
           <div key={`${start}-${i}`} style={{ flex: '1 1 0', minWidth: 0 }}>
@@ -155,7 +192,7 @@ function TestimonialCarousel({ items }: { items: Testimonial[] }) {
           </div>
         ))}
       </div>
-      <button type="button" aria-label="Next" onClick={() => setStart((start + 1) % n)} style={{ ...arrow, right: 0 }}>&#8250;</button>
+      <button type="button" aria-label="Next" onClick={() => setStart((start + 1) % n)} style={{ ...arrow, right: 0 }}>&#8594;</button>
     </div>
   );
 }
@@ -163,6 +200,7 @@ function TestimonialCarousel({ items }: { items: Testimonial[] }) {
 /* ============================================================ */
 export default function PackagePage({ content: c }: { content: PackageContent }) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [faqQuery, setFaqQuery] = useState('');
   const [openEv, setOpenEv] = useState<number | null>(null);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
   const [heroMuted, setHeroMuted] = useState(true);
@@ -194,13 +232,17 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         <div style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#f1f0eb', borderRadius: 28, padding: '48px 52px' }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 48, alignItems: 'center' }} className="fr-hero-grid">
             <div>
-              <Eyebrow align="left">{c.heroEyebrow}</Eyebrow>
+              <Eyebrow align="left" size={13}>{c.heroEyebrow}</Eyebrow>
               <h1 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 28, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', margin: '12px 0 0' }}>
                 {c.heroTitle}
               </h1>
-              <div style={{ width: 300, maxWidth: '70%', height: 1, backgroundColor: '#d9d2ca', margin: '12px 0 18px' }} />
-              <p style={{ color: TAUPE, fontFamily: WIDE, fontWeight: 400, fontSize: 15, letterSpacing: 'normal', margin: '0 0 16px' }}>{c.heroSubheading}</p>
-              <p style={{ color: TAUPE, fontFamily: BODY, fontWeight: 400, fontSize: 14, lineHeight: 1.55, margin: '0 0 22px' }}>{c.heroDescription}</p>
+              {!hidden.heroSubheading && (
+                <>
+                  <div style={{ width: 300, maxWidth: '70%', height: 1, backgroundColor: '#d9d2ca', margin: '12px 0 18px' }} />
+                  <p style={{ color: TAUPE, fontFamily: WIDE, fontWeight: 400, fontSize: 15, letterSpacing: 'normal', margin: '0 0 16px' }}>{c.heroSubheading}</p>
+                </>
+              )}
+              <p style={{ color: TAUPE, fontFamily: BODY, fontWeight: 400, fontSize: 14, lineHeight: 1.55, margin: hidden.heroSubheading ? '14px 0 22px' : '0 0 22px' }}>{c.heroDescription}</p>
 
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
                 {c.heroIncludes.map((it) => (
@@ -214,12 +256,12 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 15, letterSpacing: 'normal', margin: '0 0 2px' }}>
                 <span style={{ fontWeight: 700 }}>TOTAL VALUE:</span> {c.heroTotalValue} <span style={{ fontWeight: 700 }}>TODAY:</span> {c.heroTodayPrice}
               </p>
-              {c.heroPriceNote && <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12, letterSpacing: 'normal', textTransform: 'uppercase', margin: '0 0 20px' }}>{c.heroPriceNote}</p>}
+              {c.heroPriceNote && <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12, letterSpacing: 'normal', margin: '0 0 20px' }}>{c.heroPriceNote}</p>}
 
               <div style={{ marginBottom: 16, marginTop: c.heroPriceNote ? 0 : 16 }}>
-                <CTA variant="green">Claim your spot now</CTA>
+                <CTA variant="green" wide>Claim your spot now</CTA>
               </div>
-              <div style={{ marginBottom: 18 }}><Stars /></div>
+              <div style={{ marginBottom: 18 }}><Stars withGoogle size={22} /></div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
                 {c.heroFineprint.map((f) => (
@@ -230,9 +272,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
               {c.heroVideo ? (
-                <div style={{ position: 'relative', width: '100%', maxWidth: 360 }}>
+                <div style={{ position: 'relative', width: '100%', maxWidth: 398 }}>
+                  {/* live hero video has a petal border-radius: 100px 15px 100px 15px */}
                   <video ref={heroVideoRef} src={c.heroVideo} poster={c.heroImage} autoPlay muted loop playsInline aria-label={c.heroSubheading}
-                    style={{ width: '100%', aspectRatio: c.heroImageRatio ?? '398 / 682', objectFit: 'cover', borderRadius: 18, display: 'block', backgroundColor: '#dce6dc' }} />
+                    style={{ width: '100%', aspectRatio: c.heroImageRatio ?? '398 / 682', objectFit: 'cover', borderRadius: '100px 15px 100px 15px', display: 'block', backgroundColor: '#dce6dc' }} />
                   <button
                     type="button"
                     onClick={toggleHeroSound}
@@ -257,7 +300,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 </div>
               ) : (
                 // eslint-disable-next-line @next/next/no-img-element
-                <img src={c.heroImage} alt={c.heroSubheading} style={{ width: '100%', maxWidth: 360, aspectRatio: c.heroImageRatio ?? '398 / 560', objectFit: 'cover', borderRadius: 18, display: 'block' }} />
+                <img src={c.heroImage} alt={c.heroSubheading} style={{ width: '100%', maxWidth: 398, aspectRatio: c.heroImageRatio ?? '398 / 560', objectFit: 'cover', borderRadius: 18, display: 'block' }} />
               )}
               <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -281,22 +324,31 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         </div>
 
         <div style={{ ...CONTAINER, marginTop: 56 }}>
-          <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 16, letterSpacing: '0.5px', textTransform: 'uppercase', textAlign: 'center', margin: 0 }}>{c.secretSubheading}</p>
+          {/* live: 980px rounded panel, gradient measured as linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%) */}
+          <div style={{ maxWidth: 980, marginLeft: 'auto', marginRight: 'auto', borderRadius: 18, background: 'linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', padding: '48px 44px' }}>
+            <SectionHeading>{c.secretSubheading}</SectionHeading>
 
-          <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 40 }} className="fr-2col">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.secretImage} alt={c.secretSubheading} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
-            <div>
-              <p style={{ ...body, marginBottom: 18 }}>{c.secretIntro}</p>
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {c.secretBullets.map((b) => (
-                  <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <Tick size={16} /><span style={{ ...body }}>{b}</span>
-                  </li>
-                ))}
-              </ul>
-              <p style={{ ...body, marginBottom: 24 }}>{c.secretClosing}</p>
-              <CTA variant="blue" />
+            <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 36 }} className="fr-2col">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={c.secretImage} alt={c.secretSubheading} style={{ width: '100%', borderRadius: '100px 10px', display: 'block' }} />
+              <div>
+                <p style={{ ...body, marginBottom: 18 }}>{c.secretIntro}</p>
+                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                  {c.secretBullets.map((b) => (
+                    <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                      <Dot /><span style={{ ...body }}>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+                <p style={{ ...body, marginBottom: c.secretClosing2 ? 18 : 24 }}>{c.secretClosingBold && c.secretClosing.includes(c.secretClosingBold) ? (<>{c.secretClosing.slice(0, c.secretClosing.indexOf(c.secretClosingBold))}<strong>{c.secretClosingBold}</strong>{c.secretClosing.slice(c.secretClosing.indexOf(c.secretClosingBold) + c.secretClosingBold.length)}</>) : c.secretClosing}</p>
+                {c.secretClosing2 && (
+                  <p style={{ ...body, marginBottom: 24 }}>
+                    {c.secretClosing2.lead && <span style={{ color: GREEN, fontWeight: 700 }}>{c.secretClosing2.lead} </span>}
+                    {c.secretClosing2.text}
+                  </p>
+                )}
+                <CTA variant="blue" full />
+              </div>
             </div>
           </div>
         </div>
@@ -305,18 +357,12 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {/* ===================== 3. PRESS ===================== */}
       <section style={{ paddingTop: 24, paddingBottom: 48 }}>
         <div style={CONTAINER}>
-          <SectionHeading size={24}>malta&rsquo;s trusted clinic for<br />non surgical fat reduction</SectionHeading>
+          <SectionHeading>{(c.pressHeading ?? PRESS_HEADING_DEFAULT).map((l, i, arr) => (<span key={i}>{l}{i < arr.length - 1 && <br />}</span>))}</SectionHeading>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: 40, marginTop: 28 }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={PRESS.maltaDaily} alt="Malta Daily" style={{ height: 38, width: 'auto' }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={PRESS.maltaToday} alt="Malta Today" style={{ height: 34, width: 'auto' }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={PRESS.lovin} alt="Lovin Malta" style={{ height: 40, width: 'auto' }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={PRESS.times} alt="Times of Malta" style={{ height: 38, width: 'auto' }} />
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={PRESS.mtToday} alt="MT Today" style={{ height: 38, width: 'auto' }} />
+            {PRESS.map((p) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img key={p.src} src={p.src} alt={p.alt} style={{ height: p.h, width: 'auto' }} />
+            ))}
           </div>
         </div>
       </section>
@@ -327,7 +373,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         <div style={{ ...CONTAINER, maxWidth: 1180 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 22 }} className="fr-benefits">
             {c.benefits.map((b) => (
-              <div key={b.title} style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)', borderRadius: '22px 22px 0 22px', padding: '28px 24px 34px' }}>
+              <div key={b.title} style={{ background: 'linear-gradient(189deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', borderRadius: '22px 22px 0 22px', padding: '28px 24px 34px' }}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img src={b.icon} alt="" style={{ width: 52, height: 52, objectFit: 'contain', marginBottom: 18 }} />
                 <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px', lineHeight: 1.3 }}>{b.title}</h3>
@@ -358,7 +404,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               <div style={{ marginTop: 18 }}><Stars withGoogle /></div>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.valueProps.image} alt={c.valueProps.heading} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
+            <img src={c.valueProps.image} alt={c.valueProps.heading} style={{ width: '100%', borderRadius: '100px 10px', display: 'block' }} />
           </div>
         </div>
       </section>
@@ -374,7 +420,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             <Eyebrow>{c.commitmentPanel.eyebrow}</Eyebrow>
             <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
             <SectionHeading>{c.commitmentPanel.heading}</SectionHeading>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginTop: 40, alignItems: 'start', maxWidth: 880, marginInline: 'auto' }} className="fr-2col">
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 40, maxWidth: 480 }}>
               {[{ h: c.commitmentPanel.leftHeading, items: c.commitmentPanel.left }, { h: c.commitmentPanel.rightHeading, items: c.commitmentPanel.right }].map((col) => (
                 <div key={col.h}>
                   <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>{col.h}</h3>
@@ -412,11 +458,21 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             <img src={c.eligImage} alt={c.eligHeading} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
             <div>
               <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 20px', lineHeight: 1.4 }}>{c.eligIntro}</p>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
-                {c.areas.map((a, i) => (
-                  <div key={a} style={{ gridColumn: i === c.areas.length - 1 && c.areas.length % 2 === 1 ? '1 / -1' : 'auto', backgroundColor: '#eef1ec', borderRadius: 8, padding: '14px 16px', textAlign: 'center', color: TAUPE, fontFamily: WIDE, fontSize: 12.5, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{a}</div>
-                ))}
-              </div>
+              {c.eligListStyle === 'checks' ? (
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
+                  {c.areas.map((a) => (
+                    <li key={a} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                      <Tick size={18} /><span style={{ ...body }}>{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
+                  {c.areas.map((a, i) => (
+                    <div key={a} style={{ gridColumn: i === c.areas.length - 1 && c.areas.length % 2 === 1 ? '1 / -1' : 'auto', backgroundColor: '#eef1ec', borderRadius: 8, padding: '14px 16px', textAlign: 'center', color: TAUPE, fontFamily: WIDE, fontSize: 12.5, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{a}</div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -450,9 +506,49 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {!hidden.packageCard && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
-          <Eyebrow>{c.ptEyebrow}</Eyebrow>
-          <div style={{ marginTop: 8 }}><SectionHeading>{c.ptHeading}</SectionHeading></div>
+          {c.ptEyebrow && <Eyebrow>{c.ptEyebrow}</Eyebrow>}
+          {/* live: short centered taupe hairline under the section eyebrow
+              (wixui-horizontal-line, 116x1 #9B8D83, 15px below — measured on live
+              skin-tightening / anti-cellulite / muscle-stimulation / lipocavitation / fat-reduction) */}
+          {c.ptEyebrow && <div aria-hidden style={{ width: 116, height: 1, backgroundColor: TAUPE, margin: '15px auto 0' }} />}
+          {c.ptHeading && <div style={{ marginTop: 8 }}><SectionHeading><span style={{ whiteSpace: 'pre-line' }}>{c.ptHeading}</span></SectionHeading></div>}
 
+          {c.ptLayout === 'centered' ? (
+            /* live lymphatic-drainage: white card, centered serif title, centered intro
+               paragraphs, then text left / images right with an in-card blue CTA */
+            <div style={{ marginTop: 36, backgroundColor: '#fff', borderRadius: 20, padding: 36, boxShadow: '0 6px 26px rgba(120,114,104,0.14)' }}>
+              <SectionHeading>{c.ptCardEyebrow}</SectionHeading>
+              <div style={{ maxWidth: 880, margin: '20px auto 0' }}>
+                {c.ptParas.map((p, i) => (<p key={p} style={{ ...body, textAlign: 'center', marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>))}
+              </div>
+              <div style={{ marginTop: 26, display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: 40, alignItems: 'start' }} className="fr-2col">
+                <div>
+                  {c.ptEfficacyTitle && <p style={{ ...body, marginBottom: 14 }}>{c.ptEfficacyTitle}</p>}
+                  <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    {c.ptEfficacyBullets.map((b) => (
+                      <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                        <Dot /><span style={{ ...body, fontSize: 14 }}>{b}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  {c.ptClosing && <p style={{ ...body, fontSize: 14, marginBottom: 20 }}>{c.ptClosing}</p>}
+                  {c.ptCardCta && <CTA variant="blue">{c.ptCardCta}</CTA>}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.ptImage} alt="" style={{ width: '100%', borderRadius: 12, display: 'block' }} />
+                  {(c.ptImage2 || c.ptImage3) && (
+                    <div style={{ display: 'flex', gap: 18 }}>
+                      {[c.ptImage2, c.ptImage3].filter(Boolean).map((img) => (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img key={img} src={img} alt="" style={{ width: 0, flex: '1 1 0', borderRadius: 12, objectFit: 'cover', display: 'block' }} />
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          ) : (
           <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #f1f3ee 0%, #e2e9df 100%)', borderRadius: 20, padding: 36, display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 40, alignItems: 'center' }} className="fr-2col">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -463,21 +559,38 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               )}
             </div>
             <div>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 14 }}>
-                <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
-                <span style={{ color: GREEN, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN}`, borderRadius: 20, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>
-              </div>
-              {c.ptParas.map((p) => (<p key={p} style={{ ...body, marginBottom: 14 }}>{p}</p>))}
-              <p style={{ color: GREEN, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '4px 0 14px' }}>{c.ptEfficacyTitle}</p>
+              {c.ptTitleStyle === 'serif' ? (
+                /* live anti-cellulite + skin-tightening header: green serif title | vertical rule | plain bold taupe tag,
+                   1px rgba(142,176,147,0.62) hairline below (measured on both live pages) */
+                <div style={{ borderBottom: '1px solid rgba(142,176,147,0.62)', paddingBottom: 14, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
+                  <p style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 18, letterSpacing: 'normal', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
+                  {c.ptCardTag && (
+                    <>
+                      <span style={{ width: 1, alignSelf: 'stretch', backgroundColor: '#d9d2ca' }} aria-hidden />
+                      <p style={{ color: TAUPE, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: 'normal', margin: 0 }}>{c.ptCardTag}</p>
+                    </>
+                  )}
+                </div>
+              ) : (
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 14 }}>
+                  <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
+                  {c.ptCardTag && <span style={{ color: GREEN, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN}`, borderRadius: 20, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>}
+                </div>
+              )}
+              {c.ptParas.map((p, i) => (<p key={p} style={{ ...body, marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>))}
+              {c.ptEfficacyTitle && <p style={{ color: GREEN, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '4px 0 14px' }}>{c.ptEfficacyTitle}</p>}
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {c.ptEfficacyBullets.map((b) => (
                   <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                    <Tick size={16} /><span style={{ ...body, fontSize: 14 }}>{b}</span>
+                    <Dot /><span style={{ ...body, fontSize: 14 }}>{b}</span>
                   </li>
                 ))}
               </ul>
+              {c.ptClosing && <p style={{ ...body, fontSize: 14, margin: '16px 0 0' }}>{c.ptClosing}</p>}
+              {c.ptCardCta && <div style={{ marginTop: 20 }}><CTA variant="blue">{c.ptCardCta}</CTA></div>}
             </div>
           </div>
+          )}
         </div>
       </section>
       )}
@@ -486,10 +599,11 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {!hidden.dual && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
-          <SectionHeading>{c.dualHeading.map((l, i) => (<span key={i}>{l}{i < c.dualHeading.length - 1 && <br />}</span>))}</SectionHeading>
+          {c.dualEyebrow && <div style={{ marginBottom: 10 }}><Eyebrow>{c.dualEyebrow}</Eyebrow></div>}
+          <SectionHeading size={24}>{c.dualHeading.map((l, i) => (<span key={i}>{l}{i < c.dualHeading.length - 1 && <br />}</span>))}</SectionHeading>
 
           <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #eef1ea 0%, #e7ece2 100%)', borderRadius: 22, padding: 22, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 22 }} className="fr-2col">
-            <div style={{ backgroundColor: '#fff', borderRadius: 16, padding: '34px 30px', display: 'flex', flexDirection: 'column', gap: 26, justifyContent: 'center' }}>
+            <div style={{ backgroundColor: '#fff', borderRadius: 16, padding: '34px 30px', display: 'flex', flexDirection: 'column', gap: 26, justifyContent: 'space-around' }}>
               {c.dualMini.map((m) => (
                 <div key={m.title} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
                   <span style={{ flexShrink: 0, width: 54, height: 54, border: '1px solid #d7dcd4', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
@@ -512,14 +626,15 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                   </li>
                 ))}
               </ul>
-              <div style={{ background: 'linear-gradient(150deg, #eef2ea 0%, #dfe8db 100%)', borderRadius: 12, padding: '18px 20px' }}>
-                <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px' }}>
-                  TOTAL VALUE: {c.dualTotalValue} TODAY: <span style={{ color: GREEN }}>{c.dualTodayPrice}</span>
+              {/* live price box: sage at the top fading to cream, green label, larger taupe price */}
+              <div style={{ background: 'linear-gradient(150deg, #dfe8db 0%, #eef2ea 100%)', borderRadius: 12, padding: '18px 20px' }}>
+                <p style={{ color: GREEN, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                  TOTAL VALUE: {c.dualTotalValue} TODAY: <span style={{ color: TAUPE, fontSize: 18 }}>{c.dualTodayPrice}</span>
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 16 }}>
                   {c.dualFineprint.map((f) => (<p key={f} style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0 }}>{f}</p>))}
                 </div>
-                <div style={{ marginBottom: 14 }}><CTA variant="blue" full>Claim your spot now</CTA></div>
+                <div style={{ marginBottom: 14 }}><CTA variant="blue" full>{c.dualCtaLabel ?? 'Claim your spot now'}</CTA></div>
                 <Stars withGoogle />
               </div>
             </div>
@@ -535,7 +650,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           <SectionHeading>{c.offer.introHeading}</SectionHeading>
           <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 44, alignItems: 'center', marginTop: 36 }} className="fr-2col">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.offer.introImage} alt={c.offer.introHeading} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
+            <img src={c.offer.introImage} alt={c.offer.introHeading} style={{ width: '100%', borderRadius: '10px 100px', display: 'block' }} />
             <div>
               {c.offer.introParas.map((p) => (<p key={p} style={{ ...body, fontSize: 14, marginBottom: 14 }}>{p}</p>))}
               <div style={{ marginTop: 8 }}><CTA variant="blue" /></div>
@@ -561,7 +676,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               <Stars withGoogle />
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.offer.cardImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: 16, display: 'block' }} />
+            <img src={c.offer.cardImage} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '100px 10px', display: 'block' }} />
           </div>
         </div>
       </section>
@@ -610,21 +725,48 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {/* ===================== 10. FAQ ===================== */}
       <section style={{ paddingTop: 56, paddingBottom: 56 }}>
         <div style={{ ...CONTAINER, maxWidth: 900 }}>
-          <SectionHeading size={24}>Frequently asked questions</SectionHeading>
+          {/* live Wix FAQ widget: heading left-of-center + underlined search field on the right */}
+          <div className="fr-faqrow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
+            <SectionHeading size={22} align="left">Frequently asked questions</SectionHeading>
+            <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', width: 256, borderBottom: '1px solid #d9d2ca' }}>
+              <input
+                type="text"
+                value={faqQuery}
+                onChange={(e) => { setFaqQuery(e.target.value); setOpenFaq(null); }}
+                placeholder="Looking for something?"
+                aria-label="Search frequently asked questions"
+                className="fr-faqsearch"
+                style={{ width: '100%', border: 'none', outline: 'none', background: 'none', color: GREEN, fontFamily: BODY, fontSize: 16, padding: '8px 30px 8px 2px' }}
+              />
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke={GREEN} strokeWidth="2" strokeLinecap="round" aria-hidden style={{ position: 'absolute', right: 4 }}>
+                <circle cx="11" cy="11" r="7" /><line x1="16.5" y1="16.5" x2="21" y2="21" />
+              </svg>
+            </span>
+          </div>
           <div style={{ marginTop: 36 }}>
-            {c.faqs.map((f, i) => {
+            {c.faqs.filter((f) => !faqQuery || (f.q + ' ' + f.a).toLowerCase().includes(faqQuery.toLowerCase())).map((f, i) => {
               const open = openFaq === i;
               return (
                 <div key={f.q} style={{ borderBottom: '1px solid #e6e1da' }}>
                   <button onClick={() => setOpenFaq(open ? null : i)} style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', padding: '20px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, textAlign: 'left' }}>
-                    <span style={{ color: open ? GREEN : TAUPE_DK, fontFamily: WIDE, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>{f.q}</span>
+                    <span style={{ color: GREEN, fontFamily: WIDE, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>{f.q}</span>
                     <span style={{ color: TAUPE_LT, fontSize: 18, flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>&#8964;</span>
                   </button>
-                  {open && <p style={{ ...body, padding: '0 4px 22px', maxWidth: 760 }}>{f.a}</p>}
+                  {open && (
+                    <div style={{ padding: '0 4px 22px' }}>
+                      <p style={{ ...body, fontSize: 16, margin: '0 0 16px', maxWidth: 760 }}>{f.a}</p>
+                      <ShareIcons url={c.liveUrl} />
+                    </div>
+                  )}
                 </div>
               );
             })}
           </div>
+          {/* live: centered blue CTA between the FAQ list and the evidence section
+              (skipped when faqCtaLabel is '' — live fat-dissolving has no FAQ CTA) */}
+          {c.faqCtaLabel !== '' && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}><CTA variant="blue">{c.faqCtaLabel ?? 'Claim my spot now'}</CTA></div>
+          )}
         </div>
       </section>
 
@@ -633,7 +775,8 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       <section style={{ paddingTop: 32, paddingBottom: 64 }}>
         <div style={{ ...CONTAINER, maxWidth: 1100 }}>
           <Eyebrow>{c.evidenceEyebrow}</Eyebrow>
-          <div style={{ marginTop: 8 }}><SectionHeading size={25}>evidence based approach</SectionHeading></div>
+          <div style={{ width: 320, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 0' }} />
+          <div style={{ marginTop: 14 }}><SectionHeading size={24}>evidence based approach</SectionHeading></div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, marginTop: 40 }} className="fr-evgrid">
             {c.evidence.map((e, i) => {
@@ -650,8 +793,8 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 30, border: `2px solid ${GREEN}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                   </div>
                   {/* gradient card sitting behind the lower part of the image */}
-                  <div style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
-                    <h3 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', margin: 0 }}>{e.title}</h3>
+                  <div style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, rgba(142,176,147,0.4) 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
+                    <h3 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', whiteSpace: 'pre-line', margin: 0 }}>{e.title}</h3>
                     <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
                     <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>What it does</p>
                     <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.6, margin: '0 0 6px', ...(open ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>{e.does}</p>
@@ -671,12 +814,13 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             })}
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}><CTA variant="blue">Claim my spot now</CTA></div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}><CTA variant="blue">{c.evidenceCtaLabel ?? 'Claim my spot now'}</CTA></div>
         </div>
       </section>
       )}
 
       <style>{`
+        .fr-faqsearch::placeholder { color: ${GREEN}; opacity: 1; }
         @media (max-width: 860px) {
           .fr-hero-grid, .fr-2col, .fr-benefits, .fr-evgrid { grid-template-columns: 1fr !important; }
           .fr-evgrid > div { grid-column: auto !important; }

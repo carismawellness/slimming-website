@@ -10,16 +10,6 @@ export interface Testimonial {
 export const testimonials: Record<string, Testimonial[]> = {
   "fat-freezing": [
     {
-      "image": "/wix/87fc13_4cf3910addfc4354a4f85689adde45ec~mv2.png",
-      "quote": "Every time I put jeans or dress I was seeing this belly and I always try hide it with tops and even in summer I was not comfortable so I did fat freezing and now its much better and I feel more free when I dress.",
-      "name": "MARIJA CAMILLERI"
-    },
-    {
-      "image": "/wix/87fc13_00e6c827b80b4e1cafae24b05d371188~mv2.png",
-      "quote": "From the side my stomach used to bother me and i’m not into diets or all that so I did fat freezing and it helped enough for me to feel better about it.",
-      "name": "MARK REYNOLDS"
-    },
-    {
       "image": "/wix/87fc13_c84a6bdcb7aa4711b0333934071d3659~mv2.png",
       "quote": "I always noticed this part of my stomach, especially in tighter clothes. It never really changed. After the treatment it looks flatter and I feel much better about it.",
       "name": "KRISTA MICALLEF"
@@ -28,6 +18,16 @@ export const testimonials: Record<string, Testimonial[]> = {
       "image": "/wix/87fc13_6290ce8d1f0c458c8f78d0749b72bde9~mv2.png",
       "quote": "From the side my stomach used to bother me in photos. I didn’t want surgery, so I tried this and it made a real difference. It looks smoother and I feel more confident.",
       "name": "REBECCA ATTARD"
+    },
+    {
+      "image": "/wix/87fc13_4cf3910addfc4354a4f85689adde45ec~mv2.png",
+      "quote": "Every time I put jeans or dress I was seeing this belly and I always try hide it with tops and even in summer I was not comfortable so I did fat freezing and now its much better and I feel more free when I dress.",
+      "name": "MARIJA CAMILLERI"
+    },
+    {
+      "image": "/wix/87fc13_00e6c827b80b4e1cafae24b05d371188~mv2.png",
+      "quote": "From the side my stomach used to bother me and i’m not into diets or all that so I did fat freezing and it helped enough for me to feel better about it.",
+      "name": "MARK REYNOLDS"
     }
   ],
   "fat-dissolving": [

@@ -351,50 +351,49 @@ export default function Home() {
       {/* (4) Our Results-Driven Approach / Extended Care Commitment */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderRadius: '32px', padding: '48px' }}>
-            <h2 className="text-center mb-2" style={{ color: '#5E7E63', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '28px' }}>
-              our results-driven approach
-            </h2>
-            <p className="text-center mb-10" style={{ color: '#5E7E63', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', lineHeight: '1.4' }}>
-              UP TO 1KG A WEEK. MEASURED. VERIFIED. COMMITTED TO YOUR WEIGHT LOSS
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-              {/* Left - Image */}
-              <div className="flex justify-center">
-                <img
-                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
-                  alt="Doctor consultation for medical weight loss at Carisma Slimming Malta"
-                  className="rounded-lg"
-                  style={{ width: '100%', maxWidth: '412px', aspectRatio: '412 / 487', height: 'auto', objectFit: 'cover', objectPosition: 'center', display: 'block', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}
-                />
-              </div>
-              {/* Right - Text + Commitment */}
-              <div>
-                <p className="mb-6" style={{ color: '#55624F', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
-                  We are selective about who joins our weight loss transformation programs. We only accept clients we genuinely believe we can help reach their healthy weight through our slimming program. If you qualify and complete your program and do not hit your target weight, we will extend your weight management program at no extra program fee until we achieve your desired result.
-                </p>
-                <p className="mb-5" style={{ color: '#3F5742', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '600', letterSpacing: '0.5px' }}>
-                  This is our Extended Care Commitment
-                </p>
-                <p className="mb-5" style={{ color: '#55624F', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
-                  To keep your slimming results medically valid and fair, you agree to
-                </p>
-                <ul className="grid grid-cols-1 gap-y-3">
-              {[
-                'Attend all scheduled in clinic sessions and weekly check ins',
-                'Follow your personalised food plan consistently and tell us when you struggle',
-                'Complete your agreed physical activities & discuss any pain or obstacles',
-                'Use only the treatments and medications recommended by our medical team',
-                'Inform us of any major health (e.g., heart disease) or medication changes',
-                'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
-              ].map((req) => (
-                  <li key={req} className="flex items-start gap-2" style={{ color: '#55624F', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
-                    <span style={{ color: '#3F5742' }}>•</span>
-                    <span>{req}</span>
-                  </li>
-                ))}
-                </ul>
-              </div>
+          <h4 className="text-center mb-2" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
+            our results-driven approach
+          </h4>
+          <div className="mx-auto mb-4" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />
+          <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.4', textTransform: 'uppercase' }}>
+            up to 1kg a week. measured. verified.<br />committed to your weight loss
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+            {/* Left - Image */}
+            <div className="flex justify-center">
+              <img
+                src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                alt="Doctor consultation for medical weight loss at Carisma Slimming Malta"
+                className="rounded-lg"
+                style={{ width: '100%', maxWidth: '412px', aspectRatio: '412 / 487', height: 'auto', objectFit: 'cover', objectPosition: 'center', display: 'block', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}
+              />
+            </div>
+            {/* Right - Text + Commitment */}
+            <div>
+              <p className="mb-6" style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.4' }}>
+                We are selective about who joins our weight loss transformation programs. We only accept clients we genuinely believe we can help reach their healthy weight through our slimming program. If you qualify and complete your program and do not hit your target weight, we will extend your weight management program at no extra program fee until we achieve your desired result.
+              </p>
+              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '600', letterSpacing: '0.5px' }}>
+                This is our Extended Care Commitment
+              </p>
+              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', lineHeight: '1.4', textTransform: 'uppercase' }}>
+                To keep your slimming results medically valid and fair, you agree to
+              </p>
+              <ul className="grid grid-cols-1 gap-y-3">
+            {[
+              'Attend all scheduled in clinic sessions and weekly check ins',
+              'Follow your personalised food plan consistently and tell us when you struggle',
+              'Complete your agreed physical activities & discuss any pain or obstacles',
+              'Use only the treatments and medications recommended by our medical team',
+              'Inform us of any major health (e.g., heart disease) or medication changes',
+              'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
+            ].map((req) => (
+                <li key={req} className="flex items-start gap-2" style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.4' }}>
+                  <span style={{ color: '#8EB093' }}>•</span>
+                  <span>{req}</span>
+                </li>
+              ))}
+              </ul>
             </div>
           </div>
         </div>
@@ -403,14 +402,14 @@ export default function Home() {
       {/* (5) Medical Weight Loss in Malta (GLP-1) */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-3" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '28px' }}>
+          <h2 className="text-center mb-3" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px' }}>
             MEDICAL WEIGHT LOSS IN MALTA (GLP-1)
           </h2>
           <div className="mx-auto mb-12" style={{ width: '120px', height: '1px', backgroundColor: '#C9B8AE' }} />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
             {/* Left - text */}
             <div className="order-2 md:order-1">
-              <p className="mb-6" style={{ color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
+              <p className="mb-6" style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.4' }}>
                 GLP-1s are naturally occurring hormones that help regulate appetite and blood sugar. GLP-1 prescription medications — such as Ozempic and Mounjaro, mimic or boost these signals so you feel full sooner, think about food less, and can lose weight more effectively when combined with a structured slimming plan and personalised meal plan.
               </p>
               <p className="mb-3" style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
@@ -419,21 +418,22 @@ export default function Home() {
               <div className="mb-6" style={{ width: '100%', maxWidth: '540px', height: '1px', backgroundColor: '#E6E1DC' }} />
               <div className="space-y-5">
                 {[
-                  'You first have a full medical weight loss assessment, body scan and review of your history and bloods. If you medically qualify, the doctor explains your options, expected results and side effects so you can decide with confidence',
+                  'You first have a full medical weight loss assessment, body scan and review of your history and bloods',
+                  'If you medically qualify, the doctor explains your options, expected results and side effects so you can decide with confidence',
                   'Any prescription is paired with a personalised meal plan, movement and accountability, never used on its own',
                   'We monitor your progress and symptoms, adjust or stop treatment when needed and plan for life after the medication',
                   'If GLP-1 is not right for you, we will tell you clearly and focus on non-medication weight loss routes that match your health and goals',
                 ].map((step, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <span style={{ color: '#8EB093', fontSize: '18px', lineHeight: '1.5' }}>•</span>
-                    <p style={{ color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.7' }}>
+                    <span style={{ color: '#8EB093', fontSize: '18px', lineHeight: '1.4' }}>•</span>
+                    <p style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.4' }}>
                       {step}
                     </p>
                   </div>
                 ))}
               </div>
               <div className="mt-8" style={{ borderLeft: '3px solid #8EB093', paddingLeft: '18px' }}>
-                <p style={{ color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.7', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+                <p style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.4', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                   To protect quality of care, our guaranteed weight loss transformation programs are limited to a small number of clients each month. Check if you qualify.
                 </p>
               </div>
@@ -443,16 +443,16 @@ export default function Home() {
               <img
                 src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png"
                 alt="medical weight loss consultation Malta"
-                style={{ width: '100%', maxWidth: '370px', marginLeft: 'auto', marginRight: 'auto', aspectRatio: '326 / 443', objectFit: 'cover', objectPosition: 'center', display: 'block', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}
+                style={{ width: '100%', maxWidth: '326px', marginLeft: 'auto', marginRight: 'auto', aspectRatio: '326 / 443', objectFit: 'cover', objectPosition: 'center', display: 'block', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}
               />
               <a
                 href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-center rounded font-bold text-white"
-                style={{ backgroundColor: '#2b5672', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '16px 0', width: '100%', maxWidth: '370px', marginLeft: 'auto', marginRight: 'auto' }}
+                className="inline-flex items-center justify-center font-bold text-white"
+                style={{ backgroundColor: '#6391AB', borderRadius: '10px', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', width: '100%', maxWidth: '326px', height: '40px', marginLeft: 'auto', marginRight: 'auto' }}
               >
-                Get Your Free Body Analysis →
+                Get Your Free Body Analysis ›
               </a>
             </div>
           </div>
@@ -462,19 +462,27 @@ export default function Home() {
       {/* (6) The Carisma Difference */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderRadius: '32px', padding: '48px' }}>
+          <div className="relative" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderRadius: '32px', padding: '48px', overflow: 'hidden' }}>
+            {/* Decorative background watermark (live Wix asset, alt="") */}
+            <img
+              src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png"
+              alt=""
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '50%', top: '40px', transform: 'translateX(-50%)', width: '678px', height: '630px', objectFit: 'contain', pointerEvents: 'none', zIndex: 0 }}
+            />
+            <div className="relative" style={{ zIndex: 1 }}>
             <p className="text-center mb-2" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', fontWeight: '600', letterSpacing: '3px', textTransform: 'uppercase' }}>
               the carisma difference
             </p>
             <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-            <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               malta&rsquo;s #1 leading wellness chain
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
               {/* Left - commitments */}
               <div className="space-y-10">
                 <div>
-                  <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '16px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <h3 className="mb-5" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     Our Commitment
                   </h3>
                   <ul className="space-y-3">
@@ -492,7 +500,7 @@ export default function Home() {
                   </ul>
                 </div>
                 <div>
-                  <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '16px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <h3 className="mb-5" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
                     Why Malta Chooses Carisma
                   </h3>
                   <ul className="space-y-3">
@@ -529,10 +537,10 @@ export default function Home() {
                 href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-center rounded font-bold text-white"
-                style={{ backgroundColor: '#2b5672', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '14px 48px' }}
+                className="inline-flex items-center justify-center font-bold text-white"
+                style={{ backgroundColor: '#6391AB', borderRadius: '10px', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', width: '464px', maxWidth: '100%', height: '40px' }}
               >
-                Get Your Free Body Analysis →
+                Get Your Free Body Analysis ›
               </a>
               <div className="flex items-center gap-3">
                 <img src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="Complimentary on-site parking" style={{ width: '34px', height: 'auto', objectFit: 'contain' }} />
@@ -541,6 +549,7 @@ export default function Home() {
                 </span>
               </div>
             </div>
+            </div>
           </div>
         </div>
       </section>
@@ -548,7 +557,7 @@ export default function Home() {
       {/* (7) Real People, Real Reviews — heading precedes doctor profiles (rendered by BrandBlock) */}
       <section className="pt-16 pb-4" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '28px', letterSpacing: '1px' }}>
+          <h2 style={{ color: '#8EB093', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '35px', letterSpacing: '1px' }}>
             real people, real reviews
           </h2>
         </div>

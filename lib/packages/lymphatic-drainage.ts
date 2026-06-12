@@ -41,6 +41,13 @@ export const lymphaticDrainage: PackageContent = {
   ],
   secretClosing:
     'If you’re reading this and thinking, “This sounds like me,” the issue may not be lifestyle or effort. Often, it’s your lymphatic system struggling to drain efficiently. When lymph flow is slow, fluids and toxins can build up in the body.',
+  secretClosingBold: 'lymphatic system',
+  secretClosing2: {
+    lead: 'Lymphatic Drainage Therapy',
+    text: 'gently stimulates your lymphatic system, supporting natural detoxification, improved circulation, and reduced fluid retention — helping your body feel lighter, more balanced, and refreshed again.',
+  },
+
+  pressHeading: ['malta’s trusted clinic for', 'medical lymphatic drainage therapy'],
 
   benefits: [
     { icon: W + '87fc13_e504472e668d4f3c916d7c048696cde3~mv2.png', title: 'MEDICALLY GUIDED APPROACH', body: 'Your lymphatic drainage treatment is overseen by medical professionals, with careful assessment of your health history to ensure the therapy is safe, appropriate, and effective for your body.' },
@@ -59,28 +66,34 @@ export const lymphaticDrainage: PackageContent = {
     'Designed to promote a lighter, more balanced feeling in the body',
     'Always provided as part of a medically guided wellness approach',
   ],
+  eligListStyle: 'checks',
 
-  ptEyebrow: 'the carisma difference',
-  ptHeading: 'we are not another diet clinic.',
+  // live: heading appears once (above the difference card); the therapy card has no section heading of its own
+  ptEyebrow: '',
+  ptHeading: '',
   ptCardEyebrow: 'LYMPHATIC DRAINAGE THERAPY',
   ptCardTag: '',
+  ptLayout: 'centered',
   ptParas: [
     'The lymphatic system plays a vital role in fluid balance, detoxification, and immune support. When lymph flow becomes sluggish, fluid and waste can accumulate in the body leading to bloating, swelling, heaviness, and slow recovery.',
     'Lymphatic Drainage Therapy uses gentle, targeted techniques to stimulate lymph flow, helping the body naturally eliminate excess fluids and toxins while supporting circulation and overall wellbeing.',
-    'At our clinic, lymphatic drainage is used as a therapeutic support, not a cosmetic shortcut:',
   ],
-  ptEfficacyTitle: '',
+  ptEfficacyTitle: 'At our clinic, lymphatic drainage is used as a therapeutic support, not a cosmetic shortcut:',
   ptEfficacyBullets: [
     'You begin with a professional consultation to assess your health history, symptoms, and suitability for treatment.',
     'Your practitioner explains how lymphatic drainage works, what results to expect, and how often sessions may be recommended.',
     'Treatment is delivered using controlled, medically guided techniques — never aggressively or without assessment.',
     'We monitor your response and adjust frequency or approach as needed, ensuring comfort, safety, and effectiveness.',
-    'If lymphatic drainage is not appropriate for you, we are clear and transparent — and guide you toward alternative therapies that better support your health and goals.',
   ],
+  ptClosing:
+    'If lymphatic drainage is not appropriate for you, we are clear and transparent — and guide you toward alternative therapies that better support your health and goals.',
+  ptCardCta: 'Claim your spot now',
   ptImage: W + '87fc13_69b82cafbcc744d39a475402cf8fd33e~mv2.jpg',
   ptImage2: W + '87fc13_a421b8598a9d4687aed1200322e0dc64~mv2.png',
+  ptImage3: W + '87fc13_50cffcdb438440d68ea6b0553bf28e24~mv2.png',
 
-  dualHeading: ['4 core pillars of our methodology', 'Malta’s only dual technology starter pack for stubborn fat'],
+  dualEyebrow: '4 core pillars of our methodology',
+  dualHeading: ['Malta’s only dual technology starter pack for stubborn fat'],
   dualMini: [
     { icon: W + '87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'ELIGIBILITY & ASSESSMENT', body: 'Every lymphatic drainage journey begins with a professional consultation to assess suitability, health history, and individual concerns before treatment is recommended.' },
     { icon: W + '87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'LYMPHATIC FLOW & DETOX SUPPORT', body: 'Gentle, targeted lymphatic techniques are used to stimulate lymph flow, helping reduce fluid retention, support detoxification, and improve circulation in a controlled, therapeutic way.' },
@@ -93,11 +106,12 @@ export const lymphaticDrainage: PackageContent = {
     '€25 Carisma Aesthetics credit (€25)',
     'Complimentary Parking Validation',
   ],
-  dualTotalValue: '€665',
+  dualTotalValue: '€665.',
   dualTodayPrice: '€199 Only',
   dualFineprint: [
     '* Eligibility and treatment recommendations depend on your health history and individual needs. A clear plan will always be discussed during your consultation before starting. Lymphatic drainage is a supportive wellness therapy and may not be suitable for certain medical conditions. Treatment is provided following professional assessment by our medical team.',
   ],
+  dualCtaLabel: 'Claim my spot now',
 
   mapQuery: 'Carisma Slimming, Malta',
 
@@ -159,7 +173,5 @@ export const lymphaticDrainage: PackageContent = {
       foot: 'Gentle & non-invasive Requires basic screening Comfort-first approach',
     },
   ],
-
-  // The live /lymphatic-drainage page has no treatable-areas / eligibility section.
-  hide: { eligibility: true },
+  evidenceCtaLabel: 'Claim your spot now',
 };
