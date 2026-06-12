@@ -126,6 +126,8 @@ export const lymphaticDrainage: PackageContent = {
     { q: '8. What should I do after my session?', a: 'After treatment, you may be advised to stay well hydrated and allow your body time to respond. Some people notice increased urination or a lighter feeling shortly after the session. Your practitioner may also recommend follow-up sessions or simple lifestyle tips to support results.' },
   ],
 
+  faqCtaLabel: 'Claim your spot now',
+
   evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METODOLOGY',
   evidence: [
     {
