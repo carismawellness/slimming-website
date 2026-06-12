@@ -182,6 +182,8 @@ export interface PackageContent {
     evidence?: boolean;
     /** suppress the before/after testimonial carousel in the secret section (live lymphatic-drainage has none). */
     testimonials?: boolean;
+    /** suppress the Google Maps iframe in the wellness section (live lipocavitation omits the map). */
+    map?: boolean;
   };
 }
 

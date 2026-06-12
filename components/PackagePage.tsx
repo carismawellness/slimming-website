@@ -263,14 +263,14 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               </div>
               <div style={{ marginBottom: 18 }}><Stars withGoogle size={22} /></div>
 
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 6 }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                 {c.heroFineprint.map((f) => (
                   <p key={f} style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0, maxWidth: 460 }}>{f}</p>
                 ))}
               </div>
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
+            <div className="fr-hero-img" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
               {c.heroVideo ? (
                 <div style={{ position: 'relative', width: '100%', maxWidth: 398 }}>
                   {/* live hero video has a petal border-radius: 100px 15px 100px 15px */}
@@ -318,7 +318,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           <SectionHeading>{c.secretHeading.map((l, i) => (<span key={i}>{l}{i < c.secretHeading.length - 1 && <br />}</span>))}</SectionHeading>
           <div style={{ width: 280, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '18px auto 0' }} />
 
-          {TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
+          {!hidden.testimonials && TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
             <TestimonialCarousel items={TESTIMONIALS[c.id]} />
           )}
         </div>
@@ -330,7 +330,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
             <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 36 }} className="fr-2col">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={c.secretImage} alt={c.secretSubheading} style={{ width: '100%', borderRadius: '100px 10px', display: 'block' }} />
+              <img src={c.secretImage} alt={c.secretSubheading} style={{ width: '100%', aspectRatio: c.secretImageRatio ?? '394 / 510', objectFit: 'cover', borderRadius: '100px 10px', display: 'block' }} />
               <div>
                 <p style={{ ...body, marginBottom: 18 }}>{c.secretIntro}</p>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', display: 'flex', flexDirection: 'column', gap: 10 }}>
@@ -458,7 +458,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={c.eligImage} alt={c.eligHeading} style={{ width: '100%', aspectRatio: c.eligImageRatio, objectFit: c.eligImageRatio ? 'cover' : undefined, borderRadius: 16, display: 'block' }} />
             <div>
-              <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 20px', lineHeight: 1.4 }}>{c.eligIntro}</p>
+              <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 16, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 20px', lineHeight: 1.6, maxWidth: 330 }}>{c.eligIntro}</p>
               {c.eligListStyle === 'checks' ? (
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
                   {c.areas.map((a) => (
@@ -470,7 +470,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                   {c.areas.map((a, i) => (
-                    <div key={a} style={{ gridColumn: i === c.areas.length - 1 && c.areas.length % 2 === 1 ? '1 / -1' : 'auto', backgroundColor: '#eef1ec', borderRadius: 8, padding: '14px 16px', textAlign: 'center', color: TAUPE, fontFamily: WIDE, fontSize: 12.5, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{a}</div>
+                    <div key={a} style={{ gridColumn: i === c.areas.length - 1 && c.areas.length % 2 === 1 ? '1 / -1' : 'auto', backgroundColor: '#fff', border: '1px solid #E5E0D8', borderRadius: 10, padding: '14px 16px', textAlign: 'center', color: TAUPE, fontFamily: WIDE, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{a}</div>
                   ))}
                 </div>
               )}
@@ -512,7 +512,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               (wixui-horizontal-line, 116x1 #9B8D83, 15px below — measured on live
               skin-tightening / anti-cellulite / muscle-stimulation / lipocavitation / fat-reduction) */}
           {c.ptEyebrow && <div aria-hidden style={{ width: 116, height: 1, backgroundColor: TAUPE, margin: '15px auto 0' }} />}
-          {c.ptHeading && <div style={{ marginTop: 8 }}><SectionHeading><span style={{ whiteSpace: 'pre-line' }}>{c.ptHeading}</span></SectionHeading></div>}
+          {c.ptHeading && <div style={{ marginTop: 8 }}><SectionHeading size={25}><span style={{ whiteSpace: 'pre-line' }}>{c.ptHeading}</span></SectionHeading></div>}
 
           {c.ptLayout === 'centered' ? (
             /* live lymphatic-drainage: white card, centered serif title, centered intro
@@ -555,8 +555,14 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src={c.ptImage} alt="Before and after" style={{ width: '100%', borderRadius: 12, display: 'block' }} />
               {c.ptImage2 && (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={c.ptImage2} alt="" style={{ width: 150, height: 'auto', borderRadius: 12 }} />
+                <div style={{ position: 'relative' }}>
+                  {c.ptDecorImage && (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img src={c.ptDecorImage} alt="" aria-hidden style={{ position: 'absolute', left: -36, bottom: -36, width: 515, maxWidth: '60vw', height: 'auto', pointerEvents: 'none' }} />
+                  )}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={c.ptImage2} alt="" style={{ width: c.ptImage2Width ?? '100%', height: 'auto', borderRadius: 12, position: 'relative' }} />
+                </div>
               )}
             </div>
             <div>
@@ -579,7 +585,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 </div>
               )}
               {c.ptParas.map((p, i) => (<p key={p} style={{ ...body, marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>))}
-              {c.ptEfficacyTitle && <p style={{ color: GREEN, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '4px 0 14px' }}>{c.ptEfficacyTitle}</p>}
+              {c.ptEfficacyTitle && <p style={{ color: TAUPE, fontFamily: WIDE, fontWeight: 400, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '4px 0 14px' }}>{c.ptEfficacyTitle}</p>}
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                 {c.ptEfficacyBullets.map((b) => (
                   <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
@@ -601,7 +607,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
           {c.dualEyebrow && <div style={{ marginBottom: 10 }}><Eyebrow>{c.dualEyebrow}</Eyebrow></div>}
-          <SectionHeading size={24}>{c.dualHeading.map((l, i) => (<span key={i}>{l}{i < c.dualHeading.length - 1 && <br />}</span>))}</SectionHeading>
+          <SectionHeading size={25}>{c.dualHeading.map((l, i) => (<span key={i}>{l}{i < c.dualHeading.length - 1 && <br />}</span>))}</SectionHeading>
 
           <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #eef1ea 0%, #e7ece2 100%)', borderRadius: 22, padding: 22, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 22 }} className="fr-2col">
             <div style={{ backgroundColor: '#fff', borderRadius: 16, padding: '34px 30px', display: 'flex', flexDirection: 'column', gap: 26, justifyContent: 'space-around' }}>
@@ -694,7 +700,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
             <SectionHeading>malta&rsquo;s #1 leading wellness chain</SectionHeading>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 48, marginTop: 40, alignItems: 'start' }} className="fr-2col">
+            <div style={{ display: 'grid', gridTemplateColumns: hidden.map ? '1fr' : '1fr 1fr', gap: 48, marginTop: 40, alignItems: 'start' }} className="fr-2col">
               <div>
                 <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>our commitment</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 30px', display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -705,9 +711,11 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                   {whyMalta.map((x) => (<li key={x} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}><span style={{ color: TAUPE_LT }}>&bull;</span><span>{x}</span></li>))}
                 </ul>
               </div>
+              {!hidden.map && (
               <div style={{ borderRadius: 14, overflow: 'hidden', boxShadow: '0 8px 26px rgba(120,114,104,0.18)' }}>
                 <iframe title={`${c.id} clinic location in Malta`} src={`https://www.google.com/maps?q=${encodeURIComponent(c.mapQuery)}&output=embed`} width="100%" height="360" loading="lazy" referrerPolicy="no-referrer-when-downgrade" style={{ border: 0, display: 'block' }} />
               </div>
+              )}
             </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, marginTop: 40, flexWrap: 'wrap' }}>
@@ -725,10 +733,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 10. FAQ ===================== */}
       <section style={{ paddingTop: 56, paddingBottom: 56 }}>
-        <div style={{ ...CONTAINER, maxWidth: 900 }}>
+        <div style={{ ...CONTAINER, maxWidth: 960 }}>
           {/* live Wix FAQ widget: heading left-of-center + underlined search field on the right */}
           <div className="fr-faqrow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-            <SectionHeading size={22} align="left">Frequently asked questions</SectionHeading>
+            <SectionHeading size={28}>Frequently asked questions</SectionHeading>
             <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', width: 256, borderBottom: '1px solid #d9d2ca' }}>
               <input
                 type="text"
@@ -748,8 +756,8 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             {c.faqs.filter((f) => !faqQuery || (f.q + ' ' + f.a).toLowerCase().includes(faqQuery.toLowerCase())).map((f, i) => {
               const open = openFaq === i;
               return (
-                <div key={f.q} style={{ borderBottom: '1px solid #e6e1da' }}>
-                  <button onClick={() => setOpenFaq(open ? null : i)} style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', padding: '20px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, textAlign: 'left' }}>
+                <div key={f.q} style={{ borderBottom: '1px solid #e6e1da', marginBottom: 24 }}>
+                  <button onClick={() => setOpenFaq(open ? null : i)} style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', padding: '26px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, textAlign: 'left' }}>
                     <span style={{ color: GREEN, fontFamily: WIDE, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>{f.q}</span>
                     <span style={{ color: TAUPE_LT, fontSize: 18, flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>&#8964;</span>
                   </button>
@@ -826,6 +834,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           .fr-hero-grid, .fr-2col, .fr-benefits, .fr-evgrid { grid-template-columns: 1fr !important; }
           .fr-evgrid > div { grid-column: auto !important; }
           .fr-testi { flex-direction: column !important; }
+          .fr-hero-img { order: -1; }
         }
         @media (max-width: 560px) { .fr-benefits { grid-template-columns: 1fr !important; } }
       `}</style>

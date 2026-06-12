@@ -161,4 +161,6 @@ export const lipocavitation: PackageContent = {
       foot: 'No surgery or needles · Most people return to normal activity right away · Side effects are usually mild and temporary',
     },
   ],
+
+  hide: { map: true },
 };
