@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-const BANNER_PHRASE = "#1 VOTED SLIMMING CLINIC IN MALTA        ▫️        MALTA'S MOST COMPREHENSIVE SLIMMING PROGRAM        ▫️        MEDICALLY QUALIFIED DOCTORS        ▫️        ";
+const BANNER_PHRASE = "#1 VOTED SLIMMING CLINIC IN MALTA        ▫        MALTA'S MOST COMPREHENSIVE SLIMMING PROGRAM        ▫        MEDICALLY QUALIFIED DOCTORS        ▫        ";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -11,7 +11,7 @@ export default function Header() {
   return (
     <header className="bg-white sticky top-0 z-50">
       {/* Scrolling Banner - continuous ticker (text duplicated so the strip is never empty) */}
-      <div className="w-full overflow-hidden text-white flex items-center" style={{ backgroundColor: '#8EB093', height: '34px', fontSize: '12px' }}>
+      <div className="w-full overflow-hidden text-white hidden md:flex items-center" style={{ backgroundColor: '#8EB093', height: '34px', fontSize: '12px' }}>
         <div
           style={{
             animation: 'scroll-banner 20s linear infinite',

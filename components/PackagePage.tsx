@@ -389,7 +389,8 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {c.valueProps && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
-          <SectionHeading>{c.valueProps.heading}</SectionHeading>
+          {/* live: 24px, explicit break after "confidence," (data carries the \n) */}
+          <SectionHeading size={24}><span style={{ whiteSpace: 'pre-line' }}>{c.valueProps.heading}</span></SectionHeading>
           <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 48, alignItems: 'center', marginTop: 40 }} className="fr-2col">
             <div>
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -404,7 +405,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               <div style={{ marginTop: 18 }}><Stars withGoogle /></div>
             </div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.valueProps.image} alt={c.valueProps.heading} style={{ width: '100%', borderRadius: '100px 10px', display: 'block' }} />
+            <img src={c.valueProps.image} alt={c.valueProps.heading} style={{ width: '100%', maxWidth: 384, aspectRatio: '384 / 362', objectFit: 'cover', borderRadius: '100px 10px', display: 'block', marginInline: 'auto' }} />
           </div>
         </div>
       </section>
@@ -455,7 +456,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
           <div style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 44, alignItems: 'center', marginTop: 36 }} className="fr-2col">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={c.eligImage} alt={c.eligHeading} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
+            <img src={c.eligImage} alt={c.eligHeading} style={{ width: '100%', aspectRatio: c.eligImageRatio, objectFit: c.eligImageRatio ? 'cover' : undefined, borderRadius: 16, display: 'block' }} />
             <div>
               <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 20px', lineHeight: 1.4 }}>{c.eligIntro}</p>
               {c.eligListStyle === 'checks' ? (
@@ -572,7 +573,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                   )}
                 </div>
               ) : (
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 14 }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 14, flexWrap: 'wrap' }}>
                   <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
                   {c.ptCardTag && <span style={{ color: GREEN, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN}`, borderRadius: 20, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>}
                 </div>
@@ -647,7 +648,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {c.offer && (
       <section style={{ paddingTop: 32, paddingBottom: 56 }}>
         <div style={CONTAINER}>
-          <SectionHeading>{c.offer.introHeading}</SectionHeading>
+          <SectionHeading size={24}>{c.offer.introHeading}</SectionHeading>
           <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 44, alignItems: 'center', marginTop: 36 }} className="fr-2col">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={c.offer.introImage} alt={c.offer.introHeading} style={{ width: '100%', borderRadius: '10px 100px', display: 'block' }} />

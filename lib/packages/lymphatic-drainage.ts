@@ -176,4 +176,6 @@ export const lymphaticDrainage: PackageContent = {
     },
   ],
   evidenceCtaLabel: 'Claim your spot now',
+
+  hide: { testimonials: true },
 };

@@ -54,6 +54,7 @@ export const fatFreezing: PackageContent = {
   eligEyebrow: 'eligibility criteria',
   eligHeading: 'selective by intention successful by design',
   eligImage: W + '87fc13_bda5e64e4bcb4471b28a919528af71bc~mv2.png',
+  eligImageRatio: '1 / 1',
   eligIntro: 'Treat visible fat bulges in 7 areas of the body',
   // live page chip literally reads "THIGS" (Wix typo) — kept for pixel parity
   areas: ['STOMACH – BELLY FAT', 'LOVE HANDLES', 'UPPER ARMS', 'THIGS', 'BANANA ROLL', 'BACK FAT, BRA FAT', 'DOUBLE CHIN / THE JAWLINE'],
@@ -76,6 +77,8 @@ export const fatFreezing: PackageContent = {
   ],
   ptImage: W + '87fc13_e873e3bf68584964b06a9f7bd9e5d335~mv2.png',
   ptImage2: W + '87fc13_1105e5fcee694da4a6ed1edeb9fd2bd7~mv2.png',
+  ptImage2Width: 225,
+  ptDecorImage: W + '87fc13_134b655cd7f945a9a2847030229e46a1~mv2.png',
 
   dualHeading: ['malta’s only dual technology', 'starter pack for stubborn fat'],
   dualMini: [

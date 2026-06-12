@@ -55,6 +55,7 @@ export interface PackageContent {
   secretHeading: string[]; // lines
   secretSubheading: string;
   secretImage: string;
+  secretImageRatio?: string; // CSS aspect-ratio for the secret section image; default portrait 394/510
   secretIntro: string;
   secretBullets: string[];
   secretClosing: string;
@@ -75,6 +76,7 @@ export interface PackageContent {
   eligEyebrow?: string;
   eligHeading: string;
   eligImage: string;
+  eligImageRatio?: string; // CSS aspect-ratio; live fat-reduction crops to ~1/1
   eligIntro: string;
   areas: string[];
   /** 'pills' (default): uppercase grid boxes. 'checks': vertical sentence-case list with green check icons (live lymphatic-drainage). */
@@ -103,6 +105,8 @@ export interface PackageContent {
   ptCardCta?: string;
   ptImage: string; // before/after
   ptImage2?: string; // small decorative
+  ptImage2Width?: number; // px; live fat-reduction orange measures ~225
+  ptDecorImage?: string;  // decorative graphic behind/below ptImage2 (live: green waves)
   ptImage3?: string; // second close-up (centered layout renders ptImage2 + ptImage3 side by side)
 
   /* ---- 8. dual / starter pack ---- */
@@ -176,6 +180,8 @@ export interface PackageContent {
     dual?: boolean;
     wellness?: boolean;
     evidence?: boolean;
+    /** suppress the before/after testimonial carousel in the secret section (live lymphatic-drainage has none). */
+    testimonials?: boolean;
   };
 }
 
