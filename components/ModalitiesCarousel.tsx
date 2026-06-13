@@ -52,7 +52,7 @@ const CARDS = [
 const CARD_W = 349;
 const CARD_H = 465;
 const GAP = 10;
-const SCROLL_STEP = CARD_W + GAP;
+const PAD = 40; // left/right breathing room
 
 export default function ModalitiesCarousel() {
   const ref = useRef<HTMLDivElement>(null);
@@ -62,8 +62,8 @@ export default function ModalitiesCarousel() {
   const sync = () => {
     const el = ref.current;
     if (!el) return;
-    setAtStart(el.scrollLeft <= 2);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+    setAtStart(el.scrollLeft <= 4);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
   };
 
   useEffect(() => {
@@ -78,7 +78,7 @@ export default function ModalitiesCarousel() {
   }, []);
 
   const scroll = (dir: 1 | -1) =>
-    ref.current?.scrollBy({ left: dir * SCROLL_STEP, behavior: 'smooth' });
+    ref.current?.scrollBy({ left: dir * (CARD_W + GAP), behavior: 'smooth' });
 
   return (
     <div className="relative">
@@ -97,38 +97,42 @@ export default function ModalitiesCarousel() {
             backgroundColor: '#ffffff',
             boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
             color: '#9B8D83',
-            fontSize: '24px',
+            fontSize: '26px',
             lineHeight: 1,
             border: 'none',
             cursor: 'pointer',
+            borderRadius: '2px',
           }}
         >
           ‹
         </button>
       )}
 
-      {/* Scrollable track — full viewport width, bleeds both edges */}
+      {/* Scrollable track */}
       <div
         ref={ref}
         className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden"
         style={{
           gap: `${GAP}px`,
           scrollSnapType: 'x mandatory',
+          /* scroll-padding-left must match paddingLeft so snap targets are correct */
+          scrollPaddingLeft: `${PAD}px`,
           scrollbarWidth: 'none',
-          paddingLeft: '40px',
-          paddingRight: '40px',
+          paddingLeft: `${PAD}px`,
+          paddingRight: `${PAD}px`,
         }}
       >
         {CARDS.map((card) => (
           <Link
             key={card.title}
             href={card.href}
-            className="relative block overflow-hidden flex-shrink-0 group"
+            className="relative block overflow-hidden flex-shrink-0"
             style={{
               width: `${CARD_W}px`,
               height: `${CARD_H}px`,
-              borderRadius: '8px',
+              borderRadius: '20px',
               scrollSnapAlign: 'start',
+              textDecoration: 'none',
             }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -154,10 +158,7 @@ export default function ModalitiesCarousel() {
               }}
             />
             {/* Text + button */}
-            <div
-              className="absolute inset-x-0 bottom-0"
-              style={{ padding: '0 28px 28px' }}
-            >
+            <div className="absolute inset-x-0 bottom-0" style={{ padding: '0 28px 28px' }}>
               <h3
                 className="mb-3"
                 style={{
@@ -183,16 +184,18 @@ export default function ModalitiesCarousel() {
               >
                 {card.desc}
               </p>
+              {/* EXPLORE — visually a button, functionally part of the card Link */}
               <span
                 className="block text-center"
                 style={{
-                  border: '1px solid rgba(255,255,255,0.8)',
+                  border: '1.5px solid rgba(255,255,255,0.8)',
                   color: '#ffffff',
                   fontFamily: 'Novecento Wide Book, sans-serif',
                   fontSize: '13px',
                   letterSpacing: '2px',
                   padding: '14px 0',
                   textTransform: 'uppercase',
+                  borderRadius: '4px',
                 }}
               >
                 EXPLORE
@@ -217,10 +220,11 @@ export default function ModalitiesCarousel() {
             backgroundColor: '#ffffff',
             boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
             color: '#9B8D83',
-            fontSize: '24px',
+            fontSize: '26px',
             lineHeight: 1,
             border: 'none',
             cursor: 'pointer',
+            borderRadius: '2px',
           }}
         >
           ›
