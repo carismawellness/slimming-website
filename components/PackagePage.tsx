@@ -275,7 +275,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 <div style={{ position: 'relative', width: '100%', maxWidth: 398 }}>
                   {/* live hero video has a petal border-radius: 100px 15px 100px 15px */}
                   <video ref={heroVideoRef} src={c.heroVideo} poster={c.heroImage} autoPlay muted loop playsInline aria-label={c.heroSubheading}
-                    style={{ width: '100%', aspectRatio: c.heroImageRatio ?? '398 / 682', objectFit: 'cover', borderRadius: '100px 15px 100px 15px', display: 'block', backgroundColor: '#dce6dc' }} />
+                    style={{ width: '100%', maxHeight: '540px', aspectRatio: c.heroImageRatio ?? '398 / 682', objectFit: 'cover', borderRadius: '100px 15px 100px 15px', display: 'block', backgroundColor: '#dce6dc' }} />
                   <button
                     type="button"
                     onClick={toggleHeroSound}
