@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Script from 'next/script';
 import GoogleReviews from '@/components/GoogleReviews';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 
@@ -46,28 +45,16 @@ export default function Home() {
               {/* Form Section — GoHighLevel (LeadConnector) embedded web form.
                   Submissions create a lead in the Carisma GHL system. */}
               <h2 className="text-xl mb-6" style={{ color: '#8EB093', fontSize: '15px', fontWeight: '500', letterSpacing: '0.5px' }}>
-                BOOK YOUR FREE CONSULTATION
+                YOUR PERSONALISED SLIMMING QUIZ
               </h2>
-              <div style={{ borderRadius: '8px', overflow: 'hidden', backgroundColor: '#EEF3F0' }}>
+              <div style={{ width: '100%' }}>
                 <iframe
-                  src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
-                  style={{ width: '100%', height: '760px', border: 'none', borderRadius: '8px' }}
-                  id="inline-Z3VHJCJwj5mBGmqcdmpE"
-                  data-layout="{'id':'INLINE'}"
-                  data-trigger-type="alwaysShow"
-                  data-trigger-value=""
-                  data-activation-type="alwaysActivated"
-                  data-activation-value=""
-                  data-deactivation-type="neverDeactivate"
-                  data-deactivation-value=""
-                  data-form-name="WEB FORM"
-                  data-height="1093"
-                  data-layout-iframe-id="inline-Z3VHJCJwj5mBGmqcdmpE"
-                  data-form-id="Z3VHJCJwj5mBGmqcdmpE"
-                  title="WEB FORM"
+                  src="https://quiz-slimming.vercel.app"
+                  title="Personalised Slimming Quiz"
+                  loading="lazy"
+                  style={{ width: '100%', height: '760px', border: 'none', display: 'block' }}
                 />
               </div>
-              <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
             </div>
 
             {/* Right Side - Image and Badge */}
