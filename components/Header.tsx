@@ -6,7 +6,7 @@ import { useState } from 'react';
 const GREEN = '#8EB093';
 
 const navLink = {
-  color: GREEN,
+  color: '#B0A68F',
   fontFamily: '"Novecento Wide", sans-serif',
   fontSize: '12px',
   fontWeight: 400 as const,
@@ -65,7 +65,7 @@ export default function Header() {
 
           {/* Packages dropdown */}
           <div className="relative group" style={{ display: 'flex', alignItems: 'center' }}>
-            <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: 0 }} className="hover:opacity-60 transition-opacity">
+            <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#B0A68F' }} className="hover:opacity-60 transition-opacity">
               Packages
             </button>
             <div className="absolute hidden group-hover:block" style={{
