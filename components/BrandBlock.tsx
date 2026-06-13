@@ -50,11 +50,19 @@ export default function BrandBlock() {
   const [bookVisible, setBookVisible] = useState(false);
 
   useEffect(() => {
+    const el = bookRef.current;
+    if (!el) return;
     const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setBookVisible(true); },
-      { threshold: 0.15 }
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          // Double rAF ensures the browser paints the initial hidden state before transitioning
+          requestAnimationFrame(() => requestAnimationFrame(() => setBookVisible(true)));
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
     );
-    if (bookRef.current) observer.observe(bookRef.current);
+    observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
@@ -93,9 +101,10 @@ export default function BrandBlock() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div ref={bookRef} className="flex items-center justify-end" style={{
               height: '487px',
-              transform: bookVisible ? 'translateY(0px)' : 'translateY(60px)',
+              willChange: 'transform, opacity',
+              transform: bookVisible ? 'translateY(0px)' : 'translateY(70px)',
               opacity: bookVisible ? 1 : 0,
-              transition: 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease',
+              transition: bookVisible ? 'transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease' : 'none',
             }}>
               <img src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.png" alt="Carisma Slimming Guide cover image" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             </div>
