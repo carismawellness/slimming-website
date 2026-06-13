@@ -48,7 +48,7 @@ export default function Home() {
               <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
                 <iframe
                   src="https://quiz-slimming.vercel.app"
-                  style={{ width: '100%', height: '760px', border: 'none', borderRadius: '8px' }}
+                  style={{ width: '100%', height: '620px', border: 'none', borderRadius: '8px' }}
                   title="Slimming Quiz"
                 />
               </div>
