@@ -9,7 +9,7 @@ const NAV_STYLE = {
   fontFamily: '"Novecento Wide", sans-serif',
   fontSize: '12px',
   fontWeight: 400 as const,
-  letterSpacing: '1px',
+  letterSpacing: '0.5px',
   textDecoration: 'none',
 } as const;
 
@@ -38,7 +38,7 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center" style={{ gap: '40px' }}>
+        <div className="hidden md:flex items-center" style={{ gap: '28px' }}>
           <Link href="/weight-loss" style={NAV_STYLE} className="hover:opacity-70 uppercase">
             Weight Loss
           </Link>
