@@ -210,7 +210,7 @@ export default function Home() {
                 ],
               },
             ].map((pillar) => (
-              <div key={pillar.title} style={{ padding: '22px 14px', background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
+              <div key={pillar.title} style={{ padding: '22px 14px', background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
                 <div className="mb-5 flex items-center" style={{ height: '48px' }}>
                   <img src={pillar.icon} alt={pillar.iconAlt} style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} />
                 </div>

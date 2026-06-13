@@ -413,7 +413,7 @@ export default function MedicalWeightLossLpPage() {
               <div
                 key={card.title}
                 className="p-8"
-                style={{ background: 'linear-gradient(180deg, #F5F8F3 0%, #DEE8DA 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '80px', borderBottomRightRadius: '16px' }}
+                style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '80px', borderBottomRightRadius: '16px' }}
               >
                 <img src={card.icon} alt="" style={{ width: 'auto', height: '66px', objectFit: 'contain', marginBottom: '20px' }} />
                 <h3 className="mb-3 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '0.5px' }}>
