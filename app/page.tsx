@@ -247,15 +247,13 @@ export default function Home() {
 
       {/* (3) Explore Our Modalities */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="mb-3" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
-              Explore our modalities
-            </h2>
-            <div className="mx-auto" style={{ width: '120px', height: '1px', backgroundColor: '#C9B8AE' }} />
-          </div>
-          <ModalitiesCarousel />
+        <div className="text-center mb-12">
+          <h2 className="mb-3" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
+            Explore our modalities
+          </h2>
+          <div className="mx-auto" style={{ width: '120px', height: '1px', backgroundColor: '#C9B8AE' }} />
         </div>
+        <ModalitiesCarousel />
       </section>
 
       {/* (4) Our Results-Driven Approach / Extended Care Commitment */}
