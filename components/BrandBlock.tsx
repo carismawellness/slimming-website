@@ -1,3 +1,6 @@
+'use client';
+import { useRef, useEffect, useState } from 'react';
+
 const GREEN = '#8EB093';
 const TAUPE = '#9B8D83';
 const FRESHA = 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=4994308&oiid=sv%3A25969858&share=true&pId=2708191';
@@ -43,6 +46,18 @@ const BRANDS = [
 ];
 
 export default function BrandBlock() {
+  const bookRef = useRef<HTMLDivElement>(null);
+  const [bookVisible, setBookVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setBookVisible(true); },
+      { threshold: 0.15 }
+    );
+    if (bookRef.current) observer.observe(bookRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div>
       {/* Doctor Profiles — stacked 2-column rows, alternating photo side */}
@@ -76,7 +91,12 @@ export default function BrandBlock() {
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div className="flex items-center justify-center" style={{ height: '487px' }}>
+            <div ref={bookRef} className="flex items-center justify-end" style={{
+              height: '487px',
+              transform: bookVisible ? 'translateY(0px)' : 'translateY(60px)',
+              opacity: bookVisible ? 1 : 0,
+              transition: 'transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.9s ease',
+            }}>
               <img src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.png" alt="Carisma Slimming Guide cover image" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             </div>
             <div>
