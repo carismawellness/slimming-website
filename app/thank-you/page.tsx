@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const paragraphs = [
   'Thank you for taking the first step towards a healthier, slimmer and more confident you.',
-  'We're looking forward to learning more about your goals and recommending a personalised plan that works for your lifestyle.',
+  "We're looking forward to learning more about your goals and recommending a personalised plan that works for your lifestyle.",
   'A member of our team will be in touch shortly to answer your questions and guide you through the next steps.',
 ];
 
