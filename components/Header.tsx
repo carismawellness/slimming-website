@@ -8,9 +8,9 @@ const GREEN = '#8EB093';
 const navLink = {
   color: GREEN,
   fontFamily: '"Novecento Wide", sans-serif',
-  fontSize: '13px',
+  fontSize: '12px',
   fontWeight: 400 as const,
-  letterSpacing: '1.2px',
+  letterSpacing: '0.5px',
   textDecoration: 'none',
   textTransform: 'uppercase' as const,
   whiteSpace: 'nowrap' as const,
@@ -59,7 +59,7 @@ export default function Header() {
         </div>
 
         {/* CENTER — Nav links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '36px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '26px' }}>
           <Link href="/weight-loss" style={navLink} className="hover:opacity-60 transition-opacity">Weight Loss</Link>
           <Link href="/glp1" style={navLink} className="hover:opacity-60 transition-opacity">GLP-1s</Link>
 
@@ -106,7 +106,7 @@ export default function Header() {
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2">
               <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.128.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.572 2.81.7A2 2 0 0 1 22 16.92z"/>
             </svg>
-            <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
+            <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px' }}>
               27802062
             </span>
           </a>
@@ -116,10 +116,10 @@ export default function Header() {
             fontFamily: '"Novecento Wide", sans-serif',
             fontSize: '12px',
             fontWeight: 700,
-            letterSpacing: '1px',
+            letterSpacing: '0.5px',
             textTransform: 'uppercase',
-            padding: '11px 20px',
-            borderRadius: '8px',
+            padding: '12px 22px',
+            borderRadius: '20px',
             textDecoration: 'none',
             whiteSpace: 'nowrap',
           }}>
@@ -150,7 +150,7 @@ export default function Header() {
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.128.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.572 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
             <span style={{ color:GREEN, fontFamily:'"Novecento Wide",sans-serif', fontSize:'13px', fontWeight:600 }}>27802062</span>
           </a>
-          <Link href="/consultation" className="block text-center mt-4" style={{ backgroundColor:GREEN, color:'#fff', fontFamily:'"Novecento Wide",sans-serif', fontSize:'13px', fontWeight:700, letterSpacing:'1px', textTransform:'uppercase', padding:'13px', borderRadius:'8px', textDecoration:'none' }}>
+          <Link href="/consultation" className="block text-center mt-4" style={{ backgroundColor:GREEN, color:'#fff', fontFamily:'"Novecento Wide",sans-serif', fontSize:'13px', fontWeight:700, letterSpacing:'0.5px', textTransform:'uppercase', padding:'13px', borderRadius:'20px', textDecoration:'none' }}>
             Free Consultation
           </Link>
         </div>
