@@ -55,8 +55,7 @@ export default function BrandBlock() {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
-          // Double rAF ensures the browser paints the initial hidden state before transitioning
-          requestAnimationFrame(() => requestAnimationFrame(() => setBookVisible(true)));
+          setBookVisible(true);
           observer.unobserve(el);
         }
       },
@@ -99,13 +98,19 @@ export default function BrandBlock() {
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div ref={bookRef} className="flex items-center justify-end" style={{
-              height: '487px',
-              willChange: 'transform, opacity',
-              transform: bookVisible ? 'translateY(0px)' : 'translateY(70px)',
-              opacity: bookVisible ? 1 : 0,
-              transition: bookVisible ? 'transform 1s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease' : 'none',
-            }}>
+            <style>{`
+              @keyframes bookFloatUp {
+                from { opacity: 0; transform: translateY(70px); }
+                to   { opacity: 1; transform: translateY(0px); }
+              }
+              .book-hidden { opacity: 0; }
+              .book-visible { animation: bookFloatUp 1s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+            `}</style>
+            <div
+              ref={bookRef}
+              className={`flex items-center justify-end ${bookVisible ? 'book-visible' : 'book-hidden'}`}
+              style={{ height: '487px' }}
+            >
               <img src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.png" alt="Carisma Slimming Guide cover image" style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }} />
             </div>
             <div>
