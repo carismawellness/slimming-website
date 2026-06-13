@@ -290,7 +290,7 @@ export default function GLP1Page() {
               <div
                 key={i}
                 className="p-8"
-                style={{ background: 'linear-gradient(180deg, #F1F2EC 0%, #E4EBDF 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '80px', borderBottomRightRadius: '16px' }}
+                style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '80px', borderBottomRightRadius: '16px' }}
               >
                 <img src={pillarIcons[i]} alt="" style={{ width: '74px', height: '74px', objectFit: 'contain', marginBottom: '20px' }} />
                 <h3 className="mb-3" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
