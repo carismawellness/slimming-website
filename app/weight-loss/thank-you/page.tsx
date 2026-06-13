@@ -1,16 +1,16 @@
 import type { Metadata } from 'next';
 
-const wideFont = "'Novecento Wide', sans-serif";
+const wideFont     = "'Novecento Wide', sans-serif";
 const wideBookFont = "'Novecento Wide Book', sans-serif";
-const bodyFont = 'Roboto, sans-serif';
-const taupe = '#9B8D83';
+const bodyFont     = 'Roboto, sans-serif';
+const taupe        = '#9B8D83';
+const taupeLight   = '#AFA39D';
 
 const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
 
 export const metadata: Metadata = {
   title: 'Thank you | Carisma Slimming',
-  description:
-    'Medical weight loss in Malta. Your enquiry has been received and our team will be in touch shortly.',
+  description: 'Your enquiry has been received. A member of our team will be in touch shortly.',
 };
 
 const paragraphs = [
@@ -21,132 +21,164 @@ const paragraphs = [
 
 export default function WeightLossThankYouPage() {
   return (
-    <main className="w-full" style={{ backgroundColor: '#FFFFFF' }}>
-      {/* Desktop */}
-      <section className="hidden md:block">
-        <div className="relative mx-auto" style={{ width: '980px', height: '500px' }}>
-          <div
-            className="absolute overflow-hidden"
-            style={{ left: 0, top: 0, width: '975px', height: '500px' }}
-          >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={HERO_IMG}
-              alt="image.png"
-              className="absolute"
-              style={{ width: '100%', height: 'auto', maxWidth: 'none', left: 0, top: '-4.4416%' }}
-            />
+    <main className="w-full" style={{ backgroundColor: '#F5EDE8' }}>
+
+      {/* ── Desktop ── */}
+      <section
+        className="hidden md:block"
+        style={{
+          position: 'relative',
+          width: '100%',
+          minHeight: '520px',
+          overflow: 'hidden',
+          backgroundColor: '#F5EDE8',
+        }}
+      >
+        {/* Full-bleed background photo — woman on right, pale left for text */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={HERO_IMG}
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            top: '-4%',
+            left: 0,
+            width: '100%',
+            height: '115%',
+            objectFit: 'cover',
+            objectPosition: 'top center',
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* Text — overlaid on the pale left portion */}
+        <div
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            maxWidth: '1280px',
+            margin: '0 auto',
+            padding: '70px 60px',
+            minHeight: '520px',
+          }}
+        >
+          <div style={{ maxWidth: '430px' }}>
+            <h1
+              style={{
+                fontFamily: wideFont,
+                fontWeight: 400,
+                fontSize: '52px',
+                lineHeight: '1.2em',
+                color: taupe,
+                marginBottom: '22px',
+              }}
+            >
+              THANK YOU
+            </h1>
+
+            <p
+              style={{
+                fontFamily: wideBookFont,
+                fontWeight: 400,
+                fontSize: '14px',
+                letterSpacing: '1px',
+                textTransform: 'uppercase',
+                color: taupeLight,
+                marginBottom: '28px',
+              }}
+            >
+              YOUR ENQUIRY HAS BEEN RECEIVED.
+            </p>
+
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {paragraphs.map((text) => (
+                <p
+                  key={text}
+                  style={{
+                    fontFamily: bodyFont,
+                    fontWeight: 400,
+                    fontSize: '16px',
+                    lineHeight: '1.55em',
+                    color: taupe,
+                    margin: 0,
+                  }}
+                >
+                  {text}
+                </p>
+              ))}
+            </div>
           </div>
-          <h2
-            className="absolute"
+        </div>
+      </section>
+
+      {/* ── Mobile ── */}
+      <section className="md:hidden">
+        {/* Portrait crop of image */}
+        <div style={{ position: 'relative', width: '100%', aspectRatio: '9 / 11', overflow: 'hidden' }}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={HERO_IMG}
+            alt=""
+            aria-hidden="true"
             style={{
-              left: '24px',
-              top: '41px',
-              width: '450px',
+              position: 'absolute',
+              top: '-4%',
+              left: '-33%',
+              width: '170%',
+              height: 'auto',
+              pointerEvents: 'none',
+            }}
+          />
+        </div>
+
+        {/* Text below photo on mobile */}
+        <div style={{ padding: '32px 24px 40px', backgroundColor: '#F5EDE8' }}>
+          <h1
+            style={{
               fontFamily: wideFont,
               fontWeight: 400,
-              fontSize: '48px',
-              lineHeight: '1.4em',
+              fontSize: '32px',
+              lineHeight: '1.2em',
               color: taupe,
+              marginBottom: '14px',
             }}
           >
             THANK YOU
-          </h2>
-          <h3
-            className="absolute"
+          </h1>
+          <p
             style={{
-              left: '23px',
-              top: '126px',
-              width: '450px',
               fontFamily: wideBookFont,
               fontWeight: 400,
-              fontSize: '15px',
-              lineHeight: '1.4em',
-              color: taupe,
+              fontSize: '12px',
+              letterSpacing: '1px',
+              textTransform: 'uppercase',
+              color: taupeLight,
+              marginBottom: '20px',
             }}
           >
             YOUR ENQUIRY HAS BEEN RECEIVED.
-          </h3>
-          <div
-            className="absolute"
-            style={{
-              left: '24px',
-              top: '171px',
-              width: '394px',
-              fontFamily: bodyFont,
-              fontWeight: 400,
-              fontSize: '18px',
-              lineHeight: '1.4em',
-              color: taupe,
-            }}
-          >
+          </p>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
             {paragraphs.map((text) => (
-              <p key={text}>{text}</p>
+              <p
+                key={text}
+                style={{
+                  fontFamily: bodyFont,
+                  fontWeight: 400,
+                  fontSize: '14px',
+                  lineHeight: '1.55em',
+                  color: taupe,
+                  margin: 0,
+                }}
+              >
+                {text}
+              </p>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Mobile */}
-      <section className="md:hidden" style={{ padding: '12px 12px 32px' }}>
-        <div className="relative mx-auto" style={{ maxWidth: '420px' }}>
-          <div className="relative overflow-hidden" style={{ aspectRatio: '564 / 845' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={HERO_IMG}
-              alt="image.png"
-              className="absolute"
-              style={{ width: '272.34%', height: 'auto', maxWidth: 'none', left: '-91.134%', top: '-9.408%' }}
-            />
-          </div>
-          <h3
-            className="absolute"
-            style={{
-              left: '9.4%',
-              top: '9.7%',
-              width: '56.6%',
-              fontFamily: wideBookFont,
-              fontWeight: 400,
-              fontSize: '15px',
-              lineHeight: '1.4em',
-              color: taupe,
-            }}
-          >
-            YOUR ENQUIRY HAS BEEN RECEIVED.
-          </h3>
-          <div
-            className="absolute"
-            style={{
-              left: '9.4%',
-              top: '22.2%',
-              width: '56.6%',
-              fontFamily: bodyFont,
-              fontWeight: 400,
-              fontSize: '13px',
-              lineHeight: '1.4em',
-              color: taupe,
-            }}
-          >
-            {paragraphs.map((text) => (
-              <p key={text}>{text}</p>
-            ))}
-          </div>
-          <h2
-            className="absolute"
-            style={{
-              left: '9.4%',
-              top: '77.8%',
-              fontFamily: wideFont,
-              fontWeight: 400,
-              fontSize: '13px',
-              lineHeight: '1.4em',
-              color: taupe,
-            }}
-          >
-            THANK YOU
-          </h2>
-        </div>
-      </section>
     </main>
   );
 }
