@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const GREEN = '#8EB093';
 
@@ -20,6 +20,16 @@ const BANNER = "#1 VOTED SLIMMING CLINIC IN MALTA   ▫   MALTA’S MOST COMPREH
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [pkgOpen, setPkgOpen] = useState(false);
+  const pkgTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const openPkg = () => {
+    if (pkgTimer.current) clearTimeout(pkgTimer.current);
+    setPkgOpen(true);
+  };
+  const closePkg = () => {
+    pkgTimer.current = setTimeout(() => setPkgOpen(false), 250);
+  };
 
   return (
     <header className="bg-white sticky top-0 z-50" style={{ borderBottom: '1px solid #E8E3DE' }}>
@@ -64,37 +74,40 @@ export default function Header() {
           <Link href="/glp1" style={navLink} className="hover:opacity-60 transition-opacity">GLP-1s</Link>
 
           {/* Packages dropdown */}
-          <div className="relative group" style={{ display: 'flex', alignItems: 'center' }}>
+          <div className="relative" style={{ display: 'flex', alignItems: 'center' }} onMouseEnter={openPkg} onMouseLeave={closePkg}>
             <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#B0A68F' }} className="hover:opacity-60 transition-opacity">
               Packages
             </button>
-            <div className="absolute hidden group-hover:block" style={{
-              top: 'calc(100% + 10px)',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              backgroundColor: '#ffffff',
-              border: '1px solid #E8E3DE',
-              borderRadius: '6px',
-              boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
-              width: '200px',
-              padding: '6px 0',
-              zIndex: 100,
-            }}>
-              {[
-                ['Fat Freezing', '/packages/fat-freezing'],
-                ['Fat Dissolving', '/packages/fat-dissolving'],
-                ['Muscle Stimulation', '/packages/muscle-stimulation'],
-                ['Skin Tightening', '/packages/skin-tightening'],
-                ['Lipocavitation', '/packages/lipocavitation'],
-                ['Anti Cellulite', '/packages/anti-cellulite'],
-                ['Lymphatic Drainage', '/packages/lymphatic-drainage'],
-              ].map(([label, href]) => (
-                <Link key={href} href={href} className="block hover:bg-gray-50"
-                  style={{ padding: '8px 16px', color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none' }}>
-                  {label}
-                </Link>
-              ))}
-            </div>
+            {pkgOpen && (
+              <div style={{
+                position: 'absolute',
+                top: 'calc(100% + 4px)',
+                left: '50%',
+                transform: 'translateX(-50%)',
+                backgroundColor: '#ffffff',
+                border: '1px solid #E8E3DE',
+                borderRadius: '6px',
+                boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
+                width: '200px',
+                padding: '6px 0',
+                zIndex: 100,
+              }}>
+                {[
+                  ['Fat Freezing', '/packages/fat-freezing'],
+                  ['Fat Dissolving', '/packages/fat-dissolving'],
+                  ['Muscle Stimulation', '/packages/muscle-stimulation'],
+                  ['Skin Tightening', '/packages/skin-tightening'],
+                  ['Lipocavitation', '/packages/lipocavitation'],
+                  ['Anti Cellulite', '/packages/anti-cellulite'],
+                  ['Lymphatic Drainage', '/packages/lymphatic-drainage'],
+                ].map(([label, href]) => (
+                  <Link key={href} href={href} className="block hover:bg-gray-50"
+                    style={{ padding: '8px 16px', color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none' }}>
+                    {label}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
 
           <Link href="/slimming-guide" style={navLink} className="hover:opacity-60 transition-opacity">Slimming Guide</Link>
