@@ -64,7 +64,7 @@ export default function BrandBlock() {
               </div>
             );
             return (
-              <div key={doc.name} className="flex flex-col md:flex-row gap-12 items-center" style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)', borderRadius: '28px', padding: '40px' }}>
+              <div key={doc.name} className="flex flex-col md:flex-row gap-12 items-center" style={{ background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', borderRadius: '28px', padding: '40px' }}>
                 {photoFirst ? [photo, text] : [text, photo]}
               </div>
             );
