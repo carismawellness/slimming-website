@@ -2,20 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Join the Team at Carisma Slimming | #1 Award Winning Chain',
-  description:
-    "Join the team at Carisma Slimming and take your career to the next level. We are Malta's number one award winning chain, offering top-quality slimming treatments.",
-  openGraph: {
-    title: 'Join the Team at Carisma Slimming | #1 Award Winning Chain',
-    description:
-      "Join the team at Carisma Slimming and take your career to the next level. We are Malta's number one award winning chain, offering top-quality slimming treatments.",
-    images: [
-      'https://static.wixstatic.com/media/87fc13_c6ca2393e0a544a8976b31ec6b7cc5d6~mv2.png/v1/fit/w_2500,h_1330,al_c/87fc13_c6ca2393e0a544a8976b31ec6b7cc5d6~mv2.png',
-    ],
-  },
-  alternates: {
-    canonical: 'https://www.carismaslimming.com/careers',
-  },
+  title: "Careers at Carisma Slimming Malta | Join Our Team",
+  description: "Join Malta's #1 voted slimming clinic. Explore career opportunities at Carisma Slimming — we're looking for passionate healthcare and wellness professionals.",
+  alternates: { canonical: 'https://www.carismaslimming.com/careers' },
 };
 
 const headingFont = 'Trajan Pro, serif';

@@ -1,9 +1,9 @@
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Weight Loss Program Malta | Carisma Slimming',
-  description:
-    "Malta's most comprehensive, medically guided slimming program. Lose up to 1kg a week with doctor-led plans, GLP-1 medication, fat freezing and body sculpting treatments.",
+  title: "Medical Weight Loss Programs Malta | Carisma Slimming",
+  description: "Doctor-led medical weight loss programs in Malta. Personalised slimming plans combining GLP-1 medications, non-invasive treatments and nutritional guidance.",
+  alternates: { canonical: 'https://www.carismaslimming.com/weight-loss' },
 };
 
 export default function WeightLossLayout({

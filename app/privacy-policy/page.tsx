@@ -1,3 +1,11 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | Carisma Slimming Malta",
+  description: "Read our Privacy Policy to understand how Carisma Slimming collects, uses, and protects your personal data in accordance with GDPR.",
+  alternates: { canonical: 'https://www.carismaslimming.com/privacy-policy' },
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <main className="w-full">

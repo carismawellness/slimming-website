@@ -9,18 +9,8 @@ const taupeLight   = '#AFA39D';
 const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
 
 export const metadata: Metadata = {
-  title: 'Thank you | Carisma Slimming ',
-  description: 'Medical weight loss in Malta. Personalized plans, expert support, and real results. Book your consultation and start your transformation today.',
-  alternates: {
-    canonical: 'https://www.carismaslimming.com/thank-you',
-  },
-  openGraph: {
-    title: 'Thank you | Carisma Slimming ',
-    description: 'Medical weight loss in Malta. Personalized plans, expert support, and real results. Book your consultation and start your transformation today.',
-    images: [
-      'https://static.wixstatic.com/media/87fc13_c6ca2393e0a544a8976b31ec6b7cc5d6%7Emv2.png/v1/fit/w_2500,h_1330,al_c/87fc13_c6ca2393e0a544a8976b31ec6b7cc5d6%7Emv2.png',
-    ],
-  },
+  title: "Thank You | Carisma Slimming",
+  robots: { index: false, follow: false },
 };
 
 const paragraphs = [

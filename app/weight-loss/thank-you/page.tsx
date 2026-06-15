@@ -9,8 +9,8 @@ const taupeLight   = '#AFA39D';
 const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
 
 export const metadata: Metadata = {
-  title: 'Thank you | Carisma Slimming',
-  description: 'Your enquiry has been received. A member of our team will be in touch shortly.',
+  title: "Thank You | Carisma Slimming",
+  robots: { index: false, follow: false },
 };
 
 const paragraphs = [

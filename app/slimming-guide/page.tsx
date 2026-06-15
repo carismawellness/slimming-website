@@ -2,20 +2,9 @@ import type { Metadata } from 'next';
 import OutcomeStepper from './OutcomeStepper';
 
 export const metadata: Metadata = {
-  title: "Carisma Slimmig Guide | Malta's #1 Weight-Loss Clinic",
-  description:
-    "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
-  alternates: {
-    canonical: 'https://www.carismaslimming.com/slimming-guide',
-  },
-  openGraph: {
-    title: "Carisma Slimmig Guide | Malta's #1 Weight-Loss Clinic",
-    description:
-      "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
-    images: [
-      'https://static.wixstatic.com/media/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png/v1/fill/w_2500,h_2523,al_c/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png',
-    ],
-  },
+  title: "Free Slimming Guide Malta | Your Weight Loss Bible | Carisma Slimming",
+  description: "Download our free Slimming Guide — the definitive weight loss resource for Malta. Expert advice from our doctors on diet, exercise, GLP-1s, and body contouring.",
+  alternates: { canonical: 'https://www.carismaslimming.com/slimming-guide' },
 };
 
 const PRODUCT_URL =

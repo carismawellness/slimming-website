@@ -24,26 +24,45 @@ export async function generateStaticParams() {
   return Object.keys(services).map((service) => ({ service }));
 }
 
+const serviceMeta: Record<string, { title: string; description: string }> = {
+  'fat-freezing': {
+    title: 'Fat Freezing Malta | Cryolipolysis Treatment | Carisma Slimming',
+    description: 'Permanent fat removal with cryolipolysis (fat freezing) in Malta. Lose stubborn fat without surgery — medically supervised at Carisma Slimming.',
+  },
+  'fat-dissolving': {
+    title: 'Fat Dissolving Injections Malta | Aqualyx | Carisma Slimming',
+    description: 'Fat dissolving injections (Aqualyx) in Malta to permanently eliminate stubborn fat pockets. Non-surgical, medically administered at Carisma Slimming.',
+  },
+  'muscle-stimulation': {
+    title: 'Muscle Stimulation Malta | EMSculpt Body Sculpting | Carisma Slimming',
+    description: 'Build muscle and burn fat simultaneously with EMSculpt muscle stimulation in Malta. Achieve a sculpted physique at Carisma Slimming.',
+  },
+  'skin-tightening': {
+    title: 'Skin Tightening Malta | RF Body Treatment | Carisma Slimming',
+    description: 'Non-invasive skin tightening treatments in Malta using radiofrequency technology. Firm, lift and contour skin at Carisma Slimming.',
+  },
+  'lipocavitation': {
+    title: 'Lipocavitation Malta | Ultrasound Cavitation | Carisma Slimming',
+    description: 'Ultrasound lipocavitation in Malta to break down fat cells non-invasively. Targeted body contouring at Carisma Slimming.',
+  },
+  'anti-cellulite': {
+    title: 'Anti-Cellulite Treatment Malta | Carisma Slimming',
+    description: 'Effective anti-cellulite treatments in Malta combining advanced technologies to smooth skin and reduce the appearance of cellulite.',
+  },
+  'lymphatic-drainage': {
+    title: 'Lymphatic Drainage Massage Malta | Carisma Slimming',
+    description: 'Professional lymphatic drainage massage in Malta to reduce bloating, improve circulation and support weight loss at Carisma Slimming.',
+  },
+};
+
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { service: serviceId } = await params;
-  const service = services[serviceId];
-  if (!service) {
-    return { title: 'Carisma Slimming' };
-  }
-  // Use seoDescription when set; empty string means no description tag (matches Wix default).
-  const rawDesc = service.seoDescription ?? service.hero.description;
-  const description = rawDesc || undefined;
+  const { service } = await params;
+  const meta = serviceMeta[service];
+  if (!meta) return { title: 'Treatment | Carisma Slimming' };
   return {
-    title: service.seoTitle,
-    description,
-    alternates: {
-      canonical: service.liveUrl,
-    },
-    openGraph: {
-      title: service.seoTitle,
-      description,
-      ...(service.ogImage ? { images: [service.ogImage] } : {}),
-    },
+    title: meta.title,
+    description: meta.description,
+    alternates: { canonical: `https://www.carismaslimming.com/packages/${service}` },
   };
 }
 

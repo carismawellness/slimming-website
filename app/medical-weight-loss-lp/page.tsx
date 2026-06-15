@@ -4,7 +4,8 @@ import HowItWorksTabs from './HowItWorksTabs';
 import TestimonialsSlider from './TestimonialsSlider';
 
 export const metadata: Metadata = {
-  title: "Medical weight loss Malta | Malta's #1 Weight-Loss Clinic",
+  title: "Medical Weight Loss Malta | Carisma Slimming",
+  robots: { index: false, follow: false },
 };
 
 const FRESHA_BOOK =

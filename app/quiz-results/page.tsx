@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: 'Your Slimming Recommendations | Carisma Slimming',
-  description: 'Personalised slimming treatment recommendations based on your goals.',
+  title: "Your Quiz Results | Carisma Slimming",
+  robots: { index: false, follow: false },
 };
 
 /* ── Brand tokens ─────────────────────────────────────────────────────── */

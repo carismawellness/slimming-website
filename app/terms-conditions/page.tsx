@@ -1,3 +1,11 @@
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Terms & Conditions | Carisma Slimming Malta",
+  description: "Read the Terms & Conditions governing use of the Carisma Slimming website and services.",
+  alternates: { canonical: 'https://www.carismaslimming.com/terms-conditions' },
+};
+
 const bodyStyle: React.CSSProperties = {
   color: '#9B8D83',
   fontFamily: 'Roboto, sans-serif',

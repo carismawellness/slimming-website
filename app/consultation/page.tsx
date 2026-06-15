@@ -1,4 +1,11 @@
+import type { Metadata } from 'next';
 import Script from 'next/script';
+
+export const metadata: Metadata = {
+  title: "Book a Free Slimming Consultation in Malta | Carisma Slimming",
+  description: "Book your free slimming consultation with our medically qualified doctors in Malta. Get a personalised weight loss plan and start your journey today.",
+  alternates: { canonical: 'https://www.carismaslimming.com/consultation' },
+};
 
 const GREEN = '#8EB093';
 const TAUPE = '#9B8D83';

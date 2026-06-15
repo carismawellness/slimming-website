@@ -7,18 +7,9 @@ import FAQAccordion from '@/components/FAQAccordion';
 import EvidenceCards from '@/components/EvidenceCards';
 
 export const metadata: Metadata = {
-  title: 'Medical Weight Loss Malta | Ozempic & Mounjaro | Carisma Slimming',
-  description: "Malta's #1 doctor-led medical weight loss clinic. Personalised weight loss programs with GLP-1 support, nutrition, body composition tracking, and ongoing medical supervision. Book your free consultation.",
-  alternates: {
-    canonical: 'https://www.carismaslimming.com/medical-weight-loss',
-  },
-  openGraph: {
-    title: 'Medical Weight Loss Malta | Ozempic & Mounjaro | Carisma Slimming',
-    description: "Malta's #1 doctor-led medical weight loss clinic. Personalised weight loss programs with GLP-1 support, nutrition, body composition tracking, and ongoing medical supervision. Book your free consultation.",
-    images: [
-      'https://static.wixstatic.com/media/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png/v1/fill/w_2500,h_2523,al_c/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png',
-    ],
-  },
+  title: "GLP-1 Weight Loss Injections Malta | Ozempic & Mounjaro | Carisma Slimming",
+  description: "Medically prescribed GLP-1 injections in Malta including Ozempic and Mounjaro. Supervised weight loss of up to 1kg per week with our qualified doctors.",
+  alternates: { canonical: 'https://www.carismaslimming.com/glp1' },
 };
 
 export default function GLP1Page() {
