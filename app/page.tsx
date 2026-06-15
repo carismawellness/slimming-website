@@ -6,7 +6,7 @@ import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 export const metadata: Metadata = {
   title: "Carisma Slimming | #1 Voted Slimming Clinic in Malta",
   description: "Malta’s most comprehensive slimming program, led by medically qualified doctors. Lose up to 1kg a week with weight loss, GLP-1s, and non-invasive body contouring packages.",
-  alternates: { canonical: ‘https://www.carismaslimming.com’ },
+  alternates: { canonical: "https://www.carismaslimming.com" },
 };
 
 export default function Home() {
