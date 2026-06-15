@@ -30,9 +30,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) {
     return { title: 'Carisma Slimming' };
   }
+  const description = service.seoDescription ?? service.hero.description;
+  const title = service.seoTitle;
+  const canonical = service.liveUrl;
   return {
-    title: service.seoTitle,
-    description: service.hero.description,
+    title,
+    description,
+    alternates: {
+      canonical,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      title,
+      description,
+      url: canonical,
+      images: [
+        'https://static.wixstatic.com/media/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png/v1/fill/w_2500,h_2523,al_c/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png',
+      ],
+    },
   };
 }
 

@@ -61,6 +61,8 @@ export interface Service {
   treatment: string;
   /** Per-service SEO <title>. */
   seoTitle: string;
+  /** Per-service SEO meta description (dedicated, not hero copy). */
+  seoDescription?: string;
 
   /** Hero block (eyebrow + heading + description). */
   hero: Hero;
@@ -256,6 +258,8 @@ export const services: Record<string, Service> = {
     liveUrl: 'https://www.carismaslimming.com/fatdissolving',
     treatment: 'Fat Dissolving',
     seoTitle: 'Fat Dissolving Injections Malta | Lemon Bottle | Carisma Slimming',
+    seoDescription:
+      'Fat dissolving injections in Malta designed to permanently break down stubborn fat cells, restoring definition and contour without surgery or downtime. Available at Carisma Slimming.',
     hero: {
       eyebrow:
         "#1 VOTED SLIMMING CLINIC IN MALTA ▫️ MALTA'S MOST COMPREHENSIVE SLIMMING PROGRAM ▫️ MEDICALLY QUALIFIED DOCTORS",
@@ -455,6 +459,7 @@ export const services: Record<string, Service> = {
     liveUrl: 'https://www.carismaslimming.com/muscle-stimulation',
     treatment: 'Muscle Stimulation (EMSculpt NEO)',
     seoTitle: 'EMSculpt NEO Malta | Build Muscle & Burn Fat | Carisma Slimming',
+    seoDescription: '',
     hero: {
       eyebrow:
         "#1 voted slimming clinic in malta ▫️ Malta's most comprehensive slimming program ▫️ Medically qualified doctors",
@@ -608,6 +613,7 @@ export const services: Record<string, Service> = {
     liveUrl: 'https://www.carismaslimming.com/skin-tightening',
     treatment: 'Skin Tightening (VelaShape III)',
     seoTitle: 'VelaShape III Malta | Skin Tightening | Carisma Slimming',
+    seoDescription: 'VelaShape III skin tightening in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
     hero: {
       eyebrow:
         "#1 voted slimming clinic in malta ▫️ Malta's most comprehensive slimming program ▫️ Medically qualified doctors",
@@ -787,6 +793,7 @@ export const services: Record<string, Service> = {
     liveUrl: 'https://www.carismaslimming.com/lipocavitation-malta',
     treatment: 'Lipocavitation',
     seoTitle: 'Lipocavitation Malta | Fat Reduction | Carisma Slimming',
+    seoDescription: 'Lipocavitation Fat Redultion in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
     hero: {
       eyebrow: 'NON-INVASIVE FAT CONTOURING IN MALTA',
       heading: 'stubborn fat, met its match',
@@ -976,6 +983,7 @@ export const services: Record<string, Service> = {
     liveUrl: 'https://www.carismaslimming.com/anti-cellulite',
     treatment: 'Anti Cellulite',
     seoTitle: 'Cellulite Treatment Malta | VelaShape III | Carisma Slimming',
+    seoDescription: 'Effective cellulite treatment in Malta using VelaShape III technology. Visible results from the first session. Non-invasive, no downtime. Book today.',
     hero: {
       eyebrow: 'ADVANCED CELLULITE SMOOTHING',
       heading: 'cellulift & contour protocol',
