@@ -616,6 +616,7 @@ export const services: Record<string, Service> = {
     treatment: 'Skin Tightening (VelaShape III)',
     seoTitle: 'VelaShape III Malta | Skin Tightening | Carisma Slimming',
     seoDescription: 'VelaShape III skin tightening in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
+    ogImage: 'https://static.wixstatic.com/media/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png/v1/fill/w_2500,h_2523,al_c/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png',
     hero: {
       eyebrow:
         "#1 voted slimming clinic in malta ▫️ Malta's most comprehensive slimming program ▫️ Medically qualified doctors",
