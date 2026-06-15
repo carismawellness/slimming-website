@@ -30,9 +30,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) {
     return { title: 'Carisma Slimming' };
   }
+  const description = service.seoDescription ?? service.hero.description;
   return {
     title: service.seoTitle,
-    description: service.seoDescription ?? service.hero.description,
+    description,
+    alternates: {
+      canonical: service.liveUrl,
+    },
+    openGraph: {
+      title: service.seoTitle,
+      description,
+      ...(service.ogImage ? { images: [service.ogImage] } : {}),
+    },
   };
 }
 

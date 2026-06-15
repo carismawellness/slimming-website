@@ -63,6 +63,8 @@ export interface Service {
   seoTitle: string;
   /** Per-service SEO meta description (dedicated, not hero copy). */
   seoDescription?: string;
+  /** OG image URL for og:image meta tag. */
+  ogImage?: string;
 
   /** Hero block (eyebrow + heading + description). */
   hero: Hero;
@@ -794,6 +796,7 @@ export const services: Record<string, Service> = {
     treatment: 'Lipocavitation',
     seoTitle: 'Lipocavitation Malta | Fat Reduction | Carisma Slimming',
     seoDescription: 'Lipocavitation Fat Redultion in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
+    ogImage: 'https://static.wixstatic.com/media/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png/v1/fill/w_2500,h_2523,al_c/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png',
     hero: {
       eyebrow: 'NON-INVASIVE FAT CONTOURING IN MALTA',
       heading: 'stubborn fat, met its match',
