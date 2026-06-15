@@ -1,5 +1,23 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getOrderedServices, BOOKING_URL } from '@/lib/services';
+
+export const metadata: Metadata = {
+  title: "Weight Loss Protocol | Malta's #1 Weight-Loss Clinic",
+  description:
+    "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
+  alternates: {
+    canonical: 'https://www.carismaslimming.com/packages',
+  },
+  openGraph: {
+    title: "Weight Loss Protocol | Malta's #1 Weight-Loss Clinic",
+    description:
+      "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
+    images: [
+      'https://static.wixstatic.com/media/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png/v1/fill/w_2500,h_2523,al_c/f940f0_91c17052f86d48088597ba76c4ac8057~mv2.png',
+    ],
+  },
+};
 
 const HEADING_FONT = '"Trajan Pro", serif';
 const BODY_FONT = '"Novecento Wide", Roboto, sans-serif';
