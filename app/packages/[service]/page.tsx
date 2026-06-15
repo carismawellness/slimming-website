@@ -30,7 +30,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) {
     return { title: 'Carisma Slimming' };
   }
-  const description = service.seoDescription ?? service.hero.description;
+  // Use seoDescription when set; empty string means no description tag (matches Wix default).
+  const rawDesc = service.seoDescription ?? service.hero.description;
+  const description = rawDesc || undefined;
   return {
     title: service.seoTitle,
     description,
