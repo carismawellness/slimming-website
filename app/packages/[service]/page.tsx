@@ -33,6 +33,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: service.seoTitle,
     description: service.seoDescription ?? service.hero.description,
+    alternates: {
+      canonical: service.liveUrl,
+    },
   };
 }
 
