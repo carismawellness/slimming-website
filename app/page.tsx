@@ -1,6 +1,24 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import GoogleReviews from '@/components/GoogleReviews';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
+
+export const metadata: Metadata = {
+  title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
+  description:
+    'Lose up to 1kg a week with Malta’s most comprehensive slimming program. Fat freezing, body contouring, personalised meal plans. Starter packs from €199. Book your free consultation.',
+  alternates: {
+    canonical: 'https://www.carismaslimming.com',
+  },
+  openGraph: {
+    title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
+    description:
+      'Lose up to 1kg a week with Malta’s most comprehensive slimming program. Fat freezing, body contouring, personalised meal plans. Starter packs from €199. Book your free consultation.',
+    images: [
+      'https://static.wixstatic.com/media/87fc13_c6ca2393e0a544a8976b31ec6b7cc5d6~mv2.png/v1/fill/w_1677,h_936,al_c/87fc13_c6ca2393e0a544a8976b31ec6b7cc5d6~mv2.png',
+    ],
+  },
+};
 
 export default function Home() {
 
