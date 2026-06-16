@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Script from "next/script";
 import GlobalHeader from "@/components/GlobalHeader";
 import GlobalBottom from "@/components/GlobalBottom";
 import CookieConsentBanner from "@/components/CookieConsentBanner";
@@ -87,6 +88,14 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        {/* Google Analytics */}
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-MG9FV9HW9E" strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-MG9FV9HW9E');
+        `}</Script>
         <GlobalHeader />
         <main className="flex-grow">{children}</main>
         <GlobalBottom />
