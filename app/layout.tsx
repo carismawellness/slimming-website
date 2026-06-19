@@ -95,6 +95,7 @@ export default function RootLayout({
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', 'G-MG9FV9HW9E');
+          gtag('config', 'AW-880824336');
         `}</Script>
         <GlobalHeader />
         <main className="flex-grow">{children}</main>
