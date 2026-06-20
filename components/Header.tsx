@@ -1,41 +1,116 @@
 'use client';
 
 import Link from 'next/link';
-import { useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 
 const GREEN = '#8EB093';
-
-const navLink = {
-  color: '#B0A68F',
-  fontFamily: '"Novecento Wide", sans-serif',
-  fontSize: '12px',
-  fontWeight: 400 as const,
-  letterSpacing: '0.5px',
-  textDecoration: 'none',
-  textTransform: 'uppercase' as const,
-  whiteSpace: 'nowrap' as const,
-};
+const TAUPE = '#B0A68F';
 
 const BANNER = "#1 VOTED SLIMMING CLINIC IN MALTA   ▫   MALTA’S MOST COMPREHENSIVE SLIMMING PROGRAM   ▫   MEDICALLY QUALIFIED DOCTORS   ▫   ";
 
+type NavItem = { label: string; href: string };
+
+const PACKAGE_LINKS: NavItem[] = [
+  { label: 'Fat Freezing', href: '/packages/fat-freezing' },
+  { label: 'Fat Dissolving', href: '/packages/fat-dissolving' },
+  { label: 'Muscle Stimulation', href: '/packages/muscle-stimulation' },
+  { label: 'Skin Tightening', href: '/packages/skin-tightening' },
+  { label: 'Lipocavitation', href: '/packages/lipocavitation' },
+  { label: 'Anti Cellulite', href: '/packages/anti-cellulite' },
+  { label: 'Lymphatic Drainage', href: '/packages/lymphatic-drainage' },
+];
+
+type Menu = { label: string; href?: string; items?: NavItem[] };
+
+const MENUS: Menu[] = [
+  { label: 'Weight Loss', href: '/weight-loss' },
+  { label: 'GLP-1s', href: '/glp1' },
+  { label: 'Packages', items: PACKAGE_LINKS },
+  { label: 'Slimming Guide', href: '/slimming-guide' },
+];
+
+const navLink: React.CSSProperties = {
+  color: TAUPE,
+  fontFamily: '"Novecento Wide", sans-serif',
+  fontSize: '12px',
+  fontWeight: 400,
+  letterSpacing: '0.5px',
+  textDecoration: 'none',
+  textTransform: 'uppercase',
+  whiteSpace: 'nowrap',
+};
+
+function PhoneIcon() {
+  return (
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.128.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.572 2.81.7A2 2 0 0 1 22 16.92z" />
+    </svg>
+  );
+}
+
 export default function Header() {
   const [open, setOpen] = useState(false);
-  const [pkgOpen, setPkgOpen] = useState(false);
-  const pkgTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const [pkgHover, setPkgHover] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const openPkg = () => {
-    if (pkgTimer.current) clearTimeout(pkgTimer.current);
-    setPkgOpen(true);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    if (!open) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prev;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  const pillStyle: React.CSSProperties = {
+    background: scrolled ? 'rgba(255,255,255,0.74)' : 'rgba(255,255,255,0.56)',
+    backdropFilter: 'blur(20px) saturate(180%)',
+    WebkitBackdropFilter: 'blur(20px) saturate(180%)',
+    border: '1px solid rgba(255,255,255,0.65)',
+    borderRadius: '999px',
+    boxShadow: scrolled
+      ? '0 10px 34px rgba(40,55,44,0.16), inset 0 1px 0 rgba(255,255,255,0.85)'
+      : '0 8px 30px rgba(40,55,44,0.12), inset 0 1px 0 rgba(255,255,255,0.8)',
+    transition: 'background 0.35s ease, box-shadow 0.35s ease',
   };
-  const closePkg = () => {
-    pkgTimer.current = setTimeout(() => setPkgOpen(false), 250);
+
+  const ctaStyle: React.CSSProperties = {
+    backgroundColor: GREEN,
+    color: '#ffffff',
+    fontFamily: '"Novecento Wide", sans-serif',
+    fontSize: '12px',
+    fontWeight: 700,
+    letterSpacing: '0.5px',
+    textTransform: 'uppercase',
+    padding: '11px 22px',
+    borderRadius: '999px',
+    textDecoration: 'none',
+    whiteSpace: 'nowrap',
   };
 
   return (
-    <header className="bg-white sticky top-0 z-50" style={{ borderBottom: '1px solid #E8E3DE' }}>
-
-      {/* Scrolling banner */}
-      <div className="overflow-hidden flex items-center" style={{ backgroundColor: GREEN, height: '30px' }}>
+    <header className="fixed top-0 inset-x-0 z-50">
+      {/* Announcement strip — slides away on scroll */}
+      <div
+        className="overflow-hidden flex items-center"
+        style={{
+          backgroundColor: GREEN,
+          height: scrolled ? 0 : 30,
+          opacity: scrolled ? 0 : 1,
+          transition: 'height 0.35s ease, opacity 0.25s ease',
+        }}
+      >
         <div style={{
           display: 'inline-block',
           whiteSpace: 'nowrap',
@@ -51,121 +126,176 @@ export default function Header() {
         <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
       </div>
 
-      {/* Main nav — 3-column: logo | links | phone+cta */}
-      <div className="hidden md:grid" style={{
-        gridTemplateColumns: '1fr auto 1fr',
-        alignItems: 'center',
-        maxWidth: '1280px',
-        margin: '0 auto',
-        padding: '0 40px',
-        height: '68px',
-      }}>
-
-        {/* LEFT — Logo */}
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Link href="/">
-            <img src="/logo.png" alt="Carisma Slimming" style={{ height: '40px', width: 'auto', display: 'block' }} />
+      {/* Floating glass pill */}
+      <div style={{ padding: '12px clamp(12px,3vw,28px) 0', maxWidth: '1280px', margin: '0 auto' }}>
+        <nav
+          className="flex items-center justify-between"
+          style={{ ...pillStyle, minHeight: '60px', padding: '8px 12px 8px 22px' }}
+        >
+          {/* Logo */}
+          <Link href="/" className="flex items-center shrink-0" onClick={() => setOpen(false)}>
+            <img src="/logo.png" alt="Carisma Slimming" style={{ height: '38px', width: 'auto', display: 'block' }} />
           </Link>
-        </div>
 
-        {/* CENTER — Nav links */}
-        <div style={{ display: 'flex', alignItems: 'center', gap: '26px' }}>
-          <Link href="/weight-loss" style={navLink} className="hover:opacity-60 transition-opacity">Weight Loss</Link>
-          <Link href="/glp1" style={navLink} className="hover:opacity-60 transition-opacity">GLP-1s</Link>
-
-          {/* Packages dropdown */}
-          <div className="relative" style={{ display: 'flex', alignItems: 'center' }} onMouseEnter={openPkg} onMouseLeave={closePkg}>
-            <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: 0, color: '#B0A68F' }} className="hover:opacity-60 transition-opacity">
-              Packages
-            </button>
-            {pkgOpen && (
-              <div style={{
-                position: 'absolute',
-                top: 'calc(100% + 4px)',
-                left: '50%',
-                transform: 'translateX(-50%)',
-                backgroundColor: '#ffffff',
-                border: '1px solid #E8E3DE',
-                borderRadius: '6px',
-                boxShadow: '0 8px 24px rgba(0,0,0,0.08)',
-                width: '200px',
-                padding: '6px 0',
-                zIndex: 100,
-              }}>
-                {[
-                  ['Fat Freezing', '/packages/fat-freezing'],
-                  ['Fat Dissolving', '/packages/fat-dissolving'],
-                  ['Muscle Stimulation', '/packages/muscle-stimulation'],
-                  ['Skin Tightening', '/packages/skin-tightening'],
-                  ['Lipocavitation', '/packages/lipocavitation'],
-                  ['Anti Cellulite', '/packages/anti-cellulite'],
-                  ['Lymphatic Drainage', '/packages/lymphatic-drainage'],
-                ].map(([label, href]) => (
-                  <Link key={href} href={href} className="block hover:bg-gray-50"
-                    style={{ padding: '8px 16px', color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none' }}>
-                    {label}
-                  </Link>
-                ))}
-              </div>
+          {/* Desktop menu */}
+          <div className="hidden md:flex items-center" style={{ gap: '26px' }}>
+            {MENUS.map((m) =>
+              m.items ? (
+                <div
+                  key={m.label}
+                  className="relative"
+                  style={{ display: 'flex', alignItems: 'center' }}
+                  onMouseEnter={() => setPkgHover(true)}
+                  onMouseLeave={() => setPkgHover(false)}
+                >
+                  <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0' }} className="hover:opacity-60 transition-opacity">
+                    {m.label}
+                  </button>
+                  {pkgHover && (
+                    <div style={{
+                      position: 'absolute',
+                      top: 'calc(100% - 4px)',
+                      left: '50%',
+                      transform: 'translateX(-50%)',
+                      background: 'rgba(255,255,255,0.82)',
+                      backdropFilter: 'blur(22px) saturate(180%)',
+                      WebkitBackdropFilter: 'blur(22px) saturate(180%)',
+                      border: '1px solid rgba(255,255,255,0.7)',
+                      borderRadius: '18px',
+                      boxShadow: '0 16px 40px rgba(40,55,44,0.16), inset 0 1px 0 rgba(255,255,255,0.85)',
+                      width: '210px',
+                      padding: '8px 0',
+                      zIndex: 100,
+                    }}>
+                      {m.items.map((it) => (
+                        <Link key={it.href} href={it.href} className="block hover:bg-black/5"
+                          style={{ padding: '8px 18px', color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none' }}>
+                          {it.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link key={m.label} href={m.href!} style={navLink} className="hover:opacity-60 transition-opacity">{m.label}</Link>
+              )
             )}
           </div>
 
-          <Link href="/slimming-guide" style={navLink} className="hover:opacity-60 transition-opacity">Slimming Guide</Link>
-        </div>
+          {/* Right — phone + CTA */}
+          <div className="hidden md:flex items-center" style={{ gap: '18px' }}>
+            <a href="tel:+35627802062" className="flex items-center hover:opacity-60 transition-opacity" style={{ gap: '6px', textDecoration: 'none' }}>
+              <PhoneIcon />
+              <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px' }}>27802062</span>
+            </a>
+            <Link href="/consultation" className="cta-glow" style={ctaStyle}>Free Consultation</Link>
+          </div>
 
-        {/* RIGHT — Phone + CTA */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', gap: '20px' }}>
-          <a href="tel:+35627802062" className="flex items-center hover:opacity-60 transition-opacity" style={{ gap: '6px', textDecoration: 'none' }}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.128.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.572 2.81.7A2 2 0 0 1 22 16.92z"/>
+          {/* Mobile hamburger */}
+          <button className="md:hidden flex items-center justify-center" style={{ width: 44, height: 44 }} onClick={() => setOpen(true)} aria-label="Open menu">
+            <svg width="22" height="22" fill="none" stroke={GREEN} viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
             </svg>
-            <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px' }}>
-              27802062
-            </span>
-          </a>
-          <Link href="/consultation" className="hover:opacity-85 transition-opacity" style={{
-            backgroundColor: GREEN,
-            color: '#ffffff',
-            fontFamily: '"Novecento Wide", sans-serif',
-            fontSize: '12px',
-            fontWeight: 700,
-            letterSpacing: '0.5px',
-            textTransform: 'uppercase',
-            padding: '12px 22px',
-            borderRadius: '20px',
-            textDecoration: 'none',
-            whiteSpace: 'nowrap',
-          }}>
-            Free Consultation
-          </Link>
-        </div>
+          </button>
+        </nav>
       </div>
 
-      {/* Mobile nav */}
-      <div className="md:hidden flex items-center justify-between" style={{ padding: '0 20px', height: '60px' }}>
-        <Link href="/"><img src="/logo.png" alt="Carisma Slimming" style={{ height: '36px', width: 'auto' }} /></Link>
-        <button onClick={() => setOpen(!open)} aria-label="Menu">
-          <svg width="22" height="22" fill="none" stroke={GREEN} viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-        </button>
-      </div>
+      {/* Full-page liquid-glass mobile menu */}
       {open && (
-        <div className="md:hidden bg-white" style={{ borderTop: '1px solid #E8E3DE', padding: '12px 20px 20px' }}>
-          {[['Weight Loss','/weight-loss'],['GLP-1s','/glp1'],['Slimming Guide','/slimming-guide']].map(([l,h])=>(
-            <Link key={h} href={h} className="block py-3" style={{ color: GREEN, fontFamily:'"Novecento Wide",sans-serif', fontSize:'13px', borderBottom:'1px solid #F0EBE6', textDecoration:'none' }}>{l}</Link>
-          ))}
-          <p className="py-3" style={{ color: GREEN, fontFamily:'"Novecento Wide",sans-serif', fontSize:'13px', borderBottom:'1px solid #F0EBE6' }}>Packages</p>
-          {[['Fat Freezing','/packages/fat-freezing'],['Fat Dissolving','/packages/fat-dissolving'],['Muscle Stimulation','/packages/muscle-stimulation'],['Skin Tightening','/packages/skin-tightening'],['Lipocavitation','/packages/lipocavitation'],['Anti Cellulite','/packages/anti-cellulite'],['Lymphatic Drainage','/packages/lymphatic-drainage']].map(([l,h])=>(
-            <Link key={h} href={h} className="block py-2 pl-4" style={{ color:'#9B8D83', fontFamily:'Roboto,sans-serif', fontSize:'13px', textDecoration:'none' }}>{l}</Link>
-          ))}
-          <a href="tel:+35627802062" className="flex items-center py-3" style={{ gap:'8px', borderBottom:'1px solid #F0EBE6', textDecoration:'none' }}>
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.128.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.572 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            <span style={{ color:GREEN, fontFamily:'"Novecento Wide",sans-serif', fontSize:'13px', fontWeight:600 }}>27802062</span>
-          </a>
-          <Link href="/consultation" className="block text-center mt-4" style={{ backgroundColor:GREEN, color:'#fff', fontFamily:'"Novecento Wide",sans-serif', fontSize:'13px', fontWeight:700, letterSpacing:'0.5px', textTransform:'uppercase', padding:'13px', borderRadius:'20px', textDecoration:'none' }}>
-            Free Consultation
-          </Link>
+        <div
+          className="md:hidden fixed inset-0"
+          style={{
+            zIndex: 60,
+            background: 'linear-gradient(160deg, rgba(232,240,233,0.9) 0%, rgba(255,255,255,0.82) 55%, rgba(245,242,236,0.88) 100%)',
+            backdropFilter: 'blur(30px) saturate(180%)',
+            WebkitBackdropFilter: 'blur(30px) saturate(180%)',
+            animation: 'glassIn 0.32s cubic-bezier(0.22,1,0.36,1)',
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <style>{`@keyframes glassIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}`}</style>
+
+          {/* Top row: logo + close */}
+          <div className="flex items-center justify-between shrink-0" style={{ padding: '16px clamp(16px,5vw,28px)' }}>
+            <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
+              <img src="/logo.png" alt="Carisma Slimming" style={{ height: '38px', width: 'auto', display: 'block' }} />
+            </Link>
+            <button
+              onClick={() => setOpen(false)}
+              aria-label="Close menu"
+              className="flex items-center justify-center"
+              style={{
+                width: 46,
+                height: 46,
+                borderRadius: '999px',
+                background: 'rgba(255,255,255,0.6)',
+                border: '1px solid rgba(255,255,255,0.7)',
+                boxShadow: 'inset 0 1px 0 rgba(255,255,255,0.8)',
+              }}
+            >
+              <svg width="22" height="22" fill="none" stroke={GREEN} viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Scrollable link area */}
+          <div style={{ flex: 1, overflowY: 'auto', padding: '8px clamp(16px,5vw,28px) 28px' }}>
+            {MENUS.map((m) =>
+              m.items ? (
+                <div key={m.label} style={{ borderBottom: '1px solid rgba(142,176,147,0.22)' }}>
+                  <button
+                    className="w-full flex items-center justify-between"
+                    style={{ padding: '18px 4px', fontFamily: '"Novecento Wide", sans-serif', fontSize: '17px', letterSpacing: '0.06em', textTransform: 'uppercase', color: GREEN }}
+                    onClick={() => setExpanded(expanded === m.label ? null : m.label)}
+                  >
+                    {m.label}
+                    <span style={{ fontSize: '22px', color: GREEN, lineHeight: 1 }}>{expanded === m.label ? '−' : '+'}</span>
+                  </button>
+                  {expanded === m.label && (
+                    <div style={{ paddingBottom: '10px' }}>
+                      {m.items.map((it) => (
+                        <Link
+                          key={it.href}
+                          href={it.href}
+                          onClick={() => setOpen(false)}
+                          className="block"
+                          style={{ padding: '9px 12px', fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#9B8D83', textDecoration: 'none' }}
+                        >
+                          {it.label}
+                        </Link>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <Link
+                  key={m.label}
+                  href={m.href!}
+                  onClick={() => setOpen(false)}
+                  className="block"
+                  style={{ padding: '18px 4px', fontFamily: '"Novecento Wide", sans-serif', fontSize: '17px', letterSpacing: '0.06em', textTransform: 'uppercase', color: GREEN, borderBottom: '1px solid rgba(142,176,147,0.22)', textDecoration: 'none' }}
+                >
+                  {m.label}
+                </Link>
+              )
+            )}
+
+            {/* Phone + CTA */}
+            <a href="tel:+35627802062" className="flex items-center" style={{ gap: '8px', padding: '22px 4px 8px', textDecoration: 'none' }}>
+              <PhoneIcon />
+              <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '16px', fontWeight: 600, letterSpacing: '0.5px' }}>27802062</span>
+            </a>
+            <Link
+              href="/consultation"
+              onClick={() => setOpen(false)}
+              className="cta-glow block text-center"
+              style={{ ...ctaStyle, marginTop: '10px', padding: '14px', fontSize: '13px' }}
+            >
+              Free Consultation
+            </Link>
+          </div>
         </div>
       )}
     </header>
