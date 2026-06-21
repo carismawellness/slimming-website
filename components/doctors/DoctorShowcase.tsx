@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { DOCTORS } from '@/lib/doctors';
-import BookConsultationButton from '@/components/BookConsultationButton';
 
 /* ── Shared design tokens (light gradient footer) ──────────────────────── */
 const INK = '#1a1a1a'; // headings
@@ -136,13 +135,6 @@ function DoctorCard({ doctor, index }: { doctor: (typeof DOCTORS)[number]; index
         >
           {expanded ? 'Read less' : 'Read more'}
         </button>
-
-        {/* CTA pinned to bottom for alignment across cards */}
-        <div style={{ marginTop: 'auto', paddingTop: 22 }}>
-          <BookConsultationButton variant="outline" style={{ width: '100%' }}>
-            Book Your Free Body Analysis
-          </BookConsultationButton>
-        </div>
       </div>
     </article>
   );

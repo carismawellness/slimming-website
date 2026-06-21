@@ -23,7 +23,6 @@ const SERIF = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
 const WIDE  = '"Novecento Wide Book","Novecento Wide",sans-serif';
 const BODY  = 'Roboto, sans-serif';
 
-const FRESHA_AES = 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=4994308&oiid=sv%3A25969858&share=true&pId=2708191';
 const IG_URL = 'https://www.instagram.com/carismaslimming';
 const FB_URL = 'https://www.facebook.com/carismaaesthetics/';
 
@@ -41,7 +40,7 @@ const BRANDS = [
     img: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.png',
     logo: '/wix/87fc13_b5a7ec4b11f445b4879c36d7268ba6d1~mv2.png',
     cta: 'Discover Med-Aesthetics',
-    href: FRESHA_AES,
+    href: 'https://www.carismaaesthetics.com/',
   },
 ];
 
