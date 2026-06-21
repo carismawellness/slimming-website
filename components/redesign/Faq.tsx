@@ -2,15 +2,33 @@
 
 import { useState } from 'react';
 import { FAQ } from '@/lib/redesign/content';
+import { prefersReducedMotion } from './motion';
 import Reveal from './Reveal';
 import Cta from './Cta';
 
+function slugify(s: string) {
+  return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
 function Item({ q, a }: { q: string; a: string }) {
   const [open, setOpen] = useState(false);
+  const id = `faq-${slugify(q).slice(0, 40)}`;
+  const answerId = `${id}-answer`;
+  // Respect prefers-reduced-motion: inline style wins over CSS rules so we
+  // must gate the transition in JS rather than relying on the @media rule.
+  const reduced = typeof window !== 'undefined' && prefersReducedMotion();
   return (
     <div className={`cx-faq-item cx-faq-premium ${open ? 'open' : ''}`}>
       <h3 style={{ margin: 0 }}>
-        <button type="button" className="cx-faq-q" aria-expanded={open} onClick={() => setOpen((v) => !v)}>
+        <button
+          type="button"
+          className="cx-faq-q"
+          id={id}
+          aria-expanded={open}
+          aria-controls={answerId}
+          onClick={() => setOpen((v) => !v)}
+          style={{ minHeight: 44 }}
+        >
           <span>{q}</span>
           <span className="cx-faq-icon" aria-hidden>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
@@ -18,7 +36,13 @@ function Item({ q, a }: { q: string; a: string }) {
         </button>
       </h3>
       {/* grid-rows 0fr→1fr animates cleanly for unknown content heights */}
-      <div style={{ display: 'grid', gridTemplateRows: open ? '1fr' : '0fr', transition: 'grid-template-rows .5s var(--ease)' }}>
+      <div
+        id={answerId}
+        role="region"
+        aria-labelledby={id}
+        aria-hidden={!open}
+        style={{ display: 'grid', gridTemplateRows: open ? '1fr' : '0fr', transition: reduced ? 'none' : 'grid-template-rows .5s var(--ease)' }}
+      >
         <div style={{ overflow: 'hidden' }}>
           <p className="cx-faq-answer" style={{ fontFamily: 'var(--body)', fontSize: 14.5, color: 'var(--taupe)', lineHeight: 1.65, padding: '0 0 24px' }}>{a}</p>
         </div>
@@ -29,12 +53,12 @@ function Item({ q, a }: { q: string; a: string }) {
 
 export default function Faq() {
   return (
-    <section id="faq" className="cx-section" style={{ background: 'var(--white)' }}>
+    <section id="faq" className="cx-section" aria-labelledby="faq-heading" style={{ background: 'var(--white)' }}>
       <div className="cx-wrap cx-wrap-tight">
         <div className="cx-faq-layout" style={{ display: 'grid', gap: 'clamp(28px,4vw,56px)', alignItems: 'start' }}>
           <Reveal style={{ position: 'relative' }}>
             <p className="cx-eyebrow" style={{ marginBottom: 14 }}>Questions, answered</p>
-            <h2 className="cx-h2" style={{ marginBottom: 18 }}>Slimming treatment questions, <em>honestly answered</em></h2>
+            <h2 id="faq-heading" className="cx-h2" style={{ marginBottom: 18 }}>Slimming treatment questions, <em>honestly answered</em></h2>
             <p className="cx-lead" style={{ marginBottom: 26 }}>No pressure, no judgement. Here&rsquo;s what most people ask before booking their free body analysis.</p>
             <div className="cx-faq-cta-desktop" style={{ display: 'none' }}>
               <Cta variant="primary">Get your free body analysis</Cta>
@@ -74,6 +98,15 @@ export default function Faq() {
         .cx-faq-premium.open .cx-faq-icon { box-shadow: 0 6px 16px -8px rgba(56,80,63,0.5); }
         .cx-faq-answer { max-width: 62ch; }
 
+        .cx-faq-q:focus-visible {
+          outline: 2px solid #4f7256;
+          outline-offset: 2px;
+          border-radius: 6px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .cx-faq-premium, .cx-faq-premium .cx-faq-icon { transition: none !important; }
+          .cx-faq-premium > div { transition: none !important; }
+        }
         @media (min-width: 900px){
           .cx-faq-layout{ grid-template-columns: 0.8fr 1.2fr; }
           .cx-faq-cta-desktop{ display: block !important; }

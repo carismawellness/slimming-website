@@ -5,12 +5,12 @@ import Reveal from './Reveal';
 
 export default function Treatments() {
   return (
-    <section id="treatments" className="cx-section" style={{ background: 'linear-gradient(180deg, #fff 0%, var(--cream) 100%)' }}>
+    <section id="treatments" className="cx-section" aria-labelledby="treatments-heading" style={{ background: 'linear-gradient(180deg, #fff 0%, var(--cream) 100%)' }}>
       <div className="cx-wrap">
         <Reveal style={{ textAlign: 'center', maxWidth: 680, marginInline: 'auto', marginBottom: 'clamp(36px,5vw,56px)' }}>
           <p className="cx-eyebrow" style={{ marginBottom: 14 }}>Body contouring treatments</p>
           <div className="cx-rule center" style={{ marginBottom: 22 }} />
-          <h2 className="cx-h2" style={{ marginBottom: 16 }}>Body contouring &amp; slimming treatments, <em>integrated into your plan</em></h2>
+          <h2 id="treatments-heading" className="cx-h2" style={{ marginBottom: 16 }}>Body contouring &amp; slimming treatments, <em>integrated into your plan</em></h2>
           <p className="cx-lead">Medical-grade treatments that speed up change — recommended only when they will help your specific goals. Non-invasive, with no downtime required.</p>
         </Reveal>
 
@@ -21,22 +21,23 @@ export default function Treatments() {
               href={t.href}
               target="_blank"
               rel="noopener noreferrer"
+              aria-label={`${t.name} — learn more (opens in new tab)`}
               className={`cx-card cx-treat${i === 0 ? ' cx-treat--feature' : ''}`}
             >
               <div className="cx-treat-media">
                 <img
                   src={t.img}
-                  alt={`${t.name} at Carisma Slimming Malta`}
+                  alt={`${t.name} treatment at Carisma Slimming Malta`}
                   className="cx-treat-img"
                   loading="lazy"
                 />
                 <span aria-hidden className="cx-treat-shade" />
                 <span aria-hidden className="cx-treat-index">{String(i + 1).padStart(2, '0')}</span>
-                <h3 className="cx-treat-name">{t.name}</h3>
+                <h3 className="cx-treat-name" aria-hidden>{t.name}</h3>
               </div>
               <div className="cx-treat-body">
                 <p className="cx-treat-blurb">{t.blurb}</p>
-                <span className="cx-link-underline cx-treat-cta">Explore →</span>
+                <span aria-hidden className="cx-link-underline cx-treat-cta">Explore →</span>
               </div>
             </a>
           ))}
@@ -144,6 +145,12 @@ export default function Treatments() {
           .cx-treat:nth-child(4) { grid-column: span 3; }
           .cx-treat--feature .cx-treat-media { aspect-ratio: 16 / 9; }
           .cx-treat--feature .cx-treat-name { font-size: 22px; }
+        }
+
+        .cx-treat:focus-visible {
+          outline: 2px solid #4f7256;
+          outline-offset: 3px;
+          border-radius: 22px;
         }
 
         @media (prefers-reduced-motion: reduce) {

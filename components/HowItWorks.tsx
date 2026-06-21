@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
@@ -45,24 +46,28 @@ export default function HowItWorks() {
 
   const [active, setActive] = useState(0);
   const tabs = ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5'];
+  const tabPanelId = 'how-it-works-panel';
   const colHead = { fontFamily: wideFont, fontSize: '15px', fontWeight: 600 as const, letterSpacing: '1px', textTransform: 'uppercase' as const };
 
   return (
-    <section className="py-24">
+    <section className="py-24" aria-labelledby="how-it-works-heading">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
+        <h2 id="how-it-works-heading" className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
           How our GLP-1 medical weight loss programme works — step by step
         </h2>
-        <div className="mx-auto mb-10" style={{ width: '110px', height: '1px', backgroundColor: '#cdd8c8' }} />
+        <div className="mx-auto mb-10" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#cdd8c8' }} />
 
-        {/* Step tabs */}
-        <div className="flex" style={{ borderBottom: '1px solid #e3ded6' }}>
+        {/* Step tabs — proper tab role pattern */}
+        <div role="tablist" aria-label="Programme steps" className="flex" style={{ borderBottom: '1px solid #e3ded6' }}>
           {tabs.map((t, i) => (
             <button
               key={t}
+              role="tab"
+              id={`tab-${i}`}
+              aria-selected={active === i}
+              aria-controls={tabPanelId}
               onClick={() => setActive(i)}
-              className="flex-1 pb-4 text-center transition-colors"
-              aria-pressed={active === i}
+              className="flex-1 pb-4 text-center transition-colors duration-200 min-h-[44px]"
               style={{ color: active === i ? greenDark : taupeLight, fontWeight: active === i ? 700 : 400, fontFamily: wideFont, fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase', borderBottom: active === i ? `2px solid ${greenText}` : '2px solid transparent', marginBottom: '-1px', background: 'transparent', cursor: 'pointer' }}
             >
               {t}
@@ -71,13 +76,25 @@ export default function HowItWorks() {
         </div>
 
         {/* Panel */}
-        <div style={{ background: panelGradient, borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '32px' }}>
+        <div
+          id={tabPanelId}
+          role="tabpanel"
+          aria-labelledby={`tab-${active}`}
+          style={{ background: panelGradient, borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '32px' }}
+        >
           {active === 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Consultation */}
               <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
-                  <img src="/wix/87fc13_d2a17b8db6de4c8c8c41219e3a2c99cb~mv2.png" alt="" style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
+                  <Image
+                    src="/wix/87fc13_d2a17b8db6de4c8c8c41219e3a2c99cb~mv2.png"
+                    alt=""
+                    aria-hidden={true}
+                    width={44}
+                    height={44}
+                    style={{ height: '44px', width: 'auto', objectFit: 'contain' }}
+                  />
                   <h3 style={{ ...colHead, color: greenText }}>Your medical weight loss consultation</h3>
                 </div>
                 <p className="mb-5" style={pStyle}>
@@ -86,7 +103,7 @@ export default function HowItWorks() {
                 <ol className="space-y-2 mb-5">
                   {consultationSteps.map((s, i) => (
                     <li key={s} className="flex items-start gap-3" style={liStyle}>
-                      <span style={{ color: greenDark, fontWeight: 600 }}>{i + 1}.</span>
+                      <span aria-hidden="true" style={{ color: greenDark, fontWeight: 600 }}>{i + 1}.</span>
                       <span>{s}</span>
                     </li>
                   ))}
@@ -99,13 +116,13 @@ export default function HowItWorks() {
               <div className="card p-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <div className="flex items-center gap-2 mb-5">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={greenText} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Suitable"><polyline points="20 6 9 17 4 12" /></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={greenText} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12" /></svg>
                     <h3 style={{ ...colHead, fontSize: '14px', color: taupe }}>Suitable for</h3>
                   </div>
                   <ul className="space-y-3">
                     {suitableFor.map((t) => (
                       <li key={t} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
-                        <span style={bullet}>&bull;</span>
+                        <span aria-hidden="true" style={bullet}>&bull;</span>
                         <span>{t}</span>
                       </li>
                     ))}
@@ -113,13 +130,13 @@ export default function HowItWorks() {
                 </div>
                 <div className="sm:pl-6" style={{ borderLeft: '1px solid #e3ded6' }}>
                   <div className="flex items-center gap-2 mb-5">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#595959" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Not suitable"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#595959" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" focusable="false"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
                     <h3 style={{ ...colHead, fontSize: '14px', color: taupe }}>Not suitable for</h3>
                   </div>
                   <ul className="space-y-3">
                     {notSuitableFor.map((t) => (
                       <li key={t} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
-                        <span style={bullet}>&bull;</span>
+                        <span aria-hidden="true" style={bullet}>&bull;</span>
                         <span>{t}</span>
                       </li>
                     ))}
@@ -138,13 +155,23 @@ export default function HowItWorks() {
                 </p>
                 <ul className="space-y-2">
                   {['Bloodwork for thyroid, blood sugar and cholesterol', 'Food-intolerance screening where symptoms point to it', 'Blood pressure and other checks to keep your plan safe'].map((t) => (
-                    <li key={t} className="flex items-start gap-2" style={liStyle}><span style={bullet}>&bull;</span><span>{t}</span></li>
+                    <li key={t} className="flex items-start gap-2" style={liStyle}>
+                      <span aria-hidden="true" style={bullet}>&bull;</span>
+                      <span>{t}</span>
+                    </li>
                   ))}
                 </ul>
                 <p className="mt-4" style={pStyle}>This also establishes whether a GLP-1 medication (Ozempic or Mounjaro) is clinically appropriate.</p>
               </div>
               <div className="w-full overflow-hidden" style={{ aspectRatio: '375 / 350', borderRadius: '16px' }}>
-                <img src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png" alt="Body composition analysis at Carisma" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <Image
+                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                  alt="Body composition analysis at Carisma Slimming Malta"
+                  width={375}
+                  height={350}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                  loading="lazy"
+                />
               </div>
             </div>
           )}

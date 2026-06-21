@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 
 const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
@@ -68,13 +69,21 @@ const ITEMS: Item[] = [
 
 function EvidenceCard({ item }: { item: Item }) {
   const [expanded, setExpanded] = useState(false);
+  const expandId = `evidence-${item.title.replace(/\s+/g, '-').toLowerCase().slice(0, 30)}`;
   return (
-    <div
+    <article
       className="card overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #EAF0E9 100%)' }}
     >
       <div className="w-full overflow-hidden" style={{ aspectRatio: '381 / 182' }}>
-        <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <Image
+          src={item.image}
+          alt={item.title}
+          width={381}
+          height={182}
+          style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          loading="lazy"
+        />
       </div>
       <div className="px-7 pt-6 pb-7">
         <h3 className="text-center" style={{ color: taupe, fontFamily: wideFont, fontWeight: 400, fontSize: '24px', textTransform: 'lowercase', lineHeight: 1.3 }}>
@@ -82,43 +91,43 @@ function EvidenceCard({ item }: { item: Item }) {
         </h3>
         <p className="mt-4 mb-2" style={{ color: '#1a1a1a', fontFamily: bodyFont, fontSize: '14px', fontWeight: 700 }}>WHAT IT DOES</p>
         <p style={{ color: '#333', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item.what}</p>
-        {expanded && (
-          <>
-            <p className="mt-4 mb-2" style={{ color: '#1a1a1a', fontFamily: bodyFont, fontSize: '14px', fontWeight: 700 }}>KEY RESULTS</p>
-            {item.keyResults.map((kr, i) => (
-              <p key={i} className="mb-2" style={{ color: '#333', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                {kr.text}<strong style={{ fontWeight: 700 }}>{kr.source}</strong>
-              </p>
+        <div id={expandId} hidden={!expanded}>
+          <p className="mt-4 mb-2" style={{ color: '#1a1a1a', fontFamily: bodyFont, fontSize: '14px', fontWeight: 700 }}>KEY RESULTS</p>
+          {item.keyResults.map((kr, i) => (
+            <p key={i} className="mb-2" style={{ color: '#333', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+              {kr.text}{' '}<cite style={{ fontStyle: 'normal', fontWeight: 700 }}>{kr.source}</cite>
+            </p>
+          ))}
+          <div className="flex flex-wrap gap-2 mt-4" role="list" aria-label="Treatment tags">
+            {item.tags.map((t) => (
+              <span key={t} role="listitem" style={{ backgroundColor: 'rgba(244,250,246,0.39)', color: greenDark, fontFamily: bodyFont, fontSize: '12px', border: '1px solid #4f7256', borderRadius: '999px', padding: '6px 15px' }}>{t}</span>
             ))}
-            <div className="flex flex-wrap gap-2 mt-4">
-              {item.tags.map((t) => (
-                <span key={t} style={{ backgroundColor: 'rgba(244,250,246,0.39)', color: greenDark, fontFamily: bodyFont, fontSize: '12px', border: '1px solid #4f7256', borderRadius: '999px', padding: '6px 15px' }}>{t}</span>
-              ))}
-            </div>
-          </>
-        )}
+          </div>
+        </div>
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-3 block"
-          style={{ color: taupe, fontFamily: bodyFont, fontSize: '16px', fontStyle: 'italic', textDecoration: 'underline', cursor: 'pointer', background: 'transparent', padding: 0, border: 0 }}
+          aria-expanded={expanded}
+          aria-controls={expandId}
+          className="mt-3 block min-h-[44px] transition-colors duration-200 ease-in-out hover:opacity-75"
+          style={{ color: taupe, fontFamily: bodyFont, fontSize: '16px', fontStyle: 'italic', textDecoration: 'underline', cursor: 'pointer', background: 'transparent', padding: '8px 0', border: 0 }}
         >
           {expanded ? 'Read less' : 'Read more'}
         </button>
       </div>
-    </div>
+    </article>
   );
 }
 
 export default function EvidenceCards() {
   return (
-    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" aria-labelledby="evidence-heading" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center mb-2" style={{ color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase' }}>
+        <p className="text-center mb-2" aria-hidden="true" style={{ color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our medical weight loss methodology
         </p>
-        <div className="mx-auto mb-4" style={{ width: '210px', height: '1px', backgroundColor: '#B9A99E' }} />
-        <h2 className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+        <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '210px', height: '1px', backgroundColor: '#B9A99E' }} />
+        <h2 id="evidence-heading" className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
           The clinical evidence behind GLP-1 weight loss treatment
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
@@ -131,8 +140,9 @@ export default function EvidenceCards() {
             href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
             target="_blank"
             rel="noopener noreferrer"
-            className="cta-glow inline-block text-center font-bold text-white"
-            style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '12px 24px', width: '590px', maxWidth: '100%' }}
+            aria-label="Book your medical weight loss consultation — opens in new tab"
+            className="cta-glow inline-block text-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
+            style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 24px', minHeight: '48px', width: '590px', maxWidth: '100%', display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}
           >
             Book your medical weight loss consultation
           </a>

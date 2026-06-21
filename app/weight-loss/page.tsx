@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
@@ -133,8 +134,16 @@ function AsSeenOn() {
         </p>
         <div className="mx-auto mb-8" style={{ width: '90px', height: '1px', backgroundColor: '#d9cfc6' }} />
         <div className="flex flex-wrap items-center justify-center" style={{ gap: '12px' }}>
-          {logos.map((l, i) => (
-            <img key={i} src={l.src} alt={l.alt} style={{ width: `${l.w}px`, height: `${l.h}px`, objectFit: 'cover' }} />
+          {logos.map((l) => (
+            <Image
+              key={l.src}
+              src={l.src}
+              alt={l.alt}
+              width={l.w}
+              height={l.h}
+              style={{ objectFit: 'contain', width: `${l.w}px`, height: `${l.h}px` }}
+              loading="lazy"
+            />
           ))}
         </div>
       </div>
@@ -194,12 +203,12 @@ function ProblemAgitationSection() {
   ];
 
   return (
-    <section>
+    <section aria-labelledby="problem-heading">
       {/* Narrative */}
       <div className="pt-14 pb-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto" style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #DCE7D9 100%)', border: '1px solid #E5E5E3', borderRadius: '16px', padding: '40px', maxWidth: '976px' }}>
-            <h2 className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+            <h2 id="problem-heading" className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
               Weight Loss After 30 in Malta<br />Without Giving Up the Foods You Love
             </h2>
             <MotifAccent mode="divider" className="mx-auto mb-7" style={{ width: 'min(220px, 60%)' }} />
@@ -330,20 +339,24 @@ function ProgramOverviewSection() {
   const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '13px', lineHeight: 1.4 };
 
   return (
-    <section className="py-24">
+    <section className="py-24" aria-labelledby="program-heading">
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '992px' }}>
-        <h2 className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
+        <h2 id="program-heading" className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           How Our Doctor-Led Weight Loss Programme Works
         </h2>
         <div className="mx-auto mb-10" style={{ width: '110px', height: '1px', backgroundColor: '#cdd8c8' }} />
 
         {/* Step tabs */}
-        <div className="flex" style={{ borderBottom: '1px solid #e3ded6' }}>
+        <div role="tablist" aria-label="Program steps" className="flex" style={{ borderBottom: '1px solid #e3ded6' }}>
           {tabs.map((t, i) => (
             <button
               key={t}
+              role="tab"
+              aria-selected={active === i}
+              aria-controls={`step-panel-${i}`}
+              id={`step-tab-${i}`}
               onClick={() => setActive(i)}
-              className="flex-1 pb-4 text-center transition-colors"
+              className="flex-1 pb-4 text-center transition-colors min-h-[44px] focus-visible:outline-2 focus-visible:outline-offset-2"
               style={{ color: active === i ? greenDark : taupeLight, fontFamily: wideFont, fontSize: '14px', letterSpacing: '2px', textTransform: 'uppercase', borderBottom: active === i ? `2px solid ${green}` : '2px solid transparent', marginBottom: '-1px' }}
             >
               {t}
@@ -354,11 +367,11 @@ function ProgramOverviewSection() {
         {/* Panel */}
         <div style={{ background: panelGradient, borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '32px' }}>
           {active === 0 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div role="tabpanel" id="step-panel-0" aria-labelledby="step-tab-0" className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Complimentary consultation */}
               <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
-                  <img src="/wix/87fc13_d2a17b8db6de4c8c8c41219e3a2c99cb~mv2.png" alt="" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
+                  <Image src="/wix/87fc13_d2a17b8db6de4c8c8c41219e3a2c99cb~mv2.png" alt="" role="presentation" width={50} height={50} style={{ height: '50px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
                   <h3 style={colHead}>Complimentary Consultation</h3>
                 </div>
                 <p className="mb-5" style={pStyle}>
@@ -380,7 +393,7 @@ function ProgramOverviewSection() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div className="card p-6">
                   <div className="flex items-center gap-2 mb-5">
-                    <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
+                    <Image src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" role="presentation" width={30} height={30} style={{ objectFit: 'contain' }} loading="lazy" />
                     <h3 style={colHead}>Suitable for</h3>
                   </div>
                   <ul className="space-y-3">
@@ -394,7 +407,7 @@ function ProgramOverviewSection() {
                 </div>
                 <div className="card p-6">
                   <div className="flex items-center gap-2 mb-5">
-                    <img src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png" alt="" style={{ width: '27px', height: '27px', objectFit: 'contain' }} />
+                    <Image src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png" alt="" role="presentation" width={27} height={27} style={{ objectFit: 'contain' }} loading="lazy" />
                     <h3 style={colHead}>Not suitable for</h3>
                   </div>
                   <ul className="space-y-3">
@@ -411,9 +424,9 @@ function ProgramOverviewSection() {
           )}
 
           {active === 1 && (
-            <div className="card p-7">
+            <div role="tabpanel" id="step-panel-1" aria-labelledby="step-tab-1" className="card p-7">
               <div className="flex items-center gap-3 mb-5">
-                <img src="/wix/87fc13_05acf8a406274fbd9b5586bead0d2df5~mv2.png" alt="" style={{ height: '63px', width: 'auto', objectFit: 'contain' }} />
+                <Image src="/wix/87fc13_05acf8a406274fbd9b5586bead0d2df5~mv2.png" alt="" role="presentation" width={63} height={63} style={{ height: '63px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
                 <h3 style={stepTitle}>Body analysis &amp; medical grade consultation</h3>
               </div>
               <p className="mb-4" style={pStyle}>
@@ -436,10 +449,10 @@ function ProgramOverviewSection() {
           )}
 
           {active === 2 && (
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div role="tabpanel" id="step-panel-2" aria-labelledby="step-tab-2" className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
-                  <img src="/wix/87fc13_b0aad949fa9d47b58f1512dcf2522e3d~mv2.png" alt="" style={{ height: '63px', width: 'auto', objectFit: 'contain' }} />
+                  <Image src="/wix/87fc13_b0aad949fa9d47b58f1512dcf2522e3d~mv2.png" alt="" role="presentation" width={63} height={63} style={{ height: '63px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
                   <h3 style={stepTitle}>Diet and accountability</h3>
                 </div>
                 <p className="mb-5" style={pStyle}>
@@ -458,7 +471,7 @@ function ProgramOverviewSection() {
               </div>
               <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
-                  <img src="/wix/87fc13_9a4ac5ded2b94bbbb6e11e641f46f5d5~mv2.png" alt="" style={{ height: '63px', width: 'auto', objectFit: 'contain' }} />
+                  <Image src="/wix/87fc13_9a4ac5ded2b94bbbb6e11e641f46f5d5~mv2.png" alt="" role="presentation" width={63} height={63} style={{ height: '63px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
                   <h3 style={stepTitle}>Then we shape it around your life:</h3>
                 </div>
                 <ul className="space-y-3 mb-5">
@@ -493,9 +506,9 @@ function ProgramOverviewSection() {
           )}
 
           {active === 3 && (
-            <div className="card p-7">
+            <div role="tabpanel" id="step-panel-3" aria-labelledby="step-tab-3" className="card p-7">
               <div className="flex items-center gap-3 mb-5">
-                <img src="/wix/87fc13_83de975f116646a795c9db7ebdc3b4be~mv2.png" alt="" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
+                <Image src="/wix/87fc13_83de975f116646a795c9db7ebdc3b4be~mv2.png" alt="" role="presentation" width={50} height={50} style={{ height: '50px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
                 <h3 style={stepTitle}>Movement That Fits Your Life</h3>
               </div>
               <p className="mb-4" style={pStyle}>
@@ -521,7 +534,7 @@ function ProgramOverviewSection() {
           )}
 
           {active === 4 && (
-            <div className="space-y-6">
+            <div role="tabpanel" id="step-panel-4" aria-labelledby="step-tab-4" className="space-y-6">
               <div className="card p-7">
                 <h3 className="mb-4" style={stepTitle}>Body Contouring Treatments Included in Your Programme</h3>
                 <p style={pStyle}>
@@ -577,7 +590,7 @@ function ProgramOverviewSection() {
                 ].map((t) => (
                   <div key={t.title} className="card p-7">
                     <div className="flex items-center gap-3 mb-5">
-                      <img src={t.icon} alt="" style={{ height: '65px', width: 'auto', objectFit: 'contain' }} />
+                      <Image src={t.icon} alt="" role="presentation" width={65} height={65} style={{ height: '65px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
                       <h3 style={stepTitle}>{t.title}</h3>
                     </div>
                     <p className="mb-4" style={pStyle}>{t.desc}</p>
@@ -651,20 +664,20 @@ function CorePillarsSection() {
   ];
 
   return (
-    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" aria-labelledby="pillars-heading" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           4 core pillars of our methodology
         </p>
         <div className="mx-auto mb-5" style={{ width: '150px', height: '1px', backgroundColor: '#cdd8c8' }} />
-        <h2 className="text-center mb-12" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+        <h2 id="pillars-heading" className="text-center mb-12" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
           Malta&apos;s only multidisciplinary<br />approach to weight-loss
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {pillars.map((p) => (
-            <div key={p.title} className="lg-raised lg-raised--hover p-6" style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #E6EFE3 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
+            <article key={p.title} className="lg-raised lg-raised--hover p-6" style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #E6EFE3 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
               <div className="mb-5 flex items-center" style={{ height: '48px' }}>
-                <img src={p.icon} alt="" style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} />
+                <Image src={p.icon} alt="" role="presentation" width={44} height={44} style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
               </div>
               <p className="mb-2" style={{ color: green, fontFamily: wideFont, fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>{p.title}</p>
               <h3 className="mb-5" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', fontWeight: 400, lineHeight: 1.4 }}>{p.subtitle}</h3>
@@ -676,7 +689,7 @@ function CorePillarsSection() {
                   </li>
                 ))}
               </ul>
-            </div>
+            </article>
           ))}
         </div>
       </div>
@@ -754,8 +767,8 @@ function TreatmentsSection() {
               <div key={t.title} className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div className={flip ? 'md:order-2' : ''}>
                   {t.image ? (
-                    <div className="w-full overflow-hidden shadow-md" style={{ borderRadius: '16px', aspectRatio: '381 / 250' }}>
-                      <img src={t.image} alt={t.placeholder} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <div className="w-full overflow-hidden shadow-md" style={{ position: 'relative', borderRadius: '16px', aspectRatio: '381 / 250' }}>
+                      <Image src={t.image} alt={t.placeholder} fill style={{ objectFit: 'cover' }} loading="lazy" />
                     </div>
                   ) : (
                     <Placeholder label={t.placeholder} height="280px" />
@@ -796,7 +809,7 @@ function CarismaDifferenceSection() {
     'Selective entry and measurable weight loss results guaranteed',
   ];
   return (
-    <section className="relative py-20" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <section className="relative py-20" aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       {/* Accessibility scrim — the centred sage watermark has darkest pixel #A8C0AD; a 0.7 white veil
           lifts the effective background to ~#e5ece6 so taupe body clears 4.81:1 and green text 4.51:1 (AA). */}
       <div aria-hidden="true" className="absolute inset-0" style={{ backgroundColor: 'rgba(255,255,255,0.7)', pointerEvents: 'none' }} />
@@ -805,7 +818,7 @@ function CarismaDifferenceSection() {
           the carisma difference
         </p>
         <div className="mx-auto mb-6" style={{ width: '110px', height: '1px', backgroundColor: '#d9cfc6' }} />
-        <h2 className="text-center mb-6" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+        <h2 id="difference-heading" className="text-center mb-6" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
           Why Carisma Slimming Is Different<br />From Every Other Weight Loss Clinic in Malta
         </h2>
         <p className="text-center mx-auto mb-12 max-w-2xl" style={pStyle}>
@@ -815,7 +828,7 @@ function CarismaDifferenceSection() {
           <ul className="space-y-6">
             {items.map((t) => (
               <li key={t} className="flex items-start gap-4">
-                <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '23px', height: '23px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} />
+                <Image src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" role="presentation" width={23} height={23} style={{ objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} loading="lazy" />
                 <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
               </li>
             ))}
@@ -856,11 +869,13 @@ function OurPromiseSection() {
             Up to 1 kg Per Week.<br />Medically Measured. Results Guaranteed.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-10">
-            <div className="overflow-hidden" style={{ borderRadius: '16px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', width: '375px', maxWidth: '100%', height: '350px' }}>
-              <img
+            <div className="overflow-hidden" style={{ position: 'relative', borderRadius: '16px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', width: '375px', maxWidth: '100%', height: '350px' }}>
+              <Image
                 src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
-                alt="Clinical measurement and body analysis at Carisma"
-                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                alt="Clinical measurement and body analysis at Carisma Slimming"
+                fill
+                style={{ objectFit: 'cover' }}
+                loading="lazy"
               />
             </div>
             <div>
@@ -963,7 +978,8 @@ function CarismaWellnessSection() {
                 href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="cta-glow text-center font-bold text-white"
+                aria-label="Get your free body analysis (opens in new tab)"
+                className="cta-glow text-center font-bold text-white inline-flex items-center justify-center min-h-[44px] transition-opacity duration-200 hover:opacity-90 active:opacity-80"
                 style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '14px 40px' }}
               >
                 Get Your Free Body Analysis &rsaquo;
@@ -971,7 +987,7 @@ function CarismaWellnessSection() {
               <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
             </div>
             <div className="flex items-center gap-3">
-              <img src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="Complimentary on-site parking" style={{ width: '34px', height: 'auto', objectFit: 'contain' }} />
+              <Image src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="" role="presentation" width={34} height={34} style={{ width: '34px', height: 'auto', objectFit: 'contain' }} loading="lazy" />
               <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
                 Complimentary on-site parking
               </span>
@@ -1088,7 +1104,7 @@ function ResultsSection() {
           </p>
 
           {/* Lead doctor — prominent */}
-          <div className="card grid grid-cols-1 md:grid-cols-3 gap-8 items-center p-8 mb-8">
+          <article className="card grid grid-cols-1 md:grid-cols-3 gap-8 items-center p-8 mb-8" aria-label={`${doctors[0].name}, ${doctors[0].role}`}>
             <div className="md:col-span-1">
               <Placeholder label={doctors[0].placeholder} height="300px" />
             </div>
@@ -1097,16 +1113,16 @@ function ResultsSection() {
               <p className="mb-4" style={{ color: green, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>{doctors[0].role}</p>
               <p style={pStyle}>{doctors[0].bio}</p>
             </div>
-          </div>
+          </article>
 
           {/* Supporting doctors */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {doctors.slice(1).map((d) => (
-              <div key={d.name} className="card p-7">
+              <article key={d.name} className="card p-7" aria-label={`${d.name}, ${d.role}`}>
                 <h3 style={{ color: greenDark, fontFamily: headingFont, fontSize: '20px', fontWeight: 400 }}>{d.name}</h3>
                 <p className="mb-3" style={{ color: green, fontFamily: wideFont, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>{d.role}</p>
                 <p style={{ ...pStyle, fontSize: '14px' }}>{d.bio}</p>
-              </div>
+              </article>
             ))}
           </div>
         </div>
@@ -1132,7 +1148,7 @@ function ResultsSection() {
               </p>
               <a
                 href="/slimming-guide"
-                className="cta-glow inline-block font-bold text-white text-center"
+                className="cta-glow inline-flex items-center justify-center font-bold text-white text-center min-h-[44px] transition-opacity duration-200 hover:opacity-90 active:opacity-80"
                 style={{ padding: '14px 34px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px' }}
               >
                 READ THE GUIDE
@@ -1171,21 +1187,24 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-16">
+    <section className="py-16" aria-labelledby="testimonials-heading">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Eyebrow>Real results from real clients</Eyebrow>
-        <SectionHeading>The change our clients feel first</SectionHeading>
+        <SectionHeading><span id="testimonials-heading">The change our clients feel first</span></SectionHeading>
         <p className="mt-4 mb-12 text-center max-w-2xl mx-auto" style={pStyle}>
           A small sample of the hundreds of people across Malta who came to us after everything else had stopped working.
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <div key={t.name} className="card-lift p-7 flex flex-col">
-              <p style={{ color: green, fontFamily: headingFont, fontSize: '13px', letterSpacing: '1px' }}>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+            <blockquote key={t.name} className="card-lift p-7 flex flex-col">
+              <p aria-hidden="true" style={{ color: green, fontFamily: headingFont, fontSize: '13px', letterSpacing: '1px' }}>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
+              <span className="sr-only">5 stars</span>
               <p className="mt-3 mb-5 flex-1" style={{ ...pStyle, fontStyle: 'italic' }}>&ldquo;{t.quote}&rdquo;</p>
-              <p style={{ color: greenDark, fontFamily: headingFont, fontSize: '16px', fontWeight: 400 }}>{t.name}</p>
-              <p style={{ color: taupeLight, fontFamily: wideFont, fontSize: '11px', letterSpacing: '0.5px', textTransform: 'uppercase' }} dangerouslySetInnerHTML={{ __html: t.detail }} />
-            </div>
+              <footer>
+                <cite style={{ fontStyle: 'normal', color: greenDark, fontFamily: headingFont, fontSize: '16px', fontWeight: 400 }}>{t.name}</cite>
+                <p style={{ color: taupeLight, fontFamily: wideFont, fontSize: '11px', letterSpacing: '0.5px', textTransform: 'uppercase' }} dangerouslySetInnerHTML={{ __html: t.detail }} />
+              </footer>
+            </blockquote>
           ))}
         </div>
         <div className="mt-12 flex flex-wrap justify-center gap-3">
@@ -1247,44 +1266,56 @@ function FAQSection() {
         </div>
 
         {/* Accordion */}
-        <div>
+        <div role="list">
           {visible.map(({ f, i }) => {
             const isOpen = open === i;
+            const panelId = `faq-panel-${i}`;
+            const btnId = `faq-btn-${i}`;
             return (
-              <div key={f.q} style={{ borderBottom: '1px solid #e6e6e1' }}>
+              <div key={f.q} role="listitem" style={{ borderBottom: '1px solid #e6e6e1' }}>
                 <button
                   type="button"
+                  id={btnId}
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="w-full flex items-center justify-between gap-4 text-left"
+                  className="w-full flex items-center justify-between gap-4 text-left min-h-[44px] focus-visible:outline-2 focus-visible:outline-offset-2"
                   style={{ padding: '22px 4px', cursor: 'pointer', background: 'transparent' }}
                   aria-expanded={isOpen}
+                  aria-controls={panelId}
                 >
                   <span style={{ color: green, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>
                     {i + 1}. {f.q}
                   </span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={taupe} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={taupe} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </button>
-                {isOpen && (
-                  <div style={{ padding: '0 4px 24px' }}>
-                    {f.intro && <p className="mb-4" style={pStyle}>{f.intro}</p>}
-                    {f.bullets && (
-                      <ul className="mb-4 space-y-2">
-                        {f.bullets.map((b) => (
-                          <li key={b} className="flex items-start gap-2" style={liStyle}>
-                            <span style={bullet}>&bull;</span>
-                            <span>{b}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                    {f.paras && f.paras.map((p) => (
-                      <p key={p} className="mb-4 last:mb-0" style={pStyle}>{p}</p>
-                    ))}
-                    {f.outro && <p style={pStyle}>{f.outro}</p>}
-                  </div>
-                )}
+                <div
+                  id={panelId}
+                  role="region"
+                  aria-labelledby={btnId}
+                  hidden={!isOpen}
+                  style={{ padding: isOpen ? '0 4px 24px' : undefined }}
+                >
+                  {isOpen && (
+                    <>
+                      {f.intro && <p className="mb-4" style={pStyle}>{f.intro}</p>}
+                      {f.bullets && (
+                        <ul className="mb-4 space-y-2">
+                          {f.bullets.map((b) => (
+                            <li key={b} className="flex items-start gap-2" style={liStyle}>
+                              <span style={bullet}>&bull;</span>
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                      {f.paras && f.paras.map((p) => (
+                        <p key={p} className="mb-4 last:mb-0" style={pStyle}>{p}</p>
+                      ))}
+                      {f.outro && <p style={pStyle}>{f.outro}</p>}
+                    </>
+                  )}
+                </div>
               </div>
             );
           })}
@@ -1315,7 +1346,7 @@ function EvidenceCard({ item }: { item: { title: string; strength: string; image
     <div className="flex flex-col items-center">
       {/* Image with badge — overlaps the card below */}
       <div className="relative z-10 overflow-hidden" style={{ ...leafCorners, width: '381px', maxWidth: '92%', height: '182px', boxShadow: '0 14px 30px rgba(0,0,0,0.12)' }}>
-        <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} loading="lazy" />
         <span
           className="absolute"
           style={{ top: '14px', left: '14px', backgroundColor: '#ffffff', color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '9999px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)' }}
@@ -1362,7 +1393,8 @@ function EvidenceCard({ item }: { item: { title: string; strength: string; image
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
-          className="mt-3"
+          aria-expanded={expanded}
+          className="mt-3 min-h-[44px] px-2 focus-visible:outline-2 focus-visible:outline-offset-2"
           style={{ color: taupe, fontFamily: bodyFont, fontSize: '13px', fontStyle: 'italic', textDecoration: 'underline', cursor: 'pointer', background: 'transparent' }}
         >
           {expanded ? 'See Less' : 'See More'}
@@ -1469,13 +1501,13 @@ function EvidenceApproachSection() {
     },
   ];
   return (
-    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" aria-labelledby="evidence-approach-heading" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '970px' }}>
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '3.2px', textTransform: 'uppercase' }}>
-          Clinical research: basis of our metodology
+          Clinical research: basis of our methodology
         </p>
         <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-        <h2 className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+        <h2 id="evidence-approach-heading" className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
           The Evidence-Based Approach Behind Our Weight Loss Programme
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-9 gap-y-12">
@@ -1543,7 +1575,8 @@ function FinalCTASection() {
               href="https://www.carismaspa.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-secondary font-bold text-center"
+              aria-label="Discover our spas — Carisma Spa (opens in new tab)"
+              className="btn btn-secondary font-bold text-center inline-flex items-center justify-center min-h-[44px] transition-opacity duration-200 hover:opacity-90 active:opacity-80"
               style={{ padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
             >
               Discover our spas
@@ -1552,7 +1585,8 @@ function FinalCTASection() {
               href="https://www.carismaspa.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="btn btn-secondary font-bold text-center"
+              aria-label="Discover Carisma medical aesthetics (opens in new tab)"
+              className="btn btn-secondary font-bold text-center inline-flex items-center justify-center min-h-[44px] transition-opacity duration-200 hover:opacity-90 active:opacity-80"
               style={{ padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
             >
               Discover med-aesthetics
@@ -1561,26 +1595,26 @@ function FinalCTASection() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="py-12" style={{ backgroundColor: '#fff', borderTop: `1px solid #e0e0e0` }}>
+      {/* Contact info — using div to avoid nesting footer inside section which conflicts with outer layout footer */}
+      <div className="py-12" style={{ backgroundColor: '#fff', borderTop: `1px solid #e0e0e0` }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px' }}>
           <p className="mb-2">
-            <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} style={{ color: slate, fontWeight: 600, textDecoration: 'underline' }}>{phoneNumber}</a>
-            <span className="mx-2">&middot;</span>
+            <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} aria-label={`Call us at ${phoneNumber}`} style={{ color: slate, fontWeight: 600, textDecoration: 'underline' }}>{phoneNumber}</a>
+            <span className="mx-2" aria-hidden="true">&middot;</span>
             <a href="mailto:info@carismaslimming.com" style={{ color: slate, fontWeight: 600, textDecoration: 'underline' }}>info@carismaslimming.com</a>
           </p>
           <p className="mb-4">
-            <a href="https://www.instagram.com/carismaslimming" target="_blank" rel="noopener noreferrer" style={{ color: slate, textDecoration: 'underline' }}>@carismaslimming</a>
-            <span className="mx-2">&middot;</span>
-            <a href="https://www.facebook.com/carismaslimming" target="_blank" rel="noopener noreferrer" style={{ color: slate, textDecoration: 'underline' }}>Facebook</a>
+            <a href="https://www.instagram.com/carismaslimming" target="_blank" rel="noopener noreferrer" aria-label="Follow Carisma Slimming on Instagram (opens in new tab)" style={{ color: slate, textDecoration: 'underline' }}>@carismaslimming</a>
+            <span className="mx-2" aria-hidden="true">&middot;</span>
+            <a href="https://www.facebook.com/carismaslimming" target="_blank" rel="noopener noreferrer" aria-label="Carisma Slimming on Facebook (opens in new tab)" style={{ color: slate, textDecoration: 'underline' }}>Facebook</a>
           </p>
           <p style={{ color: taupe, fontSize: '13px' }}>
             <a href="/privacy-policy" style={{ color: slate, textDecoration: 'underline' }}>Privacy Policy</a>
-            <span className="mx-2">&middot;</span>
+            <span className="mx-2" aria-hidden="true">&middot;</span>
             <a href="/terms-conditions" style={{ color: slate, textDecoration: 'underline' }}>Terms &amp; Conditions</a>
           </p>
         </div>
-      </footer>
+      </div>
     </section>
   );
 }

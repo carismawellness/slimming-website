@@ -60,7 +60,10 @@ export default function HeroVideoPlayer({
   };
 
   return (
-    <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+    // borderRadius: inherit + overflow keeps the arch shape; the radius is also
+    // set on the <video> itself so a PLAYING video (its own GPU layer) self-clips
+    // to the arch instead of snapping back to a rectangle.
+    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 'inherit', overflow: 'hidden' }}>
       <video
         ref={ref}
         src={src}
@@ -72,7 +75,7 @@ export default function HeroVideoPlayer({
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
-        style={{ width: '100%', height: '100%', objectFit: fit, display: 'block', backgroundColor: '#0c0c0c', cursor: 'pointer' }}
+        style={{ width: '100%', height: '100%', objectFit: fit, display: 'block', backgroundColor: '#0c0c0c', cursor: 'pointer', borderRadius: 'inherit' }}
       />
 
       {/* subtle bottom scrim so floating cards / sound button always read */}

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import BookConsultationButton from '@/components/BookConsultationButton';
 import GradientField from '@/components/layers/GradientField';
 
@@ -24,6 +25,15 @@ const COLLAGE = [
 export default function ConsultationPage() {
   return (
     <main className="w-full" style={{ color: TAUPE }}>
+      {/* Skip-to-main-content link — WCAG 2.4.1 */}
+      <a
+        href="#consultation-main"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold focus:text-white focus:outline-none"
+        style={{ background: GREEN }}
+      >
+        Skip to main content
+      </a>
+      <div id="consultation-main">
       {/* CONTACT US banner */}
       <section
         className="flex items-center justify-center"
@@ -74,14 +84,19 @@ export default function ConsultationPage() {
         }}
       >
         {/* Faint decorative wavy-lines graphic bleeding off the left edge */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/wix/87fc13_7502c14a8f8c4a5d8e75362f7366465a~mv2.png"
-          alt=""
+        <div
           aria-hidden="true"
           className="absolute pointer-events-none hidden md:block"
           style={{ left: '-50px', top: '128px', width: '1039px', height: '380px', zIndex: 0 }}
-        />
+        >
+          <Image
+            src="/wix/87fc13_7502c14a8f8c4a5d8e75362f7366465a~mv2.png"
+            alt=""
+            fill
+            className="object-contain"
+            loading="lazy"
+          />
+        </div>
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={{ zIndex: 10 }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
             {/* Photo collage — tight 2x2 cluster of Wix petal shapes */}
@@ -89,13 +104,15 @@ export default function ConsultationPage() {
               {COLLAGE.map((src, i) => (
                 <div
                   key={i}
-                  className="card overflow-hidden w-full aspect-[267/280]"
+                  className="card overflow-hidden w-full aspect-[267/280] relative"
                 >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src={src}
                     alt=""
-                    className="w-full h-full object-cover"
+                    fill
+                    className="object-cover"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 0px, 25vw"
                   />
                 </div>
               ))}
@@ -243,6 +260,7 @@ export default function ConsultationPage() {
           </div>
         </div>
       </section>
+      </div>{/* /consultation-main */}
     </main>
   );
 }

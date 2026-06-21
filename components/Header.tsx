@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 // Accessible brand tokens (see globals.css locked palette).
@@ -72,13 +73,21 @@ export default function Header() {
     if (!open) return;
     const prev = document.body.style.overflow;
     document.body.style.overflow = 'hidden';
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setOpen(false); setPkgHover(false); setExpanded(null); } };
     window.addEventListener('keydown', onKey);
     return () => {
       document.body.style.overflow = prev;
       window.removeEventListener('keydown', onKey);
     };
   }, [open]);
+
+  // Close desktop dropdown on Escape when mobile menu is closed.
+  useEffect(() => {
+    if (!pkgHover && !expanded) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === 'Escape') { setPkgHover(false); setExpanded(null); } };
+    document.addEventListener('keydown', onKey);
+    return () => document.removeEventListener('keydown', onKey);
+  }, [pkgHover, expanded]);
 
   const pillStyle: React.CSSProperties = {
     background: scrolled ? 'rgba(255,255,255,0.74)' : 'rgba(255,255,255,0.56)',
@@ -138,12 +147,13 @@ export default function Header() {
       {/* Floating glass pill */}
       <div style={{ padding: '12px clamp(12px,3vw,28px) 0', maxWidth: '1280px', margin: '0 auto' }}>
         <nav
+          aria-label="Main navigation"
           className="flex items-center justify-between"
           style={{ ...pillStyle, minHeight: '60px', padding: '8px 12px 8px 22px' }}
         >
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0" onClick={() => setOpen(false)}>
-            <img src="/logo.png" alt="Carisma Slimming" className="header-logo" style={{ height: '38px', width: 'auto', display: 'block' }} />
+            <Image src="/logo.png" alt="Carisma Slimming" width={152} height={38} className="header-logo" style={{ height: '38px', width: 'auto', display: 'block' }} priority />
           </Link>
 
           {/* Desktop menu */}
@@ -157,7 +167,13 @@ export default function Header() {
                   onMouseEnter={() => setPkgHover(true)}
                   onMouseLeave={() => setPkgHover(false)}
                 >
-                  <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0' }} className="hover:underline transition">
+                  <button
+                    style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0' }}
+                    className="hover:underline transition"
+                    aria-haspopup="true"
+                    aria-expanded={pkgHover}
+                    onClick={() => setPkgHover(p => !p)}
+                  >
                     {m.label}
                   </button>
                   {pkgHover && (
@@ -231,7 +247,7 @@ export default function Header() {
           {/* Top row: logo + close */}
           <div className="flex items-center justify-between shrink-0" style={{ padding: '16px clamp(16px,5vw,28px)' }}>
             <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
-              <img src="/logo.png" alt="Carisma Slimming" className="header-logo header-logo--mobile" style={{ height: '38px', width: 'auto', display: 'block' }} />
+              <Image src="/logo.png" alt="Carisma Slimming" width={108} height={27} className="header-logo header-logo--mobile" style={{ height: '27px', width: 'auto', display: 'block' }} />
             </Link>
             <button
               onClick={() => setOpen(false)}

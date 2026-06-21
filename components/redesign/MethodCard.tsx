@@ -52,29 +52,32 @@ export default function MethodCard({ p }: { p: Pillar }) {
   };
 
   return (
-    <article
-      ref={ref}
-      className="cx-card cx-pillar"
-      onMouseMove={onMove}
-      onMouseLeave={reset}
-    >
-      <span aria-hidden className="cx-pillar-glow" />
-      <span aria-hidden className="cx-pillar-num">{p.n}</span>
-      <div className="cx-pillar-inner">
-        <div className="cx-pillar-icon">
-          <img src={p.icon} alt="" aria-hidden />
+    <li style={{ listStyle: 'none' }}>
+      <article
+        ref={ref}
+        className="cx-card cx-pillar"
+        aria-label={`Pillar ${p.n}: ${p.title}`}
+        onMouseMove={onMove}
+        onMouseLeave={reset}
+      >
+        <span aria-hidden className="cx-pillar-glow" />
+        <span aria-hidden className="cx-pillar-num">{p.n}</span>
+        <div className="cx-pillar-inner">
+          <div className="cx-pillar-icon" aria-hidden>
+            <img src={p.icon} alt="" aria-hidden />
+          </div>
+          <h3 className="cx-pillar-title">{p.title}</h3>
+          <p className="cx-pillar-tag">{p.tagline}</p>
+          <ul className="cx-pillar-list" aria-label={`${p.title} features`}>
+            {p.items.map((it) => (
+              <li key={it}>
+                <span aria-hidden className="cx-pillar-dot" />
+                <span>{it}</span>
+              </li>
+            ))}
+          </ul>
         </div>
-        <h3 className="cx-pillar-title">{p.title}</h3>
-        <p className="cx-pillar-tag">{p.tagline}</p>
-        <ul className="cx-pillar-list">
-          {p.items.map((it) => (
-            <li key={it}>
-              <span aria-hidden className="cx-pillar-dot" />
-              <span>{it}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </article>
+      </article>
+    </li>
   );
 }

@@ -16,6 +16,7 @@ export default function Journey() {
     <section
       id="journey"
       className="cx-section"
+      aria-labelledby="journey-heading"
       style={{ background: 'linear-gradient(180deg, var(--cream) 0%, #fff 100%)' }}
     >
       <div className="cx-wrap cx-wrap-tight">
@@ -29,7 +30,7 @@ export default function Journey() {
         >
           <p className="cx-eyebrow" style={{ marginBottom: 14 }}>How it works</p>
           <div className="cx-rule center" style={{ marginBottom: 22 }} />
-          <h2 className="cx-h2" style={{ marginBottom: 16 }}>
+          <h2 id="journey-heading" className="cx-h2" style={{ marginBottom: 16 }}>
             How your weight loss journey <em>actually begins</em>
           </h2>
           <p className="cx-lead">
@@ -52,6 +53,7 @@ export default function Journey() {
           </div>
 
           <ol
+            aria-label={`Your journey — ${N} steps`}
             style={{
               listStyle: 'none',
               margin: 0,
@@ -72,6 +74,7 @@ export default function Journey() {
                 <li
                   key={s.n}
                   className={`cx-jstep${active ? ' is-active' : ''}`}
+                  aria-label={`Step ${i + 1} of ${N}: ${s.t}`}
                   style={{ position: 'relative', paddingLeft: 76 }}
                 >
                   <span

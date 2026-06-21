@@ -52,8 +52,8 @@ export default function Cta({
     <a
       ref={ref}
       href={href}
-      aria-label={ariaLabel}
-      className={`cx-btn cx-btn-${variant} ${className}`}
+      aria-label={external && !ariaLabel ? `${typeof children === 'string' ? children : 'Book now'} (opens in new tab)` : ariaLabel}
+      className={`cx-btn cx-btn-${variant} cx-btn-accessible ${className}`}
       onMouseMove={onMove}
       onMouseLeave={reset}
       {...(external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}

@@ -17,7 +17,7 @@ function CheckList({ items, small = false }: { items: readonly string[]; small?:
   return (
     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: small ? 11 : 13 }}>
       {items.map((c) => (
-        <li key={c} style={{ display: 'flex', gap: 12, fontFamily: 'var(--body)', fontSize: small ? 13.5 : 14, color: 'var(--taupe-ink)', lineHeight: 1.55 }}>
+        <li key={c} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontFamily: 'var(--body)', fontSize: small ? 13.5 : 14, color: 'var(--taupe-ink)', lineHeight: 1.625 }}>
           <Tick />
           <span>{c}</span>
         </li>
@@ -28,13 +28,13 @@ function CheckList({ items, small = false }: { items: readonly string[]; small?:
 
 export default function WhyCarisma() {
   return (
-    <section id="why" className="cx-section" style={{ background: 'var(--white)' }}>
+    <section id="why" className="cx-section" aria-labelledby="why-heading" style={{ background: 'var(--white)' }}>
       <div className="cx-wrap">
         {/* The Carisma difference */}
         <Reveal style={{ textAlign: 'center', maxWidth: 680, marginInline: 'auto', marginBottom: 'clamp(32px,4vw,48px)' }}>
           <p className="cx-eyebrow" style={{ marginBottom: 14 }}>The Carisma difference</p>
           <div className="cx-rule center" style={{ marginBottom: 22 }} />
-          <h2 className="cx-h2">Malta&rsquo;s <em>#1 leading wellness chain</em></h2>
+          <h2 id="why-heading" className="cx-h2">Malta&rsquo;s <em>#1 leading wellness chain</em></h2>
         </Reveal>
 
         <div className="cx-why-grid" style={{ display: 'grid', gap: 'clamp(22px,3vw,40px)', alignItems: 'stretch' }}>
@@ -42,14 +42,14 @@ export default function WhyCarisma() {
             <div aria-hidden className="cx-glow" style={{ width: 280, height: 280, background: 'rgba(142,176,147,0.5)', top: -120, right: -90, opacity: 0.4 }} />
             <div style={{ position: 'relative', zIndex: 1, display: 'grid', gap: 30 }}>
               <div>
-                <h3 className="cx-kicker cx-why-head" style={{ fontSize: 12, color: 'var(--sage-ink)', marginBottom: 16, letterSpacing: '0.16em' }}>
+                <h3 className="cx-kicker cx-why-head" style={{ fontSize: 12, color: '#4f7256', marginBottom: 16, letterSpacing: '0.16em' }}>
                   <span className="cx-why-num">01</span> Our commitment
                 </h3>
                 <CheckList items={WHY.commitment} />
               </div>
               <div className="cx-why-divider" aria-hidden />
               <div>
-                <h3 className="cx-kicker cx-why-head" style={{ fontSize: 12, color: 'var(--sage-ink)', marginBottom: 16, letterSpacing: '0.16em' }}>
+                <h3 className="cx-kicker cx-why-head" style={{ fontSize: 12, color: '#4f7256', marginBottom: 16, letterSpacing: '0.16em' }}>
                   <span className="cx-why-num">02</span> Why Malta chooses Carisma
                 </h3>
                 <CheckList items={WHY.why} />
@@ -60,7 +60,8 @@ export default function WhyCarisma() {
           <Reveal style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div className="cx-map-frame" style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', boxShadow: 'var(--shadow-card)', flex: 1, minHeight: 320, border: '1px solid var(--line)' }}>
               <iframe
-                title="Carisma Slimming — Grand Hotel Excelsior, Floriana"
+                title="Map showing Carisma Slimming location at Grand Hotel Excelsior, Floriana, Malta"
+                aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
                 src={CONTACT.mapsEmbed}
                 width="100%"
                 height="100%"

@@ -8,7 +8,7 @@ import BookConsultationButton from '@/components/BookConsultationButton';
 
 export default function FinalCta() {
   return (
-    <section className="cx-section cx-grain" style={{ position: 'relative', overflow: 'hidden', background: 'var(--white)' }}>
+    <section className="cx-section cx-grain" aria-labelledby="final-cta-heading" style={{ position: 'relative', overflow: 'hidden', background: 'var(--white)' }}>
       <div className="cx-wrap">
         <Reveal className="cx-panel cx-final-panel" style={{ position: 'relative', overflow: 'hidden', borderRadius: 32, padding: 'clamp(40px,6vw,80px) clamp(24px,5vw,72px)', textAlign: 'center' }}>
           {/* Static CSS gradient base — always rendered. Serves as the full
@@ -24,18 +24,25 @@ export default function FinalCta() {
 
           <div style={{ position: 'relative', zIndex: 2, maxWidth: 680, marginInline: 'auto' }}>
             <p className="cx-eyebrow" style={{ marginBottom: 16 }}>{FINAL_CTA.eyebrow}</p>
-            <h2 className="cx-display" style={{ fontSize: 'clamp(32px,5.5vw,62px)', marginBottom: 20 }}>Begin your doctor-led slimming journey in Malta</h2>
+            <h2 id="final-cta-heading" className="cx-display" style={{ fontSize: 'clamp(32px,5.5vw,62px)', marginBottom: 20 }}>Begin your doctor-led slimming journey in Malta</h2>
             <p className="cx-lead" style={{ fontSize: 17, marginBottom: 32 }}>{FINAL_CTA.sub}</p>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 26 }}>
               <Cta variant="primary">{FINAL_CTA.cta}</Cta>
               <BookConsultationButton
                 variant="outline"
-                style={{ fontSize: '13px', padding: '14px 28px', border: '1px solid rgba(255,255,255,0.6)', color: '#fff', background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(6px)' }}
+                style={{ fontSize: '13px', padding: '14px 28px', minHeight: 48, border: '1px solid rgba(255,255,255,0.6)', color: '#fff', background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(6px)' }}
               />
-              <a href={CONTACT.phoneHref} className="cx-btn cx-btn-ghost" aria-label={`Call ${CONTACT.phone}`}><span className="cx-btn-label">Call {CONTACT.phone}</span></a>
+              <a
+                href={CONTACT.phoneHref}
+                className="cx-btn cx-btn-ghost"
+                aria-label={`Call us at ${CONTACT.phone}`}
+              >
+                <span className="cx-btn-label">Call {CONTACT.phone}</span>
+              </a>
             </div>
             <p style={{ fontFamily: 'var(--body)', fontSize: 13, color: 'var(--taupe)' }}>
-              ★ {REVIEWS.rating.toFixed(1)} from {REVIEWS.total}+ reviews · Doctor-led · Free on-site parking
+              <span aria-label={`Rated ${REVIEWS.rating.toFixed(1)} out of 5 stars`} role="img">★</span>
+              {' '}{REVIEWS.rating.toFixed(1)} from {REVIEWS.total}+ reviews · Doctor-led · Free on-site parking
             </p>
           </div>
         </Reveal>

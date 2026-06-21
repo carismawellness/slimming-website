@@ -7,6 +7,7 @@ import Cta from './Cta';
 
 function DoctorCard({ d }: { d: (typeof DOCTORS)[number] }) {
   const [open, setOpen] = useState(false);
+  const bioId = `bio-${d.name.toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '')}`;
   return (
     <article className="cx-card cx-doc" style={{ borderRadius: 22, overflow: 'hidden' }}>
       <div
@@ -15,7 +16,7 @@ function DoctorCard({ d }: { d: (typeof DOCTORS)[number] }) {
       >
         <img
           src={d.img}
-          alt={`${d.name}, ${d.role} at Carisma Slimming`}
+          alt={`${d.name}, ${d.role} at Carisma Slimming Malta`}
           className="cx-doc-img"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }}
         />
@@ -36,19 +37,20 @@ function DoctorCard({ d }: { d: (typeof DOCTORS)[number] }) {
             fontSize: 11,
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            color: 'var(--sage-deep)',
+            color: '#4f7256',
             marginBottom: 14,
           }}
         >
           {d.role}
         </p>
         <p
+          id={bioId}
           className="cx-doc-bio"
           style={{
             fontFamily: 'var(--body)',
             fontSize: 13.5,
             color: 'var(--taupe)',
-            lineHeight: 1.6,
+            lineHeight: 1.625,
             ...(open
               ? {}
               : {
@@ -66,17 +68,19 @@ function DoctorCard({ d }: { d: (typeof DOCTORS)[number] }) {
           onClick={() => setOpen((v) => !v)}
           className="cx-link-underline"
           aria-expanded={open}
+          aria-controls={bioId}
           style={{
             marginTop: 10,
+            minHeight: 44,
             background: 'none',
             border: 'none',
-            padding: 0,
+            padding: '0 0 8px',
             cursor: 'pointer',
             fontFamily: 'var(--wide)',
             fontSize: 10.5,
             letterSpacing: '0.08em',
             textTransform: 'uppercase',
-            color: 'var(--sage-deep)',
+            color: '#4f7256',
           }}
         >
           {open ? 'Show less' : 'Read full bio'}
@@ -91,6 +95,7 @@ export default function Doctors() {
     <section
       id="doctors"
       className="cx-section"
+      aria-labelledby="doctors-heading"
       style={{ background: 'linear-gradient(180deg, var(--cream) 0%, #fff 100%)' }}
     >
       <div className="cx-wrap">
@@ -104,7 +109,7 @@ export default function Doctors() {
         >
           <p className="cx-eyebrow" style={{ marginBottom: 14 }}>Doctor-led care</p>
           <div className="cx-rule center" style={{ marginBottom: 22 }} />
-          <h2 className="cx-h2" style={{ marginBottom: 16 }}>
+          <h2 id="doctors-heading" className="cx-h2" style={{ marginBottom: 16 }}>
             Real doctors, <em>genuinely in your corner</em>
           </h2>
           <p className="cx-lead">
@@ -124,8 +129,13 @@ export default function Doctors() {
         </div>
       </div>
       <style>{`
-        .cx-doc { position: relative; }
+        .cx-doc { position: relative; transition: transform 0.55s var(--ease), box-shadow 0.55s var(--ease); }
         .cx-doc:hover { transform: translateY(-6px); box-shadow: var(--shadow-float); }
+        .cx-doc .cx-link-underline:focus-visible {
+          outline: 2px solid #4f7256;
+          outline-offset: 2px;
+          border-radius: 2px;
+        }
 
         .cx-doc-img {
           transition: transform .9s var(--ease), filter .8s var(--ease);

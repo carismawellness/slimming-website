@@ -18,9 +18,9 @@ function Check() {
 
 function Stars({ size = 15 }: { size?: number }) {
   return (
-    <span className="cx-stars" aria-label={`${REVIEWS.rating} out of 5`}>
+    <span className="cx-stars" aria-label={`${REVIEWS.rating} out of 5 stars`} role="img">
       {[0, 1, 2, 3, 4].map((i) => (
-        <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
+        <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill="currentColor" aria-hidden><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" /></svg>
       ))}
     </span>
   );
@@ -162,9 +162,9 @@ export default function Hero() {
 
             <p data-hero="sub" className="cx-lead" style={{ maxWidth: 540, marginBottom: 26 }}>{HERO.sub}</p>
 
-            <ul data-hero="bullets" style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'grid', gap: 12, maxWidth: 540 }}>
+            <ul data-hero="bullets" aria-label="Key benefits" style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', display: 'grid', gap: 12, maxWidth: 540 }}>
               {HERO.bullets.map((b) => (
-                <li key={b} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontFamily: 'var(--body)', fontSize: 14.5, color: 'var(--taupe-ink)', lineHeight: 1.5 }}>
+                <li key={b} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', fontFamily: 'var(--body)', fontSize: 14.5, color: 'var(--taupe-ink)', lineHeight: 1.625 }}>
                   <Check /><span>{b}</span>
                 </li>
               ))}
@@ -198,9 +198,11 @@ export default function Hero() {
                 controls
                 poster={HERO.videoPoster}
                 preload="metadata"
+                aria-label="Carisma Slimming — doctor-led weight loss introduction video"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', willChange: 'transform' }}
               >
                 <source src={HERO.video} type="video/mp4" />
+                Your browser does not support the video tag.
               </video>
               {/* curtain veil — covers the media at first paint, wipes upward */}
               <span

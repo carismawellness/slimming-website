@@ -11,20 +11,20 @@ const MethodCanvas = dynamic(() => import('./MethodCanvas'), { ssr: false });
 
 export default function Method() {
   return (
-    <section id="method" className="cx-section cx-method" style={{ background: 'var(--white)', position: 'relative', overflow: 'hidden' }}>
+    <section id="method" className="cx-section cx-method" aria-labelledby="method-heading" style={{ background: 'var(--white)', position: 'relative', overflow: 'hidden' }}>
       <MethodCanvas />
 
       <div className="cx-wrap" style={{ position: 'relative', zIndex: 1 }}>
         <Reveal style={{ textAlign: 'center', maxWidth: 720, marginInline: 'auto', marginBottom: 'clamp(40px,5vw,64px)' }}>
           <p className="cx-eyebrow" style={{ marginBottom: 14 }}>The Carisma Method</p>
           <div className="cx-rule center" style={{ marginBottom: 22 }} />
-          <h2 className="cx-h2" style={{ marginBottom: 18 }}>
+          <h2 id="method-heading" className="cx-h2" style={{ marginBottom: 18 }}>
             Malta&rsquo;s only <em>multidisciplinary</em> approach to slimming
           </h2>
-          <p className="cx-lead">Four pillars working together — assessment, nutrition, movement and body contouring — in one doctor-led plan. Not another diet. A system built around your body.</p>
+          <p className="cx-lead" style={{ lineHeight: 1.625 }}>Four pillars working together — assessment, nutrition, movement and body contouring — in one doctor-led plan. Not another diet. A system built around your body.</p>
         </Reveal>
 
-        <Reveal stagger className="cx-pillars">
+        <Reveal stagger className="cx-pillars" as="ol">
           {PILLARS.map((p) => (
             <MethodCard key={p.n} p={p} />
           ))}

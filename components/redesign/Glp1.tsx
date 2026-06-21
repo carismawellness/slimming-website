@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { GLP1 } from '@/lib/redesign/content';
 import { prefersReducedMotion } from './motion';
 import Reveal from './Reveal';
@@ -49,6 +50,7 @@ export default function Glp1() {
     <section
       id="glp1"
       className="cx-section cx-grain"
+      aria-labelledby="glp1-heading"
       style={{ position: 'relative', overflow: 'hidden', background: 'var(--white)' }}
     >
       {/* static gradient glow (also the reduced-motion / small-screen fallback) */}
@@ -80,10 +82,14 @@ export default function Glp1() {
                   transform: `translate3d(0, ${y}px, 0)`,
                 }}
               >
-                <img
+                {/* P3: next/image with fill; parent has position:absolute + defined height via inset */}
+                <Image
                   src={GLP1.image}
-                  alt="Medical weight loss consultation at Carisma Slimming, Malta"
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  alt="Medical weight loss consultation with a doctor at Carisma Slimming clinic, Malta"
+                  fill
+                  style={{ objectFit: 'cover', display: 'block' }}
+                  sizes="(max-width: 880px) 100vw, 380px"
+                  priority
                 />
               </div>
             </div>
@@ -92,7 +98,7 @@ export default function Glp1() {
           {/* copy */}
           <Reveal>
             <p className="cx-eyebrow" style={{ marginBottom: 14 }}>{GLP1.eyebrow}</p>
-            <h2 className="cx-h2" style={{ marginBottom: 18 }}>GLP-1 weight loss programmes, <em>prescribed responsibly</em></h2>
+            <h2 id="glp1-heading" className="cx-h2" style={{ marginBottom: 18 }}>GLP-1 weight loss programmes, <em>prescribed responsibly</em></h2>
             <p className="cx-lead" style={{ marginBottom: 18 }}>{GLP1.intro}</p>
 
             <div
@@ -131,20 +137,23 @@ export default function Glp1() {
               ))}
             </Reveal>
 
+            {/* P1: var(--taupe-lt) may be too light — use var(--taupe) (≥4.5:1 on white) for body text.
+                P6: 11.5px is below 14px minimum for body — bumped to 12px (still legal for disclaimers) */}
             <p
               style={{
                 fontFamily: 'var(--wide)',
-                fontSize: 11.5,
+                fontSize: 12,
                 letterSpacing: '0.04em',
                 textTransform: 'uppercase',
-                color: 'var(--taupe-lt)',
+                color: 'var(--taupe)',
                 lineHeight: 1.6,
                 marginBottom: 22,
               }}
             >
               {GLP1.capacity}
             </p>
-            <Cta variant="blue">Check if you qualify</Cta>
+            {/* P2: CTA aria-label for icon-less button context */}
+            <Cta variant="blue" aria-label="Check if you qualify for GLP-1 weight loss treatment">Check if you qualify</Cta>
           </Reveal>
         </div>
       </div>
