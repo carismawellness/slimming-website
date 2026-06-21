@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader, SiteFooter, SiteCookieBanner, SiteMobileCTA } from "@/components/PreviewChromeGate";
 import ConsultationModal from "@/components/ConsultationModal";
+import QuizModal from "@/components/QuizModal";
 import Script from "next/script";
 
 const geistSans = Geist({
@@ -93,6 +94,7 @@ export default function RootLayout({
         <SiteCookieBanner />
         <SiteMobileCTA />
         <ConsultationModal />
+        <QuizModal />
         <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
       </body>
     </html>

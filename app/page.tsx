@@ -43,10 +43,6 @@ export default function Home() {
         compactHeadline
       />
 
-      {/* Personalised programme quiz — opens in a popup modal via the hero's
-          "Take the quiz" CTA (a[href="#quiz"]). The quiz lives in QuizModal. */}
-      <QuizModal />
-
       {/* (1) Media / Press Strip */}
       <section className="py-10" aria-label="As seen in media" style={{ backgroundColor: '#f9f7f5' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
