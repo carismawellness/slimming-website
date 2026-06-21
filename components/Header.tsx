@@ -216,7 +216,7 @@ export default function Header() {
               <PhoneIcon />
               <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px' }}>27802062</span>
             </a>
-            <Link href="/consultation" className="cta-glow" style={ctaStyle}>Free Consultation</Link>
+            <Link href="/consultation" className="cta-glow" style={ctaStyle}>Free Body Analysis</Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -321,7 +321,7 @@ export default function Header() {
               className="cta-glow block text-center"
               style={{ ...ctaStyle, marginTop: '10px', padding: '14px', fontSize: '13px' }}
             >
-              Free Consultation
+              Free Body Analysis
             </Link>
           </div>
         </div>

@@ -62,7 +62,7 @@ export default function MobileStickyCTA() {
           boxShadow: '0 6px 20px rgba(26, 26, 26, 0.22)',
         }}
       >
-        Book Your Free Consultation
+        Book Your Free Body Analysis
       </Link>
     </div>
   );
