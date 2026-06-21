@@ -280,36 +280,41 @@ export default function GoogleReviews() {
             letterSpacing: 4,
             color: SAGE,
             textTransform: 'uppercase',
-            marginBottom: 10,
+            marginBottom: 16,
           }}
         >
           What our clients say
         </p>
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-            <span style={{ fontFamily: SERIF, fontSize: 38, color: INK, lineHeight: 1 }}>4.9</span>
-            <Stars rating={5} size={22} />
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
+          {/* Primary stats — big and bold */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', justifyContent: 'center' }}>
+            <span style={{ fontFamily: SERIF, fontSize: 64, color: INK, lineHeight: 1, fontWeight: 400 }}>4.9</span>
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6 }}>
+              <Stars rating={5} size={24} />
+              <span style={{ fontFamily: BODY, fontSize: 20, fontWeight: 700, color: INK, letterSpacing: '-0.3px' }}>800+ verified reviews</span>
+            </div>
           </div>
+          {/* Secondary — platform attribution */}
           <p
             style={{
               margin: 0,
               fontFamily: BODY,
-              fontSize: 12.5,
+              fontSize: 12,
               color: META,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: 8,
+              gap: 6,
               flexWrap: 'wrap',
             }}
           >
-            <span>800+ reviews on</span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-              <GoogleG size={14} /> Google
+            <span>on</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+              <GoogleG size={13} /> Google
             </span>
-            <span aria-hidden style={{ color: HAIRLINE }}>and</span>
-            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-              <FreshaBadge size={14} /> Fresha
+            <span aria-hidden style={{ color: HAIRLINE }}>·</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3 }}>
+              <FreshaBadge size={13} /> Fresha
             </span>
           </p>
         </div>
