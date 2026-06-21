@@ -1,53 +1,113 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
 
 /* ──────────────────────────────────────────────────────────────────────────
-   HeroVideoPlayer — click-to-play video with sound controls.
+   HeroVideoPlayer — LCP-optimised click-to-play hero video.
 
-   • Does NOT autoplay: shows the poster + a play button until the user presses it.
-   • Pressing play ALWAYS starts unmuted at full volume (user gesture → allowed).
-   • A mute/unmute button is shown while playing; clicking the frame pauses.
-   • Reduced-motion safe; no native controls (custom play + sound buttons only).
+   Strategy:
+   • Before play: render a Next.js <Image priority> of the poster so the
+     browser fetches it immediately as part of the initial HTML — this is
+     the LCP element and should paint in <1 s with the preload hint in
+     layout.tsx.
+   • The <video> element is NOT mounted until the user clicks play, so the
+     browser never wastes bandwidth downloading the video on page load.
+   • On click: swap the static image for the video, auto-play at full volume.
    ────────────────────────────────────────────────────────────────────────── */
 
-export default function HeroVideoPlayer({
+const SCRIM: React.CSSProperties = {
+  position: 'absolute',
+  inset: 0,
+  pointerEvents: 'none',
+  zIndex: 1,
+  background:
+    'linear-gradient(to top, rgba(18,28,20,0.34) 0%, rgba(18,28,20,0.05) 30%, transparent 58%)',
+};
+
+function PlayBtn({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      aria-label="Play video"
+      style={{
+        position: 'absolute',
+        inset: 0,
+        zIndex: 2,
+        display: 'grid',
+        placeItems: 'center',
+        border: 0,
+        cursor: 'pointer',
+        background: 'rgba(0,0,0,0.18)',
+      }}
+    >
+      <span
+        style={{
+          width: 64,
+          height: 64,
+          borderRadius: '50%',
+          background: '#ffffff',
+          display: 'grid',
+          placeItems: 'center',
+          boxShadow: '0 10px 28px rgba(0,0,0,0.32)',
+        }}
+      >
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="#4f7256"
+          aria-hidden
+          style={{ marginLeft: 3 }}
+        >
+          <path d="M8 5v14l11-7z" />
+        </svg>
+      </span>
+    </button>
+  );
+}
+
+/* Active video player — only mounts after user clicks play */
+function ActiveVideo({
   src,
   poster,
   alt,
-  fit = 'cover',
+  fit,
 }: {
   src: string;
   poster?: string;
   alt?: string;
-  fit?: 'cover' | 'contain';
+  fit: 'cover' | 'contain';
 }) {
   const ref = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [muted, setMuted] = useState(false);
 
-  const start = () => {
+  useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    // Every play press = full volume, sound on.
     v.muted = false;
     v.volume = 1;
-    setMuted(false);
     v.play()
       .then(() => setPlaying(true))
       .catch(() => {
-        // Extremely defensive: if an unmuted play is somehow blocked, retry muted.
         v.muted = true;
         setMuted(true);
-        v.play().then(() => setPlaying(true)).catch(() => {});
+        v.play()
+          .then(() => setPlaying(true))
+          .catch(() => {});
       });
-  };
+  }, []);
 
   const toggleFrame = () => {
     const v = ref.current;
     if (!v) return;
-    if (v.paused) start();
-    else v.pause();
+    if (v.paused) {
+      v.play().then(() => setPlaying(true)).catch(() => {});
+    } else {
+      v.pause();
+    }
   };
 
   const toggleMute = (e: React.MouseEvent) => {
@@ -60,72 +120,30 @@ export default function HeroVideoPlayer({
   };
 
   return (
-    // borderRadius: inherit + overflow keeps the arch shape; the radius is also
-    // set on the <video> itself so a PLAYING video (its own GPU layer) self-clips
-    // to the arch instead of snapping back to a rectangle.
-    <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 'inherit', overflow: 'hidden' }}>
+    <>
       <video
         ref={ref}
         src={src}
         poster={poster}
         playsInline
-        preload="metadata"
+        preload="none"
         aria-label={alt || 'Carisma Slimming Malta'}
         onClick={toggleFrame}
         onPlay={() => setPlaying(true)}
         onPause={() => setPlaying(false)}
         onEnded={() => setPlaying(false)}
-        style={{ width: '100%', height: '100%', objectFit: fit, display: 'block', backgroundColor: '#0c0c0c', cursor: 'pointer', borderRadius: 'inherit' }}
-      />
-
-      {/* subtle bottom scrim so floating cards / sound button always read */}
-      <span
-        aria-hidden
         style={{
-          position: 'absolute',
-          inset: 0,
-          pointerEvents: 'none',
-          zIndex: 1,
-          background: 'linear-gradient(to top, rgba(18,28,20,0.34) 0%, rgba(18,28,20,0.05) 30%, transparent 58%)',
+          width: '100%',
+          height: '100%',
+          objectFit: fit,
+          display: 'block',
+          backgroundColor: '#0c0c0c',
+          cursor: 'pointer',
+          borderRadius: 'inherit',
         }}
       />
-
-      {/* play button (poster state) */}
-      {!playing && (
-        <button
-          type="button"
-          onClick={start}
-          aria-label="Play video"
-          style={{
-            position: 'absolute',
-            inset: 0,
-            zIndex: 2,
-            display: 'grid',
-            placeItems: 'center',
-            border: 0,
-            cursor: 'pointer',
-            background: 'rgba(0,0,0,0.18)',
-          }}
-        >
-          <span
-            style={{
-              width: 64,
-              height: 64,
-              borderRadius: '50%',
-              background: '#ffffff',
-              display: 'grid',
-              placeItems: 'center',
-              boxShadow: '0 10px 28px rgba(0,0,0,0.32)',
-            }}
-          >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="#4f7256" aria-hidden style={{ marginLeft: 3 }}>
-              <path d="M8 5v14l11-7z" />
-            </svg>
-          </span>
-        </button>
-      )}
-
-      {/* sound toggle (while playing) */}
+      <span aria-hidden style={SCRIM} />
+      {!playing && <PlayBtn onClick={() => ref.current?.play().then(() => setPlaying(true)).catch(() => {})} />}
       {playing && (
         <button
           type="button"
@@ -164,6 +182,52 @@ export default function HeroVideoPlayer({
             </svg>
           )}
         </button>
+      )}
+    </>
+  );
+}
+
+/* ── Main export ─────────────────────────────────────────────────────────── */
+export default function HeroVideoPlayer({
+  src,
+  poster,
+  alt,
+  fit = 'cover',
+}: {
+  src: string;
+  poster?: string;
+  alt?: string;
+  fit?: 'cover' | 'contain';
+}) {
+  const [active, setActive] = useState(false);
+
+  return (
+    <div
+      style={{
+        position: 'relative',
+        width: '100%',
+        height: '100%',
+        borderRadius: 'inherit',
+        overflow: 'hidden',
+      }}
+    >
+      {active ? (
+        <ActiveVideo src={src} poster={poster} alt={alt} fit={fit} />
+      ) : (
+        <>
+          {/* LCP element — server-rendered immediately, no JS needed */}
+          <Image
+            src={poster || '/Thumbnail.png'}
+            alt={alt || 'Carisma Slimming Malta — click to play'}
+            fill
+            priority
+            fetchPriority="high"
+            sizes="(max-width: 900px) 100vw, 45vw"
+            style={{ objectFit: fit }}
+          />
+          <span aria-hidden style={SCRIM} />
+          <PlayBtn onClick={() => setActive(true)} />
+        </>
       )}
     </div>
   );
