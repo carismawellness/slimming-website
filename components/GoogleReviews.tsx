@@ -254,13 +254,8 @@ function MarqueeRow({
 export default function GoogleReviews() {
   const googleReviews = SLIMMING_REVIEWS.filter((r) => r.source === 'google');
 
-  // Split Fresha reviews across the two rows.
-  const mid = Math.ceil(FRESHA_REVIEWS.length / 2);
-  const freshaRowA = FRESHA_REVIEWS.slice(0, mid);
-  const freshaRowB = FRESHA_REVIEWS.slice(mid);
-
   return (
-    <section style={{ background: 'transparent', padding: '64px 0 56px' }} aria-label="Client reviews">
+    <section style={{ background: 'transparent', padding: '44px 0 40px' }} aria-label="Client reviews">
       <style>{`
         @keyframes slimming-marquee-left {
           from { transform: translateX(0); }
@@ -277,7 +272,7 @@ export default function GoogleReviews() {
       `}</style>
 
       {/* Header — real aggregate rating + count, both review platforms */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={{ marginBottom: 36, textAlign: 'center' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={{ marginBottom: 24, textAlign: 'center' }}>
         <p
           style={{
             fontFamily: SERIF,
@@ -285,38 +280,38 @@ export default function GoogleReviews() {
             letterSpacing: 4,
             color: SAGE,
             textTransform: 'uppercase',
-            marginBottom: 8,
+            marginBottom: 10,
           }}
         >
           What our clients say
         </p>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <span style={{ fontFamily: SERIF, fontSize: 42, color: INK, lineHeight: 1 }}>4.9</span>
-          <div>
-            <Stars rating={5} size={20} />
-            <p
-              style={{
-                margin: '6px 0 0',
-                fontFamily: BODY,
-                fontSize: 12.5,
-                color: META,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: 8,
-                flexWrap: 'wrap',
-              }}
-            >
-              <span>800 reviews on</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                <GoogleG size={14} /> Google
-              </span>
-              <span aria-hidden style={{ color: HAIRLINE }}>and</span>
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                <FreshaBadge size={14} /> Fresha
-              </span>
-            </p>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <span style={{ fontFamily: SERIF, fontSize: 38, color: INK, lineHeight: 1 }}>4.9</span>
+            <Stars rating={5} size={22} />
           </div>
+          <p
+            style={{
+              margin: 0,
+              fontFamily: BODY,
+              fontSize: 12.5,
+              color: META,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              gap: 8,
+              flexWrap: 'wrap',
+            }}
+          >
+            <span>800 reviews on</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+              <GoogleG size={14} /> Google
+            </span>
+            <span aria-hidden style={{ color: HAIRLINE }}>and</span>
+            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+              <FreshaBadge size={14} /> Fresha
+            </span>
+          </p>
         </div>
       </div>
 
@@ -327,18 +322,11 @@ export default function GoogleReviews() {
         ))}
       </MarqueeRow>
 
-      {/* Fresha reviews — two rows, opposite directions */}
-      <div style={{ marginTop: 20 }}>
-        <MarqueeRow direction="left" duration={40}>
-          {freshaRowA.map((r, i) => (
-            <FreshaReviewCard key={r.id} r={r} idx={i} />
-          ))}
-        </MarqueeRow>
-      </div>
-      <div style={{ marginTop: 20 }}>
+      {/* Fresha reviews — single row, scrolls right */}
+      <div style={{ marginTop: 16 }}>
         <MarqueeRow direction="right" duration={48}>
-          {freshaRowB.map((r, i) => (
-            <FreshaReviewCard key={r.id} r={r} idx={i + freshaRowA.length} />
+          {FRESHA_REVIEWS.map((r, i) => (
+            <FreshaReviewCard key={r.id} r={r} idx={i} />
           ))}
         </MarqueeRow>
       </div>
