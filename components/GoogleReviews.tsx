@@ -1,31 +1,39 @@
 'use client';
 
-/* Auto-scrolling marquee of the clinic's REAL Google reviews (single row).
-   Each card links to the review at its source. Dates are computed live from
-   each review's publish time, so they never go stale. Pauses on hover.
-   Respects prefers-reduced-motion. */
+/* Reviews block at the top of the footer.
+   - Header: "What our clients say" eyebrow, a big 4.9 rating, and a count line
+     with both a Google and a Fresha badge.
+   - One marquee row of the clinic's REAL Google reviews (scrolls left).
+   - Two marquee rows of Fresha reviews below (scroll in opposite directions).
+   Real data only — Google reviews from '@/lib/reviews', Fresha from
+   '@/lib/fresha-reviews'. Google relative dates are computed live so they never
+   go stale. The section background is transparent so the footer gradient shows
+   through. Marquees pause on hover and respect prefers-reduced-motion. */
 
 import {
   SLIMMING_REVIEWS,
-  AGGREGATE,
-  GOOGLE_WRITE_REVIEW_URL,
   GOOGLE_PROFILE_URL,
-  FRESHA_PROFILE_URL,
   relativeDate,
   type Review,
 } from '@/lib/reviews';
+import {
+  FRESHA_REVIEWS,
+  FRESHA_PROFILE,
+  type FreshaReview,
+} from '@/lib/fresha-reviews';
 
-// ── Brand tokens (WCAG AA) ────────────────────────────────────────────────
-const GREEN = '#4f7256';       // sage text / icons  5.10:1 on #f8f8f8
-const DARK_GREEN = '#024C27';  // deep forest headings
-const TAUPE = '#6f6456';       // body text          5.78:1 on #f8f8f8
-const TAUPE_LT = '#595959';    // secondary/meta     6.60:1 on #f8f8f8
-const GOLD = '#8c6d18';        // star fills         4.58:1 on #f8f8f8
+// ── Brand tokens (light gradient, WCAG AA) ────────────────────────────────
+const INK = '#1a1a1a';      // ink / headings
+const BODY_C = '#333333';   // body text
+const META = '#595959';     // muted / meta
+const SAGE = '#4f7256';     // links / icons / CTA fill (white text = AA)
+const GOLD = '#8c6d18';     // star fills
+const HAIRLINE = '#E5DED7'; // hairlines
 const SERIF = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
 const WIDE = '"Novecento Wide Book", "Novecento Wide", sans-serif';
 const BODY = 'Roboto, sans-serif';
 
-// ── Sub-components ────────────────────────────────────────────────────────
+// ── Badges ────────────────────────────────────────────────────────────────
 
 function GoogleG({ size = 18 }: { size?: number }) {
   return (
@@ -38,11 +46,12 @@ function GoogleG({ size = 18 }: { size?: number }) {
   );
 }
 
-function FreshaF({ size = 18 }: { size?: number }) {
+function FreshaBadge({ size = 18 }: { size?: number }) {
+  const r = Math.round(size * 0.28);
   return (
     <svg width={size} height={size} viewBox="0 0 24 24" aria-label="Fresha" role="img">
-      <circle cx="12" cy="12" r="12" fill="#1a0c2e" />
-      <text x="12" y="17" textAnchor="middle" fontFamily="sans-serif" fontSize="14" fontWeight="700" fill="#ffffff">f</text>
+      <rect x="0" y="0" width="24" height="24" rx={r} fill="#1a0c2e" />
+      <text x="12" y="17.5" textAnchor="middle" fontFamily="sans-serif" fontSize="15" fontWeight="700" fill="#ffffff">f</text>
     </svg>
   );
 }
@@ -59,84 +68,90 @@ function Stars({ rating = 5, size = 14 }: { rating?: number; size?: number }) {
   );
 }
 
-function ReviewCard({ r }: { r: Review }) {
+// ── Avatar ────────────────────────────────────────────────────────────────
+
+function Avatar({ initials, color }: { initials: string; color: string }) {
+  return (
+    <span
+      style={{
+        flexShrink: 0,
+        width: 40,
+        height: 40,
+        borderRadius: '50%',
+        background: color,
+        color: '#fff',
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontFamily: WIDE,
+        fontSize: 14,
+        fontWeight: 700,
+      }}
+      aria-hidden
+    >
+      {initials}
+    </span>
+  );
+}
+
+// Shared card chrome.
+const CARD_STYLE: React.CSSProperties = {
+  flexShrink: 0,
+  width: 300,
+  background: '#ffffff',
+  borderRadius: 16,
+  padding: '20px 22px',
+  border: `1px solid ${HAIRLINE}`,
+  boxShadow: '0 2px 12px rgba(26,26,26,0.06)',
+  display: 'flex',
+  flexDirection: 'column',
+  gap: 10,
+  margin: '0 10px',
+  textDecoration: 'none',
+  color: 'inherit',
+};
+
+const NAME_STYLE: React.CSSProperties = {
+  margin: 0,
+  fontFamily: BODY,
+  fontSize: 13.5,
+  fontWeight: 600,
+  color: INK,
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis',
+};
+
+// ── Google review card ──────────────────────────────────────────────────────
+
+function GoogleReviewCard({ r }: { r: Review }) {
   return (
     <a
       href={r.sourceUrl}
       target="_blank"
       rel="noopener noreferrer"
       aria-label={`Read ${r.name}'s review on Google`}
-      style={{
-        flexShrink: 0,
-        width: 300,
-        background: '#ffffff',
-        borderRadius: 16,
-        padding: '20px 22px',
-        boxShadow: '0 2px 12px rgba(2,76,39,0.08)',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: 10,
-        margin: '0 10px',
-        textDecoration: 'none',
-        color: 'inherit',
-      }}
+      style={CARD_STYLE}
     >
-      {/* Header: avatar + name + date + Google badge */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-        <span
-          style={{
-            flexShrink: 0,
-            width: 40,
-            height: 40,
-            borderRadius: '50%',
-            background: r.avatarColor,
-            color: '#fff',
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontFamily: WIDE,
-            fontSize: 14,
-            fontWeight: 700,
-          }}
-          aria-hidden
-        >
-          {r.initials}
-        </span>
+        <Avatar initials={r.initials} color={r.avatarColor} />
         <div style={{ flex: 1, minWidth: 0 }}>
-          <p
-            style={{
-              margin: 0,
-              fontFamily: BODY,
-              fontSize: 13.5,
-              fontWeight: 600,
-              color: TAUPE,
-              whiteSpace: 'nowrap',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-            }}
-          >
-            {r.name}
-          </p>
-          <p
-            style={{ margin: 0, fontFamily: BODY, fontSize: 11, color: TAUPE_LT }}
-            suppressHydrationWarning
-          >
+          <p style={NAME_STYLE}>{r.name}</p>
+          <p style={{ margin: 0, fontFamily: BODY, fontSize: 11, color: META }} suppressHydrationWarning>
             {relativeDate(r.publishedAt)}
           </p>
         </div>
         <GoogleG size={18} />
       </div>
 
-      {/* Stars */}
       <Stars rating={r.rating} size={14} />
 
-      {/* Review text — 4-line clamp */}
       <p
         style={{
           margin: 0,
           fontFamily: BODY,
           fontSize: 13,
-          color: TAUPE,
+          color: BODY_C,
           lineHeight: 1.6,
           display: '-webkit-box',
           WebkitLineClamp: 4,
@@ -150,11 +165,69 @@ function ReviewCard({ r }: { r: Review }) {
   );
 }
 
-// ── Marquee row ───────────────────────────────────────────────────────────
+// ── Fresha review card (no dates) ───────────────────────────────────────────
 
-function MarqueeRow({ reviews, duration }: { reviews: Review[]; duration: number }) {
+const SAGE_AVATARS = ['#4f7256', '#124E59', '#6f6456', '#5a5043', '#6391AB'];
+
+function FreshaReviewCard({ r, idx }: { r: FreshaReview; idx: number }) {
+  const hasText = !!r.text && r.text.trim().length > 0;
+  return (
+    <a
+      href={FRESHA_PROFILE.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Read ${r.name}'s review on Fresha`}
+      style={CARD_STYLE}
+    >
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <Avatar initials={r.initials} color={SAGE_AVATARS[idx % SAGE_AVATARS.length]} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={NAME_STYLE}>{r.name}</p>
+          <p style={{ margin: 0, fontFamily: BODY, fontSize: 11, color: META }}>Fresha booking</p>
+        </div>
+        <FreshaBadge size={18} />
+      </div>
+
+      <Stars rating={r.rating} size={14} />
+
+      {hasText ? (
+        <p
+          style={{
+            margin: 0,
+            fontFamily: BODY,
+            fontSize: 13,
+            color: BODY_C,
+            lineHeight: 1.6,
+            display: '-webkit-box',
+            WebkitLineClamp: 4,
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+          }}
+        >
+          {r.text}
+        </p>
+      ) : (
+        <p style={{ margin: 0, fontFamily: BODY, fontSize: 13, fontStyle: 'italic', color: META, lineHeight: 1.6 }}>
+          Verified Fresha review
+        </p>
+      )}
+    </a>
+  );
+}
+
+// ── Marquee row ─────────────────────────────────────────────────────────────
+
+function MarqueeRow({
+  direction,
+  duration,
+  children,
+}: {
+  direction: 'left' | 'right';
+  duration: number;
+  children: React.ReactNode[];
+}) {
   // Duplicate for seamless looping.
-  const doubled = [...reviews, ...reviews];
+  const doubled = [...children, ...children];
   return (
     <div style={{ overflow: 'hidden', width: '100%' }}>
       <div
@@ -162,32 +235,40 @@ function MarqueeRow({ reviews, duration }: { reviews: Review[]; duration: number
         style={{
           display: 'flex',
           width: 'max-content',
-          animation: `slimming-marquee-left ${duration}s linear infinite`,
+          animation: `slimming-marquee-${direction} ${duration}s linear infinite`,
           paddingBottom: 4,
         }}
       >
-        {doubled.map((r, i) => (
-          <ReviewCard key={`${r.id}-${i}`} r={r} />
+        {doubled.map((child, i) => (
+          <div key={i} style={{ display: 'flex' }}>
+            {child}
+          </div>
         ))}
       </div>
     </div>
   );
 }
 
-// ── Main export ───────────────────────────────────────────────────────────
+// ── Main export ─────────────────────────────────────────────────────────────
 
 export default function GoogleReviews() {
-  const { rating, count } = AGGREGATE;
+  const googleReviews = SLIMMING_REVIEWS.filter((r) => r.source === 'google');
+
+  // Split Fresha reviews across the two rows.
+  const mid = Math.ceil(FRESHA_REVIEWS.length / 2);
+  const freshaRowA = FRESHA_REVIEWS.slice(0, mid);
+  const freshaRowB = FRESHA_REVIEWS.slice(mid);
 
   return (
-    <section
-      style={{ background: '#F2F6EF', padding: '64px 0 56px' }}
-      aria-label="Client reviews"
-    >
+    <section style={{ background: 'transparent', padding: '64px 0 56px' }} aria-label="Client reviews">
       <style>{`
         @keyframes slimming-marquee-left {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
+        }
+        @keyframes slimming-marquee-right {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0); }
         }
         .slimming-marquee-track:hover { animation-play-state: paused; }
         @media (prefers-reduced-motion: reduce) {
@@ -195,17 +276,14 @@ export default function GoogleReviews() {
         }
       `}</style>
 
-      {/* Aggregate bar — real Google rating + count */}
-      <div
-        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
-        style={{ marginBottom: 36, textAlign: 'center' }}
-      >
+      {/* Header — real aggregate rating + count, both review platforms */}
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={{ marginBottom: 36, textAlign: 'center' }}>
         <p
           style={{
             fontFamily: SERIF,
             fontSize: 13,
             letterSpacing: 4,
-            color: GREEN,
+            color: SAGE,
             textTransform: 'uppercase',
             marginBottom: 8,
           }}
@@ -213,50 +291,56 @@ export default function GoogleReviews() {
           What our clients say
         </p>
         <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap' }}>
-          <span style={{ fontFamily: SERIF, fontSize: 42, color: DARK_GREEN, lineHeight: 1 }}>{rating}</span>
+          <span style={{ fontFamily: SERIF, fontSize: 42, color: INK, lineHeight: 1 }}>4.9</span>
           <div>
             <Stars rating={5} size={20} />
-            <p style={{ margin: '6px 0 0', fontFamily: BODY, fontSize: 12.5, color: TAUPE_LT, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
-              <span>{count} verified reviews across</span>
-              <a href={FRESHA_PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                <FreshaF size={14} /> Fresha
-              </a>
-              <span aria-hidden style={{ color: '#cdd8c8' }}>+</span>
-              <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+            <p
+              style={{
+                margin: '6px 0 0',
+                fontFamily: BODY,
+                fontSize: 12.5,
+                color: META,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 8,
+                flexWrap: 'wrap',
+              }}
+            >
+              <span>800 reviews on</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
                 <GoogleG size={14} /> Google
-              </a>
+              </span>
+              <span aria-hidden style={{ color: HAIRLINE }}>and</span>
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <FreshaBadge size={14} /> Fresha
+              </span>
             </p>
           </div>
         </div>
       </div>
 
-      {/* Real reviews — single row */}
-      <MarqueeRow reviews={SLIMMING_REVIEWS} duration={44} />
+      {/* Google reviews — single row, scrolls left */}
+      <MarqueeRow direction="left" duration={44}>
+        {googleReviews.map((r) => (
+          <GoogleReviewCard key={r.id} r={r} />
+        ))}
+      </MarqueeRow>
 
-      {/* CTA */}
-      <div style={{ textAlign: 'center', marginTop: 36 }}>
-        <a
-          href={GOOGLE_WRITE_REVIEW_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            gap: 8,
-            fontFamily: WIDE,
-            fontSize: 13,
-            fontWeight: 700,
-            letterSpacing: '0.5px',
-            color: GREEN,
-            border: `2px solid ${GREEN}`,
-            borderRadius: 8,
-            padding: '11px 24px',
-            textDecoration: 'none',
-          }}
-        >
-          <GoogleG size={16} />
-          Leave us a Google review
-        </a>
+      {/* Fresha reviews — two rows, opposite directions */}
+      <div style={{ marginTop: 20 }}>
+        <MarqueeRow direction="left" duration={40}>
+          {freshaRowA.map((r, i) => (
+            <FreshaReviewCard key={r.id} r={r} idx={i} />
+          ))}
+        </MarqueeRow>
+      </div>
+      <div style={{ marginTop: 20 }}>
+        <MarqueeRow direction="right" duration={48}>
+          {freshaRowB.map((r, i) => (
+            <FreshaReviewCard key={r.id} r={r} idx={i + freshaRowA.length} />
+          ))}
+        </MarqueeRow>
       </div>
     </section>
   );
