@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import MotifAccent from './layers/MotifAccent';
 
 // Accessible brand tokens (see globals.css locked palette).
 // GREEN: sage text/icon/heading on near-white footer = 5.42:1 AA (was #8EB093 -> 2.33:1).
@@ -65,15 +66,19 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* STAY IN TOUCH */}
-      <h4 className="text-center" style={{ color: GREEN, fontFamily: '"Trajan Pro", serif', fontSize: '15px', letterSpacing: '4px', marginTop: '48px', marginBottom: '14px' }}>
-        STAY IN TOUCH
-      </h4>
-      <div className="mx-auto" style={{ width: '290px', height: '1px', backgroundColor: GREEN, marginBottom: '40px' }} />
+      {/* Liquid Gloss contact panel — floats over the sage gradient */}
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ marginTop: '48px' }}>
+        <div className="lg-glass lg-glass--panel" style={{ padding: '34px clamp(20px,5vw,56px) 40px' }}>
+          {/* faint brand-motif divider */}
+          <MotifAccent mode="divider" style={{ maxWidth: '290px', height: 22, margin: '0 auto 16px' }} />
+          {/* STAY IN TOUCH */}
+          <h4 className="text-center" style={{ color: GREEN, fontFamily: '"Trajan Pro", serif', fontSize: '15px', letterSpacing: '4px', marginBottom: '14px' }}>
+            STAY IN TOUCH
+          </h4>
+          <div className="mx-auto" style={{ width: '290px', height: '1px', backgroundColor: GREEN, marginBottom: '32px' }} />
 
-      {/* Contact Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-14">
-        <div className="flex justify-center">
+          {/* Contact Grid */}
+          <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-20 gap-y-7">
             <ContactRow
               href="tel:+35627802062"
@@ -120,6 +125,7 @@ export default function Footer() {
                 </svg>
               }
             />
+            </div>
           </div>
         </div>
       </div>
