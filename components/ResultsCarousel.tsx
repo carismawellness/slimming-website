@@ -90,7 +90,7 @@ export default function ResultsCarousel() {
   };
 
   return (
-    <section className="py-16">
+    <section className="py-24">
       {/* Focus indicator: 3px deep-sage ring (#4F7256 = 5.42:1 on white, >=3:1 AA UI),
           offset 2px, never removed. Applied to all interactive controls in this carousel. */}
       <style>{`

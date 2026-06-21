@@ -66,7 +66,7 @@ export default function PackagesPage() {
       />
 
       {/* Packages grid */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-3xl mb-10 text-center"
@@ -125,7 +125,7 @@ export default function PackagesPage() {
       </section>
 
       {/* Combined / CTA */}
-      <section className="py-16" style={{ backgroundColor: '#F5F2EF' }}>
+      <section className="py-24" style={{ backgroundColor: '#F5F2EF' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl mb-6" style={{ fontFamily: HEADING_FONT, color: TAUPE }}>
             Not Sure Which Body Contouring Package Is Right for You?

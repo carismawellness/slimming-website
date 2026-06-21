@@ -119,7 +119,7 @@ function EvidenceCard({ item }: { item: Item }) {
 
 export default function EvidenceCards() {
   return (
-    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our medical weight loss methodology

@@ -419,7 +419,7 @@ export default function PageHero({
         }
         .hero-outline:hover { background: ${SAGE_TEXT}; color: #fff; }
         @media (min-width: 900px) {
-          .page-hero-grid { grid-template-columns: 1.08fr 0.92fr; }
+          .page-hero-grid { grid-template-columns: 60fr 40fr; }
           .page-hero-media { justify-self: end; }
         }
       `}</style>

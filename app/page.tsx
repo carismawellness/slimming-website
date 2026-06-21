@@ -33,7 +33,7 @@ export default function Home() {
       />
 
       {/* Personalised programme quiz (relocated from hero) */}
-      <section id="quiz" className="py-14" style={{ backgroundColor: '#ffffff' }}>
+      <section id="quiz" className="py-20" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '22px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Find Your Personalised Weight Loss Programme
@@ -49,7 +49,7 @@ export default function Home() {
       </section>
 
       {/* (1) Media / Press Strip */}
-      <section className="py-10" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center mb-2" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', textTransform: 'uppercase' }}>
             As seen on
@@ -75,7 +75,7 @@ export default function Home() {
       </section>
 
       {/* (2) 4 Core Pillars of Our Weight Loss Methodology */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1007px' }}>
           <p className="text-center mb-2" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
             4 core pillars of our weight loss methodology
@@ -176,7 +176,7 @@ export default function Home() {
       </section>
 
       {/* (3) Explore Our Modalities */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="text-center mb-12">
           <h2 className="mb-3" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
             Our weight loss &amp; body contouring treatments in Malta
@@ -187,7 +187,7 @@ export default function Home() {
       </section>
 
       {/* (4) Our Results-Driven Approach / Extended Care Commitment */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Live page renders this section on a rounded gradient panel (980px wide) */}
           <div style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', borderRadius: '17px', background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', padding: '28px 46px 48px' }}>
@@ -240,7 +240,7 @@ export default function Home() {
       </section>
 
       {/* (5) Medical Weight Loss in Malta (GLP-1) */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center mb-3" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px' }}>
             HOW GLP-1 WEIGHT LOSS WORKS AT OUR CLINIC
@@ -300,7 +300,7 @@ export default function Home() {
       </section>
 
       {/* (6) The Carisma Difference */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative" style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '20px', padding: '30px 33px 40px', overflow: 'hidden' }}>
             {/* Decorative background watermark (live Wix asset, alt="") */}
@@ -395,7 +395,7 @@ export default function Home() {
       </section>
 
       {/* (7) Real People, Real Reviews — heading precedes doctor profiles (rendered by BrandBlock) */}
-      <section className="pt-16 pb-4" style={{ backgroundColor: '#ffffff' }}>
+      <section className="pt-24 pb-4" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '35px', letterSpacing: '1px' }}>
             real results from our slimming clients in malta

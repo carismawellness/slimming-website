@@ -86,7 +86,7 @@ function ReviewCard({ r, color }: { r: Review; color: string }) {
 export default function GoogleReviews() {
   const { rating, total } = REVIEW_SUMMARY;
   return (
-    <section style={{ backgroundColor: '#ffffff', padding: '56px 0' }}>
+    <section style={{ backgroundColor: '#ffffff', padding: '84px 0' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* summary bar */}
         <div style={{ backgroundColor: '#f7f7f5', borderRadius: 10, padding: '24px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, marginBottom: 28 }}>

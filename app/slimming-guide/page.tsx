@@ -201,7 +201,7 @@ export default function SlimmingGuidePage() {
       />
 
       {/* Main Narrative / Pain Point Section */}
-      <section className="py-16" style={{ backgroundColor: '#FFFFFF' }}>
+      <section className="py-24" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="mx-auto px-4" style={{ maxWidth: '1032px' }}>
           <div
             className="px-6 py-10 sm:px-12 sm:py-12"
@@ -270,7 +270,7 @@ export default function SlimmingGuidePage() {
       <div className="relative overflow-hidden">
       {/* Built To Hold Band */}
       <section
-        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '38px 0' }}
+        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '57px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
@@ -285,7 +285,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* What This Is Section */}
-      <section className="py-16 relative bg-white">
+      <section className="py-24 relative bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <Kicker centered rule>WHAT THIS IS</Kicker>
           <h2
@@ -340,7 +340,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Method Section */}
-      <section className="py-16 relative bg-white">
+      <section className="py-24 relative bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center max-w-3xl mx-auto mb-10">
             <Kicker centered rule>THE METHOD</Kicker>
@@ -406,7 +406,7 @@ export default function SlimmingGuidePage() {
       </div>{/* end decorative wrapper */}
 
       {/* Success Outcomes Section — STEP 1-4 stepper */}
-      <section className="py-16 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center mb-10">
             <h2
@@ -429,7 +429,7 @@ export default function SlimmingGuidePage() {
 
       {/* Stabilise Band */}
       <section
-        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '38px 0' }}
+        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '57px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
@@ -444,7 +444,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Designed for Malta Section */}
-      <section className="py-16 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <Kicker centered rule>DESIGNED FOR MALTA</Kicker>
@@ -549,7 +549,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Is This For You Section */}
-      <section className="py-16 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Kicker centered rule>before you start</Kicker>
@@ -644,7 +644,7 @@ export default function SlimmingGuidePage() {
 
       {/* Final Call-to-Action Section — full-width dark green band */}
       <section
-        className="py-16 relative overflow-hidden"
+        className="py-24 relative overflow-hidden"
         style={{ background: `linear-gradient(90deg, #3E483E 0%, #57695A 50%, ${BAND_END} 100%)` }}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -706,7 +706,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Carisma Difference Section */}
-      <section className="py-16 bg-white">
+      <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
             className="max-w-5xl mx-auto px-8 py-10 sm:px-14"

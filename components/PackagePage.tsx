@@ -263,7 +263,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       </section>
 
       {/* ===================== 2. SECRET (+ before/after testimonials) ===================== */}
-      <section style={{ paddingTop: 56, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 84, paddingBottom: 84 }}>
         <div style={{ ...CONTAINER, maxWidth: 1180 }}>
           <SectionHeading>{c.secretHeading.map((l, i) => (<span key={i}>{l}{i < c.secretHeading.length - 1 && <br />}</span>))}</SectionHeading>
           <div style={{ width: 280, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '18px auto 0' }} />
@@ -273,7 +273,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           )}
         </div>
 
-        <div style={{ ...CONTAINER, marginTop: 56 }}>
+        <div style={{ ...CONTAINER, marginTop: 84 }}>
           {/* live: 980px rounded panel, gradient measured as linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%) */}
           <div style={{ maxWidth: 980, marginLeft: 'auto', marginRight: 'auto', borderRadius: 18, background: 'linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', padding: '48px 44px' }}>
             <SectionHeading>{c.secretSubheading}</SectionHeading>
@@ -305,7 +305,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       </section>
 
       {/* ===================== 3. PRESS ===================== */}
-      <section style={{ paddingTop: 24, paddingBottom: 48 }}>
+      <section style={{ paddingTop: 36, paddingBottom: 72 }}>
         <div style={CONTAINER}>
           <SectionHeading>{(c.pressHeading ?? PRESS_HEADING_DEFAULT).map((l, i, arr) => (<span key={i}>{l}{i < arr.length - 1 && <br />}</span>))}</SectionHeading>
           <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'center', gap: 40, marginTop: 28 }}>
@@ -319,7 +319,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 4. BENEFITS ===================== */}
       {!hidden.benefits && c.benefits.length > 0 && (
-      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 84 }}>
         <div style={{ ...CONTAINER, maxWidth: 1180 }}>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 22 }} className="fr-benefits">
             {c.benefits.map((b) => (
@@ -337,7 +337,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===== 4b. VALUE PROPS ("created for those who value…") ===== */}
       {c.valueProps && (
-      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 84 }}>
         <div style={CONTAINER}>
           {/* live: 24px, explicit break after "confidence," (data carries the \n) */}
           <SectionHeading size={24}><span style={{ whiteSpace: 'pre-line' }}>{c.valueProps.heading}</span></SectionHeading>
@@ -363,7 +363,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===== 4c. COMMITMENT PANEL ("35+ years delivering results") ===== */}
       {c.commitmentPanel && (
-      <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 40, paddingBottom: 56 }}>
+      <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
         <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 24, padding: '48px 48px 44px' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={WELL_BG} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
@@ -398,7 +398,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 5. ELIGIBILITY ===================== */}
       {!hidden.eligibility && c.areas.length > 0 && (
-      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 84 }}>
         <div style={CONTAINER}>
           <Eyebrow>{c.eligEyebrow ?? 'eligibility criteria'}</Eyebrow>
           <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 14px' }} />
@@ -432,7 +432,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 6. DIFFERENCE ===================== */}
       {!hidden.difference && (
-      <section style={{ position: 'relative', paddingTop: 48, paddingBottom: 64, overflow: 'hidden' }}>
+      <section style={{ position: 'relative', paddingTop: 72, paddingBottom: 96, overflow: 'hidden' }}>
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src={DIFF_BG} alt="" aria-hidden style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.5, pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ ...CONTAINER, position: 'relative', zIndex: 1 }}>
@@ -455,7 +455,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 7. PACKAGE TREATMENTS ===================== */}
       {!hidden.packageCard && (
-      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 84 }}>
         <div style={CONTAINER}>
           {c.ptEyebrow && <Eyebrow>{c.ptEyebrow}</Eyebrow>}
           {/* live: short centered taupe hairline under the section eyebrow
@@ -554,7 +554,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 8. DUAL / STARTER PACK ===================== */}
       {!hidden.dual && (
-      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 84 }}>
         <div style={CONTAINER}>
           {c.dualEyebrow && <div style={{ marginBottom: 10 }}><Eyebrow>{c.dualEyebrow}</Eyebrow></div>}
           <SectionHeading size={25}>{c.dualHeading.map((l, i) => (<span key={i}>{l}{i < c.dualHeading.length - 1 && <br />}</span>))}</SectionHeading>
@@ -602,7 +602,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===== 8b. OFFER (bespoke; intro block + pricing card) ===== */}
       {c.offer && (
-      <section style={{ paddingTop: 32, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 84 }}>
         <div style={CONTAINER}>
           <SectionHeading size={24}>{c.offer.introHeading}</SectionHeading>
           <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 44, alignItems: 'center', marginTop: 36 }} className="fr-2col">
@@ -641,7 +641,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 9. WELLNESS CHAIN + MAP ===================== */}
       {!hidden.wellness && (
-      <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 40, paddingBottom: 56 }}>
+      <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
         <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 24, padding: '48px 48px 44px' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={WELL_BG} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
@@ -682,7 +682,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       )}
 
       {/* ===================== 10. FAQ ===================== */}
-      <section style={{ paddingTop: 56, paddingBottom: 56 }}>
+      <section style={{ paddingTop: 84, paddingBottom: 84 }}>
         <div style={{ ...CONTAINER, maxWidth: 960 }}>
           {/* live Wix FAQ widget: heading left-of-center + underlined search field on the right */}
           <div className="fr-faqrow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
@@ -731,7 +731,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
       {/* ===================== 11. EVIDENCE ===================== */}
       {!hidden.evidence && c.evidence.length > 0 && (
-      <section style={{ paddingTop: 32, paddingBottom: 64 }}>
+      <section style={{ paddingTop: 48, paddingBottom: 96 }}>
         <div style={{ ...CONTAINER, maxWidth: 1100 }}>
           <Eyebrow>{c.evidenceEyebrow}</Eyebrow>
           <div style={{ width: 320, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 0' }} />

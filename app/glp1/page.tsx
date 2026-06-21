@@ -114,7 +114,7 @@ export default function GLP1Page() {
       <ResultsCarousel />
 
       {/* What is Medical Weight Loss */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             What is medical weight loss?
@@ -167,8 +167,8 @@ export default function GLP1Page() {
 
 
       {/* Sustainability */}
-      <section className="py-10" style={{ backgroundColor: '#ffffff' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8" style={{ maxWidth: '1100px', background: 'linear-gradient(180deg, #D7E2D8 0%, #FBFBF9 38%, #FFFFFF 50%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }}>
+      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12" style={{ maxWidth: '1100px', background: 'linear-gradient(180deg, #D7E2D8 0%, #FBFBF9 38%, #FFFFFF 50%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }}>
           <h2
             className="text-center mb-12 uppercase"
             style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
@@ -216,7 +216,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Malta's trusted clinic — press logos + program pillars */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-center"
@@ -264,7 +264,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Medical weight loss eligibility */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '760px' }}>
           <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             medical weight loss eligibility
@@ -319,7 +319,7 @@ export default function GLP1Page() {
       </section>
 
       {/* We are not another diet clinic */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+      <section className="py-24" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             The Carisma Difference
@@ -358,7 +358,7 @@ export default function GLP1Page() {
       <HowItWorks />
 
       {/* Led by expertise — Dr Zaid Teebi */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Expert <span style={{ color: '#4f7256' }}>medical weight loss</span> care
@@ -400,7 +400,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Our promise — extended care commitment */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Our Promise
@@ -451,7 +451,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Safety, side effects & our system */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F8F7F3 35%)', borderRadius: '28px', padding: '48px' }}>
             <h2 className="text-center" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.4 }}>
@@ -509,7 +509,7 @@ export default function GLP1Page() {
       </section>
 
       {/* The science behind GLP-1 — video */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.6 }}>
             Why weight loss is biological,<br />not just behavioural
@@ -539,7 +539,7 @@ export default function GLP1Page() {
       </section>
 
       {/* 4 core pillars — programme built to last */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             4 core pillars of our methodology
@@ -601,7 +601,7 @@ export default function GLP1Page() {
       </section>
 
       {/* The Carisma difference — wellness chain + map */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ background: 'linear-gradient(135deg, #FBFBF7 0%, #DDE8D6 100%)', borderRadius: '32px', padding: '48px' }}>
             <p className="text-center mb-2" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>

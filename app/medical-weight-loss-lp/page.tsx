@@ -241,7 +241,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* The secret to a more defined, confident look — testimonial carousel */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
             real women, real weight loss results<br />in Malta
@@ -254,7 +254,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Clarity before you start */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '740px' }}>
           <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
             What are medical weight management program?
@@ -303,7 +303,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Philosophy — we build the conditions for it to last */}
-      <section className="py-10">
+      <section className="py-16">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
           <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #D8E3D9 0%, #F8F6F2 100%)', borderRadius: '24px' }}>
             <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.6 }}>
@@ -339,7 +339,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Press logos + four differentiators */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
             malta&rsquo;s trusted clinic for<br />doctor led, medical weight loss
@@ -372,7 +372,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Eligibility criteria */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '740px' }}>
           <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', letterSpacing: '2px' }}>
             eligibility criteria
@@ -430,7 +430,7 @@ export default function MedicalWeightLossLpPage() {
 
       {/* The carisma difference — not another diet clinic (checklist card) */}
       <section
-        className="py-16"
+        className="py-24"
         style={{
           backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)',
           backgroundSize: '2068px 1063px',
@@ -465,7 +465,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* How it works — 5-step tabs */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '4px' }}>
             how our medical weight loss programme works
@@ -476,7 +476,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Expert care — Dr Zaid Teebi */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '970px' }}>
           <p className="text-center uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '20px', letterSpacing: '2px' }}>
             expert care
@@ -524,7 +524,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Results-driven approach — performance assurance */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '970px' }}>
           <p className="text-center uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '20px', letterSpacing: '2px' }}>
             our results-driven approach
@@ -569,7 +569,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Safety, side effects, and our system */}
-      <section className="py-10">
+      <section className="py-16">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '1104px' }}>
           <div className="p-8 sm:py-12 sm:px-20" style={{ background: 'linear-gradient(180deg, #B7CBB2 0%, #F4F2EC 38%, #FFFFFF 100%)', borderRadius: '28px' }}>
             <h2 className="text-center uppercase" style={{ color: TAUPE, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
@@ -615,7 +615,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* 4 core pillars of our methodology */}
-      <section className="py-16">
+      <section className="py-24">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
           <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px' }}>
             4 core plllars of our methodology
@@ -677,7 +677,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Malta's #1 leading wellness chain */}
-      <section className="py-10">
+      <section className="py-16">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
           <div className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #F4F7F2 0%, #E9EFE6 100%)', borderRadius: '32px', padding: '40px 33px' }}>
             {/* soft rose watermark behind the card content (live: f940f0_9f944ed5, 678x579) */}
@@ -748,7 +748,7 @@ export default function MedicalWeightLossLpPage() {
 
       {/* Closing — photo collage + contact + LP footer */}
       <section
-        className="py-16"
+        className="py-24"
         style={{
           backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)',
           backgroundSize: '2068px 1063px',

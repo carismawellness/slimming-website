@@ -123,7 +123,7 @@ function AsSeenOn() {
     { src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', alt: 'maltatoday', w: 75, h: 44 },
   ];
   return (
-    <section className="pt-7 pb-3" style={{ backgroundColor: '#fff' }}>
+    <section className="pt-10 pb-5" style={{ backgroundColor: '#fff' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <p className="mb-2" style={{ color: taupeLight, fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase' }}>
           As seen on
@@ -193,7 +193,7 @@ function ProblemAgitationSection() {
   return (
     <section>
       {/* Narrative */}
-      <div className="pt-9 pb-3">
+      <div className="pt-14 pb-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mx-auto" style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #DCE7D9 100%)', border: '1px solid #E5E5E3', borderRadius: '24px', padding: '40px', maxWidth: '976px' }}>
             <h2 className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
@@ -229,7 +229,7 @@ function ProblemAgitationSection() {
       </div>
 
       {/* Why it's harder after 30 */}
-      <div className="py-16" style={{ backgroundColor: '#ffffff' }}>
+      <div className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
             Why everything else failed?
@@ -325,7 +325,7 @@ function ProgramOverviewSection() {
   const liStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '13px', lineHeight: 1.4 };
 
   return (
-    <section className="py-16">
+    <section className="py-24">
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '992px' }}>
         <h2 className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           How Our Doctor-Led Weight Loss Programme Works
@@ -646,7 +646,7 @@ function CorePillarsSection() {
   ];
 
   return (
-    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           4 core pillars of our methodology
@@ -791,7 +791,7 @@ function CarismaDifferenceSection() {
     'Selective entry and measurable weight loss results guaranteed',
   ];
   return (
-    <section className="relative py-12" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <section className="relative py-20" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       {/* Accessibility scrim — the centred sage watermark has darkest pixel #A8C0AD; a 0.7 white veil
           lifts the effective background to ~#e5ece6 so taupe body clears 4.81:1 and green text 4.51:1 (AA). */}
       <div aria-hidden="true" className="absolute inset-0" style={{ backgroundColor: 'rgba(255,255,255,0.7)', pointerEvents: 'none' }} />
@@ -834,7 +834,7 @@ function OurPromiseSection() {
     'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
   ];
   return (
-    <div className="py-12" style={{ backgroundColor: '#ffffff' }}>
+    <div className="py-20" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
         <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '28px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
           <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
@@ -895,7 +895,7 @@ function CarismaWellnessSection() {
     'High touch support with weekly check ins and WhatsApp coaching',
   ];
   return (
-    <section className="py-12" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-20" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
         <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #E6EFE3 100%)', borderRadius: '32px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
           <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
@@ -1203,7 +1203,7 @@ function FAQSection() {
     .filter(({ f }) => f.q.toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
-    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading + search */}
         <div className="relative mb-10">
@@ -1452,7 +1452,7 @@ function EvidenceApproachSection() {
     },
   ];
   return (
-    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '970px' }}>
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our metodology
