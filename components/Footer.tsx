@@ -168,7 +168,7 @@ function FooterBase() {
 
             {/* Brand */}
             <div>
-              <p style={{ fontFamily: SERIF, fontSize: '18px', fontWeight: 400, color: INK, letterSpacing: '1px', marginBottom: '12px' }}>Carisma Slimming</p>
+              <p style={{ fontFamily: SERIF, fontSize: '18px', fontWeight: 400, color: INK, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '12px' }}>Carisma Slimming</p>
               <p style={{ fontFamily: BODY, fontSize: '13px', lineHeight: 1.75, color: TEXT, maxWidth: '210px', marginBottom: '20px' }}>
                 Malta&rsquo;s most comprehensive slimming programme — medical weight loss, body contouring and personalised meal plans.
               </p>

@@ -142,9 +142,13 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
 }
 
+/* BRAND RULE: Trajan Pro is a titling-capitals face — mixed/title case renders as
+   ugly two-height small-caps. Headings are Trajan, so force a single uniform case.
+   (The .font-script utility opts out via text-transform: none.) */
 h1, h2, h3, h4, h5, h6 {
   color: var(--primary-navy);
   font-weight: 700;
+  text-transform: uppercase;
 }
 
 /* ---- Brand CTA: soft gradient pill with a blurred glow halo ----

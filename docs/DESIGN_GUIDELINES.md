@@ -55,10 +55,21 @@ palette, typography, and logo usage.
 | Helvetica | `"Helvetica Brand"` | Clean neutral UI / alternate body. |
 | Ani Lazy Day | `"Carisma Script"` (`.font-script`) | Decorative script — large decorative accents **only**. |
 
+> ### ⚠️ BRAND RULE — Trajan Pro is ALWAYS uniform case (never mixed/title case)
+> Trajan Pro is a **titling-capitals** typeface: it has no true lowercase, so any
+> lowercase letters render as **small capitals**. Setting it in mixed/title case
+> (e.g. "Carisma Slimming") therefore produces an ugly **two-height** look (big
+> initial cap + small caps). **Never do this.** Trajan text must always be a single
+> uniform case — set `text-transform: uppercase` (or author the text in ALL CAPS).
+> - Enforced globally for headings via `h1–h6 { text-transform: uppercase }` in `globals.css`.
+> - For any **non-heading** element using Trajan (brand names, numbers, spans), add
+>   `textTransform: 'uppercase'` to its style.
+> - The only exception is the decorative script (`.font-script`), which opts out.
+
 **Notes:**
 - Novecento Wide drives display copy and should be set uppercase with letter
   tracking for headings, navigation, and CTAs.
-- Trajan Pro is for elegant serif accents.
+- Trajan Pro is for elegant serif accents — **always uppercase / uniform case** (see brand rule above).
 - Roboto is the primary body typeface; Helvetica (CSS family `"Helvetica Brand"`)
   is the clean neutral alternate for UI and body text.
 - "Ani Lazy Day" (CSS family `"Carisma Script"`, utility class `.font-script`) is

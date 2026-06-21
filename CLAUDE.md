@@ -64,6 +64,15 @@ notices. See also [AGENTS.md](AGENTS.md).
   you get a client-reference proxy, not the array. Put shared data in a plain module
   (see `lib/faq/`).
 
+## Typography (brand rules)
+
+- **Trajan Pro is ALWAYS uniform uppercase — never mixed/title case.** It's a
+  titling-capitals face (no true lowercase → lowercase renders as small caps), so
+  title case ("Carisma Slimming") produces an ugly two-height look. Any element using
+  Trajan must have `text-transform: uppercase` (headings are enforced globally via
+  `h1–h6` in `globals.css`; for non-heading Trajan spans add `textTransform: 'uppercase'`).
+  Only `.font-script` is exempt. See `docs/DESIGN_GUIDELINES.md`.
+
 ## Accessibility
 
 - Use the locked **WCAG AA** color tokens: deep sage `#4f7256` for text / icons / CTA
