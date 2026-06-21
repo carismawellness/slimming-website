@@ -194,3 +194,27 @@ h1, h2, h3, h4, h5, h6 {
   text-underline-offset: 2px;
 }
 
+/* ---- PageHero: arch media container + floating glass proof cards ---- */
+.hero-arch {
+  border-radius: 210px 210px 22px 22px;
+  overflow: hidden;
+  background: #0c0c0c;
+  box-shadow: 0 30px 70px -28px rgba(40, 55, 44, 0.45);
+}
+.hero-glass {
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 14px 36px rgba(40, 55, 44, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.85);
+}
+@keyframes cx-float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-9px); }
+}
+.hero-float { animation: cx-float 5.5s ease-in-out infinite; }
+.hero-float-2 { animation: cx-float 6.8s ease-in-out infinite; animation-delay: -2.4s; }
+@media (prefers-reduced-motion: reduce) {
+  .hero-float, .hero-float-2 { animation: none; }
+}
+

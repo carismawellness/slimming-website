@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getOrderedServices, BOOKING_URL } from '@/lib/services';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL as SITE, breadcrumbList } from '@/lib/seo/schema';
+import PageHero from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: "Body Contouring Packages Malta | Carisma Slimming",
@@ -45,26 +46,23 @@ export default function PackagesPage() {
     <main className="w-full">
       <JsonLd data={schema} />
       {/* Hero */}
-      <section className="py-20 text-center" style={{ backgroundColor: '#F5F2EF' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p
-            className="uppercase tracking-widest mb-4 text-sm"
-            style={{ color: GREEN, fontFamily: BODY_FONT }}
-          >
-            Carisma Slimming
-          </p>
-          <h1
-            className="text-4xl md:text-5xl mb-6"
-            style={{ fontFamily: HEADING_FONT, color: TAUPE }}
-          >
-            Weight Loss &amp; Body Contouring Packages in Malta
-          </h1>
-          <p className="text-lg" style={{ color: TAUPE_LIGHT, fontFamily: BODY_FONT }}>
-            Doctor-led, non-surgical treatments to freeze, dissolve, tone, tighten and detox -
-            each available as a focused protocol with spa &amp; fitness access included.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Carisma Slimming"
+        headline={[
+          { text: 'Weight Loss & Body Contouring' },
+          { text: 'Packages in Malta', em: true },
+        ]}
+        sub="Doctor-led, non-surgical treatments to freeze, dissolve, tone, tighten and detox — each a focused protocol with spa & fitness access included."
+        bullets={[
+          { text: 'Non-surgical fat freezing, dissolving & cavitation' },
+          { text: 'Muscle toning, skin tightening & anti-cellulite' },
+          { text: 'Spa & fitness access included with every protocol' },
+        ]}
+        primaryCta={{ text: 'Free Consultation', href: BOOKING_URL, external: true }}
+        secondaryCta={{ text: 'Call 27802062', href: 'tel:+35627802062' }}
+        media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.png', alt: 'Carisma Slimming body contouring in Malta' }}
+        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+      />
 
       {/* Packages grid */}
       <section className="py-16">

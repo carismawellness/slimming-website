@@ -1,0 +1,428 @@
+import Link from 'next/link';
+
+/* ──────────────────────────────────────────────────────────────────────────
+   PageHero — shared above-the-fold hero for marketing pages.
+
+   Goals (per spec):
+   • Two-column: copy left, ARCH media container right.
+   • Floating glass social-proof cards over the arch that drift up/down
+     continuously (pure-CSS `cx-float`, reduced-motion safe → server component).
+   • Fits within the viewport at 100% zoom (target MacBook ~1512×982) with no
+     scroll: the section fills 100svh and centres its content under the nav.
+   • Reuses each page's existing media + the live light-sage `.cta-glow` CTA.
+   Brand tokens come from globals.css (locked accessible palette).
+   ────────────────────────────────────────────────────────────────────────── */
+
+const HEADING = 'Trajan Pro, serif';
+const WIDE = '"Novecento Wide", "Novecento Wide Book", sans-serif';
+const BODY = 'Roboto, sans-serif';
+const SAGE_TEXT = '#4f7256'; // accessible deep sage — headings/icons
+const TAUPE = '#6f6456'; // accessible body/eyebrow text
+
+export type HeroBullet = { label?: string; text: string };
+export type HeroMedia = {
+  type: 'video' | 'image';
+  src: string;
+  poster?: string;
+  alt?: string;
+  /** object-fit inside the arch — 'cover' (default, photos/video) or 'contain' (product mockups). */
+  fit?: 'cover' | 'contain';
+  /** arch background behind the media (default dark). Use a tint for 'contain' media. */
+  bg?: string;
+};
+export type HeroProof = {
+  rating?: string; // e.g. "4.9"
+  reviews?: string; // e.g. "200+"
+  awardSrc?: string;
+  awardText?: string; // e.g. "#1 voted clinic\nMalta 2025–26"
+  statValue?: string; // e.g. "30+"
+  statLabel?: string; // e.g. "years in wellness"
+};
+
+export type PageHeroProps = {
+  eyebrow?: string;
+  /** Headline lines. Strings render as plain serif; {em:true} colours the line sage. */
+  headline: { text: string; em?: boolean }[];
+  sub?: string;
+  bullets?: HeroBullet[];
+  primaryCta: { text: string; href: string; external?: boolean };
+  secondaryCta?: { text: string; href: string; external?: boolean };
+  media: HeroMedia;
+  proof?: HeroProof;
+  /** Optional background override for the section (defaults to soft sage wash). */
+  background?: string;
+  /** Slightly smaller headline clamp for long H1s. */
+  compactHeadline?: boolean;
+};
+
+function Stars({ size = 14 }: { size?: number }) {
+  return (
+    <span style={{ display: 'inline-flex', gap: 1, color: '#caa44a' }} aria-hidden>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+function CtaLink({
+  cta,
+  className,
+  children,
+}: {
+  cta: { href: string; external?: boolean };
+  className?: string;
+  children: React.ReactNode;
+}) {
+  if (cta.external) {
+    return (
+      <a href={cta.href} target="_blank" rel="noopener noreferrer" className={className}>
+        {children}
+      </a>
+    );
+  }
+  return (
+    <Link href={cta.href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+export default function PageHero({
+  eyebrow,
+  headline,
+  sub,
+  bullets,
+  primaryCta,
+  secondaryCta,
+  media,
+  proof,
+  background,
+  compactHeadline,
+}: PageHeroProps) {
+  const headlineSize = compactHeadline
+    ? 'clamp(27px, 3.6vw, 44px)'
+    : 'clamp(30px, 4.2vw, 52px)';
+
+  return (
+    <section
+      className="page-hero"
+      style={{
+        position: 'relative',
+        minHeight: '100svh',
+        display: 'flex',
+        alignItems: 'center',
+        paddingTop: 'clamp(104px, 13vh, 132px)',
+        paddingBottom: 'clamp(20px, 4vh, 44px)',
+        paddingLeft: 'clamp(16px, 4vw, 40px)',
+        paddingRight: 'clamp(16px, 4vw, 40px)',
+        overflow: 'hidden',
+        background:
+          background ||
+          'radial-gradient(120% 90% at 85% 10%, #eef3ea 0%, #f6f4ef 45%, #ffffff 100%)',
+      }}
+    >
+      {/* soft brand glow bed (decorative) */}
+      <span
+        aria-hidden
+        style={{
+          position: 'absolute',
+          top: '-12%',
+          right: '-8%',
+          width: 460,
+          height: 460,
+          borderRadius: '50%',
+          background: 'rgba(142,176,147,0.28)',
+          filter: 'blur(90px)',
+          zIndex: 0,
+        }}
+      />
+
+      <div
+        className="page-hero-grid"
+        style={{
+          position: 'relative',
+          zIndex: 1,
+          width: '100%',
+          maxWidth: 1180,
+          margin: '0 auto',
+          display: 'grid',
+          gap: 'clamp(28px, 4vw, 56px)',
+          alignItems: 'center',
+        }}
+      >
+        {/* LEFT — message */}
+        <div>
+          {/* badge pills */}
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 18 }}>
+            <span className="hero-pill">
+              <Stars size={13} />
+              <span style={{ fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: SAGE_TEXT }}>
+                Highest rated in Malta
+              </span>
+            </span>
+            <span className="hero-pill">
+              <span style={{ fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: TAUPE }}>
+                #1 voted slimming clinic
+              </span>
+            </span>
+          </div>
+
+          {eyebrow && (
+            <p
+              style={{
+                fontFamily: WIDE,
+                fontSize: 12,
+                letterSpacing: '0.22em',
+                textTransform: 'uppercase',
+                color: TAUPE,
+                margin: '0 0 14px',
+              }}
+            >
+              {eyebrow}
+            </p>
+          )}
+
+          <h1
+            style={{
+              fontFamily: HEADING,
+              fontWeight: 400,
+              fontSize: headlineSize,
+              lineHeight: 1.1,
+              textTransform: 'uppercase',
+              color: SAGE_TEXT,
+              margin: '0 0 18px',
+              maxWidth: 600,
+            }}
+          >
+            {headline.map((l, i) => (
+              <span key={i} style={{ display: 'block', color: l.em ? '#7ba587' : undefined }}>
+                {l.text}
+              </span>
+            ))}
+          </h1>
+
+          {sub && (
+            <p
+              style={{
+                fontFamily: BODY,
+                fontSize: 'clamp(14px, 1.1vw, 15.5px)',
+                lineHeight: 1.6,
+                color: TAUPE,
+                maxWidth: 520,
+                margin: '0 0 20px',
+              }}
+            >
+              {sub}
+            </p>
+          )}
+
+          {bullets && bullets.length > 0 && (
+            <ul
+              style={{
+                listStyle: 'none',
+                padding: 0,
+                margin: '0 0 26px',
+                display: 'grid',
+                gap: 9,
+                maxWidth: 540,
+              }}
+            >
+              {bullets.map((b, i) => (
+                <li key={i} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <span
+                    aria-hidden
+                    style={{
+                      flexShrink: 0,
+                      width: 20,
+                      height: 20,
+                      borderRadius: '50%',
+                      background: 'rgba(142,176,147,0.20)',
+                      display: 'grid',
+                      placeItems: 'center',
+                      marginTop: 1,
+                    }}
+                  >
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+                      <path d="M5 13l4 4L19 7" stroke={SAGE_TEXT} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </span>
+                  <span style={{ fontFamily: BODY, fontSize: 13.5, color: TAUPE, lineHeight: 1.5 }}>
+                    {b.label && <strong style={{ color: '#5a5043', fontWeight: 600 }}>{b.label} </strong>}
+                    {b.text}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', marginBottom: 18 }}>
+            <CtaLink
+              cta={primaryCta}
+              className="cta-glow"
+            >
+              <span
+                style={{
+                  display: 'inline-block',
+                  padding: '14px 28px',
+                  fontFamily: WIDE,
+                  fontSize: 12.5,
+                  fontWeight: 700,
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: '#fff',
+                }}
+              >
+                {primaryCta.text}
+              </span>
+            </CtaLink>
+            {secondaryCta && (
+              <CtaLink cta={secondaryCta} className="hero-outline">
+                {secondaryCta.text}
+              </CtaLink>
+            )}
+          </div>
+
+          {/* compact proof row */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+            <Stars size={14} />
+            <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>
+              <strong style={{ color: SAGE_TEXT }}>{proof?.rating || '4.9'}</strong> · {proof?.reviews || '200+'} Google reviews
+            </span>
+            <span aria-hidden style={{ width: 1, height: 14, background: '#d9d2ca' }} />
+            <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>Doctor-led · Free body analysis</span>
+          </div>
+        </div>
+
+        {/* RIGHT — arch media + floating proof cards */}
+        <div
+          className="page-hero-media"
+          style={{ position: 'relative', justifySelf: 'center', width: '100%', display: 'flex', justifyContent: 'center' }}
+        >
+          <div
+            className="hero-arch"
+            style={{
+              position: 'relative',
+              height: 'min(60vh, 540px)',
+              aspectRatio: '4 / 5',
+              maxWidth: '100%',
+              ...(media.bg ? { background: media.bg } : {}),
+            }}
+          >
+            {media.type === 'video' ? (
+              <video
+                playsInline
+                muted
+                loop
+                autoPlay
+                poster={media.poster}
+                preload="metadata"
+                aria-label={media.alt || 'Carisma Slimming Malta'}
+                style={{ width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
+              >
+                <source src={media.src} type="video/mp4" />
+              </video>
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={media.src}
+                alt={media.alt || 'Carisma Slimming Malta'}
+                style={{ width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
+              />
+            )}
+            {/* subtle bottom scrim so floating cards always read cleanly over any footage */}
+            {media.fit !== 'contain' && (
+              <span
+                aria-hidden
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  pointerEvents: 'none',
+                  background:
+                    'linear-gradient(to top, rgba(18,28,20,0.36) 0%, rgba(18,28,20,0.06) 30%, transparent 58%)',
+                }}
+              />
+            )}
+          </div>
+
+          {/* floating: rating card */}
+          <div
+            className="hero-glass hero-float"
+            style={{
+              position: 'absolute',
+              left: 'clamp(-8px, -1vw, 0px)',
+              bottom: '14%',
+              borderRadius: 16,
+              padding: '11px 15px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 10,
+              zIndex: 3,
+            }}
+          >
+            <span style={{ fontFamily: HEADING, fontSize: 28, color: SAGE_TEXT, lineHeight: 1 }}>
+              {proof?.rating || '4.9'}
+            </span>
+            <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+              <Stars size={11} />
+              <span style={{ fontFamily: BODY, fontSize: 10.5, color: TAUPE }}>{proof?.reviews || '200+'} reviews</span>
+            </span>
+          </div>
+
+          {/* floating: award / stat card */}
+          <div
+            className="hero-glass hero-float-2"
+            style={{
+              position: 'absolute',
+              right: 'clamp(-6px, -0.5vw, 4px)',
+              top: '8%',
+              borderRadius: 16,
+              padding: '10px 13px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 9,
+              maxWidth: 190,
+              zIndex: 3,
+            }}
+          >
+            {proof?.awardSrc ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={proof.awardSrc} alt="" aria-hidden style={{ height: 34, width: 'auto' }} />
+            ) : (
+              <span style={{ fontFamily: HEADING, fontSize: 22, color: SAGE_TEXT, lineHeight: 1 }}>{proof?.statValue || '30+'}</span>
+            )}
+            <span style={{ fontFamily: WIDE, fontSize: 9.5, letterSpacing: '0.06em', textTransform: 'uppercase', color: SAGE_TEXT, lineHeight: 1.35, whiteSpace: 'pre-line' }}>
+              {proof?.awardText || `${proof?.statLabel || 'years in wellness'}`}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <style>{`
+        .page-hero-grid { grid-template-columns: 1fr; }
+        .hero-pill {
+          display: inline-flex; align-items: center; gap: 7px;
+          background: rgba(255,255,255,0.7);
+          border: 1px solid rgba(95,126,102,0.18);
+          border-radius: 999px; padding: 7px 14px;
+          backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+        }
+        .hero-outline {
+          display: inline-flex; align-items: center;
+          padding: 13px 26px; border-radius: 999px;
+          border: 1.5px solid ${SAGE_TEXT}; color: ${SAGE_TEXT};
+          font-family: ${WIDE}; font-size: 12px; font-weight: 700;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          text-decoration: none; transition: background 0.2s ease, color 0.2s ease;
+        }
+        .hero-outline:hover { background: ${SAGE_TEXT}; color: #fff; }
+        @media (min-width: 900px) {
+          .page-hero-grid { grid-template-columns: 1.08fr 0.92fr; }
+          .page-hero-media { justify-self: end; }
+        }
+      `}</style>
+    </section>
+  );
+}

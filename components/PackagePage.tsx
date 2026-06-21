@@ -21,7 +21,8 @@
      11 Evidence based approach (research cards)
    ============================================================ */
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import PageHero from '@/components/PageHero';
 import { BOOKING_URL } from '@/lib/services';
 import {
   PackageContent,
@@ -56,7 +57,6 @@ const BODY = 'Roboto, sans-serif';
 
 /* ---------- shared assets ---------- */
 const W = '/wix/';
-const HERO_BG = W + '87fc13_f0e92ac188af4582a4dcab0d17d5d2ed~mv2.png';
 const BADGE = W + 'f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png';
 const GOOGLE = W + '87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png';
 const CHECK = W + '87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png';
@@ -213,21 +213,6 @@ export default function PackagePage({ content: c }: { content: PackageContent })
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [faqQuery, setFaqQuery] = useState('');
   const [openEv, setOpenEv] = useState<number | null>(null);
-  const heroVideoRef = useRef<HTMLVideoElement>(null);
-  const [heroMuted, setHeroMuted] = useState(true);
-
-  const toggleHeroSound = () => {
-    const v = heroVideoRef.current;
-    if (!v) return;
-    const next = !v.muted;
-    v.muted = next;
-    if (!next) {
-      // unmuting: make sure it is audible and playing
-      v.volume = 1;
-      void v.play().catch(() => {});
-    }
-    setHeroMuted(next);
-  };
 
   const body: React.CSSProperties = { color: TAUPE, fontFamily: BODY, fontSize: 15, lineHeight: 1.7, margin: 0 };
   const differenceBullets = c.differenceBullets ?? SHARED_DIFFERENCE_BULLETS;
@@ -239,86 +224,34 @@ export default function PackagePage({ content: c }: { content: PackageContent })
   return (
     <div style={{ backgroundColor: '#ffffff', fontFamily: BODY }}>
       {/* ===================== 1. HERO ===================== */}
-      <section style={{ ...CONTAINER, maxWidth: 1180, paddingTop: 24, paddingBottom: 24 }}>
-        <div style={{ backgroundImage: `url(${HERO_BG})`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundColor: '#f1f0eb', borderRadius: 28, padding: '48px 52px' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 48, alignItems: 'center' }} className="fr-hero-grid">
-            <div>
-              <Eyebrow align="left" size={13}>{c.heroEyebrow}</Eyebrow>
-              <h1 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 28, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', margin: '12px 0 0' }}>
-                {c.heroTitle}
-              </h1>
-              {!hidden.heroSubheading && (
-                <>
-                  <div style={{ width: 300, maxWidth: '70%', height: 1, backgroundColor: '#d9d2ca', margin: '12px 0 18px' }} />
-                  <p style={{ color: TAUPE, fontFamily: WIDE, fontWeight: 400, fontSize: 15, letterSpacing: 'normal', margin: '0 0 16px' }}>{c.heroSubheading}</p>
-                </>
-              )}
-              <p style={{ color: TAUPE, fontFamily: BODY, fontWeight: 400, fontSize: 14, lineHeight: 1.55, margin: hidden.heroSubheading ? '14px 0 22px' : '0 0 22px' }}>{c.heroDescription}</p>
+      <PageHero
+        headline={[{ text: c.heroTitle }]}
+        sub={c.heroDescription}
+        bullets={c.heroIncludes.map((t) => ({ text: t }))}
+        primaryCta={{ text: 'Claim Your Spot Now', href: BOOKING_URL, external: true }}
+        media={c.heroVideo
+          ? { type: 'video', src: c.heroVideo, poster: c.heroImage, alt: c.heroSubheading }
+          : { type: 'image', src: c.heroImage, alt: c.heroSubheading }}
+        proof={{ rating: '4.9', reviews: '200+', awardSrc: BADGE, awardText: '#1 voted clinic\nMalta' }}
+        compactHeadline
+      />
 
-              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 24px', display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {c.heroIncludes.map((it) => (
-                  <li key={it} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                    <span style={{ color: TAUPE_LT, fontSize: 18, lineHeight: 1.1, flexShrink: 0 }}>&bull;</span>
-                    <span style={{ color: TAUPE, fontFamily: BODY, fontWeight: 400, fontSize: 14 }}>{it}</span>
-                  </li>
-                ))}
-              </ul>
-
-              <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 15, letterSpacing: 'normal', margin: '0 0 2px' }}>
-                <span style={{ fontWeight: 700 }}>TOTAL VALUE:</span> {c.heroTotalValue} <span style={{ fontWeight: 700 }}>TODAY:</span> {c.heroTodayPrice}
-              </p>
-              {c.heroPriceNote && <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12, letterSpacing: 'normal', margin: '0 0 20px' }}>{c.heroPriceNote}</p>}
-
-              <div style={{ marginBottom: 16, marginTop: c.heroPriceNote ? 0 : 16 }}>
-                <CTA variant="green" wide>Claim your spot now</CTA>
-              </div>
-              <div style={{ marginBottom: 18 }}><Stars withGoogle size={22} /></div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-                {c.heroFineprint.map((f) => (
-                  <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0, maxWidth: 460 }}>{f}</p>
-                ))}
-              </div>
-            </div>
-
-            <div className="fr-hero-img" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 16 }}>
-              {c.heroVideo ? (
-                <div style={{ position: 'relative', width: '100%', maxWidth: 398 }}>
-                  {/* live hero video has a petal border-radius: 100px 15px 100px 15px */}
-                  <video ref={heroVideoRef} src={c.heroVideo} poster={c.heroImage} autoPlay muted loop playsInline aria-label={c.heroSubheading}
-                    style={{ width: '100%', maxHeight: '540px', aspectRatio: c.heroImageRatio ?? '398 / 682', objectFit: 'cover', borderRadius: '100px 15px 100px 15px', display: 'block', backgroundColor: '#dce6dc' }} />
-                  <button
-                    type="button"
-                    onClick={toggleHeroSound}
-                    aria-label={heroMuted ? 'Unmute video' : 'Mute video'}
-                    title={heroMuted ? 'Tap to hear the doctor' : 'Mute'}
-                    style={{ position: 'absolute', bottom: 12, right: 12, width: 42, height: 42, borderRadius: '50%', border: 'none', cursor: 'pointer', backgroundColor: 'rgba(40,44,40,0.66)', backdropFilter: 'blur(2px)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', padding: 0 }}
-                  >
-                    {heroMuted ? (
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                        <path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none" />
-                        <line x1="23" y1="9" x2="17" y2="15" />
-                        <line x1="17" y1="9" x2="23" y2="15" />
-                      </svg>
-                    ) : (
-                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
-                        <path d="M11 5 6 9H2v6h4l5 4z" fill="currentColor" stroke="none" />
-                        <path d="M15.54 8.46a5 5 0 0 1 0 7.07" />
-                        <path d="M19.07 4.93a10 10 0 0 1 0 14.14" />
-                      </svg>
-                    )}
-                  </button>
-                </div>
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={c.heroImage} alt={c.heroSubheading} style={{ width: '100%', maxWidth: 398, aspectRatio: c.heroImageRatio ?? '398 / 560', objectFit: 'cover', borderRadius: 18, display: 'block' }} />
-              )}
-              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={BADGE} alt="#1 Voted Clinic in Malta" style={{ width: 64, height: 'auto' }} />
-                <span style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12, letterSpacing: '1px', lineHeight: 1.3, textTransform: 'uppercase' }}>#1 Voted Clinic<br />in Malta</span>
-              </div>
-            </div>
+      {/* ===== offer band (preserves hero offer info) ===== */}
+      <section style={{ paddingTop: 8, paddingBottom: 40 }}>
+        <div style={{ ...CONTAINER, maxWidth: 760, textAlign: 'center' }}>
+          {!hidden.heroSubheading && c.heroSubheading && (
+            <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 15, margin: '0 0 14px' }}>{c.heroSubheading}</p>
+          )}
+          <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 16, margin: '0 0 4px' }}>
+            <span style={{ fontWeight: 700 }}>TOTAL VALUE:</span> {c.heroTotalValue} <span style={{ fontWeight: 700 }}>TODAY:</span> {c.heroTodayPrice}
+          </p>
+          {c.heroPriceNote && <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12, margin: '0 0 18px' }}>{c.heroPriceNote}</p>}
+          <div style={{ display: 'inline-block', marginBottom: 16 }}><CTA variant="green" wide>Claim your spot now</CTA></div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}><Stars withGoogle size={22} /></div>
+          <div>
+            {c.heroFineprint.map((f) => (
+              <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: '0 auto', maxWidth: 460 }}>{f}</p>
+            ))}
           </div>
         </div>
       </section>

@@ -1,6 +1,6 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
-import HeroVideo from '@/components/HeroVideo';
+import PageHero from '@/components/PageHero';
 import ResultsCarousel from '@/components/ResultsCarousel';
 import HowItWorks from '@/components/HowItWorks';
 import FAQAccordion from '@/components/FAQAccordion';
@@ -91,100 +91,24 @@ export default function GLP1Page() {
     <main className="w-full" style={{ backgroundColor: '#ffffff' }}>
       <JsonLd data={jsonLd} />
       {/* Hero Section */}
-      <section className="py-12 mx-auto" style={{ backgroundImage: 'url(/wix/87fc13_f0e92ac188af4582a4dcab0d17d5d2ed~mv2.png)', backgroundSize: '100% 100%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: '40px', overflow: 'hidden', maxWidth: '1340px', marginTop: '12px', marginBottom: '20px' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1240px' }}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            {/* Scrim: 0.80-alpha white backdrop guarantees >=4.5:1 for taupe/green text over the
-                hero background image (worst-case sampled backdrop rgb(136,143,132) -> taupe 4.70:1). */}
-            <div style={{ maxWidth: '510px', backgroundColor: 'rgba(255,255,255,0.80)', borderRadius: '24px', padding: '20px 24px', backdropFilter: 'blur(2px)' }}>
-              <p
-                className="mb-3 uppercase tracking-wide"
-                style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 500 }}
-              >
-                ultimate weight loss protocol in malta
-              </p>
-              <h1
-                className="mb-6 uppercase leading-tight"
-                style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', maxWidth: '400px' }}
-              >
-                GLP-1 weight loss injections in Malta &mdash; doctor-led Ozempic &amp; Mounjaro programme
-              </h1>
-              <p className="mb-4" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.7' }}>
-                Struggling with constant hunger, stalled progress, and weight that keeps coming back?
-              </p>
-              <p className="mb-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.7' }}>
-                Our programs combine full medical assessment, personalised nutrition, body composition
-                tracking, and ongoing doctor supervision with <strong style={{ fontWeight: 700 }}>Ozempic</strong> and <strong style={{ fontWeight: 700 }}>Mounjaro</strong> prescription support
-                where clinically appropriate, to help you lose fat safely and keep it off.
-              </p>
-
-              <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
-                  <span style={{ color: '#4f7256', fontWeight: 700 }}>✓</span>
-                  <span>
-                    <strong style={{ color: '#6f6456' }}>Calmer appetite:</strong> GLP-1 support mimics natural
-                    fullness signals so you feel satisfied with smaller portions and less food noise
-                  </span>
-                </li>
-                <li className="flex items-start gap-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
-                  <span style={{ color: '#4f7256', fontWeight: 700 }}>✓</span>
-                  <span>
-                    <strong style={{ color: '#6f6456' }}>Doctor monitored:</strong> Full medical assessment, body
-                    scan, blood tests, safety screening, and regular reviews to adjust your plan
-                  </span>
-                </li>
-                <li className="flex items-start gap-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
-                  <span style={{ color: '#4f7256', fontWeight: 700 }}>✓</span>
-                  <span>
-                    <strong style={{ color: '#6f6456' }}>Part of a full plan:</strong> Never Ozempic or Mounjaro
-                    alone, your plan includes nutrition structure, movement guidance, accountability, and a
-                    maintenance strategy
-                  </span>
-                </li>
-              </ul>
-
-              {/* Medication brand logos */}
-              <div className="flex items-center mb-5">
-                <img src="/wix/87fc13_9b5f8cba779d4117a4f59ffdb0f0772a~mv2.png" alt="Ozempic semaglutide injection" style={{ width: '176px', height: '51px', objectFit: 'contain' }} />
-                <img src="/wix/87fc13_7c506cd7a9324e74a89aab69b22cc67d~mv2.png" alt="Mounjaro tirzepatide" style={{ width: '152px', height: '51px', objectFit: 'contain' }} />
-              </div>
-
-              <Link
-                href="/consultation"
-                className="cta-glow block uppercase tracking-wide text-white font-bold text-center"
-                style={{ padding: '14px 20px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', width: '507px', maxWidth: '100%' }}
-              >
-                book your medical weight loss consultation
-              </Link>
-
-              {/* Google reviews */}
-              <div className="mt-7 flex items-center gap-1" style={{ paddingLeft: '40px' }}>
-                <img src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png" alt="Google" style={{ width: '23px', height: '23px', objectFit: 'contain', marginRight: '4px' }} />
-                {[0, 1, 2, 3, 4].map((i) => (
-                  <img key={i} src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png" alt="" style={{ width: '23px', height: '20px', objectFit: 'contain' }} />
-                ))}
-                <span className="ml-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
-              </div>
-
-              {/* Disclaimer */}
-              <p className="mt-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '12px', lineHeight: 1.6, maxWidth: '507px' }}>
-                * Eligibility and exact costs depend on your health, lab results, and the support you need. You will always receive a clear plan and pricing in your medical weight loss consultation before starting. <strong style={{ fontWeight: 700 }}>Important:</strong> GLP-1 medications are prescription-only and not suitable for everyone. This program is offered only after a full medical assessment by our doctor.
-              </p>
-            </div>
-
-            {/* Hero media */}
-            <div className="w-full" style={{ maxWidth: '405px', marginLeft: 'auto' }}>
-              <div
-                className="flex items-center justify-center text-center w-full overflow-hidden"
-                style={{ aspectRatio: '405 / 560', borderRadius: '30px' }}
-              >
-                <HeroVideo src="/video/hero-720p.mp4" poster="/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png" hideButton />
-              </div>
-              <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="Voted number one clinic award" style={{ width: '114px', height: '72px', objectFit: 'contain', marginTop: '15px', marginLeft: '21px' }} />
-            </div>
-          </div>
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Ultimate weight loss protocol in Malta"
+        headline={[
+          { text: 'GLP-1 Weight Loss Injections in Malta' },
+          { text: 'Doctor-Led Ozempic & Mounjaro Programme', em: true },
+        ]}
+        sub="Full medical assessment, personalised nutrition, body-composition tracking and ongoing doctor supervision — with Ozempic and Mounjaro support where clinically appropriate — to lose fat safely and keep it off."
+        bullets={[
+          { label: 'Calmer appetite:', text: 'GLP-1 support mimics natural fullness signals so you feel satisfied with smaller portions.' },
+          { label: 'Doctor monitored:', text: 'Full assessment, body scan, blood tests and regular reviews to adjust your plan.' },
+          { label: 'Part of a full plan:', text: 'Never medication alone — nutrition, movement and accountability included.' },
+        ]}
+        primaryCta={{ text: 'Book Your Consultation', href: '/consultation' }}
+        secondaryCta={{ text: 'Speak to a doctor', href: 'tel:+35627802062' }}
+        media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png', alt: 'Doctor-led GLP-1 weight loss in Malta' }}
+        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+        compactHeadline
+      />
 
       {/* Medical Weight Loss Results */}
       <ResultsCarousel />

@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import PageHero from '@/components/PageHero';
 import OutcomeStepper from './OutcomeStepper';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
@@ -24,13 +25,6 @@ const jsonLd = [
 
 const PRODUCT_URL =
   'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta';
-
-const heroFeatures = [
-  { label: 'What to eat |', text: 'and what to swap using local Maltese ingredients' },
-  { label: 'When to eat |', text: 'simple meal timing that fits your schedule' },
-  { label: '30+ recipes', text: 'built for the mediterranean kitchen' },
-  { label: 'a structure', text: 'that works around social dinners and busy days' },
-];
 
 const methodPillars = [
   {
@@ -138,7 +132,6 @@ const bodyFont = 'Roboto, sans-serif';
 // on white/light-sage backgrounds. Replaced with darker same-family hexes that clear AA/AAA.
 const GREEN = '#406042'; // deep brand sage for TEXT/headings on white & light-sage (>=4.5:1)
 const GREEN_FILL = '#4f7256'; // CTA/button solid fill — white text clears 5.42:1 (AA)
-const GREEN_BRIGHT = '#8EB093'; // bright sage — DECORATIVE ONLY (large >=24px over hero scrim / accents that clear 3:1)
 const GREEN_SAGE_LIGHT = '#C9E0CC'; // light sage for text over the scrimmed hero (>=4.5:1)
 const TAUPE = '#5f5649'; // darkened taupe for body/muted text — clears AA (>=4.92:1) on white & EVERY light-sage card on this page
 const BLUE = '#356a87'; // darkened brand blue — white CTA text clears 5.89:1 (AA)
@@ -189,134 +182,23 @@ export default function SlimmingGuidePage() {
     <main className="w-full" style={{ fontFamily: bodyFont, color: TAUPE }}>
       <JsonLd data={jsonLd} />
       <style dangerouslySetInnerHTML={{ __html: localFontCss }} />
-      {/* Hero Section — inset rounded dark-green card with wave-line banner */}
-      <section className="bg-white px-4 sm:px-6 lg:px-10 pt-4 pb-8">
-        <div
-          className="mx-auto overflow-hidden relative"
-          style={{
-            maxWidth: '1340px',
-            borderRadius: '30px',
-            background:
-              'url(/wix/f940f0_ca648db83c1542ae8daddf4032ba936d~mv2.png) center top / cover no-repeat, linear-gradient(90deg, #445648 0%, #4E6B55 60%, #6D8A72 100%)',
-          }}
-        >
-          {/* A11y scrim: guarantees >=4.5:1 for light text over the sage gradient's
-              lightest stop (#6D8A72). Worst case with 0.45 black: white 9.14, light sage 6.54,
-              E5EBE2 7.54; bright-sage h1 span (40px, large) 3.82 (>=3:1). */}
-          <div
-            className="absolute inset-0 pointer-events-none"
-            style={{ background: 'rgba(0,0,0,0.45)', zIndex: 0 }}
-          />
-          <div className="px-6 sm:px-12 lg:px-20 pt-14 relative" style={{ zIndex: 1 }}>
-            <div className="grid grid-cols-1 lg:grid-cols-[740px_1fr] gap-10 items-center">
-              {/* Left content */}
-              <div>
-                <h1
-                  className="mb-5 uppercase"
-                  style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '40px', lineHeight: '40px' }}
-                >
-                  <span style={{ color: '#FFFFFF' }}>weight loss guide malta</span>
-                  <br />
-                  {/* 40px large text → 3:1 suffices; bright sage over 0.45 scrim = 3.82:1 */}
-                  <span style={{ color: GREEN_BRIGHT }}>the slimming system built for real maltese life</span>
-                </h1>
-                <p
-                  className="mb-5 uppercase"
-                  style={{ color: GREEN_SAGE_LIGHT, fontFamily: wideFont, fontSize: '16px', lineHeight: 1.3, letterSpacing: '3.2px', maxWidth: '640px' }}
-                >
-                  Recipes, meal timing &amp; a structured plan. Designed around{' '}
-                  <strong style={{ color: '#FFFFFF' }}>the Mediterranean diet</strong>,{' '}
-                  <strong style={{ color: '#FFFFFF' }}>the festa season</strong>, &amp;{' '}
-                  <strong style={{ color: '#FFFFFF' }}>busy Maltese weeks</strong>.
-                </p>
-                <p className="mb-6" style={{ color: '#E5EBE2', fontSize: '15px', maxWidth: '590px' }}>
-                  The Carisma Slimming Guide gives you a doctor-backed system you can actually follow, no crash
-                  diets, no calorie counting.
-                </p>
-                <div className="flex flex-col gap-3 mb-7">
-                  {heroFeatures.map((f) => (
-                    <div key={f.text} className="flex items-start gap-3">
-                      <img
-                        src="/wix/87fc13_770e6750343b46b4acf0dc8bdbd35979~mv2.png"
-                        alt=""
-                        style={{ width: '20px', height: '20px', objectFit: 'contain', marginTop: '1px' }}
-                      />
-                      <p
-                        className="uppercase"
-                        style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '14px', lineHeight: 1.8, letterSpacing: '0.7px' }}
-                      >
-                        <span style={{ fontWeight: 700 }}>{f.label}</span> {f.text}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-                <p
-                  className="inline-block uppercase mb-7"
-                  style={{
-                    color: '#FFFFFF',
-                    fontFamily: wideFont,
-                    fontSize: '20px',
-                    lineHeight: '34px',
-                    letterSpacing: '1px',
-                    border: '1px solid #FFFFFF',
-                    padding: '0px 14px',
-                  }}
-                >
-                  FOR ONLY €30
-                </p>
-                <a
-                  href={PRODUCT_URL}
-                  className="cta-glow block text-center uppercase text-white mb-6"
-                  style={{
-                    backgroundColor: GREEN_FILL,
-                    borderRadius: '999px',
-                    maxWidth: '455px',
-                    padding: '14px 24px',
-                    fontFamily: wideFont,
-                    fontSize: '15px',
-                    fontWeight: 700,
-                    letterSpacing: '1.5px',
-                  }}
-                >
-                  Get Slimming Guide &nbsp;›
-                </a>
-                <GoogleReviewsRow light />
-              </div>
-
-              {/* Right - product mockup (in-flow below lg; large absolute version on desktop) */}
-              <div className="flex justify-center lg:hidden">
-                <img
-                  src="/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.png"
-                  alt="3D mockup of the Carisma Slimming Guide product (Guide 3D 01.jpg.png)"
-                  style={{ width: '100%', maxWidth: '500px', aspectRatio: '679 / 943', objectFit: 'contain' }}
-                />
-              </div>
-            </div>
-
-            {/* Awards badge + caption inside the hero card */}
-            <div className="flex flex-col items-center gap-5 pt-6 pb-10 relative" style={{ zIndex: 1 }}>
-              <img
-                src="/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png"
-                alt="Malta Healthcare, Wellness, Beauty & Best Spa Awards (Screen-Shot-2024-12-16-at-09.58_edited.p)"
-                style={{ width: '147px', height: '94px', objectFit: 'contain' }}
-              />
-              <p
-                className="uppercase"
-                style={{ color: GREEN_SAGE_LIGHT, fontFamily: bodyFont, fontSize: '14px', letterSpacing: '0.5px' }}
-              >
-                #1 Voted Clinic in Malta
-              </p>
-            </div>
-          </div>
-          {/* Large product mockup pinned over the right half of the hero card (desktop) */}
-          <img
-            src="/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.png"
-            alt=""
-            className="hidden lg:block absolute pointer-events-none"
-            style={{ left: '731px', top: '-169px', width: '735px', aspectRatio: '679 / 943', objectFit: 'contain' }}
-          />
-        </div>
-      </section>
+      <PageHero
+        eyebrow="Recipes, meal timing & a structured plan — built around Mediterranean life"
+        headline={[
+          { text: 'Weight Loss Guide Malta' },
+          { text: 'The slimming system for real Maltese life', em: true },
+        ]}
+        sub="A doctor-backed system you can actually follow — no crash diets, no calorie counting. For only €30."
+        bullets={[
+          { label: 'What to eat —', text: 'and what to swap, using local Maltese ingredients.' },
+          { label: 'When to eat —', text: 'simple meal timing that fits your schedule.' },
+          { text: '30+ recipes built for the Mediterranean kitchen.' },
+        ]}
+        primaryCta={{ text: 'Get the Slimming Guide', href: 'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta', external: true }}
+        media={{ type: 'image', src: '/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.png', alt: 'The Carisma Slimming Guide', fit: 'contain', bg: 'linear-gradient(160deg, #eef3ea 0%, #dde7d6 100%)' }}
+        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta' }}
+        compactHeadline
+      />
 
       {/* Main Narrative / Pain Point Section */}
       <section className="py-16" style={{ backgroundColor: '#FFFFFF' }}>

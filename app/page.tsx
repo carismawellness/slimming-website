@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import GoogleReviews from '@/components/GoogleReviews';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
+import PageHero from '@/components/PageHero';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | #1 Voted Slimming Clinic in Malta",
@@ -13,98 +13,36 @@ export default function Home() {
 
   return (
     <div className="w-full">
-      {/* Hero Section */}
-      <section className="relative mx-auto" style={{ minHeight: '700px', paddingTop: '40px', paddingBottom: '40px', backgroundImage: 'url(/background.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', backgroundAttachment: 'scroll', borderRadius: '30px', overflow: 'hidden', maxWidth: '1340px', marginLeft: 'auto', marginRight: 'auto', marginTop: '0px', marginBottom: '36px' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10" style={{ maxWidth: '1052px' }}>
-          <div className="grid grid-cols-1 md:grid-cols-[523px_minmax(0,1fr)] gap-12 items-stretch">
-            {/* Left Content */}
-            <div>
-              <h1 className="mb-6 leading-tight pb-6 border-b" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '28px', borderColor: '#e0e0e0', lineHeight: '1.4' }}>
-                MEDICAL WEIGHT LOSS IN MALTA<br />DOCTOR-LED SLIMMING CLINIC
-              </h1>
+      {/* Hero Section — fit-to-viewport, arch media + floating proof */}
+      <PageHero
+        headline={[
+          { text: 'Medical Weight Loss in Malta' },
+          { text: 'Doctor-Led Slimming Clinic', em: true },
+        ]}
+        sub="Lose up to 1kg a week with Malta's most comprehensive slimming program — medical weight loss, body contouring and personalised meal plans, all in one doctor-led plan."
+        bullets={[
+          { text: 'Medical weight loss assessment with prescription GLP-1 support if appropriate' },
+          { text: 'Personalised meal plan with weekly check-ins to keep you consistent' },
+          { text: 'In-clinic treatments to burn fat, tone muscle and tighten skin' },
+        ]}
+        primaryCta={{ text: 'Get Your Free Body Analysis', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
+        secondaryCta={{ text: 'Take the quiz', href: '#quiz' }}
+        media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.png', alt: 'Carisma Slimming doctor-led weight loss in Malta' }}
+        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+      />
 
-              <p className="mb-6" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px' }}>
-                <span style={{ fontWeight: '600', color: '#5a4f43' }}>LOSE UP TO 1KG A WEEK</span>
-                <span style={{ fontWeight: '250' }}> WITH MALTA'S MOST COMPREHENSIVE SLIMMING PROGRAM, COMBINING </span>
-                <span style={{ fontWeight: '600', color: '#5a4f43' }}>MEDICAL WEIGHT LOSS, BODY CONTOURING & PERSONALISED MEAL PLANS</span>
-                <span style={{ fontWeight: '250' }}> IN ONE DOCTOR-LED PLAN</span>
-              </p>
-
-              <ul className="space-y-2 mb-8">
-                <li className="flex items-center gap-1" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontWeight: '400', fontSize: '14px' }}>
-                  <span style={{ color: '#4f7256', fontSize: '18px', lineHeight: '1' }}>•</span>
-                  <span>Medical weight loss assessment with prescription GLP-1 support if appropriate</span>
-                </li>
-                <li className="flex items-center gap-1" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontWeight: '400', fontSize: '14px' }}>
-                  <span style={{ color: '#4f7256', fontSize: '18px', lineHeight: '1' }}>•</span>
-                  <span>Personalised meal plan with weekly check-ins to keep you consistent</span>
-                </li>
-                <li className="flex items-center gap-1" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontWeight: '400', fontSize: '14px' }}>
-                  <span style={{ color: '#4f7256', fontSize: '18px', lineHeight: '1' }}>•</span>
-                  <span>In-clinic slimming treatments to burn fat, tone muscles, and tighten skin</span>
-                </li>
-                <li className="flex items-center gap-1" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontWeight: '400', fontSize: '14px' }}>
-                  <span style={{ color: '#4f7256', fontSize: '18px', lineHeight: '1' }}>•</span>
-                  <span>Habit-based strength training to lose weight and protect long-term health</span>
-                </li>
-              </ul>
-
-              <h2 className="text-xl mb-6" style={{ color: '#4f7256', fontSize: '15px', fontWeight: '500', letterSpacing: '0.5px' }}>
-                FIND YOUR PERSONALISED WEIGHT LOSS PROGRAMME
-              </h2>
-              <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
-                <iframe
-                  src="https://quiz-slimming.vercel.app"
-                  style={{ width: '100%', height: '620px', border: 'none', borderRadius: '8px' }}
-                  title="Slimming Quiz"
-                />
-              </div>
-            </div>
-
-            {/* Right Side - Image and Badge */}
-            <div className="flex flex-col gap-2 relative">
-              {/* Video Container */}
-              <div className="relative z-10 mx-auto" style={{ width: '350px' }}>
-                <div
-                  className="shadow-xl overflow-hidden relative"
-                  style={{
-                    borderTopLeftRadius: '72px',
-                    borderTopRightRadius: '12px',
-                    borderBottomLeftRadius: '12px',
-                    borderBottomRightRadius: '72px',
-                    aspectRatio: '3 / 4'
-                  }}
-                >
-                  <video
-                    className="w-full h-full"
-                    style={{ objectFit: 'cover', objectPosition: 'center', display: 'block', backgroundColor: '#000' }}
-                    controls
-                    poster="/Thumbnail.png"
-                  >
-                    <source src="/IVana.mp4" type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
-                </div>
-              </div>
-
-              {/* Review Section */}
-              <div className="flex flex-col gap-3 z-10">
-                {/* Malta Award */}
-                <div className="flex items-center justify-center gap-4">
-                  <img src="/Malta.png" alt="Malta Award" style={{ height: '70px', width: 'auto', flexShrink: 0 }} />
-                  <div>
-                    <p style={{ color: '#4f7256', fontSize: '13px', fontWeight: '600', lineHeight: '1.3' }}>
-                      #1 VOTED CLINIC<br />IN MALTA 2025-2026
-                    </p>
-                  </div>
-                </div>
-
-                {/* Google Review — image already contains G + stars + "Over 200+ Reviews" */}
-                <div className="flex items-center justify-center gap-2">
-                  <img src="/Google review.png" alt="Google Review — Over 200+ Reviews" style={{ height: '32px', width: 'auto', flexShrink: 0 }} />
-                </div>
-              </div>
-            </div>
+      {/* Personalised programme quiz (relocated from hero) */}
+      <section id="quiz" className="py-14" style={{ backgroundColor: '#ffffff' }}>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '22px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+            Find Your Personalised Weight Loss Programme
+          </h2>
+          <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
+            <iframe
+              src="https://quiz-slimming.vercel.app"
+              style={{ width: '100%', height: '620px', border: 'none', borderRadius: '8px' }}
+              title="Slimming Quiz"
+            />
           </div>
         </div>
       </section>

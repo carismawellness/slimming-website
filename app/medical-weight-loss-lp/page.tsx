@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
+import PageHero from '@/components/PageHero';
 import HowItWorksTabs from './HowItWorksTabs';
 import TestimonialsSlider from './TestimonialsSlider';
 
@@ -22,7 +23,6 @@ const bodyFont = 'Roboto, sans-serif';
 // icon/accent/CTA we use the darkened sage variants that clear AA on white and
 // on the page's tinted sage gradient panels.
 const GREEN = '#456849'; // deep sage for serif HEADINGS (large >=24px). 6.31:1 white, >=3:1 on tinted panels
-const GREEN_HERO = '#456849'; // hero accents over near-white hero image (5.05:1)
 const TAUPE = '#5a5043'; // deep warm taupe for ALL body/secondary/bullet/footer text. 7.89:1 white, >=4.5:1 on #C9D8C1/#B7CBB2 panels
 const CHECK = '#4f7256'; // brand-green-text: icons, accent eyebrows, checkmarks, ratings, CTA fill. 5.42:1 white
 const BLUE = '#4f7256'; // CTA fill (was #6391AB — white text only 3.40:1, failed). Now 5.42:1 vs white text
@@ -42,12 +42,6 @@ function BlueCta({ href, children }: { href: string; children: React.ReactNode }
 }
 
 export default function MedicalWeightLossLpPage() {
-  const heroBullets = [
-    { label: 'Calmer appetite:', text: 'Mimics natural fullness signals so you feel satisfied with smaller portions and less food noise.' },
-    { label: 'Doctor monitored', text: ': Assessment, body scan, safety checks and regular reviews to manage side effects' },
-    { label: 'Part of a full plan', text: ': Never used alone, it fits into your nutrition, movement, accountability and treatment protocol.' },
-  ];
-
   const helpsWith = [
     'Appetite regulation and feeling full sooner',
     'Craving reduction and less “food noise”',
@@ -201,103 +195,48 @@ export default function MedicalWeightLossLpPage() {
       </header>
 
       {/* Hero — doctor-led medical weight loss */}
-      <section
-        className="mx-auto"
-        style={{
-          maxWidth: '1340px',
-          backgroundImage: 'url(/wix/87fc13_f0e92ac188af4582a4dcab0d17d5d2ed~mv2.png)',
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundRepeat: 'no-repeat',
-          borderRadius: '24px',
-          overflow: 'hidden',
-          paddingTop: '50px',
-          paddingBottom: '16px',
-        }}
-      >
-        <div className="mx-auto px-6 xl:px-0" style={{ maxWidth: '970px' }}>
-          <div className="grid grid-cols-1 md:grid-cols-[1fr_398px] items-start" style={{ gap: '46px' }}>
-            <div>
-              <p className="mb-2 uppercase" style={{ color: GREEN_HERO, fontFamily: wideFont, fontSize: '13px', fontWeight: 500, letterSpacing: '2px' }}>
-                ultimate weight loss protocol in malta
-              </p>
-              <h1 className="mb-5 uppercase leading-snug" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px' }}>
-                medical weight loss programme in Malta &mdash; lose fat and keep it off
-              </h1>
-              <p className="mb-3" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
-                Struggling with constant hunger, stalled progress and weight that creeps back every time you stop dieting?
-              </p>
-              <p className="mb-5" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
-                Clinician-guided weight loss combining assessment, eligibility review, nutrition, and weekly tracking to help you lose fat safely and keep it off.
-              </p>
-              <ul className="space-y-3">
-                {heroBullets.map((b) => (
-                  <li key={b.label} className="flex items-start gap-3" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                    <span style={{ color: GREEN_HERO, fontWeight: 700 }}>✓</span>
-                    <span>
-                      <strong style={{ color: TAUPE }}>{b.label}</strong>
-                      {b.text.startsWith(':') ? b.text : ` ${b.text}`}
-                    </span>
-                  </li>
-                ))}
-              </ul>
+      <PageHero
+        eyebrow="Ultimate weight loss protocol in Malta"
+        headline={[
+          { text: 'Medical Weight Loss Programme in Malta' },
+          { text: 'Lose fat and keep it off', em: true },
+        ]}
+        sub="Clinician-guided weight loss — assessment, eligibility review, nutrition and weekly tracking — to help you lose fat safely and keep it off."
+        bullets={[
+          { label: 'Calmer appetite:', text: 'mimics natural fullness signals so smaller portions satisfy.' },
+          { label: 'Doctor monitored:', text: 'assessment, body scan, safety checks and regular reviews.' },
+          { label: 'Part of a full plan:', text: 'fits your nutrition, movement and treatment protocol.' },
+        ]}
+        primaryCta={{ text: 'Book Your Consultation', href: '#book-form' }}
+        media={{ type: 'video', src: '/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png', alt: 'Medical weight loss programme in Malta' }}
+        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+        compactHeadline
+      />
 
-              {/* GoHighLevel (LeadConnector) lead form — same embedded web form
-                  as the live LP hero (filesusr 3dbfd5_1eed50f1…). */}
-              <div className="mt-6">
-                <iframe
-                  src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
-                  style={{ width: '100%', height: '814px', border: 'none', borderRadius: '8px' }}
-                  id="inline-Z3VHJCJwj5mBGmqcdmpE"
-                  data-layout="{'id':'INLINE'}"
-                  data-trigger-type="alwaysShow"
-                  data-trigger-value=""
-                  data-activation-type="alwaysActivated"
-                  data-activation-value=""
-                  data-deactivation-type="neverDeactivate"
-                  data-deactivation-value=""
-                  data-form-name="WEB FORM"
-                  data-height="751"
-                  data-layout-iframe-id="inline-Z3VHJCJwj5mBGmqcdmpE"
-                  data-form-id="Z3VHJCJwj5mBGmqcdmpE"
-                  title="WEB FORM"
-                />
-              </div>
-              <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
-            </div>
-
-            <div>
-              <div className="w-full overflow-hidden" style={{ borderRadius: '20px', aspectRatio: '398 / 569' }}>
-                <video
-                  src="/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4"
-                  poster="/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                />
-              </div>
-              <p className="mt-5" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '11px', lineHeight: 1.6 }}>
-                * Eligibility and exact costs depend on your health, lab results and the serving you need. You will always receive a clear plan and pricing in your consultation before starting. Important: medical weight management programs are observation only and not suitable for everyone. This protocol is offered only after a full medical assessment by our doctor
-              </p>
-              <div className="mt-5 flex items-center gap-3">
-                <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="Screen-Shot-2024-12-16-at-09.58.11-300x183-removebg-preview.png" style={{ width: '114px', height: '72px', objectFit: 'contain' }} />
-                <p className="uppercase" style={{ color: GREEN_HERO, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, lineHeight: 1.4, letterSpacing: '1px' }}>
-                  #1 Voted Clinic<br />in Malta
-                </p>
-              </div>
-              <div className="mt-4 flex items-center gap-2">
-                <img src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png" alt="google.png" style={{ width: '26px', height: '26px', objectFit: 'contain' }} />
-                <span className="flex items-center gap-1">
-                  {[0, 1, 2, 3, 4].map((i) => (
-                    <img key={i} src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png" alt="" style={{ width: '18px', height: '18px', objectFit: 'contain' }} />
-                  ))}
-                </span>
-                <span style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '13px' }}>Over 200+ Reviews</span>
-              </div>
-            </div>
-          </div>
+      {/* Lead form — relocated below the hero */}
+      <section id="book-form" className="py-14" style={{ backgroundColor: '#ffffff' }}>
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '24px', textTransform: 'uppercase' }}>Book your free consultation</h2>
+          {/* GoHighLevel (LeadConnector) lead form — same embedded web form
+              as the live LP hero (filesusr 3dbfd5_1eed50f1…). */}
+          <iframe
+            src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
+            style={{ width: '100%', height: '814px', border: 'none', borderRadius: '8px' }}
+            id="inline-Z3VHJCJwj5mBGmqcdmpE"
+            data-layout="{'id':'INLINE'}"
+            data-trigger-type="alwaysShow"
+            data-trigger-value=""
+            data-activation-type="alwaysActivated"
+            data-activation-value=""
+            data-deactivation-type="neverDeactivate"
+            data-deactivation-value=""
+            data-form-name="WEB FORM"
+            data-height="751"
+            data-layout-iframe-id="inline-Z3VHJCJwj5mBGmqcdmpE"
+            data-form-id="Z3VHJCJwj5mBGmqcdmpE"
+            title="WEB FORM"
+          />
+          <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
         </div>
       </section>
 

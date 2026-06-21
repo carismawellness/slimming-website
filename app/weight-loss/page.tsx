@@ -1,6 +1,7 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useState } from 'react';
+import PageHero from '@/components/PageHero';
 import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, faqPage, serviceSchema } from '@/lib/seo/schema';
@@ -142,93 +143,25 @@ function AsSeenOn() {
    1. HERO
    ============================================================ */
 function HeroSection() {
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const [started, setStarted] = useState(false);
   return (
-    <section className="relative py-16 lg:py-20 mx-auto" style={{ backgroundImage: 'url(/background.png)', backgroundSize: 'cover', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: '48px', overflow: 'hidden', maxWidth: '1280px', marginTop: '20px', marginBottom: '20px' }}>
-      {/* Accessibility scrim — guarantees text-over-image contrast. The hero art is a light sage
-          wash (darkest pixel #D5DFCE); a 0.55 white veil lifts the effective background to ~#ecf1e9
-          so taupe body text clears 5.04:1 and green headings clear 4.73:1 (both AA, worst case). */}
-      <div aria-hidden="true" className="absolute inset-0" style={{ backgroundColor: 'rgba(255,255,255,0.55)', pointerEvents: 'none' }} />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Left — copy */}
-          <div>
-            <h1 className="mb-5 pb-4" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.1, letterSpacing: '1px', textTransform: 'uppercase', borderBottom: '1px solid #cdd8c8' }}>
-              Medical Weight Loss in Malta.<br />Doctor-Led. Results Guaranteed.
-            </h1>
-            <p className="mb-6" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase', lineHeight: 1.5 }}>
-              With Malta&apos;s most comprehensive, medically guided slimming program
-            </p>
-            <p className="mb-6" style={pStyle}>
-              Personalised programs that combine medical-grade analysis and prescription stack, nutrition plan, internationally renowned body sculpting modalities and weekly check-ins to help you achieve your target weight and stick to it.
-            </p>
-            <p className="mb-2" style={pStyle}>
-              We are so confident in our programs that we offer an extended care commitment results:
-            </p>
-            <ul className="mb-5 space-y-1">
-              {['5kgs in 6 weeks', '10kgs in 12 weeks', '20kgs in 20 weeks'].map((t) => (
-                <li key={t} className="flex items-start gap-2" style={pStyle}>
-                  <span style={bullet}>&bull;</span>
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
-            <p className="mb-8" style={pStyle}>
-              If you do not hit your agreed target, we keep treating you for free.
-            </p>
-            <CTAButton label="GET YOUR FREE BODY ANALYSIS" />
-            <div className="mt-6 flex items-center gap-3">
-              <img src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png" alt="Google" style={{ height: '23px', width: 'auto', objectFit: 'contain' }} />
-              <span style={{ color: green, fontSize: '16px', letterSpacing: '2px' }}>&#9733;&#9733;&#9733;&#9733;&#9733;</span>
-              <span style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
-            </div>
-            <div className="mt-8 space-y-1" style={{ color: taupeLight, fontFamily: bodyFont, fontSize: '12px', lineHeight: 1.6 }}>
-              <p>*Includes 3 appointments of fat freezing sessions, scheduled based on your clinical plan; additional areas or appointments charged at extra.</p>
-              <p>** Sessions may be spaced over multiple weeks depending on area and suitability</p>
-              <p>***Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.</p>
-            </div>
-          </div>
-
-          {/* Right — video frame + awards */}
-          <div className="flex flex-col items-center gap-6">
-            <div className="relative w-full" style={{ maxWidth: '420px' }}>
-              <div className="overflow-hidden shadow-lg" style={{ aspectRatio: '4 / 5', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}>
-                <video
-                  ref={videoRef}
-                  src="/video/hero-720p.mp4"
-                  poster="/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png"
-                  controls={started}
-                  playsInline
-                  preload="metadata"
-                  onPlay={() => setStarted(true)}
-                  style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', backgroundColor: '#000' }}
-                />
-              </div>
-              {!started && (
-                <button
-                  type="button"
-                  onClick={() => videoRef.current?.play()}
-                  className="absolute inset-0 flex items-center justify-center"
-                  style={{ cursor: 'pointer', background: 'transparent', border: 0 }}
-                  aria-label="Play video"
-                >
-                  <span className="flex items-center justify-center rounded-full" style={{ width: '64px', height: '64px', backgroundColor: 'rgba(255,255,255,0.85)' }}>
-                    <span style={{ marginLeft: '5px', width: 0, height: 0, borderLeft: '18px solid #4f7256', borderTop: '11px solid transparent', borderBottom: '11px solid transparent' }} />
-                  </span>
-                </button>
-              )}
-            </div>
-            <div className="flex items-center gap-3">
-              <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="Malta Healthcare, Wellness, Beauty & Best Spa Awards" style={{ height: '54px', width: 'auto', objectFit: 'contain' }} />
-              <p style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>
-                #1 Voted Clinic<br />in Malta
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      <PageHero
+        eyebrow="Malta's most comprehensive, medically guided slimming program"
+        headline={[
+          { text: 'Medical Weight Loss in Malta.' },
+          { text: 'Doctor-Led. Results Guaranteed.', em: true },
+        ]}
+        sub="Personalised programs combining medical-grade analysis, prescription support, nutrition and body sculpting with weekly check-ins — to help you hit your target weight and keep it off."
+        bullets={[
+          { text: '5kg in 6 weeks' },
+          { text: '10kg in 12 weeks' },
+          { text: '20kg in 20 weeks — or we keep treating you free' },
+        ]}
+        primaryCta={{ text: 'Get Your Free Body Analysis', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
+        secondaryCta={{ text: 'Speak to a doctor', href: 'tel:+35627802062' }}
+        media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png', alt: 'Carisma medical weight loss in Malta' }}
+        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+        compactHeadline
+      />
   );
 }
 
