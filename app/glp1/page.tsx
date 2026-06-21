@@ -1,10 +1,13 @@
 import { Metadata } from 'next';
 import Link from 'next/link';
+import dynamic from 'next/dynamic';
 import PageHero from '@/components/PageHero';
-import ResultsCarousel from '@/components/ResultsCarousel';
-import HowItWorks from '@/components/HowItWorks';
-import FAQAccordion from '@/components/FAQAccordion';
-import EvidenceCards from '@/components/EvidenceCards';
+
+// Lazy-load below-fold components to reduce initial JS bundle
+const ResultsCarousel = dynamic(() => import('@/components/ResultsCarousel'));
+const HowItWorks     = dynamic(() => import('@/components/HowItWorks'));
+const FAQAccordion   = dynamic(() => import('@/components/FAQAccordion'));
+const EvidenceCards  = dynamic(() => import('@/components/EvidenceCards'));
 import { JsonLd } from '@/lib/seo/JsonLd';
 import {
   SITE_URL,
@@ -113,7 +116,7 @@ export default function GLP1Page() {
         ]}
         primaryCta={{ text: 'Book Your Consultation', href: '/consultation' }}
         secondaryCta={{ text: 'Speak to a doctor', href: 'tel:+35627802062' }}
-        media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png', alt: 'Doctor-led GLP-1 weight loss in Malta' }}
+        media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/glp1-hero.webp', alt: 'Doctor-led GLP-1 weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />

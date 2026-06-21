@@ -96,8 +96,12 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        {/* Preload the hero video poster for LCP optimisation */}
-        <link rel="preload" as="image" href="/Thumbnail.png" fetchPriority="high" />
+        {/* Hero poster — inline img in PageHero server component is the LCP element;
+            this preload fires simultaneously to ensure zero extra RTT */}
+        <link rel="preload" as="image" href="/Thumbnail.webp" fetchPriority="high" type="image/webp" />
+        {/* Preconnect to speed up third-party origins */}
+        <link rel="preconnect" href="https://link.msgsndr.com" />
+        <link rel="dns-prefetch" href="https://link.msgsndr.com" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

@@ -45,7 +45,7 @@ export default function Home() {
         ]}
         primaryCta={{ text: 'Get Your Free Body Analysis', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
         secondaryCta={{ text: 'Take the quiz', href: '#quiz' }}
-        media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.png', alt: 'Carisma Slimming doctor-led weight loss in Malta' }}
+        media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.webp', alt: 'Carisma Slimming doctor-led weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
         motif

@@ -318,8 +318,21 @@ export default function PageHero({
             }}
           >
             {media.type === 'video' ? (
-              // Click-to-play with play + sound buttons (no autoplay; full volume on play).
-              <HeroVideoPlayer src={media.src} poster={media.poster} alt={media.alt} fit={media.fit || 'cover'} />
+              // Server-render the poster as the LCP element so the browser fetches
+              // it in the initial HTML (before JS hydrates). HeroVideoPlayer overlays
+              // the play button and, on click, replaces this with the video.
+              <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 'inherit', overflow: 'hidden' }}>
+                {/* LCP anchor — rendered by server, correct preload injected by next/image */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={media.poster || '/Thumbnail.webp'}
+                  alt={media.alt || 'Carisma Slimming Malta'}
+                  fetchPriority="high"
+                  decoding="async"
+                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
+                />
+                <HeroVideoPlayer src={media.src} poster={media.poster} alt={media.alt} fit={media.fit || 'cover'} />
+              </div>
             ) : (
               <>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
