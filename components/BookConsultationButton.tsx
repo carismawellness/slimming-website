@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function BookConsultationButton({
-  children = 'Book Free Consultation',
+  children = 'Free Body Analysis',
   className = '',
   variant = 'outline',
   style,
