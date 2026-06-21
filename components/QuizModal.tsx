@@ -1,12 +1,14 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import SlimmingQuiz from './quiz/SlimmingQuiz';
 
 export const QUIZ_MODAL_EVENT = 'openQuizModal';
 
 /**
- * Popup modal that embeds the personalised weight-loss quiz
- * (https://quiz-slimming.vercel.app).
+ * Popup modal that hosts the NATIVE, on-brand personalised weight-loss quiz
+ * (components/quiz/SlimmingQuiz). On completion the quiz navigates to
+ * /quiz-results and closes this modal.
  *
  * Opens via:
  *  - a custom `openQuizModal` window event, OR
@@ -16,7 +18,7 @@ export const QUIZ_MODAL_EVENT = 'openQuizModal';
  *
  * Mirrors ConsultationModal: dialog semantics, ESC + backdrop close, focus moved
  * into the dialog on open and restored to the trigger on close, Tab trap across
- * the dialog's own focusable boundary (the quiz is a cross-origin iframe).
+ * the dialog's own focusable elements.
  */
 export default function QuizModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -105,61 +107,52 @@ export default function QuizModal() {
       {/* Panel */}
       <div
         ref={panelRef}
-        className="relative z-10 w-full overflow-hidden"
-        style={{ maxWidth: '640px', borderRadius: '20px', boxShadow: '0 32px 80px rgba(0,0,0,0.28)', background: '#fff' }}
+        className="relative z-10 w-full"
+        style={{ maxWidth: '600px', borderRadius: '22px', boxShadow: '0 32px 80px rgba(0,0,0,0.28)', background: '#fff' }}
       >
-        {/* Header bar */}
+        {/* Brand eyebrow + close (slim, replaces the heavy green header bar) */}
         <div
-          className="flex items-center justify-between px-6 py-4"
-          style={{ background: 'linear-gradient(135deg,#4f7256,#3a5a40)' }}
+          className="flex items-center justify-between"
+          style={{ padding: '16px 22px 0' }}
         >
           <p
             style={{
-              color: '#fff',
+              color: '#4f7256',
               fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif",
-              fontSize: '13px',
+              fontSize: '11px',
               letterSpacing: '2px',
               textTransform: 'uppercase',
               margin: 0,
             }}
           >
-            Find Your Personalised Programme
+            Carisma Slimming · Your Plan
           </p>
           <button
             ref={closeBtnRef}
             onClick={() => setIsOpen(false)}
-            aria-label="Close"
-            className="focus-on-dark"
+            aria-label="Close quiz"
             style={{
-              background: 'none',
+              background: '#F0F4EE',
               border: 'none',
-              color: '#fff',
+              color: '#4f7256',
               cursor: 'pointer',
-              padding: '4px',
-              opacity: 0.85,
-              transition: 'opacity 0.2s',
-              display: 'flex',
+              padding: '6px',
+              borderRadius: '999px',
+              display: 'inline-flex',
               alignItems: 'center',
+              justifyContent: 'center',
+              lineHeight: 0,
             }}
           >
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />
               <line x1="6" y1="6" x2="18" y2="18" />
             </svg>
           </button>
         </div>
 
-        {/* Quiz */}
-        <div style={{ overflowY: 'auto', maxHeight: '80vh' }}>
-          {hasOpened && (
-            <iframe
-              src="https://quiz-slimming.vercel.app"
-              style={{ width: '100%', height: '640px', border: 'none', display: 'block' }}
-              title="Personalised weight loss programme quiz"
-              aria-label="Personalised weight loss programme quiz"
-            />
-          )}
-        </div>
+        {/* Native quiz */}
+        {hasOpened && <SlimmingQuiz onClose={() => setIsOpen(false)} />}
       </div>
     </div>
   );

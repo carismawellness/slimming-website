@@ -165,19 +165,21 @@ function getRecommendations(
 }
 
 /* ── Page ─────────────────────────────────────────────────────────────── */
-export default function SlimmingQuizResultsPage({
+export default async function SlimmingQuizResultsPage({
   searchParams,
 }: {
-  searchParams: { goals?: string; areas?: string; medication?: string; name?: string };
+  // Next.js 16: searchParams is a Promise and must be awaited before use.
+  searchParams: Promise<{ goals?: string; areas?: string; medication?: string; name?: string }>;
 }) {
-  const selectedGoals = searchParams.goals
-    ? searchParams.goals.split(',').map((g) => decodeURIComponent(g.trim()))
+  const sp = await searchParams;
+  const selectedGoals = sp.goals
+    ? sp.goals.split(',').map((g) => decodeURIComponent(g.trim()))
     : [];
-  const selectedAreas = searchParams.areas
-    ? searchParams.areas.split(',').map((a) => decodeURIComponent(a.trim()))
+  const selectedAreas = sp.areas
+    ? sp.areas.split(',').map((a) => decodeURIComponent(a.trim()))
     : [];
-  const medication = searchParams.medication ?? '';
-  const firstName  = searchParams.name ?? '';
+  const medication = sp.medication ?? '';
+  const firstName  = sp.name ?? '';
 
   const recs = getRecommendations(selectedGoals, selectedAreas, medication);
 
