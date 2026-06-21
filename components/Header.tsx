@@ -216,7 +216,7 @@ export default function Header() {
               <PhoneIcon />
               <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px' }}>27802062</span>
             </a>
-            <Link href="/consultation" className="cta-glow" style={ctaStyle}>Free Body Composition Analysis</Link>
+            <button className="cta-glow" style={{ ...ctaStyle, border: 'none', cursor: 'pointer' }} onClick={() => window.dispatchEvent(new Event('openConsultationModal'))}>Free Body Composition Analysis</button>
           </div>
 
           {/* Mobile hamburger */}
@@ -315,14 +315,13 @@ export default function Header() {
               <PhoneIcon />
               <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '16px', fontWeight: 600, letterSpacing: '0.5px' }}>27802062</span>
             </a>
-            <Link
-              href="/consultation"
-              onClick={() => setOpen(false)}
-              className="cta-glow block text-center"
-              style={{ ...ctaStyle, marginTop: '10px', padding: '14px', fontSize: '13px' }}
+            <button
+              className="cta-glow block text-center w-full"
+              style={{ ...ctaStyle, marginTop: '10px', padding: '14px', fontSize: '13px', border: 'none', cursor: 'pointer' }}
+              onClick={() => { setOpen(false); window.dispatchEvent(new Event('openConsultationModal')); }}
             >
               Free Body Composition Analysis
-            </Link>
+            </button>
           </div>
         </div>
       )}

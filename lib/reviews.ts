@@ -1,6 +1,12 @@
-// Slimming clinic reviews — Google + Fresha combined.
-// Google Place ID: ChIJb8mnDlFNDhMReGUGioZvbCY (Carisma Slimming, Floriana)
-// All reviews are slimming-specific. Previous data incorrectly referenced Carisma Aesthetics.
+// Carisma Slimming — REAL Google reviews for the slimming clinic.
+//
+// Data source: the clinic's verified Google Business Profile (place ID below),
+// captured by the Cockpit reviews ETL. These are genuine customer reviews — no
+// fabricated names, copy, or dates. The relative date ("x weeks ago") is computed
+// dynamically from each review's publish timestamp, so it never goes stale.
+//
+// Slimming clinic Google place ID: ChIJgVdYYmhFDhMR8oSHh_7gYX4
+// (NOTE: the previous ChIJb8mnDlFNDhMReGUGioZvbCY pointed at a Spa location — fixed.)
 
 export type ReviewSource = 'google' | 'fresha';
 
@@ -9,24 +15,28 @@ export type Review = {
   name: string;
   /** Two-letter initials shown in the avatar circle */
   initials: string;
-  /** AA-compliant fill colour for the avatar (white text must clear 4.5:1) */
+  /** AA-compliant fill colour for the avatar (white text clears 4.5:1) */
   avatarColor: string;
   rating: number;
   text: string;
-  date: string;
+  /** ISO publish timestamp — relative date is computed from this at render. */
+  publishedAt: string;
+  /** Opens the review at its source (the clinic's Google reviews listing). */
+  sourceUrl: string;
   source: ReviewSource;
-  // Legacy alias used by older components — keep for backward-compat
+  // Legacy aliases kept for backward-compat with older components.
   initial?: string;
+  date?: string;
   when?: string;
 };
 
-// Opens the slimming clinic's Google listing.
-export const GOOGLE_PROFILE_URL =
-  'https://search.google.com/local/reviews?placeid=ChIJb8mnDlFNDhMReGUGioZvbCY';
+const PLACE_ID = 'ChIJgVdYYmhFDhMR8oSHh_7gYX4';
+
+// The clinic's Google reviews listing — used as each review's "source" link.
+export const GOOGLE_PROFILE_URL = `https://search.google.com/local/reviews?placeid=${PLACE_ID}`;
 // Direct "leave a review" link.
-export const GOOGLE_WRITE_REVIEW_URL =
-  'https://search.google.com/local/writereview?placeid=ChIJb8mnDlFNDhMReGUGioZvbCY';
-// Fresha booking / review page for the slimming clinic.
+export const GOOGLE_WRITE_REVIEW_URL = `https://search.google.com/local/writereview?placeid=${PLACE_ID}`;
+// Fresha booking page for the slimming clinic.
 export const FRESHA_PROFILE_URL =
   'https://www.fresha.com/a/carisma-slimming-floriana-great-siege-road-wxxyuj9p?pId=2708191';
 
@@ -35,142 +45,85 @@ export const AGGREGATE = { rating: '4.9', count: '800+' };
 /** @deprecated Use AGGREGATE instead */
 export const REVIEW_SUMMARY = { rating: 4.9, total: 800 };
 
+/**
+ * Convert an ISO timestamp to a Google-style relative date ("x weeks ago").
+ * Computed at render so reviews always read as fresh, never outdated.
+ */
+export function relativeDate(iso: string): string {
+  const then = new Date(iso).getTime();
+  if (Number.isNaN(then)) return '';
+  const days = Math.max(0, Math.floor((Date.now() - then) / 86_400_000));
+  if (days <= 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 7) return `${days} days ago`;
+  const weeks = Math.floor(days / 7);
+  if (weeks < 5) return weeks === 1 ? 'a week ago' : `${weeks} weeks ago`;
+  const months = Math.floor(days / 30);
+  if (months < 12) return months === 1 ? 'a month ago' : `${months} months ago`;
+  const years = Math.floor(days / 365);
+  return years === 1 ? 'a year ago' : `${years} years ago`;
+}
+
+// ── Real Google reviews (verbatim, slimming clinic) ─────────────────────────
 export const SLIMMING_REVIEWS: Review[] = [
-  // ── Google reviews (slimming-specific) ───────────────────────────────────
   {
-    id: 'g1',
-    name: 'Melissa C.',
-    initials: 'MC',
-    initial: 'M',
-    avatarColor: '#6391AB',
-    rating: 5,
-    text: 'The programme changed my life. I lost 14kg over 3 months with constant doctor support. The approach is medical and structured — not just another diet.',
-    date: '1 week ago',
-    when: '1 week ago',
-    source: 'google',
-  },
-  {
-    id: 'g2',
-    name: 'Angela P.',
-    initials: 'AP',
-    initial: 'A',
+    id: 'g-italia-le',
+    name: 'Italia Le',
+    initials: 'IL',
+    initial: 'I',
     avatarColor: '#4f7256',
     rating: 5,
-    text: 'Doctor Teebi is exceptional. He took the time to understand my full medical history and designed a safe, personalised plan. Already down 6kg in five weeks.',
-    date: '2 weeks ago',
-    when: '2 weeks ago',
+    text: "I bought a package for a treatment and I met Brunna. She is amazing, knowledgeable and kind, and really made the difference to the experience. This type of treatments works well, because of the operator's skill and capability. I already purchased another package so I highly recommended.",
+    publishedAt: '2026-05-22T13:13:26Z',
+    sourceUrl: GOOGLE_PROFILE_URL,
     source: 'google',
   },
   {
-    id: 'g3',
-    name: 'Karen B.',
-    initials: 'KB',
-    initial: 'K',
-    avatarColor: '#978063',
-    rating: 5,
-    text: 'I had tried every diet before coming here. This is the first time I actually understood why I was struggling and got real, evidence-based medical help. Highly recommend.',
-    date: '3 weeks ago',
-    when: '3 weeks ago',
-    source: 'google',
-  },
-  {
-    id: 'g4',
-    name: 'Daniela M.',
-    initials: 'DM',
-    initial: 'D',
+    id: 'g-lorraine-galea',
+    name: 'Lorraine Galea',
+    initials: 'LG',
+    initial: 'L',
     avatarColor: '#124E59',
     rating: 5,
-    text: 'Lost 9kg in 8 weeks. The Mounjaro prescription plus the nutrition plan worked incredibly well together. The staff are caring and completely professional.',
-    date: '1 month ago',
-    when: '1 month ago',
+    text: "I'm having a great experience with Carisma Slimming. The team is professional, understanding, and truly focused on my personal goals, guiding me in a way that feels supportive and tailored. A special thank you to Diana, who is a sweetheart during my appointments and always makes me feel comfortable.",
+    publishedAt: '2026-03-02T17:01:58Z',
+    sourceUrl: GOOGLE_PROFILE_URL,
     source: 'google',
   },
   {
-    id: 'g5',
-    name: 'Francesca Z.',
-    initials: 'FZ',
+    id: 'g-fernanda-muniz',
+    name: 'Fernanda Muniz',
+    initials: 'FM',
     initial: 'F',
+    avatarColor: '#024C27',
+    rating: 5,
+    text: 'very nice place with very nice treatment; Dr Anni Casotti was super attentive, care and kind to explain everything clearly!',
+    publishedAt: '2026-02-20T16:07:15Z',
+    sourceUrl: GOOGLE_PROFILE_URL,
+    source: 'google',
+  },
+  {
+    id: 'g-priscila-guedes',
+    name: 'Priscila Guedes',
+    initials: 'PG',
+    initial: 'P',
     avatarColor: '#6f6456',
     rating: 5,
-    text: 'Weekly check-ins, a personalised meal plan, body composition scans — everything is tracked and adjusted. I felt safe and supported throughout. Best decision I made.',
-    date: '5 days ago',
-    when: '5 days ago',
+    text: 'I had already had some procedures done at the clinic, and the last time I went, Anne take care of me and she was very attentive and professional. I have another appointment scheduled for soon and I hope I will enjoy it too.',
+    publishedAt: '2026-02-20T15:33:36Z',
+    sourceUrl: GOOGLE_PROFILE_URL,
     source: 'google',
   },
   {
-    id: 'g6',
-    name: 'Joanna V.',
-    initials: 'JV',
-    initial: 'J',
-    avatarColor: '#5f7a89',
-    rating: 5,
-    text: 'The team genuinely cares. From the first consultation I felt heard, not judged. The GLP-1 treatment was explained fully and monitored at every step. Down 11kg now.',
-    date: '2 weeks ago',
-    when: '2 weeks ago',
-    source: 'google',
-  },
-  // ── Fresha reviews ───────────────────────────────────────────────────────
-  {
-    id: 'f1',
-    name: 'Maria B.',
-    initials: 'MB',
+    id: 'g-mavis-sammut',
+    name: 'Mavis Sammut',
+    initials: 'MS',
     initial: 'M',
-    avatarColor: '#637b6a',
+    avatarColor: '#5a5043',
     rating: 5,
-    text: 'Lost 8kg in 6 weeks. The programme is structured and the team is so supportive. Katya checks in every week. Highly recommend!',
-    date: '2 weeks ago',
-    when: '2 weeks ago',
-    source: 'fresha',
-  },
-  {
-    id: 'f2',
-    name: 'Christine V.',
-    initials: 'CV',
-    initial: 'C',
-    avatarColor: '#97697d',
-    rating: 5,
-    text: 'Finally found a programme that actually works. Dr Teebi is brilliant and the personalised meal plan made all the difference.',
-    date: '1 month ago',
-    when: '1 month ago',
-    source: 'fresha',
-  },
-  {
-    id: 'f3',
-    name: 'Sandra M.',
-    initials: 'SM',
-    initial: 'S',
-    avatarColor: '#7b728e',
-    rating: 5,
-    text: 'I have tried everything before. This is the only place that took my health seriously and gave me a real plan. Down 12kg and still going.',
-    date: '3 weeks ago',
-    when: '3 weeks ago',
-    source: 'fresha',
-  },
-  {
-    id: 'f4',
-    name: 'Elaine F.',
-    initials: 'EF',
-    initial: 'E',
-    avatarColor: '#906d64',
-    rating: 5,
-    text: 'The body composition scan at the start was eye-opening. The weekly check-ins keep me accountable. Amazing team — I genuinely look forward to my appointments.',
-    date: '1 month ago',
-    when: '1 month ago',
-    source: 'fresha',
-  },
-  {
-    id: 'f5',
-    name: 'Joanna C.',
-    initials: 'JC',
-    initial: 'J',
-    avatarColor: '#5f7a89',
-    rating: 5,
-    text: 'Ozempic was prescribed as part of a full programme, not just handed over. I felt completely safe and supported the whole way through.',
-    date: '5 days ago',
-    when: '5 days ago',
-    source: 'fresha',
+    text: "I'd lost weight and I was proud of it, but I still didn't feel fully confident because my skin didn't look as firm as I wanted. I was nervous skin tightening would be uncomfortable, but it honestly just felt like a warm, deep massage. After just a couple of sessions I could already see my skin looking tighter and smoother — a really natural-looking upgrade to the results I'd already worked for.",
+    publishedAt: '2026-02-11T11:35:49Z',
+    sourceUrl: GOOGLE_PROFILE_URL,
+    source: 'google',
   },
 ];
-
-/** @deprecated Use SLIMMING_REVIEWS instead */
-export const CURATED_REVIEWS: Review[] = SLIMMING_REVIEWS;

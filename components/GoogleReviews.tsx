@@ -1,13 +1,16 @@
 'use client';
 
-/* Horizontal auto-scrolling marquee of Google + Fresha reviews.
-   Two rows: top scrolls left→right, bottom scrolls right→left.
-   Cards pause on hover. Respects prefers-reduced-motion. */
+/* Auto-scrolling marquee of the clinic's REAL Google reviews (single row).
+   Each card links to the review at its source. Dates are computed live from
+   each review's publish time, so they never go stale. Pauses on hover.
+   Respects prefers-reduced-motion. */
 
 import {
   SLIMMING_REVIEWS,
   AGGREGATE,
   GOOGLE_WRITE_REVIEW_URL,
+  GOOGLE_PROFILE_URL,
+  relativeDate,
   type Review,
 } from '@/lib/reviews';
 
@@ -34,15 +37,6 @@ function GoogleG({ size = 18 }: { size?: number }) {
   );
 }
 
-function FreshaF({ size = 18 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-label="Fresha" role="img">
-      <circle cx="12" cy="12" r="12" fill="#007963" />
-      <text x="12" y="17" textAnchor="middle" fontFamily="sans-serif" fontSize="14" fontWeight="700" fill="#ffffff">f</text>
-    </svg>
-  );
-}
-
 function Stars({ rating = 5, size = 14 }: { rating?: number; size?: number }) {
   return (
     <span style={{ display: 'inline-flex', gap: 1 }} aria-label={`${rating} out of 5 stars`}>
@@ -57,7 +51,11 @@ function Stars({ rating = 5, size = 14 }: { rating?: number; size?: number }) {
 
 function ReviewCard({ r }: { r: Review }) {
   return (
-    <div
+    <a
+      href={r.sourceUrl}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Read ${r.name}'s review on Google`}
       style={{
         flexShrink: 0,
         width: 300,
@@ -69,9 +67,11 @@ function ReviewCard({ r }: { r: Review }) {
         flexDirection: 'column',
         gap: 10,
         margin: '0 10px',
+        textDecoration: 'none',
+        color: 'inherit',
       }}
     >
-      {/* Header: avatar + name + source badge */}
+      {/* Header: avatar + name + date + Google badge */}
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
         <span
           style={{
@@ -107,15 +107,20 @@ function ReviewCard({ r }: { r: Review }) {
           >
             {r.name}
           </p>
-          <p style={{ margin: 0, fontFamily: BODY, fontSize: 11, color: TAUPE_LT }}>{r.date}</p>
+          <p
+            style={{ margin: 0, fontFamily: BODY, fontSize: 11, color: TAUPE_LT }}
+            suppressHydrationWarning
+          >
+            {relativeDate(r.publishedAt)}
+          </p>
         </div>
-        {r.source === 'google' ? <GoogleG size={18} /> : <FreshaF size={18} />}
+        <GoogleG size={18} />
       </div>
 
       {/* Stars */}
       <Stars rating={r.rating} size={14} />
 
-      {/* Review text — 3-line clamp */}
+      {/* Review text — 4-line clamp */}
       <p
         style={{
           margin: 0,
@@ -124,32 +129,22 @@ function ReviewCard({ r }: { r: Review }) {
           color: TAUPE,
           lineHeight: 1.6,
           display: '-webkit-box',
-          WebkitLineClamp: 3,
+          WebkitLineClamp: 4,
           WebkitBoxOrient: 'vertical',
           overflow: 'hidden',
         }}
       >
         {r.text}
       </p>
-    </div>
+    </a>
   );
 }
 
 // ── Marquee row ───────────────────────────────────────────────────────────
 
-function MarqueeRow({
-  reviews,
-  direction,
-  duration,
-}: {
-  reviews: Review[];
-  direction: 'left' | 'right';
-  duration: number;
-}) {
-  // Duplicate for seamless looping
+function MarqueeRow({ reviews, duration }: { reviews: Review[]; duration: number }) {
+  // Duplicate for seamless looping.
   const doubled = [...reviews, ...reviews];
-  const animName = direction === 'left' ? 'slimming-marquee-left' : 'slimming-marquee-right';
-
   return (
     <div style={{ overflow: 'hidden', width: '100%' }}>
       <div
@@ -157,10 +152,9 @@ function MarqueeRow({
         style={{
           display: 'flex',
           width: 'max-content',
-          animation: `${animName} ${duration}s linear infinite`,
+          animation: `slimming-marquee-left ${duration}s linear infinite`,
           paddingBottom: 4,
         }}
-        data-direction={direction}
       >
         {doubled.map((r, i) => (
           <ReviewCard key={`${r.id}-${i}`} r={r} />
@@ -175,9 +169,6 @@ function MarqueeRow({
 export default function GoogleReviews() {
   const { rating, count } = AGGREGATE;
 
-  const row1 = SLIMMING_REVIEWS.slice(0, 6);
-  const row2 = [...SLIMMING_REVIEWS].reverse();
-
   return (
     <section
       style={{ background: '#F2F6EF', padding: '64px 0 56px' }}
@@ -188,21 +179,13 @@ export default function GoogleReviews() {
           from { transform: translateX(0); }
           to   { transform: translateX(-50%); }
         }
-        @keyframes slimming-marquee-right {
-          from { transform: translateX(-50%); }
-          to   { transform: translateX(0); }
-        }
-        .slimming-marquee-track:hover {
-          animation-play-state: paused;
-        }
+        .slimming-marquee-track:hover { animation-play-state: paused; }
         @media (prefers-reduced-motion: reduce) {
-          .slimming-marquee-track {
-            animation: none !important;
-          }
+          .slimming-marquee-track { animation: none !important; }
         }
       `}</style>
 
-      {/* Aggregate bar */}
+      {/* Aggregate bar — real Google rating + count */}
       <div
         className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
         style={{ marginBottom: 36, textAlign: 'center' }}
@@ -224,32 +207,27 @@ export default function GoogleReviews() {
           <div>
             <Stars rating={5} size={20} />
             <p style={{ margin: '4px 0 0', fontFamily: BODY, fontSize: 12.5, color: TAUPE_LT }}>
-              {count} verified reviews &nbsp;·&nbsp;{' '}
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                <GoogleG size={14} />
-                <span style={{ fontFamily: BODY, fontSize: 12.5 }}>
-                  <span style={{ color: '#4285F4' }}>G</span><span style={{ color: '#EA4335' }}>o</span><span style={{ color: '#FBBC05' }}>o</span><span style={{ color: '#4285F4' }}>g</span><span style={{ color: '#34A853' }}>l</span><span style={{ color: '#EA4335' }}>e</span>
+              <a
+                href={GOOGLE_PROFILE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5 }}
+              >
+                {count} reviews on{' '}
+                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                  <GoogleG size={14} />
+                  <span style={{ fontFamily: BODY, fontSize: 12.5 }}>
+                    <span style={{ color: '#4285F4' }}>G</span><span style={{ color: '#EA4335' }}>o</span><span style={{ color: '#FBBC05' }}>o</span><span style={{ color: '#4285F4' }}>g</span><span style={{ color: '#34A853' }}>l</span><span style={{ color: '#EA4335' }}>e</span>
+                  </span>
                 </span>
-              </span>
-              {' '}&nbsp;+&nbsp;{' '}
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                <FreshaF size={14} />
-                <span style={{ fontFamily: BODY, fontSize: 12.5, color: '#007963', fontWeight: 600 }}>Fresha</span>
-              </span>
+              </a>
             </p>
           </div>
         </div>
       </div>
 
-      {/* Row 1 — scrolls left */}
-      <div style={{ marginBottom: 14 }}>
-        <MarqueeRow reviews={row1} direction="left" duration={38} />
-      </div>
-
-      {/* Row 2 — scrolls right */}
-      <div>
-        <MarqueeRow reviews={row2} direction="right" duration={44} />
-      </div>
+      {/* Real reviews — single row */}
+      <MarqueeRow reviews={SLIMMING_REVIEWS} duration={44} />
 
       {/* CTA */}
       <div style={{ textAlign: 'center', marginTop: 36 }}>
@@ -270,15 +248,6 @@ export default function GoogleReviews() {
             borderRadius: 8,
             padding: '11px 24px',
             textDecoration: 'none',
-            transition: 'background 0.2s, color 0.2s',
-          }}
-          onMouseEnter={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.background = GREEN;
-            (e.currentTarget as HTMLAnchorElement).style.color = '#fff';
-          }}
-          onMouseLeave={(e) => {
-            (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
-            (e.currentTarget as HTMLAnchorElement).style.color = GREEN;
           }}
         >
           <GoogleG size={16} />
