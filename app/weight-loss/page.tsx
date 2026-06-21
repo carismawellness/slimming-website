@@ -838,67 +838,137 @@ function CarismaDifferenceSection() {
 }
 
 /* ============================================================
-   5c. OUR PROMISE — extended care commitment card
+   5c. OUR PROMISE — guarantee hero + extended care commitment
    ============================================================ */
 function OurPromiseSection() {
-  const promiseAgreements = [
-    'Attend all scheduled in clinic sessions and weekly check ins',
-    'Follow your personalised food plan consistently and tell us when you struggle',
-    'Complete your agreed movement plan or discuss any pain or obstacles with your coach',
-    'Use only the treatments and medications recommended by our medical team for this program',
-    'Inform us of any major health or medication changes, pregnancy or new diagnosis during the program',
-    'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
+  const conditions = [
+    { label: 'Show up', text: 'Attend all scheduled in-clinic sessions and weekly check-ins' },
+    { label: 'Follow your plan', text: 'Stick to your personalised food plan — tell us if you struggle' },
+    { label: 'Stay active', text: 'Complete your agreed movement plan or discuss any obstacles' },
+    { label: 'Medical only', text: 'Use only the treatments and medications our team recommends' },
+    { label: 'Keep us informed', text: 'Tell us about any health changes, medication or new diagnosis' },
+    { label: 'No shortcuts', text: 'Avoid crash diets or outside weight loss treatments' },
   ];
+
   return (
-    <div className="py-20" style={{ backgroundColor: '#ffffff' }}>
-      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
-        <GradientField
-          className="p-8 sm:p-10"
-          style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '16px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}
-          blob={{ top: '8%', right: '-5%' }}
-          dots
-          motif="watermark"
-        >
-          <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
-            Our Promise
-          </p>
-          <div className="mx-auto mt-2 mb-6" style={{ width: '120px', height: '1px', backgroundColor: taupeLight }} />
-          <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: 1.35, textTransform: 'uppercase' }}>
-            Up to 1 kg Per Week.<br />Medically Measured. Results Guaranteed.
+    <>
+      {/* ── Hero band ─────────────────────────────────────────── */}
+      <section style={{ background: '#024C27', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+        {/* Decorative large watermark number */}
+        <span aria-hidden style={{
+          position: 'absolute', right: '-2%', top: '4%',
+          fontFamily: headingFont, fontSize: 'clamp(180px,26vw,340px)', fontWeight: 400,
+          color: 'rgba(255,255,255,0.04)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
+        }}>1KG</span>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', position: 'relative' }}>
+          {/* Badge */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', border: '1px solid rgba(201,216,193,0.35)', borderRadius: '999px', padding: '8px 20px', marginBottom: '36px' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9D8C1" strokeWidth="1.8" aria-hidden>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', color: '#C9D8C1', textTransform: 'uppercase' }}>
+              Medically Guaranteed
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h2 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#ffffff', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
+            Up to 1KG<br />
+            <em style={{ fontStyle: 'normal', color: '#C9D8C1' }}>Per Week.</em>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-10">
-            <div className="overflow-hidden" style={{ position: 'relative', borderRadius: '16px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', width: '375px', maxWidth: '100%', height: '350px' }}>
-              <Image
-                src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
-                alt="Clinical measurement and body analysis at Carisma Slimming"
-                fill
-                style={{ objectFit: 'cover' }}
-                loading="lazy"
-              />
+
+          <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.6)', maxWidth: '520px', margin: '0 auto 16px' }}>
+            If you qualify, follow the programme, and don&rsquo;t reach your target weight — we extend your care at <strong style={{ color: '#ffffff', fontWeight: 600 }}>no extra cost</strong>, until you do.
+          </p>
+          <p style={{ fontFamily: headingFont, fontSize: '16px', color: 'rgba(201,216,193,0.7)', fontStyle: 'italic', marginBottom: '64px' }}>
+            This is our Extended Care Commitment.
+          </p>
+        </div>
+
+        {/* 3 proof pillars */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2px', borderTop: '1px solid rgba(201,216,193,0.12)' }}>
+          {[
+            { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
+            { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
+            { num: '3', stat: 'Extended Until Done', sub: 'We keep going at no extra cost until you hit your agreed target weight' },
+          ].map((item) => (
+            <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(201,216,193,0.1)', textAlign: 'center' }}>
+              <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: 'rgba(201,216,193,0.5)', textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
+              <p style={{ fontFamily: headingFont, fontSize: '20px', color: '#ffffff', marginBottom: '10px' }}>{item.stat}</p>
+              <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.65, color: 'rgba(255,255,255,0.5)' }}>{item.sub}</p>
             </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Conditions section ────────────────────────────────── */}
+      <section style={{ background: '#F2F6EF', padding: '72px 0 80px' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'start' }}>
+
+            {/* Photo + caption */}
             <div>
-              <p className="mb-4" style={pStyle}>
-                We are selective about who joins our transformation programs. We only accept women we genuinely believe we can help. If you qualify and complete your program as agreed, and and do not hit your target weight, we will extend your program at no extra program fee until we achieve our desired result.
+              <div style={{ position: 'relative', height: '460px', borderTopLeftRadius: '16px', borderTopRightRadius: '72px', borderBottomLeftRadius: '72px', borderBottomRightRadius: '16px', overflow: 'hidden', boxShadow: '12px -12px 0 #C9D8C1' }}>
+                <Image
+                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                  alt="Tanita body composition analysis at Carisma Slimming — your measurable baseline"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  loading="lazy"
+                />
+              </div>
+              <p style={{ fontFamily: bodyFont, fontSize: '12px', color: '#9B8D83', textAlign: 'center', marginTop: '16px', fontStyle: 'italic', letterSpacing: '0.5px' }}>
+                Tanita body composition scan — your measurable baseline at every visit
               </p>
-              <p className="mb-6" style={pStyle}>
-                This is our Extended Care Commitment
+            </div>
+
+            {/* Right: promise + conditions */}
+            <div>
+              <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '10px' }}>
+                How it works
               </p>
-              <p className="mb-4" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
-                To keep your results medically valid and fair, you agree to*
+              <div style={{ width: '32px', height: '1px', background: '#C9B8AE', marginBottom: '20px' }} />
+              <h3 style={{ fontFamily: headingFont, fontSize: '22px', fontWeight: 400, color: '#024C27', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: 1.3, marginBottom: '18px' }}>
+                We Only Accept Clients We Genuinely Believe We Can Help
+              </h3>
+              <p style={{ fontFamily: bodyFont, fontSize: '14.5px', lineHeight: 1.8, color: taupe, marginBottom: '32px', borderLeft: '2px solid #C9D8C1', paddingLeft: '16px' }}>
+                If you qualify and complete the programme as agreed — and don&rsquo;t reach your target weight — we extend your weight management programme at no extra fee until we get there together.
               </p>
-              <ul className="space-y-3">
-                {promiseAgreements.map((t) => (
-                  <li key={t} className="flex items-start gap-2" style={liStyle}>
-                    <span style={bullet}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
+
+              <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '16px' }}>
+                To receive this guarantee, you agree to:
+              </p>
+
+              {/* Conditions grid */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px' }}>
+                {conditions.map((c, i) => (
+                  <div key={c.label} style={{ background: '#ffffff', borderRadius: '12px', padding: '16px', boxShadow: '0 2px 12px rgba(2,76,39,0.06)', display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, color: '#C9D8C1', letterSpacing: '1px' }}>0{i + 1}</span>
+                      <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', color: green }}>{c.label}</span>
+                    </div>
+                    <p style={{ fontFamily: bodyFont, fontSize: '12.5px', lineHeight: 1.6, color: taupe, margin: 0 }}>{c.text}</p>
+                  </div>
                 ))}
-              </ul>
+              </div>
+
+              <div style={{ marginTop: '28px' }}>
+                <a
+                  href={freshaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-glow"
+                  style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: wideFont, fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', color: '#fff', padding: '14px 28px', borderRadius: '999px', minHeight: '44px' }}
+                >
+                  Apply for the Guarantee
+                </a>
+              </div>
             </div>
           </div>
-        </GradientField>
-      </div>
-    </div>
+        </div>
+      </section>
+    </>
   );
 }
 
