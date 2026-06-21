@@ -24,6 +24,7 @@
 import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
 import { BOOKING_URL } from '@/lib/services';
+import BookConsultationButton from '@/components/BookConsultationButton';
 import {
   PackageContent,
   SHARED_DIFFERENCE_BULLETS,
@@ -94,15 +95,18 @@ function SectionHeading({ children, align = 'center', size = 28 }: { children: R
 
 function CTA({ children = 'Claim your spot now', full = false, wide = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean; wide?: boolean }) {
   return (
-    <a
-      href={BOOKING_URL}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="cta-glow"
-      style={{ display: full ? 'block' : 'inline-block', color: '#fff', fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', textAlign: 'center', textDecoration: 'none', padding: wide ? '15px 70px' : '15px 38px' }}
-    >
-      {children}
-    </a>
+    <div style={{ display: 'flex', flexDirection: full ? 'column' : 'row', flexWrap: 'wrap', gap: '10px', alignItems: 'flex-start' }}>
+      <a
+        href={BOOKING_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cta-glow"
+        style={{ color: '#fff', fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', textAlign: 'center', textDecoration: 'none', padding: wide ? '15px 70px' : '15px 38px' }}
+      >
+        {children}
+      </a>
+      <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
+    </div>
   );
 }
 
@@ -159,7 +163,7 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
 function TestimonialCard({ t }: { t: Testimonial }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div style={{ background: '#fff', borderRadius: 16, padding: '20px 10px', margin: '0 10px', boxSizing: 'border-box' }}>
+    <div className="card-lift" style={{ background: '#fff', padding: '20px 10px', margin: '0 10px', boxSizing: 'border-box' }}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img src={t.image} alt={`${t.name} before and after`} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
       <div style={{ background: 'linear-gradient(178deg, #F8F6F2 42%, #C9D8C1 100%)', borderRadius: 16, padding: '15px', paddingTop: 70, marginTop: -91 }}>
@@ -275,7 +279,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         <div style={{ ...CONTAINER, marginTop: 84 }}>
           {/* live: 980px rounded panel, gradient measured as linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%) */}
-          <div style={{ maxWidth: 980, marginLeft: 'auto', marginRight: 'auto', borderRadius: 18, background: 'linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', padding: '48px 44px' }}>
+          <div style={{ maxWidth: 980, marginLeft: 'auto', marginRight: 'auto', borderRadius: 16, background: 'linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', padding: '48px 44px' }}>
             <SectionHeading>{c.secretSubheading}</SectionHeading>
 
             <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 36 }} className="fr-2col">
@@ -364,7 +368,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {/* ===== 4c. COMMITMENT PANEL ("35+ years delivering results") ===== */}
       {c.commitmentPanel && (
       <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
-        <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 24, padding: '48px 48px 44px' }}>
+        <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 16, padding: '48px 48px 44px' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={WELL_BG} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
           <div style={{ position: 'relative', zIndex: 1 }}>
@@ -420,7 +424,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               ) : (
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }}>
                   {c.areas.map((a, i) => (
-                    <div key={a} style={{ gridColumn: i === c.areas.length - 1 && c.areas.length % 2 === 1 ? '1 / -1' : 'auto', backgroundColor: '#fff', border: '1px solid #E5E0D8', borderRadius: 10, padding: '14px 16px', textAlign: 'center', color: TAUPE, fontFamily: WIDE, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{a}</div>
+                    <div key={a} className="card" style={{ gridColumn: i === c.areas.length - 1 && c.areas.length % 2 === 1 ? '1 / -1' : 'auto', padding: '14px 16px', textAlign: 'center', color: TAUPE, fontFamily: WIDE, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{a}</div>
                   ))}
                 </div>
               )}
@@ -440,7 +444,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           <div style={{ marginTop: 10 }}><SectionHeading>We Are Not Another Diet Clinic —<br />Malta&rsquo;s Doctor-Led Body Transformation Programme</SectionHeading></div>
           <p style={{ ...body, textAlign: 'center', maxWidth: 720, margin: '18px auto 0' }}>{SHARED_DIFFERENCE_INTRO}</p>
 
-          <div style={{ marginTop: 36, marginLeft: 'auto', marginRight: 'auto', maxWidth: 560, background: 'linear-gradient(150deg, #eef2ec 0%, #e0e8df 100%)', borderRadius: 18, padding: '34px 36px' }}>
+          <div style={{ marginTop: 36, marginLeft: 'auto', marginRight: 'auto', maxWidth: 560, background: 'linear-gradient(150deg, #eef2ec 0%, #e0e8df 100%)', borderRadius: 16, padding: '34px 36px' }}>
             <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
               {differenceBullets.map((d) => (
                 <li key={d} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
@@ -467,7 +471,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           {c.ptLayout === 'centered' ? (
             /* live lymphatic-drainage: white card, centered serif title, centered intro
                paragraphs, then text left / images right with an in-card blue CTA */
-            <div style={{ marginTop: 36, backgroundColor: '#fff', borderRadius: 20, padding: 36, boxShadow: '0 6px 26px rgba(120,114,104,0.14)' }}>
+            <div style={{ marginTop: 36, backgroundColor: '#fff', borderRadius: 16, padding: 36, boxShadow: '0 6px 26px rgba(120,114,104,0.14)' }}>
               <SectionHeading>{c.ptCardEyebrow}</SectionHeading>
               <div style={{ maxWidth: 880, margin: '20px auto 0' }}>
                 {c.ptParas.map((p, i) => (<p key={p} style={{ ...body, textAlign: 'center', marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>))}
@@ -487,12 +491,12 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.ptImage} alt="" style={{ width: '100%', borderRadius: 12, display: 'block' }} />
+                  <img src={c.ptImage} alt="" style={{ width: '100%', borderRadius: 16, display: 'block' }} />
                   {(c.ptImage2 || c.ptImage3) && (
                     <div style={{ display: 'flex', gap: 18 }}>
                       {[c.ptImage2, c.ptImage3].filter(Boolean).map((img) => (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img key={img} src={img} alt="" style={{ width: 0, flex: '1 1 0', borderRadius: 12, objectFit: 'cover', display: 'block' }} />
+                        <img key={img} src={img} alt="" style={{ width: 0, flex: '1 1 0', borderRadius: 16, objectFit: 'cover', display: 'block' }} />
                       ))}
                     </div>
                   )}
@@ -500,10 +504,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               </div>
             </div>
           ) : (
-          <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #f1f3ee 0%, #e2e9df 100%)', borderRadius: 20, padding: 36, display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 40, alignItems: 'center' }} className="fr-2col">
+          <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #f1f3ee 0%, #e2e9df 100%)', borderRadius: 16, padding: 36, display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 40, alignItems: 'center' }} className="fr-2col">
             <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={c.ptImage} alt="Before and after" style={{ width: '100%', borderRadius: 12, display: 'block' }} />
+              <img src={c.ptImage} alt="Before and after" style={{ width: '100%', borderRadius: 16, display: 'block' }} />
               {c.ptImage2 && (
                 <div style={{ position: 'relative' }}>
                   {c.ptDecorImage && (
@@ -511,7 +515,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     <img src={c.ptDecorImage} alt="" aria-hidden style={{ position: 'absolute', left: -36, bottom: -36, width: 515, maxWidth: '60vw', height: 'auto', pointerEvents: 'none' }} />
                   )}
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={c.ptImage2} alt="" style={{ width: c.ptImage2Width ?? '100%', height: 'auto', borderRadius: 12, position: 'relative' }} />
+                  <img src={c.ptImage2} alt="" style={{ width: c.ptImage2Width ?? '100%', height: 'auto', borderRadius: 16, position: 'relative' }} />
                 </div>
               )}
             </div>
@@ -531,7 +535,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               ) : (
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 14, flexWrap: 'wrap' }}>
                   <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
-                  {c.ptCardTag && <span style={{ color: GREEN_TEXT, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN_TEXT}`, borderRadius: 20, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>}
+                  {c.ptCardTag && <span style={{ color: GREEN_TEXT, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN_TEXT}`, borderRadius: 999, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>}
                 </div>
               )}
               {c.ptParas.map((p, i) => (<p key={p} style={{ ...body, marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>))}
@@ -559,11 +563,11 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           {c.dualEyebrow && <div style={{ marginBottom: 10 }}><Eyebrow>{c.dualEyebrow}</Eyebrow></div>}
           <SectionHeading size={25}>{c.dualHeading.map((l, i) => (<span key={i}>{l}{i < c.dualHeading.length - 1 && <br />}</span>))}</SectionHeading>
 
-          <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #eef1ea 0%, #e7ece2 100%)', borderRadius: 22, padding: 22, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 22 }} className="fr-2col">
+          <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #eef1ea 0%, #e7ece2 100%)', borderRadius: 16, padding: 22, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 22 }} className="fr-2col">
             <div style={{ backgroundColor: '#fff', borderRadius: 16, padding: '34px 30px', display: 'flex', flexDirection: 'column', gap: 26, justifyContent: 'space-around' }}>
               {c.dualMini.map((m) => (
                 <div key={m.title} style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
-                  <span style={{ flexShrink: 0, width: 54, height: 54, border: '1px solid #d7dcd4', borderRadius: 12, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                  <span style={{ flexShrink: 0, width: 54, height: 54, border: '1px solid #d7dcd4', borderRadius: 16, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={m.icon} alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
                   </span>
@@ -584,7 +588,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 ))}
               </ul>
               {/* live price box: sage at the top fading to cream, green label, larger taupe price */}
-              <div style={{ background: 'linear-gradient(150deg, #dfe8db 0%, #eef2ea 100%)', borderRadius: 12, padding: '18px 20px' }}>
+              <div style={{ background: 'linear-gradient(150deg, #dfe8db 0%, #eef2ea 100%)', borderRadius: 16, padding: '18px 20px' }}>
                 <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px' }}>
                   TOTAL VALUE: {c.dualTotalValue} TODAY: <span style={{ color: TAUPE, fontSize: 18 }}>{c.dualTodayPrice}</span>
                 </p>
@@ -615,7 +619,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </div>
 
           {/* pricing card */}
-          <div style={{ marginTop: 40, background: 'linear-gradient(150deg, #f1f3ee 0%, #e3eadf 100%)', borderRadius: 22, padding: 22, display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 22, alignItems: 'stretch' }} className="fr-2col">
+          <div style={{ marginTop: 40, background: 'linear-gradient(150deg, #f1f3ee 0%, #e3eadf 100%)', borderRadius: 16, padding: 22, display: 'grid', gridTemplateColumns: '1.1fr 0.9fr', gap: 22, alignItems: 'stretch' }} className="fr-2col">
             <div style={{ backgroundColor: '#fff', borderRadius: 16, padding: '32px 30px' }}>
               <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 8px' }}>{c.offer.tagline}</p>
               <p style={{ ...body, fontSize: 13.5, marginBottom: 18 }}>{c.offer.subline}</p>
@@ -642,7 +646,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       {/* ===================== 9. WELLNESS CHAIN + MAP ===================== */}
       {!hidden.wellness && (
       <section style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
-        <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 24, padding: '48px 48px 44px' }}>
+        <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 16, padding: '48px 48px 44px' }}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={WELL_BG} alt="" aria-hidden style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
           <div style={{ position: 'relative', zIndex: 1 }}>
@@ -662,7 +666,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 </ul>
               </div>
               {!hidden.map && (
-              <div style={{ borderRadius: 14, overflow: 'hidden', boxShadow: '0 8px 26px rgba(120,114,104,0.18)' }}>
+              <div style={{ borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 26px rgba(120,114,104,0.18)' }}>
                 <iframe title={`${c.id} clinic location in Malta`} src={`https://www.google.com/maps?q=${encodeURIComponent(c.mapQuery)}&output=embed`} width="100%" height="360" loading="lazy" referrerPolicy="no-referrer-when-downgrade" style={{ border: 0, display: 'block' }} />
               </div>
               )}
@@ -749,7 +753,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={e.img} alt="" style={{ width: '100%', height: 186, objectFit: 'cover', display: 'block' }} />
                     </div>
-                    <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 30, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
+                    <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 999, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                   </div>
                   {/* gradient card sitting behind the lower part of the image */}
                   <div style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, rgba(142,176,147,0.4) 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>

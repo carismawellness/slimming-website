@@ -5,6 +5,7 @@ import { notFound } from 'next/navigation';
 import PackagePage from '@/components/PackagePage';
 import { packageContent } from '@/lib/packages';
 import { JsonLd } from '@/lib/seo/JsonLd';
+import BookConsultationButton from '@/components/BookConsultationButton';
 import {
   SITE_URL as SITE,
   breadcrumbList,
@@ -234,20 +235,21 @@ export default async function ServicePage({ params }: Props) {
                 </p>
               )}
 
-              <div className="flex flex-col sm:flex-row gap-3 mb-4">
+              <div className="flex flex-col sm:flex-row flex-wrap gap-3 mb-4">
                 <a
                   href={BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="cta-glow text-white px-8 py-3.5 font-bold uppercase tracking-wide text-center text-sm"
-                  style={{ backgroundColor: GREEN, fontFamily: BODY_FONT }}
+                  style={{ fontFamily: BODY_FONT }}
                 >
                   Claim Your Spot Now
                 </a>
+                <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
                 <a
                   href="tel:+35627802062"
-                  className="px-8 py-3.5 rounded font-bold uppercase tracking-wide text-center border-2 text-sm"
-                  style={{ borderColor: GREEN, color: GREEN, fontFamily: BODY_FONT }}
+                  className="btn btn-secondary px-8 py-3.5 font-bold uppercase tracking-wide text-center text-sm"
+                  style={{ fontFamily: BODY_FONT }}
                 >
                   +356 27802062
                 </a>
@@ -276,8 +278,8 @@ export default async function ServicePage({ params }: Props) {
             {service.heroImage && (
               <div className="relative">
                 <div
-                  className="rounded-2xl overflow-hidden shadow-sm mx-auto"
-                  style={{ backgroundColor: SAGE_LIGHT, width: '100%', maxWidth: '383px' }}
+                  className="overflow-hidden shadow-sm mx-auto"
+                  style={{ backgroundColor: SAGE_LIGHT, width: '100%', maxWidth: '383px', borderRadius: '16px' }}
                 >
                   <img
                     src={service.heroImage}
@@ -351,8 +353,7 @@ export default async function ServicePage({ params }: Props) {
             {service.packages.map((pkg, pi) => (
               <div
                 key={pi}
-                className="bg-white rounded-lg shadow-sm border overflow-hidden"
-                style={{ borderColor: BORDER }}
+                className="card overflow-hidden"
               >
                 <div className="p-6 border-b" style={{ borderColor: BORDER }}>
                   <h3
@@ -457,7 +458,7 @@ export default async function ServicePage({ params }: Props) {
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {service.imagesNeeded.map((img, i) =>
               img.src ? (
-                <div key={i} className="h-28 rounded border overflow-hidden" style={{ borderColor: BORDER }}>
+                <div key={i} className="card h-28 overflow-hidden">
                   <img
                     src={img.src}
                     alt={img.label}
@@ -467,8 +468,8 @@ export default async function ServicePage({ params }: Props) {
               ) : (
                 <div
                   key={i}
-                  className="h-28 rounded border flex items-center justify-center text-center px-3"
-                  style={{ backgroundColor: CREAM_DEEP, borderColor: BORDER, color: TAUPE_LIGHT }}
+                  className="card h-28 flex items-center justify-center text-center px-3"
+                  style={{ backgroundColor: CREAM_DEEP, color: TAUPE_LIGHT }}
                 >
                   <span className="text-xs leading-snug" style={{ fontFamily: BODY_FONT }}>
                     [ {img.label} ]
@@ -489,19 +490,20 @@ export default async function ServicePage({ params }: Props) {
           <p className="text-xl mb-8" style={{ fontFamily: BODY_FONT }}>
             Schedule your free consultation to discuss this treatment.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
             <a
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white px-8 py-3 rounded font-bold uppercase tracking-wide text-center"
-              style={{ color: GREEN, fontFamily: BODY_FONT }}
+              className="cta-glow text-white px-8 py-3 font-bold uppercase tracking-wide text-center"
+              style={{ fontFamily: BODY_FONT }}
             >
               Free Consultation
             </a>
+            <BookConsultationButton variant="outline" style={{ fontSize: '13px' }} />
             <a
               href="tel:+35627802062"
-              className="border-2 border-white px-8 py-3 rounded font-bold uppercase tracking-wide text-center"
+              className="btn btn-secondary px-8 py-3 font-bold uppercase tracking-wide text-center"
               style={{ fontFamily: BODY_FONT }}
             >
               Call: +356 27802062
@@ -524,8 +526,8 @@ export default async function ServicePage({ params }: Props) {
               <Link
                 key={s.id}
                 href={`/packages/${s.id}`}
-                className="px-5 py-2 rounded-full text-sm border bg-white hover:shadow-sm transition"
-                style={{ borderColor: BORDER, color: TAUPE }}
+                className="btn btn-secondary px-5 py-2 text-sm"
+                style={{ fontFamily: BODY_FONT }}
               >
                 {s.treatment}
               </Link>

@@ -4,6 +4,7 @@ import { getOrderedServices, BOOKING_URL } from '@/lib/services';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL as SITE, breadcrumbList } from '@/lib/seo/schema';
 import PageHero from '@/components/PageHero';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
   title: "Body Contouring Packages Malta | Carisma Slimming",
@@ -77,10 +78,7 @@ export default function PackagesPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {servicesList.map((service) => (
               <Link key={service.id} href={`/packages/${service.id}`} className="group">
-                <div
-                  className="bg-white border rounded-lg overflow-hidden h-full flex flex-col transition shadow-sm hover:shadow-lg"
-                  style={{ borderColor: '#E5DED7' }}
-                >
+                <div className="card overflow-hidden h-full flex flex-col">
                   {/* Image placeholder */}
                   <div
                     className="h-48 flex items-center justify-center text-center px-4 border-b"
@@ -135,7 +133,7 @@ export default function PackagesPage() {
             plan. Our medical team will recommend the ideal combination based on your goals and a
             full body assessment.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
             <a
               href={BOOKING_URL}
               target="_blank"
@@ -145,10 +143,11 @@ export default function PackagesPage() {
             >
               Free Consultation
             </a>
+            <BookConsultationButton variant="outline" style={{ fontSize: '13px' }} />
             <a
               href="tel:+35627802062"
-              className="px-8 py-3 rounded font-bold uppercase tracking-wide inline-block border-2"
-              style={{ borderColor: GREEN, color: GREEN, fontFamily: BODY_FONT }}
+              className="btn btn-secondary px-8 py-3 font-bold uppercase tracking-wide inline-block"
+              style={{ fontFamily: BODY_FONT }}
             >
               Call: +356 27802062
             </a>

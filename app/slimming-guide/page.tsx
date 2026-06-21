@@ -3,6 +3,7 @@ import PageHero from '@/components/PageHero';
 import OutcomeStepper from './OutcomeStepper';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
   title: "Free Slimming Guide Malta | Carisma Slimming",
@@ -204,7 +205,7 @@ export default function SlimmingGuidePage() {
       <section className="py-24" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="mx-auto px-4" style={{ maxWidth: '1032px' }}>
           <div
-            className="px-6 py-10 sm:px-12 sm:py-12"
+            className="card px-6 py-10 sm:px-12 sm:py-12"
             style={{
               background: 'linear-gradient(170deg, #F7F4ED 0%, #F0EFE5 55%, #D8E4D6 100%)',
               borderRadius: '16px',
@@ -221,7 +222,7 @@ export default function SlimmingGuidePage() {
                 <img
                   src="/wix/11062b_926c2ba259264b22bed8a16f8021e64b~mv2.jpg"
                   alt="Woman Eating Pizza"
-                  style={{ width: '338px', maxWidth: '100%', aspectRatio: '338 / 386', objectFit: 'cover', objectPosition: 'center top', borderRadius: '160px 160px 12px 60px' }}
+                  style={{ width: '338px', maxWidth: '100%', aspectRatio: '338 / 386', objectFit: 'cover', objectPosition: 'center top', borderRadius: '16px' }}
                 />
               </div>
               <div style={{ maxWidth: '540px' }}>
@@ -363,11 +364,10 @@ export default function SlimmingGuidePage() {
             {methodPillars.map((p) => (
               <div
                 key={p.lead}
-                className="px-7 pt-8 pb-7"
+                className="card px-7 pt-8 pb-7"
                 style={{
                   background: 'linear-gradient(180deg, #CBDCC9 0%, #FBFBF8 55%)',
-                  borderRadius: '12px',
-                  boxShadow: '0 4px 14px rgba(0,0,0,0.07)',
+                  borderRadius: '16px',
                 }}
               >
                 <h3
@@ -475,11 +475,10 @@ export default function SlimmingGuidePage() {
             </div>
             {/* Right petal card */}
             <div
-              className="px-8 pt-7 pb-9"
+              className="card px-8 pt-7 pb-9"
               style={{
                 background: 'linear-gradient(135deg, #F8F6F0 0%, #E9EEE5 40%, #CBDCC9 100%)',
-                borderRadius: '24px 70px 24px 90px',
-                boxShadow: '0 6px 16px rgba(0,0,0,0.08)',
+                borderRadius: '16px 70px 16px 90px',
               }}
             >
               <div className="flex items-center gap-3 mb-4">
@@ -524,10 +523,10 @@ export default function SlimmingGuidePage() {
           </div>
           {/* 'Most people who come to us...' highlight card */}
           <div
-            className="px-8 py-11 lg:-mx-10"
+            className="card px-8 py-11 lg:-mx-10"
             style={{
               background: 'linear-gradient(180deg, #CDDCCA 0%, #F7F7F3 85%)',
-              borderRadius: '24px',
+              borderRadius: '16px',
             }}
           >
             <p
@@ -562,7 +561,7 @@ export default function SlimmingGuidePage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
             <div
-              className="p-9"
+              className="card p-9"
               style={{
                 background: 'linear-gradient(180deg, #F7F5F0 0%, #E3EADF 45%, #C9DAC8 100%)',
                 borderRadius: '90px 30px 90px 30px',
@@ -592,7 +591,7 @@ export default function SlimmingGuidePage() {
               </ul>
             </div>
             <div
-              className="p-9"
+              className="card p-9"
               style={{
                 background: 'linear-gradient(180deg, #F7F5F0 0%, #E3EADF 45%, #C9DAC8 100%)',
                 borderRadius: '90px 30px 90px 30px',
@@ -709,10 +708,10 @@ export default function SlimmingGuidePage() {
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div
-            className="max-w-5xl mx-auto px-8 py-10 sm:px-14"
+            className="card max-w-5xl mx-auto px-8 py-10 sm:px-14"
             style={{
               background: 'linear-gradient(160deg, #F8F6F2 0%, #EFF1EA 55%, #CFDECC 100%)',
-              borderRadius: '24px',
+              borderRadius: '16px',
               boxShadow: '0 6px 16px rgba(0,0,0,0.06)',
             }}
           >
@@ -751,22 +750,27 @@ export default function SlimmingGuidePage() {
               ))}
             </ul>
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              <a
-                href={PRODUCT_URL}
-                className="cta-glow block text-center uppercase text-white w-full"
-                style={{
-                  backgroundColor: BLUE,
-                  borderRadius: '999px',
-                  maxWidth: '460px',
-                  padding: '11px 24px',
-                  fontFamily: wideFont,
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  letterSpacing: '1.5px',
-                }}
-              >
-                Get Slimming Guide &nbsp;›
-              </a>
+              <div className="flex flex-col gap-3">
+                <a
+                  href={PRODUCT_URL}
+                  className="cta-glow block text-center uppercase text-white w-full"
+                  style={{
+                    backgroundColor: BLUE,
+                    borderRadius: '999px',
+                    maxWidth: '460px',
+                    padding: '11px 24px',
+                    fontFamily: wideFont,
+                    fontSize: '13px',
+                    fontWeight: 700,
+                    letterSpacing: '1.5px',
+                  }}
+                >
+                  Get Slimming Guide &nbsp;›
+                </a>
+                <BookConsultationButton variant="filled" style={{ fontSize: '13px', padding: '11px 24px', borderRadius: '999px' }}>
+                  Book Free Consultation
+                </BookConsultationButton>
+              </div>
               <div className="flex items-center gap-3">
                 <img
                   src="/wix/87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png"

@@ -13,6 +13,7 @@ import {
   medicalWebPage,
 } from '@/lib/seo/schema';
 import { glp1Faqs } from '@/lib/faq/glp1';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
   title: "GLP-1 Weight Loss Injections Malta | Carisma Slimming",
@@ -168,7 +169,7 @@ export default function GLP1Page() {
 
       {/* Sustainability */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12" style={{ maxWidth: '1100px', background: 'linear-gradient(180deg, #D7E2D8 0%, #FBFBF9 38%, #FFFFFF 50%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12" style={{ maxWidth: '1100px', background: 'linear-gradient(180deg, #D7E2D8 0%, #FBFBF9 38%, #FFFFFF 50%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
           <h2
             className="text-center mb-12 uppercase"
             style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
@@ -245,8 +246,8 @@ export default function GLP1Page() {
             {pillars.map((pillar, i) => (
               <div
                 key={i}
-                className="p-8"
-                style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}
+                className="card p-8"
+                style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)' }}
               >
                 <img src={pillarIcons[i]} alt="" style={{ width: '74px', height: '74px', objectFit: 'contain', marginBottom: '20px' }} />
                 {/* Card sits on a #F2F6EF->#C9D8C1 sage gradient; deeper taupe #5c5346 clears AA
@@ -304,16 +305,17 @@ export default function GLP1Page() {
               </ul>
             </div>
           </div>
-          <div className="text-center mt-14">
+          <div className="flex flex-wrap gap-3 justify-center mt-14">
             <a
               href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5084222&oiid=sv%3A26105577&share=true&pId=2708191"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-glow inline-block text-center font-bold text-white"
-              style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1.4px', textTransform: 'uppercase', padding: '13px 24px', width: '474px', maxWidth: '100%' }}
+              style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1.4px', textTransform: 'uppercase', padding: '13px 24px' }}
             >
               book your medical consultation
             </a>
+            <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
           </div>
         </div>
       </section>
@@ -333,7 +335,7 @@ export default function GLP1Page() {
           <p className="text-center mx-auto mb-12" style={{ color: '#5c5346', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '760px' }}>
             We are a doctor-led medical weight loss clinic in Malta that blends medical insight, sustainable nutrition, and modern body technology into one high-touch system. So you do not just lose weight, you build a stronger, healthier version of yourself.
           </p>
-          <div className="mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', borderBottomLeftRadius: '24px', borderBottomRightRadius: '90px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
+          <div className="card mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)' }}>
             <ul className="space-y-6">
               {[
                 'Doctor-led medical weight loss: full check, body scan, and blood work',
@@ -370,7 +372,7 @@ export default function GLP1Page() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
               className="w-full overflow-hidden mx-auto"
-              style={{ maxWidth: '448px', aspectRatio: '448 / 479', borderTopLeftRadius: '90px', borderTopRightRadius: '18px', borderBottomLeftRadius: '18px', borderBottomRightRadius: '90px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}
+              style={{ maxWidth: '448px', aspectRatio: '448 / 479', borderTopLeftRadius: '90px', borderTopRightRadius: '16px', borderBottomLeftRadius: '16px', borderBottomRightRadius: '90px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}
             >
               <img src="/wix/87fc13_130b2a48c11a4658bad12952342d1eb4~mv2.jpeg" alt="Dr Zaid Teebi, lead medical weight loss doctor at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
@@ -385,15 +387,18 @@ export default function GLP1Page() {
               <p className="mb-8" style={{ color: '#6f6456', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
                 Medical weight loss should never be guesswork. Every body tells a story, and our job is to turn it into a plan that lasts&rdquo; &ndash; Dr. Teebi
               </p>
-              <a
-                href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-glow inline-block text-center font-bold text-white"
-                style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 20px', width: '468px', maxWidth: '100%' }}
-              >
-                Book your medical consultation
-              </a>
+              <div className="flex flex-wrap gap-3 items-center">
+                <a
+                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-glow inline-block text-center font-bold text-white"
+                  style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 20px' }}
+                >
+                  Book your medical consultation
+                </a>
+                <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
+              </div>
             </div>
           </div>
         </div>
@@ -411,8 +416,8 @@ export default function GLP1Page() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
-              className="p-12 flex items-center"
-              style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', minHeight: '240px' }}
+              className="card p-12 flex items-center"
+              style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', minHeight: '240px' }}
             >
               {/* Callout on #F2F6EF->#DCE7D5 sage gradient: deep taupe #5c5346 (>=5.9:1) with
                   deepest-sage #3d5a42 emphasis (>=6.0:1) replaces the failing pale #A9BFA6/#8EB093. */}
@@ -453,7 +458,7 @@ export default function GLP1Page() {
       {/* Safety, side effects & our system */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F8F7F3 35%)', borderRadius: '28px', padding: '48px' }}>
+          <div className="card" style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F8F7F3 35%)', padding: '48px' }}>
             <h2 className="text-center" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.4 }}>
               Safety, side effects,<br />and our system
             </h2>
@@ -480,25 +485,28 @@ export default function GLP1Page() {
                 <p className="mb-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7 }}>
                   <strong style={{ color: '#574d40' }}>The biggest clinical mistake:</strong> prescribing Ozempic or Mounjaro without a structured clinical system. Medication can quiet appetite, but it does not build muscle, teach eating habits, address emotional drivers, or create long-term maintenance. That is why our program pairs Ozempic or Mounjaro with strength training, protein-first nutrition structure, behavioural coaching, accountability, and a defined maintenance plan.
                 </p>
-                <a
-                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-glow inline-block text-center font-bold text-white"
-                  style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px 24px', width: '382px', maxWidth: '100%' }}
-                >
-                  Book your medical consultation
-                </a>
+                <div className="flex flex-wrap gap-3 items-center">
+                  <a
+                    href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-glow inline-block text-center font-bold text-white"
+                    style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px 24px' }}
+                  >
+                    Book your medical consultation
+                  </a>
+                  <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
+                </div>
               </div>
               <div className="flex flex-col gap-5">
-                <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '477 / 270' }}>
+                <div className="w-full overflow-hidden" style={{ aspectRatio: '477 / 270', borderRadius: '16px' }}>
                   <img src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="Ozempic pen for medical weight loss" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="grid gap-5" style={{ gridTemplateColumns: '176fr 281fr' }}>
-                  <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '176 / 168' }}>
+                  <div className="w-full overflow-hidden" style={{ aspectRatio: '176 / 168', borderRadius: '16px' }}>
                     <img src="/wix/87fc13_de24c77f8dcf436699a6eeac3645088c~mv2.jpg" alt="Consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
-                  <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '281 / 168' }}>
+                  <div className="w-full overflow-hidden" style={{ aspectRatio: '281 / 168', borderRadius: '16px' }}>
                     <img src="/wix/87fc13_59abc443a8274e1c90646831cbc819c5~mv2.jpg" alt="Movement assessment with a Carisma practitioner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                 </div>
@@ -524,7 +532,7 @@ export default function GLP1Page() {
           <p className="mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
             In this video, you will understand how GLP-1 regulates appetite, blood sugar, and metabolic signals, and why modern therapies like Ozempic and Mounjaro are reshaping long-term weight management. When used with medical guidance and structured lifestyle support, Ozempic or Mounjaro becomes a tool within a structured program, not a shortcut.
           </p>
-          <div className="mx-auto" style={{ border: '6px solid #8EB093', maxWidth: '744px', overflow: 'hidden' }}>
+          <div className="mx-auto" style={{ border: '6px solid #8EB093', maxWidth: '744px', overflow: 'hidden', borderRadius: '16px' }}>
             <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
               <iframe
                 src="https://www.youtube.com/embed/9t5m33ccUYA?autoplay=1&mute=1&controls=1&loop=1&playsinline=1&playlist=9t5m33ccUYA"
@@ -548,16 +556,16 @@ export default function GLP1Page() {
           <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4, textTransform: 'uppercase' }}>
             A doctor-led medical weight loss<br />programme built to last
           </h2>
-          <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', borderRadius: '28px', padding: '28px' }}>
+          <div className="card" style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', padding: '28px' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-2xl p-8 space-y-7">
+              <div className="card bg-white p-8 space-y-7">
                 {[
                   { icon: '/wix/87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'Medical eligibility & assessment', body: 'Every journey begins with a full medical consultation to assess Ozempic or Mounjaro suitability, health history, and individual goals before any treatment is considered.' },
                   { icon: '/wix/87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'Appetite & metabolic support', body: 'GLP-1 medication is used to support natural fullness signals and reduce food noise, helping make portion control and consistency feel more manageable.' },
                   { icon: '/wix/87fc13_c4cf7001e0324fbd84551191d2a27bd1~mv2.png', title: 'Safe, long-term approach', body: 'This is not a crash diet or quick fix. Our approach always uses Ozempic or Mounjaro as part of a wider lifestyle plan designed for sustainable, steady fat reduction.' },
                 ].map((f) => (
                   <div key={f.title} className="flex items-start gap-4">
-                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: '46px', height: '46px', borderRadius: '12px', border: '1px solid #e3ded6' }}>
+                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: '46px', height: '46px', borderRadius: '9999px', border: '1px solid #e3ded6' }}>
                       <img src={f.icon} alt="" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
                     </div>
                     <div>
@@ -567,8 +575,8 @@ export default function GLP1Page() {
                   </div>
                 ))}
               </div>
-              <div className="bg-white rounded-2xl p-8">
-                <div className="w-full overflow-hidden rounded-xl mb-6" style={{ aspectRatio: '382 / 183' }}>
+              <div className="card bg-white p-8">
+                <div className="w-full overflow-hidden mb-6" style={{ aspectRatio: '382 / 183', borderRadius: '16px' }}>
                   <img src="/wix/87fc13_56eec505c9f9433db5846a0aeae07c7f~mv2.jpg" alt="Medical consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <ul className="space-y-2 mb-6">
@@ -578,15 +586,18 @@ export default function GLP1Page() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-glow block w-full text-center font-bold text-white mb-5"
-                  style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '12px' }}
-                >
-                  Book your medical consultation
-                </a>
+                <div className="flex flex-wrap gap-3 items-center mb-5">
+                  <a
+                    href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-glow inline-block text-center font-bold text-white"
+                    style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '12px 24px' }}
+                  >
+                    Book your medical consultation
+                  </a>
+                  <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '12px 20px' }} />
+                </div>
                 <div className="flex items-center justify-center gap-1">
                   <img src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png" alt="Google" style={{ width: '23px', height: '23px', objectFit: 'contain', marginRight: '4px' }} />
                   {[0, 1, 2, 3, 4].map((i) => (
@@ -603,7 +614,7 @@ export default function GLP1Page() {
       {/* The Carisma difference — wellness chain + map */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ background: 'linear-gradient(135deg, #FBFBF7 0%, #DDE8D6 100%)', borderRadius: '32px', padding: '48px' }}>
+          <div className="card" style={{ background: 'linear-gradient(135deg, #FBFBF7 0%, #DDE8D6 100%)', padding: '48px' }}>
             <p className="text-center mb-2" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
               the carisma difference
             </p>
@@ -650,7 +661,7 @@ export default function GLP1Page() {
                   src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
                   width="100%"
                   height="380"
-                  style={{ border: 0, borderRadius: '12px', display: 'block' }}
+                  style={{ border: 0, borderRadius: '16px', display: 'block' }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
