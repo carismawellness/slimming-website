@@ -48,6 +48,7 @@ export default function Home() {
         media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.png', alt: 'Carisma Slimming doctor-led weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
+        motif
       />
 
       {/* (2) 4 Core Pillars of Our Weight Loss Methodology */}

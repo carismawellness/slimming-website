@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import HeroVideoPlayer from './HeroVideoPlayer';
+import HeroMotif from './HeroMotif';
 
 /* ──────────────────────────────────────────────────────────────────────────
    PageHero — shared above-the-fold hero for marketing pages.
@@ -58,6 +59,8 @@ export type PageHeroProps = {
   background?: string;
   /** Slightly smaller headline clamp for long H1s. */
   compactHeadline?: boolean;
+  /** Render the animated 3D sage wave-field motif (Three.js) behind the hero. */
+  motif?: boolean;
 };
 
 function Stars({ size = 14 }: { size?: number }) {
@@ -106,6 +109,7 @@ export default function PageHero({
   proof,
   background,
   compactHeadline,
+  motif,
 }: PageHeroProps) {
   const headlineSize = compactHeadline
     ? 'clamp(23px, 2.7vw, 31px)'
@@ -144,6 +148,9 @@ export default function PageHero({
           zIndex: 0,
         }}
       />
+
+      {/* animated 3D wave-field motif (Three.js) */}
+      {motif && <HeroMotif />}
 
       <div
         className="page-hero-grid"
