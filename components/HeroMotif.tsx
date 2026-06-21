@@ -54,7 +54,7 @@ export default function HeroMotif() {
       camera.lookAt(0, -0.2, -3);
 
       // ── Build the line field ────────────────────────────────────────────
-      const LINES = coarse ? 38 : 60;   // stacked contour lines
+      const LINES = coarse ? 16 : 24;   // stacked contour lines (sparse)
       const SEG = coarse ? 60 : 96;     // points per line
       const HALF_W = 8.2;               // x extent
       const Z_NEAR = 1.2;
@@ -97,6 +97,7 @@ export default function HeroMotif() {
           attribute float aSeed;
           varying float vDepth;
           varying float vWave;
+          varying float vNdcY;
           void main() {
             vec3 p = position;
             float x = p.x;
@@ -112,7 +113,9 @@ export default function HeroMotif() {
             p.x += uMouse * 0.30 * (1.0 + (z - ${Z_FAR.toFixed(1)}) * 0.02);
             vDepth = z;
             vWave = w;
-            gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+            vec4 clip = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
+            vNdcY = clip.y / clip.w; // -1 bottom … +1 top of screen
+            gl_Position = clip;
           }
         `,
         fragmentShader: /* glsl */ `
@@ -123,13 +126,17 @@ export default function HeroMotif() {
           uniform float uZFar;
           varying float vDepth;
           varying float vWave;
+          varying float vNdcY;
           void main() {
             // atmospheric depth fade: near = visible, far = dissolves
             float depth = clamp((vDepth - uZFar) / (uZNear - uZFar), 0.0, 1.0);
             float depthFade = smoothstep(0.08, 0.78, depth);
+            // keep the motif low: fade out toward the top of the screen so it
+            // sits at the bottom and stays clear of the hero copy.
+            float bottomBias = smoothstep(0.35, -0.65, vNdcY);
             // crest highlight — tops of the waves catch a little more light
             float crest = 0.6 + 0.4 * smoothstep(-0.4, 0.6, vWave);
-            float a = depthFade * crest * 0.24 * uIntro;
+            float a = depthFade * bottomBias * crest * 0.24 * uIntro;
             gl_FragColor = vec4(uColor, a);
           }
         `,
