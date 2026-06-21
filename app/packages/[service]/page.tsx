@@ -42,32 +42,32 @@ export async function generateStaticParams() {
 
 const serviceMeta: Record<string, { title: string; description: string }> = {
   'fat-freezing': {
-    title: 'Fat Freezing Malta | Cryolipolysis | Carisma Slimming',
-    description: 'Permanent fat removal with cryolipolysis (fat freezing) in Malta. Lose stubborn fat without surgery — medically supervised at Carisma Slimming.',
+    title: 'CoolSculpting Malta | Fat Freezing Treatment | Carisma Slimming',
+    description: 'Non-surgical fat freezing in Malta with CoolSculpting. Up to 27% fat reduction per session. FDA-cleared. Book your free body analysis at Carisma Slimming.',
   },
   'fat-dissolving': {
-    title: 'Fat Dissolving Injections Malta | Aqualyx | Carisma Slimming',
-    description: 'Fat dissolving injections (Aqualyx) in Malta to permanently eliminate stubborn fat pockets. Non-surgical, medically administered at Carisma Slimming.',
+    title: 'Fat Dissolving Injections Malta | Lemon Bottle | Carisma Slimming',
+    description: 'Fat dissolving injections in Malta targeting stubborn areas. Non-surgical, minimal downtime. Visible results in 2-4 weeks. Book your consultation.',
   },
   'muscle-stimulation': {
-    title: 'Muscle Stimulation Malta | EMSculpt | Carisma Slimming',
-    description: 'Build muscle and burn fat simultaneously with EMSculpt muscle stimulation in Malta. Achieve a sculpted physique at Carisma Slimming.',
+    title: 'EMSculpt NEO Malta | Build Muscle & Burn Fat | Carisma Slimming',
+    description: 'EMSculpt NEO in Malta. Build 25% more muscle, reduce 30% fat in 30 minutes. FDA-cleared body sculpting. Book your free consultation at Carisma Slimming.',
   },
   'skin-tightening': {
-    title: 'Skin Tightening Malta | RF Body Treatment | Carisma Slimming',
-    description: 'Non-invasive skin tightening treatments in Malta using radiofrequency technology. Firm, lift and contour skin at Carisma Slimming.',
+    title: 'VelaShape III Malta | Skin Tightening | Carisma Slimming',
+    description: 'VelaShape III skin tightening in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
   },
   lipocavitation: {
-    title: 'Lipocavitation Malta | Cavitation | Carisma Slimming',
-    description: 'Ultrasound lipocavitation in Malta to break down fat cells non-invasively. Targeted body contouring at Carisma Slimming.',
+    title: 'Lipocavitation Malta | Fat Reduction | Carisma Slimming',
+    description: 'Lipocavitation Fat Redultion in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
   },
   'anti-cellulite': {
-    title: 'Anti-Cellulite Treatment Malta | Carisma Slimming',
-    description: 'Effective anti-cellulite treatments in Malta combining advanced technologies to smooth skin and reduce the appearance of cellulite.',
+    title: 'Cellulite Treatment Malta | VelaShape III | Carisma Slimming',
+    description: 'Effective cellulite treatment in Malta using VelaShape III technology. Visible results from the first session. Non-invasive, no downtime. Book today.',
   },
   'lymphatic-drainage': {
-    title: 'Lymphatic Drainage Massage Malta | Carisma Slimming',
-    description: 'Professional lymphatic drainage massage in Malta to reduce bloating, improve circulation and support weight loss at Carisma Slimming.',
+    title: 'Lymphatic Drainage Malta | Detox Treatment | Carisma Slimming',
+    description: 'Professional lymphatic drainage massage in Malta. Reduce bloating, eliminate toxins, support weight loss. Feel lighter from your first session. Book now.',
   },
 };
 
