@@ -43,37 +43,9 @@ export default function Home() {
         compactHeadline
       />
 
-      {/* (1) Media / Press Strip */}
-      <section className="py-10" aria-label="As seen in media" style={{ backgroundColor: '#f9f7f5' }}>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center mb-2" aria-hidden="true" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '11px', fontWeight: '700', letterSpacing: '3px', textTransform: 'uppercase' }}>
-            As seen on
-          </p>
-          <div className="mx-auto mb-8" aria-hidden="true" style={{ width: '40px', height: '1px', backgroundColor: '#C9B8AE' }} />
-          <div className="flex flex-wrap items-center justify-center" style={{ gap: '52px', rowGap: '28px' }}>
-            {[
-              { label: 'Malta Today', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', width: 130, height: 34 },
-              { label: 'Bay Radio Malta', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', width: 130, height: 34 },
-              { label: 'Lovin Malta', src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', width: 155, height: 40 },
-              { label: 'Times of Malta', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', width: 130, height: 34 },
-              { label: 'MT Today', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', width: 130, height: 34 },
-            ].map((logo) => (
-              <Image
-                key={logo.label}
-                src={logo.src}
-                alt={`${logo.label} — Carisma Slimming featured`}
-                width={logo.width}
-                height={logo.height}
-                style={{ height: `${logo.height}px`, width: 'auto', objectFit: 'contain', filter: 'grayscale(1) opacity(0.5)', transition: 'filter 0.3s ease' }}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* (2) 4 Core Pillars of Our Weight Loss Methodology */}
       <section className="py-24" aria-labelledby="pillars-heading" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1007px' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center mb-2" aria-hidden="true" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
             4 core pillars of our weight loss methodology
           </p>
@@ -81,7 +53,7 @@ export default function Home() {
           <h2 id="pillars-heading" className="text-center mb-12" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.3', textTransform: 'uppercase' }}>
             malta&rsquo;s only multidisciplinary<br />slimming &amp; weight-loss approach
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ gap: '21px' }} role="list">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ gap: '28px' }} role="list">
             {[
               {
                 subheading: 'Know your body before starting any program',
@@ -136,26 +108,26 @@ export default function Home() {
                 ],
               },
             ].map((pillar) => (
-              <div key={pillar.title} role="listitem" style={{ padding: '22px 14px', background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
-                <div className="mb-5 flex items-center" style={{ height: '48px' }}>
+              <div key={pillar.title} role="listitem" style={{ padding: '28px 24px', background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div className="mb-5 flex items-center" style={{ height: '52px', flexShrink: 0 }}>
                   <Image
                     src={pillar.icon}
                     alt={pillar.iconAlt}
-                    width={44}
-                    height={44}
-                    style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }}
+                    width={48}
+                    height={48}
+                    style={{ maxHeight: '48px', width: 'auto', objectFit: 'contain' }}
                   />
                 </div>
-                <h3 className="mb-2" style={{ color: '#3c5a40', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: '1.4' }}>
+                <h3 className="mb-2" style={{ color: '#3c5a40', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', fontWeight: '700', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: '1.5', wordBreak: 'break-word' }}>
                   {pillar.title}
                 </h3>
-                <p className="mb-5" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400', lineHeight: '1.4' }}>
+                <p className="mb-4" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', fontWeight: '400', lineHeight: '1.6', borderBottom: '1px solid rgba(60,90,64,0.12)', paddingBottom: '14px' }}>
                   {pillar.subheading}
                 </p>
-                <ul className="space-y-2">
+                <ul className="space-y-3" style={{ flex: 1 }}>
                   {pillar.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '13px', lineHeight: '1.4' }}>
-                      <span aria-hidden="true" style={{ color: '#3c5a40', lineHeight: '1.4' }}>•</span>
+                    <li key={item} className="flex items-start gap-2" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '13px', lineHeight: '1.55', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3c5a40" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }} aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
                       <span>{item}</span>
                     </li>
                   ))}

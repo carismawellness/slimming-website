@@ -288,7 +288,7 @@ export default function PageHero({
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
             <Stars size={14} />
             <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>
-              <strong style={{ color: SAGE_TEXT }}>{proof?.rating || '4.9'}</strong> · {proof?.reviews || '800+'} Google reviews
+              <strong style={{ color: SAGE_TEXT }}>{proof?.rating || '4.9'}</strong> · {proof?.reviews || '800+'} verified client reviews
             </span>
           </div>
         </div>
