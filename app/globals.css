@@ -96,6 +96,37 @@
   --text-light: #595959;          /* secondary text on white = 7.00:1 AAA */
   --bg-light: #f5f5f5;
   --white: #ffffff;
+
+  /* ============================================================
+     LOCKED INTERACTION DESIGN SYSTEM
+     ============================================================ */
+  /* Radius tokens — buttons/pills = 999px; cards/inputs/containers/images = 16px */
+  --r-pill: 999px;
+  --r-card: 16px;
+  /* Sage interaction surface — used by .btn-* fills/borders + the focus ring.
+     #4f7256 on white = 5.42:1 (AA); white on #4f7256 = 5.42:1 (AA). */
+  --btn-sage: #4f7256;
+
+  /* ============================================================
+     LAYERS DESIGN SYSTEM — depth tokens (Whisper intensity)
+     ============================================================ */
+  /* Brand cool sweep — shared with the gradient-motif type language. */
+  --grad-1: #024c27;  /* deep forest */
+  --grad-2: #124e59;  /* dark teal   */
+  --grad-3: #6391ab;  /* slate blue  */
+  /* Liquid Gloss surface */
+  --lg-glass-bg: rgba(255, 255, 255, 0.62);
+  --lg-glass-blur: 18px;
+  --lg-glass-border: rgba(255, 255, 255, 0.65);
+  --lg-glass-inset: rgba(255, 255, 255, 0.85);
+  --lg-glass-shadow: 0 14px 36px rgba(40, 55, 44, 0.16);
+  /* Layer fields — kept faint on purpose */
+  --layer-motif-opacity: 0.06;
+  --layer-dot-opacity: 0.03;
+  --layer-grid-opacity: 0.025;
+  --blob-blur: 80px;
+  --blob-opacity: 0.22;
+  --blob-pulse: 10s;
 }
 
 @theme inline {
@@ -128,30 +159,169 @@ h1, h2, h3, h4, h5, h6 {
   position: relative;
   background-image: linear-gradient(135deg, #a7c5ab 0%, #8eb093 55%, #6e9576 100%);
   color: #ffffff;
-  border-radius: 999px;
+  border-radius: var(--r-pill);
   box-shadow:
     0 0 22px rgba(var(--cta-glow), 0.45),
     0 8px 24px rgba(var(--cta-glow), 0.5);
-  transition: all 0.25s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-image 0.3s ease;
   cursor: pointer;
+}
+/* Underline reveal — animated pseudo-element under the label, grows 0 -> 100% */
+.cta-glow::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.55em;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+  pointer-events: none;
 }
 .cta-glow:hover {
   background-image: linear-gradient(135deg, #8eb093 0%, #6e9576 65%, #5f8568 100%);
   box-shadow:
     0 0 30px rgba(var(--cta-glow), 0.62),
     0 12px 30px rgba(var(--cta-glow), 0.68);
-  transform: translateY(-1px);
+  transform: scale(1.04);
+}
+.cta-glow:hover::after {
+  width: 60%;
 }
 .cta-glow:active {
-  transform: translateY(0);
+  transform: scale(1.0);
 }
 @media (prefers-reduced-motion: reduce) {
   .cta-glow,
   .cta-glow:hover,
   .cta-glow:active {
     transform: none;
-    transition: box-shadow 0.25s ease, background-image 0.25s ease;
+    transition: box-shadow 0.3s ease, background-image 0.3s ease;
   }
+  .cta-glow::after,
+  .cta-glow:hover::after {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   LOCKED INTERACTION DESIGN SYSTEM — buttons, cards, inputs
+   Class API implemented centrally; page agents APPLY these names.
+   ============================================================ */
+
+/* ---- .btn base: pill radius, 300ms transition, pointer ---- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-pill);
+  transition: transform 0.3s ease, background-color 0.3s ease,
+    color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+/* Animated underline reveal shared by both button variants */
+.btn::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0.5em;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transform: translateX(-50%);
+  transition: width 0.3s ease;
+  pointer-events: none;
+}
+.btn:hover::after {
+  width: 60%;
+}
+
+/* ---- .btn-primary: sage fill, white text. Hover: scale + INVERT ----
+   Default: white on #4f7256 = 5.42:1 (AA).
+   Hover:   #4f7256 text on white w/ sage border = 5.42:1 (AA). */
+.btn-primary {
+  background-color: var(--btn-sage);
+  color: #ffffff;
+  border: 1px solid var(--btn-sage);
+}
+.btn-primary:hover {
+  background-color: #ffffff;
+  color: var(--btn-sage);
+  border-color: var(--btn-sage);
+  transform: scale(1.04);
+}
+
+/* ---- .btn-secondary: outlined sage. Hover: scale + invert to filled ----
+   Default: #4f7256 text + border on white = 5.42:1 (AA).
+   Hover:   white text on #4f7256 fill = 5.42:1 (AA). */
+.btn-secondary {
+  background-color: #ffffff;
+  color: var(--btn-sage);
+  border: 1px solid var(--btn-sage);
+}
+.btn-secondary:hover {
+  background-color: var(--btn-sage);
+  color: #ffffff;
+  border-color: var(--btn-sage);
+  transform: scale(1.04);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn:hover,
+  .btn-primary:hover,
+  .btn-secondary:hover {
+    transform: none;
+  }
+  .btn::after,
+  .btn:hover::after {
+    transition: none;
+  }
+}
+
+/* ---- .card: 16px radius, soft shadow, 1px border. Hover: border darkens + shadow grows ---- */
+.card {
+  border-radius: var(--r-card);
+  background: var(--white);
+  border: 1px solid rgba(40, 55, 44, 0.12);
+  box-shadow: 0 4px 16px rgba(40, 55, 44, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card:hover {
+  border-color: rgba(40, 55, 44, 0.28);
+  box-shadow: 0 10px 28px rgba(40, 55, 44, 0.16);
+}
+
+/* ---- .card-lift: .card PLUS hover translateY(-6px) + scale(1.02) + elevated shadow ----
+   Use on REVIEW / TESTIMONIAL cards (the "raise" effect). */
+.card-lift {
+  border-radius: var(--r-card);
+  background: var(--white);
+  border: 1px solid rgba(40, 55, 44, 0.12);
+  box-shadow: 0 4px 16px rgba(40, 55, 44, 0.08);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+.card-lift:hover {
+  border-color: rgba(40, 55, 44, 0.28);
+  box-shadow: 0 22px 48px -12px rgba(40, 55, 44, 0.28);
+  transform: translateY(-6px) scale(1.02);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card:hover,
+  .card-lift,
+  .card-lift:hover {
+    transform: none;
+  }
+}
+
+/* ---- Inputs: 16px radius globally + visible focus ring ---- */
+input, select, textarea {
+  border-radius: var(--r-card);
 }
 
 @keyframes marquee {
@@ -169,13 +339,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ---- Global visible focus indicator (WCAG 2.2 / 2.4.7 + 1.4.11) ----
-   Never removed; >=3:1 against typical light backgrounds. --focus-ring
-   (#4f7256) is 5.42:1 vs white. A white outer ring keeps it visible on the
-   sage CTA fill too. Applies on keyboard focus across all interactive elems. */
-:where(a, button, input, textarea, select, summary, [tabindex]):focus-visible {
+   CRITICAL: do NOT wrap this in :where() — that yields ZERO specificity and
+   Tailwind's `outline-none` / `outline-hidden` utilities (specificity 0,1,0)
+   silently win, killing the ring. A real selector list carries (0,1,1)
+   specificity and reliably beats those utilities so the ring is never lost.
+   --focus-ring (#024c27) is >=3:1 against white & light tints; the 4px sage
+   (#4f7256, 5.42:1 vs white) outer ring keeps it visible everywhere. */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+summary:focus-visible,
+[tabindex]:focus-visible {
   outline: 3px solid var(--focus-ring);
   outline-offset: 2px;
   border-radius: 4px;
+}
+/* Inputs get the locked treatment: ink (#1a1a1a) border + 4px sage outline ring. */
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  outline: 4px solid var(--btn-sage);
+  outline-offset: 2px;
+  border-color: #1a1a1a;
+  border-radius: var(--r-card);
 }
 /* On the dark cookie bar / sage fills, add a light halo so the ring stays
    visible regardless of the underlying colour. */
@@ -216,5 +404,98 @@ h1, h2, h3, h4, h5, h6 {
 .hero-float-2 { animation: cx-float 6.8s ease-in-out infinite; animation-delay: -2.4s; }
 @media (prefers-reduced-motion: reduce) {
   .hero-float, .hero-float-2 { animation: none; }
+}
+
+/* ---- No hanging lines (typographic orphans/widows) ----
+   `balance` evens out multi-line headings (no lone trailing word); `pretty`
+   pulls a stray last word back up in body copy. Degrades to normal wrapping
+   on older browsers. Applies site-wide. */
+h1, h2, h3, h4, h5, h6 { text-wrap: balance; }
+p, li, blockquote, figcaption, dd, dt { text-wrap: pretty; }
+
+/* ============================================================
+   LAYERS DESIGN SYSTEM — depth primitives (Whisper intensity)
+   Apply sparingly. Per viewport: <=1 motif watermark, <=1 blob,
+   <=1 backdrop-filter glass layer. Dots/grid are flat & cheap.
+   ============================================================ */
+
+/* Liquid Gloss surface — the navbar / .hero-glass recipe, reusable. */
+.lg-glass {
+  background: var(--lg-glass-bg);
+  backdrop-filter: blur(var(--lg-glass-blur)) saturate(180%);
+  -webkit-backdrop-filter: blur(var(--lg-glass-blur)) saturate(180%);
+  border: 1px solid var(--lg-glass-border);
+  box-shadow: var(--lg-glass-shadow), inset 0 1px 0 var(--lg-glass-inset);
+}
+.lg-glass--panel { border-radius: var(--r-card); }
+
+/* Raised feature card — reads as lifted above a gradient field. */
+.lg-raised {
+  background: #fff;
+  border: 1px solid rgba(40, 55, 44, 0.06);
+  border-radius: var(--r-card);
+  box-shadow:
+    0 1px 2px rgba(40, 55, 44, 0.06),
+    0 12px 28px -12px rgba(40, 55, 44, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.lg-raised--hover:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 2px 4px rgba(40, 55, 44, 0.08),
+    0 20px 40px -16px rgba(40, 55, 44, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+/* Flat CSS texture layers (zero image requests) — placed by GradientField. */
+.layer-dots {
+  background-image: radial-gradient(circle, rgba(2, 76, 39, 1) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: var(--layer-dot-opacity);
+}
+.layer-grid {
+  background-image:
+    linear-gradient(rgba(18, 78, 89, 1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 78, 89, 1) 1px, transparent 1px);
+  background-size: 64px 64px;
+  opacity: var(--layer-grid-opacity);
+}
+
+/* Localized pulsing blob. */
+.layer-blob {
+  position: absolute;
+  width: 42vw;
+  max-width: 460px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 50%,
+    rgba(99, 145, 171, 0.9) 0%, rgba(2, 76, 39, 0.55) 45%, transparent 70%);
+  filter: blur(var(--blob-blur));
+  opacity: var(--blob-opacity);
+  animation: lg-pulse var(--blob-pulse) ease-in-out infinite;
+}
+@keyframes lg-pulse {
+  0%, 100% { transform: scale(1);    opacity: calc(var(--blob-opacity) * 0.85); }
+  50%      { transform: scale(1.12); opacity: var(--blob-opacity); }
+}
+
+/* Motif accent — recolored via mask so color/opacity follow tokens. */
+.layer-motif {
+  background-color: var(--grad-2);
+  -webkit-mask: url(/motifs/strokes.svg) no-repeat center / contain;
+  mask: url(/motifs/strokes.svg) no-repeat center / contain;
+  opacity: var(--layer-motif-opacity);
+}
+.layer-motif--divider {
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: auto 100%;
+  mask-size: auto 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer-blob { animation: none; }
+  .lg-raised, .lg-raised--hover:hover { transition: none; }
 }
 
