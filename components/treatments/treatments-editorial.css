@@ -1,0 +1,204 @@
+/* ============================================================================
+   Treatments — Editorial layout
+   Scoped to .treatments-editorial so these utility-ish class names never leak.
+   Palette: deep sage #4f7256 / forest #024C27 (headings, links, underline),
+   taupe #6f6456 / #5a5043 (body), bright sage #8EB093 DECORATIVE only.
+   ========================================================================== */
+
+.treatments-editorial {
+  max-width: 1180px;
+}
+
+/* ---- Scroll-reveal -------------------------------------------------------
+   Hidden start state only applies once JS has armed the element ([data-armed]),
+   so no-JS / SSR renders stay fully visible. Motion is disabled under
+   prefers-reduced-motion. */
+.treatments-editorial .reveal {
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.treatments-editorial .reveal[data-armed] {
+  opacity: 0;
+  transform: translateY(26px);
+}
+.treatments-editorial .reveal.is-revealed {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---- Grid composition ----------------------------------------------------
+   Mobile-first: single clean column, heading first, generous rhythm. */
+.treatments-editorial .te-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 44px;
+  justify-items: center;
+}
+
+/* ---- Heading block ------------------------------------------------------- */
+.treatments-editorial .te-heading {
+  text-align: center;
+  max-width: 540px;
+  padding: 4px 0 8px;
+}
+.treatments-editorial .te-heading h2 {
+  color: #024c27;
+  font-family: 'Trajan Pro', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 6.4vw, 46px);
+  line-height: 1.18;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+  text-wrap: balance;
+}
+.treatments-editorial .te-heading__rule {
+  display: block;
+  width: 88px;
+  height: 2px;
+  margin: 22px auto;
+  background: linear-gradient(90deg, #8eb093, #4f7256);
+  border-radius: 2px;
+}
+.treatments-editorial .te-heading__sub {
+  color: #5a5043;
+  font-family: 'Roboto', sans-serif;
+  font-size: 15px;
+  line-height: 1.7;
+  margin: 0 auto;
+  max-width: 440px;
+}
+
+/* ---- Cards --------------------------------------------------------------- */
+.treatments-editorial .te-card {
+  width: 100%;
+  max-width: 360px;
+}
+.treatments-editorial .te-card__link {
+  display: block;
+  text-decoration: none;
+  border-radius: 22px;
+  outline: none;
+}
+.treatments-editorial .te-card__link:focus-visible {
+  outline: 2px solid #024c27;
+  outline-offset: 6px;
+}
+.treatments-editorial .te-card__frame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #e9efe7;
+  box-shadow:
+    0 14px 34px rgba(2, 76, 39, 0.12),
+    0 3px 10px rgba(40, 33, 28, 0.08);
+  transition:
+    transform 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+    box-shadow 0.45s ease;
+}
+.treatments-editorial .te-card__img {
+  transition: transform 0.6s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+/* Gentle hover lift + subtle zoom */
+.treatments-editorial .te-card__link:hover .te-card__frame,
+.treatments-editorial .te-card__link:focus-visible .te-card__frame {
+  transform: translateY(-6px);
+  box-shadow:
+    0 22px 48px rgba(2, 76, 39, 0.18),
+    0 6px 16px rgba(40, 33, 28, 0.1);
+}
+.treatments-editorial .te-card__link:hover .te-card__img {
+  transform: scale(1.04);
+}
+
+.treatments-editorial .te-card__title {
+  color: #024c27;
+  font-family: 'Novecento Wide Book', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.6px;
+  line-height: 1.3;
+  text-transform: uppercase;
+  margin: 20px 0 0;
+  transition: color 0.3s ease;
+}
+.treatments-editorial .te-card__link:hover .te-card__title {
+  color: #4f7256;
+}
+/* Thin sage underline accent beneath the title */
+.treatments-editorial .te-card__rule {
+  display: block;
+  width: 40px;
+  height: 2px;
+  margin: 10px 0 0;
+  background-color: #4f7256;
+  border-radius: 2px;
+  transition: width 0.4s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+.treatments-editorial .te-card__link:hover .te-card__rule {
+  width: 64px;
+}
+.treatments-editorial .te-card__subtitle {
+  color: #6f6456;
+  font-family: 'Roboto', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.55;
+  margin: 12px 0 0;
+  max-width: 320px;
+}
+
+/* ---- Desktop editorial composition (lg+) --------------------------------
+   3 columns; heading occupies the centre; cards flank and sit above/below it
+   with per-card vertical nudges (--lg-offset) for the airy asymmetric scatter. */
+@media (min-width: 1024px) {
+  .treatments-editorial .te-grid {
+    grid-template-columns: 1fr 1.08fr 1fr;
+    column-gap: 48px;
+    row-gap: 8px;
+    align-items: start;
+    justify-items: stretch;
+    grid-template-areas:
+      'c1 .  c2'
+      'c1 h  c2'
+      'c3 h  c4'
+      'c3 c5 c6';
+  }
+  .treatments-editorial .te-heading {
+    align-self: center;
+    padding: 24px 8px;
+    max-width: none;
+  }
+  .treatments-editorial .te-card {
+    max-width: 320px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: var(--lg-offset, 0px);
+    margin-bottom: 28px;
+  }
+}
+
+/* ---- Reduced motion: no transforms, no reveal hiding, instant + calm ------ */
+@media (prefers-reduced-motion: reduce) {
+  .treatments-editorial .reveal,
+  .treatments-editorial .reveal[data-armed],
+  .treatments-editorial .te-card__frame,
+  .treatments-editorial .te-card__img,
+  .treatments-editorial .te-card__rule,
+  .treatments-editorial .te-card__title {
+    transition: none !important;
+  }
+  .treatments-editorial .reveal[data-armed] {
+    opacity: 1;
+    transform: none;
+  }
+  .treatments-editorial .te-card__link:hover .te-card__frame {
+    transform: none;
+  }
+  .treatments-editorial .te-card__link:hover .te-card__img {
+    transform: none;
+  }
+}

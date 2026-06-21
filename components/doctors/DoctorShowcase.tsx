@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { DOCTORS } from '@/lib/doctors';
 
@@ -18,11 +18,48 @@ const BODY_FONT = 'Roboto, sans-serif';
 
 function DoctorCard({ doctor, index }: { doctor: (typeof DOCTORS)[number]; index: number }) {
   const [expanded, setExpanded] = useState(false);
+  // Cards always render fully visible by default (SSR / no-JS / reduced-motion).
+  // We only opt INTO the hidden→revealed animation once JS confirms the
+  // IntersectionObserver is wired and the user hasn't asked for reduced motion.
+  const [revealed, setRevealed] = useState(true);
+  const ref = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof IntersectionObserver === 'undefined') return;
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduceMotion) return; // keep cards visible immediately, no transforms
+
+    const node = ref.current;
+    if (!node) return;
+
+    // Opt into the animation: start hidden, then reveal on scroll-in.
+    setRevealed(false);
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setRevealed(true);
+            observer.disconnect();
+          }
+        });
+      },
+      { threshold: 0.18, rootMargin: '0px 0px -8% 0px' },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <article
+      ref={ref}
       className="doctor-card"
+      data-revealed={revealed ? 'true' : 'false'}
       style={{
+        // Staggered, sequential reveal — each card eases in ~150ms after the prior.
+        '--reveal-delay': `${index * 150}ms`,
         display: 'flex',
         flexDirection: 'column',
         background: '#ffffff',
@@ -31,7 +68,7 @@ function DoctorCard({ doctor, index }: { doctor: (typeof DOCTORS)[number]; index
         border: `1px solid ${HAIRLINE}`,
         boxShadow: '0 18px 44px rgba(26,26,26,0.08)',
         height: '100%',
-      }}
+      } as React.CSSProperties}
     >
       {/* Portrait — large, 3:4, fills card top */}
       <div
@@ -162,15 +199,43 @@ export default function DoctorShowcase() {
           transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s cubic-bezier(.2,.7,.2,1);
           will-change: transform;
         }
+        /* ── Scroll-driven "one-by-one" reveal ─────────────────────────────
+           Hidden state translates the card down + fades it out; revealing
+           eases it into place. The per-card --reveal-delay (set inline) makes
+           the cards appear sequentially as the section scrolls into view.
+           Only opacity/transform animate — content is always in the DOM. */
+        .doctor-card[data-revealed='false'] {
+          opacity: 0;
+          transform: translateY(34px) scale(.98);
+          transition:
+            opacity .62s cubic-bezier(.22,.61,.36,1) var(--reveal-delay, 0ms),
+            transform .62s cubic-bezier(.22,.61,.36,1) var(--reveal-delay, 0ms);
+        }
+        .doctor-card[data-revealed='true'] {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+          transition:
+            opacity .62s cubic-bezier(.22,.61,.36,1) var(--reveal-delay, 0ms),
+            transform .62s cubic-bezier(.22,.61,.36,1) var(--reveal-delay, 0ms);
+        }
         @media (hover: hover) {
-          .doctor-card:hover {
+          /* Hover lift only applies once the card has finished revealing. */
+          .doctor-card[data-revealed='true']:hover {
             transform: translateY(-6px);
             box-shadow: 0 28px 60px rgba(26,26,26,0.14);
+            transition: transform .4s cubic-bezier(.2,.7,.2,1), box-shadow .4s cubic-bezier(.2,.7,.2,1);
           }
         }
         @media (prefers-reduced-motion: reduce) {
-          .doctor-card { transition: none; }
-          .doctor-card:hover { transform: none; }
+          /* No transforms/animation: cards are fully visible immediately. */
+          .doctor-card,
+          .doctor-card[data-revealed='false'],
+          .doctor-card[data-revealed='true'] {
+            opacity: 1 !important;
+            transform: none !important;
+            transition: none !important;
+          }
+          .doctor-card:hover { transform: none !important; }
         }
       `}</style>
 

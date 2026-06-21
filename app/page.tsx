@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import TreatmentsCarousel3D from '@/components/TreatmentsCarousel3D';
+import TreatmentsEditorial from '@/components/TreatmentsEditorial';
 import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
@@ -159,15 +159,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* (3) Explore Our Modalities */}
+      {/* (3) Explore Our Treatments — editorial composition */}
       <section className="py-24" aria-labelledby="modalities-heading" style={{ backgroundColor: '#ffffff' }}>
-        <div className="text-center mb-12">
-          <h2 id="modalities-heading" className="mb-3" style={{ color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
-            Our weight loss &amp; body contouring treatments in Malta
-          </h2>
-          <div className="mx-auto" aria-hidden="true" style={{ width: '120px', height: '1px', backgroundColor: '#C9B8AE' }} />
-        </div>
-        <TreatmentsCarousel3D />
+        <TreatmentsEditorial />
       </section>
 
       {/* (4) Our Results Guarantee — "The Carisma Pact" + ambient 3D silk */}
