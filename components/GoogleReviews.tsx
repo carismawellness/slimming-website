@@ -303,7 +303,7 @@ export default function GoogleReviews() {
               flexWrap: 'wrap',
             }}
           >
-            <span>800 reviews on</span>
+            <span>800+ reviews on</span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
               <GoogleG size={14} /> Google
             </span>
