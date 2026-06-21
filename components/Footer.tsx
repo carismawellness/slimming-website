@@ -6,6 +6,7 @@ import SiteSearch from './SiteSearch';
 import GoogleReviews from './GoogleReviews';
 import BookConsultationButton from './BookConsultationButton';
 import DoctorShowcase from './doctors/DoctorShowcase';
+import FooterRose from './FooterRose';
 
 // ─── Shared design tokens (cross-file consistent) ───────────────────────────────
 // The whole footer sits on the homepage above-the-fold gradient hue.
@@ -276,12 +277,15 @@ function FooterBase() {
 // ─── Main export ──────────────────────────────────────────────────────────────
 export default function Footer() {
   return (
-    <footer style={{ background: GRADIENT }}>
-      <GoogleReviews />
-      <DoctorsSection />
-      <BookSection />
-      <BrandsSection />
-      <FooterBase />
+    <footer style={{ background: GRADIENT, position: 'relative', overflow: 'hidden', isolation: 'isolate' }}>
+      <FooterRose />
+      <div style={{ position: 'relative', zIndex: 1 }}>
+        <GoogleReviews />
+        <DoctorsSection />
+        <BookSection />
+        <BrandsSection />
+        <FooterBase />
+      </div>
     </footer>
   );
 }
