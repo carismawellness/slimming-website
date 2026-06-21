@@ -80,3 +80,17 @@ notices. See also [AGENTS.md](AGENTS.md).
 
 - Push to `main` → Vercel auto-deploys. Doc/cleanup changes don't affect the build;
   code changes do — always verify `npm run build` first.
+
+### Auto-deploy (no "want me to push?" prompts)
+
+- A Claude Code **Stop hook** runs `.claude/auto-deploy.sh` after every turn: it
+  pushes any *committed* changes on the current branch to `main` (→ Vercel deploys
+  to production). So **commit your work and it goes live automatically — never ask
+  the user before pushing.**
+- The hook is **push-only**: it never `git add`/`commit`s, so uncommitted /
+  in-progress work is never deployed by surprise. To deploy, just commit.
+- Always run `npm run build` before committing — Vercel build-gates production, but
+  a green local build keeps the history clean.
+- Hook wiring: committed `.claude/settings.json` (fires when this repo is the
+  Claude project) + the user's local `…/Carisma AI/.claude/settings.local.json`
+  (fires when working from the vault root). Manage/disable via `/hooks`.
