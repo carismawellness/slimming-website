@@ -1,7 +1,6 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
-import DoctorShowcase from '@/components/doctors/DoctorShowcase';
 
 // Accessible brand tokens (WCAG AA). Bright brand sage #8EB093 and taupe #9B8D83
 // fail as text on white/near-white, so text/heading uses darkened same-family values.
@@ -56,8 +55,6 @@ export default function BrandBlock() {
 
   return (
     <div>
-      {/* Doctor showcase — 3D coverflow carousel (replaces the long stacked rows) */}
-      <DoctorShowcase />
 
       {/* Your Bible to Sustainable Weight Loss Management */}
       <section className="py-16" aria-labelledby="guide-heading" style={{ backgroundColor: '#ffffff' }}>

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import SiteSearch from './SiteSearch';
 import GoogleReviews from './GoogleReviews';
 import BookConsultationButton from './BookConsultationButton';
+import DoctorShowcase from './doctors/DoctorShowcase';
 
 // ─── Brand tokens ──────────────────────────────────────────────────────────────
 const DEEP  = '#024C27';
@@ -20,27 +21,6 @@ const IG_URL = 'https://www.instagram.com/carismaslimming';
 const FB_URL = 'https://www.facebook.com/carismaaesthetics/';
 
 // ─── Static data ───────────────────────────────────────────────────────────────
-const DOCTORS = [
-  {
-    name: 'Dr. Zaid Teebi',
-    title: 'Medical Weight Loss Consultant',
-    img: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png',
-    bio: 'Over 30 years of clinical experience in general medicine, geriatrics and sports medicine. Completed pain management training at Harvard and allergy therapy at Imperial College London — personally conducting every medical weight loss consultation.',
-  },
-  {
-    name: 'Dr. Giovanni Scornavacca',
-    title: 'Aesthetic Medicine Specialist',
-    img: '/wix/87fc13_e903680b4d124adda85e7ade5dfd676b~mv2.png',
-    bio: '20+ years trained across leading Italian universities, specialising in regenerative aesthetics — PRP, stem cells, dermal fillers and medical-grade lasers. His philosophy: restoration, not change. Natural, harmonious results that honour your face.',
-  },
-  {
-    name: 'Dr. Francesca Chircop',
-    title: 'Aesthetic Doctor & Laser Specialist',
-    img: '/wix/87fc13_26127e01d9fb4ec48fb0b2f7ccb73508~mv2.png',
-    bio: 'London-trained with 8+ years in medical aesthetics and a foundation in orthopaedic surgery. Leads our Lip Flip programme and medical-grade laser hair removal — conservative, personalised plans. Refreshed, never overdone.',
-  },
-];
-
 const BRANDS = [
   {
     title: 'Carisma Spa & Wellness',
@@ -87,34 +67,9 @@ function Rule({ dark = false }: { dark?: boolean }) {
   return <div style={{ width: '36px', height: '1px', backgroundColor: dark ? 'rgba(201,216,193,0.4)' : '#C9B8AE', marginBottom: '24px' }} />;
 }
 
-// ─── Section: Doctors ─────────────────────────────────────────────────────────
+// ─── Section: Doctors — award-winning 3D coverflow showcase ───────────────────
 function DoctorsSection() {
-  return (
-    <section aria-labelledby="footer-doctors-h" style={{ background: '#fff', padding: '80px 0 72px' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div style={{ textAlign: 'center', marginBottom: '52px' }}>
-          <Eyebrow>Our medical team</Eyebrow>
-          <Rule />
-          <h2 id="footer-doctors-h" style={{ fontFamily: SERIF, fontSize: 'clamp(22px,3vw,30px)', fontWeight: 400, color: DEEP, letterSpacing: '1px', textTransform: 'uppercase' }}>
-            Doctor-led from day one
-          </h2>
-        </div>
-        <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', justifyContent: 'center' }}>
-          {DOCTORS.map((doc) => (
-            <div key={doc.name} style={{ flex: '1 1 270px', maxWidth: '320px', background: 'linear-gradient(160deg,#F7FAF6 0%,#EDF4EA 100%)', borderRadius: '20px', padding: '32px 24px', boxShadow: '0 4px 24px rgba(2,76,39,0.07)', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <div style={{ width: '108px', height: '136px', marginBottom: '20px', borderTopLeftRadius: '10px', borderTopRightRadius: '48px', borderBottomLeftRadius: '48px', borderBottomRightRadius: '10px', overflow: 'hidden', boxShadow: '6px -6px 0 #C9D8C1', flexShrink: 0 }}>
-                <Image src={doc.img} alt={`${doc.name} — Carisma medical team`} width={108} height={136} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} loading="lazy" />
-              </div>
-              <h3 style={{ fontFamily: SERIF, fontSize: '15px', fontWeight: 400, color: DEEP, letterSpacing: '0.5px', marginBottom: '4px', textAlign: 'center' }}>{doc.name}</h3>
-              <p style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', color: SAGE, textTransform: 'uppercase', textAlign: 'center', marginBottom: '14px' }}>{doc.title}</p>
-              <div style={{ width: '28px', height: '1px', background: LIGHT, marginBottom: '14px' }} />
-              <p style={{ fontFamily: BODY, fontSize: '13px', lineHeight: 1.75, color: TAUPE, textAlign: 'center' }}>{doc.bio}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
+  return <DoctorShowcase />;
 }
 
 // ─── Section: Book / Slimming Guide ───────────────────────────────────────────
