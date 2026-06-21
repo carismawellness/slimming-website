@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
+import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
@@ -239,66 +240,44 @@ export default function Home() {
               How GLP-1 Weight Loss<br />Works at Our Clinic
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
-            {/* Left - text */}
-            <div className="order-2 md:order-1">
-              <p className="mb-6" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
-                GLP-1s are naturally occurring hormones that help regulate appetite and blood sugar. GLP-1 prescription medications — such as Ozempic and Mounjaro — mimic or boost these signals so you feel full sooner, think about food less, and can lose weight more effectively when combined with a structured slimming plan and personalised meal plan.
+          {/* Intro */}
+          <p className="text-center mx-auto mb-4" style={{ maxWidth: '720px', color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
+            GLP-1s are naturally occurring hormones that help regulate appetite and blood sugar. Prescription GLP-1s — such as Ozempic and Mounjaro — mimic these signals so you feel full sooner and think about food less, working best alongside a structured slimming plan and personalised meal plan.
+          </p>
+          <p className="text-center mx-auto mb-12" style={{ maxWidth: '660px', color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            At our clinic, GLP-1 is an optional tool within your weight loss program — not a shortcut for everyone:
+          </p>
+
+          {/* Vertical step timeline */}
+          <StepTimeline
+            steps={[
+              { title: 'Full Medical Assessment', desc: 'You first have a full medical weight loss assessment, body scan and review of your history and bloods.' },
+              { title: 'Doctor Review & Options', desc: 'If you medically qualify, the doctor explains your options, expected results and side effects so you can decide with confidence.' },
+              { title: 'Part of a Full Plan', desc: 'Any prescription is paired with a personalised meal plan, movement and accountability — never used on its own.' },
+              { title: 'Ongoing Monitoring', desc: 'We monitor your progress and symptoms, adjust or stop treatment when needed, and plan for life after the medication.' },
+              { title: 'Honest Guidance', desc: 'If GLP-1 is not right for you, we tell you clearly and focus on non-medication weight loss routes that match your health and goals.' },
+            ]}
+          />
+
+          {/* Pull-quote */}
+          <div className="mx-auto mt-16" style={{ maxWidth: '620px', paddingLeft: '24px' }}>
+            <blockquote style={{ borderLeft: '3px solid #4f7256', paddingLeft: '20px' }}>
+              <p style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontSize: '15px', lineHeight: '1.65', fontStyle: 'italic', letterSpacing: '0.3px', margin: 0 }}>
+                To protect quality of care, our guaranteed weight loss transformation programs are limited to a small number of clients each month. Check if you qualify.
               </p>
-              <p className="mb-5" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                At our slimming clinic, GLP-1 is an optional tool within your weight loss program, not a shortcut for everyone:
-              </p>
-              <div className="mb-7" style={{ width: '100%', maxWidth: '560px', height: '1px', backgroundColor: '#C9D8C1' }} aria-hidden="true" />
-              <div className="space-y-5">
-                {[
-                  'You first have a full medical weight loss assessment, body scan and review of your history and bloods',
-                  'If you medically qualify, the doctor explains your options, expected results and side effects so you can decide with confidence',
-                  'Any prescription is paired with a personalised meal plan, movement and accountability, never used on its own',
-                  'We monitor your progress and symptoms, adjust or stop treatment when needed and plan for life after the medication',
-                  'If GLP-1 is not right for you, we will tell you clearly and focus on non-medication weight loss routes that match your health and goals',
-                ].map((step, idx) => (
-                  <div key={idx} className="flex items-start gap-3">
-                    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
-                      <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
-                      <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    <p style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
-                      {step}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              {/* Pull-quote */}
-              <div className="mt-10 relative" style={{ paddingLeft: '24px' }}>
-                <span aria-hidden="true" style={{ position: 'absolute', left: 0, top: '-10px', fontFamily: 'Georgia, serif', fontSize: '56px', lineHeight: '1', color: '#4f7256', opacity: 0.35 }}>&ldquo;</span>
-                <blockquote style={{ borderLeft: '3px solid #4f7256', paddingLeft: '20px', paddingTop: '4px', paddingBottom: '4px' }}>
-                  <p style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontSize: '15px', lineHeight: '1.65', fontStyle: 'italic', letterSpacing: '0.3px' }}>
-                    To protect quality of care, our guaranteed weight loss transformation programs are limited to a small number of clients each month. Check if you qualify.
-                  </p>
-                  <span aria-hidden="true" style={{ display: 'block', textAlign: 'right', fontFamily: 'Georgia, serif', fontSize: '56px', lineHeight: '0.6', color: '#4f7256', opacity: 0.35, marginTop: '4px' }}>&rdquo;</span>
-                </blockquote>
-              </div>
-            </div>
-            {/* Right - image + CTA */}
-            <div className="flex flex-col items-center gap-8 order-1 md:order-2">
-              <Image
-                src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png"
-                alt="Medical weight loss consultation at Carisma Slimming Malta"
-                width={400}
-                height={540}
-                style={{ width: '100%', maxWidth: '400px', height: 'auto', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '120px 16px 16px 16px', boxShadow: '0 24px 60px rgba(2,76,39,0.15), 0 8px 24px rgba(0,0,0,0.08)' }}
-              />
-              <div style={{ width: '100%', maxWidth: '400px' }}>
-                <a
-                  href="/consultation"
-                  className="cta-glow"
-                  style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 32px', display: 'inline-block', fontWeight: 700, color: '#ffffff', width: '100%', textAlign: 'center', textDecoration: 'none' }}
-                  aria-label="Book my free body analysis"
-                >
-                  Book My Free Body Analysis
-                </a>
-              </div>
-            </div>
+            </blockquote>
+          </div>
+
+          {/* CTA */}
+          <div className="text-center mt-10">
+            <a
+              href="/consultation"
+              className="cta-glow"
+              style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 44px', display: 'inline-block', fontWeight: 700, color: '#ffffff', textDecoration: 'none' }}
+              aria-label="Book my free body analysis"
+            >
+              Book My Free Body Analysis
+            </a>
           </div>
         </div>
       </section>
