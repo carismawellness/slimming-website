@@ -6,7 +6,6 @@ import PageHero from '@/components/PageHero';
 import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, faqPage, serviceSchema } from '@/lib/seo/schema';
-import BookConsultationButton from '@/components/BookConsultationButton';
 import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
@@ -289,7 +288,6 @@ function ProblemAgitationSection() {
             </p>
             <div className="mt-6 flex flex-wrap justify-center gap-3">
               <CTAButton label="GET YOUR FREE BODY ANALYSIS" />
-              <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '14px 28px' }} />
             </div>
           </div>
         </div>
@@ -984,7 +982,6 @@ function CarismaWellnessSection() {
               >
                 Get Your Free Body Analysis &rsaquo;
               </a>
-              <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
             </div>
             <div className="flex items-center gap-3">
               <Image src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="" role="presentation" width={34} height={34} style={{ width: '34px', height: 'auto', objectFit: 'contain' }} loading="lazy" />
@@ -1209,7 +1206,6 @@ function TestimonialsSection() {
         </div>
         <div className="mt-12 flex flex-wrap justify-center gap-3">
           <CTAButton label="START YOUR OWN RESULT" />
-          <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '14px 28px' }} />
         </div>
         <div className="text-center mt-4">
           <CTAReassurance />
@@ -1551,7 +1547,6 @@ function FinalCTASection() {
           </ul>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <CTAButton />
-            <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
             <PhoneButton />
           </div>
           <CTAReassurance className="mt-5" />

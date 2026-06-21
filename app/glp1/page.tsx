@@ -13,7 +13,6 @@ import {
   medicalWebPage,
 } from '@/lib/seo/schema';
 import { glp1Faqs } from '@/lib/faq/glp1';
-import BookConsultationButton from '@/components/BookConsultationButton';
 import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
@@ -317,7 +316,6 @@ export default function GLP1Page() {
             >
               book your medical consultation
             </a>
-            <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
           </div>
         </div>
       </section>
@@ -399,7 +397,6 @@ export default function GLP1Page() {
                 >
                   Book your medical consultation
                 </a>
-                <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
               </div>
             </div>
           </div>
@@ -497,7 +494,6 @@ export default function GLP1Page() {
                   >
                     Book your medical consultation
                   </a>
-                  <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
                 </div>
               </div>
               <div className="flex flex-col gap-5">
@@ -598,7 +594,6 @@ export default function GLP1Page() {
                   >
                     Book your medical consultation
                   </a>
-                  <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '12px 20px' }} />
                 </div>
                 <div className="flex items-center justify-center gap-1">
                   <img src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png" alt="Google" style={{ width: '23px', height: '23px', objectFit: 'contain', marginRight: '4px' }} />
