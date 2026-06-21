@@ -121,9 +121,9 @@
   --lg-glass-inset: rgba(255, 255, 255, 0.85);
   --lg-glass-shadow: 0 14px 36px rgba(40, 55, 44, 0.16);
   /* Layer fields — kept faint on purpose */
-  --layer-motif-opacity: 0.06;
-  --layer-dot-opacity: 0.03;
-  --layer-grid-opacity: 0.025;
+  --layer-motif-opacity: 0.10;
+  --layer-dot-opacity: 0.05;
+  --layer-grid-opacity: 0.04;
   --blob-blur: 80px;
   --blob-opacity: 0.22;
   --blob-pulse: 10s;
