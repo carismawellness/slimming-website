@@ -30,12 +30,12 @@ export const DOCTORS: Doctor[] = [
   },
   {
     name: 'Dr. Francesca Chircop',
-    role: 'Medical Aesthetics',
+    role: 'Fat-Dissolving & Contouring',
     years: '8+ years',
     highlight:
-      'London-trained aesthetic doctor with an orthopaedic-surgery foundation. Leads our Lip Flip and medical-grade laser care — precise, conservative, authentically you.',
+      'London-trained doctor with an orthopaedic-surgery foundation, bringing real anatomical precision to non-surgical contouring. Leads our fat-dissolving injections and jawline-sculpting — define your profile, no surgery.',
     fullBio:
-      'Dr. Francesca is a London-trained aesthetic doctor with 8+ years in medical aesthetics and a foundation in orthopaedic surgery, bringing precise anatomical insight to subtle, balanced results. Her philosophy is restoration, not change: every consultation begins with listening to your story and how you want to feel in your skin before shaping a conservative, personalised plan that prioritises safety, clarity, and natural harmony. She leads our Lip Flip enhancements and oversees the majority of our medical-grade laser hair removal care, pairing meticulous technique with advanced protocols for smooth, long-term results. Across anti-wrinkle injections, dermal fillers, skin boosters, PRP/regenerative techniques, microneedling with mesotherapy, and medical-grade lasers, she guides you thoughtfully through each step so the outcome feels authentically you—refreshed, never overdone.',
+      "Dr. Francesca is a London-trained doctor with 8+ years in medical aesthetics and a foundation in orthopaedic surgery, giving her the anatomical precision that non-surgical contouring demands. At Carisma Slimming she leads our fat-dissolving injection treatments — breaking down the stubborn pockets under the chin, along the jawline and across the body that diet and exercise can't shift. Her signature \"Snatch Your Jawline\" protocol pairs targeted fat-dissolving injections with skin-tightening to sharpen the chin and jaw for a defined, lifted profile. Her philosophy is definition, not distortion: every plan starts by listening to your goals, then maps a conservative, precisely-paced course that prioritises safety, natural balance and results that look like you — sharper, never overdone. Across submental (double-chin) fat dissolving, body-contouring injections and jawline sculpting, she guides you through each step so you feel informed, comfortable and confident.",
     image: '/wix/87fc13_26127e01d9fb4ec48fb0b2f7ccb73508~mv2.png',
   },
 ];

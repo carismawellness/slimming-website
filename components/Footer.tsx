@@ -45,16 +45,16 @@ const BRANDS = [
   },
 ];
 
-// 3x3 Instagram grid — 9 cells cycling through the 6 available image srcs.
+// Small Instagram preview — UNIQUE Carisma Slimming images only (no duplicates,
+// no cross-brand Spa/Aesthetics shots). NOTE: these are site assets, not a live
+// feed — to show the real @carismaslimming posts, wire an Instagram feed
+// integration (Basic Display API token or a widget like Behold/EmbedSocial).
 const IG_SRCS = [
   { src: '/Thumbnail.png', alt: 'Carisma Slimming clinic treatment' },
   { src: '/wix/87fc13_16e7dbedc9e84343b51b1f3d4821c6ea~mv2.jpg', alt: 'Weight loss consultation at Carisma Slimming' },
   { src: '/wix/87fc13_6ac670fc080e4fe4a974d6701eed38a8~mv2_crop.jpg', alt: 'Body contouring treatment' },
   { src: '/wix/87fc13_56eec505c9f9433db5846a0aeae07c7f~mv2.jpg', alt: 'Carisma Slimming team' },
-  { src: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.png', alt: 'Carisma Aesthetics clinic' },
-  { src: '/wix/87fc13_a62cc8038b274204a2fe70fd3d4879d0~mv2.png', alt: 'Carisma Spa & Wellness' },
 ];
-const IG_GRID = Array.from({ length: 9 }, (_, i) => IG_SRCS[i % IG_SRCS.length]);
 
 const NAV_LINKS = [
   { label: 'Medical Weight Loss', href: '/weight-loss' },
@@ -162,29 +162,6 @@ function BrandsSection() {
 function FooterBase() {
   return (
     <div style={{ background: 'transparent' }}>
-      {/* Instagram grid */}
-      <div style={{ padding: '52px 0 44px', borderBottom: `1px solid ${HAIR}` }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div style={{ textAlign: 'center', marginBottom: '22px' }}>
-            <Eyebrow>Follow us on Instagram</Eyebrow>
-            <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: WIDE, fontSize: '18px', fontWeight: 700, letterSpacing: '1px', color: INK, textDecoration: 'none' }}>
-              @carismaslimming
-            </a>
-          </div>
-          <style>{`.igt:hover .igo{background:rgba(79,114,86,.45)!important}.igt:hover .igicon{opacity:1!important}@media (prefers-reduced-motion: no-preference){.igt:hover img{transform:scale(1.06)}}`}</style>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '3px', borderRadius: '10px', overflow: 'hidden' }}>
-            {IG_GRID.map((img, i) => (
-              <a key={i} href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label={`${img.alt} — Instagram`} className="igt" style={{ display: 'block', aspectRatio: '1/1', position: 'relative', overflow: 'hidden' }}>
-                <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover', transition: 'transform .4s ease' }} sizes="(max-width:768px) 33vw, 240px" loading="lazy" />
-                <div className="igo" style={{ position: 'absolute', inset: 0, background: 'rgba(79,114,86,0)', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'background .3s' }}>
-                  <svg className="igicon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="1.5" style={{ opacity: 0, transition: 'opacity .3s' }}><rect x="2" y="2" width="20" height="20" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" fill="#fff" stroke="none" /></svg>
-                </div>
-              </a>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Info grid */}
       <div style={{ padding: '52px 0 44px', borderBottom: `1px solid ${HAIR}` }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -247,6 +224,24 @@ function FooterBase() {
                   </li>
                 ))}
               </ul>
+            </div>
+
+            {/* Instagram — small embedded preview */}
+            <div>
+              <h4 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '18px' }}>Follow us</h4>
+              <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: BODY, fontSize: '13px', color: TEXT, textDecoration: 'none', display: 'inline-block', marginBottom: '12px', transition: 'color .2s' }}
+                onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = SAGE)}
+                onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}>
+                @carismaslimming
+              </a>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '6px', maxWidth: '168px' }}>
+                {IG_SRCS.map((img, i) => (
+                  <a key={i} href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label={`${img.alt} — Instagram`}
+                    style={{ display: 'block', aspectRatio: '1/1', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
+                    <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} sizes="80px" loading="lazy" />
+                  </a>
+                ))}
+              </div>
             </div>
 
           </div>
