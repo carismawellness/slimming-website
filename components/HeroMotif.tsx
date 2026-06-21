@@ -98,21 +98,25 @@ export default function HeroMotif() {
           varying float vDepth;
           varying float vWave;
           varying float vNdcY;
+          varying float vX;
           void main() {
             vec3 p = position;
             float x = p.x;
             float z = p.z;
             // layered flowing wave — wind moving across a silk field
             float w = 0.0;
-            w += 0.62 * sin(x * 0.46 + z * 0.52 + uTime * 0.26);
-            w += 0.30 * sin(x * 0.88 - z * 0.40 + uTime * 0.17 + aSeed);
-            w += 0.14 * sin(x * 1.80 + z * 1.00 - uTime * 0.30 + aSeed * 1.7);
-            w += 0.055 * sin(x * 3.20 - z * 0.28 + uTime * 0.46);
-            p.y += w;
+            w += 0.62 * sin(x * 0.46 + z * 0.52 + uTime * 0.20);
+            w += 0.30 * sin(x * 0.88 - z * 0.40 + uTime * 0.13 + aSeed);
+            w += 0.14 * sin(x * 1.80 + z * 1.00 - uTime * 0.23 + aSeed * 1.7);
+            w += 0.055 * sin(x * 3.20 - z * 0.28 + uTime * 0.36);
+            // slow luxurious breath — the whole field gently swells and settles
+            float breath = 0.90 + 0.10 * sin(uTime * 0.11);
+            p.y += w * breath;
             // barely-there parallax sway toward the pointer, stronger up close
             p.x += uMouse * 0.30 * (1.0 + (z - ${Z_FAR.toFixed(1)}) * 0.02);
             vDepth = z;
             vWave = w;
+            vX = x;
             vec4 clip = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
             vNdcY = clip.y / clip.w; // -1 bottom … +1 top of screen
             gl_Position = clip;
@@ -124,9 +128,11 @@ export default function HeroMotif() {
           uniform float uIntro;
           uniform float uZNear;
           uniform float uZFar;
+          uniform float uTime;
           varying float vDepth;
           varying float vWave;
           varying float vNdcY;
+          varying float vX;
           void main() {
             // atmospheric depth fade: near = visible, far = dissolves
             float depth = clamp((vDepth - uZFar) / (uZNear - uZFar), 0.0, 1.0);
@@ -136,8 +142,18 @@ export default function HeroMotif() {
             float bottomBias = smoothstep(0.12, -0.55, vNdcY);
             // crest highlight — tops of the waves catch a little more light
             float crest = 0.6 + 0.4 * smoothstep(-0.4, 0.6, vWave);
-            float a = depthFade * bottomBias * crest * 0.34 * uIntro;
-            gl_FragColor = vec4(uColor, a);
+            // traveling silk sheen — a soft band of light drifts slowly across,
+            // catching the field like light moving over satin
+            float sheen = 0.5 + 0.5 * sin(vX * 0.20 - uTime * 0.26);
+            sheen = pow(clamp(sheen, 0.0, 1.0), 2.6);
+            // luxe tonal depth: sage deepens in the troughs and lifts toward a
+            // pale pearl at the crests / where the sheen passes
+            vec3 deep  = vec3(0.40, 0.53, 0.51);
+            vec3 pearl = vec3(0.91, 0.95, 0.92);
+            vec3 col = mix(deep, uColor, crest);
+            col = mix(col, pearl, sheen * 0.55 + crest * 0.16);
+            float a = depthFade * bottomBias * (0.76 * crest + 0.24) * (0.78 + sheen * 0.6) * 0.34 * uIntro;
+            gl_FragColor = vec4(col, a);
           }
         `,
       });
