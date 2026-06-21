@@ -1,30 +1,13 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
 import Image from 'next/image';
+import DoctorShowcase from '@/components/doctors/DoctorShowcase';
 
 // Accessible brand tokens (WCAG AA). Bright brand sage #8EB093 and taupe #9B8D83
 // fail as text on white/near-white, so text/heading uses darkened same-family values.
 const GREEN = '#4f7256'; // --brand-green-text: deep sage for sage TEXT/headings on white (5.42:1)
 const TAUPE = '#6f6456'; // darkened taupe for muted text on white/near-white (5.78:1)
 const FRESHA = 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=4994308&oiid=sv%3A25969858&share=true&pId=2708191';
-
-const DOCTORS = [
-  {
-    name: 'Dr. Zaid Teebi',
-    img: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png',
-    bio: 'Dr Zaid Teebi is the medical consultant leading our weight loss and slimming programs, with over 30+ years of clinical experience. He holds credentials in general medicine, geriatrics, and specialised allergy training, allowing him to combine broad clinical insight with focused care. He also holds a certificate in Sports Medicine from the American College of Sports Medicine and completed training in Pain Management at Harvard Medical School (USA) and Allergy and allergy therapy at the Imperial College London (UK). Dr Teebi personally conducts detailed medical weight loss consultations and prescribes personalised meal plans: a comprehensive medical and allergy history, symptom chronology, family history, environmental and occupational factors, followed by a full clinical examination before recommending targeted diagnostic tests and therapy.',
-  },
-  {
-    name: 'Dr. Giovanni Scornavacca',
-    img: '/wix/87fc13_e903680b4d124adda85e7ade5dfd676b~mv2.png',
-    bio: 'Dr. Giovanni is an Italian aesthetic doctor at Carisma Aesthetics, trained and practised for 20+ years in Italy with continued advanced education across leading universities in Rome, Bologna and other centres. He specialises in aesthetic medicine with a particular interest in regenerative approaches such as PRP, stem cells, pairing medical rigour with a calm, human manner. His philosophy is restoration, not change: every consultation begins with listening to your story and how you want to feel in your skin, then shaping a conservative, precisely paced plan that prioritises safety, clarity and natural balance. From softening expression lines and refining contour to improving tone, texture and early laxity, his results are subtle and harmonious—refreshed, never overdone. At our St Julian\'s clinic, Dr. Giovanni offers evidence-based treatments including dermal fillers, collagen stimulators, skin boosters, microneedling with mesotherapy, PRP and medical-grade laser therapies, guiding you thoughtfully through each step so you can glow with confidence.',
-  },
-  {
-    name: 'Dr. Francesca Chircop',
-    img: '/wix/87fc13_26127e01d9fb4ec48fb0b2f7ccb73508~mv2.png',
-    bio: 'Dr. Francesca is a London-trained aesthetic doctor with 8+ years in medical aesthetics and a foundation in orthopaedic surgery, bringing precise anatomical insight to subtle, balanced results. Her philosophy is restoration, not change: every consultation begins with listening to your story and how you want to feel in your skin before shaping a conservative, personalised plan that prioritises safety, clarity, and natural harmony. She leads our Lip Flip enhancements and oversees the majority of our medical-grade laser hair removal care, pairing meticulous technique with advanced protocols for smooth, long-term results. Across anti-wrinkle injections, dermal fillers, skin boosters, PRP/regenerative techniques, microneedling with mesotherapy, and medical-grade lasers, she guides you thoughtfully through each step so the outcome feels authentically you—refreshed, never overdone.',
-  },
-];
 
 const BRANDS = [
   {
@@ -73,40 +56,8 @@ export default function BrandBlock() {
 
   return (
     <div>
-      {/* Doctor Profiles — stacked 2-column rows, alternating photo side */}
-      <section className="py-16" aria-labelledby="doctors-heading" style={{ backgroundColor: '#ffffff' }}>
-        <h2 id="doctors-heading" className="sr-only">Our Medical Team</h2>
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-16">
-          {DOCTORS.map((doc, i) => {
-            const photoFirst = i % 2 === 0;
-            const photo = (
-              <div key="photo" className="md:w-1/2 flex justify-center">
-                <div style={{ borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', overflow: 'hidden', width: '100%', maxWidth: '343px', aspectRatio: '343 / 456', boxShadow: '16px -16px 0 #CBDEC5' }}>
-                  <Image
-                    src={doc.img}
-                    alt={`${doc.name} — Carisma Slimming medical team`}
-                    width={343}
-                    height={456}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center', display: 'block' }}
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            );
-            const text = (
-              <div key="text" className="md:w-1/2 flex flex-col justify-center">
-                <h3 className="mb-4 pb-3" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontSize: '28px', fontWeight: 400, letterSpacing: '1px', textTransform: 'uppercase', borderBottom: '1px solid #A9C6A2' }}>{doc.name}</h3>
-                <p style={{ color: '#333333', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: 1.75 }}>{doc.bio}</p>
-              </div>
-            );
-            return (
-              <div key={doc.name} className="flex flex-col md:flex-row gap-12 items-center" style={{ background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', borderRadius: '16px', padding: '40px' }}>
-                {photoFirst ? [photo, text] : [text, photo]}
-              </div>
-            );
-          })}
-        </div>
-      </section>
+      {/* Doctor showcase — 3D coverflow carousel (replaces the long stacked rows) */}
+      <DoctorShowcase />
 
       {/* Your Bible to Sustainable Weight Loss Management */}
       <section className="py-16" aria-labelledby="guide-heading" style={{ backgroundColor: '#ffffff' }}>
