@@ -127,21 +127,21 @@ export default function HeroMotif() {
             n *= 0.92 + 0.08 * sin(u_time * 0.17);
 
             // shape into soft light
-            float light = smoothstep(0.34, 0.92, n);
+            float light = smoothstep(0.18, 0.74, n);
 
             // brand tonal palette: deep sage → sage → pale pearl at the cores
-            vec3 deep  = vec3(0.30, 0.44, 0.42);
-            vec3 sage  = vec3(0.588, 0.698, 0.698);
+            vec3 deep  = vec3(0.27, 0.45, 0.33);
+            vec3 sage  = vec3(0.557, 0.690, 0.576);
             vec3 pearl = vec3(0.93, 0.95, 0.91);
             vec3 col = mix(deep, sage, smoothstep(0.0, 0.6, light));
             col = mix(col, pearl, smoothstep(0.70, 1.0, light) * 0.65);
 
             // pool the light low and dissolve it before the headline
-            float lowBias  = smoothstep(0.62, 0.02, uv.y);  // strong at bottom
-            float sideFade = smoothstep(1.02, 0.28, abs(uv.x - 0.5));
-            float mask = lowBias * mix(0.72, 1.0, sideFade);
+            float lowBias  = smoothstep(0.60, 0.0, uv.y);   // strong at bottom
+            float sideFade = smoothstep(1.05, 0.20, abs(uv.x - 0.5));
+            float mask = lowBias * mix(0.82, 1.0, sideFade);
 
-            float alpha = light * mask * 0.55 * u_intro;
+            float alpha = light * mask * 0.95 * u_intro;
 
             // fine grain to keep the gradients clean (no banding)
             col += (hash(uv * u_res + t) - 0.5) * 0.018;
