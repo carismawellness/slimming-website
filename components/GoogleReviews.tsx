@@ -23,7 +23,7 @@ import {
 } from '@/lib/fresha-reviews';
 
 // ── Brand tokens (light gradient, WCAG AA) ────────────────────────────────
-const INK = '#1a1a1a';      // ink / headings
+const INK = '#574e46';      // softened warm charcoal (was #1a1a1a — less loud); AA on light
 const BODY_C = '#333333';   // body text
 const META = '#595959';     // muted / meta
 const SAGE = '#4f7256';     // links / icons / CTA fill (white text = AA)
@@ -291,7 +291,7 @@ export default function GoogleReviews() {
             <span style={{ fontFamily: SERIF, fontSize: 64, color: INK, lineHeight: 1, fontWeight: 400 }}>4.9</span>
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6 }}>
               <Stars rating={5} size={24} />
-              <span style={{ fontFamily: BODY, fontSize: 20, fontWeight: 700, color: INK, letterSpacing: '-0.3px' }}>800+ verified reviews</span>
+              <span style={{ fontFamily: BODY, fontSize: 20, fontWeight: 600, color: INK, letterSpacing: '-0.3px' }}>800+ verified reviews</span>
             </div>
           </div>
           {/* Secondary — platform attribution */}
