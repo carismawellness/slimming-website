@@ -115,7 +115,7 @@ export default function ResultsGuarantee() {
           <div className="rg-grid" style={{ marginTop: 'clamp(32px,5vw,52px)' }}>
             <div style={{ display: 'flex', justifyContent: 'center' }}>
               <Image
-                src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.webp"
                 alt="Doctor-led body composition analysis at Carisma Slimming Malta"
                 width={300}
                 height={384}

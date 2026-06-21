@@ -5,6 +5,7 @@ import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
+import ResultsGuarantee from '@/components/results/ResultsGuarantee';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
@@ -169,67 +170,8 @@ export default function Home() {
         <TreatmentsCarousel3D />
       </section>
 
-      {/* (4) Our Results-Driven Approach / Extended Care Commitment */}
-      <section className="py-24" aria-labelledby="results-heading" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Live page renders this section on a rounded gradient panel (980px wide) */}
-          {/* Layers (Whisper): page's single watermark + blob + dots + grid live on this panel */}
-          <GradientField
-            blob={{ top: '8%', right: '-8%' }}
-            dots
-            grid
-            motif="watermark"
-            style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', borderRadius: '16px', background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', padding: '28px 46px 48px' }}
-          >
-            <p className="text-center mb-2" aria-hidden="true" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
-              our results-driven approach
-            </p>
-            <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />
-            <h2 id="results-heading" className="text-center mb-4" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.4', textTransform: 'uppercase' }}>
-              our results guarantee: up to 1kg a week,<br />medically supervised &amp; verified
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-[326px_minmax(0,1fr)] gap-10 items-start">
-              {/* Left - Image */}
-              <div className="flex justify-center">
-                <Image
-                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.webp"
-                  alt="Doctor consultation for medical weight loss at Carisma Slimming Malta"
-                  width={326}
-                  height={418}
-                  style={{ width: '100%', maxWidth: '326px', height: 'auto', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '100px 10px' }}
-                />
-              </div>
-              {/* Right - Text + Commitment */}
-              <div>
-                <p className="mb-6" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
-                  We are selective about who joins our weight loss transformation programs. We only accept clients we genuinely believe we can help reach their healthy weight through our slimming program. If you qualify and complete your program and do not hit your target weight, we will extend your weight management program at no extra program fee until we achieve your desired result.
-                </p>
-                <p className="mb-5" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '0.5px' }}>
-                  This is our <span style={{ fontWeight: '700' }}>Extended Care Commitment</span>
-                </p>
-                <p className="mb-5" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', lineHeight: '1.4', textTransform: 'uppercase' }}>
-                  To keep your slimming results medically valid and fair, you agree to
-                </p>
-                <ul className="grid grid-cols-1" aria-label="Extended Care Commitment requirements">
-              {[
-                'Attend all scheduled in clinic sessions and weekly check ins',
-                'Follow your personalised food plan consistently and tell us when you struggle',
-                'Complete your agreed physical activities & discuss any pain or obstacles',
-                'Use only the treatments and medications recommended by our medical team',
-                'Inform us of any major health (e.g., heart disease) or medication changes',
-                'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
-              ].map((req) => (
-                  <li key={req} className="flex items-start gap-2" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.9' }}>
-                    <span aria-hidden="true" style={{ color: '#3c5a40' }}>•</span>
-                    <span>{req}</span>
-                  </li>
-                ))}
-                </ul>
-              </div>
-            </div>
-          </GradientField>
-        </div>
-      </section>
+      {/* (4) Our Results Guarantee — "The Carisma Pact" + ambient 3D silk */}
+      <ResultsGuarantee />
 
       {/* Layers: single section divider between Results-Driven and GLP-1 */}
       <MotifAccent mode="divider" />

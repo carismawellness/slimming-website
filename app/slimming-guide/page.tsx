@@ -75,17 +75,17 @@ const outcomes = [
   },
   {
     title: 'Appetite Stability',
-    icon: '/wix/f940f0_e7472796f93447e68c2b1d2210b09224~mv2.png',
+    icon: '/wix/f940f0_e7472796f93447e68c2b1d2210b09224~mv2.webp',
     text: 'You stop arriving at meals desperate. Hunger becomes something predictable, something you can read, something that arrives on schedule rather than ambushing you. You stop making decisions when you are already too hungry to make good ones. That alone changes everything.',
   },
   {
     title: 'Energy Stability',
-    icon: '/wix/f940f0_fffe93587a1d4b73b4ff7af603ebd67a~mv2.png',
+    icon: '/wix/f940f0_fffe93587a1d4b73b4ff7af603ebd67a~mv2.webp',
     text: 'The 3pm crash becomes unfamiliar. You stop needing caffeine to get through the afternoon. Sleep improves without doing anything specific about sleep. Your body regulates. You notice it first in the small things: concentration, mood, the way evenings feel lighter.',
   },
   {
     title: 'Emotional Calm Around Food',
-    icon: '/wix/f940f0_ba9d9802e5184f72ae39ac796ad06084~mv2.png',
+    icon: '/wix/f940f0_ba9d9802e5184f72ae39ac796ad06084~mv2.webp',
     text: 'You go to dinner and enjoy it. You come home and do not spiral. You stop the all-or-nothing arithmetic, the mental ledger of what you ate and what it cost you. Food becomes simpler. Less loaded. You leave the table satisfied, not negotiating with yourself.',
   },
 ];
