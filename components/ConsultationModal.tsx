@@ -32,6 +32,24 @@ export default function ConsultationModal() {
     return () => window.removeEventListener(CONSULT_MODAL_EVENT, open);
   }, []);
 
+  // Intercept every "book-now" Fresha link site-wide — open the lead capture modal instead.
+  useEffect(() => {
+    const onBookingClick = (e: MouseEvent) => {
+      const anchor = (e.target as Element).closest('a');
+      if (!anchor) return;
+      const href = anchor.getAttribute('href') || '';
+      if (href.includes('fresha.com/book-now')) {
+        e.preventDefault();
+        restoreFocusRef.current = anchor;
+        setStep('form');
+        setIsOpen(true);
+        setHasOpened(true);
+      }
+    };
+    document.addEventListener('click', onBookingClick, true);
+    return () => document.removeEventListener('click', onBookingClick, true);
+  }, []);
+
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
