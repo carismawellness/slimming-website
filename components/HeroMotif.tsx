@@ -57,8 +57,8 @@ export default function HeroMotif() {
       const LINES = coarse ? 16 : 24;   // stacked contour lines (sparse)
       const SEG = coarse ? 60 : 96;     // points per line
       const HALF_W = 8.2;               // x extent
-      const Z_NEAR = 1.2;
-      const Z_FAR = -10.5;
+      const Z_NEAR = 2.6;               // bring the band close so it fills the
+      const Z_FAR = -7.0;               // bottom white-space below the CTA
 
       const positions: number[] = [];
       const seeds: number[] = [];
@@ -104,10 +104,10 @@ export default function HeroMotif() {
             float z = p.z;
             // layered flowing wave — wind moving across a silk field
             float w = 0.0;
-            w += 0.34 * sin(x * 0.46 + z * 0.52 + uTime * 0.26);
-            w += 0.17 * sin(x * 0.88 - z * 0.40 + uTime * 0.17 + aSeed);
-            w += 0.075 * sin(x * 1.80 + z * 1.00 - uTime * 0.30 + aSeed * 1.7);
-            w += 0.03 * sin(x * 3.20 - z * 0.28 + uTime * 0.46);
+            w += 0.62 * sin(x * 0.46 + z * 0.52 + uTime * 0.26);
+            w += 0.30 * sin(x * 0.88 - z * 0.40 + uTime * 0.17 + aSeed);
+            w += 0.14 * sin(x * 1.80 + z * 1.00 - uTime * 0.30 + aSeed * 1.7);
+            w += 0.055 * sin(x * 3.20 - z * 0.28 + uTime * 0.46);
             p.y += w;
             // barely-there parallax sway toward the pointer, stronger up close
             p.x += uMouse * 0.30 * (1.0 + (z - ${Z_FAR.toFixed(1)}) * 0.02);
@@ -131,12 +131,12 @@ export default function HeroMotif() {
             // atmospheric depth fade: near = visible, far = dissolves
             float depth = clamp((vDepth - uZFar) / (uZNear - uZFar), 0.0, 1.0);
             float depthFade = smoothstep(0.08, 0.78, depth);
-            // keep the motif low: fade out toward the top of the screen so it
-            // sits at the bottom and stays clear of the hero copy.
-            float bottomBias = smoothstep(0.35, -0.65, vNdcY);
+            // keep the motif low: fully faded through the copy/CTA region and
+            // only filling the white space well below the button.
+            float bottomBias = smoothstep(0.12, -0.55, vNdcY);
             // crest highlight — tops of the waves catch a little more light
             float crest = 0.6 + 0.4 * smoothstep(-0.4, 0.6, vWave);
-            float a = depthFade * bottomBias * crest * 0.24 * uIntro;
+            float a = depthFade * bottomBias * crest * 0.34 * uIntro;
             gl_FragColor = vec4(uColor, a);
           }
         `,
@@ -144,6 +144,7 @@ export default function HeroMotif() {
 
       const field = new THREE.LineSegments(geo, material);
       field.rotation.x = -0.06; // a touch of tilt for depth
+      field.position.y = -1.7;  // drop the band into the lower hero white-space
       scene.add(field);
 
       // ── Interaction + sizing ────────────────────────────────────────────
@@ -178,7 +179,7 @@ export default function HeroMotif() {
       const render = (now: number) => {
         const t = (now - start) / 1000;
         uniforms.uTime.value = t;
-        uniforms.uIntro.value = Math.min(1, t / 2.6); // slow, graceful fade-in
+        uniforms.uIntro.value = Math.min(1, t / 0.3); // appear right away
         uniforms.uMouse.value += (targetMouse - uniforms.uMouse.value) * 0.022;
         if (visible && !document.hidden) renderer.render(scene, camera);
         raf = requestAnimationFrame(render);
