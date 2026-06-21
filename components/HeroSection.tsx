@@ -53,7 +53,7 @@ export default function HeroSection() {
                 className="inline-flex items-center justify-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
                 style={{ backgroundColor: ctaBg, borderRadius: '999px', minHeight: '52px', padding: '0 32px', fontFamily: wideFont, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}
               >
-                Get Free Consultation
+                Get Free Body Analysis
               </Link>
               <a
                 href="tel:+35627802062"

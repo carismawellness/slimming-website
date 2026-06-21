@@ -86,7 +86,7 @@ export default function PackagesPage() {
             { text: 'Muscle toning, skin tightening & anti-cellulite' },
             { text: 'Spa & fitness access included with every protocol' },
           ]}
-          primaryCta={{ text: 'Free Consultation', href: BOOKING_URL, external: true }}
+          primaryCta={{ text: 'Free Body Analysis', href: BOOKING_URL, external: true }}
           secondaryCta={{ text: 'Call 27802062', href: 'tel:+35627802062' }}
           media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.png', alt: 'Carisma Slimming body contouring treatment demonstration in Malta' }}
           proof={{ rating: '4.9', reviews: '200+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
@@ -196,11 +196,11 @@ export default function PackagesPage() {
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="Book a free consultation (opens in new tab)"
+                aria-label="Book a free body composition analysis (opens in new tab)"
                 className="cta-glow text-white px-8 font-bold uppercase tracking-wide inline-flex items-center justify-center min-h-[44px] transition-all duration-200 ease-in-out active:scale-95"
                 style={{ backgroundColor: GREEN, fontFamily: BODY_FONT }}
               >
-                Book Free Consultation
+                Book Free Body Analysis
               </a>
               <BookConsultationButton variant="outline" style={{ fontSize: '13px', minHeight: '44px' }} />
               <a

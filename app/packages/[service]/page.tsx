@@ -567,7 +567,7 @@ export default async function ServicePage({ params }: Props) {
               Ready to Start Your {service.treatment} Treatment?
             </h2>
             <p className="text-xl mb-8 max-w-prose mx-auto leading-relaxed" style={{ fontFamily: BODY_FONT }}>
-              Schedule your free consultation to discuss this treatment with our medical team.
+              Schedule your free body composition analysis to discuss this treatment with our medical team.
             </p>
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
               <a
@@ -578,7 +578,7 @@ export default async function ServicePage({ params }: Props) {
                 className="cta-glow text-white px-8 font-bold uppercase tracking-wide text-center inline-flex items-center justify-center min-h-[44px] transition-all duration-200 ease-in-out active:scale-95"
                 style={{ fontFamily: BODY_FONT }}
               >
-                Book Free Consultation
+                Book Free Body Analysis
               </a>
               <BookConsultationButton variant="outline" style={{ fontSize: '13px', minHeight: '44px' }} />
               <a
@@ -604,11 +604,11 @@ export default async function ServicePage({ params }: Props) {
             href={BOOKING_URL}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Book free consultation (opens in new tab)"
+            aria-label="Book free body composition analysis (opens in new tab)"
             className="flex-1 text-white text-sm font-bold uppercase tracking-wide text-center inline-flex items-center justify-center min-h-[44px] rounded-lg transition-all duration-200 ease-in-out active:scale-95"
             style={{ backgroundColor: GREEN, fontFamily: BODY_FONT }}
           >
-            Free Consultation
+            Free Body Analysis
           </a>
           <a
             href="tel:+35627802062"

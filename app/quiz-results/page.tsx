@@ -292,14 +292,14 @@ export default function SlimmingQuizResultsPage({
         {/* CTA */}
         <div style={{ textAlign: 'center', marginTop: '52px' }}>
           <p style={{ fontFamily: bodyFont, fontSize: '15px', color: taupeLight, marginBottom: '20px' }}>
-            Ready to start? Book a free consultation with our medical team.
+            Ready to start? Book a free body composition analysis with our medical team.
           </p>
           <Link
             href="/consultation"
             className="cta-glow"
             style={{ padding: '15px 40px', color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none' }}
           >
-            Book a Free Consultation
+            Book a Free Body Analysis
           </Link>
         </div>
       </section>

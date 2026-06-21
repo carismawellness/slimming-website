@@ -5,8 +5,8 @@ import GradientField from '@/components/layers/GradientField';
 import DoctorCards from './_components/DoctorCards';
 
 export const metadata: Metadata = {
-  title: "Free Slimming Consultation Malta | Carisma Slimming",
-  description: "Book your free slimming consultation with our medically qualified doctors in Malta. Get a personalised weight loss plan and start your journey today.",
+  title: "Free Body Composition Analysis Malta | Carisma Slimming",
+  description: "Book your free body composition analysis with our medically qualified doctors in Malta. Get a personalised weight loss plan and start your journey today.",
   alternates: { canonical: 'https://www.carismaslimming.com/consultation' },
 };
 
@@ -70,7 +70,7 @@ const TRUST = [
 const STEPS = [
   {
     n: '01',
-    t: 'Book your free consultation',
+    t: 'Book your free body composition analysis',
     d: 'Pick a time that suits you. It takes under a minute and there is no obligation — just bring your goals and any questions.',
   },
   {
@@ -217,7 +217,7 @@ export default function ConsultationPage() {
 
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', marginBottom: 18 }}>
                 <BookConsultationButton variant="filled" style={{ padding: '16px 34px' }}>
-                  Book Your Free Consultation
+                  Book Your Free Body Analysis
                 </BookConsultationButton>
               </div>
 
@@ -369,7 +369,7 @@ export default function ConsultationPage() {
                 Meet the Doctors Behind Your Plan
               </h2>
               <p style={{ fontFamily: BODY, fontSize: 15, lineHeight: 1.6, color: TAUPE, maxWidth: 600, margin: '14px auto 0' }}>
-                Your free consultation is led by medically qualified doctors who listen first and build a conservative,
+                Your free body composition analysis is led by medically qualified doctors who listen first and build a conservative,
                 evidence-led plan around you.
               </p>
             </header>
@@ -436,11 +436,11 @@ export default function ConsultationPage() {
               Your Healthier Weight Starts With One Conversation
             </h2>
             <p style={{ fontFamily: BODY, fontSize: 16, lineHeight: 1.6, color: TAUPE, maxWidth: 560, margin: '0 auto 30px' }}>
-              Book your free consultation today, meet your doctor, and get the honest, personalised plan you deserve.
+              Book your free body composition analysis today, meet your doctor, and get the honest, personalised plan you deserve.
             </p>
             <div className="flex justify-center">
               <BookConsultationButton variant="filled" style={{ padding: '17px 40px' }}>
-                Book Your Free Consultation
+                Book Your Free Body Analysis
               </BookConsultationButton>
             </div>
             <p style={{ fontFamily: BODY, fontSize: 13, color: TAUPE, opacity: 0.85, marginTop: 16 }}>
@@ -519,7 +519,7 @@ export default function ConsultationPage() {
                 </div>
 
                 <div style={{ marginTop: 'auto', paddingTop: 6 }}>
-                  <BookConsultationButton variant="outline">Book Free Consultation</BookConsultationButton>
+                  <BookConsultationButton variant="outline">Book Free Body Analysis</BookConsultationButton>
                 </div>
               </div>
 

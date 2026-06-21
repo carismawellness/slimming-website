@@ -15,7 +15,7 @@ export interface ImageRef {
 }
 
 /**
- * Live primary booking link. Every "Claim Your Spot Now" / "Free Consultation"
+ * Live primary booking link. Every "Claim Your Spot Now" / "Free Body Analysis"
  * CTA on the Wix site routes to the Fresha booking platform.
  */
 export const BOOKING_URL =

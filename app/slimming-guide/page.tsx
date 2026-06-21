@@ -785,7 +785,7 @@ export default function SlimmingGuidePage() {
                   Get Slimming Guide &nbsp;›
                 </a>
                 <BookConsultationButton variant="filled" style={{ fontSize: '13px', padding: '11px 24px', borderRadius: '999px' }}>
-                  Book Free Consultation
+                  Book Free Body Analysis
                 </BookConsultationButton>
               </div>
               <div className="flex items-center gap-3">
