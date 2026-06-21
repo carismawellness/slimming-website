@@ -3,18 +3,23 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * HeroMotif — the Carisma flowing-lines motif (Vector.svg) brought to life as a
- * living 3D wave field with Three.js.
+ * HeroMotif — "Aurora Breath".
  *
- * The SVG is a field of stacked sage contour lines; here those lines are laid
- * into 3D depth and driven by a layered flowing-wave vertex shader, viewed at a
- * low angle with perspective so they recede and converge — a subtle, luxurious,
- * award-worthy "silk current" behind the hero. Sage #96B2B2, very low opacity.
+ * A bottom-up, first-principles motif for Carisma Slimming: not lines, but a
+ * soft wash of sage light that slowly drifts and gently *breathes*, like dawn
+ * light through mist. It evokes the brand's promise — calm, lightness, gentle
+ * renewal — and makes the hero feel alive without ever competing with the copy.
  *
- * Guards: skipped under prefers-reduced-motion (a single static frame is drawn
- * instead, so the motif still shows); DPR capped; paused when offscreen/hidden;
- * three.js dynamically imported so it never blocks SSR / first paint; full
- * dispose on unmount.
+ * Technique: a single full-screen fragment shader. Domain-warped fbm noise
+ * forms organic, ever-shifting volumes of light; a slow global pulse makes the
+ * whole field breathe; the light pools in the lower hero (the white space below
+ * the CTA) and dissolves before it reaches the headline. Tonal palette runs
+ * from deep sage in the shadows to the brand sage to a pale pearl at the cores.
+ *
+ * Guards: reduced-motion → one static frame; DPR-capped; lighter octave count
+ * on phones; paused offscreen / tab-hidden; three.js imported dynamically so it
+ * never blocks SSR / first paint; full dispose on unmount. Time is referenced
+ * only in the fragment shader, so there is no cross-stage uniform mismatch.
  */
 export default function HeroMotif() {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -39,7 +44,7 @@ export default function HeroMotif() {
 
       const renderer = new THREE.WebGLRenderer({
         alpha: true,
-        antialias: !coarse,
+        antialias: false,
         powerPreference: 'low-power',
       });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarse ? 1 : 1.5));
@@ -49,162 +54,142 @@ export default function HeroMotif() {
       Object.assign(renderer.domElement.style, { width: '100%', height: '100%', display: 'block' });
 
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(46, host.clientWidth / host.clientHeight, 0.1, 100);
-      camera.position.set(0, 1.7, 6.6);
-      camera.lookAt(0, -0.2, -3);
-
-      // ── Build the line field ────────────────────────────────────────────
-      const LINES = coarse ? 16 : 24;   // stacked contour lines (sparse)
-      const SEG = coarse ? 60 : 96;     // points per line
-      const HALF_W = 8.2;               // x extent
-      const Z_NEAR = 2.6;               // bring the band close so it fills the
-      const Z_FAR = -7.0;               // bottom white-space below the CTA
-
-      const positions: number[] = [];
-      const seeds: number[] = [];
-      for (let i = 0; i < LINES; i++) {
-        const z = Z_NEAR + (Z_FAR - Z_NEAR) * (i / (LINES - 1));
-        const seed = i * 0.37;
-        for (let s = 0; s < SEG - 1; s++) {
-          const x0 = -HALF_W + (2 * HALF_W) * (s / (SEG - 1));
-          const x1 = -HALF_W + (2 * HALF_W) * ((s + 1) / (SEG - 1));
-          positions.push(x0, 0, z, x1, 0, z); // a segment (pair) → LineSegments
-          seeds.push(seed, seed);
-        }
-      }
-
-      const geo = new THREE.BufferGeometry();
-      geo.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-      geo.setAttribute('aSeed', new THREE.Float32BufferAttribute(seeds, 1));
+      const camera = new THREE.Camera(); // vertex shader writes clip space directly
 
       const uniforms = {
-        uTime: { value: 0 },
-        uMouse: { value: 0 },
-        uIntro: { value: 0 },
-        uColor: { value: new THREE.Color('#96B2B2') },
-        uZNear: { value: Z_NEAR },
-        uZFar: { value: Z_FAR },
+        u_time: { value: 0 },
+        u_res: { value: new THREE.Vector2(host.clientWidth, host.clientHeight) },
+        u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
+        u_intro: { value: 0 },
       };
 
       const material = new THREE.ShaderMaterial({
         uniforms,
         transparent: true,
         depthWrite: false,
-        blending: THREE.NormalBlending,
+        depthTest: false,
+        defines: { OCTAVES: coarse ? 3 : 5, WARP2: coarse ? 0 : 1 },
         vertexShader: /* glsl */ `
-          uniform float uTime;
-          uniform float uMouse;
-          attribute float aSeed;
-          varying float vDepth;
-          varying float vWave;
-          varying float vNdcY;
-          varying float vX;
+          varying vec2 vUv;
           void main() {
-            vec3 p = position;
-            float x = p.x;
-            float z = p.z;
-            // layered flowing wave — wind moving across a silk field
-            float w = 0.0;
-            w += 0.62 * sin(x * 0.46 + z * 0.52 + uTime * 0.20);
-            w += 0.30 * sin(x * 0.88 - z * 0.40 + uTime * 0.13 + aSeed);
-            w += 0.14 * sin(x * 1.80 + z * 1.00 - uTime * 0.23 + aSeed * 1.7);
-            w += 0.055 * sin(x * 3.20 - z * 0.28 + uTime * 0.36);
-            // slow luxurious breath — the whole field gently swells and settles
-            float breath = 0.90 + 0.10 * sin(uTime * 0.11);
-            p.y += w * breath;
-            // barely-there parallax sway toward the pointer, stronger up close
-            p.x += uMouse * 0.30 * (1.0 + (z - ${Z_FAR.toFixed(1)}) * 0.02);
-            vDepth = z;
-            vWave = w;
-            vX = x;
-            vec4 clip = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
-            vNdcY = clip.y / clip.w; // -1 bottom … +1 top of screen
-            gl_Position = clip;
+            vUv = uv;
+            gl_Position = vec4(position.xy, 0.0, 1.0);
           }
         `,
         fragmentShader: /* glsl */ `
           precision highp float;
-          uniform vec3 uColor;
-          uniform float uIntro;
-          uniform float uZNear;
-          uniform float uZFar;
-          uniform float uTime;
-          varying float vDepth;
-          varying float vWave;
-          varying float vNdcY;
-          varying float vX;
-          void main() {
-            // atmospheric depth fade: near = visible, far = dissolves
-            float depth = clamp((vDepth - uZFar) / (uZNear - uZFar), 0.0, 1.0);
-            float depthFade = smoothstep(0.08, 0.78, depth);
-            // keep the motif low: fully faded through the copy/CTA region and
-            // only filling the white space well below the button.
-            float bottomBias = smoothstep(0.12, -0.55, vNdcY);
-            // crest highlight — tops of the waves catch a little more light
-            float crest = 0.6 + 0.4 * smoothstep(-0.4, 0.6, vWave);
-            // traveling silk sheen — a soft band of light drifts slowly across,
-            // catching the field like light moving over satin
-            float sheen = 0.5 + 0.5 * sin(vX * 0.20 - uTime * 0.26);
-            sheen = pow(clamp(sheen, 0.0, 1.0), 2.6);
-            // luxe tonal depth: sage deepens in the troughs and lifts toward a
-            // pale pearl at the crests / where the sheen passes
-            vec3 deep  = vec3(0.40, 0.53, 0.51);
-            vec3 pearl = vec3(0.91, 0.95, 0.92);
-            vec3 col = mix(deep, uColor, crest);
-            col = mix(col, pearl, sheen * 0.55 + crest * 0.16);
-            float a = depthFade * bottomBias * (0.76 * crest + 0.24) * (0.78 + sheen * 0.6) * 0.34 * uIntro;
-            gl_FragColor = vec4(col, a);
+          uniform float u_time;
+          uniform vec2  u_res;
+          uniform vec2  u_mouse;
+          uniform float u_intro;
+          varying vec2  vUv;
+
+          float hash(vec2 p){
+            p = fract(p * vec2(123.34, 345.45));
+            p += dot(p, p + 34.345);
+            return fract(p.x * p.y);
+          }
+          float noise(vec2 p){
+            vec2 i = floor(p), f = fract(p);
+            vec2 u = f * f * (3.0 - 2.0 * f);
+            float a = hash(i);
+            float b = hash(i + vec2(1.0, 0.0));
+            float c = hash(i + vec2(0.0, 1.0));
+            float d = hash(i + vec2(1.0, 1.0));
+            return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
+          }
+          float fbm(vec2 p){
+            float v = 0.0, a = 0.5;
+            for (int i = 0; i < OCTAVES; i++){ v += a * noise(p); p *= 2.0; a *= 0.5; }
+            return v;
+          }
+
+          void main(){
+            vec2 uv = vUv;
+            vec2 p = uv;
+            p.x *= u_res.x / u_res.y;        // aspect-correct
+            p += (u_mouse - 0.5) * 0.05;     // whisper of parallax
+
+            float t = u_time * 0.055;        // slow drift
+
+            // domain-warped fbm → organic, ever-shifting light
+            vec2 q = vec2(fbm(p * 1.5 + vec2(0.0, t)),
+                          fbm(p * 1.5 + vec2(5.2, -t)));
+            vec2 w = p * 1.5 + q * 1.1;
+            #if WARP2
+              vec2 r = vec2(fbm(w + vec2(1.7, 0.30 * t)),
+                            fbm(w + vec2(8.3, -0.20 * t)));
+              w += r * 1.3;
+            #endif
+            float n = fbm(w);
+
+            // breathing — the whole field gently swells and settles
+            n *= 0.92 + 0.08 * sin(u_time * 0.17);
+
+            // shape into soft light
+            float light = smoothstep(0.34, 0.92, n);
+
+            // brand tonal palette: deep sage → sage → pale pearl at the cores
+            vec3 deep  = vec3(0.30, 0.44, 0.42);
+            vec3 sage  = vec3(0.588, 0.698, 0.698);
+            vec3 pearl = vec3(0.93, 0.95, 0.91);
+            vec3 col = mix(deep, sage, smoothstep(0.0, 0.6, light));
+            col = mix(col, pearl, smoothstep(0.70, 1.0, light) * 0.65);
+
+            // pool the light low and dissolve it before the headline
+            float lowBias  = smoothstep(0.62, 0.02, uv.y);  // strong at bottom
+            float sideFade = smoothstep(1.02, 0.28, abs(uv.x - 0.5));
+            float mask = lowBias * mix(0.72, 1.0, sideFade);
+
+            float alpha = light * mask * 0.55 * u_intro;
+
+            // fine grain to keep the gradients clean (no banding)
+            col += (hash(uv * u_res + t) - 0.5) * 0.018;
+
+            gl_FragColor = vec4(col, clamp(alpha, 0.0, 1.0));
           }
         `,
       });
 
-      const field = new THREE.LineSegments(geo, material);
-      field.rotation.x = -0.06; // a touch of tilt for depth
-      field.position.y = -1.7;  // drop the band into the lower hero white-space
-      scene.add(field);
+      const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+      scene.add(quad);
 
-      // ── Interaction + sizing ────────────────────────────────────────────
-      let targetMouse = 0;
+      // ── interaction + sizing ────────────────────────────────────────────
+      const target = new THREE.Vector2(0.5, 0.5);
       const onPointer = (e: PointerEvent) => {
-        targetMouse = (e.clientX / window.innerWidth) * 2 - 1;
+        target.set(e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight);
       };
       window.addEventListener('pointermove', onPointer, { passive: true });
 
       const onResize = () => {
         if (!host) return;
-        const w = host.clientWidth;
-        const h = host.clientHeight;
+        const w = host.clientWidth, h = host.clientHeight;
         renderer.setSize(w, h);
-        camera.aspect = w / h;
-        camera.updateProjectionMatrix();
+        uniforms.u_res.value.set(w, h);
       };
       window.addEventListener('resize', onResize, { passive: true });
 
-      // pause when offscreen / tab hidden
       let visible = true;
       const io = new IntersectionObserver(
         ([entry]) => { visible = entry.isIntersecting; },
         { threshold: 0 }
       );
       io.observe(host);
-      const onVis = () => { visible = !document.hidden; };
-      document.addEventListener('visibilitychange', onVis);
 
       const start = performance.now();
       let raf = 0;
       const render = (now: number) => {
-        const t = (now - start) / 1000;
-        uniforms.uTime.value = t;
-        uniforms.uIntro.value = Math.min(1, t / 0.3); // appear right away
-        uniforms.uMouse.value += (targetMouse - uniforms.uMouse.value) * 0.022;
+        const tt = (now - start) / 1000;
+        uniforms.u_time.value = tt;
+        uniforms.u_intro.value = Math.min(1, tt / 0.7); // appears almost at once
+        uniforms.u_mouse.value.lerp(target, 0.03);
         if (visible && !document.hidden) renderer.render(scene, camera);
         raf = requestAnimationFrame(render);
       };
 
       if (reduced) {
-        // single representative static frame
-        uniforms.uTime.value = 2.0;
-        uniforms.uIntro.value = 1;
+        uniforms.u_time.value = 8.0;
+        uniforms.u_intro.value = 1;
         renderer.render(scene, camera);
       } else {
         raf = requestAnimationFrame(render);
@@ -214,9 +199,8 @@ export default function HeroMotif() {
         cancelAnimationFrame(raf);
         window.removeEventListener('pointermove', onPointer);
         window.removeEventListener('resize', onResize);
-        document.removeEventListener('visibilitychange', onVis);
         io.disconnect();
-        geo.dispose();
+        quad.geometry.dispose();
         material.dispose();
         renderer.dispose();
         if (renderer.domElement.parentNode === host) host.removeChild(renderer.domElement);
