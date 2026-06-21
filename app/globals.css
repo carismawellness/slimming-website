@@ -121,27 +121,25 @@ h1, h2, h3, h4, h5, h6 {
    element; this class owns the fill, the glow and the hover. Override the glow
    colour per-button with `--cta-glow: <r,g,b>` if a non-sage variant is needed. */
 .cta-glow {
-  /* Glow halo keeps the LIGHTER brand sage so the brand pop survives, while the
-     fill below is darkened for legibility (mirrors the Carisma Aesthetics CTAs). */
-  --cta-glow: 142, 176, 147;      /* light brand sage #8eb093 — halo bloom (brand pop) */
-  --cta-glow-deep: 2, 76, 39;     /* deep forest #024c27 — drop shadow */
+  /* Light, soft sage gradient + glow halo — matches the Carisma Aesthetics
+     deployed CTA look (light teal-200 -> teal -> teal-deep), in slimming sage.
+     Deliberate brand/aesthetic choice over the darker AAA palette. */
+  --cta-glow: 142, 176, 147;      /* brand sage #8eb093 — halo bloom */
   position: relative;
-  /* New primary brand green — deep forest. WHITE text passes AAA across the
-     entire gradient (lightest stop #0a5e33 = 6.6:1). */
-  background-image: linear-gradient(135deg, #0a5e33 0%, #024c27 55%, #013d1f 100%);
+  background-image: linear-gradient(135deg, #a7c5ab 0%, #8eb093 55%, #6e9576 100%);
   color: #ffffff;
   border-radius: 999px;
   box-shadow:
     0 0 22px rgba(var(--cta-glow), 0.45),
-    0 8px 24px rgba(var(--cta-glow-deep), 0.5);
+    0 8px 24px rgba(var(--cta-glow), 0.5);
   transition: all 0.25s ease;
   cursor: pointer;
 }
 .cta-glow:hover {
-  background-image: linear-gradient(135deg, #024c27 0%, #013d1f 65%, #012a15 100%);
+  background-image: linear-gradient(135deg, #8eb093 0%, #6e9576 65%, #5f8568 100%);
   box-shadow:
     0 0 30px rgba(var(--cta-glow), 0.62),
-    0 12px 30px rgba(var(--cta-glow-deep), 0.68);
+    0 12px 30px rgba(var(--cta-glow), 0.68);
   transform: translateY(-1px);
 }
 .cta-glow:active {
