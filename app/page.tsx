@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import GoogleReviews from '@/components/GoogleReviews';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | #1 Voted Slimming Clinic in Malta",
@@ -38,10 +39,10 @@ export default function Home() {
           <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '22px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
             Find Your Personalised Weight Loss Programme
           </h2>
-          <div style={{ borderRadius: '8px', overflow: 'hidden' }}>
+          <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
             <iframe
               src="https://quiz-slimming.vercel.app"
-              style={{ width: '100%', height: '620px', border: 'none', borderRadius: '8px' }}
+              style={{ width: '100%', height: '620px', border: 'none', borderRadius: '16px' }}
               title="Slimming Quiz"
             />
           </div>
@@ -161,16 +162,17 @@ export default function Home() {
               </div>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <div className="flex flex-wrap justify-center items-center gap-3 mt-12">
             <a
               href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
               target="_blank"
               rel="noopener noreferrer"
               className="cta-glow inline-flex items-center justify-center font-bold text-white"
-              style={{ width: '444px', maxWidth: '100%', height: '40px', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '10px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+              style={{ height: '40px', padding: '0 36px', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '10px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
             >
               Get Your Free Body Analysis ›
             </a>
+            <BookConsultationButton variant="outline" style={{ height: '40px', padding: '0 28px', fontSize: '10px' }} />
           </div>
         </div>
       </section>
@@ -190,7 +192,7 @@ export default function Home() {
       <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Live page renders this section on a rounded gradient panel (980px wide) */}
-          <div style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', borderRadius: '17px', background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', padding: '28px 46px 48px' }}>
+          <div style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', borderRadius: '16px', background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', padding: '28px 46px 48px' }}>
             <p className="text-center mb-2" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
               our results-driven approach
             </p>
@@ -285,15 +287,18 @@ export default function Home() {
                 alt="medical weight loss consultation Malta"
                 style={{ width: '100%', maxWidth: '326px', marginLeft: 'auto', marginRight: 'auto', aspectRatio: '326 / 443', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '100px 10px' }}
               />
-              <a
-                href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-glow inline-flex items-center justify-center font-bold text-white"
-                style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '10px', letterSpacing: '0.5px', textTransform: 'uppercase', width: '100%', maxWidth: '326px', height: '40px', marginLeft: 'auto', marginRight: 'auto' }}
-              >
-                Get Your Free Body Analysis ›
-              </a>
+              <div className="flex flex-col gap-3" style={{ maxWidth: '326px', marginLeft: 'auto', marginRight: 'auto' }}>
+                <a
+                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-glow inline-flex items-center justify-center font-bold text-white"
+                  style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '10px', letterSpacing: '0.5px', textTransform: 'uppercase', width: '100%', height: '40px' }}
+                >
+                  Get Your Free Body Analysis ›
+                </a>
+                <BookConsultationButton variant="outline" style={{ fontSize: '10px', height: '40px', width: '100%' }} />
+              </div>
             </div>
           </div>
         </div>
@@ -302,7 +307,7 @@ export default function Home() {
       {/* (6) The Carisma Difference */}
       <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative" style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '20px', padding: '30px 33px 40px', overflow: 'hidden' }}>
+          <div className="relative" style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '30px 33px 40px', overflow: 'hidden' }}>
             {/* Decorative background watermark (live Wix asset, alt="") */}
             <img
               src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png"
@@ -365,7 +370,7 @@ export default function Home() {
                   src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
                   width="100%"
                   height="484"
-                  style={{ border: 0, borderRadius: '12px', display: 'block' }}
+                  style={{ border: 0, borderRadius: '16px', display: 'block' }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
@@ -373,15 +378,18 @@ export default function Home() {
             </div>
             {/* Bottom row - CTA + parking */}
             <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-12">
-              <a
-                href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-glow inline-flex items-center justify-center font-bold text-white"
-                style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '10px', letterSpacing: '0.5px', textTransform: 'uppercase', width: '464px', maxWidth: '100%', height: '40px' }}
-              >
-                Get Your Free Body Analysis ›
-              </a>
+              <div className="flex flex-wrap gap-3 items-center">
+                <a
+                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-glow inline-flex items-center justify-center font-bold text-white"
+                  style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '10px', letterSpacing: '0.5px', textTransform: 'uppercase', height: '40px', padding: '0 36px' }}
+                >
+                  Get Your Free Body Analysis ›
+                </a>
+                <BookConsultationButton variant="outline" style={{ fontSize: '10px', height: '40px', padding: '0 24px' }} />
+              </div>
               <div className="flex items-center gap-3">
                 <img src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="Complimentary on-site parking" style={{ width: '34px', height: 'auto', objectFit: 'contain' }} />
                 <span style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase' }}>

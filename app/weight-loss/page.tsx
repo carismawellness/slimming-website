@@ -5,6 +5,7 @@ import PageHero from '@/components/PageHero';
 import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, faqPage, serviceSchema } from '@/lib/seo/schema';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 /* ============================================================
    Carisma — Medical Weight-Loss Program  (/weight-loss)
@@ -65,8 +66,8 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 function Placeholder({ label, height = '320px' }: { label: string; height?: string }) {
   return (
     <div
-      className="w-full flex items-center justify-center text-center rounded-lg border-2 border-dashed"
-      style={{ minHeight: height, borderColor: green, backgroundColor: softBg, color: taupe, fontFamily: bodyFont, fontSize: '14px', padding: '16px' }}
+      className="w-full flex items-center justify-center text-center border-2 border-dashed"
+      style={{ minHeight: height, borderRadius: '16px', borderColor: green, backgroundColor: softBg, color: taupe, fontFamily: bodyFont, fontSize: '14px', padding: '16px' }}
     >
       {label}
     </div>
@@ -92,8 +93,8 @@ function PhoneButton() {
   return (
     <a
       href={`tel:${phoneNumber.replace(/\s/g, '')}`}
-      className="inline-block rounded-full font-bold text-center transition-colors"
-      style={{ backgroundColor: 'transparent', border: `2px solid ${green}`, color: green, padding: '13px 34px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+      className="btn btn-secondary font-bold text-center"
+      style={{ padding: '13px 34px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
     >
       Speak to a doctor
     </a>
@@ -195,7 +196,7 @@ function ProblemAgitationSection() {
       {/* Narrative */}
       <div className="pt-14 pb-5">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto" style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #DCE7D9 100%)', border: '1px solid #E5E5E3', borderRadius: '24px', padding: '40px', maxWidth: '976px' }}>
+          <div className="mx-auto" style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #DCE7D9 100%)', border: '1px solid #E5E5E3', borderRadius: '16px', padding: '40px', maxWidth: '976px' }}>
             <h2 className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
               Weight Loss After 30 in Malta<br />Without Giving Up the Foods You Love
             </h2>
@@ -270,12 +271,13 @@ function ProblemAgitationSection() {
               So you end up <strong style={{ color: greenDark }}>hungrier</strong>, more <strong style={{ color: greenDark }}>tired</strong> and more <strong style={{ color: greenDark }}>frustrated</strong>, often with <strong style={{ color: greenDark }}>less muscle</strong> and a <strong style={{ color: greenDark }}>slower metabolism</strong> than when you started.
             </p>
           </div>
-          <div className="mt-10 mx-auto max-w-3xl text-center p-8" style={{ background: panelGradient, borderRadius: '24px' }}>
+          <div className="mt-10 mx-auto max-w-3xl text-center p-8" style={{ background: panelGradient, borderRadius: '16px' }}>
             <p style={{ ...pStyle, fontSize: '15px', lineHeight: 1.4 }}>
               <strong style={{ color: greenDark }}>Our program is built to reverse exactly that:</strong> we reset your metabolism for your age, protect muscle, work with your hormones and show you how to lose weight while still eating food you enjoy.
             </p>
-            <div className="mt-6 flex justify-center">
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
               <CTAButton label="GET YOUR FREE BODY ANALYSIS" />
+              <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '14px 28px' }} />
             </div>
           </div>
         </div>
@@ -347,11 +349,11 @@ function ProgramOverviewSection() {
         </div>
 
         {/* Panel */}
-        <div style={{ background: panelGradient, borderBottomLeftRadius: '24px', borderBottomRightRadius: '24px', padding: '32px' }}>
+        <div style={{ background: panelGradient, borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '32px' }}>
           {active === 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Complimentary consultation */}
-              <div className="bg-white rounded-xl p-7">
+              <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
                   <img src="/wix/87fc13_d2a17b8db6de4c8c8c41219e3a2c99cb~mv2.png" alt="" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
                   <h3 style={colHead}>Complimentary Consultation</h3>
@@ -373,7 +375,7 @@ function ProgramOverviewSection() {
               </div>
               {/* Suitable / Not suitable */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                <div className="bg-white rounded-xl p-6">
+                <div className="card p-6">
                   <div className="flex items-center gap-2 mb-5">
                     <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '30px', height: '30px', objectFit: 'contain' }} />
                     <h3 style={colHead}>Suitable for</h3>
@@ -387,7 +389,7 @@ function ProgramOverviewSection() {
                     ))}
                   </ul>
                 </div>
-                <div className="bg-white rounded-xl p-6">
+                <div className="card p-6">
                   <div className="flex items-center gap-2 mb-5">
                     <img src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png" alt="" style={{ width: '27px', height: '27px', objectFit: 'contain' }} />
                     <h3 style={colHead}>Not suitable for</h3>
@@ -406,7 +408,7 @@ function ProgramOverviewSection() {
           )}
 
           {active === 1 && (
-            <div className="bg-white rounded-xl p-7">
+            <div className="card p-7">
               <div className="flex items-center gap-3 mb-5">
                 <img src="/wix/87fc13_05acf8a406274fbd9b5586bead0d2df5~mv2.png" alt="" style={{ height: '63px', width: 'auto', objectFit: 'contain' }} />
                 <h3 style={stepTitle}>Body analysis &amp; medical grade consultation</h3>
@@ -432,7 +434,7 @@ function ProgramOverviewSection() {
 
           {active === 2 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div className="bg-white rounded-xl p-7">
+              <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
                   <img src="/wix/87fc13_b0aad949fa9d47b58f1512dcf2522e3d~mv2.png" alt="" style={{ height: '63px', width: 'auto', objectFit: 'contain' }} />
                   <h3 style={stepTitle}>Diet and accountability</h3>
@@ -451,7 +453,7 @@ function ProgramOverviewSection() {
                   </div>
                 ))}
               </div>
-              <div className="bg-white rounded-xl p-7">
+              <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
                   <img src="/wix/87fc13_9a4ac5ded2b94bbbb6e11e641f46f5d5~mv2.png" alt="" style={{ height: '63px', width: 'auto', objectFit: 'contain' }} />
                   <h3 style={stepTitle}>Then we shape it around your life:</h3>
@@ -488,7 +490,7 @@ function ProgramOverviewSection() {
           )}
 
           {active === 3 && (
-            <div className="bg-white rounded-xl p-7">
+            <div className="card p-7">
               <div className="flex items-center gap-3 mb-5">
                 <img src="/wix/87fc13_83de975f116646a795c9db7ebdc3b4be~mv2.png" alt="" style={{ height: '50px', width: 'auto', objectFit: 'contain' }} />
                 <h3 style={stepTitle}>Movement That Fits Your Life</h3>
@@ -517,7 +519,7 @@ function ProgramOverviewSection() {
 
           {active === 4 && (
             <div className="space-y-6">
-              <div className="bg-white rounded-xl p-7">
+              <div className="card p-7">
                 <h3 className="mb-4" style={stepTitle}>Body Contouring Treatments Included in Your Programme</h3>
                 <p style={pStyle}>
                   We use internationally renowned technologies to shape, tighten and refine your results &mdash; never cheap gadgets or outdated machines. Our treatments are not the whole plan, but they are powerful tools when used on top of a solid medical, diet and movement strategy. Every device we use is leading in its category, chosen for safety, research and real-world results.
@@ -570,7 +572,7 @@ function ProgramOverviewSection() {
                     note: 'It feels like a warm, deep massage rather than a harsh, painful treatment.',
                   },
                 ].map((t) => (
-                  <div key={t.title} className="bg-white rounded-xl p-7">
+                  <div key={t.title} className="card p-7">
                     <div className="flex items-center gap-3 mb-5">
                       <img src={t.icon} alt="" style={{ height: '65px', width: 'auto', objectFit: 'contain' }} />
                       <h3 style={stepTitle}>{t.title}</h3>
@@ -749,7 +751,7 @@ function TreatmentsSection() {
               <div key={t.title} className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
                 <div className={flip ? 'md:order-2' : ''}>
                   {t.image ? (
-                    <div className="w-full rounded-xl overflow-hidden shadow-md" style={{ aspectRatio: '381 / 250' }}>
+                    <div className="w-full overflow-hidden shadow-md" style={{ borderRadius: '16px', aspectRatio: '381 / 250' }}>
                       <img src={t.image} alt={t.placeholder} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                     </div>
                   ) : (
@@ -836,7 +838,7 @@ function OurPromiseSection() {
   return (
     <div className="py-20" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
-        <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '28px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
+        <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '16px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
           <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Our Promise
           </p>
@@ -845,7 +847,7 @@ function OurPromiseSection() {
             Up to 1 kg Per Week.<br />Medically Measured. Results Guaranteed.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-10">
-            <div className="overflow-hidden" style={{ borderRadius: '18px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', width: '375px', maxWidth: '100%', height: '350px' }}>
+            <div className="overflow-hidden" style={{ borderRadius: '16px', boxShadow: '0 14px 30px rgba(123,165,135,0.25)', width: '375px', maxWidth: '100%', height: '350px' }}>
               <img
                 src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
                 alt="Clinical measurement and body analysis at Carisma"
@@ -897,7 +899,7 @@ function CarismaWellnessSection() {
   return (
     <section className="py-20" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
-        <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #E6EFE3 100%)', borderRadius: '32px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
+        <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #E6EFE3 100%)', borderRadius: '16px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
           <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
             the carisma difference
           </p>
@@ -940,22 +942,25 @@ function CarismaWellnessSection() {
                 src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
                 width="428"
                 height="359"
-                style={{ border: 0, borderRadius: '12px', display: 'block', maxWidth: '100%' }}
+                style={{ border: 0, borderRadius: '16px', display: 'block', maxWidth: '100%' }}
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             </div>
           </div>
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-12">
-            <a
-              href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="cta-glow text-center font-bold text-white"
-              style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '14px 40px' }}
-            >
-              Get Your Free Body Analysis &rsaquo;
-            </a>
+            <div className="flex flex-wrap gap-3 items-center">
+              <a
+                href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="cta-glow text-center font-bold text-white"
+                style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '14px 40px' }}
+              >
+                Get Your Free Body Analysis &rsaquo;
+              </a>
+              <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
+            </div>
             <div className="flex items-center gap-3">
               <img src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="Complimentary on-site parking" style={{ width: '34px', height: 'auto', objectFit: 'contain' }} />
               <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
@@ -1044,7 +1049,7 @@ function ResultsSection() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {evidence.map((e) => (
-              <div key={e.modality} className="rounded-xl p-6 bg-white" style={{ borderLeft: `4px solid ${green}`, border: `1px solid #dfe6dc`, borderLeftWidth: '4px', borderLeftColor: green }}>
+              <div key={e.modality} className="card p-6" style={{ borderLeftWidth: '4px', borderLeftColor: green }}>
                 <div className="flex items-start justify-between gap-3 mb-3">
                   <h3 style={{ color: greenDark, fontFamily: headingFont, fontSize: '17px', fontWeight: 400 }}>{e.modality}</h3>
                   <span
@@ -1074,7 +1079,7 @@ function ResultsSection() {
           </p>
 
           {/* Lead doctor — prominent */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center bg-white rounded-xl p-8 mb-8" style={{ border: `1px solid #dfe6dc` }}>
+          <div className="card grid grid-cols-1 md:grid-cols-3 gap-8 items-center p-8 mb-8">
             <div className="md:col-span-1">
               <Placeholder label={doctors[0].placeholder} height="300px" />
             </div>
@@ -1088,7 +1093,7 @@ function ResultsSection() {
           {/* Supporting doctors */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {doctors.slice(1).map((d) => (
-              <div key={d.name} className="bg-white rounded-xl p-7" style={{ border: `1px solid #dfe6dc` }}>
+              <div key={d.name} className="card p-7">
                 <h3 style={{ color: greenDark, fontFamily: headingFont, fontSize: '20px', fontWeight: 400 }}>{d.name}</h3>
                 <p className="mb-3" style={{ color: green, fontFamily: wideFont, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase' }}>{d.role}</p>
                 <p style={{ ...pStyle, fontSize: '14px' }}>{d.bio}</p>
@@ -1101,7 +1106,7 @@ function ResultsSection() {
       {/* Slimming guide promo */}
       <div className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center rounded-2xl p-8 md:p-12" style={{ background: panelGradient }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-8 md:p-12" style={{ borderRadius: '16px', background: panelGradient }}>
             <div className="w-full mx-auto" style={{ maxWidth: '360px' }}>
               <Placeholder label="Carisma Slimming Guide — e-book cover" height="340px" />
             </div>
@@ -1166,7 +1171,7 @@ function TestimonialsSection() {
         </p>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {testimonials.map((t) => (
-            <div key={t.name} className="rounded-xl p-7 bg-white flex flex-col" style={{ border: `1px solid #dfe6dc` }}>
+            <div key={t.name} className="card-lift p-7 flex flex-col">
               <p style={{ color: green, fontFamily: headingFont, fontSize: '13px', letterSpacing: '1px' }}>&#9733;&#9733;&#9733;&#9733;&#9733;</p>
               <p className="mt-3 mb-5 flex-1" style={{ ...pStyle, fontStyle: 'italic' }}>&ldquo;{t.quote}&rdquo;</p>
               <p style={{ color: greenDark, fontFamily: headingFont, fontSize: '16px', fontWeight: 400 }}>{t.name}</p>
@@ -1174,9 +1179,12 @@ function TestimonialsSection() {
             </div>
           ))}
         </div>
-        <div className="text-center mt-12">
+        <div className="mt-12 flex flex-wrap justify-center gap-3">
           <CTAButton label="START YOUR OWN RESULT" />
-          <CTAReassurance className="mt-4" />
+          <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '14px 28px' }} />
+        </div>
+        <div className="text-center mt-4">
+          <CTAReassurance />
         </div>
       </div>
     </section>
@@ -1218,7 +1226,7 @@ function FAQSection() {
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Looking for something?"
                 aria-label="Search frequently asked questions"
-                className="w-full bg-transparent outline-none placeholder:text-[#6f6456]"
+                className="w-full bg-transparent placeholder:text-[#6f6456]"
                 style={{ color: taupe, fontFamily: bodyFont, fontSize: '15px' }}
               />
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={taupeLight} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
@@ -1502,6 +1510,7 @@ function FinalCTASection() {
           </ul>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <CTAButton />
+            <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px' }} />
             <PhoneButton />
           </div>
           <CTAReassurance className="mt-5" />
@@ -1525,8 +1534,8 @@ function FinalCTASection() {
               href="https://www.carismaspa.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded-full font-bold text-center"
-              style={{ border: `2px solid ${green}`, color: green, padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+              className="btn btn-secondary font-bold text-center"
+              style={{ padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
             >
               Discover our spas
             </a>
@@ -1534,8 +1543,8 @@ function FinalCTASection() {
               href="https://www.carismaspa.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block rounded-full font-bold text-center"
-              style={{ border: `2px solid ${green}`, color: green, padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
+              className="btn btn-secondary font-bold text-center"
+              style={{ padding: '12px 28px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
             >
               Discover med-aesthetics
             </a>

@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteHeader, SiteFooter, SiteCookieBanner } from "@/components/PreviewChromeGate";
+import { SiteHeader, SiteFooter, SiteCookieBanner, SiteMobileCTA } from "@/components/PreviewChromeGate";
+import ConsultationModal from "@/components/ConsultationModal";
+import Script from "next/script";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -84,11 +86,14 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col pb-[88px] md:pb-0">
         <SiteHeader />
         <main className="flex-grow">{children}</main>
         <SiteFooter />
         <SiteCookieBanner />
+        <SiteMobileCTA />
+        <ConsultationModal />
+        <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
       </body>
     </html>
   );

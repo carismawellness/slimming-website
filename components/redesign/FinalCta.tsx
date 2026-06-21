@@ -4,6 +4,7 @@ import { FINAL_CTA, REVIEWS, CONTACT } from '@/lib/redesign/content';
 import Reveal from './Reveal';
 import Cta from './Cta';
 import FinalCtaAurora from './FinalCtaAurora';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 export default function FinalCta() {
   return (
@@ -27,6 +28,10 @@ export default function FinalCta() {
             <p className="cx-lead" style={{ fontSize: 17, marginBottom: 32 }}>{FINAL_CTA.sub}</p>
             <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', justifyContent: 'center', marginBottom: 26 }}>
               <Cta variant="primary">{FINAL_CTA.cta}</Cta>
+              <BookConsultationButton
+                variant="outline"
+                style={{ fontSize: '13px', padding: '14px 28px', border: '1px solid rgba(255,255,255,0.6)', color: '#fff', background: 'rgba(255,255,255,0.12)', backdropFilter: 'blur(6px)' }}
+              />
               <a href={CONTACT.phoneHref} className="cx-btn cx-btn-ghost" aria-label={`Call ${CONTACT.phone}`}><span className="cx-btn-label">Call {CONTACT.phone}</span></a>
             </div>
             <p style={{ fontFamily: 'var(--body)', fontSize: 13, color: 'var(--taupe)' }}>

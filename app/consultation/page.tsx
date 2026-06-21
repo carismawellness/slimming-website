@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
   title: "Free Slimming Consultation Malta | Carisma Slimming",
@@ -18,14 +18,6 @@ const COLLAGE = [
   '/wix/87fc13_59d15b41b3c1462788d0a0843b859d0b~mv2.png',
   '/wix/87fc13_73555ee869874f3c8a90fd5bb62d19e8~mv2.png',
   '/wix/87fc13_074438e081814932aa4c2fe6dc450e57~mv2.png',
-];
-
-// Wix "petal" shapes: alternating corner radii per collage slot
-const COLLAGE_RADII = [
-  '15px 140px',
-  '140px 15px',
-  '140px 15px',
-  '15px 140px',
 ];
 
 export default function ConsultationPage() {
@@ -87,8 +79,7 @@ export default function ConsultationPage() {
               {COLLAGE.map((src, i) => (
                 <div
                   key={i}
-                  className="overflow-hidden w-full aspect-[267/280]"
-                  style={{ borderRadius: COLLAGE_RADII[i] }}
+                  className="card overflow-hidden w-full aspect-[267/280]"
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -100,27 +91,31 @@ export default function ConsultationPage() {
               ))}
             </div>
 
-            {/* Booking form — GoHighLevel (LeadConnector) embedded web form,
-                same widget the live page embeds (499x627). */}
-            <div className="mx-auto w-full" style={{ maxWidth: '499px' }}>
-              <iframe
-                src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
-                style={{ width: '100%', height: '627px', border: 'none' }}
-                id="inline-contact-Z3VHJCJwj5mBGmqcdmpE"
-                data-layout="{'id':'INLINE'}"
-                data-trigger-type="alwaysShow"
-                data-trigger-value=""
-                data-activation-type="alwaysActivated"
-                data-activation-value=""
-                data-deactivation-type="neverDeactivate"
-                data-deactivation-value=""
-                data-form-name="WEB FORM"
-                data-height="627"
-                data-layout-iframe-id="inline-contact-Z3VHJCJwj5mBGmqcdmpE"
-                data-form-id="Z3VHJCJwj5mBGmqcdmpE"
-                title="WEB FORM"
-              />
-              <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
+            {/* Consultation CTA — form opens in a lightbox popup */}
+            <div className="mx-auto w-full flex flex-col justify-center" style={{ maxWidth: '499px' }}>
+              <p
+                className="mb-4"
+                style={{ fontFamily: "'Novecento Wide Book', sans-serif", fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', color: TAUPE }}
+              >
+                Doctor-led &middot; Free &middot; No obligation
+              </p>
+              <h3
+                className="mb-5"
+                style={{ fontFamily: "'Trajan Pro', serif", fontWeight: 400, fontSize: '22px', color: GREEN, textTransform: 'uppercase', lineHeight: 1.4 }}
+              >
+                Meet our weight loss doctors — your personalised plan starts here
+              </h3>
+              <p className="mb-8" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: 1.7, color: TAUPE }}>
+                Our medically qualified team reviews your goals, health history and current weight to build a programme that fits your body, your lifestyle and your timeline. Book your free consultation and get a clear picture of what&rsquo;s possible for you.
+              </p>
+              <div className="flex flex-col sm:flex-row items-start gap-4">
+                <BookConsultationButton variant="filled" style={{ fontSize: '13px', padding: '16px 40px' }}>
+                  Book Your Free Consultation
+                </BookConsultationButton>
+              </div>
+              <p className="mt-4" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', color: TAUPE, opacity: 0.75 }}>
+                ★ 4.9 from 200+ reviews &middot; Limited places each month
+              </p>
             </div>
           </div>
         </div>
@@ -227,13 +222,15 @@ export default function ConsultationPage() {
       {/* Google Map */}
       <section className="pb-14" style={{ backgroundColor: '#FFFFFF' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '980px' }}>
-          <iframe
-            src="https://maps.google.com/maps?q=Carisma%20Slimming%2C%20Malta&z=15&output=embed"
-            style={{ width: '100%', height: '350px', border: 'none' }}
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-            title="Carisma Slimming map"
-          />
+          <div className="card overflow-hidden" style={{ lineHeight: 0 }}>
+            <iframe
+              src="https://maps.google.com/maps?q=Carisma%20Slimming%2C%20Malta&z=15&output=embed"
+              style={{ width: '100%', height: '350px', border: 'none' }}
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="Carisma Slimming map"
+            />
+          </div>
         </div>
       </section>
     </main>

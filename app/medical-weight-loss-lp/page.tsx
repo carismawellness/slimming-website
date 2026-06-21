@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import Script from 'next/script';
 import PageHero from '@/components/PageHero';
 import HowItWorksTabs from './HowItWorksTabs';
 import TestimonialsSlider from './TestimonialsSlider';
+import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
   title: "Medical Weight Loss Malta | Carisma Slimming",
@@ -38,6 +38,15 @@ function BlueCta({ href, children }: { href: string; children: React.ReactNode }
     >
       {children} &rsaquo;
     </a>
+  );
+}
+
+function CtaPair({ href, primaryLabel }: { href: string; primaryLabel: React.ReactNode }) {
+  return (
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
+      <BlueCta href={href}>{primaryLabel}</BlueCta>
+      <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '14px 28px' }} />
+    </div>
   );
 }
 
@@ -207,38 +216,11 @@ export default function MedicalWeightLossLpPage() {
           { label: 'Doctor monitored:', text: 'assessment, body scan, safety checks and regular reviews.' },
           { label: 'Part of a full plan:', text: 'fits your nutrition, movement and treatment protocol.' },
         ]}
-        primaryCta={{ text: 'Book Your Consultation', href: '#book-form' }}
+        primaryCta={{ text: 'Book Your Consultation', href: FRESHA_BOOK, external: true }}
         media={{ type: 'video', src: '/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png', alt: 'Medical weight loss programme in Malta' }}
         proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />
-
-      {/* Lead form — relocated below the hero */}
-      <section id="book-form" className="py-14" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '24px', textTransform: 'uppercase' }}>Book your free consultation</h2>
-          {/* GoHighLevel (LeadConnector) lead form — same embedded web form
-              as the live LP hero (filesusr 3dbfd5_1eed50f1…). */}
-          <iframe
-            src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
-            style={{ width: '100%', height: '814px', border: 'none', borderRadius: '8px' }}
-            id="inline-Z3VHJCJwj5mBGmqcdmpE"
-            data-layout="{'id':'INLINE'}"
-            data-trigger-type="alwaysShow"
-            data-trigger-value=""
-            data-activation-type="alwaysActivated"
-            data-activation-value=""
-            data-deactivation-type="neverDeactivate"
-            data-deactivation-value=""
-            data-form-name="WEB FORM"
-            data-height="751"
-            data-layout-iframe-id="inline-Z3VHJCJwj5mBGmqcdmpE"
-            data-form-id="Z3VHJCJwj5mBGmqcdmpE"
-            title="WEB FORM"
-          />
-          <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
-        </div>
-      </section>
 
       {/* The secret to a more defined, confident look — testimonial carousel */}
       <section className="py-24">
@@ -305,7 +287,7 @@ export default function MedicalWeightLossLpPage() {
       {/* Philosophy — we build the conditions for it to last */}
       <section className="py-16">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
-          <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #D8E3D9 0%, #F8F6F2 100%)', borderRadius: '24px' }}>
+          <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #D8E3D9 0%, #F8F6F2 100%)', borderRadius: '16px' }}>
             <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.6 }}>
               sustainable weight loss in Malta:<br />structure, not willpower
             </h2>
@@ -331,7 +313,7 @@ export default function MedicalWeightLossLpPage() {
                 <p className="mb-8" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.8 }}>
                   Treatment support can help reduce appetite. Long-term results come from structure, monitoring, and habits that fit real life.
                 </p>
-                <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
+                <CtaPair href={FRESHA_ANALYSIS} primaryLabel="Get Your Free Body Analysis" />
               </div>
             </div>
           </div>
@@ -358,7 +340,7 @@ export default function MedicalWeightLossLpPage() {
               <div
                 key={card.title}
                 className="p-8"
-                style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '80px', borderBottomRightRadius: '16px' }}
+                style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderRadius: '16px' }}
               >
                 <img src={card.icon} alt="" style={{ width: 'auto', height: '66px', objectFit: 'contain', marginBottom: '20px' }} />
                 <h3 className="mb-3 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '0.5px' }}>
@@ -414,16 +396,17 @@ export default function MedicalWeightLossLpPage() {
             </div>
           </div>
 
-          <div className="mt-12 text-center">
+          <div className="mt-12 flex flex-wrap justify-center gap-3">
             <a
               href={FRESHA_BOOK}
               target="_blank"
               rel="noopener noreferrer"
-              className="cta-glow inline-block text-center font-bold text-white w-full sm:w-auto"
-              style={{ backgroundColor: BLUE, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '16px 120px' }}
+              className="cta-glow inline-block text-center font-bold text-white"
+              style={{ backgroundColor: BLUE, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '16px 48px' }}
             >
               find out if you qualify
             </a>
+            <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '15px 32px' }} />
           </div>
         </div>
       </section>
@@ -508,16 +491,18 @@ export default function MedicalWeightLossLpPage() {
               <p className="mb-8" style={{ color: '#5a5043', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
                 &ldquo;Medical weight loss should never be guesswork. Every body tells a story, and our job is to turn it into a plan that lasts&rdquo; &mdash; Dr. Teebi
               </p>
-              {/* Live LP uses a green (not blue) CTA in this section */}
-              <a
-                href={FRESHA_ANALYSIS}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="cta-glow inline-block text-center font-bold text-white"
-                style={{ backgroundColor: CHECK, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 36px' }}
-              >
-                Get Your Free Body Analysis &rsaquo;
-              </a>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '12px', alignItems: 'center' }}>
+                <a
+                  href={FRESHA_ANALYSIS}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-glow inline-block text-center font-bold text-white"
+                  style={{ backgroundColor: CHECK, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 36px' }}
+                >
+                  Get Your Free Body Analysis &rsaquo;
+                </a>
+                <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '14px 28px' }} />
+              </div>
             </div>
           </div>
         </div>
@@ -594,7 +579,7 @@ export default function MedicalWeightLossLpPage() {
                 <p className="mb-8" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7 }}>
                   <strong style={{ color: '#5a5043' }}>The biggest clinical mistake:</strong> clinical oversight Medical weight loss without a system. Treatment support can quiet appetite, but it does not build muscle, teach eating, fix emotional drivers, or create long-term habits. That&rsquo;s why we pair it with strength training, protein-first structure, behavioural coaching, accountability, and a maintenance plan.
                 </p>
-                <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
+                <CtaPair href={FRESHA_ANALYSIS} primaryLabel="Get Your Free Body Analysis" />
               </div>
               <div className="flex flex-col gap-7">
                 <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '477 / 270' }}>
@@ -652,15 +637,18 @@ export default function MedicalWeightLossLpPage() {
                     </li>
                   ))}
                 </ul>
-                <a
-                  href={FRESHA_ANALYSIS}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="cta-glow block text-center font-bold text-white mb-5 mx-auto"
-                  style={{ backgroundColor: BLUE, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px', maxWidth: '356px' }}
-                >
-                  Get Your Free Body Analysis &rsaquo;
-                </a>
+                <div className="mb-5 flex flex-col sm:flex-row gap-3 items-center">
+                  <a
+                    href={FRESHA_ANALYSIS}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-glow inline-block text-center font-bold text-white"
+                    style={{ backgroundColor: BLUE, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px 28px' }}
+                  >
+                    Get Your Free Body Analysis &rsaquo;
+                  </a>
+                  <BookConsultationButton variant="outline" style={{ fontSize: '12px', padding: '12px 20px' }} />
+                </div>
                 <div className="flex items-center justify-center gap-2">
                   <span className="flex items-center gap-1">
                     {[0, 1, 2, 3, 4].map((i) => (
@@ -733,7 +721,7 @@ export default function MedicalWeightLossLpPage() {
                 </div>
               </div>
               <div className="mt-12 flex flex-wrap items-center justify-between gap-6">
-                <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
+                <CtaPair href={FRESHA_ANALYSIS} primaryLabel="Get Your Free Body Analysis" />
                 <div className="flex items-center gap-3">
                   <img src="/wix/87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png" alt="parking-sign (1).png" style={{ width: '30px', height: 'auto', objectFit: 'contain' }} />
                   <span className="uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '1px' }}>
