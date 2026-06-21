@@ -23,6 +23,7 @@
 
 import { useState, useEffect } from 'react';
 import PageHero from '@/components/PageHero';
+import GradientField from '@/components/layers/GradientField';
 import { BOOKING_URL } from '@/lib/services';
 import BookConsultationButton from '@/components/BookConsultationButton';
 import {
@@ -279,7 +280,12 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         <div style={{ ...CONTAINER, marginTop: 84 }}>
           {/* live: 980px rounded panel, gradient measured as linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%) */}
-          <div style={{ maxWidth: 980, marginLeft: 'auto', marginRight: 'auto', borderRadius: 16, background: 'linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', padding: '48px 44px' }}>
+          {/* Layers: gradient moved onto GradientField, which adds one soft blob + faint dots behind the content. */}
+          <GradientField
+            blob={{ top: '6%', right: '-5%' }}
+            dots
+            style={{ maxWidth: 980, marginLeft: 'auto', marginRight: 'auto', borderRadius: 16, background: 'linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', padding: '48px 44px' }}
+          >
             <SectionHeading>{c.secretSubheading}</SectionHeading>
 
             <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 36 }} className="fr-2col">
@@ -304,7 +310,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 <CTA variant="blue" full />
               </div>
             </div>
-          </div>
+          </GradientField>
         </div>
       </section>
 

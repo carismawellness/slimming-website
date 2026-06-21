@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import BookConsultationButton from '@/components/BookConsultationButton';
+import GradientField from '@/components/layers/GradientField';
 
 export const metadata: Metadata = {
   title: "Free Slimming Consultation Malta | Carisma Slimming",
@@ -62,7 +63,16 @@ export default function ConsultationPage() {
       </section>
 
       {/* Collage + booking form */}
-      <section className="relative pb-12 pt-9" style={{ backgroundColor: '#FFFFFF' }}>
+      <GradientField
+        blob={{ top: '12%', right: '-4%' }}
+        dots
+        className="relative pb-12 pt-9"
+        style={{
+          backgroundImage:
+            'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.18) 100%)',
+          backgroundColor: '#FFFFFF',
+        }}
+      >
         {/* Faint decorative wavy-lines graphic bleeding off the left edge */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -92,7 +102,7 @@ export default function ConsultationPage() {
             </div>
 
             {/* Consultation CTA — form opens in a lightbox popup */}
-            <div className="mx-auto w-full flex flex-col justify-center" style={{ maxWidth: '499px' }}>
+            <div className="lg-glass lg-glass--panel mx-auto w-full flex flex-col justify-center p-6 sm:p-8" style={{ maxWidth: '499px' }}>
               <p
                 className="mb-4"
                 style={{ fontFamily: "'Novecento Wide Book', sans-serif", fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', color: TAUPE }}
@@ -119,7 +129,7 @@ export default function ConsultationPage() {
             </div>
           </div>
         </div>
-      </section>
+      </GradientField>
 
       {/* Opening hours + contact icons */}
       <section className="pb-14" style={{ backgroundColor: '#FFFFFF', paddingTop: '88px' }}>

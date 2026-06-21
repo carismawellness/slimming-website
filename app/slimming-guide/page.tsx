@@ -4,6 +4,8 @@ import OutcomeStepper from './OutcomeStepper';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
 import BookConsultationButton from '@/components/BookConsultationButton';
+import GradientField from '@/components/layers/GradientField';
+import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
   title: "Free Slimming Guide Malta | Carisma Slimming",
@@ -269,8 +271,11 @@ export default function SlimmingGuidePage() {
       {/* Built To Hold band + What This Is + Method share a wrapper so the tilted
           paper mockups can overlap section boundaries like on the live site */}
       <div className="relative overflow-hidden">
-      {/* Built To Hold Band */}
-      <section
+      {/* Built To Hold Band — single Layers blob region (Whisper depth on its
+          existing dark-green gradient; no CTA here, so a blob is allowed). */}
+      <GradientField
+        blob={{ top: '-20%', right: '-4%' }}
+        dots
         style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '57px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -283,7 +288,7 @@ export default function SlimmingGuidePage() {
             <strong>NOT</strong> A QUICK FIX.
           </p>
         </div>
-      </section>
+      </GradientField>
 
       {/* What This Is Section */}
       <section className="py-24 relative bg-white">
@@ -404,6 +409,11 @@ export default function SlimmingGuidePage() {
         style={{ width: '771px', aspectRatio: '771 / 708', objectFit: 'contain', top: '330px', left: '-305px' }}
       />
       </div>{/* end decorative wrapper */}
+
+      {/* Single Layers divider — restrained motif marking the Method → Outcomes seam. */}
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+        <MotifAccent mode="divider" />
+      </div>
 
       {/* Success Outcomes Section — STEP 1-4 stepper */}
       <section className="py-24 bg-white">
@@ -646,7 +656,14 @@ export default function SlimmingGuidePage() {
         className="py-24 relative overflow-hidden"
         style={{ background: `linear-gradient(90deg, #3E483E 0%, #57695A 50%, ${BAND_END} 100%)` }}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Single Layers watermark — decorative motif behind CTA content (no blob
+            here because this band has a .cta-glow button). */}
+        <MotifAccent
+          mode="watermark"
+          className="hidden md:block"
+          style={{ position: 'absolute', left: '-3%', bottom: '-10%', zIndex: 0 }}
+        />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative" style={{ zIndex: 1 }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             {/* Left — heading, copy, CTA, reviews */}
             <div>
