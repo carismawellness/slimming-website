@@ -59,7 +59,7 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
   },
   lipocavitation: {
     title: 'Lipocavitation Malta | Fat Reduction | Carisma Slimming',
-    description: 'Lipocavitation Fat Redultion in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
+    description: 'Lipocavitation fat reduction in Malta. Non-invasive ultrasound treatment that breaks down stubborn fat cells. No downtime. Book your free assessment today.',
   },
   'anti-cellulite': {
     title: 'Cellulite Treatment Malta | VelaShape III | Carisma Slimming',
