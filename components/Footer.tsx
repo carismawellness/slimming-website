@@ -1,5 +1,7 @@
 import Link from 'next/link';
 import MotifAccent from './layers/MotifAccent';
+import SiteSearch from './SiteSearch';
+import GoogleReviews from './GoogleReviews';
 
 // Accessible brand tokens (see globals.css locked palette).
 // GREEN: sage text/icon/heading on near-white footer = 5.42:1 AA (was #8EB093 -> 2.33:1).
@@ -47,23 +49,12 @@ function ContactRow({
 export default function Footer() {
   return (
     <footer style={{ background: `linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, ${GREEN_DECO} 100%)` }}>
-      {/* Search Bar */}
+      {/* Reviews marquee — shown on every page via the global footer */}
+      <GoogleReviews />
+
+      {/* Search Bar — live client-side site search */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
-        <div className="relative">
-          <input
-            type="text"
-            placeholder="WHAT ARE YOU LOOKING FOR?"
-            aria-label="Search"
-            className="w-full bg-white placeholder:text-[#4F7256]"
-            style={{ border: '1px solid #4F7256', borderRadius: '999px', padding: '16px 52px 16px 20px', color: GREEN, fontFamily: 'Roboto, sans-serif', fontSize: '13px', letterSpacing: '2px' }}
-          />
-          <span className="absolute top-1/2 -translate-y-1/2" style={{ right: '18px', pointerEvents: 'none' }}>
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <circle cx="11" cy="11" r="7"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-          </span>
-        </div>
+        <SiteSearch />
       </div>
 
       {/* Liquid Gloss contact panel — floats over the sage gradient */}

@@ -1,29 +1,31 @@
 'use client';
 
-/* Google reviews block for the slimming site — a styled recreation of the live
-   Elfsight Google Reviews widget, populated with the real reviews from the
-   clinic's Google listing (lib/reviews.ts). Mirrors the Carisma Aesthetics
-   GoogleReviews setup, restyled with the slimming palette/fonts. */
+/* Horizontal auto-scrolling marquee of Google + Fresha reviews.
+   Two rows: top scrolls left→right, bottom scrolls right→left.
+   Cards pause on hover. Respects prefers-reduced-motion. */
 
-import { useState } from 'react';
-import { CURATED_REVIEWS, REVIEW_SUMMARY, GOOGLE_PROFILE_URL, GOOGLE_WRITE_REVIEW_URL, type Review } from '@/lib/reviews';
+import {
+  SLIMMING_REVIEWS,
+  AGGREGATE,
+  GOOGLE_WRITE_REVIEW_URL,
+  type Review,
+} from '@/lib/reviews';
 
-// Accessible brand palette (WCAG AA on the surfaces used in this component):
-//  - GREEN_TEXT: deep sage for sage TEXT / ICONS / LINKS / borders (brand-green-text). 5.10:1 on #f8f8f8.
-//  - TAUPE: darkened taupe for primary muted text. 5.44:1 on #f8f8f8.
-//  - TAUPE_LT: secondary/meta text. Uses --text-light #595959 = 6.60:1 on #f8f8f8 (AAA).
-//  - GOLD: deep brand gold for star fills (primary-gold-text). 4.58:1 on #f8f8f8; 3.76:1 vs the empty-star #e2e2e2.
-const GREEN_TEXT = '#4f7256';
-const TAUPE = '#6f6456';
-const TAUPE_LT = '#595959';
-const GOLD = '#8c6d18';
+// ── Brand tokens (WCAG AA) ────────────────────────────────────────────────
+const GREEN = '#4f7256';       // sage text / icons  5.10:1 on #f8f8f8
+const DARK_GREEN = '#024C27';  // deep forest headings
+const TAUPE = '#6f6456';       // body text          5.78:1 on #f8f8f8
+const TAUPE_LT = '#595959';    // secondary/meta     6.60:1 on #f8f8f8
+const GOLD = '#8c6d18';        // star fills         4.58:1 on #f8f8f8
 const SERIF = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
-const WIDE = 'Novecento Wide Book, Novecento Wide, sans-serif';
+const WIDE = '"Novecento Wide Book", "Novecento Wide", sans-serif';
 const BODY = 'Roboto, sans-serif';
+
+// ── Sub-components ────────────────────────────────────────────────────────
 
 function GoogleG({ size = 18 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 24 24" aria-hidden>
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-label="Google" role="img">
       <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z" />
       <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z" />
       <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z" />
@@ -32,11 +34,20 @@ function GoogleG({ size = 18 }: { size?: number }) {
   );
 }
 
-function Stars({ rating = 5, size = 16 }: { rating?: number; size?: number }) {
+function FreshaF({ size = 18 }: { size?: number }) {
   return (
-    <span style={{ display: 'inline-flex', color: GOLD }} aria-label={`${rating} out of 5 stars`}>
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-label="Fresha" role="img">
+      <circle cx="12" cy="12" r="12" fill="#007963" />
+      <text x="12" y="17" textAnchor="middle" fontFamily="sans-serif" fontSize="14" fontWeight="700" fill="#ffffff">f</text>
+    </svg>
+  );
+}
+
+function Stars({ rating = 5, size = 14 }: { rating?: number; size?: number }) {
+  return (
+    <span style={{ display: 'inline-flex', gap: 1 }} aria-label={`${rating} out of 5 stars`}>
       {[0, 1, 2, 3, 4].map((i) => (
-        <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill={i < Math.round(rating) ? 'currentColor' : '#e2e2e2'}>
+        <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill={i < Math.round(rating) ? GOLD : '#e2e2e2'} aria-hidden>
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
         </svg>
       ))}
@@ -44,79 +55,235 @@ function Stars({ rating = 5, size = 16 }: { rating?: number; size?: number }) {
   );
 }
 
-// Darkened (same hue family) so white initials clear AA (>=4.5:1). Pastels failed (2.33-3.39:1).
-const AVATAR_COLORS = ['#97697d', '#5f7a89', '#637b6a', '#85735d', '#7b728e', '#906d64'];
-
-function ReviewCard({ r, color }: { r: Review; color: string }) {
-  const [open, setOpen] = useState(false);
-  const long = r.text.length > 140;
+function ReviewCard({ r }: { r: Review }) {
   return (
-    <div className="card-lift" style={{ backgroundColor: '#f8f8f8', padding: 22 }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-        <span style={{ flexShrink: 0, width: 42, height: 42, borderRadius: '50%', background: color, color: '#fff', display: 'inline-flex', alignItems: 'center', justifyContent: 'center', fontFamily: WIDE, fontSize: 17 }}>{r.initial}</span>
-        <span style={{ flex: 1, minWidth: 0 }}>
-          <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
-            <span style={{ fontFamily: BODY, fontSize: 14.5, color: TAUPE, fontWeight: 600 }}>{r.name}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" role="img" aria-label="Verified Google review"><circle cx="12" cy="12" r="10" fill={GREEN_TEXT} /><path d="M10.2 15.3l-2.6-2.6 1.1-1.1 1.5 1.5 4-4 1.1 1.1z" fill="#fff" /></svg>
-          </span>
-          <span style={{ display: 'block', fontFamily: BODY, fontSize: 11.5, color: TAUPE_LT }}>{r.when}</span>
+    <div
+      style={{
+        flexShrink: 0,
+        width: 300,
+        background: '#ffffff',
+        borderRadius: 16,
+        padding: '20px 22px',
+        boxShadow: '0 2px 12px rgba(2,76,39,0.08)',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 10,
+        margin: '0 10px',
+      }}
+    >
+      {/* Header: avatar + name + source badge */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+        <span
+          style={{
+            flexShrink: 0,
+            width: 40,
+            height: 40,
+            borderRadius: '50%',
+            background: r.avatarColor,
+            color: '#fff',
+            display: 'inline-flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontFamily: WIDE,
+            fontSize: 14,
+            fontWeight: 700,
+          }}
+          aria-hidden
+        >
+          {r.initials}
         </span>
-        <GoogleG size={20} />
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p
+            style={{
+              margin: 0,
+              fontFamily: BODY,
+              fontSize: 13.5,
+              fontWeight: 600,
+              color: TAUPE,
+              whiteSpace: 'nowrap',
+              overflow: 'hidden',
+              textOverflow: 'ellipsis',
+            }}
+          >
+            {r.name}
+          </p>
+          <p style={{ margin: 0, fontFamily: BODY, fontSize: 11, color: TAUPE_LT }}>{r.date}</p>
+        </div>
+        {r.source === 'google' ? <GoogleG size={18} /> : <FreshaF size={18} />}
       </div>
-      <div style={{ marginTop: 12 }}><Stars rating={r.rating} /></div>
+
+      {/* Stars */}
+      <Stars rating={r.rating} size={14} />
+
+      {/* Review text — 3-line clamp */}
       <p
         style={{
-          marginTop: 10, fontFamily: BODY, fontSize: 13.5, color: TAUPE, lineHeight: 1.65,
-          ...(open ? {} : { display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical', overflow: 'hidden' }),
+          margin: 0,
+          fontFamily: BODY,
+          fontSize: 13,
+          color: TAUPE,
+          lineHeight: 1.6,
+          display: '-webkit-box',
+          WebkitLineClamp: 3,
+          WebkitBoxOrient: 'vertical',
+          overflow: 'hidden',
         }}
       >
         {r.text}
       </p>
-      {long && (
-        <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} style={{ marginTop: 4, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: BODY, fontSize: 13, color: GREEN_TEXT, fontWeight: 600, textDecoration: 'underline' }}>
-          {open ? 'Hide' : 'Read more'}
-        </button>
-      )}
     </div>
   );
 }
 
-export default function GoogleReviews() {
-  const { rating, total } = REVIEW_SUMMARY;
+// ── Marquee row ───────────────────────────────────────────────────────────
+
+function MarqueeRow({
+  reviews,
+  direction,
+  duration,
+}: {
+  reviews: Review[];
+  direction: 'left' | 'right';
+  duration: number;
+}) {
+  // Duplicate for seamless looping
+  const doubled = [...reviews, ...reviews];
+  const animName = direction === 'left' ? 'slimming-marquee-left' : 'slimming-marquee-right';
+
   return (
-    <section style={{ backgroundColor: '#ffffff', padding: '84px 0' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* summary bar */}
-        <div className="card" style={{ backgroundColor: '#f7f7f5', padding: '24px 28px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', flexWrap: 'wrap', gap: 16, marginBottom: 28 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
-            <span style={{ fontFamily: SERIF, fontSize: 38, color: TAUPE, lineHeight: 1 }}>{rating.toFixed(1)}</span>
-            <span style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-              <Stars rating={rating} size={18} />
-              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontFamily: BODY, fontSize: 13, color: TAUPE_LT }}>
-                {total} reviews on <GoogleG size={16} />
-                <span style={{ fontFamily: BODY, fontWeight: 600 }}>
+    <div style={{ overflow: 'hidden', width: '100%' }}>
+      <div
+        className="slimming-marquee-track"
+        style={{
+          display: 'flex',
+          width: 'max-content',
+          animation: `${animName} ${duration}s linear infinite`,
+          paddingBottom: 4,
+        }}
+        data-direction={direction}
+      >
+        {doubled.map((r, i) => (
+          <ReviewCard key={`${r.id}-${i}`} r={r} />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Main export ───────────────────────────────────────────────────────────
+
+export default function GoogleReviews() {
+  const { rating, count } = AGGREGATE;
+
+  const row1 = SLIMMING_REVIEWS.slice(0, 6);
+  const row2 = [...SLIMMING_REVIEWS].reverse();
+
+  return (
+    <section
+      style={{ background: '#F2F6EF', padding: '64px 0 56px' }}
+      aria-label="Client reviews"
+    >
+      <style>{`
+        @keyframes slimming-marquee-left {
+          from { transform: translateX(0); }
+          to   { transform: translateX(-50%); }
+        }
+        @keyframes slimming-marquee-right {
+          from { transform: translateX(-50%); }
+          to   { transform: translateX(0); }
+        }
+        .slimming-marquee-track:hover {
+          animation-play-state: paused;
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .slimming-marquee-track {
+            animation: none !important;
+          }
+        }
+      `}</style>
+
+      {/* Aggregate bar */}
+      <div
+        className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8"
+        style={{ marginBottom: 36, textAlign: 'center' }}
+      >
+        <p
+          style={{
+            fontFamily: SERIF,
+            fontSize: 13,
+            letterSpacing: 4,
+            color: GREEN,
+            textTransform: 'uppercase',
+            marginBottom: 8,
+          }}
+        >
+          What our clients say
+        </p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 10, flexWrap: 'wrap' }}>
+          <span style={{ fontFamily: SERIF, fontSize: 42, color: DARK_GREEN, lineHeight: 1 }}>{rating}</span>
+          <div>
+            <Stars rating={5} size={20} />
+            <p style={{ margin: '4px 0 0', fontFamily: BODY, fontSize: 12.5, color: TAUPE_LT }}>
+              {count} verified reviews &nbsp;·&nbsp;{' '}
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <GoogleG size={14} />
+                <span style={{ fontFamily: BODY, fontSize: 12.5 }}>
                   <span style={{ color: '#4285F4' }}>G</span><span style={{ color: '#EA4335' }}>o</span><span style={{ color: '#FBBC05' }}>o</span><span style={{ color: '#4285F4' }}>g</span><span style={{ color: '#34A853' }}>l</span><span style={{ color: '#EA4335' }}>e</span>
                 </span>
               </span>
-            </span>
+              {' '}&nbsp;+&nbsp;{' '}
+              <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <FreshaF size={14} />
+                <span style={{ fontFamily: BODY, fontSize: 12.5, color: '#007963', fontWeight: 600 }}>Fresha</span>
+              </span>
+            </p>
           </div>
-          <a href={GOOGLE_WRITE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="cta-glow" style={{ color: '#fff', fontFamily: WIDE, fontSize: 14, fontWeight: 700, letterSpacing: '0.4px', padding: '13px 26px', textDecoration: 'none' }}>
-            Review us on Google
-          </a>
         </div>
+      </div>
 
-        {/* review cards */}
-        <div className="grid gap-5 md:grid-cols-3">
-          {CURATED_REVIEWS.slice(0, 6).map((r, i) => (
-            <ReviewCard key={r.name + i} r={r} color={AVATAR_COLORS[i % AVATAR_COLORS.length]} />
-          ))}
-        </div>
+      {/* Row 1 — scrolls left */}
+      <div style={{ marginBottom: 14 }}>
+        <MarqueeRow reviews={row1} direction="left" duration={38} />
+      </div>
 
-        <div style={{ textAlign: 'center', marginTop: 30 }}>
-          <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" className="btn btn-secondary" style={{ gap: 8, padding: '11px 24px', fontFamily: WIDE, fontSize: 13, fontWeight: 600 }}>
-            <GoogleG size={16} /> See all our reviews on Google
-          </a>
-        </div>
+      {/* Row 2 — scrolls right */}
+      <div>
+        <MarqueeRow reviews={row2} direction="right" duration={44} />
+      </div>
+
+      {/* CTA */}
+      <div style={{ textAlign: 'center', marginTop: 36 }}>
+        <a
+          href={GOOGLE_WRITE_REVIEW_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: 8,
+            fontFamily: WIDE,
+            fontSize: 13,
+            fontWeight: 700,
+            letterSpacing: '0.5px',
+            color: GREEN,
+            border: `2px solid ${GREEN}`,
+            borderRadius: 8,
+            padding: '11px 24px',
+            textDecoration: 'none',
+            transition: 'background 0.2s, color 0.2s',
+          }}
+          onMouseEnter={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.background = GREEN;
+            (e.currentTarget as HTMLAnchorElement).style.color = '#fff';
+          }}
+          onMouseLeave={(e) => {
+            (e.currentTarget as HTMLAnchorElement).style.background = 'transparent';
+            (e.currentTarget as HTMLAnchorElement).style.color = GREEN;
+          }}
+        >
+          <GoogleG size={16} />
+          Leave us a Google review
+        </a>
       </div>
     </section>
   );
