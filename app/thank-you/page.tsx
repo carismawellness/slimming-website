@@ -3,8 +3,12 @@ import type { Metadata } from 'next';
 const wideFont     = "'Novecento Wide', sans-serif";
 const wideBookFont = "'Novecento Wide Book', sans-serif";
 const bodyFont     = 'Roboto, sans-serif';
-const taupe        = '#9B8D83';
-const taupeLight   = '#AFA39D';
+// Darkened taupe (from #9B8D83) so it clears WCAG AA on the #F5EDE8 cream panel
+// and over the hero image (guaranteed by the cream scrim behind the text column).
+// #6f6456 = 5.00:1 on cream; >= 4.58:1 worst-case over the 0.96-opacity scrim.
+const taupe        = '#6f6456';
+// Muted subline kept in the same taupe family; hierarchy preserved via size/letter-spacing/uppercase.
+const taupeLight   = '#6f6456';
 
 const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
 
@@ -61,7 +65,16 @@ export default function ThankYouPage() {
             minHeight: '520px',
           }}
         >
-          <div style={{ maxWidth: '430px' }}>
+          {/* Cream scrim behind the text column guarantees AA contrast over the hero image:
+              rgba(245,237,232,0.96) yields worst-case 4.58:1 (black image) / 5.03:1 (white) for #6f6456 text. */}
+          <div
+            style={{
+              maxWidth: '430px',
+              backgroundColor: 'rgba(245, 237, 232, 0.96)',
+              padding: '28px 30px',
+              borderRadius: '4px',
+            }}
+          >
             <h1
               style={{
                 fontFamily: wideFont,

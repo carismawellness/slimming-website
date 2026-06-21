@@ -7,7 +7,9 @@ export const metadata: Metadata = {
 };
 
 const bodyStyle: React.CSSProperties = {
-  color: '#9B8D83',
+  // Darkened taupe (--TAUPE accessible variant). #9B8D83 was 3.22:1 on white
+  // at 12px (AA fail). #6f6456 = 5.78:1 on white, clears AA for normal text.
+  color: '#6f6456',
   fontFamily: 'Roboto, sans-serif',
   fontSize: '12px',
   lineHeight: 1.4,
@@ -51,10 +53,10 @@ export default function TermsPage() {
       {/* Title */}
       <section className="bg-white">
         <div className="text-center px-4" style={{ paddingTop: '42px' }}>
-          <h1 style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '30px', lineHeight: '42px' }}>
+          <h1 style={{ color: '#6f6456', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '30px', lineHeight: '42px' }}>
             Terms &amp; Conditions — Carisma Slimming Malta
           </h1>
-          <div className="mx-auto" style={{ width: '541px', maxWidth: '100%', borderTop: '1px solid #B0A68F' }} />
+          <div className="mx-auto" style={{ width: '541px', maxWidth: '100%', borderTop: '1px solid #6f6456' }} />
         </div>
       </section>
 

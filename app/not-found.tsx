@@ -17,7 +17,7 @@ export default function NotFound() {
         style={{
           width: '60px',
           height: '2px',
-          background: '#8EB093',
+          background: '#4f7256',
           marginBottom: '32px',
         }}
       />
@@ -26,7 +26,7 @@ export default function NotFound() {
         style={{
           fontFamily: "'Trajan Pro', serif",
           fontSize: 'clamp(64px, 10vw, 120px)',
-          color: '#8EB093',
+          color: '#4f7256',
           letterSpacing: '8px',
           textAlign: 'center',
           margin: 0,
@@ -41,7 +41,7 @@ export default function NotFound() {
           fontFamily: "'Novecento Wide', sans-serif",
           fontSize: '13px',
           letterSpacing: '4px',
-          color: '#9B8D83',
+          color: '#6f6456',
           marginTop: '12px',
           marginBottom: 0,
           textAlign: 'center',
@@ -54,7 +54,7 @@ export default function NotFound() {
         style={{
           fontFamily: "'Roboto', sans-serif",
           fontSize: '15px',
-          color: '#9B8D83',
+          color: '#6f6456',
           marginTop: '24px',
           marginBottom: 0,
           maxWidth: '400px',
@@ -98,8 +98,8 @@ export default function NotFound() {
           style={{
             display: 'inline-block',
             backgroundColor: 'transparent',
-            color: '#8EB093',
-            border: '1px solid #8EB093',
+            color: '#4f7256',
+            border: '1px solid #4f7256',
             padding: '14px 32px',
             fontFamily: "'Roboto', sans-serif",
             fontSize: '12px',

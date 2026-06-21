@@ -1,9 +1,8 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getOrderedServices, BOOKING_URL } from '@/lib/services';
-import JsonLd from '@/components/JsonLd';
-
-const SITE = 'https://www.carismaslimming.com';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import { SITE_URL as SITE, breadcrumbList } from '@/lib/seo/schema';
 
 export const metadata: Metadata = {
   title: "Body Contouring Packages Malta | Carisma Slimming",
@@ -13,22 +12,22 @@ export const metadata: Metadata = {
 
 const HEADING_FONT = '"Trajan Pro", serif';
 const BODY_FONT = '"Novecento Wide", Roboto, sans-serif';
-const GREEN = '#8EB093';
-const TAUPE = '#9B8D83';
-const TAUPE_LIGHT = '#AFA39D';
+// Accessible brand-family colors (WCAG AA on white / #F5F2EF / #EFEAE5).
+// GREEN: deep sage --brand-green-text/fill #4f7256 — same green family, darkened
+// from #8EB093 (2.39:1 fail) to clear AA as text, link, border, and CTA fill.
+// TAUPE: darkened taupe #6f6456 from #9B8D83/#AFA39D (2.2-3.2:1 fail) — clears AA.
+const GREEN = '#4f7256';
+const TAUPE = '#6f6456';
+const TAUPE_LIGHT = '#6f6456';
 
 export default function PackagesPage() {
   const servicesList = getOrderedServices();
 
   const schema = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
-        { '@type': 'ListItem', position: 2, name: 'Packages', item: `${SITE}/packages` },
-      ],
-    },
+    breadcrumbList([
+      { name: 'Home', url: `${SITE}/` },
+      { name: 'Packages', url: `${SITE}/packages` },
+    ]),
     {
       '@context': 'https://schema.org',
       '@type': 'ItemList',
@@ -113,7 +112,7 @@ export default function PackagesPage() {
                       </p>
                     )}
                     <span
-                      className="font-semibold text-sm uppercase tracking-wide"
+                      className="font-semibold text-sm uppercase tracking-wide underline underline-offset-4"
                       style={{ color: GREEN, fontFamily: BODY_FONT }}
                     >
                       Learn More &rarr;

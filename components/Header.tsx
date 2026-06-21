@@ -6,10 +6,10 @@ import { useEffect, useState } from 'react';
 // Accessible brand tokens (see globals.css locked palette).
 // GREEN_FILL: solid sage dark enough that #fff text clears 4.5:1 (used as
 //   announcement-strip + CTA background). 5.42:1 AA.
-// GREEN: sage as small text/icon on white = 5.42:1 AA (was #8EB093 -> 2.39:1).
-// TAUPE: nav link / value text on white = 5.78:1 AA (was #B0A68F -> 2.41:1).
-const GREEN_FILL = '#4F7256';
-const GREEN = '#4F7256';
+// 2026 palette refresh — deep forest #024C27 is the new primary brand green
+// (AAA white text / AAA on white). TAUPE stays the neutral nav-link ink.
+const GREEN_FILL = '#024C27'; // CTA fill / deep brand green
+const GREEN = '#024C27';      // brand green for small text/icons/announcement bar (AAA on white)
 const TAUPE = '#6F6456';
 const DROPDOWN_INK = '#6F6456'; // dropdown/sub-item link on white = 5.78:1 AA (was #9B8D83 -> 3.22:1)
 

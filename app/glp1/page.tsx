@@ -3,7 +3,7 @@ import Link from 'next/link';
 import HeroVideo from '@/components/HeroVideo';
 import ResultsCarousel from '@/components/ResultsCarousel';
 import HowItWorks from '@/components/HowItWorks';
-import FAQAccordion, { FAQS } from '@/components/FAQAccordion';
+import FAQAccordion from '@/components/FAQAccordion';
 import EvidenceCards from '@/components/EvidenceCards';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import {
@@ -12,6 +12,7 @@ import {
   faqPage,
   medicalWebPage,
 } from '@/lib/seo/schema';
+import { glp1Faqs } from '@/lib/faq/glp1';
 
 export const metadata: Metadata = {
   title: "GLP-1 Weight Loss Injections Malta | Carisma Slimming",
@@ -30,7 +31,7 @@ const jsonLd = [
       'Medically prescribed GLP-1 injections in Malta including Ozempic and Mounjaro, supervised by qualified doctors as part of a structured weight loss programme.',
     url: `${SITE_URL}/glp1`,
   }),
-  faqPage(FAQS),
+  faqPage(glp1Faqs),
 ];
 
 export default function GLP1Page() {
@@ -396,14 +397,16 @@ export default function GLP1Page() {
       {/* We are not another diet clinic */}
       <section className="py-16" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             The Carisma Difference
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#8EB093' }} />
-          <h2 className="text-center mb-6" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+          <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', lineHeight: 1.3 }}>
             Malta&apos;s doctor-led GLP-1 clinic —<br />not another diet programme.
           </h2>
-          <p className="text-center mx-auto mb-12" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '760px' }}>
+          {/* Centered over a faint sage backgroundImage tint (worst case ~rgb(215,228,216));
+              deeper taupe #5c5346 guarantees >=5.5:1 there where #6f6456 would be 4.40:1. */}
+          <p className="text-center mx-auto mb-12" style={{ color: '#5c5346', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '760px' }}>
             We are a doctor-led medical weight loss clinic in Malta that blends medical insight, sustainable nutrition, and modern body technology into one high-touch system. So you do not just lose weight, you build a stronger, healthier version of yourself.
           </p>
           <div className="mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', borderBottomLeftRadius: '24px', borderBottomRightRadius: '90px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
@@ -418,7 +421,8 @@ export default function GLP1Page() {
               ].map((t) => (
                 <li key={t} className="flex items-start gap-4">
                   <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '29px', height: '28px', objectFit: 'contain', flexShrink: 0 }} />
-                  <span style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
+                  {/* On the #FCFCFA->#D8E7D2 card gradient; #5c5346 clears AA (>=5.85:1) at the darkest stop. */}
+                  <span style={{ color: '#5c5346', fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
                 </li>
               ))}
             </ul>
@@ -432,11 +436,11 @@ export default function GLP1Page() {
       {/* Led by expertise — Dr Zaid Teebi */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
-            Expert <span style={{ color: '#C4B8AE' }}>medical weight loss</span> care
+          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            Expert <span style={{ color: '#4f7256' }}>medical weight loss</span> care
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '170px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4 }}>
+          <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4 }}>
             Doctor-supervised weight loss —<br />led by 30 years of clinical expertise.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -447,14 +451,14 @@ export default function GLP1Page() {
               <img src="/wix/87fc13_130b2a48c11a4658bad12952342d1eb4~mv2.jpeg" alt="Dr Zaid Teebi, lead medical weight loss doctor at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div>
-              <h3 className="mb-4" style={{ color: '#8EB093', fontFamily: wideFont, fontSize: '20px', letterSpacing: '1px', textTransform: 'uppercase' }}>Dr Zaid Teebi</h3>
-              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              <h3 className="mb-4" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '20px', letterSpacing: '1px', textTransform: 'uppercase' }}>Dr Zaid Teebi</h3>
+              <p className="mb-5" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 Dr. Zaid Teebi is the lead medical weight loss doctor at Carisma Slimming with over 30 years of clinical experience and an evidence-based focus on medical weight management and metabolic health. A graduate of Imperial College London, he combines medical rigour with a calm, human approach.
               </p>
-              <p className="mb-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              <p className="mb-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 His consultations are structured and personalised, with safety screening, clear expectations, and ongoing monitoring. Where clinically appropriate, he prescribes Ozempic or Mounjaro as part of a wider programme that includes nutrition structure, habit-based strength training to protect metabolism, and a long-term weight maintenance plan.
               </p>
-              <p className="mb-8" style={{ color: '#AFA39D', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
+              <p className="mb-8" style={{ color: '#6f6456', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
                 Medical weight loss should never be guesswork. Every body tells a story, and our job is to turn it into a plan that lasts&rdquo; &ndash; Dr. Teebi
               </p>
               <a
@@ -474,11 +478,11 @@ export default function GLP1Page() {
       {/* Our promise — extended care commitment */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Our Promise
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px', lineHeight: 1.35, textTransform: 'uppercase' }}>
+          <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px', lineHeight: 1.35, textTransform: 'uppercase' }}>
             Our weight loss promise: up to 1kg per week<br />measured, verified, committed
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -486,18 +490,20 @@ export default function GLP1Page() {
               className="p-12 flex items-center"
               style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', minHeight: '240px' }}
             >
-              <p style={{ color: '#A9BFA6', fontFamily: wideFont, fontWeight: 400, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase', lineHeight: 1.9, maxWidth: '260px' }}>
-                Only weight loss clinic <strong style={{ color: '#8EB093', fontWeight: 700 }}>in Malta</strong> to offer an extended <strong style={{ color: '#8EB093', fontWeight: 700 }}>care commitment</strong>
+              {/* Callout on #F2F6EF->#DCE7D5 sage gradient: deep taupe #5c5346 (>=5.9:1) with
+                  deepest-sage #3d5a42 emphasis (>=6.0:1) replaces the failing pale #A9BFA6/#8EB093. */}
+              <p style={{ color: '#5c5346', fontFamily: wideFont, fontWeight: 400, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase', lineHeight: 1.9, maxWidth: '260px' }}>
+                Only weight loss clinic <strong style={{ color: '#3d5a42', fontWeight: 700 }}>in Malta</strong> to offer an extended <strong style={{ color: '#3d5a42', fontWeight: 700 }}>care commitment</strong>
               </p>
             </div>
             <div>
-              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              <p className="mb-5" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 We are selective about who joins our programs. We only accept those we genuinely believe we can help reach their healthy weight with Ozempic, Mounjaro, or non-medication pathways.
               </p>
-              <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              <p className="mb-5" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 If you qualify and complete your program and do not hit your target weight, we will extend your weight management program at no extra program fee until we achieve your desired result.
               </p>
-              <p className="mb-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+              <p className="mb-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 *To ensure results remain measurable and medically valid, patients must:
               </p>
               <ul className="space-y-2">
@@ -509,8 +515,8 @@ export default function GLP1Page() {
                   'Inform us of any major health (e.g., heart disease) or medication changes',
                   'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
                 ].map((t) => (
-                  <li key={t} className="flex items-start gap-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                    <span style={{ color: '#AFA39D' }}>&bull;</span>
+                  <li key={t} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                    <span style={{ color: '#6f6456' }}>&bull;</span>
                     <span>{t}</span>
                   </li>
                 ))}
@@ -524,15 +530,15 @@ export default function GLP1Page() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F8F7F3 35%)', borderRadius: '28px', padding: '48px' }}>
-            <h2 className="text-center" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.4 }}>
+            <h2 className="text-center" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.4 }}>
               Safety, side effects,<br />and our system
             </h2>
-            <p className="mt-6 mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+            <p className="mt-6 mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
               As part of our program, we prescribe Ozempic and Mounjaro with strict screening, clear education, and ongoing monitoring. Most side effects are manageable when dosing and nutrition are structured, and follow-ups are consistent.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
               <div>
-                <p className="mb-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px' }}>Common side effects and how we reduce them:</p>
+                <p className="mb-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px' }}>Common side effects and how we reduce them:</p>
                 <ul className="space-y-2 mb-7">
                   {[
                     { label: 'Nausea', text: 'slow titration, protein-first meals, hydration and electrolytes, injection timing guidance' },
@@ -541,14 +547,14 @@ export default function GLP1Page() {
                     { label: 'Fatigue', text: 'minimum calorie floors, protein and micronutrient monitoring, strength habits to protect energy' },
                     { label: 'Reflux', text: 'smaller structured portions, meal timing rules, behavioural guidance' },
                   ].map((s) => (
-                    <li key={s.label} className="flex items-start gap-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                      <span style={{ color: '#AFA39D' }}>&bull;</span>
-                      <span><strong style={{ color: '#7d7066' }}>{s.label}:</strong> {s.text}</span>
+                    <li key={s.label} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#6f6456' }}>&bull;</span>
+                      <span><strong style={{ color: '#574d40' }}>{s.label}:</strong> {s.text}</span>
                     </li>
                   ))}
                 </ul>
-                <p className="mb-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7 }}>
-                  <strong style={{ color: '#7d7066' }}>The biggest clinical mistake:</strong> prescribing Ozempic or Mounjaro without a structured clinical system. Medication can quiet appetite, but it does not build muscle, teach eating habits, address emotional drivers, or create long-term maintenance. That is why our program pairs Ozempic or Mounjaro with strength training, protein-first nutrition structure, behavioural coaching, accountability, and a defined maintenance plan.
+                <p className="mb-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7 }}>
+                  <strong style={{ color: '#574d40' }}>The biggest clinical mistake:</strong> prescribing Ozempic or Mounjaro without a structured clinical system. Medication can quiet appetite, but it does not build muscle, teach eating habits, address emotional drivers, or create long-term maintenance. That is why our program pairs Ozempic or Mounjaro with strength training, protein-first nutrition structure, behavioural coaching, accountability, and a defined maintenance plan.
                 </p>
                 <a
                   href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
@@ -581,17 +587,17 @@ export default function GLP1Page() {
       {/* The science behind GLP-1 — video */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.6 }}>
+          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.6 }}>
             Why weight loss is biological,<br />not just behavioural
           </p>
           <div className="mx-auto mt-4 mb-6" style={{ width: '120px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-8" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+          <h2 className="text-center mb-8" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', textTransform: 'uppercase' }}>
             The science behind GLP-1
           </h2>
-          <p className="mb-5" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+          <p className="mb-5" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
             Obesity is influenced by hormones, environment, and evolutionary biology, not willpower alone.
           </p>
-          <p className="mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+          <p className="mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
             In this video, you will understand how GLP-1 regulates appetite, blood sugar, and metabolic signals, and why modern therapies like Ozempic and Mounjaro are reshaping long-term weight management. When used with medical guidance and structured lifestyle support, Ozempic or Mounjaro becomes a tool within a structured program, not a shortcut.
           </p>
           <div className="mx-auto" style={{ border: '6px solid #8EB093', maxWidth: '744px', overflow: 'hidden' }}>
@@ -611,11 +617,11 @@ export default function GLP1Page() {
       {/* 4 core pillars — programme built to last */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             4 core pillars of our methodology
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '210px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4, textTransform: 'uppercase' }}>
+          <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4, textTransform: 'uppercase' }}>
             A doctor-led medical weight loss<br />programme built to last
           </h2>
           <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', borderRadius: '28px', padding: '28px' }}>
@@ -631,8 +637,8 @@ export default function GLP1Page() {
                       <img src={f.icon} alt="" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
                     </div>
                     <div>
-                      <h3 className="mb-2" style={{ color: '#8EB093', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{f.title}</h3>
-                      <p style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{f.body}</p>
+                      <h3 className="mb-2" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{f.title}</h3>
+                      <p style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{f.body}</p>
                     </div>
                   </div>
                 ))}
@@ -643,8 +649,8 @@ export default function GLP1Page() {
                 </div>
                 <ul className="space-y-2 mb-6">
                   {['Initial Medical Consultation & Eligibility Review', 'Personalised GLP-1 Treatment Planning', 'Ongoing Medical Monitoring & Reviews', 'Nutrition & Lifestyle Support Integration'].map((t) => (
-                    <li key={t} className="flex items-start gap-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                      <span style={{ color: '#AFA39D' }}>&bull;</span><span>{t}</span>
+                    <li key={t} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#6f6456' }}>&bull;</span><span>{t}</span>
                     </li>
                   ))}
                 </ul>
@@ -662,7 +668,7 @@ export default function GLP1Page() {
                   {[0, 1, 2, 3, 4].map((i) => (
                     <img key={i} src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png" alt="" style={{ width: '23px', height: '20px', objectFit: 'contain' }} />
                   ))}
-                  <span className="ml-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
+                  <span className="ml-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
                 </div>
               </div>
             </div>
@@ -674,17 +680,17 @@ export default function GLP1Page() {
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ background: 'linear-gradient(135deg, #FBFBF7 0%, #DDE8D6 100%)', borderRadius: '32px', padding: '48px' }}>
-            <p className="text-center mb-2" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
+            <p className="text-center mb-2" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
               the carisma difference
             </p>
             <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-            <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               Malta&rsquo;s #1 leading wellness chain
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
               <div className="space-y-10">
                 <div>
-                  <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Our Commitment</h3>
+                  <h3 className="mb-5" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Our Commitment</h3>
                   <ul className="space-y-3">
                     {[
                       'Visible inch loss and shape change through medical weight loss, not vague promises',
@@ -692,14 +698,14 @@ export default function GLP1Page() {
                       'No crash diets, no banned foods, no endless hours of cardio',
                       'Medical-grade technology and treatments delivered by qualified doctors',
                     ].map((item) => (
-                      <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                        <span style={{ color: '#8EB093' }}>&bull;</span><span>{item}</span>
+                      <li key={item} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                        <span style={{ color: '#4f7256' }}>&bull;</span><span>{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
                 <div>
-                  <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Why Malta Chooses Carisma</h3>
+                  <h3 className="mb-5" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Why Malta Chooses Carisma</h3>
                   <ul className="space-y-3">
                     {[
                       "Created by the team behind Malta's leading spa and medical aesthetics centres",
@@ -707,8 +713,8 @@ export default function GLP1Page() {
                       'All-in-one approach: medical assessment, nutrition, movement, and treatments',
                       'High-touch support with weekly check-ins and WhatsApp coaching',
                     ].map((item) => (
-                      <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                        <span style={{ color: '#8EB093' }}>&bull;</span><span>{item}</span>
+                      <li key={item} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                        <span style={{ color: '#4f7256' }}>&bull;</span><span>{item}</span>
                       </li>
                     ))}
                   </ul>
@@ -726,7 +732,7 @@ export default function GLP1Page() {
                 ></iframe>
                 <div className="flex items-center justify-center gap-3 mt-8">
                   <img src="/wix/87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png" alt="Complimentary on-site parking" style={{ width: '31px', height: '35px', objectFit: 'contain' }} />
-                  <span style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
+                  <span style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>
                     Complimentary on-site parking
                   </span>
                 </div>

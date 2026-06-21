@@ -1,11 +1,26 @@
 import type { Metadata } from 'next';
 import OutcomeStepper from './OutcomeStepper';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
 
 export const metadata: Metadata = {
   title: "Free Slimming Guide Malta | Carisma Slimming",
   description: "Download our free Slimming Guide — the definitive weight loss resource for Malta. Expert advice from our doctors on diet, exercise, GLP-1s, and body contouring.",
   alternates: { canonical: 'https://www.carismaslimming.com/slimming-guide' },
 };
+
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Slimming Guide', url: `${SITE_URL}/slimming-guide` },
+  ]),
+  medicalWebPage({
+    name: 'Free Slimming Guide Malta — Your Weight Loss Bible',
+    description:
+      "The definitive weight loss resource for Malta. Doctor-led advice on diet, exercise, GLP-1 medication and body contouring from Carisma Slimming.",
+    url: `${SITE_URL}/slimming-guide`,
+  }),
+];
 
 const PRODUCT_URL =
   'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta';
@@ -113,11 +128,21 @@ const wideFont = 'Novecento Wide Guide, Novecento Wide Book, Novecento Wide, san
 const localFontCss = `
 @font-face{font-family:'Novecento Wide Guide';src:url('/fonts/novecento-wide-medium.woff2') format('woff2');font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:'Novecento Wide Guide';src:url('/fonts/novecento-wide-normal.woff2') format('woff2');font-weight:500 700;font-style:normal;font-display:swap;}
+/* Visible focus indicator for CTA links — works on both light sections and dark/sage
+   button fills: white outline (>=3:1 vs the sage/blue fill) + deep-sage halo (>=3:1 vs white). */
+.cta-glow:focus-visible{outline:3px solid #ffffff;outline-offset:2px;box-shadow:0 0 0 6px #4f7256;border-radius:999px;}
 `;
 const bodyFont = 'Roboto, sans-serif';
-const GREEN = '#8EB093';
-const TAUPE = '#9B8D83';
-const BLUE = '#6391AB';
+// --- WCAG AA-corrected palette (single source of truth for this page) ---
+// Bright brand colors (#8EB093 sage, #9B8D83 taupe, #6391AB blue) failed AA as text
+// on white/light-sage backgrounds. Replaced with darker same-family hexes that clear AA/AAA.
+const GREEN = '#406042'; // deep brand sage for TEXT/headings on white & light-sage (>=4.5:1)
+const GREEN_FILL = '#4f7256'; // CTA/button solid fill — white text clears 5.42:1 (AA)
+const GREEN_BRIGHT = '#8EB093'; // bright sage — DECORATIVE ONLY (large >=24px over hero scrim / accents that clear 3:1)
+const GREEN_SAGE_LIGHT = '#C9E0CC'; // light sage for text over the scrimmed hero (>=4.5:1)
+const TAUPE = '#5f5649'; // darkened taupe for body/muted text — clears AA (>=4.92:1) on white & EVERY light-sage card on this page
+const BLUE = '#356a87'; // darkened brand blue — white CTA text clears 5.89:1 (AA)
+const BAND_END = '#567059'; // darkened lightest stop of dark-green bands so white body text clears AA
 
 function Kicker({ children, centered = false, rule = false }: { children: React.ReactNode; centered?: boolean; rule?: boolean }) {
   return (
@@ -151,7 +176,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
       ))}
       <span
         className="ml-2"
-        style={{ color: light ? TAUPE : GREEN, fontFamily: bodyFont, fontSize: '16px' }}
+        style={{ color: light ? GREEN_SAGE_LIGHT : GREEN, fontFamily: bodyFont, fontSize: '16px' }}
       >
         Over 200+ Reviews
       </span>
@@ -162,6 +187,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
 export default function SlimmingGuidePage() {
   return (
     <main className="w-full" style={{ fontFamily: bodyFont, color: TAUPE }}>
+      <JsonLd data={jsonLd} />
       <style dangerouslySetInnerHTML={{ __html: localFontCss }} />
       {/* Hero Section — inset rounded dark-green card with wave-line banner */}
       <section className="bg-white px-4 sm:px-6 lg:px-10 pt-4 pb-8">
@@ -174,7 +200,14 @@ export default function SlimmingGuidePage() {
               'url(/wix/f940f0_ca648db83c1542ae8daddf4032ba936d~mv2.png) center top / cover no-repeat, linear-gradient(90deg, #445648 0%, #4E6B55 60%, #6D8A72 100%)',
           }}
         >
-          <div className="px-6 sm:px-12 lg:px-20 pt-14">
+          {/* A11y scrim: guarantees >=4.5:1 for light text over the sage gradient's
+              lightest stop (#6D8A72). Worst case with 0.45 black: white 9.14, light sage 6.54,
+              E5EBE2 7.54; bright-sage h1 span (40px, large) 3.82 (>=3:1). */}
+          <div
+            className="absolute inset-0 pointer-events-none"
+            style={{ background: 'rgba(0,0,0,0.45)', zIndex: 0 }}
+          />
+          <div className="px-6 sm:px-12 lg:px-20 pt-14 relative" style={{ zIndex: 1 }}>
             <div className="grid grid-cols-1 lg:grid-cols-[740px_1fr] gap-10 items-center">
               {/* Left content */}
               <div>
@@ -184,11 +217,12 @@ export default function SlimmingGuidePage() {
                 >
                   <span style={{ color: '#FFFFFF' }}>weight loss guide malta</span>
                   <br />
-                  <span style={{ color: GREEN }}>the slimming system built for real maltese life</span>
+                  {/* 40px large text → 3:1 suffices; bright sage over 0.45 scrim = 3.82:1 */}
+                  <span style={{ color: GREEN_BRIGHT }}>the slimming system built for real maltese life</span>
                 </h1>
                 <p
                   className="mb-5 uppercase"
-                  style={{ color: TAUPE, fontFamily: wideFont, fontSize: '16px', lineHeight: 1.3, letterSpacing: '3.2px', maxWidth: '640px' }}
+                  style={{ color: GREEN_SAGE_LIGHT, fontFamily: wideFont, fontSize: '16px', lineHeight: 1.3, letterSpacing: '3.2px', maxWidth: '640px' }}
                 >
                   Recipes, meal timing &amp; a structured plan. Designed around{' '}
                   <strong style={{ color: '#FFFFFF' }}>the Mediterranean diet</strong>,{' '}
@@ -234,7 +268,7 @@ export default function SlimmingGuidePage() {
                   href={PRODUCT_URL}
                   className="cta-glow block text-center uppercase text-white mb-6"
                   style={{
-                    backgroundColor: GREEN,
+                    backgroundColor: GREEN_FILL,
                     borderRadius: '999px',
                     maxWidth: '455px',
                     padding: '14px 24px',
@@ -260,7 +294,7 @@ export default function SlimmingGuidePage() {
             </div>
 
             {/* Awards badge + caption inside the hero card */}
-            <div className="flex flex-col items-center gap-5 pt-6 pb-10">
+            <div className="flex flex-col items-center gap-5 pt-6 pb-10 relative" style={{ zIndex: 1 }}>
               <img
                 src="/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png"
                 alt="Malta Healthcare, Wellness, Beauty & Best Spa Awards (Screen-Shot-2024-12-16-at-09.58_edited.p)"
@@ -268,7 +302,7 @@ export default function SlimmingGuidePage() {
               />
               <p
                 className="uppercase"
-                style={{ color: GREEN, fontFamily: bodyFont, fontSize: '14px', letterSpacing: '0.5px' }}
+                style={{ color: GREEN_SAGE_LIGHT, fontFamily: bodyFont, fontSize: '14px', letterSpacing: '0.5px' }}
               >
                 #1 Voted Clinic in Malta
               </p>
@@ -354,7 +388,7 @@ export default function SlimmingGuidePage() {
       <div className="relative overflow-hidden">
       {/* Built To Hold Band */}
       <section
-        style={{ background: 'linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, #6D8A72 100%)', padding: '38px 0' }}
+        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '38px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
@@ -394,7 +428,7 @@ export default function SlimmingGuidePage() {
               color: TAUPE,
               fontFamily: wideFont,
               fontSize: '13px',
-              border: '1px solid #B5AB9F',
+              border: '1px solid #8a8073',
               padding: '12px 20px',
             }}
           >
@@ -459,7 +493,8 @@ export default function SlimmingGuidePage() {
                   style={{ color: GREEN, fontFamily: wideFont, fontSize: '25px' }}
                 >
                   <span style={{ fontWeight: 700 }}>{p.lead}</span>{' '}
-                  <span style={{ fontWeight: 400, color: '#FFFFFF' }}>{p.rest}</span>
+                  {/* was #FFFFFF (1.04:1 — invisible on light gradient); taupe at 25px large = 4.49:1 */}
+                  <span style={{ fontWeight: 400, color: TAUPE }}>{p.rest}</span>
                 </h3>
                 {p.paragraphs.map((t, i) => (
                   <p key={i} className={i < p.paragraphs.length - 1 ? 'mb-4' : ''} style={{ color: TAUPE, fontSize: '13px' }}>
@@ -512,7 +547,7 @@ export default function SlimmingGuidePage() {
 
       {/* Stabilise Band */}
       <section
-        style={{ background: 'linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, #6D8A72 100%)', padding: '38px 0' }}
+        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '38px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
@@ -728,7 +763,7 @@ export default function SlimmingGuidePage() {
       {/* Final Call-to-Action Section — full-width dark green band */}
       <section
         className="py-16 relative overflow-hidden"
-        style={{ background: 'linear-gradient(90deg, #3E483E 0%, #57695A 50%, #6D8A72 100%)' }}
+        style={{ background: `linear-gradient(90deg, #3E483E 0%, #57695A 50%, ${BAND_END} 100%)` }}
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -755,7 +790,7 @@ export default function SlimmingGuidePage() {
                 href={PRODUCT_URL}
                 className="cta-glow block text-center uppercase text-white mb-7"
                 style={{
-                  backgroundColor: 'rgba(142, 176, 147, 0.85)',
+                  backgroundColor: GREEN_FILL,
                   borderRadius: '999px',
                   maxWidth: '370px',
                   padding: '11px 24px',

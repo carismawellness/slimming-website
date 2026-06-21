@@ -48,7 +48,7 @@ export default function Error({
         style={{
           fontFamily: "'Roboto', sans-serif",
           fontSize: '15px',
-          color: '#9B8D83',
+          color: '#6f6456',
           marginTop: '24px',
           marginBottom: 0,
           maxWidth: '480px',
@@ -91,8 +91,8 @@ export default function Error({
           style={{
             display: 'inline-block',
             backgroundColor: 'transparent',
-            color: '#8EB093',
-            border: '1px solid #8EB093',
+            color: '#4f7256',
+            border: '1px solid #4f7256',
             padding: '14px 32px',
             fontFamily: "'Roboto', sans-serif",
             fontSize: '12px',

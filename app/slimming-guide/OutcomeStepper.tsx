@@ -4,8 +4,9 @@ import { useState } from 'react';
 
 const wideFont = 'Novecento Wide Guide, Novecento Wide Book, Novecento Wide, sans-serif';
 const bodyFont = 'Roboto, sans-serif';
-const green = '#8EB093';
-const taupe = '#9B8D83';
+// WCAG AA-corrected: bright #8EB093/#9B8D83 failed as text on white (2.39 / 3.22).
+const green = '#4f7256'; // deep sage — active-tab indicator & focus ring (>=3:1 on white)
+const taupe = '#5f5649'; // darkened taupe for tab labels / outcome text (>=4.92:1 on white & panel gradient)
 
 export type Outcome = { title: string; text: string; icon: string };
 
@@ -14,6 +15,8 @@ export default function OutcomeStepper({ outcomes }: { outcomes: Outcome[] }) {
   const o = outcomes[active];
   return (
     <div className="mx-auto" style={{ maxWidth: '970px' }}>
+      {/* Visible focus indicator (>=3:1, never removed) for keyboard users */}
+      <style>{`.outcome-step-tab:focus-visible{outline:3px solid ${green};outline-offset:3px;border-radius:2px;}`}</style>
       {/* STEP 1-4 tab bar */}
       <div className="grid grid-cols-4" style={{ borderBottom: '1px solid #D9D2CB' }}>
         {outcomes.map((it, i) => (
@@ -21,12 +24,17 @@ export default function OutcomeStepper({ outcomes }: { outcomes: Outcome[] }) {
             key={it.title}
             type="button"
             onClick={() => setActive(i)}
-            className="text-left uppercase"
+            aria-pressed={i === active}
+            aria-current={i === active ? 'step' : undefined}
+            className="text-left uppercase outcome-step-tab"
             style={{
               fontFamily: wideFont,
               fontSize: '16px',
-              fontWeight: 700,
-              color: taupe,
+              // Non-color cue: active tab is heavier (700) + underlined; inactive is lighter (500).
+              fontWeight: i === active ? 700 : 500,
+              textDecoration: i === active ? 'underline' : 'none',
+              textUnderlineOffset: '4px',
+              color: i === active ? green : taupe,
               padding: '0 0 12px 20px',
               marginBottom: '-1px',
               borderBottom: i === active ? `3px solid ${green}` : '3px solid transparent',

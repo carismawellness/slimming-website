@@ -7,8 +7,11 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://www.carismaslimming.com/consultation' },
 };
 
-const GREEN = '#8EB093';
-const TAUPE = '#9B8D83';
+// Accessible brand palette (locked):
+//  --brand-green-text / --brand-green-fill = #4f7256 (5.42:1 on white / carries white text)
+//  TAUPE body text = #6f6456 (5.78:1 on white)
+const GREEN = '#4f7256';
+const TAUPE = '#6f6456';
 
 const COLLAGE = [
   '/wix/87fc13_170da1f718f64c8b8e1a1a86083e1a72~mv2.png',
@@ -49,7 +52,7 @@ export default function ConsultationPage() {
         <div className="mx-auto px-4 md:px-0" style={{ maxWidth: '980px' }}>
           <div
             className="flex items-center justify-center text-center px-6"
-            style={{ backgroundColor: '#95AF95', minHeight: '120px' }}
+            style={{ backgroundColor: '#4f7256', minHeight: '120px' }}
           >
             <h2
               className="uppercase"
@@ -147,8 +150,8 @@ export default function ConsultationPage() {
           <p className="mb-5">
             <a
               href="mailto:info@carismaslimming.com"
-              className="uppercase transition hover:opacity-80"
-              style={{ color: '#B0A68F', fontFamily: '"Novecento Wide", sans-serif', fontSize: '16px' }}
+              className="uppercase underline transition hover:no-underline"
+              style={{ color: '#6f6456', fontFamily: '"Novecento Wide", sans-serif', fontSize: '16px' }}
             >
               info@carismaslimming.com
             </a>
@@ -171,7 +174,7 @@ export default function ConsultationPage() {
               </a>
               <a
                 href="mailto:info@carismaslimming.com"
-                className="transition hover:opacity-80"
+                className="underline transition hover:no-underline"
                 style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}
               >
                 info@carismaslimming.com

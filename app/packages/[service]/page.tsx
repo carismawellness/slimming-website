@@ -18,9 +18,19 @@ interface Props {
 
 const HEADING_FONT = '"Trajan Pro", serif';
 const BODY_FONT = '"Novecento Wide", Roboto, sans-serif';
-const GREEN = '#8EB093';
-const TAUPE = '#9B8D83';
-const TAUPE_LIGHT = '#AFA39D';
+// Accessible brand palette (locked single source of truth):
+// GREEN was #8EB093 (2.39:1 — fails as text/icons/borders/white-on-fill).
+// Replaced with the deep-sage --brand-green-text/-fill #4f7256, which reads as
+// the same sage family but clears AA (5.42:1 on white; white-on-fill 5.42:1).
+const GREEN = '#4f7256';
+// HEADING_INK = navy (#1a1a1a, 17.4:1 AAA on white) for h1-h3 headings.
+const HEADING_INK = '#1a1a1a';
+// TAUPE was #9B8D83 (3.22:1 — fails as body text). Now --text-dark #333333
+// (12.63:1 AAA on white) for primary body/inline copy.
+const TAUPE = '#333333';
+// TAUPE_LIGHT was #AFA39D (2.46:1 — fails as muted text). Now --text-light
+// #595959 (7.0:1 AAA on white; 5.86:1 on the deepest cream panel).
+const TAUPE_LIGHT = '#595959';
 const CREAM = '#F5F2EF';
 const CREAM_DEEP = '#EFEAE5';
 const SAGE_LIGHT = '#DCE6DC';
@@ -188,7 +198,7 @@ export default async function ServicePage({ params }: Props) {
               </p>
               <h1
                 className="text-4xl md:text-5xl mb-5 leading-tight"
-                style={{ fontFamily: HEADING_FONT, color: TAUPE }}
+                style={{ fontFamily: HEADING_FONT, color: HEADING_INK }}
               >
                 {service.hero.heading}
               </h1>

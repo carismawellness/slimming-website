@@ -17,10 +17,15 @@ const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
 const bodyFont = 'Roboto, sans-serif';
 
-const GREEN = '#8EB093'; // live LP serif headings compute to rgb(142,176,147)
-const TAUPE = '#9B8D83';
-const CHECK = '#8EB093';
-const BLUE = '#6391AB';
+// WCAG AA accessible brand palette (locked single source of truth).
+// Bright brand sage #8EB093 (2.39:1 on white) is DECORATIVE ONLY; for any text/
+// icon/accent/CTA we use the darkened sage variants that clear AA on white and
+// on the page's tinted sage gradient panels.
+const GREEN = '#456849'; // deep sage for serif HEADINGS (large >=24px). 6.31:1 white, >=3:1 on tinted panels
+const GREEN_HERO = '#456849'; // hero accents over near-white hero image (5.05:1)
+const TAUPE = '#5a5043'; // deep warm taupe for ALL body/secondary/bullet/footer text. 7.89:1 white, >=4.5:1 on #C9D8C1/#B7CBB2 panels
+const CHECK = '#4f7256'; // brand-green-text: icons, accent eyebrows, checkmarks, ratings, CTA fill. 5.42:1 white
+const BLUE = '#4f7256'; // CTA fill (was #6391AB — white text only 3.40:1, failed). Now 5.42:1 vs white text
 
 function BlueCta({ href, children }: { href: string; children: React.ReactNode }) {
   return (
@@ -213,7 +218,7 @@ export default function MedicalWeightLossLpPage() {
         <div className="mx-auto px-6 xl:px-0" style={{ maxWidth: '970px' }}>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_398px] items-start" style={{ gap: '46px' }}>
             <div>
-              <p className="mb-2 uppercase" style={{ color: CHECK, fontFamily: wideFont, fontSize: '13px', fontWeight: 500, letterSpacing: '2px' }}>
+              <p className="mb-2 uppercase" style={{ color: GREEN_HERO, fontFamily: wideFont, fontSize: '13px', fontWeight: 500, letterSpacing: '2px' }}>
                 ultimate weight loss protocol in malta
               </p>
               <h1 className="mb-5 uppercase leading-snug" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px' }}>
@@ -228,7 +233,7 @@ export default function MedicalWeightLossLpPage() {
               <ul className="space-y-3">
                 {heroBullets.map((b) => (
                   <li key={b.label} className="flex items-start gap-3" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                    <span style={{ color: CHECK, fontWeight: 700 }}>✓</span>
+                    <span style={{ color: GREEN_HERO, fontWeight: 700 }}>✓</span>
                     <span>
                       <strong style={{ color: TAUPE }}>{b.label}</strong>
                       {b.text.startsWith(':') ? b.text : ` ${b.text}`}
@@ -278,7 +283,7 @@ export default function MedicalWeightLossLpPage() {
               </p>
               <div className="mt-5 flex items-center gap-3">
                 <img src="/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png" alt="Screen-Shot-2024-12-16-at-09.58.11-300x183-removebg-preview.png" style={{ width: '114px', height: '72px', objectFit: 'contain' }} />
-                <p className="uppercase" style={{ color: CHECK, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, lineHeight: 1.4, letterSpacing: '1px' }}>
+                <p className="uppercase" style={{ color: GREEN_HERO, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, lineHeight: 1.4, letterSpacing: '1px' }}>
                   #1 Voted Clinic<br />in Malta
                 </p>
               </div>
@@ -320,12 +325,12 @@ export default function MedicalWeightLossLpPage() {
             what medical weight loss can and cannot do
           </h2>
           <p className="mb-10" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
-            <strong style={{ color: '#7d7066' }}>medical weight management programs</strong> are treatments that support weight loss by improving appetite regulation and satiety. They can make consistency easier, but they work best inside a structured, medically supervised programme.
+            <strong style={{ color: '#5a5043' }}>medical weight management programs</strong> are treatments that support weight loss by improving appetite regulation and satiety. They can make consistency easier, but they work best inside a structured, medically supervised programme.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <h3 className="mb-6 uppercase" style={{ color: '#7d7066', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
+              <h3 className="mb-6 uppercase" style={{ color: '#5a5043', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
                 What Treatment support helps with:
               </h3>
               <ul className="space-y-4">
@@ -338,7 +343,7 @@ export default function MedicalWeightLossLpPage() {
               </ul>
             </div>
             <div>
-              <h3 className="mb-6 uppercase" style={{ color: '#7d7066', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
+              <h3 className="mb-6 uppercase" style={{ color: '#5a5043', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
                 What Treatment support does not do:
               </h3>
               <ul className="space-y-4">
@@ -443,7 +448,7 @@ export default function MedicalWeightLossLpPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div>
-              <h3 className="mb-6 uppercase" style={{ color: '#7d7066', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
+              <h3 className="mb-6 uppercase" style={{ color: '#5a5043', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
                 suitable for:
               </h3>
               <ul className="space-y-4">
@@ -456,7 +461,7 @@ export default function MedicalWeightLossLpPage() {
               </ul>
             </div>
             <div>
-              <h3 className="mb-6 uppercase" style={{ color: '#7d7066', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
+              <h3 className="mb-6 uppercase" style={{ color: '#5a5043', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px' }}>
                 unsuitable for:
               </h3>
               <ul className="space-y-4">
@@ -561,7 +566,7 @@ export default function MedicalWeightLossLpPage() {
               <p className="mb-8" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 His consultations are structured and personalised, with safety screening, clear expectations, and ongoing monitoring. Where clinically appropriate, he recommends Medical weight loss support as part of a wider programme that includes nutrition structure, habit-based strength training to protect metabolism, and a long-term maintenance plan.
               </p>
-              <p className="mb-8" style={{ color: '#AFA39D', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
+              <p className="mb-8" style={{ color: '#5a5043', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
                 &ldquo;Medical weight loss should never be guesswork. Every body tells a story, and our job is to turn it into a plan that lasts&rdquo; &mdash; Dr. Teebi
               </p>
               {/* Live LP uses a green (not blue) CTA in this section */}
@@ -614,7 +619,7 @@ export default function MedicalWeightLossLpPage() {
               <ul className="space-y-2">
                 {assuranceMust.map((t) => (
                   <li key={t} className="flex items-start gap-2" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                    <span style={{ color: '#AFA39D' }}>&bull;</span>
+                    <span style={{ color: '#5a5043' }}>&bull;</span>
                     <span>{t}</span>
                   </li>
                 ))}
@@ -631,7 +636,7 @@ export default function MedicalWeightLossLpPage() {
             <h2 className="text-center uppercase" style={{ color: TAUPE, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
               safety, side effects,<br />and our system
             </h2>
-            <p className="mt-6 mb-10" style={{ color: '#8d8378', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
+            <p className="mt-6 mb-10" style={{ color: '#4a4339', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
               Treatment may be considered after assessment Medical weight loss with strict screening, clear education, and ongoing monitoring. Most side effects are manageable when amount and nutrition are structured, and follow-ups are consistent.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-[1fr_477px] gap-12">
@@ -640,15 +645,15 @@ export default function MedicalWeightLossLpPage() {
                 <ul className="space-y-2 mb-7">
                   {sideEffects.map((s) => (
                     <li key={s.label} className="flex items-start gap-2" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                      <span style={{ color: '#AFA39D' }}>&bull;</span>
+                      <span style={{ color: '#5a5043' }}>&bull;</span>
                       <span>
-                        <strong style={{ color: '#7d7066' }}>{s.label}:</strong> {s.text}
+                        <strong style={{ color: '#5a5043' }}>{s.label}:</strong> {s.text}
                       </span>
                     </li>
                   ))}
                 </ul>
                 <p className="mb-8" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7 }}>
-                  <strong style={{ color: '#7d7066' }}>The biggest clinical mistake:</strong> clinical oversight Medical weight loss without a system. Treatment support can quiet appetite, but it does not build muscle, teach eating, fix emotional drivers, or create long-term habits. That&rsquo;s why we pair it with strength training, protein-first structure, behavioural coaching, accountability, and a maintenance plan.
+                  <strong style={{ color: '#5a5043' }}>The biggest clinical mistake:</strong> clinical oversight Medical weight loss without a system. Treatment support can quiet appetite, but it does not build muscle, teach eating, fix emotional drivers, or create long-term habits. That&rsquo;s why we pair it with strength training, protein-first structure, behavioural coaching, accountability, and a maintenance plan.
                 </p>
                 <BlueCta href={FRESHA_ANALYSIS}>Get Your Free Body Analysis</BlueCta>
               </div>
@@ -757,7 +762,7 @@ export default function MedicalWeightLossLpPage() {
                     <h3 className="mb-5 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px' }}>our commitment</h3>
                     <ul className="space-y-3">
                       {commitment.map((item) => (
-                        <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                        <li key={item} className="flex items-start gap-2" style={{ color: '#5a5043', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
                           <span style={{ color: CHECK }}>&bull;</span>
                           <span>{item}</span>
                         </li>
@@ -768,7 +773,7 @@ export default function MedicalWeightLossLpPage() {
                     <h3 className="mb-5 uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '15px', fontWeight: 600, letterSpacing: '1px' }}>WHY MALTA CHOOSES Carisma</h3>
                     <ul className="space-y-3">
                       {whyCarisma.map((item) => (
-                        <li key={item} className="flex items-start gap-2" style={{ color: '#AFA39D', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                        <li key={item} className="flex items-start gap-2" style={{ color: '#5a5043', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
                           <span style={{ color: CHECK }}>&bull;</span>
                           <span>{item}</span>
                         </li>

@@ -1,7 +1,9 @@
 'use client';
 
 import { useRef, useState } from 'react';
-import { weightLossFaqs } from '@/lib/faq/weight-loss';
+import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import { SITE_URL, breadcrumbList, faqPage, serviceSchema } from '@/lib/seo/schema';
 
 /* ============================================================
    Carisma — Medical Weight-Loss Program  (/weight-loss)
@@ -24,8 +26,8 @@ const greenDark = '#4f7256'; // deep sage for emphasised text (same family, AA)
 const slate = '#2b5672'; // CTA / strong link (7.85:1 AAA on white)
 const taupe = '#6f6456'; // taupe TEXT — body, lists, eyebrows on white/near-white (5.78:1 AA)
 const taupeLight = '#6f6456'; // muted text darkened to the same accessible taupe (no separate weak grey)
-const softBg = '#E4EBE2';
-const panelGradient = 'linear-gradient(135deg, #FCFCFA, #D8E7D2)';
+const softBg = '#E8EEE6'; // lightened from #E4EBE2 so small green-text labels clear AA (4.60:1)
+const panelGradient = 'linear-gradient(135deg, #FCFCFA, #E6EFE3)'; // end lightened from #D8E7D2 so small text on the panel clears AA
 
 const freshaUrl =
   'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191';
@@ -260,7 +262,7 @@ function ProblemAgitationSection() {
       {/* Narrative */}
       <div className="pt-9 pb-3">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto" style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #D3E0D4 100%)', border: '1px solid #E5E5E3', borderRadius: '24px', padding: '40px', maxWidth: '976px' }}>
+          <div className="mx-auto" style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #DCE7D9 100%)', border: '1px solid #E5E5E3', borderRadius: '24px', padding: '40px', maxWidth: '976px' }}>
             <h2 className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
               Weight Loss After 30 in Malta<br />Without Giving Up the Foods You Love
             </h2>
@@ -856,8 +858,11 @@ function CarismaDifferenceSection() {
     'Selective entry and measurable weight loss results guaranteed',
   ];
   return (
-    <section className="py-12" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section className="relative py-12" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+      {/* Accessibility scrim — the centred sage watermark has darkest pixel #A8C0AD; a 0.7 white veil
+          lifts the effective background to ~#e5ece6 so taupe body clears 4.81:1 and green text 4.51:1 (AA). */}
+      <div aria-hidden="true" className="absolute inset-0" style={{ backgroundColor: 'rgba(255,255,255,0.7)', pointerEvents: 'none' }} />
+      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', letterSpacing: '3px', textTransform: 'uppercase' }}>
           the carisma difference
         </p>
@@ -959,7 +964,7 @@ function CarismaWellnessSection() {
   return (
     <section className="py-12" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
-        <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderRadius: '32px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
+        <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #E6EFE3 100%)', borderRadius: '32px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
           <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
             the carisma difference
           </p>
@@ -1633,9 +1638,25 @@ function FinalCTASection() {
 /* ============================================================
    PAGE
    ============================================================ */
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'Medical Weight Loss', url: `${SITE_URL}/weight-loss` },
+  ]),
+  serviceSchema({
+    name: 'Medical Weight Loss Programme',
+    description:
+      'Doctor-led medical weight loss programme in Malta combining GLP-1 medication support, personalised nutrition, body composition tracking and ongoing medical supervision.',
+    url: `${SITE_URL}/weight-loss`,
+    serviceType: 'Medical weight loss',
+  }),
+  faqPage(weightLossFaqs.map((f) => ({ q: f.q, a: flattenWeightLossAnswer(f) }))),
+];
+
 export default function WeightLossProgramPage() {
   return (
     <main className="w-full" style={{ backgroundColor: '#fff' }}>
+      <JsonLd data={jsonLd} />
       <HeroSection />
       <AsSeenOn />
       <ProblemAgitationSection />

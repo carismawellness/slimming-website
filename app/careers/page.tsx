@@ -9,7 +9,9 @@ export const metadata: Metadata = {
 
 const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
-const TAUPE = '#B0A68F';
+// Darkened taupe (locked accessible palette) so text/icons/fills clear AA on
+// white (5.78:1) and on the CREAM #F6EFE3 band (5.06:1). Was #B0A68F (2.41:1 FAIL).
+const TAUPE = '#6f6456';
 const CREAM = '#F6EFE3';
 const RULE = '#D9E4E4';
 
@@ -160,10 +162,11 @@ WELLNESS &amp; HEALTHCARE PROFESSIONALS WE&apos;RE HIRING FOR
           <div className="flex justify-center" style={{ marginTop: '67px' }}>
             <Link
               href="/consultation"
-              className="flex items-center justify-center transition hover:opacity-90"
+              className="group flex items-center justify-center transition-colors hover:brightness-110"
               style={{ width: '243px', height: '63px', backgroundColor: TAUPE, borderRadius: 0 }}
             >
               <span
+                className="underline-offset-4 group-hover:underline"
                 style={{
                   color: CREAM,
                   fontFamily: wideFont,

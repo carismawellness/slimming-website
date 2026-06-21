@@ -10,9 +10,12 @@ export const metadata: Metadata = {
 const headingFont = 'Trajan Pro, serif';
 const wideFont    = 'Novecento Wide Book, sans-serif';
 const bodyFont    = 'Roboto, sans-serif';
-const taupe       = '#9B8D83';
-const taupeLight  = '#AFA39D';
-const green       = '#8EB093';
+// Accessible taupe (locked palette TAUPE token): #6f6456 clears AA on white (5.78:1) and cream (5.20:1)
+const taupe       = '#6f6456';
+// taupeLight darkened to the same accessible taupe so muted text also clears AA (was #AFA39D, 2.2-2.5:1 FAIL)
+const taupeLight  = '#6f6456';
+// Deep sage (brand-green-text/fill): #4f7256 clears AA as tag text on #EEF3EF (4.83:1) and as CTA fill under white text (5.42:1). Bright #8EB093 stays decorative only.
+const green       = '#4f7256';
 const cream       = '#F0F4EE';
 
 /* ── Slimming treatments catalogue ───────────────────────────────────── */

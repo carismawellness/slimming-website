@@ -43,20 +43,57 @@
   font-style: normal;
   font-display: swap;
 }
+/* Helvetica — clean neutral UI / alternate body face */
+@font-face {
+  font-family: 'Helvetica Brand';
+  src: url('/fonts/helvetica.woff2') format('woff2');
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+/* Ani Lazy Day — decorative script for elegant accents (use sparingly, large only) */
+@font-face {
+  font-family: 'Carisma Script';
+  src: url('/fonts/ani-lazy-day.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+.font-script { font-family: 'Carisma Script', 'Trajan Pro', cursive; text-transform: none; letter-spacing: 0; }
+.font-helvetica { font-family: 'Helvetica Brand', -apple-system, 'Segoe UI', sans-serif; }
 
 :root {
-  --primary-navy: #1a1a1a;        /* headings on white = 17.40:1 AAA */
-  /* Brand gold. Bright variant is decorative-only; deep variant is the
-     accessible text/accent token. */
-  --primary-gold: #d4af37;        /* DECORATIVE ONLY: >=24px on navy, or non-text fills. Fails as text on white (2.10:1). */
-  --primary-gold-text: #8c6d18;   /* TEXT/ACCENT on white = 4.87:1 AA */
-  /* Brand sage/green. Bright variant decorative-only; deep variant is the
-     accessible text token and the CTA-fill / focus-ring base. */
-  --brand-green: #8eb093;         /* DECORATIVE ONLY: large/graphical, fails as small text on white (2.39:1). */
-  --brand-green-text: #4f7256;    /* TEXT / ICON / LINK on white = 5.42:1 AA (5.28:1 on #FCFCFA) */
-  --focus-ring: #4f7256;          /* focus indicator = 5.42:1 vs white, >=3:1 */
+  /* ============================================================
+     Carisma Slimming — BRAND PALETTE (2026 refresh)
+     Identity hues from the brand palette board:
+       deep forest #024C27 · light sage #C9D8C1 · slate blue #6391AB
+       dark teal #124E59 · bronze #978063 · warm beige #EFE7D7 · white
+     Deep forest green is the new PRIMARY (text / CTA / icon — AAA on white).
+     Bright/light hues are decorative; each functional token keeps an
+     AA-or-better text variant so the live site stays WCAG AA.
+     ============================================================ */
+  --primary-navy: #1a1a1a;        /* neutral heading ink on white = 17.40:1 AAA */
+
+  /* Brand green — deep forest is the accessible primary; sage tints are decorative */
+  --brand-green-deep: #024c27;    /* PRIMARY green — text / icon / CTA fill on white (AAA) */
+  --brand-green-text: #024c27;    /* TEXT / LINK / ICON on white (AAA) */
+  --brand-green-light: #c9d8c1;   /* DECORATIVE: light sage background / tint */
+  --brand-green: #8eb093;         /* legacy mid sage — DECORATIVE ONLY (fails as small text, 2.39:1) */
+
+  /* Accent hues */
+  --accent-blue: #6391ab;         /* slate blue — DECORATIVE / large graphics (3.1:1, not small text) */
+  --accent-teal: #124e59;         /* dark teal — accessible TEXT / accent on white (8.0:1 AAA) */
+  --accent-blue-text: #124e59;    /* use the dark teal when blue must be small text */
+  --accent-bronze: #978063;       /* bronze / taupe — DECORATIVE / large (3.4:1) */
+
+  /* Gold (retained accessible variant) */
+  --primary-gold: #d4af37;        /* DECORATIVE ONLY: >=24px on navy, or non-text fills (2.10:1 on white) */
+  --primary-gold-text: #8c6d18;   /* gold / bronze TEXT on white = 4.87:1 AA */
+
+  --beige: #efe7d7;               /* warm beige band */
+  --focus-ring: #024c27;          /* focus indicator — high contrast vs white & light tints */
   --text-dark: #333333;           /* body on white = 12.63:1 AAA */
-  --text-light: #595959;          /* secondary text on white = 7.00:1 AAA (was #666 -> 5.74:1, still AA, darkened for headroom on #f5f5f5) */
+  --text-light: #595959;          /* secondary text on white = 7.00:1 AAA */
   --bg-light: #f5f5f5;
   --white: #ffffff;
 }
@@ -86,12 +123,12 @@ h1, h2, h3, h4, h5, h6 {
 .cta-glow {
   /* Glow halo keeps the LIGHTER brand sage so the brand pop survives, while the
      fill below is darkened for legibility (mirrors the Carisma Aesthetics CTAs). */
-  --cta-glow: 142, 176, 147;      /* light brand sage #8eb093 — halo bloom */
-  --cta-glow-deep: 95, 126, 102;  /* deeper sage #5f7e66 — drop shadow */
+  --cta-glow: 142, 176, 147;      /* light brand sage #8eb093 — halo bloom (brand pop) */
+  --cta-glow-deep: 2, 76, 39;     /* deep forest #024c27 — drop shadow */
   position: relative;
-  /* Fill darkened so WHITE text passes >=4.5:1 across the ENTIRE gradient
-     (lightest stop #56805d 4.52:1 -> #4f7256 5.42:1 -> #456849 6.31:1, all AA). */
-  background-image: linear-gradient(135deg, #56805d 0%, #4f7256 55%, #456849 100%);
+  /* New primary brand green — deep forest. WHITE text passes AAA across the
+     entire gradient (lightest stop #0a5e33 = 6.6:1). */
+  background-image: linear-gradient(135deg, #0a5e33 0%, #024c27 55%, #013d1f 100%);
   color: #ffffff;
   border-radius: 999px;
   box-shadow:
@@ -101,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
   cursor: pointer;
 }
 .cta-glow:hover {
-  background-image: linear-gradient(135deg, #4f7256 0%, #456849 65%, #3c5a40 100%);
+  background-image: linear-gradient(135deg, #024c27 0%, #013d1f 65%, #012a15 100%);
   box-shadow:
     0 0 30px rgba(var(--cta-glow), 0.62),
     0 12px 30px rgba(var(--cta-glow-deep), 0.68);
