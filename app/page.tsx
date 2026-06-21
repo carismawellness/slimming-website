@@ -237,25 +237,24 @@ export default function Home() {
             </p>
             <div className="mx-auto mb-5" aria-hidden="true" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
             <h2 id="glp1-heading" style={{ color: '#024C27', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '38px', lineHeight: '1.25', letterSpacing: '2px', textTransform: 'uppercase' }}>
-              How GLP-1 Weight Loss<br />Works at Our Clinic
+How GLP-1 Works<br />at Our Clinic
             </h2>
           </div>
           {/* Intro */}
-          <p className="text-center mx-auto mb-4" style={{ maxWidth: '720px', color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
-            GLP-1s are naturally occurring hormones that help regulate appetite and blood sugar. Prescription GLP-1s — such as Ozempic and Mounjaro — mimic these signals so you feel full sooner and think about food less, working best alongside a structured slimming plan and personalised meal plan.
+          <p className="text-center mx-auto mb-4" style={{ maxWidth: '680px', color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
+            GLP-1s like Ozempic and Mounjaro quiet your appetite and food noise, so eating less stops feeling like a daily fight. But the results only last inside a structured, doctor-led plan — here&rsquo;s how it works.
           </p>
-          <p className="text-center mx-auto mb-12" style={{ maxWidth: '660px', color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            At our clinic, GLP-1 is an optional tool within your weight loss program — not a shortcut for everyone:
+          <p className="text-center mx-auto mb-12" style={{ maxWidth: '620px', color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            One tool inside your program — never a shortcut, only if it&rsquo;s right for you.
           </p>
 
           {/* Vertical step timeline */}
           <StepTimeline
             steps={[
-              { title: 'Full Medical Assessment', desc: 'You first have a full medical weight loss assessment, body scan and review of your history and bloods.' },
-              { title: 'Doctor Review & Options', desc: 'If you medically qualify, the doctor explains your options, expected results and side effects so you can decide with confidence.' },
-              { title: 'Part of a Full Plan', desc: 'Any prescription is paired with a personalised meal plan, movement and accountability — never used on its own.' },
-              { title: 'Ongoing Monitoring', desc: 'We monitor your progress and symptoms, adjust or stop treatment when needed, and plan for life after the medication.' },
-              { title: 'Honest Guidance', desc: 'If GLP-1 is not right for you, we tell you clearly and focus on non-medication weight loss routes that match your health and goals.' },
+              { title: 'Medical Assessment', desc: 'A doctor consultation, body scan and bloods to pinpoint what’s driving your weight — and whether GLP-1 is right for you.' },
+              { title: 'Your Personalised Plan', desc: 'If you qualify, your prescription is built into a full plan: nutrition, movement and weekly check-ins. Never medication alone.' },
+              { title: 'Doctor-Led Support', desc: 'We track your progress, fine-tune your dose and manage any side effects — so results keep coming, safely.' },
+              { title: 'Lasting Results', desc: 'We plan for life after GLP-1 so the weight stays off. And if it’s not right for you, we’ll guide you to what is.' },
             ]}
           />
 
