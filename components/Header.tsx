@@ -143,13 +143,20 @@ export default function Header() {
                   onMouseLeave={() => setPkgHover(false)}
                 >
                   <button
-                    style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0' }}
+                    style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0', display: 'flex', alignItems: 'center', gap: '4px' }}
                     className="hover:underline transition"
                     aria-haspopup="true"
                     aria-expanded={pkgHover}
                     onClick={() => setPkgHover(p => !p)}
                   >
                     {m.label}
+                    <svg
+                      width="10" height="10" viewBox="0 0 24 24" fill="none"
+                      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+                      style={{ transition: 'transform 0.2s ease', transform: pkgHover ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.7 }}
+                    >
+                      <polyline points="6 9 12 15 18 9" />
+                    </svg>
                   </button>
                   {pkgHover && (
                     <div style={{
