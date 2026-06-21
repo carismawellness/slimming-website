@@ -1,9 +1,7 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import GoogleReviews from '@/components/GoogleReviews';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
-import BookConsultationButton from '@/components/BookConsultationButton';
 import QuizModal from '@/components/QuizModal';
 import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
@@ -181,7 +179,6 @@ export default function Home() {
             >
               Get Your Free Body Analysis ›
             </a>
-            <BookConsultationButton variant="outline" style={{ minHeight: '48px', padding: '0 28px', fontSize: '11px' }} />
           </div>
         </div>
       </section>
@@ -263,22 +260,28 @@ export default function Home() {
       <MotifAccent mode="divider" />
 
       {/* (5) Medical Weight Loss in Malta (GLP-1) */}
-      <section className="py-24" aria-labelledby="glp1-heading" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-32" aria-labelledby="glp1-heading" style={{ background: 'linear-gradient(180deg, #D7E2D8 0%, #FFFFFF 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="glp1-heading" className="text-center mb-3" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px' }}>
-            HOW GLP-1 WEIGHT LOSS WORKS AT OUR CLINIC
-          </h2>
-          <div className="mx-auto mb-12" aria-hidden="true" style={{ width: '120px', height: '1px', backgroundColor: '#C9B8AE' }} />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+          {/* Eyebrow + heading */}
+          <div className="text-center mb-14">
+            <p aria-hidden="true" style={{ color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', fontWeight: '700', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '14px' }}>
+              Medical Weight Loss · GLP-1 Program
+            </p>
+            <div className="mx-auto mb-5" aria-hidden="true" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+            <h2 id="glp1-heading" style={{ color: '#024C27', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '38px', lineHeight: '1.25', letterSpacing: '2px', textTransform: 'uppercase' }}>
+              How GLP-1 Weight Loss<br />Works at Our Clinic
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start">
             {/* Left - text */}
             <div className="order-2 md:order-1">
-              <p className="mb-6" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
-                GLP-1s are naturally occurring hormones that help regulate appetite and blood sugar. GLP-1 prescription medications — such as Ozempic and Mounjaro, mimic or boost these signals so you feel full sooner, think about food less, and can lose weight more effectively when combined with a structured slimming plan and personalised meal plan.
+              <p className="mb-6" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
+                GLP-1s are naturally occurring hormones that help regulate appetite and blood sugar. GLP-1 prescription medications — such as Ozempic and Mounjaro — mimic or boost these signals so you feel full sooner, think about food less, and can lose weight more effectively when combined with a structured slimming plan and personalised meal plan.
               </p>
-              <p className="mb-3" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
+              <p className="mb-5" style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
                 At our slimming clinic, GLP-1 is an optional tool within your weight loss program, not a shortcut for everyone:
               </p>
-              <div className="mb-6" style={{ width: '100%', maxWidth: '540px', height: '1px', backgroundColor: '#E6E1DC' }} aria-hidden="true" />
+              <div className="mb-7" style={{ width: '100%', maxWidth: '560px', height: '1px', backgroundColor: '#C9D8C1' }} aria-hidden="true" />
               <div className="space-y-5">
                 {[
                   'You first have a full medical weight loss assessment, body scan and review of your history and bloods',
@@ -288,40 +291,45 @@ export default function Home() {
                   'If GLP-1 is not right for you, we will tell you clearly and focus on non-medication weight loss routes that match your health and goals',
                 ].map((step, idx) => (
                   <div key={idx} className="flex items-start gap-3">
-                    <span aria-hidden="true" style={{ color: '#4f7256', fontSize: '18px', lineHeight: '1.4' }}>•</span>
-                    <p style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.4' }}>
+                    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                      <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                      <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <p style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
                       {step}
                     </p>
                   </div>
                 ))}
               </div>
-              <div className="mt-8" style={{ borderLeft: '3px solid #4f7256', paddingLeft: '18px' }}>
-                <p style={{ color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.4', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-                  To protect quality of care, our guaranteed weight loss transformation programs are limited to a small number of clients each month. Check if you qualify.
-                </p>
+              {/* Pull-quote */}
+              <div className="mt-10 relative" style={{ paddingLeft: '24px' }}>
+                <span aria-hidden="true" style={{ position: 'absolute', left: 0, top: '-10px', fontFamily: 'Georgia, serif', fontSize: '56px', lineHeight: '1', color: '#4f7256', opacity: 0.35 }}>&ldquo;</span>
+                <blockquote style={{ borderLeft: '3px solid #4f7256', paddingLeft: '20px', paddingTop: '4px', paddingBottom: '4px' }}>
+                  <p style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontSize: '15px', lineHeight: '1.65', fontStyle: 'italic', letterSpacing: '0.3px' }}>
+                    To protect quality of care, our guaranteed weight loss transformation programs are limited to a small number of clients each month. Check if you qualify.
+                  </p>
+                  <span aria-hidden="true" style={{ display: 'block', textAlign: 'right', fontFamily: 'Georgia, serif', fontSize: '56px', lineHeight: '0.6', color: '#4f7256', opacity: 0.35, marginTop: '4px' }}>&rdquo;</span>
+                </blockquote>
               </div>
             </div>
             {/* Right - image + CTA */}
-            <div className="flex flex-col gap-6 order-1 md:order-2">
+            <div className="flex flex-col items-center gap-8 order-1 md:order-2">
               <Image
                 src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png"
                 alt="Medical weight loss consultation at Carisma Slimming Malta"
-                width={326}
-                height={443}
-                style={{ width: '100%', maxWidth: '326px', marginLeft: 'auto', marginRight: 'auto', height: 'auto', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '100px 10px' }}
+                width={400}
+                height={540}
+                style={{ width: '100%', maxWidth: '400px', height: 'auto', objectFit: 'cover', objectPosition: 'center', display: 'block', borderRadius: '120px 16px 16px 16px', boxShadow: '0 24px 60px rgba(2,76,39,0.15), 0 8px 24px rgba(0,0,0,0.08)' }}
               />
-              <div className="flex flex-col gap-3" style={{ maxWidth: '326px', marginLeft: 'auto', marginRight: 'auto' }}>
+              <div style={{ width: '100%', maxWidth: '400px' }}>
                 <a
-                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Get your free body analysis — opens booking page in new tab"
-                  className="cta-glow inline-flex items-center justify-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
-                  style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '11px', letterSpacing: '0.5px', textTransform: 'uppercase', width: '100%', minHeight: '48px' }}
+                  href="/consultation"
+                  className="cta-glow"
+                  style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 32px', display: 'inline-block', fontWeight: 700, color: '#ffffff', width: '100%', textAlign: 'center', textDecoration: 'none' }}
+                  aria-label="Book my free body analysis"
                 >
-                  Get Your Free Body Analysis ›
+                  Book My Free Body Analysis
                 </a>
-                <BookConsultationButton variant="outline" style={{ fontSize: '11px', minHeight: '48px', width: '100%' }} />
               </div>
             </div>
           </div>
@@ -331,7 +339,7 @@ export default function Home() {
       {/* (6) The Carisma Difference */}
       <section className="py-24" aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative" style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '30px 33px 40px', overflow: 'hidden' }}>
+          <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
             {/* Decorative background watermark (purely presentational) */}
             <Image
               src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png"
@@ -343,113 +351,99 @@ export default function Home() {
               style={{ position: 'absolute', left: '50%', top: '12px', transform: 'translateX(-50%)', width: '678px', height: '630px', objectFit: 'contain', pointerEvents: 'none', zIndex: 0 }}
             />
             <div className="relative" style={{ zIndex: 1 }}>
-            <p className="text-center mb-2" aria-hidden="true" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', fontWeight: '600', letterSpacing: '3px', textTransform: 'uppercase' }}>
-              the carisma difference
-            </p>
-            <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-            <h2 id="difference-heading" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-              why women in malta choose carisma slimming
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-              {/* Left - commitments */}
-              <div className="space-y-10">
-                <div>
-                  <h3 className="mb-5" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                    Our Doctor-Led Slimming Commitment
-                  </h3>
-                  <ul className="space-y-3">
-                    {[
-                      'Visible inch loss and shape change through a medically supervised slimming program',
-                      'Weight loss plans that work with your age, hormones and metabolism',
-                      'No crash diets, no banned foods, no endless hours of cardio, just medical guidance and personalised meal plans',
-                      'Medical-grade slimming treatments and fat freezing technology delivered by trained professionals',
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
-                        <span aria-hidden="true" style={{ color: '#3c5a40' }}>•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <p className="text-center mb-2" aria-hidden="true" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', fontWeight: '600', letterSpacing: '3px', textTransform: 'uppercase' }}>
+                the carisma difference
+              </p>
+              <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
+              <h2 id="difference-heading" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                why women in malta choose carisma slimming
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+                {/* Left - commitments */}
+                <div className="space-y-12">
+                  <div>
+                    <h3 className="mb-6" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                      Our Doctor-Led Slimming Commitment
+                    </h3>
+                    <ul className="space-y-4">
+                      {[
+                        'Visible inch loss and shape change through a medically supervised slimming program',
+                        'Weight loss plans that work with your age, hormones and metabolism',
+                        'No crash diets, no banned foods, no endless hours of cardio, just medical guidance and personalised meal plans',
+                        'Medical-grade slimming treatments and fat freezing technology delivered by trained professionals',
+                      ].map((item) => (
+                        <li key={item} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                            <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                            <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="mb-6" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                      What Makes Our Weight Loss Clinic Different
+                    </h3>
+                    <ul className="space-y-4">
+                      {[
+                        "Created by the team behind Malta's leading spa and medical aesthetics centres",
+                        'Doctor-led medical weight loss and slimming, not a beauty salon diet program',
+                        'All-in-one approach: medical assessment, personalised meal plans, movement and body contouring treatments',
+                        'High-touch support with weekly check-ins, WhatsApp coaching and dedicated accountability',
+                      ].map((item) => (
+                        <li key={item} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                            <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                            <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  {/* CTA */}
+                  <div>
+                    <a
+                      href="/consultation"
+                      className="cta-glow inline-flex items-center justify-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
+                      style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', minHeight: '48px', padding: '0 32px' }}
+                      aria-label="Book your free body analysis"
+                    >
+                      Book Your Free Body Analysis
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="mb-5" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                    What Makes Our Weight Loss Clinic Different
-                  </h3>
-                  <ul className="space-y-3">
-                    {[
-                      "Created by the team behind Malta's leading spa and medical aesthetics centres",
-                      'Doctor-led medical weight loss and slimming, not a beauty salon diet program',
-                      'All-in-one approach: medical assessment, personalised meal plans, movement and body contouring treatments',
-                      'High-touch support with weekly check-ins, WhatsApp coaching and dedicated accountability',
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
-                        <span aria-hidden="true" style={{ color: '#3c5a40' }}>•</span>
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
+                {/* Right - map + parking pill */}
+                <div className="flex flex-col">
+                  <iframe
+                    title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
+                    aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
+                    src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, borderRadius: '20px', display: 'block', flex: 1, minHeight: '480px' }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                  {/* Parking pill */}
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#E9F0E9', borderRadius: '999px', padding: '8px 16px', marginTop: '16px', alignSelf: 'flex-start' }}>
+                    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1" y="1" width="16" height="16" rx="4" fill="#C9D8C1" />
+                      <text x="9" y="13" textAnchor="middle" fill="#4f7256" fontSize="10" fontWeight="700" fontFamily="sans-serif">P</text>
+                    </svg>
+                    <span style={{ color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 600 }}>
+                      Complimentary on-site parking
+                    </span>
+                  </div>
                 </div>
               </div>
-              {/* Right - map */}
-              <div>
-                <iframe
-                  title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
-                  aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
-                  src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
-                  width="100%"
-                  height="484"
-                  style={{ border: 0, borderRadius: '16px', display: 'block' }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                ></iframe>
-              </div>
-            </div>
-            {/* Bottom row - CTA + parking */}
-            <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-12">
-              <div className="flex flex-wrap gap-3 items-center">
-                <a
-                  href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Get your free body analysis — opens booking page in new tab"
-                  className="cta-glow inline-flex items-center justify-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
-                  style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '11px', letterSpacing: '0.5px', textTransform: 'uppercase', minHeight: '48px', padding: '0 36px' }}
-                >
-                  Get Your Free Body Analysis ›
-                </a>
-                <BookConsultationButton variant="outline" style={{ fontSize: '11px', minHeight: '48px', padding: '0 24px' }} />
-              </div>
-              <div className="flex items-center gap-3">
-                <Image
-                  src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png"
-                  alt=""
-                  aria-hidden={true}
-                  width={34}
-                  height={34}
-                  style={{ width: '34px', height: 'auto', objectFit: 'contain' }}
-                />
-                <span style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', fontWeight: '600', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                  Complimentary on-site parking
-                </span>
-              </div>
-            </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* (7) Real People, Real Reviews — heading precedes doctor profiles (rendered by BrandBlock) */}
-      <section className="pt-24 pb-4" aria-labelledby="reviews-heading" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 id="reviews-heading" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '35px', letterSpacing: '1px', lineHeight: '1.25' }}>
-            real results from our slimming clients in malta
-          </h2>
-        </div>
-      </section>
-
-      {/* (8) Google reviews — live homepage shows the reviews widget between the
-          "real people, real reviews" heading and the doctor profiles (homepage only) */}
-      <GoogleReviews />
 
       </main>
     </div>
