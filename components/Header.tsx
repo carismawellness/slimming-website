@@ -29,7 +29,7 @@ const PACKAGE_LINKS: NavItem[] = [
 type Menu = { label: string; href?: string; items?: NavItem[] };
 
 const MENUS: Menu[] = [
-  { label: 'Medical Weight Loss', href: '/weight-loss' },
+  { label: 'Weight Loss', href: '/weight-loss' },
   { label: 'GLP-1 Injections', href: '/glp1' },
   { label: 'Body Contouring', items: PACKAGE_LINKS },
   { label: 'Slimming Guide', href: '/slimming-guide' },
