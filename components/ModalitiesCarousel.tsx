@@ -96,7 +96,7 @@ export default function ModalitiesCarousel() {
             height: '52px',
             backgroundColor: '#ffffff',
             boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-            color: '#9B8D83',
+            color: '#6f6456',
             fontSize: '26px',
             lineHeight: 1,
             border: 'none',
@@ -157,6 +157,17 @@ export default function ModalitiesCarousel() {
                   'linear-gradient(180deg, rgba(60,50,40,0.05) 0%, rgba(60,50,40,0.35) 40%, rgba(40,33,28,0.88) 100%)',
               }}
             />
+            {/* Text scrim — guarantees WCAG AA contrast for white text over any photo.
+                Worst case (pure-white image pixel) yields >=6.5:1 at the heading top. */}
+            <div
+              style={{
+                position: 'absolute',
+                inset: 0,
+                pointerEvents: 'none',
+                background:
+                  'linear-gradient(180deg, rgba(20,17,14,0) 0%, rgba(20,17,14,0) 38%, rgba(20,17,14,0.55) 52%, rgba(20,17,14,0.85) 75%, rgba(20,17,14,0.92) 100%)',
+              }}
+            />
             {/* Text + button */}
             <div className="absolute inset-x-0 bottom-0" style={{ padding: '0 28px 28px' }}>
               <h3
@@ -176,7 +187,7 @@ export default function ModalitiesCarousel() {
               <p
                 className="mb-6"
                 style={{
-                  color: 'rgba(255,255,255,0.9)',
+                  color: '#ffffff',
                   fontFamily: 'Roboto, sans-serif',
                   fontSize: '13px',
                   lineHeight: '1.55',
@@ -188,7 +199,7 @@ export default function ModalitiesCarousel() {
               <span
                 className="block text-center"
                 style={{
-                  border: '1.5px solid rgba(255,255,255,0.8)',
+                  border: '1.5px solid rgba(255,255,255,0.9)',
                   color: '#ffffff',
                   fontFamily: 'Novecento Wide Book, sans-serif',
                   fontSize: '13px',
@@ -219,7 +230,7 @@ export default function ModalitiesCarousel() {
             height: '52px',
             backgroundColor: '#ffffff',
             boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-            color: '#9B8D83',
+            color: '#6f6456',
             fontSize: '26px',
             lineHeight: 1,
             border: 'none',

@@ -42,10 +42,24 @@ export default function TestimonialsSection() {
         <h2 className="text-4xl font-bold text-center mb-12">Real People, Real Results</h2>
 
         <div className="bg-white rounded-lg shadow-lg p-12">
-          <div className="flex justify-center mb-4">
+          <div
+            className="flex items-center justify-center gap-1 mb-4"
+            role="img"
+            aria-label={`Rated ${testimonial.rating} out of 5 stars`}
+          >
             {Array.from({ length: testimonial.rating }).map((_, i) => (
-              <span key={i} className="text-yellow-400 text-2xl">★</span>
+              <span
+                key={i}
+                aria-hidden="true"
+                className="text-2xl"
+                style={{ color: 'var(--primary-gold-text)' }}
+              >
+                ★
+              </span>
             ))}
+            <span className="ml-2 text-base font-semibold" style={{ color: 'var(--text-dark)' }}>
+              {testimonial.rating.toFixed(1)}
+            </span>
           </div>
 
           <p className="text-2xl text-gray-700 text-center mb-8 italic">

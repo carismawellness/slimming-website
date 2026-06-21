@@ -7,7 +7,7 @@ export const muscleStimulation: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/muscle-stimulation',
 
   heroEyebrow: 'EMSculpt NEO MALTA',
-  heroTitle: '3 in 1 body sculpt protocol',
+  heroTitle: 'muscle stimulation in malta — emsculpt neo body sculpt protocol',
   heroSubheading: 'Stronger, tighter, more defined in 4 focused sessions.',
   heroDescription:
     'Our 3-1 course with EMSculpt NEO with HIFEM + RF gives you the effect of 20,000 sit ups per session, burns local fat and tightens the skin resulting in 30% Fat reduction, 25% Muscle growth & 29% Muscle strength',
@@ -29,7 +29,7 @@ export const muscleStimulation: PackageContent = {
   heroVideo: W + '87fc13_cce6f68254674bf1bdc055ce87736992_720p.mp4',
   heroImageRatio: '398 / 622',
 
-  secretHeading: ['the secret to a more defined,', 'confident look'],
+  secretHeading: ['how emsculpt neo builds muscle', 'and burns stubborn fat'],
   secretSubheading: 'sculpt, tighten and define stubborn areas with precision',
   secretImage: W + '87fc13_a965179046514c2a8ad7bec0b7f44127~mv2.jpg',
   secretIntro:
@@ -51,7 +51,7 @@ export const muscleStimulation: PackageContent = {
   ],
 
   eligEyebrow: 'eligibility criteria',
-  eligHeading: 'selective by intention successful by design',
+  eligHeading: 'areas emsculpt neo can sculpt and tone',
   eligImage: W + '87fc13_e0c78a6ef6974944bb2554e594e809dc~mv2.jpg',
   eligIntro: 'Treat visible fat bulges in 7 areas of the body',
   areas: ['ABDOMEN / CORE', 'GLUTES / BUTTOCKS', 'THIGHS (FRONT AND BACK)', 'CALVES', 'UPPER ARMS (BICEPS AND TRICEPS)'],
@@ -78,7 +78,7 @@ export const muscleStimulation: PackageContent = {
   ptImage: W + '87fc13_1a54a17987f64e6fb275b2721b8dc7f4~mv2.png',
   ptImage2: W + '87fc13_134b655cd7f945a9a2847030229e46a1~mv2.png',
 
-  dualHeading: ['malta’s only dual technology', 'starter pack for stubborn fat'],
+  dualHeading: ['malta’s emsculpt neo muscle', 'sculpting starter protocol'],
   dualMini: [
     { icon: W + '87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'Targeted BODY SCULPTING', body: 'EMSculpt Neo sessions are focused on your main problem areas — such as the tummy, hips, bum or thighs — delivering powerful muscle contractions to areas that are hard to tone naturally.' },
     { icon: W + '87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'Visible, TRACKABLE DEFINITION', body: 'Muscle engagement you can feel and results you can see. Improved firmness and definition show in clothes and posture, not just on the scale.' },

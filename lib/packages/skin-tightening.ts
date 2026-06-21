@@ -7,7 +7,7 @@ export const skinTightening: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/skin-tightening',
 
   heroEyebrow: 'VELASHAPE III IN MALTA',
-  heroTitle: '4-in-1 skin tightening protocol',
+  heroTitle: 'skin tightening in malta — velashape iii rf protocol',
   heroSubheading: 'Smoother, firmer, and tighter skin in 4 focused sessions.',
   heroDescription:
     'Our 4 in 1 course with the VelaShape III uses radiofrequency, infrared heat, vacuum and mechanical massage together to stimulate collagen to tighten and smoothen your skin.',
@@ -30,7 +30,7 @@ export const skinTightening: PackageContent = {
   heroVideo: W + '87fc13_0419491a053744b29ebbff7932e268e5_720p.mp4',
   heroImageRatio: '398 / 682',
 
-  secretHeading: ['THE SECRET TO A MORE DEFINED,', 'CONFIDENT LOOK'],
+  secretHeading: ['how velashape iii firms', 'and tightens loose skin'],
   secretSubheading: 'tighten loose skin and smooth stubborn areas — without surgery',
   secretImage: W + '87fc13_76c7882984cf42de95304b10e6fd263f~mv2.png',
   secretIntro:
@@ -52,7 +52,7 @@ export const skinTightening: PackageContent = {
   ],
 
   eligEyebrow: 'eligibility criteria',
-  eligHeading: 'selective by intention successful by design',
+  eligHeading: 'areas we treat for firmer, tighter skin',
   eligImage: W + '87fc13_9b8bca36cbde4c16b23d79ab96ac5286~mv2.png',
   eligIntro: 'Treat visible fat bulges in 7 areas of the body',
   areas: ['TUMMY / ABDOMEN', 'NECK', 'ARMS', 'BUTTOCKS AND UNDER-BUTT CREASE', 'THIGHS (FRONT, BACK, INNER AND OUTER)'],

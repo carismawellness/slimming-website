@@ -5,7 +5,7 @@ import TestimonialsSlider from './TestimonialsSlider';
 
 export const metadata: Metadata = {
   title: "Medical Weight Loss Malta | Carisma Slimming",
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 const FRESHA_BOOK =
@@ -28,8 +28,8 @@ function BlueCta({ href, children }: { href: string; children: React.ReactNode }
       href={href}
       target="_blank"
       rel="noopener noreferrer"
-      className="inline-block text-center font-bold text-white"
-      style={{ backgroundColor: BLUE, borderRadius: '10px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 36px' }}
+      className="cta-glow inline-block text-center font-bold text-white"
+      style={{ backgroundColor: BLUE, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 36px' }}
     >
       {children} &rsaquo;
     </a>
@@ -187,8 +187,8 @@ export default function MedicalWeightLossLpPage() {
             href={FRESHA_BOOK}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-white uppercase tracking-wide hover:opacity-90 transition"
-            style={{ backgroundColor: CHECK, borderRadius: '10px', fontFamily: wideFont, fontWeight: 700, fontSize: '12px', padding: '10px 24px' }}
+            className="cta-glow text-white uppercase tracking-wide"
+            style={{ backgroundColor: CHECK, borderRadius: '999px', fontFamily: wideFont, fontWeight: 700, fontSize: '12px', padding: '10px 24px' }}
           >
             Book Now
           </a>
@@ -217,7 +217,7 @@ export default function MedicalWeightLossLpPage() {
                 ultimate weight loss protocol in malta
               </p>
               <h1 className="mb-5 uppercase leading-snug" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px' }}>
-                doctor-led medical weight loss in Malta
+                medical weight loss programme in Malta &mdash; lose fat and keep it off
               </h1>
               <p className="mb-3" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
                 Struggling with constant hunger, stalled progress and weight that creeps back every time you stop dieting?
@@ -300,7 +300,7 @@ export default function MedicalWeightLossLpPage() {
       <section className="py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
-            the secret to a more defined,<br />confident look
+            real women, real weight loss results<br />in Malta
           </h2>
           <div className="mx-auto mt-4" style={{ width: '170px', height: '1px', backgroundColor: '#B9A99E' }} />
         </div>
@@ -317,7 +317,7 @@ export default function MedicalWeightLossLpPage() {
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
           <h2 className="text-center mb-8 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px' }}>
-            clarity before you start
+            what medical weight loss can and cannot do
           </h2>
           <p className="mb-10" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
             <strong style={{ color: '#7d7066' }}>medical weight management programs</strong> are treatments that support weight loss by improving appetite regulation and satiety. They can make consistency easier, but they work best inside a structured, medically supervised programme.
@@ -363,7 +363,7 @@ export default function MedicalWeightLossLpPage() {
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
           <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #D8E3D9 0%, #F8F6F2 100%)', borderRadius: '24px' }}>
             <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.6 }}>
-              we don&rsquo;t recommend weight loss.<br />we build the conditions for it to last.
+              sustainable weight loss in Malta:<br />structure, not willpower
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-[362px_1fr] gap-12 items-center">
               <div className="w-full overflow-hidden" style={{ borderRadius: '16px', aspectRatio: '362 / 424', maxWidth: '362px' }}>
@@ -435,7 +435,7 @@ export default function MedicalWeightLossLpPage() {
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '130px', height: '1px', backgroundColor: '#B9A99E' }} />
           <h2 className="text-center mb-8 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '3px' }}>
-            selective by intention successful by design
+            who medical weight loss is right for
           </h2>
           <p className="mb-10" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
             medical weight management program can be powerful, but only when it&rsquo;s part of a structured, medically supervised programme. Eligibility is determined through a proper medical assessment including blood tests and food intolerence, safety screening, and clear protocols, so the plan is appropriate, monitored, and adjusted responsibly.
@@ -475,8 +475,8 @@ export default function MedicalWeightLossLpPage() {
               href={FRESHA_BOOK}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-center font-bold text-white w-full sm:w-auto"
-              style={{ backgroundColor: BLUE, borderRadius: '10px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '16px 120px' }}
+              className="cta-glow inline-block text-center font-bold text-white w-full sm:w-auto"
+              style={{ backgroundColor: BLUE, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '16px 120px' }}
             >
               find out if you qualify
             </a>
@@ -500,7 +500,7 @@ export default function MedicalWeightLossLpPage() {
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
           <h2 className="text-center mb-6 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
-            we are not<br />another diet clinic.
+            doctor-led weight loss in Malta:<br />not another diet clinic
           </h2>
           <p className="text-center mx-auto mb-12" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7, maxWidth: '760px' }}>
             We&rsquo;re a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don&rsquo;t just lose weight, you step into your strongest form.
@@ -523,9 +523,9 @@ export default function MedicalWeightLossLpPage() {
       {/* How it works — 5-step tabs */}
       <section className="py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '4px' }}>
-            how it works
-          </p>
+          <h2 className="text-center uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '4px' }}>
+            how our medical weight loss programme works
+          </h2>
           <div className="mx-auto mt-3 mb-10" style={{ width: '190px', height: '1px', backgroundColor: '#B9A99E' }} />
           <HowItWorksTabs />
         </div>
@@ -540,7 +540,7 @@ export default function MedicalWeightLossLpPage() {
           <div className="mx-auto mt-2 mb-6" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
           <div className="relative" style={{ width: 'fit-content', margin: '0 auto' }}>
             <h2 className="relative text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '3px', lineHeight: 1.3, zIndex: 1 }}>
-              led by expertise.<br />driven by results.
+              your doctor-led care team<br />in Malta
             </h2>
             <img
               src="/wix/87fc13_d170f070d1d64560b77dd6ce085f4221~mv2.png"
@@ -569,8 +569,8 @@ export default function MedicalWeightLossLpPage() {
                 href={FRESHA_ANALYSIS}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-center font-bold text-white"
-                style={{ backgroundColor: CHECK, borderRadius: '5px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 36px' }}
+                className="cta-glow inline-block text-center font-bold text-white"
+                style={{ backgroundColor: CHECK, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 36px' }}
               >
                 Get Your Free Body Analysis &rsaquo;
               </a>
@@ -587,7 +587,7 @@ export default function MedicalWeightLossLpPage() {
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '200px', height: '1px', backgroundColor: '#B9A99E' }} />
           <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '27px', letterSpacing: '3px', lineHeight: 1.5 }}>
-            support weight loss progress weekly<br />measured. verified.
+            medically verified fat loss:<br />weekly tracking, measurable results
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
@@ -712,8 +712,8 @@ export default function MedicalWeightLossLpPage() {
                   href={FRESHA_ANALYSIS}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block text-center font-bold text-white mb-5 mx-auto"
-                  style={{ backgroundColor: BLUE, borderRadius: '10px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px', maxWidth: '356px' }}
+                  className="cta-glow block text-center font-bold text-white mb-5 mx-auto"
+                  style={{ backgroundColor: BLUE, borderRadius: '999px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px', maxWidth: '356px' }}
                 >
                   Get Your Free Body Analysis &rsaquo;
                 </a>
@@ -749,7 +749,7 @@ export default function MedicalWeightLossLpPage() {
               </p>
               <div className="mx-auto mb-6" style={{ width: '140px', height: '1px', backgroundColor: '#B9A99E' }} />
               <h2 className="text-center mb-12 uppercase" style={{ color: CHECK, fontFamily: headingFont, fontWeight: 400, fontSize: '26px', letterSpacing: '2px' }}>
-                malta&rsquo;s #1 leading wellness chain
+                why Malta chooses Carisma for medical weight loss
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-[1fr_428px] gap-12 items-start">
                 <div className="space-y-10">
@@ -814,7 +814,7 @@ export default function MedicalWeightLossLpPage() {
       >
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center mb-6 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px' }}>
-            we are not another diet clinic.
+            start your medical weight loss transformation in Malta
           </h2>
           <p className="text-center mx-auto mb-12" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7, maxWidth: '720px' }}>
             We&rsquo;re a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don&rsquo;t just lose weight, you step into your strongest form.

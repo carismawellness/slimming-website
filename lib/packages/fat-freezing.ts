@@ -7,7 +7,7 @@ export const fatFreezing: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/fat-reduction',
 
   heroEyebrow: 'COOLSCULPTING IN MALTA',
-  heroTitle: 'fat eraser protocol',
+  heroTitle: 'fat freezing in malta — coolsculpting fat eraser protocol',
   heroSubheading: 'BURN STUBBORN FAT, NO SURGERY.',
   heroDescription:
     'For those who have tried dieting, eating healthier and moving more, but the love handles, stubborn belly fat and double chin still will not budge.',
@@ -30,7 +30,7 @@ export const fatFreezing: PackageContent = {
   heroVideo: W + '87fc13_d455089124694edb96940d4cd650622a_720p.mp4',
   heroImageRatio: '398 / 682',
 
-  secretHeading: ['the secret to a more defined,', 'confident look'],
+  secretHeading: ['how fat freezing targets', 'stubborn fat pockets'],
   secretSubheading: 'shrink love handles & target stubborn fat pockets with precision',
   secretImage: W + '87fc13_af546d93467e47d790f061caff13348a~mv2.png',
   secretIntro:
@@ -52,7 +52,7 @@ export const fatFreezing: PackageContent = {
   ],
 
   eligEyebrow: 'eligibility criteria',
-  eligHeading: 'selective by intention successful by design',
+  eligHeading: 'where fat freezing works best on your body',
   eligImage: W + '87fc13_bda5e64e4bcb4471b28a919528af71bc~mv2.png',
   eligImageRatio: '1 / 1',
   eligIntro: 'Treat visible fat bulges in 7 areas of the body',

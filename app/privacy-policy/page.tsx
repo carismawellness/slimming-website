@@ -16,7 +16,7 @@ export default function PrivacyPolicyPage() {
             className="text-center text-[40px] leading-[56px] md:text-[50px] md:leading-[70px]"
             style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: '400', marginBottom: '0px' }}
           >
-            privacy policy
+            Privacy Policy
           </h1>
           <div
             aria-hidden="true"
@@ -33,7 +33,7 @@ export default function PrivacyPolicyPage() {
           <h2
             style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '20px', lineHeight: '28px', marginBottom: '21px' }}
           >
-            Information Collection and Use
+            How We Collect and Use Your Personal Data
           </h2>
           <p
             style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '21px', marginBottom: '21px' }}
@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
           <h2
             style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '20px', lineHeight: '28px', marginBottom: '21px' }}
           >
-            Third-Party Disclosure
+            Third-Party Data Sharing & Disclosure
           </h2>
           <p
             style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '21px', marginBottom: '21px' }}
@@ -57,7 +57,7 @@ export default function PrivacyPolicyPage() {
           <h2
             style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '20px', lineHeight: '28px', marginBottom: '21px' }}
           >
-            User Choices
+            Your Rights & Data Choices Under GDPR
           </h2>
           <p
             style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '21px' }}

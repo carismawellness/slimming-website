@@ -7,7 +7,7 @@ export const lymphaticDrainage: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/lymphatic-drainage',
 
   heroEyebrow: 'Expert LED BODY DETOX & CIRCULATION SUPPORT',
-  heroTitle: 'lymphatic drainage therapy',
+  heroTitle: 'lymphatic drainage massage in malta — medical detox therapy',
   heroSubheading: '',
   heroDescription:
     'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate your lymphatic system, helping your body eliminate toxins, reduce fluid retention, and restore natural balance.',
@@ -28,8 +28,8 @@ export const lymphaticDrainage: PackageContent = {
   heroVideo: W + '87fc13_b8ef9f4370b04873b78136d790535752_720p.mp4',
   heroImageRatio: '398 / 682',
 
-  secretHeading: ['THE SECRET TO A MORE DEFINED,', 'CONFIDENT LOOK'],
-  secretSubheading: 'WHEN HUNGER, NOT WILLPOWER, IS HOLDING YOU BACK',
+  secretHeading: ['how lymphatic drainage eases', 'bloating and fluid retention'],
+  secretSubheading: 'when sluggish lymph flow, not effort, is holding you back',
   secretImage: W + '87fc13_597101dd5e634161a957161a595de331~mv2.png',
   secretIntro:
     'You eat well, try to stay active, and take care of yourself yet your body still feels bloated, tight, or sluggish. Swelling comes and goes, your skin feels puffy, and recovery feels slower than it should. You know something feels “off,” but it’s hard to explain and harder to fix on your own.',
@@ -57,7 +57,7 @@ export const lymphaticDrainage: PackageContent = {
   ],
 
   eligEyebrow: 'Benefits of lymphatic drainage',
-  eligHeading: 'what is all the hype with debloating',
+  eligHeading: 'the benefits of lymphatic drainage massage',
   eligImage: W + '87fc13_50cffcdb438440d68ea6b0553bf28e24~mv2.png',
   eligIntro: 'SUPPORTS DETOXIFICATION, CIRCULATION & FLUID BALANCE',
   areas: [
@@ -93,7 +93,7 @@ export const lymphaticDrainage: PackageContent = {
   ptImage3: W + '87fc13_50cffcdb438440d68ea6b0553bf28e24~mv2.png',
 
   dualEyebrow: '4 core pillars of our methodology',
-  dualHeading: ['Malta’s only dual technology starter pack for stubborn fat'],
+  dualHeading: ['malta’s medically guided lymphatic drainage starter pack'],
   dualMini: [
     { icon: W + '87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'ELIGIBILITY & ASSESSMENT', body: 'Every lymphatic drainage journey begins with a professional consultation to assess suitability, health history, and individual concerns before treatment is recommended.' },
     { icon: W + '87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'LYMPHATIC FLOW & DETOX SUPPORT', body: 'Gentle, targeted lymphatic techniques are used to stimulate lymph flow, helping reduce fluid retention, support detoxification, and improve circulation in a controlled, therapeutic way.' },

@@ -5,9 +5,14 @@ import { useState } from 'react';
 const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
 const bodyFont = 'Roboto, sans-serif';
-const green = '#8EB093';
-const greenDark = '#5f7f6c';
-const taupe = '#9B8D83';
+// Bright sage #8EB093 fails as text on white (2.39:1). Use the accessible
+// --brand-green-text family value #4f7256 (5.42:1 on white) for all sage TEXT.
+const green = '#4f7256';
+// Deep sage #4f7256 for tag text/border (>=4.86:1 on the translucent tag fill).
+const greenDark = '#4f7256';
+// Taupe #9B8D83 fails (2.78-2.98:1) on the card's light gradient. Darkened taupe
+// #6f6456 clears AA (>=4.99:1) for title and Read more/less control.
+const taupe = '#6f6456';
 
 const cardCorners = {
   borderTopLeftRadius: '18px',
@@ -79,9 +84,9 @@ function EvidenceCard({ item }: { item: Item }) {
         <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
       </div>
       <div className="px-7 pt-6 pb-7">
-        <h2 className="text-center" style={{ color: taupe, fontFamily: wideFont, fontWeight: 400, fontSize: '24px', textTransform: 'lowercase', lineHeight: 1.3 }}>
+        <h3 className="text-center" style={{ color: taupe, fontFamily: wideFont, fontWeight: 400, fontSize: '24px', textTransform: 'lowercase', lineHeight: 1.3 }}>
           {item.title}
-        </h2>
+        </h3>
         <p className="mt-4 mb-2" style={{ color: '#1a1a1a', fontFamily: bodyFont, fontSize: '14px', fontWeight: 700 }}>WHAT IT DOES</p>
         <p style={{ color: '#333', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item.what}</p>
         {expanded && (
@@ -94,7 +99,7 @@ function EvidenceCard({ item }: { item: Item }) {
             ))}
             <div className="flex flex-wrap gap-2 mt-4">
               {item.tags.map((t) => (
-                <span key={t} style={{ backgroundColor: 'rgba(244,250,246,0.39)', color: greenDark, fontFamily: bodyFont, fontSize: '12px', border: '1px solid #8FB49A', borderRadius: '999px', padding: '6px 15px' }}>{t}</span>
+                <span key={t} style={{ backgroundColor: 'rgba(244,250,246,0.39)', color: greenDark, fontFamily: bodyFont, fontSize: '12px', border: '1px solid #4f7256', borderRadius: '999px', padding: '6px 15px' }}>{t}</span>
               ))}
             </div>
           </>
@@ -121,7 +126,7 @@ export default function EvidenceCards() {
         </p>
         <div className="mx-auto mb-4" style={{ width: '210px', height: '1px', backgroundColor: '#B9A99E' }} />
         <h2 className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-          Evidence based approach
+          The clinical evidence behind GLP-1 weight loss treatment
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
           {ITEMS.map((item) => (
@@ -133,8 +138,8 @@ export default function EvidenceCards() {
             href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block text-center font-bold text-white"
-            style={{ backgroundColor: '#6391AB', borderRadius: '10px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '12px 24px', width: '590px', maxWidth: '100%' }}
+            className="cta-glow inline-block text-center font-bold text-white"
+            style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '12px 24px', width: '590px', maxWidth: '100%' }}
           >
             Book your medical weight loss consultation
           </a>

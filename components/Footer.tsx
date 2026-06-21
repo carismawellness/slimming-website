@@ -1,7 +1,15 @@
 import Link from 'next/link';
 
-const GREEN = '#8EB093';
-const TAUPE = '#9B8D83';
+// Accessible brand tokens (see globals.css locked palette).
+// GREEN: sage text/icon/heading on near-white footer = 5.42:1 AA (was #8EB093 -> 2.33:1).
+// GREEN_FILL: solid sage for the bottom bar so #fff text clears 4.5:1 = 5.42:1 AA.
+// GREEN_DECO: bright brand sage kept ONLY for the decorative gradient wash + the
+//   1px divider rule (a graphical object, not text).
+// TAUPE: contact value text on near-white = 5.78:1 AA (was #9B8D83 -> 3.13:1).
+const GREEN = '#4F7256';
+const GREEN_FILL = '#4F7256';
+const GREEN_DECO = '#8EB093';
+const TAUPE = '#6F6456';
 
 function ContactRow({
   href,
@@ -27,7 +35,7 @@ function ContactRow({
         <span style={{ color: '#7A6F66', fontFamily: 'Roboto, sans-serif', fontSize: '16px', letterSpacing: '1px' }}>
           {label}
         </span>
-        <span className="transition group-hover:opacity-70" style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '16px', letterSpacing: '1px' }}>
+        <span className="transition group-hover:underline" style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '16px', letterSpacing: '1px' }}>
           {value}
         </span>
       </span>
@@ -37,7 +45,7 @@ function ContactRow({
 
 export default function Footer() {
   return (
-    <footer style={{ background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #8EB093 100%)' }}>
+    <footer style={{ background: `linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, ${GREEN_DECO} 100%)` }}>
       {/* Search Bar */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-12">
         <div className="relative">
@@ -45,8 +53,8 @@ export default function Footer() {
             type="text"
             placeholder="WHAT ARE YOU LOOKING FOR?"
             aria-label="Search"
-            className="w-full bg-white outline-none placeholder:text-[#8EB093]"
-            style={{ border: '1px solid #A9C6A2', borderRadius: '999px', padding: '16px 52px 16px 20px', color: GREEN, fontFamily: 'Roboto, sans-serif', fontSize: '13px', letterSpacing: '2px' }}
+            className="w-full bg-white placeholder:text-[#4F7256]"
+            style={{ border: '1px solid #4F7256', borderRadius: '999px', padding: '16px 52px 16px 20px', color: GREEN, fontFamily: 'Roboto, sans-serif', fontSize: '13px', letterSpacing: '2px' }}
           />
           <span className="absolute top-1/2 -translate-y-1/2" style={{ right: '18px', pointerEvents: 'none' }}>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -120,16 +128,16 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
         <div
           className="flex flex-col sm:flex-row justify-between items-center gap-3"
-          style={{ backgroundColor: GREEN, borderTopLeftRadius: '10px', borderTopRightRadius: '10px', padding: '18px 28px' }}
+          style={{ backgroundColor: GREEN_FILL, borderTopLeftRadius: '10px', borderTopRightRadius: '10px', padding: '18px 28px' }}
         >
           <p style={{ color: '#FFFFFF', fontFamily: 'Roboto, sans-serif', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             © - Carisma slimming All Rights reserved.
           </p>
           <div className="flex gap-8">
-            <Link href="/privacy-policy" className="transition hover:opacity-80" style={{ color: '#FFFFFF', fontFamily: 'Roboto, sans-serif', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <Link href="/privacy-policy" className="transition hover:underline focus-on-dark" style={{ color: '#FFFFFF', fontFamily: 'Roboto, sans-serif', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' }}>
               Privacy Policy
             </Link>
-            <Link href="/terms-conditions" className="transition hover:opacity-80" style={{ color: '#FFFFFF', fontFamily: 'Roboto, sans-serif', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <Link href="/terms-conditions" className="transition hover:underline focus-on-dark" style={{ color: '#FFFFFF', fontFamily: 'Roboto, sans-serif', fontSize: '11px', letterSpacing: '2px', textTransform: 'uppercase' }}>
               Terms &amp; Condition
             </Link>
           </div>

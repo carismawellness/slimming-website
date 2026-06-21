@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: "Your Quiz Results | Carisma Slimming",
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 /* ── Brand tokens ─────────────────────────────────────────────────────── */
@@ -194,7 +194,7 @@ export default function SlimmingQuizResultsPage({
             </p>
           )}
           <h1 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '32px', lineHeight: '1.3', color: taupe, textTransform: 'uppercase', marginBottom: '16px' }}>
-            Recommendations<br />Curated For You
+            Your Personalised Slimming Plan<br />Just For You
           </h1>
           <div style={{ width: '80px', height: '1px', backgroundColor: '#C9D8C1', margin: '0 auto 20px' }} />
           {(selectedGoals.length > 0 || selectedAreas.length > 0) && (
@@ -210,6 +210,9 @@ export default function SlimmingQuizResultsPage({
 
       {/* ── Recommendation cards ── */}
       <section style={{ maxWidth: '860px', margin: '0 auto', padding: '48px 24px 80px' }}>
+        <h2 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '24px', lineHeight: '1.3', color: taupe, textTransform: 'uppercase', textAlign: 'center', marginBottom: '32px' }}>
+          Recommended Slimming &amp; Body Treatments in Malta
+        </h2>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
           {items.map(({ id, matchedGoals, matchedAreas }) => {
             const t = TREATMENTS.find((x) => x.id === id);
@@ -241,9 +244,9 @@ export default function SlimmingQuizResultsPage({
                 {/* Content */}
                 <div style={{ padding: '28px 28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
                   <div>
-                    <h2 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '20px', color: taupe, textTransform: 'uppercase', marginBottom: '10px' }}>
+                    <h3 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '20px', color: taupe, textTransform: 'uppercase', marginBottom: '10px' }}>
                       {t.name}
-                    </h2>
+                    </h3>
                     <p style={{ fontFamily: bodyFont, fontSize: '14px', color: taupeLight, lineHeight: 1.6, marginBottom: '18px' }}>
                       {t.tagline}
                     </p>
@@ -292,7 +295,8 @@ export default function SlimmingQuizResultsPage({
           </p>
           <Link
             href="/consultation"
-            style={{ display: 'inline-block', padding: '15px 40px', backgroundColor: green, color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', borderRadius: '6px', textDecoration: 'none' }}
+            className="cta-glow"
+            style={{ display: 'inline-block', padding: '15px 40px', backgroundColor: green, color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', borderRadius: '999px', textDecoration: 'none' }}
           >
             Book a Free Consultation
           </Link>

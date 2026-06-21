@@ -7,7 +7,7 @@ export const antiCellulite: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/anti-cellulite',
 
   heroEyebrow: 'ADVANCED CELLULITE SMOOTHING',
-  heroTitle: 'cellulift & contour protocol',
+  heroTitle: 'anti-cellulite treatment in malta — cellulift protocol',
   heroSubheading: 'smooth stubborn cellulite and uneven texture with precision',
   heroDescription:
     'Our cellulite protocol combines three VelaShape vacuum roller sessions with one lymphatic drainage massage to elminate cellulite, uneven texture, and boost circulation:',
@@ -33,7 +33,7 @@ export const antiCellulite: PackageContent = {
   // live hero has no subheading line / divider between title and description
   hide: { heroSubheading: true },
 
-  secretHeading: ['the secret to a more defined,', 'confident look'],
+  secretHeading: ['how our anti-cellulite treatment', 'smooths dimpled skin'],
   secretSubheading: 'smooth stubborn cellulite and uneven texture with precision',
   secretImage: W + '87fc13_8e6b2be93835401caee6402885a0fb6c~mv2.jpg',
   secretIntro:
@@ -55,7 +55,7 @@ export const antiCellulite: PackageContent = {
   ],
 
   eligEyebrow: 'eligibility criteria',
-  eligHeading: 'selective by intention successful by design',
+  eligHeading: 'areas we treat for smoother, cellulite-free skin',
   eligImage: W + '87fc13_2b03ae3db08f45929726527724060704~mv2.jpg',
   eligIntro: 'Treat visible fat bulges in 3 areas of the body',
   areas: ['arms', 'BUTTOCKS AND UNDER-BUTT CREASE', 'THIGHS (FRONT, BACK, INNER AND OUTER)'],

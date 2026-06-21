@@ -70,9 +70,9 @@ export default function Error({
       >
         <button
           onClick={reset}
+          className="cta-glow"
           style={{
             display: 'inline-block',
-            backgroundColor: '#8EB093',
             color: '#FFFFFF',
             border: 'none',
             padding: '14px 32px',

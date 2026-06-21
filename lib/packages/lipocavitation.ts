@@ -7,7 +7,7 @@ export const lipocavitation: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/lipocavitation-malta',
 
   heroEyebrow: 'non-invasive fat contouring in maltA',
-  heroTitle: 'the contour starter pack',
+  heroTitle: 'lipocavitation in malta — ultrasound fat contouring',
   heroSubheading: 'stubborn fat, met its match',
   heroDescription:
     "For the belly that doesn't budge. The flanks that ignore every diet. The areas that have resisted everything until now. No surgery, no needles, no downtime.",
@@ -30,7 +30,7 @@ export const lipocavitation: PackageContent = {
   heroVideo: undefined,
   heroImageRatio: '398 / 682',
 
-  secretHeading: ['the secret to a more defined,', 'confident look'],
+  secretHeading: ['how ultrasound lipocavitation', 'breaks down resistant fat'],
   secretSubheading: 'some fat simply doesn’t respond to effort. that’s not a personal failing.',
   secretImage: W + 'f940f0_3959a9b1203c41b09ca238cd2c75ee35~mv2.png',
   secretIntro:
@@ -51,7 +51,7 @@ export const lipocavitation: PackageContent = {
   ],
 
   eligEyebrow: 'eligibility criteria',
-  eligHeading: 'target the areas that matter most to you',
+  eligHeading: 'body areas lipocavitation can target',
   eligImage: W + 'f940f0_4e251e5949424e95ab95d965c3b63716~mv2.png',
   eligIntro: 'Treat visible fat bulges in 7 areas of the body',
   areas: ['TUMMY / ABDOMEN', 'Back Fat & Bra Line', 'Flanks & Love Handles', 'hips', 'Buttocks & Banana Roll', 'THIGHS (FRONT, BACK, INNER AND OUTER)'],

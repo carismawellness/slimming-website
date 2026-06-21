@@ -33,10 +33,21 @@ import {
 import { testimonials as TESTIMONIALS, Testimonial } from '@/lib/packages/testimonials';
 
 /* ---------- palette / fonts (shared with the site) ---------- */
+/* GREEN stays the bright brand sage but is DECORATIVE ONLY (gradient fills,
+   image backings) — it is 2.39:1 on white and fails WCAG as text/UI border.
+   GREEN_TEXT is the locked accessible deep-sage (--brand-green-text family,
+   deepened to #456849 = 6.31:1 on white / >=4.5:1 on every panel here) used
+   for ALL sage TEXT, ICONS, LINKS, INPUT, HEADINGS and meaningful borders. */
 const GREEN = '#8EB093';
-const BLUE = '#6391AB';
-const TAUPE = '#9B8D83';
-const TAUPE_DK = '#7C7268';
+const GREEN_TEXT = '#456849';
+/* Taupe text darkened to the locked accessible value (5.78:1 on white,
+   >=4.5:1 on the #dfe8db sage price panels). One value replaces the old
+   #9B8D83 / #7C7268 / #AFA39D-as-text so every taupe string clears AA. */
+const TAUPE = '#6F6456';
+const TAUPE_DK = '#6F6456';
+/* TAUPE_LT keeps a lighter tone ONLY for decorative round bullet dots /
+   chevrons (non-informational graphics); all taupe-light *text* (fineprint)
+   is switched to TAUPE below. */
 const TAUPE_LT = '#AFA39D';
 
 const SERIF = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
@@ -75,20 +86,20 @@ function Eyebrow({ children, align = 'center', size = 15 }: { children: React.Re
 
 function SectionHeading({ children, align = 'center', size = 28 }: { children: React.ReactNode; align?: 'center' | 'left'; size?: number }) {
   return (
-    <h2 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: size, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
+    <h2 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: size, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
       {children}
     </h2>
   );
 }
 
-function CTA({ variant = 'blue', children = 'Claim your spot now', full = false, wide = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean; wide?: boolean }) {
-  const isGreen = variant === 'green';
+function CTA({ children = 'Claim your spot now', full = false, wide = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean; wide?: boolean }) {
   return (
     <a
       href={BOOKING_URL}
       target="_blank"
       rel="noopener noreferrer"
-      style={{ display: full ? 'block' : 'inline-block', backgroundColor: isGreen ? GREEN : BLUE, color: '#fff', fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', textAlign: 'center', textDecoration: 'none', padding: wide ? '15px 70px' : '15px 38px', borderRadius: isGreen ? 5 : 10 }}
+      className="cta-glow"
+      style={{ display: full ? 'block' : 'inline-block', color: '#fff', fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '1.4px', textTransform: 'uppercase', textAlign: 'center', textDecoration: 'none', padding: wide ? '15px 70px' : '15px 38px' }}
     >
       {children}
     </a>
@@ -135,7 +146,7 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
         // eslint-disable-next-line @next/next/no-img-element
         <img src={GOOGLE} alt="Google" style={{ width: size + 1, height: size + 1 }} />
       )}
-      <span style={{ color: GREEN, fontSize: size, letterSpacing: 2, lineHeight: 1 }}>{'★'.repeat(5)}</span>
+      <span style={{ color: GREEN_TEXT, fontSize: size, letterSpacing: 2, lineHeight: 1 }} role="img" aria-label="5 out of 5 stars">{'★'.repeat(5)}</span>
       <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14 }}>Over 200+ Reviews</span>
     </span>
   );
@@ -154,16 +165,16 @@ function TestimonialCard({ t }: { t: Testimonial }) {
       <div style={{ background: 'linear-gradient(178deg, #F8F6F2 42%, #C9D8C1 100%)', borderRadius: 16, padding: '15px', paddingTop: 70, marginTop: -91 }}>
         <p
           style={{
-            color: '#9B8C81', fontFamily: BODY, fontSize: 14, lineHeight: 1.5, margin: '0 0 5px',
+            color: '#655B4E', fontFamily: BODY, fontSize: 14, lineHeight: 1.5, margin: '0 0 5px',
             ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }),
           }}
         >
           {t.quote}
         </p>
-        <button type="button" onClick={() => setExpanded((v) => !v)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 14, textDecoration: 'underline', color: '#9B8C81', fontFamily: BODY }}>
+        <button type="button" onClick={() => setExpanded((v) => !v)} style={{ background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontSize: 14, textDecoration: 'underline', color: '#655B4E', fontFamily: BODY }}>
           {expanded ? 'Read less' : 'Read more'}
         </button>
-        <h3 style={{ fontSize: 16, fontWeight: 500, color: '#9B8C81', margin: '24px 0 5px', fontFamily: BODY }}>{t.name}</h3>
+        <h3 style={{ fontSize: 16, fontWeight: 500, color: '#655B4E', margin: '24px 0 5px', fontFamily: BODY }}>{t.name}</h3>
       </div>
     </div>
   );
@@ -181,7 +192,7 @@ function TestimonialCarousel({ items }: { items: Testimonial[] }) {
     const id = setInterval(() => setStart((s) => (s + 1) % n), 3000);
     return () => clearInterval(id);
   }, [paused, n]);
-  const arrow: React.CSSProperties = { position: 'absolute', top: '38%', transform: 'translateY(-50%)', width: 36, height: 36, borderRadius: '50%', border: 'none', cursor: 'pointer', background: 'rgba(0,0,0,0)', color: GREEN, fontSize: 24, lineHeight: 1, zIndex: 2 };
+  const arrow: React.CSSProperties = { position: 'absolute', top: '38%', transform: 'translateY(-50%)', width: 36, height: 36, borderRadius: '50%', border: 'none', cursor: 'pointer', background: 'rgba(0,0,0,0)', color: GREEN_TEXT, fontSize: 24, lineHeight: 1, zIndex: 2 };
   return (
     <div style={{ position: 'relative', padding: '0 36px', marginTop: 36 }} onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       <button type="button" aria-label="Previous" onClick={() => setStart((start - 1 + n) % n)} style={{ ...arrow, left: 0 }}>&#8592;</button>
@@ -233,7 +244,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           <div style={{ display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 48, alignItems: 'center' }} className="fr-hero-grid">
             <div>
               <Eyebrow align="left" size={13}>{c.heroEyebrow}</Eyebrow>
-              <h1 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 28, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', margin: '12px 0 0' }}>
+              <h1 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 28, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', margin: '12px 0 0' }}>
                 {c.heroTitle}
               </h1>
               {!hidden.heroSubheading && (
@@ -265,7 +276,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
                 {c.heroFineprint.map((f) => (
-                  <p key={f} style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0, maxWidth: 460 }}>{f}</p>
+                  <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0, maxWidth: 460 }}>{f}</p>
                 ))}
               </div>
             </div>
@@ -281,7 +292,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     onClick={toggleHeroSound}
                     aria-label={heroMuted ? 'Unmute video' : 'Mute video'}
                     title={heroMuted ? 'Tap to hear the doctor' : 'Mute'}
-                    style={{ position: 'absolute', bottom: 12, right: 12, width: 42, height: 42, borderRadius: '50%', border: 'none', cursor: 'pointer', backgroundColor: 'rgba(40,44,40,0.55)', backdropFilter: 'blur(2px)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', padding: 0 }}
+                    style={{ position: 'absolute', bottom: 12, right: 12, width: 42, height: 42, borderRadius: '50%', border: 'none', cursor: 'pointer', backgroundColor: 'rgba(40,44,40,0.66)', backdropFilter: 'blur(2px)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', padding: 0 }}
                   >
                     {heroMuted ? (
                       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -343,7 +354,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 <p style={{ ...body, marginBottom: c.secretClosing2 ? 18 : 24 }}>{c.secretClosingBold && c.secretClosing.includes(c.secretClosingBold) ? (<>{c.secretClosing.slice(0, c.secretClosing.indexOf(c.secretClosingBold))}<strong>{c.secretClosingBold}</strong>{c.secretClosing.slice(c.secretClosing.indexOf(c.secretClosingBold) + c.secretClosingBold.length)}</>) : c.secretClosing}</p>
                 {c.secretClosing2 && (
                   <p style={{ ...body, marginBottom: 24 }}>
-                    {c.secretClosing2.lead && <span style={{ color: GREEN, fontWeight: 700 }}>{c.secretClosing2.lead} </span>}
+                    {c.secretClosing2.lead && <span style={{ color: GREEN_TEXT, fontWeight: 700 }}>{c.secretClosing2.lead} </span>}
                     {c.secretClosing2.text}
                   </p>
                 )}
@@ -487,7 +498,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         <img src={DIFF_BG} alt="" aria-hidden style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.5, pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ ...CONTAINER, position: 'relative', zIndex: 1 }}>
           <Eyebrow>the carisma difference</Eyebrow>
-          <div style={{ marginTop: 10 }}><SectionHeading>we are not<br />another diet clinic.</SectionHeading></div>
+          <div style={{ marginTop: 10 }}><SectionHeading>We Are Not Another Diet Clinic —<br />Malta&rsquo;s Doctor-Led Body Transformation Programme</SectionHeading></div>
           <p style={{ ...body, textAlign: 'center', maxWidth: 720, margin: '18px auto 0' }}>{SHARED_DIFFERENCE_INTRO}</p>
 
           <div style={{ marginTop: 36, marginLeft: 'auto', marginRight: 'auto', maxWidth: 560, background: 'linear-gradient(150deg, #eef2ec 0%, #e0e8df 100%)', borderRadius: 18, padding: '34px 36px' }}>
@@ -570,7 +581,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 /* live anti-cellulite + skin-tightening header: green serif title | vertical rule | plain bold taupe tag,
                    1px rgba(142,176,147,0.62) hairline below (measured on both live pages) */
                 <div style={{ borderBottom: '1px solid rgba(142,176,147,0.62)', paddingBottom: 14, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
-                  <p style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 18, letterSpacing: 'normal', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
+                  <p style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 18, letterSpacing: 'normal', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
                   {c.ptCardTag && (
                     <>
                       <span style={{ width: 1, alignSelf: 'stretch', backgroundColor: '#d9d2ca' }} aria-hidden />
@@ -581,7 +592,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               ) : (
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 14, flexWrap: 'wrap' }}>
                   <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
-                  {c.ptCardTag && <span style={{ color: GREEN, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN}`, borderRadius: 20, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>}
+                  {c.ptCardTag && <span style={{ color: GREEN_TEXT, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN_TEXT}`, borderRadius: 20, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>}
                 </div>
               )}
               {c.ptParas.map((p, i) => (<p key={p} style={{ ...body, marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>))}
@@ -618,7 +629,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     <img src={m.icon} alt="" style={{ width: 24, height: 24, objectFit: 'contain' }} />
                   </span>
                   <div>
-                    <p style={{ color: GREEN, fontFamily: WIDE, fontWeight: 700, fontSize: 13, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '4px 0 6px' }}>{m.title}</p>
+                    <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 13, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '4px 0 6px' }}>{m.title}</p>
                     <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.55, margin: 0 }}>{m.body}</p>
                   </div>
                 </div>
@@ -635,11 +646,11 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               </ul>
               {/* live price box: sage at the top fading to cream, green label, larger taupe price */}
               <div style={{ background: 'linear-gradient(150deg, #dfe8db 0%, #eef2ea 100%)', borderRadius: 12, padding: '18px 20px' }}>
-                <p style={{ color: GREEN, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px' }}>
+                <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px' }}>
                   TOTAL VALUE: {c.dualTotalValue} TODAY: <span style={{ color: TAUPE, fontSize: 18 }}>{c.dualTodayPrice}</span>
                 </p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 16 }}>
-                  {c.dualFineprint.map((f) => (<p key={f} style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0 }}>{f}</p>))}
+                  {c.dualFineprint.map((f) => (<p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0 }}>{f}</p>))}
                 </div>
                 <div style={{ marginBottom: 14 }}><CTA variant="blue" full>{c.dualCtaLabel ?? 'Claim your spot now'}</CTA></div>
                 <Stars withGoogle />
@@ -677,7 +688,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 ))}
               </ul>
               <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 16px' }}>
-                TOTAL VALUE: {c.offer.totalValue} TODAY: <span style={{ color: GREEN }}>{c.offer.todayPrice}</span>
+                TOTAL VALUE: {c.offer.totalValue} TODAY: <span style={{ color: GREEN_TEXT }}>{c.offer.todayPrice}</span>
               </p>
               <div style={{ marginBottom: 14 }}><CTA variant="blue" full>{c.offer.buttonLabel}</CTA></div>
               <Stars withGoogle />
@@ -698,15 +709,15 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           <div style={{ position: 'relative', zIndex: 1 }}>
             <Eyebrow>the carisma difference</Eyebrow>
             <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
-            <SectionHeading>malta&rsquo;s #1 leading wellness chain</SectionHeading>
+            <SectionHeading>Malta&rsquo;s #1 Voted Slimming &amp; Wellness Clinic</SectionHeading>
 
             <div style={{ display: 'grid', gridTemplateColumns: hidden.map ? '1fr' : '1fr 1fr', gap: 48, marginTop: 40, alignItems: 'start' }} className="fr-2col">
               <div>
-                <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>our commitment</h3>
+                <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>Our Commitment to Your Results</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 30px', display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {commitment.map((x) => (<li key={x} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}><span style={{ color: TAUPE_LT }}>&bull;</span><span>{x}</span></li>))}
                 </ul>
-                <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>why malta chooses carisma</h3>
+                <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>Why Women in Malta Choose Carisma</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {whyMalta.map((x) => (<li key={x} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}><span style={{ color: TAUPE_LT }}>&bull;</span><span>{x}</span></li>))}
                 </ul>
@@ -736,7 +747,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         <div style={{ ...CONTAINER, maxWidth: 960 }}>
           {/* live Wix FAQ widget: heading left-of-center + underlined search field on the right */}
           <div className="fr-faqrow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
-            <SectionHeading size={28}>Frequently asked questions</SectionHeading>
+            <SectionHeading size={28}>Frequently Asked Questions</SectionHeading>
             <span style={{ position: 'relative', display: 'inline-flex', alignItems: 'center', width: 256, borderBottom: '1px solid #d9d2ca' }}>
               <input
                 type="text"
@@ -745,9 +756,9 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 placeholder="Looking for something?"
                 aria-label="Search frequently asked questions"
                 className="fr-faqsearch"
-                style={{ width: '100%', border: 'none', outline: 'none', background: 'none', color: GREEN, fontFamily: BODY, fontSize: 16, padding: '8px 30px 8px 2px' }}
+                style={{ width: '100%', border: 'none', background: 'none', color: GREEN_TEXT, fontFamily: BODY, fontSize: 16, padding: '8px 30px 8px 2px' }}
               />
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke={GREEN} strokeWidth="2" strokeLinecap="round" aria-hidden style={{ position: 'absolute', right: 4 }}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke={GREEN_TEXT} strokeWidth="2" strokeLinecap="round" aria-hidden style={{ position: 'absolute', right: 4 }}>
                 <circle cx="11" cy="11" r="7" /><line x1="16.5" y1="16.5" x2="21" y2="21" />
               </svg>
             </span>
@@ -758,7 +769,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               return (
                 <div key={f.q} style={{ borderBottom: '1px solid #e6e1da', marginBottom: 24 }}>
                   <button onClick={() => setOpenFaq(open ? null : i)} style={{ width: '100%', background: 'none', border: 'none', cursor: 'pointer', padding: '26px 4px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 16, textAlign: 'left' }}>
-                    <span style={{ color: GREEN, fontFamily: WIDE, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>{f.q}</span>
+                    <span style={{ color: GREEN_TEXT, fontFamily: WIDE, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>{f.q}</span>
                     <span style={{ color: TAUPE_LT, fontSize: 18, flexShrink: 0, transform: open ? 'rotate(180deg)' : 'none', transition: 'transform .2s' }}>&#8964;</span>
                   </button>
                   {open && (
@@ -785,7 +796,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         <div style={{ ...CONTAINER, maxWidth: 1100 }}>
           <Eyebrow>{c.evidenceEyebrow}</Eyebrow>
           <div style={{ width: 320, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 0' }} />
-          <div style={{ marginTop: 14 }}><SectionHeading size={24}>evidence based approach</SectionHeading></div>
+          <div style={{ marginTop: 14 }}><SectionHeading size={24}>Evidence-Based Clinical Approach</SectionHeading></div>
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, marginTop: 40 }} className="fr-evgrid">
             {c.evidence.map((e, i) => {
@@ -795,15 +806,15 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 <div key={e.title} style={{ position: 'relative', paddingTop: 16, gridColumn: centerLast ? '1 / -1' : 'auto', maxWidth: centerLast ? 560 : undefined, justifySelf: centerLast ? 'center' : 'stretch', width: centerLast ? '100%' : undefined }}>
                   {/* petal-shaped, green-bordered image poking above the card, with overlapping tag pill */}
                   <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
-                    <div style={{ border: `2px solid ${GREEN}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: GREEN }}>
+                    <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: GREEN }}>
                       {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img src={e.img} alt="" style={{ width: '100%', height: 186, objectFit: 'cover', display: 'block' }} />
                     </div>
-                    <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 30, border: `2px solid ${GREEN}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
+                    <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 30, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                   </div>
                   {/* gradient card sitting behind the lower part of the image */}
                   <div style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, rgba(142,176,147,0.4) 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
-                    <h3 style={{ color: GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', whiteSpace: 'pre-line', margin: 0 }}>{e.title}</h3>
+                    <h3 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', whiteSpace: 'pre-line', margin: 0 }}>{e.title}</h3>
                     <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
                     <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>What it does</p>
                     <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.6, margin: '0 0 6px', ...(open ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>{e.does}</p>
@@ -813,7 +824,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                         <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
                           {e.results.map((r) => (<li key={r} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}><span style={{ color: TAUPE_LT }}>&bull;</span><span style={{ ...body, fontSize: 13.5 }}>{r}</span></li>))}
                         </ul>
-                        {e.foot && <p style={{ color: TAUPE_LT, fontFamily: BODY, fontSize: 12.5, lineHeight: 1.6, margin: 0 }}>{e.foot}</p>}
+                        {e.foot && <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 12.5, lineHeight: 1.6, margin: 0 }}>{e.foot}</p>}
                       </>
                     )}
                     <button onClick={() => setOpenEv(open ? null : i)} style={{ marginTop: open ? 14 : 8, background: 'none', border: 'none', cursor: 'pointer', color: TAUPE, fontFamily: BODY, fontSize: 15, fontStyle: 'italic', textDecoration: 'underline', padding: 0, display: 'block' }}>{open ? 'Read less' : 'Read more'}</button>
@@ -829,7 +840,8 @@ export default function PackagePage({ content: c }: { content: PackageContent })
       )}
 
       <style>{`
-        .fr-faqsearch::placeholder { color: ${GREEN}; opacity: 1; }
+        .fr-faqsearch::placeholder { color: ${GREEN_TEXT}; opacity: 1; }
+        .fr-faqsearch:focus-visible { outline: 3px solid ${GREEN_TEXT}; outline-offset: 2px; }
         @media (max-width: 860px) {
           .fr-hero-grid, .fr-2col, .fr-benefits, .fr-evgrid { grid-template-columns: 1fr !important; }
           .fr-evgrid > div { grid-column: auto !important; }

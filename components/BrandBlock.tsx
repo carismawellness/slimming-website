@@ -1,8 +1,10 @@
 'use client';
 import { useRef, useEffect, useState } from 'react';
 
-const GREEN = '#8EB093';
-const TAUPE = '#9B8D83';
+// Accessible brand tokens (WCAG AA). Bright brand sage #8EB093 and taupe #9B8D83
+// fail as text on white/near-white, so text/heading uses darkened same-family values.
+const GREEN = '#4f7256'; // --brand-green-text: deep sage for sage TEXT/headings on white (5.42:1)
+const TAUPE = '#6f6456'; // darkened taupe for muted text on white/near-white (5.78:1)
 const FRESHA = 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=4994308&oiid=sv%3A25969858&share=true&pId=2708191';
 
 const DOCTORS = [
@@ -32,7 +34,7 @@ const BRANDS = [
     img: '/wix/87fc13_a62cc8038b274204a2fe70fd3d4879d0~mv2.png',
     logo: '/wix/87fc13_e2e5f077c0024cbc9a3d975e4a009b7e~mv2.png',
     cta: 'DISCOVER OUR SPAS',
-    btnColor: '#B79E61',
+    btnColor: '#8c6d18', // deep gold (--primary-gold-text family) — white text 4.87:1 AA (was #B79E61, 2.60:1 fail)
     reviews: false,
   },
   {
@@ -40,7 +42,7 @@ const BRANDS = [
     img: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.png',
     logo: '/wix/87fc13_b5a7ec4b11f445b4879c36d7268ba6d1~mv2.png',
     cta: 'DISCOVER MED-AESTHETICS',
-    btnColor: '#96B2B2',
+    btnColor: '#2f5d5d', // deep teal (Aesthetics family) — white text 7.38:1 AAA (was #96B2B2, 2.26:1 fail)
     reviews: true,
   },
 ];
@@ -81,8 +83,8 @@ export default function BrandBlock() {
             );
             const text = (
               <div key="text" className="md:w-1/2 flex flex-col justify-center">
-                <h3 className="mb-4 pb-3" style={{ color: '#7ba587', fontFamily: 'Trajan Pro, serif', fontSize: '28px', fontWeight: 400, letterSpacing: '1px', textTransform: 'uppercase', borderBottom: '1px solid #A9C6A2' }}>{doc.name}</h3>
-                <p style={{ color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: 1.75 }}>{doc.bio}</p>
+                <h3 className="mb-4 pb-3" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontSize: '28px', fontWeight: 400, letterSpacing: '1px', textTransform: 'uppercase', borderBottom: '1px solid #A9C6A2' }}>{doc.name}</h3>
+                <p style={{ color: '#333333', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: 1.75 }}>{doc.bio}</p>
               </div>
             );
             return (
@@ -118,7 +120,7 @@ export default function BrandBlock() {
                 YOUR BIBLE TO SUSTAINABLE WEIGHT LOSS MANAGEMENT
               </h2>
               <div style={{ border: '1px solid #E6E1DC', borderRadius: '4px', padding: '20px 24px' }}>
-                <p style={{ color: '#AFA39D', fontFamily: 'Roboto, sans-serif', fontSize: '12px', lineHeight: 1.7 }}>
+                <p style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '12px', lineHeight: 1.7 }}>
                   Weight loss is often treated as a test of discipline, but discipline rarely holds under stress, busy schedules, or decision fatigue. The Carisma Slimming Guide was created to address what happens after people try, when rigid rules stop working. It presents weight loss management as a structured meal plan system shaped by appetite physiology, behaviour, and real life. The guide covers when to eat, what to eat, how much to eat, and in which order: a practical framework you can return to on busy or low-energy days. Built from clinical experience at our slimming clinic in Malta, it helps you lose weight with consistency, not perfection.
                 </p>
               </div>

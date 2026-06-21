@@ -1,15 +1,21 @@
 'use client';
 
 import { useState } from 'react';
+import JsonLd from '@/components/JsonLd';
 
 const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
 const bodyFont = 'Roboto, sans-serif';
-const green = '#8EB093';
-const taupe = '#9B8D83';
-const taupeLight = '#AFA39D';
+// Accessible brand-family colors (WCAG AA on white).
+// --brand-green-text: deep sage for sage TEXT/ICONS on white (5.42:1).
+const green = '#4f7256';
+// TAUPE: darkened taupe for body/input text and form borders/icons (5.78:1).
+const taupe = '#6f6456';
+const taupeLight = '#6f6456';
 
-const FAQS: { q: string; a: string }[] = [
+// Exported so the GLP-1 page can build matching FAQPage JSON-LD (Google requires
+// structured FAQ data to mirror the visible Q&A).
+export const FAQS: { q: string; a: string }[] = [
   { q: "What is medical weight loss and how does it work?", a: "Medical weight loss is a doctor-supervised approach to losing weight that addresses the biological, behavioural, and lifestyle factors behind weight gain. At Carisma Slimming in Malta, our program begins with a full medical assessment including blood tests, body composition analysis, and health screening. Based on your results, your doctor creates a personalised plan that may include Ozempic (semaglutide) or Mounjaro (tirzepatide) prescription support, structured nutrition, movement guidance, and weekly monitoring. Unlike fad diets, medical weight loss treats the root causes — appetite regulation, metabolic health, and sustainable habits." },
   { q: "How much does medical weight loss cost in Malta?", a: "The cost of medical weight loss at Carisma Slimming depends on your individual program, which is determined during your consultation. Your doctor will assess your health, goals, and the level of support you need — then provide clear, transparent pricing before you commit to anything. There are no hidden fees. The Ozempic price in Malta and Mounjaro price in Malta vary depending on the prescribed dose and treatment duration — your doctor will discuss medication costs separately if GLP-1 is recommended. Book a medical weight loss consultation at our St Julian's clinic for a personalised quote." },
   { q: "What is included in the medical weight loss program?", a: "Our program includes a full medical consultation, eligibility assessment, personalised treatment planning, and ongoing doctor monitoring. If suitable, Ozempic or Mounjaro prescription support is recommended as part of a wider plan that includes nutrition guidance, body composition analysis, movement programming, weekly check-ins, and a defined maintenance strategy. Everything is delivered under one roof at our weight loss clinic in Malta." },
@@ -31,12 +37,24 @@ export default function FAQAccordion() {
   const [query, setQuery] = useState('');
   const visible = FAQS.map((f, i) => ({ f, i })).filter(({ f }) => f.q.toLowerCase().includes(query.trim().toLowerCase()));
 
+  const faqSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: FAQS.map((f) => ({
+      '@type': 'Question',
+      name: f.q,
+      acceptedAnswer: { '@type': 'Answer', text: f.a },
+    })),
+  };
+
   return (
+    <>
+    <JsonLd data={faqSchema} />
     <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative mb-10">
           <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '22px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            Frequently asked questions
+            Frequently asked questions about GLP-1 weight loss in Malta
           </h2>
           <div className="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 mx-auto" style={{ maxWidth: '300px' }}>
             <div className="flex items-center gap-2" style={{ borderBottom: `1px solid ${taupeLight}`, paddingBottom: '6px' }}>
@@ -45,7 +63,7 @@ export default function FAQAccordion() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Looking for something?"
-                className="w-full bg-transparent outline-none"
+                className="w-full bg-transparent"
                 style={{ color: taupe, fontFamily: bodyFont, fontSize: '15px' }}
               />
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={taupeLight} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
@@ -68,9 +86,9 @@ export default function FAQAccordion() {
                   style={{ padding: '22px 4px', cursor: 'pointer', background: 'transparent' }}
                   aria-expanded={isOpen}
                 >
-                  <span style={{ color: green, fontFamily: bodyFont, fontSize: '15px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+                  <h3 style={{ color: green, fontFamily: bodyFont, fontSize: '15px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4, margin: 0 }}>
                     {i + 1}. {f.q}
-                  </span>
+                  </h3>
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
@@ -89,5 +107,6 @@ export default function FAQAccordion() {
         </div>
       </div>
     </section>
+    </>
   );
 }

@@ -12,7 +12,7 @@ export default function HeroSection() {
             <p className="text-xl mb-4">
               Achieve up to 1kg a week with our comprehensive medical program
             </p>
-            <p className="text-lg text-blue-100 mb-8">
+            <p className="text-lg text-blue-50 mb-8">
               Combining medical assessment, personalized nutrition, exercise, and non-invasive body contouring treatments
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
@@ -30,7 +30,7 @@ export default function HeroSection() {
               </a>
             </div>
           </div>
-          <div className="bg-blue-500 rounded-lg h-96 flex items-center justify-center">
+          <div className="bg-blue-700 rounded-lg h-96 flex items-center justify-center">
             <p className="text-white text-center">Hero Image Placeholder</p>
           </div>
         </div>

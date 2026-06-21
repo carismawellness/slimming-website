@@ -3,14 +3,35 @@ import Link from 'next/link';
 import HeroVideo from '@/components/HeroVideo';
 import ResultsCarousel from '@/components/ResultsCarousel';
 import HowItWorks from '@/components/HowItWorks';
-import FAQAccordion from '@/components/FAQAccordion';
+import FAQAccordion, { FAQS } from '@/components/FAQAccordion';
 import EvidenceCards from '@/components/EvidenceCards';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import {
+  SITE_URL,
+  breadcrumbList,
+  faqPage,
+  medicalWebPage,
+} from '@/lib/seo/schema';
 
 export const metadata: Metadata = {
-  title: "GLP-1 Weight Loss Injections Malta | Ozempic & Mounjaro | Carisma Slimming",
+  title: "GLP-1 Weight Loss Injections Malta | Carisma Slimming",
   description: "Medically prescribed GLP-1 injections in Malta including Ozempic and Mounjaro. Supervised weight loss of up to 1kg per week with our qualified doctors.",
   alternates: { canonical: 'https://www.carismaslimming.com/glp1' },
 };
+
+const jsonLd = [
+  breadcrumbList([
+    { name: 'Home', url: `${SITE_URL}/` },
+    { name: 'GLP-1 Weight Loss Injections', url: `${SITE_URL}/glp1` },
+  ]),
+  medicalWebPage({
+    name: 'GLP-1 Weight Loss Injections Malta — Ozempic & Mounjaro',
+    description:
+      'Medically prescribed GLP-1 injections in Malta including Ozempic and Mounjaro, supervised by qualified doctors as part of a structured weight loss programme.',
+    url: `${SITE_URL}/glp1`,
+  }),
+  faqPage(FAQS),
+];
 
 export default function GLP1Page() {
   const addresses = [
@@ -67,51 +88,54 @@ export default function GLP1Page() {
 
   return (
     <main className="w-full" style={{ backgroundColor: '#ffffff' }}>
+      <JsonLd data={jsonLd} />
       {/* Hero Section */}
       <section className="py-12 mx-auto" style={{ backgroundImage: 'url(/wix/87fc13_f0e92ac188af4582a4dcab0d17d5d2ed~mv2.png)', backgroundSize: '100% 100%', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', borderRadius: '40px', overflow: 'hidden', maxWidth: '1340px', marginTop: '12px', marginBottom: '20px' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1240px' }}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <div style={{ maxWidth: '510px' }}>
+            {/* Scrim: 0.80-alpha white backdrop guarantees >=4.5:1 for taupe/green text over the
+                hero background image (worst-case sampled backdrop rgb(136,143,132) -> taupe 4.70:1). */}
+            <div style={{ maxWidth: '510px', backgroundColor: 'rgba(255,255,255,0.80)', borderRadius: '24px', padding: '20px 24px', backdropFilter: 'blur(2px)' }}>
               <p
                 className="mb-3 uppercase tracking-wide"
-                style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '14px', fontWeight: 500 }}
+                style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 500 }}
               >
                 ultimate weight loss protocol in malta
               </p>
               <h1
                 className="mb-6 uppercase leading-tight"
-                style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', maxWidth: '400px' }}
+                style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', maxWidth: '400px' }}
               >
-                doctor-led medical weight loss in malta
+                GLP-1 weight loss injections in Malta &mdash; doctor-led Ozempic &amp; Mounjaro programme
               </h1>
-              <p className="mb-4" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.7' }}>
+              <p className="mb-4" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.7' }}>
                 Struggling with constant hunger, stalled progress, and weight that keeps coming back?
               </p>
-              <p className="mb-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.7' }}>
+              <p className="mb-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.7' }}>
                 Our programs combine full medical assessment, personalised nutrition, body composition
                 tracking, and ongoing doctor supervision with <strong style={{ fontWeight: 700 }}>Ozempic</strong> and <strong style={{ fontWeight: 700 }}>Mounjaro</strong> prescription support
                 where clinically appropriate, to help you lose fat safely and keep it off.
               </p>
 
               <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
-                  <span style={{ color: '#8EB093', fontWeight: 700 }}>✓</span>
+                <li className="flex items-start gap-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
+                  <span style={{ color: '#4f7256', fontWeight: 700 }}>✓</span>
                   <span>
-                    <strong style={{ color: '#9B8D83' }}>Calmer appetite:</strong> GLP-1 support mimics natural
+                    <strong style={{ color: '#6f6456' }}>Calmer appetite:</strong> GLP-1 support mimics natural
                     fullness signals so you feel satisfied with smaller portions and less food noise
                   </span>
                 </li>
-                <li className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
-                  <span style={{ color: '#8EB093', fontWeight: 700 }}>✓</span>
+                <li className="flex items-start gap-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
+                  <span style={{ color: '#4f7256', fontWeight: 700 }}>✓</span>
                   <span>
-                    <strong style={{ color: '#9B8D83' }}>Doctor monitored:</strong> Full medical assessment, body
+                    <strong style={{ color: '#6f6456' }}>Doctor monitored:</strong> Full medical assessment, body
                     scan, blood tests, safety screening, and regular reviews to adjust your plan
                   </span>
                 </li>
-                <li className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
-                  <span style={{ color: '#8EB093', fontWeight: 700 }}>✓</span>
+                <li className="flex items-start gap-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
+                  <span style={{ color: '#4f7256', fontWeight: 700 }}>✓</span>
                   <span>
-                    <strong style={{ color: '#9B8D83' }}>Part of a full plan:</strong> Never Ozempic or Mounjaro
+                    <strong style={{ color: '#6f6456' }}>Part of a full plan:</strong> Never Ozempic or Mounjaro
                     alone, your plan includes nutrition structure, movement guidance, accountability, and a
                     maintenance strategy
                   </span>
@@ -126,8 +150,8 @@ export default function GLP1Page() {
 
               <Link
                 href="/consultation"
-                className="block uppercase tracking-wide text-white font-bold text-center"
-                style={{ backgroundColor: '#8EB093', borderRadius: '5px', padding: '14px 20px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', width: '507px', maxWidth: '100%' }}
+                className="cta-glow block uppercase tracking-wide text-white font-bold text-center"
+                style={{ padding: '14px 20px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', width: '507px', maxWidth: '100%' }}
               >
                 book your medical weight loss consultation
               </Link>
@@ -138,11 +162,11 @@ export default function GLP1Page() {
                 {[0, 1, 2, 3, 4].map((i) => (
                   <img key={i} src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png" alt="" style={{ width: '23px', height: '20px', objectFit: 'contain' }} />
                 ))}
-                <span className="ml-2" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
+                <span className="ml-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
               </div>
 
               {/* Disclaimer */}
-              <p className="mt-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '12px', lineHeight: 1.6, maxWidth: '507px' }}>
+              <p className="mt-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '12px', lineHeight: 1.6, maxWidth: '507px' }}>
                 * Eligibility and exact costs depend on your health, lab results, and the support you need. You will always receive a clear plan and pricing in your medical weight loss consultation before starting. <strong style={{ fontWeight: 700 }}>Important:</strong> GLP-1 medications are prescription-only and not suitable for everyone. This program is offered only after a full medical assessment by our doctor.
               </p>
             </div>
@@ -167,50 +191,50 @@ export default function GLP1Page() {
       {/* What is Medical Weight Loss */}
       <section className="py-16">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#AFA39D', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             What is medical weight loss?
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.3 }}>
-            Clarity before you start.<br />What does medical weight loss really mean?
+          <h2 className="text-center" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.3 }}>
+            What is medical weight loss?<br />How GLP-1 treatment works in practice
           </h2>
-          <p className="mt-8 mb-6" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
+          <p className="mt-8 mb-6" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
             Medical weight loss is a doctor-supervised approach to losing weight that goes beyond diets and willpower. At our weight loss clinic in Malta, it means a full medical assessment, personalised nutrition planning, body composition monitoring, and, where clinically appropriate, GLP-1 prescription support to regulate appetite and reduce cravings.
           </p>
-          <p className="mb-12" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
+          <p className="mb-12" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
             Our doctors prescribe Ozempic (semaglutide) and Mounjaro (tirzepatide) for weight loss as part of a structured programme, not as a standalone prescription. This approach works because it treats the biological, behavioural, and lifestyle factors that make losing weight difficult.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
             <div className="px-2">
-              <h3 className="mb-6" style={{ color: '#7ba587', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <h3 className="mb-6" style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 What a medical weight loss program addresses
               </h3>
               <ul className="space-y-4">
                 {addresses.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8EB093" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><polyline points="20 6 9 17 4 12" /></svg>
-                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f7256" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><polyline points="20 6 9 17 4 12" /></svg>
+                    <span style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div className="px-2">
-              <h3 className="mb-6" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <h3 className="mb-6" style={{ color: '#6f6456', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 What medication alone cannot do:
               </h3>
               <ul className="space-y-4">
                 {cannotDo.map((item, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#AEC1A6" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f7256" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+                    <span style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
 
-          <p className="mt-12 text-center mx-auto" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, maxWidth: '720px' }}>
+          <p className="mt-12 text-center mx-auto" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, maxWidth: '720px' }}>
             That is why our program in Malta combines Ozempic or Mounjaro support (if clinically appropriate) with nutrition structure, strength training guidance, weekly tracking, and a defined maintenance plan.
           </p>
         </div>
@@ -222,9 +246,9 @@ export default function GLP1Page() {
         <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-12 pb-8" style={{ maxWidth: '1100px', background: 'linear-gradient(180deg, #D7E2D8 0%, #FBFBF9 38%, #FFFFFF 50%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px' }}>
           <h2
             className="text-center mb-12 uppercase"
-            style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
+            style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
           >
-            we don&apos;t sell weight loss.<br />we build sustainability.
+            Ozempic &amp; Mounjaro alone are not enough.<br />We build sustainable weight loss.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
@@ -234,7 +258,7 @@ export default function GLP1Page() {
               <img src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png" alt="Patient consultation during medical weight loss program" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div>
-              <p className="mb-6" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
+              <p className="mb-6" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
                 Weight gain is not a failure of discipline; it is a complex medical and behavioural challenge
                 shaped by biology, stress, hormones, and modern life. Hunger, cravings, your relationship with
                 food, mental health, and time pressure all play a role. That is why a medical weight loss
@@ -244,20 +268,20 @@ export default function GLP1Page() {
               </p>
               <ul className="space-y-3 mb-6">
                 {sustainability.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
-                    <span style={{ color: '#8EB093', fontWeight: 700 }}>•</span>
+                  <li key={i} className="flex items-start gap-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: '1.6' }}>
+                    <span style={{ color: '#4f7256', fontWeight: 700 }}>•</span>
                     <span>{item}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mb-8" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
+              <p className="mb-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
                 Ozempic and Mounjaro can help regulate appetite. Long-term results come from structure,
                 monitoring, and habits that fit real life, and that is what our program delivers.
               </p>
               <Link
                 href="/consultation"
-                className="inline-block uppercase tracking-wide text-white font-bold text-center"
-                style={{ backgroundColor: '#6391AB', borderRadius: '10px', padding: '14px 20px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', width: '474px', maxWidth: '100%' }}
+                className="cta-glow inline-block uppercase tracking-wide text-white font-bold text-center"
+                style={{ padding: '14px 20px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', width: '474px', maxWidth: '100%' }}
               >
                 book your medical consultation
               </Link>
@@ -271,7 +295,7 @@ export default function GLP1Page() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-center"
-            style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', lineHeight: 1.35 }}
+            style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', lineHeight: 1.35 }}
           >
             malta&apos;s trusted clinic for<br />doctor-led, medical weight loss
           </h2>
@@ -300,10 +324,12 @@ export default function GLP1Page() {
                 style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}
               >
                 <img src={pillarIcons[i]} alt="" style={{ width: '74px', height: '74px', objectFit: 'contain', marginBottom: '20px' }} />
-                <h3 className="mb-3" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
+                {/* Card sits on a #F2F6EF->#C9D8C1 sage gradient; deeper taupe #5c5346 clears AA
+                    (>=5.06:1) even on the brightest #C9D8C1 stop where #6f6456 would be 3.87:1. */}
+                <h3 className="mb-3" style={{ color: '#5c5346', fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                   {pillar.title}
                 </h3>
-                <p style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.7 }}>
+                <p style={{ color: '#5c5346', fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.7 }}>
                   {pillar.body}
                 </p>
               </div>
@@ -315,39 +341,39 @@ export default function GLP1Page() {
       {/* Medical weight loss eligibility */}
       <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '760px' }}>
-          <p className="text-center" style={{ color: '#9B8D83', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             medical weight loss eligibility
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '124px', height: '1px', backgroundColor: '#9B8D83' }} />
-          <h2 className="text-center mb-6" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>
-            selective by intention successful by design
+          <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+            Who is GLP-1 weight loss right for?
           </h2>
-          <p className="mb-10" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+          <p className="mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
             Ozempic and Mounjaro can be powerful, but only when prescribed as part of a structured, doctor-supervised approach. Eligibility is determined through a thorough medical assessment, including blood tests, food-intolerance screening, safety checks, and clear protocols, to ensure your program is appropriate, monitored, and adjusted responsibly.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
-              <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <h3 className="mb-5" style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 Suitable for:
               </h3>
               <ul className="space-y-5">
                 {['BMI ≥27', 'Insulin resistence', 'Emotional eating or Long dieting history', 'Menopause-related weight gain'].map((item) => (
                   <li key={item} className="flex items-start gap-2">
-                    <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '26px', height: '28px', objectFit: 'contain', flexShrink: 0, marginTop: '-2px' }} />
-                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item}</span>
+                    <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="Eligible" style={{ width: '26px', height: '28px', objectFit: 'contain', flexShrink: 0, marginTop: '-2px' }} />
+                    <span style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
             <div>
-              <h3 className="mb-5" style={{ color: '#9B8D83', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <h3 className="mb-5" style={{ color: '#6f6456', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 Unsuitable for:
               </h3>
               <ul className="space-y-5">
                 {['Eating disorders', 'Very lean patients', 'Those unwilling to attend check-ins', 'Currently pregnant or trying to conceive'].map((item) => (
                   <li key={item} className="flex items-start gap-3">
-                    <img src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png" alt="" style={{ width: '19px', height: '19px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} />
-                    <span style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item}</span>
+                    <img src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png" alt="Not eligible" style={{ width: '19px', height: '19px', objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} />
+                    <span style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -358,8 +384,8 @@ export default function GLP1Page() {
               href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5084222&oiid=sv%3A26105577&share=true&pId=2708191"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block text-center font-bold text-white"
-              style={{ backgroundColor: '#6391AB', borderRadius: '10px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1.4px', textTransform: 'uppercase', padding: '13px 24px', width: '474px', maxWidth: '100%' }}
+              className="cta-glow inline-block text-center font-bold text-white"
+              style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1.4px', textTransform: 'uppercase', padding: '13px 24px', width: '474px', maxWidth: '100%' }}
             >
               book your medical consultation
             </a>
@@ -375,7 +401,7 @@ export default function GLP1Page() {
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#8EB093' }} />
           <h2 className="text-center mb-6" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', lineHeight: 1.3 }}>
-            We are not<br />another diet clinic.
+            Malta&apos;s doctor-led GLP-1 clinic —<br />not another diet programme.
           </h2>
           <p className="text-center mx-auto mb-12" style={{ color: '#9B8D83', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '760px' }}>
             We are a doctor-led medical weight loss clinic in Malta that blends medical insight, sustainable nutrition, and modern body technology into one high-touch system. So you do not just lose weight, you build a stronger, healthier version of yourself.
@@ -411,7 +437,7 @@ export default function GLP1Page() {
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '170px', height: '1px', backgroundColor: '#B9A99E' }} />
           <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4 }}>
-            Led by expertise.<br />Driven by results.
+            Doctor-supervised weight loss —<br />led by 30 years of clinical expertise.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
@@ -435,8 +461,8 @@ export default function GLP1Page() {
                 href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-block text-center font-bold text-white"
-                style={{ backgroundColor: '#8EB093', borderRadius: '5px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 20px', width: '468px', maxWidth: '100%' }}
+                className="cta-glow inline-block text-center font-bold text-white"
+                style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 20px', width: '468px', maxWidth: '100%' }}
               >
                 Book your medical consultation
               </a>
@@ -453,7 +479,7 @@ export default function GLP1Page() {
           </p>
           <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
           <h2 className="text-center mb-12" style={{ color: '#8EB093', fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px', lineHeight: 1.35, textTransform: 'uppercase' }}>
-            Up to 1kg per week<br />Measured. Verified. Comitted.
+            Our weight loss promise: up to 1kg per week<br />measured, verified, committed
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
@@ -528,8 +554,8 @@ export default function GLP1Page() {
                   href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-center font-bold text-white"
-                  style={{ backgroundColor: '#6391AB', borderRadius: '10px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px 24px', width: '382px', maxWidth: '100%' }}
+                  className="cta-glow inline-block text-center font-bold text-white"
+                  style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px 24px', width: '382px', maxWidth: '100%' }}
                 >
                   Book your medical consultation
                 </a>
@@ -626,8 +652,8 @@ export default function GLP1Page() {
                   href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full text-center font-bold text-white mb-5"
-                  style={{ backgroundColor: '#6391AB', borderRadius: '10px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '12px' }}
+                  className="cta-glow block w-full text-center font-bold text-white mb-5"
+                  style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '12px' }}
                 >
                   Book your medical consultation
                 </a>

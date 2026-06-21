@@ -4,8 +4,12 @@ import { useRef, useState } from 'react';
 
 const headingFont = 'Trajan Pro, serif';
 const bodyFont = 'Roboto, sans-serif';
-const green = '#8EB093';
-const textColor = '#9B8C81';
+// Accessible brand-family colors (WCAG 2.2 AA/AAA).
+// --brand-green-text: deep sage for sage text/icons/headings on white (5.42:1).
+const green = '#4F7256';
+// Deep taupe ink for body/name/button over the sage gradient panel.
+// Worst gradient stop #C9D8C1 → 5.06:1 (AA), white → 7.54:1 (AAA). Same warm taupe family as #9B8C81.
+const textColor = '#5C5347';
 
 type Result = { name: string; image: string; quote: string };
 
@@ -62,6 +66,8 @@ function ResultCard({ r }: { r: Result }) {
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
+          className="rc-focusable"
+          aria-expanded={expanded}
           style={{ color: textColor, fontFamily: bodyFont, fontSize: '14px', textDecoration: 'underline', cursor: 'pointer', background: 'transparent', padding: 0, border: 0 }}
         >
           {expanded ? 'Read less' : 'Read more'}
@@ -85,18 +91,27 @@ export default function ResultsCarousel() {
 
   return (
     <section className="py-16">
+      {/* Focus indicator: 3px deep-sage ring (#4F7256 = 5.42:1 on white, >=3:1 AA UI),
+          offset 2px, never removed. Applied to all interactive controls in this carousel. */}
+      <style>{`
+        .rc-focusable:focus-visible {
+          outline: 3px solid #4F7256;
+          outline-offset: 2px;
+          border-radius: 4px;
+        }
+      `}</style>
       <div className="mx-auto px-4" style={{ maxWidth: '1170px' }}>
         <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-          Medical Weight Loss Results
+          Real Medical Weight Loss Results in Malta
         </h2>
-        <div className="mx-auto mt-3 mb-10" style={{ width: '220px', height: '1px', backgroundColor: '#B9A99E' }} />
+        <div className="mx-auto mt-3 mb-10" style={{ width: '220px', height: '1px', backgroundColor: '#6F6456' }} />
 
         <div className="relative" style={{ padding: '0 35px' }}>
           <button
             type="button"
             onClick={() => scrollBy(-1)}
             aria-label="Previous"
-            className="absolute z-10 flex items-center justify-center"
+            className="rc-focusable absolute z-10 flex items-center justify-center"
             style={{ left: '-4px', top: '38%', width: '35px', height: '35px', background: 'transparent', color: green, fontSize: '26px', cursor: 'pointer', border: 0, lineHeight: 1 }}
           >
             ←
@@ -105,7 +120,7 @@ export default function ResultsCarousel() {
             type="button"
             onClick={() => scrollBy(1)}
             aria-label="Next"
-            className="absolute z-10 flex items-center justify-center"
+            className="rc-focusable absolute z-10 flex items-center justify-center"
             style={{ right: '-4px', top: '38%', width: '35px', height: '35px', background: 'transparent', color: green, fontSize: '26px', cursor: 'pointer', border: 0, lineHeight: 1 }}
           >
             →

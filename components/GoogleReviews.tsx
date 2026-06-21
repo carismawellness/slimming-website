@@ -8,10 +8,17 @@
 import { useState } from 'react';
 import { CURATED_REVIEWS, REVIEW_SUMMARY, GOOGLE_PROFILE_URL, GOOGLE_WRITE_REVIEW_URL, type Review } from '@/lib/reviews';
 
-const GREEN = '#8EB093';
-const TAUPE = '#9B8D83';
-const TAUPE_LT = '#AFA39D';
-const GOLD = '#FCBF02';
+// Accessible brand palette (WCAG AA on the surfaces used in this component):
+//  - GREEN: solid sage CTA fill (brand-green-fill). White text on it = 5.42:1.
+//  - GREEN_TEXT: deep sage for sage TEXT / ICONS / LINKS / borders (brand-green-text). 5.10:1 on #f8f8f8.
+//  - TAUPE: darkened taupe for primary muted text. 5.44:1 on #f8f8f8.
+//  - TAUPE_LT: secondary/meta text. Uses --text-light #595959 = 6.60:1 on #f8f8f8 (AAA).
+//  - GOLD: deep brand gold for star fills (primary-gold-text). 4.58:1 on #f8f8f8; 3.76:1 vs the empty-star #e2e2e2.
+const GREEN = '#4f7256';
+const GREEN_TEXT = '#4f7256';
+const TAUPE = '#6f6456';
+const TAUPE_LT = '#595959';
+const GOLD = '#8c6d18';
 const SERIF = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
 const WIDE = 'Novecento Wide Book, Novecento Wide, sans-serif';
 const BODY = 'Roboto, sans-serif';
@@ -39,7 +46,8 @@ function Stars({ rating = 5, size = 16 }: { rating?: number; size?: number }) {
   );
 }
 
-const AVATAR_COLORS = ['#b27c93', '#7c9eb2', '#8fb29a', '#b29a7c', '#9a8fb2', '#b2877c'];
+// Darkened (same hue family) so white initials clear AA (>=4.5:1). Pastels failed (2.33-3.39:1).
+const AVATAR_COLORS = ['#97697d', '#5f7a89', '#637b6a', '#85735d', '#7b728e', '#906d64'];
 
 function ReviewCard({ r, color }: { r: Review; color: string }) {
   const [open, setOpen] = useState(false);
@@ -51,7 +59,7 @@ function ReviewCard({ r, color }: { r: Review; color: string }) {
         <span style={{ flex: 1, minWidth: 0 }}>
           <span style={{ display: 'flex', alignItems: 'center', gap: 5 }}>
             <span style={{ fontFamily: BODY, fontSize: 14.5, color: TAUPE, fontWeight: 600 }}>{r.name}</span>
-            <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden><circle cx="12" cy="12" r="10" fill="#96b2b2" /><path d="M10.2 15.3l-2.6-2.6 1.1-1.1 1.5 1.5 4-4 1.1 1.1z" fill="#fff" /></svg>
+            <svg width="14" height="14" viewBox="0 0 24 24" role="img" aria-label="Verified Google review"><circle cx="12" cy="12" r="10" fill={GREEN_TEXT} /><path d="M10.2 15.3l-2.6-2.6 1.1-1.1 1.5 1.5 4-4 1.1 1.1z" fill="#fff" /></svg>
           </span>
           <span style={{ display: 'block', fontFamily: BODY, fontSize: 11.5, color: TAUPE_LT }}>{r.when}</span>
         </span>
@@ -67,7 +75,7 @@ function ReviewCard({ r, color }: { r: Review; color: string }) {
         {r.text}
       </p>
       {long && (
-        <button type="button" onClick={() => setOpen((v) => !v)} style={{ marginTop: 4, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: BODY, fontSize: 13, color: '#96b2b2' }}>
+        <button type="button" onClick={() => setOpen((v) => !v)} aria-expanded={open} style={{ marginTop: 4, background: 'none', border: 'none', padding: 0, cursor: 'pointer', fontFamily: BODY, fontSize: 13, color: GREEN_TEXT, fontWeight: 600, textDecoration: 'underline' }}>
           {open ? 'Hide' : 'Read more'}
         </button>
       )}
@@ -94,7 +102,7 @@ export default function GoogleReviews() {
               </span>
             </span>
           </div>
-          <a href={GOOGLE_WRITE_REVIEW_URL} target="_blank" rel="noopener noreferrer" style={{ backgroundColor: GREEN, color: '#fff', fontFamily: WIDE, fontSize: 14, fontWeight: 700, letterSpacing: '0.4px', padding: '13px 26px', borderRadius: 6, textDecoration: 'none' }}>
+          <a href={GOOGLE_WRITE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="cta-glow" style={{ backgroundColor: GREEN, color: '#fff', fontFamily: WIDE, fontSize: 14, fontWeight: 700, letterSpacing: '0.4px', padding: '13px 26px', borderRadius: 999, textDecoration: 'none' }}>
             Review us on Google
           </a>
         </div>
@@ -107,7 +115,7 @@ export default function GoogleReviews() {
         </div>
 
         <div style={{ textAlign: 'center', marginTop: 30 }}>
-          <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, border: '1px solid #e3ddd5', borderRadius: 999, padding: '11px 24px', fontFamily: WIDE, fontSize: 13, color: TAUPE, textDecoration: 'none' }}>
+          <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, border: `1px solid ${GREEN_TEXT}`, borderRadius: 999, padding: '11px 24px', fontFamily: WIDE, fontSize: 13, color: GREEN_TEXT, fontWeight: 600, textDecoration: 'underline' }}>
             <GoogleG size={16} /> See all our reviews on Google
           </a>
         </div>

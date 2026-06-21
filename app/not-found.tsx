@@ -76,9 +76,9 @@ export default function NotFound() {
       >
         <Link
           href="/"
+          className="cta-glow"
           style={{
             display: 'inline-block',
-            backgroundColor: '#8EB093',
             color: '#FFFFFF',
             border: 'none',
             padding: '14px 32px',

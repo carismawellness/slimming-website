@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import Script from 'next/script';
 
 export const metadata: Metadata = {
-  title: "Book a Free Slimming Consultation in Malta | Carisma Slimming",
+  title: "Free Slimming Consultation Malta | Carisma Slimming",
   description: "Book your free slimming consultation with our medically qualified doctors in Malta. Get a personalised weight loss plan and start your journey today.",
   alternates: { canonical: 'https://www.carismaslimming.com/consultation' },
 };
@@ -38,7 +38,7 @@ export default function ConsultationPage() {
             className="uppercase"
             style={{ fontFamily: "'Trajan Pro', serif", fontSize: '28px', fontWeight: 400, color: '#FFFFFF' }}
           >
-            Contact Us
+            Free Slimming Consultation in Malta — Book Your Place Today
           </h1>
           <div style={{ width: '284px', height: '1px', backgroundColor: '#FFFFFF', margin: '7px auto 0' }} />
         </div>
@@ -60,7 +60,7 @@ export default function ConsultationPage() {
                 fontSize: 'clamp(24px, 4.5vw, 40px)',
               }}
             >
-              Book Your Slimming Consultation
+              Meet Our Doctor-Led Weight Loss Team — Your Personalised Plan Starts Here
             </h2>
           </div>
         </div>

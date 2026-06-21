@@ -1,9 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { getOrderedServices, BOOKING_URL } from '@/lib/services';
+import JsonLd from '@/components/JsonLd';
+
+const SITE = 'https://www.carismaslimming.com';
 
 export const metadata: Metadata = {
-  title: "Weight Loss Packages Malta | Body Contouring | Carisma Slimming",
+  title: "Body Contouring Packages Malta | Carisma Slimming",
   description: "Explore Malta's most effective weight loss packages — fat freezing, fat dissolving, muscle stimulation, skin tightening and more. Medically supervised at Carisma Slimming.",
   alternates: { canonical: 'https://www.carismaslimming.com/packages' },
 };
@@ -17,8 +20,31 @@ const TAUPE_LIGHT = '#AFA39D';
 export default function PackagesPage() {
   const servicesList = getOrderedServices();
 
+  const schema = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: SITE },
+        { '@type': 'ListItem', position: 2, name: 'Packages', item: `${SITE}/packages` },
+      ],
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'ItemList',
+      name: 'Weight Loss & Body Contouring Packages in Malta',
+      itemListElement: servicesList.map((s, i) => ({
+        '@type': 'ListItem',
+        position: i + 1,
+        name: s.treatment,
+        url: `${SITE}/packages/${s.id}`,
+      })),
+    },
+  ];
+
   return (
     <main className="w-full">
+      <JsonLd data={schema} />
       {/* Hero */}
       <section className="py-20 text-center" style={{ backgroundColor: '#F5F2EF' }}>
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,7 +58,7 @@ export default function PackagesPage() {
             className="text-4xl md:text-5xl mb-6"
             style={{ fontFamily: HEADING_FONT, color: TAUPE }}
           >
-            Body Contouring Packages
+            Weight Loss &amp; Body Contouring Packages in Malta
           </h1>
           <p className="text-lg" style={{ color: TAUPE_LIGHT, fontFamily: BODY_FONT }}>
             Doctor-led, non-surgical treatments to freeze, dissolve, tone, tighten and detox -
@@ -44,6 +70,12 @@ export default function PackagesPage() {
       {/* Packages grid */}
       <section className="py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2
+            className="text-3xl mb-10 text-center"
+            style={{ fontFamily: HEADING_FONT, color: TAUPE }}
+          >
+            Our Slimming &amp; Body Contouring Treatment Packages
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {servicesList.map((service) => (
               <Link key={service.id} href={`/packages/${service.id}`} className="group">
@@ -98,7 +130,7 @@ export default function PackagesPage() {
       <section className="py-16" style={{ backgroundColor: '#F5F2EF' }}>
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl mb-6" style={{ fontFamily: HEADING_FONT, color: TAUPE }}>
-            Not sure which is right for you?
+            Not Sure Which Body Contouring Package Is Right for You?
           </h2>
           <p className="mb-8 text-lg" style={{ color: TAUPE_LIGHT, fontFamily: BODY_FONT }}>
             Many clients combine multiple treatments as part of their comprehensive transformation
@@ -110,7 +142,7 @@ export default function PackagesPage() {
               href={BOOKING_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white px-8 py-3 rounded font-bold uppercase tracking-wide inline-block"
+              className="cta-glow text-white px-8 py-3 font-bold uppercase tracking-wide inline-block"
               style={{ backgroundColor: GREEN, fontFamily: BODY_FONT }}
             >
               Free Consultation

@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import OutcomeStepper from './OutcomeStepper';
 
 export const metadata: Metadata = {
-  title: "Free Slimming Guide Malta | Your Weight Loss Bible | Carisma Slimming",
+  title: "Free Slimming Guide Malta | Carisma Slimming",
   description: "Download our free Slimming Guide — the definitive weight loss resource for Malta. Expert advice from our doctors on diet, exercise, GLP-1s, and body contouring.",
   alternates: { canonical: 'https://www.carismaslimming.com/slimming-guide' },
 };
@@ -19,30 +19,30 @@ const heroFeatures = [
 
 const methodPillars = [
   {
-    lead: 'When',
-    rest: 'to Eat',
+    lead: 'Meal Timing:',
+    rest: 'When to Eat for Steady Energy',
     paragraphs: [
       'Timing builds rhythm. Rhythm reduces the number of decisions you have to make each day. The guide walks you through a simple default for your first meal, how to structure eating across the day, and two tracks to choose from based on your morning routine. Safety and practicality, both covered.',
     ],
   },
   {
-    lead: 'What',
-    rest: 'to Eat',
+    lead: 'Protein First:',
+    rest: 'What to Eat to Build Satiety',
     paragraphs: [
       'Protein comes first. Not because carbs are the enemy, but because protein builds satiety from the start of every meal. The guide uses a simple points system, one calorie equals one point, with non-starchy vegetables sitting outside it entirely. No forbidden foods. No obsessive counting.',
     ],
   },
   {
-    lead: 'How Much',
-    rest: 'to Eat',
+    lead: 'Portion Guide:',
+    rest: 'How Much to Eat Without Counting',
     paragraphs: [
       'Your daily points budget is built around you.',
       'The guide includes a visual rule that works without scales, without apps, and without measuring anything. One palm. Two palms. Straightforward.',
     ],
   },
   {
-    lead: 'Which Order',
-    rest: 'to Eat',
+    lead: 'Eating Sequence:',
+    rest: 'The Order That Changes How You Feel',
     paragraphs: [
       'Protein first. Then vegetables. Then carbs. That sequence changes how hungry you feel, how steady your energy runs, and how you arrive at your next meal. It works at home. It works at restaurants. It works at family tables where the pasta arrives before anything else.',
     ],
@@ -182,9 +182,9 @@ export default function SlimmingGuidePage() {
                   className="mb-5 uppercase"
                   style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '40px', lineHeight: '40px' }}
                 >
-                  <span style={{ color: '#FFFFFF' }}>the weight-loss guide</span>
+                  <span style={{ color: '#FFFFFF' }}>weight loss guide malta</span>
                   <br />
-                  <span style={{ color: GREEN }}>built for maltese lifestyle</span>
+                  <span style={{ color: GREEN }}>the slimming system built for real maltese life</span>
                 </h1>
                 <p
                   className="mb-5 uppercase"
@@ -232,10 +232,10 @@ export default function SlimmingGuidePage() {
                 </p>
                 <a
                   href={PRODUCT_URL}
-                  className="block text-center uppercase text-white mb-6"
+                  className="cta-glow block text-center uppercase text-white mb-6"
                   style={{
                     backgroundColor: GREEN,
-                    borderRadius: '10px',
+                    borderRadius: '999px',
                     maxWidth: '455px',
                     padding: '14px 24px',
                     fontFamily: wideFont,
@@ -298,7 +298,7 @@ export default function SlimmingGuidePage() {
               className="text-center mb-10 lowercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
             >
-              it was never about discipline.
+              why diets fail in malta — and what actually works instead.
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-[338px_1fr] gap-8 items-start">
               <div className="flex flex-col gap-6">
@@ -376,7 +376,7 @@ export default function SlimmingGuidePage() {
             className="mb-8 lowercase"
             style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
           >
-            this is not a diet.
+            this is a behaviour-based weight loss system, not another diet.
           </h2>
           <p className="mb-6 text-left" style={{ color: TAUPE, fontSize: '14px' }}>
             Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use
@@ -406,7 +406,7 @@ export default function SlimmingGuidePage() {
           </p>
           <a
             href={PRODUCT_URL}
-            className="block mx-auto text-center uppercase text-white"
+            className="cta-glow block mx-auto text-center uppercase text-white"
             style={{
               backgroundColor: BLUE,
               borderRadius: '999px',
@@ -432,7 +432,7 @@ export default function SlimmingGuidePage() {
               className="mb-6 lowercase mx-auto"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', maxWidth: '500px' }}
             >
-              the reason other plans fell apart is not a mystery.
+              the four-pillar method: what to eat, when to eat, how much, and in what order.
             </h2>
             <p style={{ color: TAUPE, fontSize: '14px' }}>
               Every plan that has ever failed you asked for too many decisions made under pressure. This method
@@ -503,7 +503,7 @@ export default function SlimmingGuidePage() {
                 borderBottom: '1px solid #C9C0B8',
               }}
             >
-              What success actually looks like.
+              What sustainable weight loss actually looks like — four outcomes the guide builds.
             </h2>
           </div>
           <OutcomeStepper outcomes={outcomes} />
@@ -535,9 +535,7 @@ export default function SlimmingGuidePage() {
               className="lowercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.5 }}
             >
-              it was built for malta.
-              <br />
-              not for a version where nobody eats pasta.
+              a slimming guide designed for maltese culture — festas, family tables, and all.
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10 items-start mb-10">
@@ -642,7 +640,7 @@ export default function SlimmingGuidePage() {
               className="lowercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
             >
-              is this guide for you?
+              is this weight loss guide right for you?
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -656,7 +654,7 @@ export default function SlimmingGuidePage() {
             >
               <div className="flex items-center gap-7 mb-5">
                 <h3 className="uppercase" style={{ color: TAUPE, fontSize: '17px', fontWeight: 700 }}>
-                  this guide is for you If
+                  this weight loss guide is for you if
                 </h3>
                 <img
                   src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png"
@@ -686,7 +684,7 @@ export default function SlimmingGuidePage() {
             >
               <div className="flex items-center gap-7 mb-5">
                 <h3 className="uppercase" style={{ color: TAUPE, fontSize: '17px', fontWeight: 700 }}>
-                  this guide is not for you if
+                  this slimming guide is not for you if
                 </h3>
                 <img
                   src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png"
@@ -740,9 +738,9 @@ export default function SlimmingGuidePage() {
                 className="uppercase"
                 style={{ color: '#F4F1E9', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', lineHeight: 1.3 }}
               >
-                THE CARISMA
+                GET THE CARISMA
                 <br />
-                SLIMMING GUIDE
+                SLIMMING GUIDE — €30
               </h2>
               <div className="mt-3 mb-6" style={{ width: '180px', height: '1px', backgroundColor: 'rgba(255,255,255,0.6)' }} />
               <p className="mb-4" style={{ color: '#FFFFFF', fontSize: '14px', maxWidth: '340px' }}>
@@ -755,7 +753,7 @@ export default function SlimmingGuidePage() {
               </p>
               <a
                 href={PRODUCT_URL}
-                className="block text-center uppercase text-white mb-7"
+                className="cta-glow block text-center uppercase text-white mb-7"
                 style={{
                   backgroundColor: 'rgba(142, 176, 147, 0.85)',
                   borderRadius: '999px',
@@ -802,21 +800,21 @@ export default function SlimmingGuidePage() {
             }}
           >
             <div className="text-center mb-3">
-              <h3
+              <p
                 className="uppercase"
                 style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', letterSpacing: '2.4px' }}
               >
                 the carisma difference
-              </h3>
+              </p>
             </div>
             <h2
               className="text-center mb-8 lowercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '24px' }}
             >
-              malta&apos;s #1 leading wellness chain
+              why malta chooses carisma slimming — doctor-led, evidence-based, shame-free
             </h2>
             <h3 className="uppercase mb-4" style={{ color: TAUPE, fontSize: '15px', fontWeight: 700 }}>
-              our commitment
+              our commitment to medically-led slimming in Malta
             </h3>
             <ul className="space-y-2 list-disc pl-5 mb-8" style={{ maxWidth: '430px' }}>
               {carismaCommitments.map((item) => (
@@ -826,7 +824,7 @@ export default function SlimmingGuidePage() {
               ))}
             </ul>
             <h3 className="uppercase mb-4" style={{ color: TAUPE, fontSize: '15px', fontWeight: 700 }}>
-              WHY MALTA CHOOSES Carisma
+              WHY MALTA CHOOSES CARISMA SLIMMING OVER A GENERIC DIET PLAN
             </h3>
             <ul className="space-y-2 list-disc pl-5 mb-10" style={{ maxWidth: '430px' }}>
               {whyCarisma.map((item) => (
@@ -838,7 +836,7 @@ export default function SlimmingGuidePage() {
             <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
               <a
                 href={PRODUCT_URL}
-                className="block text-center uppercase text-white w-full"
+                className="cta-glow block text-center uppercase text-white w-full"
                 style={{
                   backgroundColor: BLUE,
                   borderRadius: '999px',

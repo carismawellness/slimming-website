@@ -40,7 +40,7 @@ export default function CareersPage() {
               maxWidth: '735px',
             }}
           >
-            JOIN THE CARISMA AESTHETICS TEAM
+CAREERS IN MALTA — JOIN CARISMA SLIMMING&apos;S #1 WEIGHT LOSS CLINIC TEAM
           </h1>
         </div>
 
@@ -123,7 +123,7 @@ export default function CareersPage() {
                   textTransform: 'uppercase',
                 }}
               >
-                IF YOU...
+WELLNESS &amp; HEALTHCARE PROFESSIONALS WE&apos;RE HIRING FOR
               </h2>
 
               <div className="relative" style={{ marginTop: '71px', paddingLeft: '19px' }}>

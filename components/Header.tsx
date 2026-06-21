@@ -3,8 +3,15 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
-const GREEN = '#8EB093';
-const TAUPE = '#B0A68F';
+// Accessible brand tokens (see globals.css locked palette).
+// GREEN_FILL: solid sage dark enough that #fff text clears 4.5:1 (used as
+//   announcement-strip + CTA background). 5.42:1 AA.
+// GREEN: sage as small text/icon on white = 5.42:1 AA (was #8EB093 -> 2.39:1).
+// TAUPE: nav link / value text on white = 5.78:1 AA (was #B0A68F -> 2.41:1).
+const GREEN_FILL = '#4F7256';
+const GREEN = '#4F7256';
+const TAUPE = '#6F6456';
+const DROPDOWN_INK = '#6F6456'; // dropdown/sub-item link on white = 5.78:1 AA (was #9B8D83 -> 3.22:1)
 
 const BANNER = "#1 VOTED SLIMMING CLINIC IN MALTA   ▫   MALTA’S MOST COMPREHENSIVE SLIMMING PROGRAM   ▫   MEDICALLY QUALIFIED DOCTORS   ▫   ";
 
@@ -86,7 +93,7 @@ export default function Header() {
   };
 
   const ctaStyle: React.CSSProperties = {
-    backgroundColor: GREEN,
+    backgroundColor: GREEN_FILL,
     color: '#ffffff',
     fontFamily: '"Novecento Wide", sans-serif',
     fontSize: '12px',
@@ -148,7 +155,7 @@ export default function Header() {
                   onMouseEnter={() => setPkgHover(true)}
                   onMouseLeave={() => setPkgHover(false)}
                 >
-                  <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0' }} className="hover:opacity-60 transition-opacity">
+                  <button style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0' }} className="hover:underline transition">
                     {m.label}
                   </button>
                   {pkgHover && (
@@ -168,8 +175,8 @@ export default function Header() {
                       zIndex: 100,
                     }}>
                       {m.items.map((it) => (
-                        <Link key={it.href} href={it.href} className="block hover:bg-black/5"
-                          style={{ padding: '8px 18px', color: '#9B8D83', fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none' }}>
+                        <Link key={it.href} href={it.href} className="block hover:bg-black/5 hover:underline"
+                          style={{ padding: '8px 18px', color: DROPDOWN_INK, fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none' }}>
                           {it.label}
                         </Link>
                       ))}
@@ -177,14 +184,14 @@ export default function Header() {
                   )}
                 </div>
               ) : (
-                <Link key={m.label} href={m.href!} style={navLink} className="hover:opacity-60 transition-opacity">{m.label}</Link>
+                <Link key={m.label} href={m.href!} style={navLink} className="hover:underline transition">{m.label}</Link>
               )
             )}
           </div>
 
           {/* Right — phone + CTA */}
           <div className="hidden md:flex items-center" style={{ gap: '18px' }}>
-            <a href="tel:+35627802062" className="flex items-center hover:opacity-60 transition-opacity" style={{ gap: '6px', textDecoration: 'none' }}>
+            <a href="tel:+35627802062" className="flex items-center hover:underline transition" style={{ gap: '6px', textDecoration: 'none' }}>
               <PhoneIcon />
               <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px' }}>27802062</span>
             </a>
@@ -261,7 +268,7 @@ export default function Header() {
                           href={it.href}
                           onClick={() => setOpen(false)}
                           className="block"
-                          style={{ padding: '9px 12px', fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: '#9B8D83', textDecoration: 'none' }}
+                          style={{ padding: '9px 12px', fontFamily: 'Roboto, sans-serif', fontSize: '14px', color: DROPDOWN_INK, textDecoration: 'none' }}
                         >
                           {it.label}
                         </Link>

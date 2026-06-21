@@ -21,11 +21,16 @@ function Para({ children }: { children: React.ReactNode }) {
 }
 
 function Heading({ children }: { children: React.ReactNode }) {
-  return <p style={bodyStyle}>{children}</p>;
+  // Real <h2> for each top-level numbered section so screen readers and search
+  // engines get a proper document outline. Styling matches body copy exactly
+  // (bodyStyle) so the visual rendering is unchanged.
+  return <h2 style={bodyStyle}>{children}</h2>;
 }
 
 function SubHeading({ children }: { children: React.ReactNode }) {
-  return <p style={bodyStyle}>{children}</p>;
+  // Real <h3> nested under its parent <h2> (no skipped levels). Same bodyStyle
+  // keeps the rendering identical to the surrounding text.
+  return <h3 style={bodyStyle}>{children}</h3>;
 }
 
 function List({ items }: { items: React.ReactNode[] }) {
@@ -47,7 +52,7 @@ export default function TermsPage() {
       <section className="bg-white">
         <div className="text-center px-4" style={{ paddingTop: '42px' }}>
           <h1 style={{ color: '#B0A68F', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '30px', lineHeight: '42px' }}>
-            Terms &amp; Conditions
+            Terms &amp; Conditions — Carisma Slimming Malta
           </h1>
           <div className="mx-auto" style={{ width: '541px', maxWidth: '100%', borderTop: '1px solid #B0A68F' }} />
         </div>

@@ -4,6 +4,13 @@ import { services, getOrderedServices, BOOKING_URL } from '@/lib/services';
 import { notFound } from 'next/navigation';
 import PackagePage from '@/components/PackagePage';
 import { packageContent } from '@/lib/packages';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import {
+  SITE_URL as SITE,
+  breadcrumbList,
+  faqPage,
+  medicalProcedure,
+} from '@/lib/seo/schema';
 
 interface Props {
   params: Promise<{ service: string }>;
@@ -26,7 +33,7 @@ export async function generateStaticParams() {
 
 const serviceMeta: Record<string, { title: string; description: string }> = {
   'fat-freezing': {
-    title: 'Fat Freezing Malta | Cryolipolysis Treatment | Carisma Slimming',
+    title: 'Fat Freezing Malta | Cryolipolysis | Carisma Slimming',
     description: 'Permanent fat removal with cryolipolysis (fat freezing) in Malta. Lose stubborn fat without surgery — medically supervised at Carisma Slimming.',
   },
   'fat-dissolving': {
@@ -34,7 +41,7 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
     description: 'Fat dissolving injections (Aqualyx) in Malta to permanently eliminate stubborn fat pockets. Non-surgical, medically administered at Carisma Slimming.',
   },
   'muscle-stimulation': {
-    title: 'Muscle Stimulation Malta | EMSculpt Body Sculpting | Carisma Slimming',
+    title: 'Muscle Stimulation Malta | EMSculpt | Carisma Slimming',
     description: 'Build muscle and burn fat simultaneously with EMSculpt muscle stimulation in Malta. Achieve a sculpted physique at Carisma Slimming.',
   },
   'skin-tightening': {
@@ -42,7 +49,7 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
     description: 'Non-invasive skin tightening treatments in Malta using radiofrequency technology. Firm, lift and contour skin at Carisma Slimming.',
   },
   'lipocavitation': {
-    title: 'Lipocavitation Malta | Ultrasound Cavitation | Carisma Slimming',
+    title: 'Lipocavitation Malta | Cavitation | Carisma Slimming',
     description: 'Ultrasound lipocavitation in Malta to break down fat cells non-invasively. Targeted body contouring at Carisma Slimming.',
   },
   'anti-cellulite': {
@@ -125,7 +132,29 @@ export default async function ServicePage({ params }: Props) {
   // matching live carismaslimming.com page.
   const content = packageContent[service.id];
   if (content) {
-    return <PackagePage content={content} />;
+    const url = `${SITE}/packages/${service.id}`;
+    const meta = serviceMeta[service.id];
+    const schema: object[] = [
+      medicalProcedure({
+        name: service.treatment,
+        description: meta?.description,
+        url,
+      }),
+      breadcrumbList([
+        { name: 'Home', url: `${SITE}/` },
+        { name: 'Packages', url: `${SITE}/packages` },
+        { name: service.treatment, url },
+      ]),
+    ];
+    if (content.faqs?.length) {
+      schema.push(faqPage(content.faqs));
+    }
+    return (
+      <>
+        <JsonLd data={schema} />
+        <PackagePage content={content} />
+      </>
+    );
   }
 
   const related = getOrderedServices().filter((s) => s.id !== service.id);
@@ -200,7 +229,7 @@ export default async function ServicePage({ params }: Props) {
                   href={BOOKING_URL}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white px-8 py-3.5 rounded font-bold uppercase tracking-wide text-center text-sm"
+                  className="cta-glow text-white px-8 py-3.5 font-bold uppercase tracking-wide text-center text-sm"
                   style={{ backgroundColor: GREEN, fontFamily: BODY_FONT }}
                 >
                   Claim Your Spot Now

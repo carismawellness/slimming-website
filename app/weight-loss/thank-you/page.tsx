@@ -3,14 +3,16 @@ import type { Metadata } from 'next';
 const wideFont     = "'Novecento Wide', sans-serif";
 const wideBookFont = "'Novecento Wide Book', sans-serif";
 const bodyFont     = 'Roboto, sans-serif';
-const taupe        = '#9B8D83';
-const taupeLight   = '#AFA39D';
+// AA-accessible deep taupe (locked palette TAUPE token). 5.0:1 on the #F5EDE8
+// cream background — clears AA for both the large heading and body/sub-label text.
+const taupe        = '#6f6456';
+const taupeLight   = '#6f6456';
 
 const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
 
 export const metadata: Metadata = {
   title: "Thank You | Carisma Slimming",
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 const paragraphs = [
@@ -63,7 +65,18 @@ export default function WeightLossThankYouPage() {
             minHeight: '520px',
           }}
         >
-          <div style={{ maxWidth: '430px' }}>
+          <div
+            style={{
+              maxWidth: '430px',
+              // Cream scrim: guarantees an effective ~#F5EDE8 backdrop behind the
+              // text regardless of the hero photo underneath. At 0.96 opacity the
+              // taupe (#6f6456) body text clears AA (>=4.67:1) even over a near-black
+              // image pixel, while a hint of the photo still shows around the panel.
+              backgroundColor: 'rgba(245, 237, 232, 0.96)',
+              padding: '28px 30px',
+              borderRadius: '4px',
+            }}
+          >
             <h1
               style={{
                 fontFamily: wideFont,
@@ -74,7 +87,7 @@ export default function WeightLossThankYouPage() {
                 marginBottom: '22px',
               }}
             >
-              THANK YOU
+              THANK YOU — WE&apos;LL BE IN TOUCH SHORTLY
             </h1>
 
             <p
@@ -133,8 +146,11 @@ export default function WeightLossThankYouPage() {
         </div>
 
         {/* Text below photo on mobile */}
+        {/* NOTE: This visible label is intentionally NOT an <h1>. The single page <h1>
+            lives in the desktop section above; both sections are always in the DOM
+            (only CSS-toggled), so a second <h1> here would create a duplicate-H1 bug. */}
         <div style={{ padding: '32px 24px 40px', backgroundColor: '#F5EDE8' }}>
-          <h1
+          <p
             style={{
               fontFamily: wideFont,
               fontWeight: 400,
@@ -144,8 +160,8 @@ export default function WeightLossThankYouPage() {
               marginBottom: '14px',
             }}
           >
-            THANK YOU
-          </h1>
+            THANK YOU — WE&apos;LL BE IN TOUCH SHORTLY
+          </p>
           <p
             style={{
               fontFamily: wideBookFont,

@@ -10,7 +10,7 @@ const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
 
 export const metadata: Metadata = {
   title: "Thank You | Carisma Slimming",
-  robots: { index: false, follow: false },
+  robots: { index: false, follow: true },
 };
 
 const paragraphs = [
@@ -72,7 +72,7 @@ export default function ThankYouPage() {
                 marginBottom: '22px',
               }}
             >
-              THANK YOU
+              THANK YOU — WE&rsquo;LL BE IN TOUCH SHORTLY
             </h1>
 
             <p
@@ -130,7 +130,8 @@ export default function ThankYouPage() {
         </div>
 
         <div style={{ padding: '32px 24px 40px', backgroundColor: '#F5EDE8' }}>
-          <h1
+          {/* Mobile heading rendered as styled <p> (not <h1>) so the page keeps exactly one <h1> in the DOM */}
+          <p
             style={{
               fontFamily: wideFont,
               fontWeight: 400,
@@ -140,8 +141,8 @@ export default function ThankYouPage() {
               marginBottom: '14px',
             }}
           >
-            THANK YOU
-          </h1>
+            THANK YOU — WE&rsquo;LL BE IN TOUCH SHORTLY
+          </p>
           <p
             style={{
               fontFamily: wideBookFont,

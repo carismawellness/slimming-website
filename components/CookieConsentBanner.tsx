@@ -134,8 +134,10 @@ export default function CookieConsentBanner() {
               </button>
               <button
                 onClick={handleAccept}
+                className="focus-on-dark"
                 style={{
-                  background: '#8EB093',
+                  /* Accessible deep sage: #fff text = 5.42:1 AA (was #8EB093 -> 2.39:1 FAIL) */
+                  background: '#4F7256',
                   color: '#fff',
                   border: 'none',
                   padding: '10px 20px',
