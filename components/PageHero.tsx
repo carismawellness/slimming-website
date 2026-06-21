@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import HeroVideoPlayer from './HeroVideoPlayer';
 
 /* ──────────────────────────────────────────────────────────────────────────
    PageHero — shared above-the-fold hero for marketing pages.
@@ -318,38 +319,30 @@ export default function PageHero({
             }}
           >
             {media.type === 'video' ? (
-              <video
-                playsInline
-                muted
-                loop
-                autoPlay
-                poster={media.poster}
-                preload="metadata"
-                aria-label={media.alt || 'Carisma Slimming Malta'}
-                style={{ width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
-              >
-                <source src={media.src} type="video/mp4" />
-              </video>
+              // Click-to-play with play + sound buttons (no autoplay; full volume on play).
+              <HeroVideoPlayer src={media.src} poster={media.poster} alt={media.alt} fit={media.fit || 'cover'} />
             ) : (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={media.src}
-                alt={media.alt || 'Carisma Slimming Malta'}
-                style={{ width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
-              />
-            )}
-            {/* subtle bottom scrim so floating cards always read cleanly over any footage */}
-            {media.fit !== 'contain' && (
-              <span
-                aria-hidden
-                style={{
-                  position: 'absolute',
-                  inset: 0,
-                  pointerEvents: 'none',
-                  background:
-                    'linear-gradient(to top, rgba(18,28,20,0.36) 0%, rgba(18,28,20,0.06) 30%, transparent 58%)',
-                }}
-              />
+              <>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={media.src}
+                  alt={media.alt || 'Carisma Slimming Malta'}
+                  style={{ width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
+                />
+                {/* subtle bottom scrim so floating cards read cleanly over the photo */}
+                {media.fit !== 'contain' && (
+                  <span
+                    aria-hidden
+                    style={{
+                      position: 'absolute',
+                      inset: 0,
+                      pointerEvents: 'none',
+                      background:
+                        'linear-gradient(to top, rgba(18,28,20,0.36) 0%, rgba(18,28,20,0.06) 30%, transparent 58%)',
+                    }}
+                  />
+                )}
+              </>
             )}
           </div>
 

@@ -537,9 +537,9 @@ export default function GLP1Page() {
           <div className="mx-auto" style={{ border: '6px solid #8EB093', maxWidth: '744px', overflow: 'hidden', borderRadius: '16px' }}>
             <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
               <iframe
-                src="https://www.youtube.com/embed/9t5m33ccUYA?autoplay=1&mute=1&controls=1&loop=1&playsinline=1&playlist=9t5m33ccUYA"
+                src="https://www.youtube.com/embed/9t5m33ccUYA?controls=1&playsinline=1&rel=0"
                 title="The Uncomfortable Truth About Ozempic — Kurzgesagt"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowFullScreen
                 style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 0 }}
               />
