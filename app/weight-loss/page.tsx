@@ -145,10 +145,10 @@ function AsSeenOn() {
 function HeroSection() {
   return (
       <PageHero
-        eyebrow="Malta's most comprehensive, medically guided slimming program"
+        eyebrow="Malta's most comprehensive slimming program"
         headline={[
-          { text: 'Medical Weight Loss in Malta.' },
-          { text: 'Doctor-Led. Results Guaranteed.', em: true },
+          { text: 'Medical Weight Loss in Malta' },
+          { text: 'Doctor-Led & Guaranteed', em: true },
         ]}
         sub="Personalised programs combining medical-grade analysis, prescription support, nutrition and body sculpting with weekly check-ins — to help you hit your target weight and keep it off."
         bullets={[

@@ -48,9 +48,10 @@ export default function PackagesPage() {
       {/* Hero */}
       <PageHero
         eyebrow="Carisma Slimming"
+        compactHeadline
         headline={[
-          { text: 'Weight Loss & Body Contouring' },
-          { text: 'Packages in Malta', em: true },
+          { text: 'Body Contouring Packages' },
+          { text: 'in Malta', em: true },
         ]}
         sub="Doctor-led, non-surgical treatments to freeze, dissolve, tone, tighten and detox — each a focused protocol with spa & fitness access included."
         bullets={[

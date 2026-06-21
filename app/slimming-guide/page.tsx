@@ -183,10 +183,10 @@ export default function SlimmingGuidePage() {
       <JsonLd data={jsonLd} />
       <style dangerouslySetInnerHTML={{ __html: localFontCss }} />
       <PageHero
-        eyebrow="Recipes, meal timing & a structured plan — built around Mediterranean life"
+        eyebrow="Recipes, meal timing & a structured plan"
         headline={[
           { text: 'Weight Loss Guide Malta' },
-          { text: 'The slimming system for real Maltese life', em: true },
+          { text: 'Built for Real Maltese Life', em: true },
         ]}
         sub="A doctor-backed system you can actually follow — no crash diets, no calorie counting. For only €30."
         bullets={[

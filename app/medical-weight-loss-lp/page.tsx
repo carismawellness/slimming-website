@@ -198,8 +198,8 @@ export default function MedicalWeightLossLpPage() {
       <PageHero
         eyebrow="Ultimate weight loss protocol in Malta"
         headline={[
-          { text: 'Medical Weight Loss Programme in Malta' },
-          { text: 'Lose fat and keep it off', em: true },
+          { text: 'Medical Weight Loss in Malta' },
+          { text: 'Lose Fat and Keep It Off', em: true },
         ]}
         sub="Clinician-guided weight loss — assessment, eligibility review, nutrition and weekly tracking — to help you lose fat safely and keep it off."
         bullets={[

@@ -225,7 +225,13 @@ export default function PackagePage({ content: c }: { content: PackageContent })
     <div style={{ backgroundColor: '#ffffff', fontFamily: BODY }}>
       {/* ===================== 1. HERO ===================== */}
       <PageHero
-        headline={[{ text: c.heroTitle }]}
+        headline={(() => {
+          // Split the title on an em/en-dash into ≤2 lines (2nd line sage); else one line.
+          const parts = c.heroTitle.split(/\s*[—–]\s*/).filter(Boolean);
+          return parts.length > 1
+            ? [{ text: parts[0] }, { text: parts.slice(1).join(' — '), em: true }]
+            : [{ text: c.heroTitle }];
+        })()}
         sub={c.heroDescription}
         bullets={c.heroIncludes.map((t) => ({ text: t }))}
         primaryCta={{ text: 'Claim Your Spot Now', href: BOOKING_URL, external: true }}

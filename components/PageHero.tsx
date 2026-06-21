@@ -103,8 +103,8 @@ export default function PageHero({
   compactHeadline,
 }: PageHeroProps) {
   const headlineSize = compactHeadline
-    ? 'clamp(27px, 3.6vw, 44px)'
-    : 'clamp(30px, 4.2vw, 52px)';
+    ? 'clamp(23px, 2.7vw, 31px)'
+    : 'clamp(26px, 3vw, 35px)';
 
   return (
     <section
@@ -194,11 +194,11 @@ export default function PageHero({
               textTransform: 'uppercase',
               color: SAGE_TEXT,
               margin: '0 0 18px',
-              maxWidth: 600,
+              maxWidth: 650,
             }}
           >
             {headline.map((l, i) => (
-              <span key={i} style={{ display: 'block', color: l.em ? '#7ba587' : undefined }}>
+              <span key={i} className="ph-hl-line" style={{ display: 'block', color: l.em ? '#7ba587' : undefined }}>
                 {l.text}
               </span>
             ))}
