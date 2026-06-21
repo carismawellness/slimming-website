@@ -600,7 +600,7 @@ export default function GLP1Page() {
                   {[0, 1, 2, 3, 4].map((i) => (
                     <img key={i} src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png" alt="" style={{ width: '23px', height: '20px', objectFit: 'contain' }} />
                   ))}
-                  <span className="ml-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px' }}>Over 200+ Reviews</span>
+                  <span className="ml-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px' }}>Over 800+ Reviews</span>
                 </div>
               </div>
             </div>

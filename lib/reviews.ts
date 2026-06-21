@@ -30,10 +30,10 @@ export const GOOGLE_WRITE_REVIEW_URL =
 export const FRESHA_PROFILE_URL =
   'https://www.fresha.com/a/carisma-slimming-floriana-great-siege-road-wxxyuj9p?pId=2708191';
 
-export const AGGREGATE = { rating: '4.9', count: '200+' };
+export const AGGREGATE = { rating: '4.9', count: '800+' };
 
 /** @deprecated Use AGGREGATE instead */
-export const REVIEW_SUMMARY = { rating: 4.9, total: 200 };
+export const REVIEW_SUMMARY = { rating: 4.9, total: 800 };
 
 export const SLIMMING_REVIEWS: Review[] = [
   // ── Google reviews (slimming-specific) ───────────────────────────────────

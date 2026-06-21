@@ -167,7 +167,7 @@ export default function ConsultationPage() {
                 <span className="hero-pill">
                   <Stars size={13} />
                   <span style={{ fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: SAGE }}>
-                    4.9 · 200+ reviews
+                    4.9 · 800+ reviews
                   </span>
                 </span>
                 <span className="hero-pill">
@@ -224,7 +224,7 @@ export default function ConsultationPage() {
               <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
                 <Stars size={14} />
                 <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>
-                  <strong style={{ color: SAGE }}>4.9</strong> · 200+ Google reviews
+                  <strong style={{ color: SAGE }}>4.9</strong> · 800+ verified reviews
                 </span>
                 <span aria-hidden style={{ width: 1, height: 14, background: '#d9d2ca' }} />
                 <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>Limited places each month</span>
@@ -269,7 +269,7 @@ export default function ConsultationPage() {
                 <span style={{ fontFamily: HEADING, fontSize: 28, color: SAGE, lineHeight: 1 }}>4.9</span>
                 <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                   <Stars size={11} />
-                  <span style={{ fontFamily: BODY, fontSize: 10.5, color: TAUPE }}>200+ reviews</span>
+                  <span style={{ fontFamily: BODY, fontSize: 10.5, color: TAUPE }}>800+ reviews</span>
                 </span>
               </div>
 
@@ -387,7 +387,7 @@ export default function ConsultationPage() {
                   <span style={{ fontFamily: HEADING, fontSize: 26, color: SAGE, lineHeight: 1 }}>4.9</span>
                 </div>
                 <h2 id="proof-heading" style={{ fontFamily: WIDE, fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', color: TAUPE }}>
-                  Loved by 200+ clients across Malta
+                  Loved by 800+ clients across Malta
                 </h2>
               </header>
 
@@ -444,7 +444,7 @@ export default function ConsultationPage() {
               </BookConsultationButton>
             </div>
             <p style={{ fontFamily: BODY, fontSize: 13, color: TAUPE, opacity: 0.85, marginTop: 16 }}>
-              ★ 4.9 from 200+ reviews · Limited places each month
+              ★ 4.9 from 800+ reviews · Limited places each month
             </p>
           </div>
         </GradientField>

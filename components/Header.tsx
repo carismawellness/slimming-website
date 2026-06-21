@@ -14,7 +14,7 @@ const GREEN = '#024C27';      // brand green for small text/icons/announcement b
 const TAUPE = '#6F6456';
 const DROPDOWN_INK = '#6F6456'; // dropdown/sub-item link on white = 5.78:1 AA (was #9B8D83 -> 3.22:1)
 
-const BANNER = "#1 VOTED SLIMMING CLINIC IN MALTA          ·          DOCTOR-LED WEIGHT LOSS          ·          200+ VERIFIED REVIEWS          ·          FREE BODY ANALYSIS          ·          ";
+const BANNER = "#1 VOTED SLIMMING CLINIC IN MALTA          ·          DOCTOR-LED WEIGHT LOSS          ·          800+ VERIFIED REVIEWS          ·          FREE BODY ANALYSIS          ·          ";
 
 type NavItem = { label: string; href: string };
 
@@ -216,7 +216,7 @@ export default function Header() {
               <PhoneIcon />
               <span style={{ color: GREEN, fontFamily: '"Novecento Wide", sans-serif', fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px' }}>27802062</span>
             </a>
-            <Link href="/consultation" className="cta-glow" style={ctaStyle}>Free Body Analysis</Link>
+            <Link href="/consultation" className="cta-glow" style={ctaStyle}>Free Body Composition Analysis</Link>
           </div>
 
           {/* Mobile hamburger */}
@@ -321,7 +321,7 @@ export default function Header() {
               className="cta-glow block text-center"
               style={{ ...ctaStyle, marginTop: '10px', padding: '14px', fontSize: '13px' }}
             >
-              Free Body Analysis
+              Free Body Composition Analysis
             </Link>
           </div>
         </div>

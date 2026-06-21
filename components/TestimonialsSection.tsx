@@ -88,7 +88,7 @@ export default function TestimonialsSection() {
         </div>
 
         <p className="text-center mt-12 text-gray-600">
-          Over 200+ reviews with 5-star Google rating
+          Over 800+ reviews with 5-star Google rating
         </p>
       </div>
     </section>

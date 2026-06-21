@@ -174,7 +174,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
         className="ml-2"
         style={{ color: light ? GREEN_SAGE_LIGHT : GREEN, fontFamily: bodyFont, fontSize: '16px' }}
       >
-        Over 200+ Reviews
+        Over 800+ Reviews
       </span>
     </div>
   );

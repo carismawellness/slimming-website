@@ -140,7 +140,7 @@ export const services: Record<string, Service> = {
       },
       {
         heading: 'Trusted Clinic / Social Proof',
-        body: 'Over 200+ Reviews accompanied by five-star ratings. Featured in: Malta Today, Times Malta, MT Today, and other local media outlets. #1 Voted Clinic in Malta.',
+        body: 'Over 800+ Reviews accompanied by five-star ratings. Featured in: Malta Today, Times Malta, MT Today, and other local media outlets. #1 Voted Clinic in Malta.',
       },
       {
         heading: 'FAQ',

@@ -310,7 +310,7 @@ export default async function ServicePage({ params }: Props) {
                     &#9733;&#9733;&#9733;&#9733;&#9733;
                   </span>
                   <span className="text-xs" style={{ color: TAUPE_LIGHT, fontFamily: BODY_FONT }}>
-                    Over 200+ Reviews
+                    Over 800+ Reviews
                   </span>
                 </div>
 

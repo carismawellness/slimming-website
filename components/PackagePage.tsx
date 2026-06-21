@@ -175,7 +175,7 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
       )}
       {/* P1 — meaningful aria-label on star rating */}
       <span style={{ color: GREEN_TEXT, fontSize: size, letterSpacing: 2, lineHeight: 1 }} role="img" aria-label="5 out of 5 stars">{'★'.repeat(5)}</span>
-      <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14 }}>Over 200+ Reviews</span>
+      <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14 }}>Over 800+ Reviews</span>
     </span>
   );
 }
