@@ -3,6 +3,8 @@ import GoogleReviews from '@/components/GoogleReviews';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
 import BookConsultationButton from '@/components/BookConsultationButton';
+import GradientField from '@/components/layers/GradientField';
+import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | #1 Voted Slimming Clinic in Malta",
@@ -192,7 +194,14 @@ export default function Home() {
       <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Live page renders this section on a rounded gradient panel (980px wide) */}
-          <div style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', borderRadius: '16px', background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', padding: '28px 46px 48px' }}>
+          {/* Layers (Whisper): page's single watermark + blob + dots + grid live on this panel */}
+          <GradientField
+            blob={{ top: '8%', right: '-8%' }}
+            dots
+            grid
+            motif="watermark"
+            style={{ maxWidth: '980px', marginLeft: 'auto', marginRight: 'auto', borderRadius: '16px', background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', padding: '28px 46px 48px' }}
+          >
             <p className="text-center mb-2" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
               our results-driven approach
             </p>
@@ -237,9 +246,12 @@ export default function Home() {
                 </ul>
               </div>
             </div>
-          </div>
+          </GradientField>
         </div>
       </section>
+
+      {/* Layers: single section divider between Results-Driven and GLP-1 */}
+      <MotifAccent mode="divider" />
 
       {/* (5) Medical Weight Loss in Malta (GLP-1) */}
       <section className="py-24" style={{ backgroundColor: '#ffffff' }}>

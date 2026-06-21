@@ -14,6 +14,8 @@ import {
 } from '@/lib/seo/schema';
 import { glp1Faqs } from '@/lib/faq/glp1';
 import BookConsultationButton from '@/components/BookConsultationButton';
+import GradientField from '@/components/layers/GradientField';
+import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
   title: "GLP-1 Weight Loss Injections Malta | Carisma Slimming",
@@ -246,7 +248,7 @@ export default function GLP1Page() {
             {pillars.map((pillar, i) => (
               <div
                 key={i}
-                className="card p-8"
+                className="card lg-raised lg-raised--hover p-8"
                 style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)' }}
               >
                 <img src={pillarIcons[i]} alt="" style={{ width: '74px', height: '74px', objectFit: 'contain', marginBottom: '20px' }} />
@@ -335,7 +337,7 @@ export default function GLP1Page() {
           <p className="text-center mx-auto mb-12" style={{ color: '#5c5346', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '760px' }}>
             We are a doctor-led medical weight loss clinic in Malta that blends medical insight, sustainable nutrition, and modern body technology into one high-touch system. So you do not just lose weight, you build a stronger, healthier version of yourself.
           </p>
-          <div className="card mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)' }}>
+          <div className="card lg-raised mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)' }}>
             <ul className="space-y-6">
               {[
                 'Doctor-led medical weight loss: full check, body scan, and blood work',
@@ -416,7 +418,7 @@ export default function GLP1Page() {
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
-              className="card p-12 flex items-center"
+              className="card lg-raised p-12 flex items-center"
               style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', minHeight: '240px' }}
             >
               {/* Callout on #F2F6EF->#DCE7D5 sage gradient: deep taupe #5c5346 (>=5.9:1) with
@@ -614,11 +616,17 @@ export default function GLP1Page() {
       {/* The Carisma difference — wellness chain + map */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="card" style={{ background: 'linear-gradient(135deg, #FBFBF7 0%, #DDE8D6 100%)', padding: '48px' }}>
+          <GradientField
+            className="card"
+            style={{ background: 'linear-gradient(135deg, #FBFBF7 0%, #DDE8D6 100%)', padding: '48px' }}
+            blob={{ top: '6%', right: '-5%' }}
+            dots
+          >
             <p className="text-center mb-2" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
               the carisma difference
             </p>
             <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
+            <MotifAccent mode="divider" className="mx-auto mb-6" />
             <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
               Malta&rsquo;s #1 leading wellness chain
             </h2>
@@ -673,7 +681,7 @@ export default function GLP1Page() {
                 </div>
               </div>
             </div>
-          </div>
+          </GradientField>
         </div>
       </section>
 

@@ -6,6 +6,8 @@ import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, faqPage, serviceSchema } from '@/lib/seo/schema';
 import BookConsultationButton from '@/components/BookConsultationButton';
+import GradientField from '@/components/layers/GradientField';
+import MotifAccent from '@/components/layers/MotifAccent';
 
 /* ============================================================
    Carisma — Medical Weight-Loss Program  (/weight-loss)
@@ -200,6 +202,7 @@ function ProblemAgitationSection() {
             <h2 className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
               Weight Loss After 30 in Malta<br />Without Giving Up the Foods You Love
             </h2>
+            <MotifAccent mode="divider" className="mx-auto mb-7" style={{ width: 'min(220px, 60%)' }} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="overflow-hidden mx-auto shadow-md" style={{ width: '334px', maxWidth: '100%', height: '362px', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}>
                 <img
@@ -659,7 +662,7 @@ function CorePillarsSection() {
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
           {pillars.map((p) => (
-            <div key={p.title} className="p-6" style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #E6EFE3 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
+            <div key={p.title} className="lg-raised lg-raised--hover p-6" style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #E6EFE3 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)' }}>
               <div className="mb-5 flex items-center" style={{ height: '48px' }}>
                 <img src={p.icon} alt="" style={{ maxHeight: '44px', width: 'auto', objectFit: 'contain' }} />
               </div>
@@ -838,7 +841,13 @@ function OurPromiseSection() {
   return (
     <div className="py-20" style={{ backgroundColor: '#ffffff' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
-        <div className="p-8 sm:p-10" style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '16px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
+        <GradientField
+          className="p-8 sm:p-10"
+          style={{ background: 'linear-gradient(180deg, #F7F6F2 0%, #DCE7D9 100%)', borderRadius: '16px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}
+          blob={{ top: '8%', right: '-5%' }}
+          dots
+          motif="watermark"
+        >
           <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
             Our Promise
           </p>
@@ -874,7 +883,7 @@ function OurPromiseSection() {
               </ul>
             </div>
           </div>
-        </div>
+        </GradientField>
       </div>
     </div>
   );
