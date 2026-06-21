@@ -12,7 +12,7 @@ type BlobPos = { top?: string; left?: string; right?: string; bottom?: string };
 
 type Props = {
   children: React.ReactNode;
-  /** false = no blob; object = blob position. Default sits top-right. */
+  /** false (default) = no blob; object = blob position, e.g. { top:'10%', right:'-6%' }. Opt-in. */
   blob?: false | BlobPos;
   dots?: boolean;
   grid?: boolean;
@@ -23,7 +23,7 @@ type Props = {
 
 export default function GradientField({
   children,
-  blob = { top: '10%', right: '-6%' },
+  blob = false,
   dots = true,
   grid = false,
   motif = false,
