@@ -168,6 +168,8 @@ function Section({
             fontWeight: 400,
             marginBottom: '20px',
             lineHeight: 1.3,
+            borderLeft: `2px solid ${c.sage}`,
+            paddingLeft: '16px',
           }}
         >
           {title}
@@ -231,10 +233,19 @@ export default function TermsPage() {
           fontSize: 'clamp(36px, 5vw, 52px)',
           fontWeight: 400,
           lineHeight: 1.2,
-          marginBottom: '28px',
+          marginBottom: '16px',
         }}>
           Carisma Slimming
         </h1>
+        <p style={{
+          color: 'rgba(201,216,193,0.75)',
+          fontFamily: '"Novecento Wide", sans-serif',
+          fontSize: '14px',
+          letterSpacing: '1.5px',
+          marginBottom: '28px',
+        }}>
+          Medical Weight Loss &mdash; Malta
+        </p>
         {/* Sage divider */}
         <div style={{ width: '64px', height: '1px', backgroundColor: c.sage, margin: '0 auto 28px' }} />
         {/* Date badge */}
