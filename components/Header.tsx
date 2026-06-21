@@ -109,7 +109,7 @@ export default function Header() {
     fontWeight: 700,
     letterSpacing: '0.5px',
     textTransform: 'uppercase',
-    padding: '11px 22px',
+    padding: '9px 20px',
     borderRadius: '999px',
     textDecoration: 'none',
     whiteSpace: 'nowrap',
@@ -140,8 +140,8 @@ export default function Header() {
           <span>{BANNER}</span><span>{BANNER}</span>
         </div>
         <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (max-width:767px){.header-logo{height:27px !important}}
-.header-logo--mobile{height:27px !important}`}</style>
+@media (max-width:767px){.header-logo{height:20px !important}}
+.header-logo--mobile{height:22px !important}`}</style>
       </div>
 
       {/* Floating glass pill */}
@@ -149,11 +149,11 @@ export default function Header() {
         <nav
           aria-label="Main navigation"
           className="flex items-center justify-between"
-          style={{ ...pillStyle, minHeight: '60px', padding: '8px 12px 8px 22px' }}
+          style={{ ...pillStyle, minHeight: '52px', padding: '6px 10px 6px 20px' }}
         >
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0" onClick={() => setOpen(false)}>
-            <Image src="/logo.png" alt="Carisma Slimming" width={152} height={38} className="header-logo" style={{ height: '38px', width: 'auto', display: 'block' }} priority />
+            <Image src="/logo.png" alt="Carisma Slimming" width={510} height={96} className="header-logo" style={{ height: '26px', width: 'auto', display: 'block' }} priority />
           </Link>
 
           {/* Desktop menu */}
@@ -247,7 +247,7 @@ export default function Header() {
           {/* Top row: logo + close */}
           <div className="flex items-center justify-between shrink-0" style={{ padding: '16px clamp(16px,5vw,28px)' }}>
             <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
-              <Image src="/logo.png" alt="Carisma Slimming" width={108} height={27} className="header-logo header-logo--mobile" style={{ height: '27px', width: 'auto', display: 'block' }} />
+              <Image src="/logo.png" alt="Carisma Slimming" width={510} height={96} className="header-logo header-logo--mobile" style={{ height: '22px', width: 'auto', display: 'block' }} />
             </Link>
             <button
               onClick={() => setOpen(false)}
