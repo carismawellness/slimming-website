@@ -17,8 +17,8 @@ import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
-  title: "GLP-1 Weight Loss Injections Malta | Carisma Slimming",
-  description: "Medically prescribed GLP-1 injections in Malta including Ozempic and Mounjaro. Supervised weight loss of up to 1kg per week with our qualified doctors.",
+  title: "Medical Weight Loss Malta | Ozempic & Mounjaro | Carisma Slimming",
+  description: "Malta's #1 doctor-led medical weight loss clinic. Personalised weight loss programs with GLP-1 support, nutrition, body composition tracking, and ongoing medical supervision. Book your free consultation.",
   alternates: { canonical: 'https://www.carismaslimming.com/glp1' },
 };
 

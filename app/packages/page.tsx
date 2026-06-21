@@ -7,8 +7,8 @@ import PageHero from '@/components/PageHero';
 import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
-  title: "Body Contouring Packages Malta | Carisma Slimming",
-  description: "Explore Malta's most effective weight loss packages — fat freezing, fat dissolving, muscle stimulation, skin tightening and more. Medically supervised at Carisma Slimming.",
+  title: "Weight Loss Protocol | Malta's #1 Weight-Loss Clinic",
+  description: "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
   alternates: { canonical: 'https://www.carismaslimming.com/packages' },
 };
 

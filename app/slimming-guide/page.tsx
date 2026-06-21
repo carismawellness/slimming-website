@@ -8,8 +8,8 @@ import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
-  title: "Free Slimming Guide Malta | Carisma Slimming",
-  description: "Download our free Slimming Guide — the definitive weight loss resource for Malta. Expert advice from our doctors on diet, exercise, GLP-1s, and body contouring.",
+  title: "Carisma Slimmig Guide | Malta's #1 Weight-Loss Clinic",
+  description: "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
   alternates: { canonical: 'https://www.carismaslimming.com/slimming-guide' },
 };
 

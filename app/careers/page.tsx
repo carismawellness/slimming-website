@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 
 export const metadata: Metadata = {
-  title: "Careers at Carisma Slimming Malta | Join Our Team",
-  description: "Join Malta's #1 voted slimming clinic. Explore career opportunities at Carisma Slimming — we're looking for passionate healthcare and wellness professionals.",
+  title: "Join the Team at Carisma Slimming | #1 Award Winning Chain",
+  description: "Join the team at Carisma Slimming and take your career to the next level. We are Malta's number one award winning chain, offering top-quality slimming treatments.",
   alternates: { canonical: 'https://www.carismaslimming.com/careers' },
 };
 

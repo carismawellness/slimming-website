@@ -7,8 +7,8 @@ import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
-  title: "Carisma Slimming | #1 Voted Slimming Clinic in Malta",
-  description: "Malta's most comprehensive slimming program, led by medically qualified doctors. Lose up to 1kg a week with weight loss, GLP-1s, and non-invasive body contouring packages.",
+  title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
+  description: "Lose up to 1kg a week with Malta's most comprehensive slimming program. Fat freezing, body contouring, personalised meal plans. Starter packs from €199. Book your free consultation.",
   alternates: { canonical: "https://www.carismaslimming.com" },
 };
 

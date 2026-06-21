@@ -7,7 +7,8 @@ import TestimonialsSlider from './TestimonialsSlider';
 import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
-  title: "Medical Weight Loss Malta | Carisma Slimming",
+  title: "Medical weight loss Malta | Malta's #1 Weight-Loss Clinic",
+  description: "Discover Malta's premier Doctor Led Metabolic Reset, a proven, evidence-based approach for stubborn fat. To book a free consultation with Carisma Slimming, call us on +356 27802062.",
   robots: { index: false, follow: true },
 };
 
