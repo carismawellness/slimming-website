@@ -117,32 +117,9 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50">
-      {/* Announcement strip — slides away on scroll */}
-      <div
-        className="overflow-hidden flex items-center"
-        style={{
-          backgroundColor: '#C9D8C1',
-          height: scrolled ? 0 : 36,
-          opacity: scrolled ? 0 : 1,
-          transition: 'height 0.35s ease, opacity 0.25s ease',
-        }}
-      >
-        <div style={{
-          display: 'inline-block',
-          whiteSpace: 'nowrap',
-          animation: 'marquee 38s linear infinite',
-          fontFamily: '"Novecento Wide", sans-serif',
-          fontWeight: 700,
-          fontSize: '10px',
-          letterSpacing: '3.5px',
-          color: '#024C27',
-        }}>
-          <span>{BANNER}</span><span>{BANNER}</span>
-        </div>
-        <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media (max-width:767px){.header-logo{height:20px !important}}
+      {/* Announcement strip removed per request. Logo sizing rules retained. */}
+      <style>{`@media (max-width:767px){.header-logo{height:20px !important}}
 .header-logo--mobile{height:22px !important}`}</style>
-      </div>
 
       {/* Floating glass pill */}
       <div style={{ padding: '12px clamp(12px,3vw,28px) 0', maxWidth: '1280px', margin: '0 auto' }}>

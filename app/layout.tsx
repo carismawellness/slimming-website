@@ -18,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | #1 Voted Slimming Clinic in Malta",
-  description: "Malta's most comprehensive slimming program, led by medically qualified doctors. Lose up to 1kg a week with weight loss, GLP-1s, and non-invasive body contouring packages.",
+  description: "Malta's most comprehensive slimming program, led by medically qualified doctors. Lose up to 1kg a week with GLP-1s, fat freezing, and body contouring.",
   keywords: "weight loss Malta, slimming clinic Malta, fat freezing, fat dissolving, GLP-1 medication, medical weight loss, body contouring Malta",
   metadataBase: new URL('https://www.carismaslimming.com'),
   openGraph: {
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Carisma Slimming | #1 Voted Slimming Clinic in Malta',
     description: "Malta's most comprehensive slimming program, led by medically qualified doctors.",
-    images: ['/background.avif'],
+    images: [{ url: '/background.avif', alt: 'Carisma Slimming Malta' }],
   },
 };
 
@@ -52,12 +52,26 @@ const schema = {
   "paymentAccepted": "Cash, Credit Card",
   "address": {
     "@type": "PostalAddress",
-    "addressCountry": "MT",
-    "addressLocality": "Malta"
+    "streetAddress": "Grand Hotel Excelsior, Great Siege Road",
+    "addressLocality": "Floriana",
+    "addressRegion": "MT",
+    "postalCode": "FRN 1810",
+    "addressCountry": "MT"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 35.8976,
+    "longitude": 14.5101
+  },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+    "opens": "08:00",
+    "closes": "20:00"
   },
   "sameAs": [
     "https://www.instagram.com/carismaslimming",
-    "https://www.facebook.com/carismaaesthetics/"
+    "https://www.facebook.com/carismaslimming"
   ],
   "medicalSpecialty": "Weight Loss",
   "availableService": [
@@ -82,6 +96,8 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        {/* Preload the hero video poster for LCP optimisation */}
+        <link rel="preload" as="image" href="/Thumbnail.png" fetchPriority="high" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
