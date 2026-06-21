@@ -89,7 +89,7 @@ export default function PackagesPage() {
           primaryCta={{ text: 'Free Body Analysis', href: BOOKING_URL, external: true }}
           secondaryCta={{ text: 'Call 27802062', href: 'tel:+35627802062' }}
           media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.png', alt: 'Carisma Slimming body contouring treatment demonstration in Malta' }}
-          proof={{ rating: '4.9', reviews: '200+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+          proof={{ rating: '4.9', reviews: '800+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         />
 
         {/* Packages grid */}

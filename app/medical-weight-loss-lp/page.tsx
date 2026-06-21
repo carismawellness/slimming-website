@@ -258,7 +258,7 @@ export default function MedicalWeightLossLpPage() {
         ]}
         primaryCta={{ text: 'Book Your Consultation', href: FRESHA_BOOK, external: true }}
         media={{ type: 'video', src: '/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png', alt: 'Medical weight loss programme in Malta — doctor consultation and body assessment' }}
-        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />
 

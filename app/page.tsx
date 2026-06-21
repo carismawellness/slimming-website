@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
-import QuizModal from '@/components/QuizModal';
 import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
@@ -40,7 +39,7 @@ export default function Home() {
         primaryCta={{ text: 'Get Your Free Body Analysis', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
         secondaryCta={{ text: 'Take the quiz', href: '#quiz' }}
         media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.png', alt: 'Carisma Slimming doctor-led weight loss in Malta' }}
-        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />
 
@@ -49,19 +48,19 @@ export default function Home() {
       <QuizModal />
 
       {/* (1) Media / Press Strip */}
-      <section className="py-16" aria-label="As seen in media" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center mb-2" aria-hidden="true" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', textTransform: 'uppercase' }}>
+      <section className="py-10" aria-label="As seen in media" style={{ backgroundColor: '#f9f7f5' }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <p className="text-center mb-2" aria-hidden="true" style={{ color: '#9B8D83', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '11px', fontWeight: '700', letterSpacing: '3px', textTransform: 'uppercase' }}>
             As seen on
           </p>
-          <div className="mx-auto mb-6" aria-hidden="true" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />
-          <div className="flex flex-wrap items-center justify-center" style={{ gap: '20px' }}>
+          <div className="mx-auto mb-8" aria-hidden="true" style={{ width: '40px', height: '1px', backgroundColor: '#C9B8AE' }} />
+          <div className="flex flex-wrap items-center justify-center" style={{ gap: '52px', rowGap: '28px' }}>
             {[
-              { label: 'Malta Today', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', width: 120, height: 31 },
-              { label: 'Bay Radio Malta', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', width: 120, height: 31 },
-              { label: 'Lovin Malta', src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', width: 145, height: 37 },
-              { label: 'Times of Malta', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', width: 120, height: 31 },
-              { label: 'MT Today', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', width: 120, height: 31 },
+              { label: 'Malta Today', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', width: 130, height: 34 },
+              { label: 'Bay Radio Malta', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', width: 130, height: 34 },
+              { label: 'Lovin Malta', src: '/wix/f940f0_8bd141199fea4275a1222b62f24f2d98~mv2.jpeg', width: 155, height: 40 },
+              { label: 'Times of Malta', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', width: 130, height: 34 },
+              { label: 'MT Today', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', width: 130, height: 34 },
             ].map((logo) => (
               <Image
                 key={logo.label}
@@ -69,7 +68,7 @@ export default function Home() {
                 alt={`${logo.label} — Carisma Slimming featured`}
                 width={logo.width}
                 height={logo.height}
-                style={{ height: `${logo.height}px`, width: 'auto', objectFit: 'contain' }}
+                style={{ height: `${logo.height}px`, width: 'auto', objectFit: 'contain', filter: 'grayscale(1) opacity(0.5)', transition: 'filter 0.3s ease' }}
               />
             ))}
           </div>

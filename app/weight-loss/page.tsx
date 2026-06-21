@@ -170,7 +170,7 @@ function HeroSection() {
         primaryCta={{ text: 'Get Your Free Body Analysis', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
         secondaryCta={{ text: 'Speak to a doctor', href: 'tel:+35627802062' }}
         media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png', alt: 'Carisma medical weight loss in Malta' }}
-        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />
   );

@@ -199,7 +199,7 @@ export default function SlimmingGuidePage() {
         ]}
         primaryCta={{ text: 'Get the Slimming Guide', href: 'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta', external: true }}
         media={{ type: 'image', src: '/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.png', alt: 'The Carisma Slimming Guide', fit: 'contain', bg: 'linear-gradient(160deg, #eef3ea 0%, #dde7d6 100%)' }}
-        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta' }}
+        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta' }}
         compactHeadline
       />
 

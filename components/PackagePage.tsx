@@ -328,7 +328,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           media={c.heroVideo
             ? { type: 'video', src: c.heroVideo, poster: c.heroImage, alt: c.heroSubheading }
             : { type: 'image', src: c.heroImage, alt: c.heroSubheading }}
-          proof={{ rating: '4.9', reviews: '200+', awardSrc: BADGE, awardText: '#1 voted clinic\nMalta' }}
+          proof={{ rating: '4.9', reviews: '800+', awardSrc: BADGE, awardText: '#1 voted clinic\nMalta' }}
           compactHeadline
         />
 

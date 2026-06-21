@@ -108,7 +108,7 @@ export default function GLP1Page() {
         primaryCta={{ text: 'Book Your Consultation', href: '/consultation' }}
         secondaryCta={{ text: 'Speak to a doctor', href: 'tel:+35627802062' }}
         media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png', alt: 'Doctor-led GLP-1 weight loss in Malta' }}
-        proof={{ rating: '4.9', reviews: '200+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
+        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />
 

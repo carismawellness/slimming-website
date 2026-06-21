@@ -160,16 +160,10 @@ export default function PageHero({
       >
         {/* LEFT — message */}
         <div>
-          {/* badge pills */}
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 18 }}>
+          {/* single badge pill, left (review proof lives under the CTA; award on the video) */}
+          <div style={{ display: 'flex', marginBottom: 18 }}>
             <span className="hero-pill">
-              <Stars size={13} />
               <span style={{ fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: SAGE_TEXT }}>
-                Highest rated in Malta
-              </span>
-            </span>
-            <span className="hero-pill">
-              <span style={{ fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: TAUPE }}>
                 #1 voted slimming clinic
               </span>
             </span>
@@ -290,14 +284,12 @@ export default function PageHero({
             )}
           </div>
 
-          {/* compact proof row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+          {/* review proof under the CTA — single source of truth */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
             <Stars size={14} />
             <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>
-              <strong style={{ color: SAGE_TEXT }}>{proof?.rating || '4.9'}</strong> · {proof?.reviews || '200+'} Google reviews
+              <strong style={{ color: SAGE_TEXT }}>{proof?.rating || '4.9'}</strong> · {proof?.reviews || '800+'} Google reviews
             </span>
-            <span aria-hidden style={{ width: 1, height: 14, background: '#d9d2ca' }} />
-            <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>Doctor-led · Free body analysis</span>
           </div>
         </div>
 
@@ -346,7 +338,7 @@ export default function PageHero({
             )}
           </div>
 
-          {/* floating: rating card */}
+          {/* floating: 35+ years in business */}
           <div
             className="hero-glass hero-float"
             style={{
@@ -362,12 +354,35 @@ export default function PageHero({
             }}
           >
             <span style={{ fontFamily: HEADING, fontSize: 28, color: SAGE_TEXT, lineHeight: 1 }}>
-              {proof?.rating || '4.9'}
+              {proof?.statValue || '35+'}
             </span>
-            <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <Stars size={11} />
-              <span style={{ fontFamily: BODY, fontSize: 10.5, color: TAUPE }}>{proof?.reviews || '200+'} reviews</span>
+            <span style={{ fontFamily: WIDE, fontSize: 9.5, letterSpacing: '0.06em', textTransform: 'uppercase', color: TAUPE, lineHeight: 1.3, maxWidth: 84 }}>
+              {proof?.statLabel || 'years in business'}
             </span>
+          </div>
+
+          {/* floating: doctor-led */}
+          <div
+            className="hero-glass hero-float"
+            style={{
+              position: 'absolute',
+              left: 'clamp(-10px, -1vw, -2px)',
+              top: '16%',
+              borderRadius: 999,
+              padding: '8px 14px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: 7,
+              zIndex: 3,
+              animationDelay: '-2.8s',
+            }}
+          >
+            <span aria-hidden style={{ width: 16, height: 16, borderRadius: '50%', background: 'rgba(142,176,147,0.22)', display: 'grid', placeItems: 'center' }}>
+              <svg width="9" height="9" viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke={SAGE_TEXT} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </span>
+            <span style={{ fontFamily: WIDE, fontSize: 10, letterSpacing: '0.1em', textTransform: 'uppercase', color: SAGE_TEXT }}>Doctor-led</span>
           </div>
 
           {/* floating: award / stat card */}
