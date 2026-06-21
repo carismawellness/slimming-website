@@ -15,7 +15,7 @@ import { NextResponse } from 'next/server';
  * and stays within Google's caching terms (no caching beyond 30 days).
  */
 
-const PLACE_ID = 'ChIJb8mnDlFNDhMReGUGioZvbCY'; // Carisma Slimming, Floriana
+const PLACE_ID = 'ChIJgVdYYmhFDhMR8oSHh_7gYX4'; // Carisma Slimming clinic (brand 3)
 const PROFILE_URL = `https://search.google.com/local/reviews?placeid=${PLACE_ID}`;
 
 // Revalidate this route's cached response once per day.
