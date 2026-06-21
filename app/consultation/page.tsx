@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import BookConsultationButton from '@/components/BookConsultationButton';
 import GradientField from '@/components/layers/GradientField';
+import DoctorCards from './_components/DoctorCards';
 
 export const metadata: Metadata = {
   title: "Free Slimming Consultation Malta | Carisma Slimming",
@@ -10,16 +11,96 @@ export const metadata: Metadata = {
 };
 
 // Accessible brand palette (locked):
-//  --brand-green-text / --brand-green-fill = #4f7256 (5.42:1 on white / carries white text)
-//  TAUPE body text = #6f6456 (5.78:1 on white)
-const GREEN = '#4f7256';
+//  deep sage  #4f7256 (5.42:1 on white) — headings / icons / CTA fills, white text
+//  taupe      #6f6456 (5.78:1 on white) — body / eyebrow text
+//  ink-taupe  #5a5043 — bold body emphasis
+//  gold-text  #8c6d18 — small accent (stars)
+//  bright sage #8EB093 — DECORATIVE ONLY (never as text on light)
+const HEADING = 'Trajan Pro, serif';
+const WIDE = '"Novecento Wide", "Novecento Wide Book", sans-serif';
+const BODY = 'Roboto, sans-serif';
+const SAGE = '#4f7256';
 const TAUPE = '#6f6456';
+const INK = '#5a5043';
 
-const COLLAGE = [
-  '/wix/87fc13_170da1f718f64c8b8e1a1a86083e1a72~mv2.png',
-  '/wix/87fc13_59d15b41b3c1462788d0a0843b859d0b~mv2.png',
-  '/wix/87fc13_73555ee869874f3c8a90fd5bb62d19e8~mv2.png',
-  '/wix/87fc13_074438e081814932aa4c2fe6dc450e57~mv2.png',
+const HERO_IMG = '/wix/87fc13_16e7dbed_consult_668x724.jpg';
+
+/* Shared little star row (gold, decorative). */
+function Stars({ size = 14 }: { size?: number }) {
+  return (
+    <span style={{ display: 'inline-flex', gap: 1, color: '#caa44a' }} aria-hidden>
+      {[0, 1, 2, 3, 4].map((i) => (
+        <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+        </svg>
+      ))}
+    </span>
+  );
+}
+
+function Check() {
+  return (
+    <span
+      aria-hidden
+      style={{
+        flexShrink: 0,
+        width: 20,
+        height: 20,
+        borderRadius: '50%',
+        background: 'rgba(142,176,147,0.20)',
+        display: 'grid',
+        placeItems: 'center',
+        marginTop: 1,
+      }}
+    >
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none">
+        <path d="M5 13l4 4L19 7" stroke={SAGE} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    </span>
+  );
+}
+
+const TRUST = [
+  { t: 'Medically qualified doctors', d: 'Doctor-led, not a salon diet' },
+  { t: 'Free Tanita body analysis', d: 'See your full body composition' },
+  { t: 'No obligation', d: 'An honest plan, zero pressure' },
+  { t: 'Limited places monthly', d: 'We only take who we can help' },
+];
+
+const STEPS = [
+  {
+    n: '01',
+    t: 'Book your free consultation',
+    d: 'Pick a time that suits you. It takes under a minute and there is no obligation — just bring your goals and any questions.',
+  },
+  {
+    n: '02',
+    t: 'Meet your doctor + Tanita body analysis',
+    d: 'A medically qualified doctor reviews your history and goals, and a Tanita scan reveals your body composition — fat, muscle, water and metabolic age.',
+  },
+  {
+    n: '03',
+    t: 'Your personalised plan',
+    d: 'You leave with a clear, realistic plan built around your body and lifestyle — including whether medical weight loss support is right for you.',
+  },
+];
+
+const PROOF_QUOTES = [
+  {
+    name: 'Alison Zammit',
+    initial: 'A',
+    text: 'Dr. Francesca is simply amazing — a professional doctor who put me completely at ease and explained every step.',
+  },
+  {
+    name: 'Melanie Vella',
+    initial: 'M',
+    text: 'The staff were welcoming and the doctor was attentive and explained everything clearly. They clearly care about their clients.',
+  },
+  {
+    name: 'Ronnalie Parungao',
+    initial: 'R',
+    text: 'Your honesty in suggesting the right option made me feel secure. I left far more informed and confident moving forward.',
+  },
 ];
 
 export default function ConsultationPage() {
@@ -29,238 +110,448 @@ export default function ConsultationPage() {
       <a
         href="#consultation-main"
         className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:rounded-lg focus:font-bold focus:text-white focus:outline-none"
-        style={{ background: GREEN }}
+        style={{ background: SAGE }}
       >
         Skip to main content
       </a>
+
       <div id="consultation-main">
-      {/* CONTACT US banner */}
-      <section
-        className="flex items-center justify-center"
-        style={{ backgroundColor: GREEN, minHeight: '112px' }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1
-            className="uppercase"
-            style={{ fontFamily: "'Trajan Pro', serif", fontSize: '28px', fontWeight: 400, color: '#FFFFFF' }}
-          >
-            Free Slimming Consultation in Malta — Book Your Place Today
-          </h1>
-          <div style={{ width: '284px', height: '1px', backgroundColor: '#FFFFFF', margin: '7px auto 0' }} />
-        </div>
-      </section>
-
-      {/* BOOK YOUR SLIMMING CONSULTATION heading bar */}
-      <section className="py-12" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="mx-auto px-4 md:px-0" style={{ maxWidth: '980px' }}>
-          <div
-            className="flex items-center justify-center text-center px-6"
-            style={{ backgroundColor: '#4f7256', minHeight: '120px' }}
-          >
-            <h2
-              className="uppercase"
-              style={{
-                fontFamily: '"Novecento Wide", sans-serif',
-                fontWeight: 500,
-                color: '#FFFFFF',
-                fontSize: 'clamp(24px, 4.5vw, 40px)',
-              }}
-            >
-              Meet Our Doctor-Led Weight Loss Team — Your Personalised Plan Starts Here
-            </h2>
-          </div>
-        </div>
-      </section>
-
-      {/* Collage + booking form */}
-      <GradientField
-        blob={{ top: '12%', right: '-4%' }}
-        dots
-        className="relative pb-12 pt-9"
-        style={{
-          backgroundImage:
-            'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.18) 100%)',
-          backgroundColor: '#FFFFFF',
-        }}
-      >
-        {/* Faint decorative wavy-lines graphic bleeding off the left edge */}
-        <div
-          aria-hidden="true"
-          className="absolute pointer-events-none hidden md:block"
-          style={{ left: '-50px', top: '128px', width: '1039px', height: '380px', zIndex: 0 }}
+        {/* ════════════════ 1 · HERO (form-first, modal CTA) ════════════════ */}
+        <section
+          className="page-hero"
+          style={{
+            position: 'relative',
+            display: 'flex',
+            alignItems: 'center',
+            minHeight: '92svh',
+            paddingTop: 'clamp(104px, 13vh, 132px)',
+            paddingBottom: 'clamp(28px, 5vh, 56px)',
+            paddingLeft: 'clamp(16px, 4vw, 40px)',
+            paddingRight: 'clamp(16px, 4vw, 40px)',
+            overflow: 'hidden',
+            background: 'radial-gradient(120% 90% at 85% 10%, #eef3ea 0%, #f6f4ef 45%, #ffffff 100%)',
+          }}
         >
-          <Image
-            src="/wix/87fc13_7502c14a8f8c4a5d8e75362f7366465a~mv2.png"
-            alt=""
-            fill
-            className="object-contain"
-            loading="lazy"
+          {/* soft brand glow bed (decorative) */}
+          <span
+            aria-hidden
+            style={{
+              position: 'absolute',
+              top: '-12%',
+              right: '-8%',
+              width: 460,
+              height: 460,
+              borderRadius: '50%',
+              background: 'rgba(142,176,147,0.28)',
+              filter: 'blur(90px)',
+              zIndex: 0,
+            }}
           />
-        </div>
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={{ zIndex: 10 }}>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-start">
-            {/* Photo collage — tight 2x2 cluster of Wix petal shapes */}
-            <div className="hidden md:grid grid-cols-2 gap-1 mx-auto w-full" style={{ maxWidth: '538px' }}>
-              {COLLAGE.map((src, i) => (
-                <div
-                  key={i}
-                  className="card overflow-hidden w-full aspect-[267/280] relative"
-                >
-                  <Image
-                    src={src}
-                    alt=""
-                    fill
-                    className="object-cover"
-                    loading="lazy"
-                    sizes="(max-width: 768px) 0px, 25vw"
-                  />
-                </div>
-              ))}
-            </div>
 
-            {/* Consultation CTA — form opens in a lightbox popup */}
-            <div className="lg-glass lg-glass--panel mx-auto w-full flex flex-col justify-center p-6 sm:p-8" style={{ maxWidth: '499px' }}>
-              <p
-                className="mb-4"
-                style={{ fontFamily: "'Novecento Wide Book', sans-serif", fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', color: TAUPE }}
-              >
-                Doctor-led &middot; Free &middot; No obligation
+          <div
+            className="consult-hero-grid"
+            style={{
+              position: 'relative',
+              zIndex: 1,
+              width: '100%',
+              maxWidth: 1180,
+              margin: '0 auto',
+              display: 'grid',
+              gap: 'clamp(28px, 4vw, 56px)',
+              alignItems: 'center',
+            }}
+          >
+            {/* LEFT — message + modal CTA */}
+            <div>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 10, marginBottom: 18 }}>
+                <span className="hero-pill">
+                  <Stars size={13} />
+                  <span style={{ fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: SAGE }}>
+                    4.9 · 200+ reviews
+                  </span>
+                </span>
+                <span className="hero-pill">
+                  <span style={{ fontFamily: WIDE, fontSize: 10.5, letterSpacing: '0.12em', textTransform: 'uppercase', color: TAUPE }}>
+                    #1 voted slimming clinic Malta
+                  </span>
+                </span>
+              </div>
+
+              <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, margin: '0 0 14px' }}>
+                Free · Doctor-led · No obligation
               </p>
-              <h3
-                className="mb-5"
-                style={{ fontFamily: "'Trajan Pro', serif", fontWeight: 400, fontSize: '22px', color: GREEN, textTransform: 'uppercase', lineHeight: 1.4 }}
+
+              <h1
+                style={{
+                  fontFamily: HEADING,
+                  fontWeight: 400,
+                  fontSize: 'clamp(26px, 3vw, 38px)',
+                  lineHeight: 1.12,
+                  textTransform: 'uppercase',
+                  color: SAGE,
+                  margin: '0 0 18px',
+                  maxWidth: 640,
+                }}
               >
-                Meet our weight loss doctors — your personalised plan starts here
-              </h3>
-              <p className="mb-8" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: 1.7, color: TAUPE }}>
-                Our medically qualified team reviews your goals, health history and current weight to build a programme that fits your body, your lifestyle and your timeline. Book your free consultation and get a clear picture of what&rsquo;s possible for you.
+                <span style={{ display: 'block' }}>Free Doctor-Led Weight Loss</span>
+                <span style={{ display: 'block', color: '#7ba587' }}>Consultation in Malta</span>
+              </h1>
+
+              <p style={{ fontFamily: BODY, fontSize: 'clamp(14px, 1.1vw, 15.5px)', lineHeight: 1.6, color: TAUPE, maxWidth: 520, margin: '0 0 22px' }}>
+                Meet a medically qualified doctor, get a free Tanita body composition analysis, and leave with a
+                personalised slimming plan built around your body, your health history and your lifestyle.
               </p>
-              <div className="flex flex-col sm:flex-row items-start gap-4">
-                <BookConsultationButton variant="filled" style={{ fontSize: '13px', padding: '16px 40px' }}>
+
+              <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 26px', display: 'grid', gap: 9, maxWidth: 540 }}>
+                {[
+                  'Doctor-led medical weight loss assessment — not a salon diet',
+                  'Free Tanita body composition scan: fat, muscle, metabolic age',
+                  'A clear, realistic plan — and zero obligation to continue',
+                ].map((b) => (
+                  <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                    <Check />
+                    <span style={{ fontFamily: BODY, fontSize: 13.5, color: TAUPE, lineHeight: 1.5 }}>{b}</span>
+                  </li>
+                ))}
+              </ul>
+
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', marginBottom: 18 }}>
+                <BookConsultationButton variant="filled" style={{ padding: '16px 34px' }}>
                   Book Your Free Consultation
                 </BookConsultationButton>
               </div>
-              <p className="mt-4" style={{ fontFamily: 'Roboto, sans-serif', fontSize: '12px', color: TAUPE, opacity: 0.75 }}>
-                ★ 4.9 from 200+ reviews &middot; Limited places each month
+
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12, flexWrap: 'wrap' }}>
+                <Stars size={14} />
+                <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>
+                  <strong style={{ color: SAGE }}>4.9</strong> · 200+ Google reviews
+                </span>
+                <span aria-hidden style={{ width: 1, height: 14, background: '#d9d2ca' }} />
+                <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>Limited places each month</span>
+              </div>
+            </div>
+
+            {/* RIGHT — arch media + floating proof cards */}
+            <div className="consult-hero-media" style={{ position: 'relative', justifySelf: 'center', width: '100%', display: 'flex', justifyContent: 'center' }}>
+              <div
+                className="hero-arch"
+                style={{
+                  position: 'relative',
+                  height: 'min(58vh, 520px)',
+                  aspectRatio: '4 / 5',
+                  maxWidth: '100%',
+                }}
+              >
+                <Image
+                  src={HERO_IMG}
+                  alt="A Carisma Slimming doctor consulting a client during a free body analysis in Malta"
+                  fill
+                  priority
+                  className="object-cover"
+                  sizes="(max-width: 900px) 90vw, 420px"
+                />
+                <span
+                  aria-hidden
+                  style={{
+                    position: 'absolute',
+                    inset: 0,
+                    pointerEvents: 'none',
+                    background: 'linear-gradient(to top, rgba(18,28,20,0.34) 0%, rgba(18,28,20,0.06) 30%, transparent 58%)',
+                  }}
+                />
+              </div>
+
+              {/* floating: rating card */}
+              <div
+                className="hero-glass hero-float"
+                style={{ position: 'absolute', left: 'clamp(-8px, -1vw, 0px)', bottom: '14%', borderRadius: 16, padding: '11px 15px', display: 'flex', alignItems: 'center', gap: 10, zIndex: 3 }}
+              >
+                <span style={{ fontFamily: HEADING, fontSize: 28, color: SAGE, lineHeight: 1 }}>4.9</span>
+                <span style={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+                  <Stars size={11} />
+                  <span style={{ fontFamily: BODY, fontSize: 10.5, color: TAUPE }}>200+ reviews</span>
+                </span>
+              </div>
+
+              {/* floating: award card */}
+              <div
+                className="hero-glass hero-float-2"
+                style={{ position: 'absolute', right: 'clamp(-6px, -0.5vw, 4px)', top: '8%', borderRadius: 16, padding: '10px 13px', display: 'flex', alignItems: 'center', gap: 9, maxWidth: 190, zIndex: 3 }}
+              >
+                <Image src="/Malta.png" alt="" aria-hidden width={34} height={34} style={{ height: 34, width: 'auto' }} />
+                <span style={{ fontFamily: WIDE, fontSize: 9.5, letterSpacing: '0.06em', textTransform: 'uppercase', color: SAGE, lineHeight: 1.35, whiteSpace: 'pre-line' }}>
+                  {'#1 voted clinic\nMalta 2025–26'}
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════ 2 · TRUST STRIP ════════════════ */}
+        <section aria-label="Why book with Carisma Slimming" style={{ backgroundColor: '#ffffff', paddingTop: 8 }}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="lg-raised" style={{ padding: 'clamp(18px, 3vw, 26px)' }}>
+              <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4" style={{ listStyle: 'none', margin: 0, padding: 0, gap: 'clamp(16px, 2.5vw, 28px)' }}>
+                {TRUST.map((c) => (
+                  <li key={c.t} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
+                    <Check />
+                    <span>
+                      <span style={{ display: 'block', fontFamily: WIDE, fontSize: 12, letterSpacing: '0.05em', textTransform: 'uppercase', color: SAGE }}>
+                        {c.t}
+                      </span>
+                      <span style={{ display: 'block', fontFamily: BODY, fontSize: 13, color: TAUPE, marginTop: 3 }}>{c.d}</span>
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        {/* ════════════════ 3 · WHAT HAPPENS NEXT (3-step) ════════════════ */}
+        <GradientField
+          dots
+          className="relative"
+          style={{
+            backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.18) 100%)',
+            backgroundColor: '#FFFFFF',
+            paddingTop: 'clamp(64px, 9vw, 96px)',
+            paddingBottom: 'clamp(64px, 9vw, 96px)',
+          }}
+        >
+          <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8" style={{ zIndex: 1 }}>
+            <header className="text-center" style={{ marginBottom: 'clamp(36px, 5vw, 56px)' }}>
+              <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, marginBottom: 12 }}>
+                Simple &amp; reassuring
               </p>
-            </div>
-          </div>
-        </div>
-      </GradientField>
+              <h2 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 34px)', textTransform: 'uppercase', color: SAGE, lineHeight: 1.15 }}>
+                What Happens at Your Consultation
+              </h2>
+            </header>
 
-      {/* Opening hours + contact icons */}
-      <section className="pb-14" style={{ backgroundColor: '#FFFFFF', paddingTop: '88px' }}>
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p
-            className="uppercase mb-2"
-            style={{
-              fontFamily: "'Trajan Pro', serif",
-              fontSize: '25px',
-              letterSpacing: '5px',
-              color: GREEN,
-            }}
-          >
-            Opening Hours
-          </p>
-          <div
-            className="flex justify-center items-center gap-8 mb-2"
-            style={{ fontSize: '15px', color: TAUPE, fontFamily: 'Roboto, sans-serif' }}
-          >
-            <p>Mon - Sun</p>
-            <p>8:00 am – 8:00 pm</p>
+            <ol className="grid grid-cols-1 md:grid-cols-3" style={{ listStyle: 'none', margin: 0, padding: 0, gap: 'clamp(20px, 2.5vw, 28px)' }}>
+              {STEPS.map((s) => (
+                <li key={s.n} className="card" style={{ padding: 'clamp(24px, 3vw, 32px)', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  <span
+                    aria-hidden
+                    style={{
+                      fontFamily: HEADING,
+                      fontSize: 30,
+                      color: '#fff',
+                      lineHeight: 1,
+                      width: 56,
+                      height: 56,
+                      borderRadius: 999,
+                      display: 'grid',
+                      placeItems: 'center',
+                      background: SAGE,
+                      boxShadow: '0 8px 20px -8px rgba(40,55,44,0.5)',
+                    }}
+                  >
+                    {s.n}
+                  </span>
+                  <h3 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 18, color: SAGE, lineHeight: 1.25 }}>{s.t}</h3>
+                  <p style={{ fontFamily: BODY, fontSize: 14, lineHeight: 1.65, color: TAUPE }}>{s.d}</p>
+                </li>
+              ))}
+            </ol>
           </div>
-          <p className="mb-5">
-            <a
-              href="mailto:info@carismaslimming.com"
-              className="uppercase underline transition duration-300 ease-in-out hover:no-underline"
-              style={{ color: '#6f6456', fontFamily: '"Novecento Wide", sans-serif', fontSize: '16px' }}
-            >
-              info@carismaslimming.com
-            </a>
-          </p>
+        </GradientField>
 
-          <div className="flex flex-col md:flex-row justify-center items-center md:items-end gap-8 md:gap-0">
-            <div className="flex flex-col items-center gap-2 md:w-[209px]">
-              <a
-                href="mailto:info@carismaaesthetics.com?subject=Get%20in%20touch%20with%20us!"
-                aria-label="Email"
-                className="transition duration-300 ease-in-out hover:opacity-80"
-                style={{ color: GREEN }}
-              >
-                <svg width="51" height="37" viewBox="0 0 26 19" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="1" y="1" width="24" height="17" rx="2" />
-                  <path d="m1.5 2.5 11.5 8.5 11.5-8.5" />
-                  <path d="m2 17 8-6.8" />
-                  <path d="m24 17-8-6.8" />
-                </svg>
-              </a>
-              <a
-                href="mailto:info@carismaslimming.com"
-                className="underline transition duration-300 ease-in-out hover:no-underline"
-                style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}
-              >
-                info@carismaslimming.com
-              </a>
-            </div>
-            <div className="flex flex-col items-center gap-2 md:w-[209px]">
-              <a
-                href="https://www.instagram.com/carismaaesthetics/?hl=en"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Instagram"
-                className="transition duration-300 ease-in-out hover:opacity-80"
-                style={{ color: GREEN }}
-              >
-                <svg width="47" height="47" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                  <rect x="2" y="2" width="20" height="20" rx="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-                </svg>
-              </a>
-              <span style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}>
-                carismaslimming
-              </span>
-            </div>
-            <div className="flex flex-col items-center gap-2 md:w-[209px]">
-              <a
-                href="https://www.facebook.com/carismaaesthetics/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Facebook"
-                className="transition duration-300 ease-in-out hover:opacity-80"
-                style={{ color: GREEN }}
-              >
-                <svg width="47" height="47" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="12" fill="currentColor" />
-                  <path
-                    fill="#FFFFFF"
-                    d="M13.5 23v-9h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.4V5.6c-.3 0-1.1-.1-2.1-.1-2 0-3.4 1.2-3.4 3.5v2.2H8.4V14h2.4v9h2.7Z"
-                  />
-                </svg>
-              </a>
-              <span style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}>
-                Carisma Slimming
-              </span>
-            </div>
+        {/* ════════════════ 4 · MEET YOUR DOCTORS ════════════════ */}
+        <section aria-labelledby="doctors-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(64px, 9vw, 96px)', paddingBottom: 'clamp(48px, 7vw, 80px)' }}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <header className="text-center" style={{ marginBottom: 'clamp(36px, 5vw, 56px)' }}>
+              <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, marginBottom: 12 }}>
+                Your medical team
+              </p>
+              <h2 id="doctors-heading" style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 34px)', textTransform: 'uppercase', color: SAGE, lineHeight: 1.15 }}>
+                Meet the Doctors Behind Your Plan
+              </h2>
+              <p style={{ fontFamily: BODY, fontSize: 15, lineHeight: 1.6, color: TAUPE, maxWidth: 600, margin: '14px auto 0' }}>
+                Your free consultation is led by medically qualified doctors who listen first and build a conservative,
+                evidence-led plan around you.
+              </p>
+            </header>
+            <DoctorCards />
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Google Map */}
-      <section className="pb-14" style={{ backgroundColor: '#FFFFFF' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '980px' }}>
-          <div className="card overflow-hidden" style={{ lineHeight: 0 }}>
-            <iframe
-              src="https://maps.google.com/maps?q=Carisma%20Slimming%2C%20Malta&z=15&output=embed"
-              style={{ width: '100%', height: '350px', border: 'none' }}
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Carisma Slimming map"
-            />
+        {/* ════════════════ 5 · PROOF BAND ════════════════ */}
+        <section aria-labelledby="proof-heading" style={{ backgroundColor: '#ffffff', paddingBottom: 'clamp(64px, 9vw, 96px)' }}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="lg-glass lg-glass--panel" style={{ padding: 'clamp(28px, 4vw, 48px)' }}>
+              <header className="text-center" style={{ marginBottom: 'clamp(28px, 4vw, 40px)' }}>
+                <div className="flex items-center justify-center" style={{ gap: 10, marginBottom: 10 }}>
+                  <Stars size={20} />
+                  <span style={{ fontFamily: HEADING, fontSize: 26, color: SAGE, lineHeight: 1 }}>4.9</span>
+                </div>
+                <h2 id="proof-heading" style={{ fontFamily: WIDE, fontSize: 13, letterSpacing: '0.14em', textTransform: 'uppercase', color: TAUPE }}>
+                  Loved by 200+ clients across Malta
+                </h2>
+              </header>
+
+              <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: 'clamp(18px, 2.5vw, 26px)' }}>
+                {PROOF_QUOTES.map((q) => (
+                  <figure key={q.name} className="card" style={{ padding: 'clamp(20px, 2.5vw, 26px)', margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
+                    <Stars size={13} />
+                    <blockquote style={{ margin: 0, fontFamily: BODY, fontSize: 14, lineHeight: 1.65, color: INK }}>
+                      &ldquo;{q.text}&rdquo;
+                    </blockquote>
+                    <figcaption className="flex items-center" style={{ gap: 10, marginTop: 'auto' }}>
+                      <span
+                        aria-hidden
+                        style={{ width: 36, height: 36, borderRadius: 999, background: 'rgba(142,176,147,0.20)', color: SAGE, display: 'grid', placeItems: 'center', fontFamily: HEADING, fontSize: 16 }}
+                      >
+                        {q.initial}
+                      </span>
+                      <span style={{ fontFamily: WIDE, fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', color: TAUPE }}>
+                        {q.name}
+                      </span>
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
+        {/* ════════════════ 6 · FINAL CTA BAND ════════════════ */}
+        <GradientField
+          blob={{ top: '8%', right: '-6%' }}
+          dots
+          className="relative"
+          style={{
+            backgroundImage: 'linear-gradient(180deg, rgba(201, 216, 193, 0.22) 0%, #FFFFFF 100%)',
+            backgroundColor: '#FFFFFF',
+            paddingTop: 'clamp(72px, 10vw, 110px)',
+            paddingBottom: 'clamp(72px, 10vw, 110px)',
+          }}
+        >
+          <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style={{ zIndex: 1 }}>
+            <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, marginBottom: 14 }}>
+              Free · Doctor-led · No obligation
+            </p>
+            <h2 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(26px, 3.6vw, 40px)', textTransform: 'uppercase', color: SAGE, lineHeight: 1.12, marginBottom: 18 }}>
+              Your Healthier Weight Starts With One Conversation
+            </h2>
+            <p style={{ fontFamily: BODY, fontSize: 16, lineHeight: 1.6, color: TAUPE, maxWidth: 560, margin: '0 auto 30px' }}>
+              Book your free consultation today, meet your doctor, and get the honest, personalised plan you deserve.
+            </p>
+            <div className="flex justify-center">
+              <BookConsultationButton variant="filled" style={{ padding: '17px 40px' }}>
+                Book Your Free Consultation
+              </BookConsultationButton>
+            </div>
+            <p style={{ fontFamily: BODY, fontSize: 13, color: TAUPE, opacity: 0.85, marginTop: 16 }}>
+              ★ 4.9 from 200+ reviews · Limited places each month
+            </p>
+          </div>
+        </GradientField>
+
+        {/* ════════════════ 7 · PRACTICAL (compact, secondary) ════════════════ */}
+        <section aria-labelledby="visit-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(56px, 8vw, 88px)', paddingBottom: 'clamp(56px, 8vw, 88px)' }}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 id="visit-heading" className="text-center" style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(20px, 2.6vw, 28px)', letterSpacing: '0.04em', textTransform: 'uppercase', color: SAGE, marginBottom: 'clamp(28px, 4vw, 40px)' }}>
+              Visit &amp; Contact
+            </h2>
+
+            <div className="grid grid-cols-1 lg:grid-cols-2" style={{ gap: 'clamp(20px, 3vw, 32px)', alignItems: 'stretch' }}>
+              {/* details card */}
+              <div className="card" style={{ padding: 'clamp(24px, 3vw, 34px)', display: 'flex', flexDirection: 'column', gap: 22 }}>
+                <div>
+                  <p style={{ fontFamily: WIDE, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: TAUPE, marginBottom: 6 }}>
+                    Opening hours
+                  </p>
+                  <p style={{ fontFamily: BODY, fontSize: 15, color: INK }}>
+                    Monday – Sunday · <strong style={{ color: SAGE }}>8:00 – 20:00</strong>
+                  </p>
+                </div>
+
+                <div>
+                  <p style={{ fontFamily: WIDE, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: TAUPE, marginBottom: 6 }}>
+                    Email
+                  </p>
+                  <a
+                    href="mailto:info@carismaslimming.com"
+                    className="link-underline transition duration-300 ease-in-out hover:no-underline"
+                    style={{ fontFamily: BODY, fontSize: 15, color: SAGE }}
+                  >
+                    info@carismaslimming.com
+                  </a>
+                </div>
+
+                <div>
+                  <p style={{ fontFamily: WIDE, fontSize: 11, letterSpacing: '0.12em', textTransform: 'uppercase', color: TAUPE, marginBottom: 10 }}>
+                    Follow us
+                  </p>
+                  <div className="flex items-center" style={{ gap: 16 }}>
+                    <a
+                      href="https://www.instagram.com/carismaaesthetics/?hl=en"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Carisma Slimming on Instagram"
+                      className="inline-flex items-center transition duration-300 ease-in-out hover:opacity-80"
+                      style={{ color: SAGE, gap: 8, fontFamily: BODY, fontSize: 14 }}
+                    >
+                      <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+                        <rect x="2" y="2" width="20" height="20" rx="5" />
+                        <circle cx="12" cy="12" r="4" />
+                        <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                      </svg>
+                      carismaslimming
+                    </a>
+                    <a
+                      href="https://www.facebook.com/carismaaesthetics/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label="Carisma Slimming on Facebook"
+                      className="inline-flex items-center transition duration-300 ease-in-out hover:opacity-80"
+                      style={{ color: SAGE, gap: 8, fontFamily: BODY, fontSize: 14 }}
+                    >
+                      <svg width="26" height="26" viewBox="0 0 24 24" aria-hidden>
+                        <circle cx="12" cy="12" r="12" fill="currentColor" />
+                        <path fill="#FFFFFF" d="M13.5 23v-9h2.3l.4-2.8h-2.7V9.4c0-.8.2-1.4 1.4-1.4h1.4V5.6c-.3 0-1.1-.1-2.1-.1-2 0-3.4 1.2-3.4 3.5v2.2H8.4V14h2.4v9h2.7Z" />
+                      </svg>
+                      Carisma Slimming
+                    </a>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: 'auto', paddingTop: 6 }}>
+                  <BookConsultationButton variant="outline">Book Free Consultation</BookConsultationButton>
+                </div>
+              </div>
+
+              {/* map card */}
+              <div className="card overflow-hidden" style={{ lineHeight: 0, minHeight: 320 }}>
+                <iframe
+                  src="https://maps.google.com/maps?q=Carisma%20Slimming%2C%20Malta&z=15&output=embed"
+                  style={{ width: '100%', height: '100%', minHeight: 320, border: 'none', display: 'block' }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  title="Carisma Slimming location on Google Maps, Malta"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
       </div>{/* /consultation-main */}
+
+      <style>{`
+        .consult-hero-grid { grid-template-columns: 1fr; }
+        .hero-pill {
+          display: inline-flex; align-items: center; gap: 7px;
+          background: rgba(255,255,255,0.7);
+          border: 1px solid rgba(95,126,102,0.18);
+          border-radius: 999px; padding: 7px 14px;
+          backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+        }
+        @media (min-width: 900px) {
+          .consult-hero-grid { grid-template-columns: 56fr 44fr; }
+          .consult-hero-media { justify-self: end; }
+        }
+      `}</style>
     </main>
   );
 }
