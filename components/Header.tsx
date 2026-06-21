@@ -14,8 +14,6 @@ const GREEN = '#024C27';      // brand green for small text/icons/announcement b
 const TAUPE = '#6F6456';
 const DROPDOWN_INK = '#6F6456'; // dropdown/sub-item link on white = 5.78:1 AA (was #9B8D83 -> 3.22:1)
 
-const BANNER = "#1 VOTED SLIMMING CLINIC IN MALTA          ·          DOCTOR-LED WEIGHT LOSS          ·          800+ VERIFIED REVIEWS          ·          FREE BODY ANALYSIS          ·          ";
-
 type NavItem = { label: string; href: string };
 
 const PACKAGE_LINKS: NavItem[] = [
