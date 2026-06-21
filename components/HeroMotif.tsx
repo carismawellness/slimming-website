@@ -3,23 +3,20 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * HeroMotif — "Aurora Breath".
+ * HeroMotif — "Silk Threads".
  *
- * A bottom-up, first-principles motif for Carisma Slimming: not lines, but a
- * soft wash of sage light that slowly drifts and gently *breathes*, like dawn
- * light through mist. It evokes the brand's promise — calm, lightness, gentle
- * renewal — and makes the hero feel alive without ever competing with the copy.
+ * A new, interactive take on the line motif. A set of fine sage contour lines
+ * lives only in the bottom quarter of the hero. They drift on a slow ambient
+ * current, and they gently rise toward the cursor — like running a hand under a
+ * silk sheet — with a soft glow that follows the pointer. Edges and the top of
+ * the band fade to nothing, so it reads as a quiet, tasteful grounding to the
+ * hero rather than a graphic.
  *
- * Technique: a single full-screen fragment shader. Domain-warped fbm noise
- * forms organic, ever-shifting volumes of light; a slow global pulse makes the
- * whole field breathe; the light pools in the lower hero (the white space below
- * the CTA) and dissolves before it reaches the headline. Tonal palette runs
- * from deep sage in the shadows to the brand sage to a pale pearl at the cores.
+ * Built on a 2D canvas (not WebGL): crisp anti-aliased strokes, pixel-precise
+ * placement in the bottom quarter, and direct screen-space mouse interaction.
  *
- * Guards: reduced-motion → one static frame; DPR-capped; lighter octave count
- * on phones; paused offscreen / tab-hidden; three.js imported dynamically so it
- * never blocks SSR / first paint; full dispose on unmount. Time is referenced
- * only in the fragment shader, so there is no cross-stage uniform mismatch.
+ * Guards: reduced-motion → one static frame (no pointer reaction); DPR-aware;
+ * paused offscreen / tab hidden; full teardown on unmount.
  */
 export default function HeroMotif() {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -32,184 +29,124 @@ export default function HeroMotif() {
       typeof window !== 'undefined' &&
       window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    let disposed = false;
-    let cleanup = () => {};
+    const canvas = document.createElement('canvas');
+    Object.assign(canvas.style, { width: '100%', height: '100%', display: 'block' });
+    host.appendChild(canvas);
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
 
-    (async () => {
-      const THREE = await import('three');
-      if (disposed || !host) return;
+    const coarse =
+      window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 760;
 
-      const coarse =
-        window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 760;
+    // ── tuning ───────────────────────────────────────────────────────────
+    const SAGE = '142, 176, 147';      // #8EB093
+    const LINES = coarse ? 9 : 14;     // contour lines stacked in the band
+    const BAND_TOP = 0.72;             // band occupies the bottom ~quarter
+    const BAND_BOT = 0.99;
+    const BASE_ALPHA = 0.17;           // very subtle
+    const STEP = coarse ? 16 : 9;      // px between sample points
+    const LIFT = 26;                   // px the lines rise toward the cursor
+    const SIGMA = 165;                 // px radius of the cursor's influence
 
-      const renderer = new THREE.WebGLRenderer({
-        alpha: true,
-        antialias: false,
-        powerPreference: 'low-power',
-      });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, coarse ? 1 : 1.5));
-      renderer.setSize(host.clientWidth, host.clientHeight);
-      renderer.setClearColor(0x000000, 0);
-      host.appendChild(renderer.domElement);
-      Object.assign(renderer.domElement.style, { width: '100%', height: '100%', display: 'block' });
+    let W = 0, H = 0, dpr = 1;
+    const resize = () => {
+      W = host.clientWidth; H = host.clientHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 2);
+      canvas.width = Math.round(W * dpr);
+      canvas.height = Math.round(H * dpr);
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
 
-      const scene = new THREE.Scene();
-      const camera = new THREE.Camera(); // vertex shader writes clip space directly
+    // pointer (smoothed), starts off-screen so lines simply drift until moved
+    const m = { tx: -9999, ty: -9999, x: -9999, y: -9999, active: false };
+    const onPointer = (e: PointerEvent) => {
+      const r = host.getBoundingClientRect();
+      m.tx = e.clientX - r.left;
+      m.ty = e.clientY - r.top;
+      if (!m.active) { m.x = m.tx; m.y = m.ty; m.active = true; }
+    };
+    const onLeave = () => { m.tx = -9999; m.ty = -9999; };
+    window.addEventListener('pointermove', onPointer, { passive: true });
+    window.addEventListener('pointerout', onLeave, { passive: true });
 
-      const uniforms = {
-        u_time: { value: 0 },
-        u_res: { value: new THREE.Vector2(host.clientWidth, host.clientHeight) },
-        u_mouse: { value: new THREE.Vector2(0.5, 0.5) },
-        u_intro: { value: 0 },
-      };
+    let visible = true;
+    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });
+    io.observe(host);
 
-      const material = new THREE.ShaderMaterial({
-        uniforms,
-        transparent: true,
-        depthWrite: false,
-        depthTest: false,
-        defines: { OCTAVES: coarse ? 3 : 5, WARP2: coarse ? 0 : 1 },
-        vertexShader: /* glsl */ `
-          varying vec2 vUv;
-          void main() {
-            vUv = uv;
-            gl_Position = vec4(position.xy, 0.0, 1.0);
+    const draw = (t: number) => {
+      ctx.clearRect(0, 0, W, H);
+      // ease the pointer toward its target for buttery motion
+      if (m.tx < -900) { m.x += (-9999 - m.x) * 0.05; m.y += (-9999 - m.y) * 0.05; }
+      else { m.x += (m.tx - m.x) * 0.09; m.y += (m.ty - m.y) * 0.09; }
+
+      const bandTop = H * BAND_TOP;
+      const bandBot = H * BAND_BOT;
+
+      for (let i = 0; i < LINES; i++) {
+        const f = LINES === 1 ? 1 : i / (LINES - 1);
+        const baseY = bandTop + (bandBot - bandTop) * f;
+        const seed = i * 0.6;
+
+        // line opacity: fade in from the top of the band, fuller toward bottom
+        const rowFade = 0.45 + 0.55 * f;
+        // a soft glow where the cursor's height is near this line
+        const dyl = baseY - m.y;
+        const glow = m.x > -900 ? Math.exp(-(dyl * dyl) / (2 * 120 * 120)) : 0;
+        const alpha = Math.min(0.4, BASE_ALPHA * rowFade * (1 + glow * 1.1));
+
+        // horizontal edge-fade gradient (transparent → sage → transparent)
+        const g = ctx.createLinearGradient(0, 0, W, 0);
+        g.addColorStop(0.0, `rgba(${SAGE}, 0)`);
+        g.addColorStop(0.14, `rgba(${SAGE}, 1)`);
+        g.addColorStop(0.86, `rgba(${SAGE}, 1)`);
+        g.addColorStop(1.0, `rgba(${SAGE}, 0)`);
+
+        ctx.beginPath();
+        for (let x = 0; x <= W; x += STEP) {
+          // slow ambient drift — the thread breathes on a gentle current
+          const a1 = 3.2 * Math.sin(x * 0.0042 + t * 0.00040 + seed);
+          const a2 = 1.7 * Math.sin(x * 0.0090 - t * 0.00026 + seed * 1.7);
+          const a3 = 0.9 * Math.sin(x * 0.017 + t * 0.00055 + seed * 0.5);
+          let y = baseY + a1 + a2 + a3;
+
+          // rise toward the cursor (gaussian falloff) — the silk-sheet lift
+          if (m.x > -900) {
+            const dx = x - m.x, dy = baseY - m.y;
+            const d2 = dx * dx + dy * dy;
+            y -= LIFT * Math.exp(-d2 / (2 * SIGMA * SIGMA));
           }
-        `,
-        fragmentShader: /* glsl */ `
-          precision highp float;
-          uniform float u_time;
-          uniform vec2  u_res;
-          uniform vec2  u_mouse;
-          uniform float u_intro;
-          varying vec2  vUv;
 
-          float hash(vec2 p){
-            p = fract(p * vec2(123.34, 345.45));
-            p += dot(p, p + 34.345);
-            return fract(p.x * p.y);
-          }
-          float noise(vec2 p){
-            vec2 i = floor(p), f = fract(p);
-            vec2 u = f * f * (3.0 - 2.0 * f);
-            float a = hash(i);
-            float b = hash(i + vec2(1.0, 0.0));
-            float c = hash(i + vec2(0.0, 1.0));
-            float d = hash(i + vec2(1.0, 1.0));
-            return mix(mix(a, b, u.x), mix(c, d, u.x), u.y);
-          }
-          float fbm(vec2 p){
-            float v = 0.0, a = 0.5;
-            for (int i = 0; i < OCTAVES; i++){ v += a * noise(p); p *= 2.0; a *= 0.5; }
-            return v;
-          }
-
-          void main(){
-            vec2 uv = vUv;
-            vec2 p = uv;
-            p.x *= u_res.x / u_res.y;        // aspect-correct
-            p += (u_mouse - 0.5) * 0.05;     // whisper of parallax
-
-            float t = u_time * 0.055;        // slow drift
-
-            // domain-warped fbm → organic, ever-shifting light
-            vec2 q = vec2(fbm(p * 1.5 + vec2(0.0, t)),
-                          fbm(p * 1.5 + vec2(5.2, -t)));
-            vec2 w = p * 1.5 + q * 1.1;
-            #if WARP2
-              vec2 r = vec2(fbm(w + vec2(1.7, 0.30 * t)),
-                            fbm(w + vec2(8.3, -0.20 * t)));
-              w += r * 1.3;
-            #endif
-            float n = fbm(w);
-
-            // breathing — the whole field gently swells and settles
-            n *= 0.92 + 0.08 * sin(u_time * 0.17);
-
-            // shape into soft light
-            float light = smoothstep(0.18, 0.74, n);
-
-            // brand tonal palette: deep sage → sage → pale pearl at the cores
-            vec3 deep  = vec3(0.27, 0.45, 0.33);
-            vec3 sage  = vec3(0.557, 0.690, 0.576);
-            vec3 pearl = vec3(0.93, 0.95, 0.91);
-            vec3 col = mix(deep, sage, smoothstep(0.0, 0.6, light));
-            col = mix(col, pearl, smoothstep(0.70, 1.0, light) * 0.65);
-
-            // pool the light low and dissolve it before the headline
-            float lowBias  = smoothstep(0.60, 0.0, uv.y);   // strong at bottom
-            float sideFade = smoothstep(1.05, 0.20, abs(uv.x - 0.5));
-            float mask = lowBias * mix(0.82, 1.0, sideFade);
-
-            float alpha = light * mask * 0.95 * u_intro;
-
-            // fine grain to keep the gradients clean (no banding)
-            col += (hash(uv * u_res + t) - 0.5) * 0.018;
-
-            gl_FragColor = vec4(col, clamp(alpha, 0.0, 1.0));
-          }
-        `,
-      });
-
-      const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
-      scene.add(quad);
-
-      // ── interaction + sizing ────────────────────────────────────────────
-      const target = new THREE.Vector2(0.5, 0.5);
-      const onPointer = (e: PointerEvent) => {
-        target.set(e.clientX / window.innerWidth, 1 - e.clientY / window.innerHeight);
-      };
-      window.addEventListener('pointermove', onPointer, { passive: true });
-
-      const onResize = () => {
-        if (!host) return;
-        const w = host.clientWidth, h = host.clientHeight;
-        renderer.setSize(w, h);
-        uniforms.u_res.value.set(w, h);
-      };
-      window.addEventListener('resize', onResize, { passive: true });
-
-      let visible = true;
-      const io = new IntersectionObserver(
-        ([entry]) => { visible = entry.isIntersecting; },
-        { threshold: 0 }
-      );
-      io.observe(host);
-
-      const start = performance.now();
-      let raf = 0;
-      const render = (now: number) => {
-        const tt = (now - start) / 1000;
-        uniforms.u_time.value = tt;
-        uniforms.u_intro.value = Math.min(1, tt / 0.7); // appears almost at once
-        uniforms.u_mouse.value.lerp(target, 0.03);
-        if (visible && !document.hidden) renderer.render(scene, camera);
-        raf = requestAnimationFrame(render);
-      };
-
-      if (reduced) {
-        uniforms.u_time.value = 8.0;
-        uniforms.u_intro.value = 1;
-        renderer.render(scene, camera);
-      } else {
-        raf = requestAnimationFrame(render);
+          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+        }
+        ctx.strokeStyle = g;
+        ctx.globalAlpha = alpha;
+        ctx.lineWidth = 1.1;
+        ctx.stroke();
       }
+      ctx.globalAlpha = 1;
+    };
 
-      cleanup = () => {
-        cancelAnimationFrame(raf);
-        window.removeEventListener('pointermove', onPointer);
-        window.removeEventListener('resize', onResize);
-        io.disconnect();
-        quad.geometry.dispose();
-        material.dispose();
-        renderer.dispose();
-        if (renderer.domElement.parentNode === host) host.removeChild(renderer.domElement);
-      };
-    })();
+    let raf = 0;
+    const loop = (now: number) => {
+      if (visible && !document.hidden) draw(now);
+      raf = requestAnimationFrame(loop);
+    };
+
+    if (reduced) {
+      draw(0);
+    } else {
+      raf = requestAnimationFrame(loop);
+    }
 
     return () => {
-      disposed = true;
-      cleanup();
+      cancelAnimationFrame(raf);
+      window.removeEventListener('resize', resize);
+      window.removeEventListener('pointermove', onPointer);
+      window.removeEventListener('pointerout', onLeave);
+      io.disconnect();
+      if (canvas.parentNode === host) host.removeChild(canvas);
     };
   }, []);
 
