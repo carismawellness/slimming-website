@@ -14,7 +14,7 @@
 export const SITE_URL = 'https://www.carismaslimming.com';
 
 /** Date the YMYL content was last medically reviewed (keep in sync with sitemap). */
-export const LAST_REVIEWED = '2026-06-15';
+export const LAST_REVIEWED = '2026-06-22';
 
 /** Reusable provider node referencing the clinic (mirrors the site-wide org in layout.tsx). */
 export const PROVIDER = {

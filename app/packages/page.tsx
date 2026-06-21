@@ -7,9 +7,15 @@ import PageHero from '@/components/PageHero';
 import BookConsultationButton from '@/components/BookConsultationButton';
 
 export const metadata: Metadata = {
-  title: "Weight Loss Protocol | Malta's #1 Weight-Loss Clinic",
-  description: "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
+  title: "Body Contouring Packages Malta | Carisma Slimming",
+  description: "Doctor-led, non-surgical body contouring packages in Malta — fat freezing, dissolving, muscle toning & skin tightening. Free body analysis included. Book now.",
   alternates: { canonical: 'https://www.carismaslimming.com/packages' },
+  openGraph: {
+    title: "Body Contouring Packages Malta | Carisma Slimming",
+    description: "Doctor-led, non-surgical body contouring packages in Malta — fat freezing, dissolving, muscle toning & skin tightening. Free body analysis included. Book now.",
+    url: 'https://www.carismaslimming.com/packages',
+    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Body Contouring Packages Malta — Carisma Slimming' }],
+  },
 };
 
 const HEADING_FONT = '"Trajan Pro", serif';

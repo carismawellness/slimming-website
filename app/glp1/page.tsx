@@ -17,9 +17,15 @@ import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
-  title: "Medical Weight Loss Malta | Ozempic & Mounjaro | Carisma Slimming",
-  description: "Malta's #1 doctor-led medical weight loss clinic. Personalised weight loss programs with GLP-1 support, nutrition, body composition tracking, and ongoing medical supervision. Book your free consultation.",
+  title: "GLP-1 Weight Loss Malta | Ozempic & Mounjaro | Carisma",
+  description: "Malta's #1 doctor-led GLP-1 clinic. Personalised weight loss with Ozempic & Mounjaro support, nutrition, body-comp tracking and medical supervision. Book free.",
   alternates: { canonical: 'https://www.carismaslimming.com/glp1' },
+  openGraph: {
+    title: "GLP-1 Weight Loss Malta | Ozempic & Mounjaro | Carisma Slimming",
+    description: "Malta's #1 doctor-led GLP-1 clinic. Personalised weight loss with Ozempic & Mounjaro support, nutrition, body-comp tracking and medical supervision. Book free.",
+    url: 'https://www.carismaslimming.com/glp1',
+    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'GLP-1 Weight Loss Malta — Carisma Slimming' }],
+  },
 };
 
 const jsonLd = [
@@ -598,7 +604,7 @@ export default function GLP1Page() {
                 <div className="flex items-center justify-center gap-1">
                   <img src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png" alt="Google" style={{ width: '23px', height: '23px', objectFit: 'contain', marginRight: '4px' }} />
                   {[0, 1, 2, 3, 4].map((i) => (
-                    <img key={i} src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png" alt="" style={{ width: '23px', height: '20px', objectFit: 'contain' }} />
+                    <img key={i} src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png" alt="" role="presentation" style={{ width: '23px', height: '20px', objectFit: 'contain' }} />
                   ))}
                   <span className="ml-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px' }}>Over 800+ Reviews</span>
                 </div>

@@ -2,8 +2,13 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Terms & Conditions | Carisma Slimming",
-  description: "At our slimming clinic, we are committed to protecting the privacy & security of our patients' personal data. We comply with the General Data Protection Regulation (GDPR) & any applicable data protection laws.",
+  description: "Carisma Slimming Terms & Conditions. We comply with GDPR and protect patients' personal data across our Malta-based slimming and wellness services.",
   alternates: { canonical: 'https://www.carismaslimming.com/terms-conditions' },
+  openGraph: {
+    title: "Terms & Conditions | Carisma Slimming",
+    description: "Carisma Slimming Terms & Conditions. We comply with GDPR and protect patients' personal data across our Malta-based slimming and wellness services.",
+    url: 'https://www.carismaslimming.com/terms-conditions',
+  },
 };
 
 const bodyStyle: React.CSSProperties = {

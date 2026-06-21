@@ -3,8 +3,14 @@ import Link from 'next/link';
 
 export const metadata: Metadata = {
   title: "Join the Team at Carisma Slimming | #1 Award Winning Chain",
-  description: "Join the team at Carisma Slimming and take your career to the next level. We are Malta's number one award winning chain, offering top-quality slimming treatments.",
+  description: "Join the team at Carisma Slimming, Malta's #1 award-winning wellness chain. We offer top-quality slimming treatments and an exciting career in 5-star hotels.",
   alternates: { canonical: 'https://www.carismaslimming.com/careers' },
+  openGraph: {
+    title: "Join the Team at Carisma Slimming | #1 Award Winning Chain",
+    description: "Join the team at Carisma Slimming, Malta's #1 award-winning wellness chain. We offer top-quality slimming treatments and an exciting career in 5-star hotels.",
+    url: 'https://www.carismaslimming.com/careers',
+    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Careers at Carisma Slimming Malta' }],
+  },
 };
 
 const headingFont = 'Trajan Pro, serif';

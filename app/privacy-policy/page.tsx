@@ -2,8 +2,13 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Privacy Policy | Carisma Slimming",
-  description: "Check Privacy Policy of Carisma Slimming that outlines how we collect, use, and protect personal data that patients provide us in relation to med-aesthetic services.",
+  description: "Carisma Slimming Privacy Policy — how we collect, use and protect personal data for patients of our Malta slimming and medical weight loss clinic.",
   alternates: { canonical: 'https://www.carismaslimming.com/privacy-policy' },
+  openGraph: {
+    title: "Privacy Policy | Carisma Slimming",
+    description: "Carisma Slimming Privacy Policy — how we collect, use and protect personal data for patients of our Malta slimming and medical weight loss clinic.",
+    url: 'https://www.carismaslimming.com/privacy-policy',
+  },
 };
 
 export default function PrivacyPolicyPage() {

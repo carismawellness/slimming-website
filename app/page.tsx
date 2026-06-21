@@ -8,8 +8,14 @@ import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
-  description: "Lose up to 1kg a week with Malta's most comprehensive slimming program. Fat freezing, body contouring, personalised meal plans. Starter packs from €199. Book your free consultation.",
+  description: "Lose up to 1kg/week with Malta's most comprehensive slimming program. Fat freezing, body contouring & personalised meal plans from €199. Book your free consultation.",
   alternates: { canonical: "https://www.carismaslimming.com" },
+  openGraph: {
+    title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
+    description: "Lose up to 1kg/week with Malta's most comprehensive slimming program. Fat freezing, body contouring & personalised meal plans from €199. Book your free consultation.",
+    url: 'https://www.carismaslimming.com',
+    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Carisma Slimming Malta' }],
+  },
 };
 
 export default function Home() {

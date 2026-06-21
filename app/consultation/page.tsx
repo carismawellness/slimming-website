@@ -8,6 +8,12 @@ export const metadata: Metadata = {
   title: "Free Body Composition Analysis Malta | Carisma Slimming",
   description: "Book your free body composition analysis with our medically qualified doctors in Malta. Get a personalised weight loss plan and start your journey today.",
   alternates: { canonical: 'https://www.carismaslimming.com/consultation' },
+  openGraph: {
+    title: "Free Body Composition Analysis Malta | Carisma Slimming",
+    description: "Book your free body composition analysis with our medically qualified doctors in Malta. Get a personalised weight loss plan and start your journey today.",
+    url: 'https://www.carismaslimming.com/consultation',
+    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Free Body Composition Analysis Malta — Carisma Slimming' }],
+  },
 };
 
 // Accessible brand palette (locked):

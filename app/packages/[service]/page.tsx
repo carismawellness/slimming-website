@@ -75,10 +75,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { service } = await params;
   const meta = serviceMeta[service];
   if (!meta) return { title: 'Treatment | Carisma Slimming' };
+  const canonicalUrl = `https://www.carismaslimming.com/packages/${service}`;
   return {
     title: meta.title,
     description: meta.description,
-    alternates: { canonical: `https://www.carismaslimming.com/packages/${service}` },
+    alternates: { canonical: canonicalUrl },
+    openGraph: {
+      title: meta.title,
+      description: meta.description,
+      url: canonicalUrl,
+      images: [{ url: '/background.avif', width: 1200, height: 630, alt: meta.title }],
+    },
   };
 }
 

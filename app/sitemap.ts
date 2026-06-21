@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next'
 
 const BASE_URL = 'https://www.carismaslimming.com'
-const LAST_MODIFIED = '2026-06-15'
+const LAST_MODIFIED = new Date('2026-06-22')
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [

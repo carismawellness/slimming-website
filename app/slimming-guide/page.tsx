@@ -8,9 +8,15 @@ import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
-  title: "Carisma Slimmig Guide | Malta's #1 Weight-Loss Clinic",
-  description: "Discover Malta's only multidisciplinary approach to weight-loss. Drop dress sizes and boost energy without giving up pasta or wine nights! To book a free consultation with Carisma Slimming, call us on +356 27802062.",
+  title: "Carisma Slimming Guide | Malta's #1 Weight-Loss Clinic",
+  description: "The Carisma Slimming Guide — a doctor-backed behaviour system with Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30.",
   alternates: { canonical: 'https://www.carismaslimming.com/slimming-guide' },
+  openGraph: {
+    title: "Carisma Slimming Guide | Malta's #1 Weight-Loss Clinic",
+    description: "The Carisma Slimming Guide — a doctor-backed behaviour system with Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30.",
+    url: 'https://www.carismaslimming.com/slimming-guide',
+    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Carisma Slimming Guide Malta' }],
+  },
 };
 
 const jsonLd = [
@@ -159,7 +165,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
     <div className="flex items-center gap-1.5">
       <img
         src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png"
-        alt="google.png"
+        alt="Google"
         style={{ width: '23px', height: '23px', objectFit: 'contain' }}
       />
       {[0, 1, 2, 3, 4].map((i) => (
@@ -397,14 +403,16 @@ export default function SlimmingGuidePage() {
       {/* Tilted A4 mockup overlapping the band + What This Is (right edge) */}
       <img
         src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.png"
-        alt="A4 paper mockup of the guide (A4 Papdfgfder Mockup V1.0.png)"
+        alt=""
+        role="presentation"
         className="hidden lg:block absolute pointer-events-none"
         style={{ width: '771px', aspectRatio: '771 / 618', objectFit: 'contain', top: '0px', right: '-305px' }}
       />
       {/* Recipe page + guide cover stack overlapping What This Is + Method (left edge) */}
       <img
         src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.png"
-        alt="The Method flyer image (Freedfvvdfv Flyer 02.png)"
+        alt=""
+        role="presentation"
         className="hidden lg:block absolute pointer-events-none"
         style={{ width: '771px', aspectRatio: '771 / 708', objectFit: 'contain', top: '330px', left: '-305px' }}
       />
@@ -494,7 +502,8 @@ export default function SlimmingGuidePage() {
               <div className="flex items-center gap-3 mb-4">
                 <img
                   src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png"
-                  alt="Designed for Malta image (Group 1707479766.png)"
+                  alt=""
+                  role="presentation"
                   style={{ width: '23px', height: '23px', objectFit: 'contain' }}
                 />
                 <p className="uppercase" style={{ color: TAUPE, fontSize: '18px', fontWeight: 700 }}>
@@ -584,7 +593,8 @@ export default function SlimmingGuidePage() {
                 </h3>
                 <img
                   src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png"
-                  alt="Group 1707479766.png"
+                  alt=""
+                  role="presentation"
                   style={{ width: '34px', height: '34px', objectFit: 'contain' }}
                 />
               </div>
@@ -614,7 +624,8 @@ export default function SlimmingGuidePage() {
                 </h3>
                 <img
                   src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png"
-                  alt="Group 1707481598.png"
+                  alt=""
+                  role="presentation"
                   style={{ width: '34px', height: '34px', objectFit: 'contain' }}
                 />
               </div>
@@ -706,7 +717,7 @@ export default function SlimmingGuidePage() {
             <div className="flex justify-center lg:hidden">
               <img
                 src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.png"
-                alt="Guide preview image (Guide 3fD 01.jpg.png)"
+                alt="Preview pages from the Carisma Slimming Guide"
                 style={{ width: '100%', maxWidth: '560px', aspectRatio: '964 / 752', objectFit: 'contain' }}
               />
             </div>
@@ -791,7 +802,8 @@ export default function SlimmingGuidePage() {
               <div className="flex items-center gap-3">
                 <img
                   src="/wix/87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png"
-                  alt="Parking sign icon (parking-sign (1).png)"
+                  alt=""
+                  role="presentation"
                   style={{ width: '20px', height: '23px', objectFit: 'contain' }}
                 />
                 <p
