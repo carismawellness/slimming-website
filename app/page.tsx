@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import ModalitiesCarousel from '@/components/ModalitiesCarousel';
+import TreatmentsCarousel3D from '@/components/TreatmentsCarousel3D';
 import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
@@ -166,7 +166,7 @@ export default function Home() {
           </h2>
           <div className="mx-auto" aria-hidden="true" style={{ width: '120px', height: '1px', backgroundColor: '#C9B8AE' }} />
         </div>
-        <ModalitiesCarousel />
+        <TreatmentsCarousel3D />
       </section>
 
       {/* (4) Our Results-Driven Approach / Extended Care Commitment */}
@@ -192,7 +192,7 @@ export default function Home() {
               {/* Left - Image */}
               <div className="flex justify-center">
                 <Image
-                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.webp"
                   alt="Doctor consultation for medical weight loss at Carisma Slimming Malta"
                   width={326}
                   height={418}
@@ -294,7 +294,7 @@ How GLP-1 Works<br />at Our Clinic
           <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
             {/* Decorative background watermark (purely presentational) */}
             <Image
-              src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png"
+              src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.webp"
               alt=""
               role="presentation"
               width={678}

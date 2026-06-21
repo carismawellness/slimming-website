@@ -36,7 +36,7 @@ const TREATMENTS = [
     id: 'glp1',
     name: 'GLP-1 Prescription (Ozempic / Mounjaro)',
     tagline: 'Prescription weight loss medication — Ozempic or Mounjaro — prescribed and monitored by our doctors when clinically appropriate.',
-    image: '/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png',
+    image: '/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.webp',
     stats: [
       { label: 'Type', value: 'Prescription only' },
       { label: 'Results', value: 'Clinically proven' },

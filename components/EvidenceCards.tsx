@@ -47,7 +47,7 @@ const ITEMS: Item[] = [
   },
   {
     title: 'Long-term weight regain prevention with GLP-1 support',
-    image: '/wix/87fc13_28e88260661c4e019e0d6587dcd1c0b6~mv2.png',
+    image: '/wix/87fc13_28e88260661c4e019e0d6587dcd1c0b6~mv2.webp',
     what: 'By supporting appetite regulation and metabolic signalling, GLP-1 therapies help address one of the main drivers of weight regain after dieting: persistent hunger and reduced satiety.',
     keyResults: [
       { text: 'A long-term follow-up study found that patients who continued GLP-1 therapy alongside lifestyle changes maintained significantly more weight loss compared to those relying on lifestyle intervention alone, highlighting the biological role of appetite hormones in weight maintenance.', source: 'The Lancet' },
@@ -57,7 +57,7 @@ const ITEMS: Item[] = [
   },
   {
     title: 'Safety and tolerability of medically supervised GLP-1 use',
-    image: '/wix/87fc13_47c25306549d4b6e9322f160244d03b6~mv2.png',
+    image: '/wix/87fc13_47c25306549d4b6e9322f160244d03b6~mv2.webp',
     what: 'GLP-1 receptor agonists have been extensively studied for safety when prescribed appropriately and monitored by healthcare professionals, with dose titration used to improve tolerability.',
     keyResults: [
       { text: 'Large-scale clinical trials and post-marketing surveillance studies report that most side effects are mild to moderate and temporary, commonly gastrointestinal, and can be managed through gradual dose adjustments and medical follow-up.', source: 'FDA / PMC' },

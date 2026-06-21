@@ -107,7 +107,7 @@ CAREERS IN MALTA — JOIN CARISMA SLIMMING&apos;S #1 WEIGHT LOSS CLINIC TEAM
             {/* Handshake photo — bleeds 150px left of the 980px grid on desktop */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/wix/f940f0_b93ac2a5ad5a4d148afac21f35018a88~mv2.png"
+              src="/wix/f940f0_b93ac2a5ad5a4d148afac21f35018a88~mv2.webp"
               alt="Handshake"
               className="w-full object-cover lg:flex-none lg:w-[883px] lg:h-[585px] lg:-ml-[150px]"
               style={{ borderRadius: '16px' }}

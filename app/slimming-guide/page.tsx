@@ -204,7 +204,7 @@ export default function SlimmingGuidePage() {
           { text: '30+ recipes built for the Mediterranean kitchen.' },
         ]}
         primaryCta={{ text: 'Get the Slimming Guide', href: 'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta', external: true }}
-        media={{ type: 'image', src: '/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.png', alt: 'The Carisma Slimming Guide', fit: 'contain', bg: 'linear-gradient(160deg, #eef3ea 0%, #dde7d6 100%)' }}
+        media={{ type: 'image', src: '/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.webp', alt: 'The Carisma Slimming Guide', fit: 'contain', bg: 'linear-gradient(160deg, #eef3ea 0%, #dde7d6 100%)' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta' }}
         compactHeadline
       />
@@ -402,7 +402,7 @@ export default function SlimmingGuidePage() {
 
       {/* Tilted A4 mockup overlapping the band + What This Is (right edge) */}
       <img
-        src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.png"
+        src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.webp"
         alt=""
         role="presentation"
         className="hidden lg:block absolute pointer-events-none"
@@ -410,7 +410,7 @@ export default function SlimmingGuidePage() {
       />
       {/* Recipe page + guide cover stack overlapping What This Is + Method (left edge) */}
       <img
-        src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.png"
+        src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.webp"
         alt=""
         role="presentation"
         className="hidden lg:block absolute pointer-events-none"
@@ -716,7 +716,7 @@ export default function SlimmingGuidePage() {
             {/* Right — guide mockup (in-flow below lg; large absolute version on desktop) */}
             <div className="flex justify-center lg:hidden">
               <img
-                src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.png"
+                src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.webp"
                 alt="Preview pages from the Carisma Slimming Guide"
                 style={{ width: '100%', maxWidth: '560px', aspectRatio: '964 / 752', objectFit: 'contain' }}
               />
@@ -725,7 +725,7 @@ export default function SlimmingGuidePage() {
         </div>
         {/* Large scattered-pages mockup pinned to the right half (desktop) */}
         <img
-          src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.png"
+          src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.webp"
           alt=""
           className="hidden lg:block absolute pointer-events-none"
           style={{ left: '433px', top: '-64px', width: '964px', height: '752px', objectFit: 'contain' }}

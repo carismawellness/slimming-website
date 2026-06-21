@@ -11,7 +11,7 @@ const FRESHA = 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/serv
 const BRANDS = [
   {
     title: 'Carisma Spa & Wellness',
-    img: '/wix/87fc13_a62cc8038b274204a2fe70fd3d4879d0~mv2.png',
+    img: '/wix/87fc13_a62cc8038b274204a2fe70fd3d4879d0~mv2.webp',
     logo: '/wix/87fc13_e2e5f077c0024cbc9a3d975e4a009b7e~mv2.png',
     cta: 'DISCOVER OUR SPAS',
     btnColor: '#8c6d18', // deep gold — white text 4.87:1 AA (was #B79E61, 2.60:1 fail)
@@ -19,7 +19,7 @@ const BRANDS = [
   },
   {
     title: 'Carisma Aesthetics',
-    img: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.png',
+    img: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.webp',
     logo: '/wix/87fc13_b5a7ec4b11f445b4879c36d7268ba6d1~mv2.png',
     cta: 'DISCOVER MED-AESTHETICS',
     btnColor: '#2f5d5d', // deep teal — white text 7.38:1 AAA (was #96B2B2, 2.26:1 fail)
@@ -78,7 +78,7 @@ export default function BrandBlock() {
               style={{ height: '487px' }}
             >
               <Image
-                src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.png"
+                src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.webp"
                 alt="Carisma Slimming Guide cover — Your Bible to Sustainable Weight Loss Management"
                 width={380}
                 height={487}

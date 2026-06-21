@@ -169,7 +169,7 @@ function HeroSection() {
         ]}
         primaryCta={{ text: 'Get Your Free Body Analysis', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
         secondaryCta={{ text: 'Speak to a doctor', href: 'tel:+35627802062' }}
-        media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png', alt: 'Carisma medical weight loss in Malta' }}
+        media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.webp', alt: 'Carisma medical weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />
@@ -807,7 +807,7 @@ function CarismaDifferenceSection() {
     'Selective entry and measurable weight loss results guaranteed',
   ];
   return (
-    <section className="relative py-20" aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+    <section className="relative py-20" aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
       {/* Accessibility scrim — the centred sage watermark has darkest pixel #A8C0AD; a 0.7 white veil
           lifts the effective background to ~#e5ece6 so taupe body clears 4.81:1 and green text 4.51:1 (AA). */}
       <div aria-hidden="true" className="absolute inset-0" style={{ backgroundColor: 'rgba(255,255,255,0.7)', pointerEvents: 'none' }} />
@@ -911,7 +911,7 @@ function OurPromiseSection() {
             <div>
               <div style={{ position: 'relative', height: '460px', borderTopLeftRadius: '16px', borderTopRightRadius: '72px', borderBottomLeftRadius: '72px', borderBottomRightRadius: '16px', overflow: 'hidden', boxShadow: '12px -12px 0 #C9D8C1' }}>
                 <Image
-                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.webp"
                   alt="Tanita body composition analysis at Carisma Slimming — your measurable baseline"
                   fill
                   style={{ objectFit: 'cover' }}

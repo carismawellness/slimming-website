@@ -11,7 +11,7 @@ const taupe        = '#6f6456';
 const taupeLight   = '#6f6456';
 const green        = '#4f7256'; // AA-accessible brand green on white (5.42:1)
 
-const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
+const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.webp';
 
 export const metadata: Metadata = {
   title: "Thank You | Carisma Slimming",

@@ -200,7 +200,7 @@ export const GLP1 = {
   ],
   capacity:
     'To protect quality of care, our transformation programs are limited to a small number of clients each month.',
-  image: '/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.png',
+  image: '/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.webp',
 } as const;
 
 /** Body contouring modalities (verbatim treatment descriptions from live site). */
@@ -269,21 +269,21 @@ export const DOCTORS = [
     name: 'Dr. Zaid Teebi',
     role: 'Medical Consultant — Weight Loss',
     exp: '30+ years',
-    img: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.png',
+    img: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.webp',
     bio: 'Leads our weight loss and slimming programs with 30+ years of clinical experience across general medicine, geriatrics and specialised allergy training. Holds a certificate in Sports Medicine (American College of Sports Medicine) and completed Pain Management training at Harvard Medical School (USA) and allergy therapy at Imperial College London (UK). Personally conducts detailed medical weight loss consultations.',
   },
   {
     name: 'Dr. Giovanni Scornavacca',
     role: 'Aesthetic Doctor',
     exp: '20+ years',
-    img: '/wix/87fc13_e903680b4d124adda85e7ade5dfd676b~mv2.png',
+    img: '/wix/87fc13_e903680b4d124adda85e7ade5dfd676b~mv2.webp',
     bio: 'Italian aesthetic doctor trained and practised for 20+ years in Italy, with advanced education across leading universities in Rome and Bologna. Pairs medical rigour with a calm, human manner — his philosophy is restoration, not change: conservative, precisely paced plans that prioritise safety, clarity and natural balance.',
   },
   {
     name: 'Dr. Francesca Chircop',
     role: 'Medical Aesthetics',
     exp: '8+ years',
-    img: '/wix/87fc13_26127e01d9fb4ec48fb0b2f7ccb73508~mv2.png',
+    img: '/wix/87fc13_26127e01d9fb4ec48fb0b2f7ccb73508~mv2.webp',
     bio: 'London-trained aesthetic doctor with 8+ years in medical aesthetics and a foundation in orthopaedic surgery, bringing precise anatomical insight to subtle, balanced results. Every consultation begins with listening to your story before shaping a conservative, personalised plan that prioritises safety and natural harmony.',
   },
 ] as const;

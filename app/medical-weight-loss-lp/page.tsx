@@ -180,10 +180,10 @@ export default function MedicalWeightLossLpPage() {
   ];
 
   const collageTiles = [
-    { src: '/wix/87fc13_170da1f718f64c8b8e1a1a86083e1a72~mv2.png', alt: 'Carisma Slimming client during medical weight loss consultation in Malta' },
-    { src: '/wix/87fc13_59d15b41b3c1462788d0a0843b859d0b~mv2.png', alt: 'Doctor-led body assessment at Carisma Slimming Malta' },
-    { src: '/wix/87fc13_73555ee869874f3c8a90fd5bb62d19e8~mv2.png', alt: 'Carisma Slimming clinic interior and treatment room in Malta' },
-    { src: '/wix/87fc13_074438e081814932aa4c2fe6dc450e57~mv2.png', alt: 'Client progress tracking session at Carisma Slimming Malta' },
+    { src: '/wix/87fc13_170da1f718f64c8b8e1a1a86083e1a72~mv2.webp', alt: 'Carisma Slimming client during medical weight loss consultation in Malta' },
+    { src: '/wix/87fc13_59d15b41b3c1462788d0a0843b859d0b~mv2.webp', alt: 'Doctor-led body assessment at Carisma Slimming Malta' },
+    { src: '/wix/87fc13_73555ee869874f3c8a90fd5bb62d19e8~mv2.webp', alt: 'Carisma Slimming clinic interior and treatment room in Malta' },
+    { src: '/wix/87fc13_074438e081814932aa4c2fe6dc450e57~mv2.webp', alt: 'Client progress tracking session at Carisma Slimming Malta' },
   ];
 
   return (
@@ -258,7 +258,7 @@ export default function MedicalWeightLossLpPage() {
           { label: 'Part of a full plan:', text: 'fits your nutrition, movement and treatment protocol.' },
         ]}
         primaryCta={{ text: 'Book Your Consultation', href: FRESHA_BOOK, external: true }}
-        media={{ type: 'video', src: '/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.png', alt: 'Medical weight loss programme in Malta — doctor consultation and body assessment' }}
+        media={{ type: 'video', src: '/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.webp', alt: 'Medical weight loss programme in Malta — doctor consultation and body assessment' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
       />
@@ -458,7 +458,7 @@ export default function MedicalWeightLossLpPage() {
         className="py-24"
         aria-labelledby="carisma-difference-heading"
         style={{
-          backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)',
+          backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)',
           backgroundSize: '2068px 1063px',
           backgroundPosition: 'calc(50% - 71px) 248px',
           backgroundRepeat: 'no-repeat',
@@ -643,7 +643,7 @@ export default function MedicalWeightLossLpPage() {
                     <Image src="/wix/87fc13_d0cbf25ddb0e465ab3edebcddd7cb3e3~mv2.jpg" alt="Client consultation at Carisma Slimming weight loss clinic Malta" width={176} height={168} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                   <div className="overflow-hidden" style={{ width: '62%', aspectRatio: '281 / 168', borderRadius: '16px' }}>
-                    <Image src="/wix/87fc13_47c25306549d4b6e9322f160244d03b6~mv2.png" alt="Carisma Slimming medical team with patient during weight loss programme Malta" width={281} height={168} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                    <Image src="/wix/87fc13_47c25306549d4b6e9322f160244d03b6~mv2.webp" alt="Carisma Slimming medical team with patient during weight loss programme Malta" width={281} height={168} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                 </div>
               </div>
@@ -680,7 +680,7 @@ export default function MedicalWeightLossLpPage() {
               <div className="bg-white p-8" style={{ borderRadius: '16px' }}>
                 {/* Live crops the top of CarismaSlim_Batch2-008 2.png (crop y_236 h_602 of 1194x1592) */}
                 <div className="w-full overflow-hidden mb-6" style={{ aspectRatio: '1194 / 602', borderRadius: '16px' }}>
-                  <Image src="/wix/87fc13_8cc64ffa7b4345f0a20daba3955f4954~mv2.png" alt="Carisma Slimming team and client during a medical weight loss consultation in Malta" width={1194} height={602} style={{ width: '100%', height: 'auto', display: 'block', marginTop: '-19.77%' }} />
+                  <Image src="/wix/87fc13_8cc64ffa7b4345f0a20daba3955f4954~mv2.webp" alt="Carisma Slimming team and client during a medical weight loss consultation in Malta" width={1194} height={602} style={{ width: '100%', height: 'auto', display: 'block', marginTop: '-19.77%' }} />
                 </div>
                 <ul className="space-y-2 mb-6">
                   {integrationBullets.map((t) => (
@@ -709,7 +709,7 @@ export default function MedicalWeightLossLpPage() {
                       <Image key={i} src="/wix/f940f0_b971086dc1d3458fb2622a9d95340fab~mv2.png" alt="" aria-hidden="true" width={18} height={18} style={{ objectFit: 'contain' }} />
                     ))}
                   </span>
-                  <Image src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png" alt="" aria-hidden="true" width={30} height={28} style={{ objectFit: 'contain' }} />
+                  <Image src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.webp" alt="" aria-hidden="true" width={30} height={28} style={{ objectFit: 'contain' }} />
                   <span className="uppercase" style={{ color: CHECK, fontFamily: wideFont, fontSize: '12px', fontWeight: 600, letterSpacing: '1px' }}>#1 Voted Clinic in Malta</span>
                 </div>
               </div>
@@ -724,7 +724,7 @@ export default function MedicalWeightLossLpPage() {
           <div className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #F4F7F2 0%, #E9EFE6 100%)', borderRadius: '16px', padding: '40px 33px' }}>
             {/* Soft watermark badge — purely decorative */}
             <Image
-              src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png"
+              src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.webp"
               alt=""
               aria-hidden="true"
               width={678}
@@ -796,7 +796,7 @@ export default function MedicalWeightLossLpPage() {
         className="py-24"
         aria-labelledby="start-transformation-heading"
         style={{
-          backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png)',
+          backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)',
           backgroundSize: '2068px 1063px',
           backgroundPosition: 'calc(50% + 27px) 217px',
           backgroundRepeat: 'no-repeat',
@@ -855,7 +855,7 @@ export default function MedicalWeightLossLpPage() {
           {/* Bottom strip */}
           <div className="mt-12 mx-auto overflow-hidden" style={{ borderRadius: '16px', maxWidth: '980px' }}>
             <Image
-              src="/wix/87fc13_940a68fd38fc42b88f55048f0dc395fd~mv2.png"
+              src="/wix/87fc13_940a68fd38fc42b88f55048f0dc395fd~mv2.webp"
               alt="Carisma Slimming — Malta's leading medical weight loss clinic"
               width={980}
               height={200}

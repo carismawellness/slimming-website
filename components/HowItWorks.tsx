@@ -165,7 +165,7 @@ export default function HowItWorks() {
               </div>
               <div className="w-full overflow-hidden" style={{ aspectRatio: '375 / 350', borderRadius: '16px' }}>
                 <Image
-                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png"
+                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.webp"
                   alt="Body composition analysis at Carisma Slimming Malta"
                   width={375}
                   height={350}

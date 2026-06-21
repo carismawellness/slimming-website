@@ -10,7 +10,7 @@ const taupe        = '#6f6456';
 // Muted subline kept in the same taupe family; hierarchy preserved via size/letter-spacing/uppercase.
 const taupeLight   = '#6f6456';
 
-const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.png';
+const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.webp';
 
 export const metadata: Metadata = {
   title: "Thank You | Carisma Slimming",

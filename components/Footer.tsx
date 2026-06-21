@@ -31,14 +31,14 @@ const FB_URL = 'https://www.facebook.com/carismaaesthetics/';
 const BRANDS = [
   {
     title: 'Carisma Spa & Wellness',
-    img: '/wix/87fc13_a62cc8038b274204a2fe70fd3d4879d0~mv2.png',
+    img: '/wix/87fc13_a62cc8038b274204a2fe70fd3d4879d0~mv2.webp',
     logo: '/wix/87fc13_e2e5f077c0024cbc9a3d975e4a009b7e~mv2.png',
     cta: 'Discover Our Spas',
     href: 'https://www.carismaspa.com',
   },
   {
     title: 'Carisma Aesthetics',
-    img: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.png',
+    img: '/wix/87fc13_bdc2b69242844d529915c2f20b2584ac~mv2.webp',
     logo: '/wix/87fc13_b5a7ec4b11f445b4879c36d7268ba6d1~mv2.png',
     cta: 'Discover Med-Aesthetics',
     href: FRESHA_AES,
@@ -98,7 +98,7 @@ function BookSection() {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '56px', alignItems: 'center', justifyContent: 'center' }}>
           <div ref={ref} className={visible ? 'book-r' : 'book-h'} style={{ flexShrink: 0 }}>
-            <Image src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.png" alt="Carisma Slimming Guide" width={220} height={282} style={{ maxWidth: '220px', filter: 'drop-shadow(0 30px 50px rgba(79,114,86,0.28))' }} loading="lazy" />
+            <Image src="/wix/87fc13_fae77cba7c5843e1ae57040ac00c3cce~mv2.webp" alt="Carisma Slimming Guide" width={220} height={282} style={{ maxWidth: '220px', filter: 'drop-shadow(0 30px 50px rgba(79,114,86,0.28))' }} loading="lazy" />
           </div>
           <div style={{ flex: '1 1 300px', maxWidth: '460px' }}>
             <Eyebrow>The Slimming Guide</Eyebrow>

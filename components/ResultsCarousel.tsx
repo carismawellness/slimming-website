@@ -17,25 +17,25 @@ type Result = { name: string; image: string; quote: string };
 const RESULTS: Result[] = [
   {
     name: 'NICOLE FARRUGIA',
-    image: '/wix/87fc13_859aab08ea744d8c997b5cfd312823a5~mv2.png',
+    image: '/wix/87fc13_859aab08ea744d8c997b5cfd312823a5~mv2.webp',
     quote:
       'I struggled with my weight for a long time and it was affecting my confidence and energy and after this journey I feel lighter in my body and happier when I look at myself.',
   },
   {
     name: 'LAURA BENNETT',
-    image: '/wix/87fc13_671e0f2c983242c5ad4711a7d5a7ce91~mv2.png',
+    image: '/wix/87fc13_671e0f2c983242c5ad4711a7d5a7ce91~mv2.webp',
     quote:
       'I had tried dieting on and off for years but my weight always came back. This helped me reset my habits and feel more comfortable in my body again.',
   },
   {
     name: 'MARY KOWALSKA',
-    image: '/wix/87fc13_c617250be48e4af7ba36007603d8533b~mv2.png',
+    image: '/wix/87fc13_c617250be48e4af7ba36007603d8533b~mv2.webp',
     quote:
       'My goal was not to be skinny but to feel healthier and more toned. The change has been gradual but very motivating and I finally feel like myself again.',
   },
   {
     name: 'ANNA LINDSTRÖM',
-    image: '/wix/87fc13_7fc62a3875154ae2a204387f87a61814~mv2.png',
+    image: '/wix/87fc13_7fc62a3875154ae2a204387f87a61814~mv2.webp',
     quote:
       'My issue wasn’t just weight, it was how heavy my body felt to carry. Walking, standing for long periods, even basic daily things felt tiring. I felt rounded and compressed, especially through my middle and back. Seeing this change feels like relief. I move easier, my posture is better, and I finally feel balanced in my body again.',
   },

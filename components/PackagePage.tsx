@@ -60,7 +60,7 @@ const W = '/wix/';
 const BADGE = W + 'f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png';
 const GOOGLE = W + '87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png';
 const CHECK = W + '87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png';
-const DIFF_BG = W + '87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.png';
+const DIFF_BG = W + '87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp';
 const WELL_BG = W + 'f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png';
 const PARKING = W + '87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png';
 /* live order + rendered sizes (measured on carismaslimming.com) */
