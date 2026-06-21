@@ -110,7 +110,7 @@ export default function ConsultationModal() {
       role="dialog"
       aria-modal="true"
       aria-label="Book your free body composition analysis"
-      className="fixed inset-0 z-[999] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[999] flex items-center justify-center p-2 sm:p-4"
       style={{ display: isOpen ? 'flex' : 'none' }}
       onKeyDown={onTrapKeyDown}
     >
@@ -122,15 +122,22 @@ export default function ConsultationModal() {
         aria-hidden="true"
       />
 
-      {/* Panel */}
+      {/* Panel — flex column, fits viewport with no internal scroll */}
       <div
         ref={panelRef}
-        className="relative z-10 w-full overflow-hidden"
-        style={{ maxWidth: '520px', borderRadius: '20px', boxShadow: '0 32px 80px rgba(0,0,0,0.28)', background: '#fff' }}
+        className="relative z-10 w-full flex flex-col overflow-hidden"
+        style={{
+          maxWidth: '520px',
+          borderRadius: '20px',
+          boxShadow: '0 32px 80px rgba(0,0,0,0.28)',
+          background: '#fff',
+          height: 'calc(100dvh - 32px)',
+          maxHeight: '780px',
+        }}
       >
-        {/* Header bar */}
+        {/* Header bar — fixed height */}
         <div
-          className="flex items-center justify-between px-6 py-4"
+          className="flex items-center justify-between px-6 py-3 shrink-0"
           style={{ background: 'linear-gradient(135deg,#4f7256,#3a5a40)' }}
         >
           <p
@@ -159,33 +166,19 @@ export default function ConsultationModal() {
           </button>
         </div>
 
-        {/* STEP 1 — GHL contact form */}
+        {/* STEP 1 — GHL contact form stretches to fill remaining height */}
         {step === 'form' && (
-          <div style={{ overflowY: 'auto', maxHeight: '80vh' }}>
+          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
             {hasOpened && (
               <iframe
                 src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
-                style={{ width: '100%', height: '640px', border: 'none', display: 'block' }}
+                style={{ flex: 1, width: '100%', border: 'none', display: 'block', minHeight: 0 }}
                 id="modal-consult-Z3VHJCJwj5mBGmqcdmpE"
                 data-layout="{'id':'INLINE'}"
                 data-form-id="Z3VHJCJwj5mBGmqcdmpE"
                 title="Free Body Composition Analysis — your details"
               />
             )}
-            {/* Guaranteed fallback: advance to booking even if the submit signal isn't caught */}
-            <div className="px-6 pb-5 pt-1 text-center">
-              <button
-                type="button"
-                onClick={() => setStep('booking')}
-                style={{
-                  background: 'none', border: 'none', cursor: 'pointer',
-                  color: '#4f7256', fontFamily: 'Roboto, sans-serif', fontSize: '13px',
-                  textDecoration: 'underline', textUnderlineOffset: '2px',
-                }}
-              >
-                Already entered your details? Continue to booking →
-              </button>
-            </div>
           </div>
         )}
 
