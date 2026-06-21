@@ -29,6 +29,10 @@ export type HeroMedia = {
   fit?: 'cover' | 'contain';
   /** arch background behind the media (default dark). Use a tint for 'contain' media. */
   bg?: string;
+  /** arch aspect-ratio override (e.g. '406 / 720'). Defaults to the video's own
+   *  portrait ratio for videos (so the full frame — and any on-video text —
+   *  is never cropped) and 4/5 for images. */
+  aspect?: string;
 };
 export type HeroProof = {
   rating?: string; // e.g. "4.9"
@@ -306,9 +310,11 @@ export default function PageHero({
             style={{
               position: 'relative',
               height: 'min(60vh, 540px)',
-              aspectRatio: '4 / 5',
+              // Match the video's own aspect so cover never crops its on-screen
+              // text; images keep the 4/5 portrait crop.
+              aspectRatio: media.aspect ?? (media.type === 'video' ? '406 / 720' : '4 / 5'),
               maxWidth: '100%',
-              ...(media.bg ? { background: media.bg } : {}),
+              ...(media.bg ? { background: media.bg } : { background: '#0c0c0c' }),
             }}
           >
             {media.type === 'video' ? (
