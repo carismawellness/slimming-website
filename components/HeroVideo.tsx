@@ -39,14 +39,17 @@ export default function HeroVideo({
           aria-label="Play video"
           onFocus={() => setFocused(true)}
           onBlur={() => setFocused(false)}
+          className="hero-video-play"
           style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', background: 'transparent', border: 0 }}
         >
           {!hideButton && (
             <span
+              className="hero-video-play__chip"
               style={{
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
+                // Icon-chip affordance = circle per the interaction system.
                 borderRadius: '9999px',
                 width: '64px',
                 height: '64px',
@@ -55,6 +58,9 @@ export default function HeroVideo({
                 // behind it; the 85% version composited to ~#d9d9d9 over dark
                 // video and dropped the triangle to 1.96:1.
                 backgroundColor: '#ffffff',
+                // 300ms ease transition (disabled under reduced-motion via the
+                // scoped <style> below).
+                transition: 'transform 300ms ease, box-shadow 300ms ease',
                 // Visible focus indicator (>=3:1, WCAG 2.4.7/2.4.11): white ring
                 // + deep-sage halo so it reads on both light and dark media.
                 outline: focused ? '3px solid #ffffff' : 'none',
@@ -67,6 +73,26 @@ export default function HeroVideo({
           )}
         </button>
       )}
+      <style jsx>{`
+        /* Hover raise on the play affordance: scale(1.04) per the locked
+           interaction system. The white chip stays #ffffff and the deep-sage
+           triangle (#4f7256, 5.42:1 on white) is unchanged, so AA is preserved
+           in both rest and hover states. Focus ring (set inline) is untouched. */
+        .hero-video-play:hover .hero-video-play__chip,
+        .hero-video-play:focus-visible .hero-video-play__chip {
+          transform: scale(1.04);
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .hero-video-play__chip {
+            transition: none !important;
+          }
+          .hero-video-play:hover .hero-video-play__chip,
+          .hero-video-play:focus-visible .hero-video-play__chip {
+            transform: none;
+          }
+        }
+      `}</style>
     </div>
   );
 }

@@ -74,7 +74,7 @@ export default function WeightLossThankYouPage() {
               // image pixel, while a hint of the photo still shows around the panel.
               backgroundColor: 'rgba(245, 237, 232, 0.96)',
               padding: '28px 30px',
-              borderRadius: '4px',
+              borderRadius: '16px',
             }}
           >
             <h1

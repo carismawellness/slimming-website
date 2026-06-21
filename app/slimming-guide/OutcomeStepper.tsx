@@ -48,10 +48,10 @@ export default function OutcomeStepper({ outcomes }: { outcomes: Outcome[] }) {
       </div>
       {/* Active outcome panel */}
       <div
-        className="flex items-center"
+        className="card flex items-center"
         style={{
           background: 'linear-gradient(100deg, #C7D8C6 0%, #EFF3EC 45%, #F8F8F4 100%)',
-          borderRadius: '8px',
+          borderRadius: '16px',
           padding: '37px 38px 37px 14px',
           marginTop: '2px',
         }}
@@ -61,7 +61,7 @@ export default function OutcomeStepper({ outcomes }: { outcomes: Outcome[] }) {
         </div>
         <div
           className="flex-1 bg-white"
-          style={{ borderRadius: '10px', padding: '34px 30px', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' }}
+          style={{ borderRadius: '16px', padding: '34px 30px', boxShadow: '0 2px 10px rgba(0,0,0,0.06)' }}
         >
           <h3
             className="uppercase mb-2"

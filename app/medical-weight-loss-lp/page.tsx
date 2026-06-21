@@ -339,7 +339,7 @@ export default function MedicalWeightLossLpPage() {
             {differentiators.map((card) => (
               <div
                 key={card.title}
-                className="p-8"
+                className="card p-8"
                 style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderRadius: '16px' }}
               >
                 <img src={card.icon} alt="" style={{ width: 'auto', height: '66px', objectFit: 'contain', marginBottom: '20px' }} />
@@ -432,7 +432,7 @@ export default function MedicalWeightLossLpPage() {
           <p className="text-center mx-auto mb-12" style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7, maxWidth: '760px' }}>
             We&rsquo;re a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don&rsquo;t just lose weight, you step into your strongest form.
           </p>
-          <div className="mx-auto p-9" style={{ maxWidth: '470px', background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderTopLeftRadius: '24px', borderTopRightRadius: '24px', borderBottomLeftRadius: '24px', borderBottomRightRadius: '90px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
+          <div className="mx-auto p-9" style={{ maxWidth: '470px', background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px', borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', boxShadow: '0 12px 32px rgba(0,0,0,0.06)' }}>
             <ul className="space-y-5">
               {differenceChecklist.map((t) => (
                 <li key={t} className="flex items-start gap-4">
@@ -477,7 +477,7 @@ export default function MedicalWeightLossLpPage() {
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-[448px_1fr] gap-12 items-center">
-            <div className="w-full overflow-hidden mx-auto" style={{ maxWidth: '448px', aspectRatio: '448 / 479', borderRadius: '24px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
+            <div className="w-full overflow-hidden mx-auto" style={{ maxWidth: '448px', aspectRatio: '448 / 479', borderRadius: '16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
               <img src="/wix/87fc13_130b2a48c11a4658bad12952342d1eb4~mv2.jpeg" alt="C8DFC042-B799-481E-82AD-DF24558C5019.jpeg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
             </div>
             <div>
@@ -521,7 +521,7 @@ export default function MedicalWeightLossLpPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
             <div
               className="p-12 flex flex-col justify-center"
-              style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', borderRadius: '24px', minHeight: '240px' }}
+              style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', borderRadius: '16px', minHeight: '240px' }}
             >
               <p className="uppercase" style={{ color: CHECK, fontFamily: headingFont, fontWeight: 400, fontSize: '22px', letterSpacing: '2px', lineHeight: 1.6 }}>
                 Only weight loss clinic in Malta to offer a complete performance assurance*
@@ -556,7 +556,7 @@ export default function MedicalWeightLossLpPage() {
       {/* Safety, side effects, and our system */}
       <section className="py-16">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '1104px' }}>
-          <div className="p-8 sm:py-12 sm:px-20" style={{ background: 'linear-gradient(180deg, #B7CBB2 0%, #F4F2EC 38%, #FFFFFF 100%)', borderRadius: '28px' }}>
+          <div className="p-8 sm:py-12 sm:px-20" style={{ background: 'linear-gradient(180deg, #B7CBB2 0%, #F4F2EC 38%, #FFFFFF 100%)', borderRadius: '16px' }}>
             <h2 className="text-center uppercase" style={{ color: TAUPE, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '2px', lineHeight: 1.5 }}>
               safety, side effects,<br />and our system
             </h2>
@@ -582,14 +582,14 @@ export default function MedicalWeightLossLpPage() {
                 <CtaPair href={FRESHA_ANALYSIS} primaryLabel="Get Your Free Body Analysis" />
               </div>
               <div className="flex flex-col gap-7">
-                <div className="w-full overflow-hidden rounded-2xl" style={{ aspectRatio: '477 / 270' }}>
+                <div className="w-full overflow-hidden" style={{ aspectRatio: '477 / 270', borderRadius: '16px' }}>
                   <img src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="ozempic-_edited.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
                 <div className="flex gap-4">
-                  <div className="overflow-hidden rounded-2xl" style={{ width: '38%', aspectRatio: '176 / 168' }}>
+                  <div className="overflow-hidden" style={{ width: '38%', aspectRatio: '176 / 168', borderRadius: '16px' }}>
                     <img src="/wix/87fc13_d0cbf25ddb0e465ab3edebcddd7cb3e3~mv2.jpg" alt="CarismaSlim_Batch2-016.jpg" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
-                  <div className="overflow-hidden rounded-2xl" style={{ width: '62%', aspectRatio: '281 / 168' }}>
+                  <div className="overflow-hidden" style={{ width: '62%', aspectRatio: '281 / 168', borderRadius: '16px' }}>
                     <img src="/wix/87fc13_47c25306549d4b6e9322f160244d03b6~mv2.png" alt="CarismaSlim_Batch2-002 1.png" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                   </div>
                 </div>
@@ -609,12 +609,12 @@ export default function MedicalWeightLossLpPage() {
           <h2 className="text-center mb-12 uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px', lineHeight: 1.5 }}>
             a doctor-led Medical weight loss<br />programme built to last
           </h2>
-          <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', borderRadius: '28px', padding: '28px' }}>
+          <div style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', borderRadius: '16px', padding: '28px' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-white rounded-2xl p-8 space-y-7">
+              <div className="card bg-white p-8 space-y-7" style={{ borderRadius: '16px' }}>
                 {corePillars.map((f) => (
                   <div key={f.title} className="flex items-start gap-4">
-                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: '46px', height: '46px', borderRadius: '12px', border: '1px solid #e3ded6' }}>
+                    <div className="flex items-center justify-center flex-shrink-0" style={{ width: '46px', height: '46px', borderRadius: '50%', border: '1px solid #e3ded6' }}>
                       <img src={f.icon} alt="" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
                     </div>
                     <div>
@@ -624,9 +624,9 @@ export default function MedicalWeightLossLpPage() {
                   </div>
                 ))}
               </div>
-              <div className="bg-white rounded-2xl p-8">
+              <div className="card bg-white p-8" style={{ borderRadius: '16px' }}>
                 {/* Live crops the top of CarismaSlim_Batch2-008 2.png (crop y_236 h_602 of 1194x1592) */}
-                <div className="w-full overflow-hidden rounded-xl mb-6" style={{ aspectRatio: '1194 / 602' }}>
+                <div className="w-full overflow-hidden mb-6" style={{ aspectRatio: '1194 / 602', borderRadius: '16px' }}>
                   <img src="/wix/87fc13_8cc64ffa7b4345f0a20daba3955f4954~mv2.png" alt="CarismaSlim_Batch2-008 2.png" style={{ width: '100%', height: 'auto', display: 'block', marginTop: '-19.77%' }} />
                 </div>
                 <ul className="space-y-2 mb-6">
@@ -667,7 +667,7 @@ export default function MedicalWeightLossLpPage() {
       {/* Malta's #1 leading wellness chain */}
       <section className="py-16">
         <div className="mx-auto px-4 sm:px-0" style={{ maxWidth: '980px' }}>
-          <div className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #F4F7F2 0%, #E9EFE6 100%)', borderRadius: '32px', padding: '40px 33px' }}>
+          <div className="relative overflow-hidden" style={{ background: 'linear-gradient(180deg, #F4F7F2 0%, #E9EFE6 100%)', borderRadius: '16px', padding: '40px 33px' }}>
             {/* soft rose watermark behind the card content (live: f940f0_9f944ed5, 678x579) */}
             <img
               src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.png"
@@ -708,7 +708,7 @@ export default function MedicalWeightLossLpPage() {
                     </ul>
                   </div>
                 </div>
-                <div className="w-full overflow-hidden" style={{ borderRadius: '12px', height: '359px' }}>
+                <div className="w-full overflow-hidden" style={{ borderRadius: '16px', height: '359px' }}>
                   <iframe
                     title="Carisma Slimming clinic location in Malta"
                     src={`https://www.google.com/maps?q=${encodeURIComponent('Carisma Slimming, Malta')}&output=embed`}

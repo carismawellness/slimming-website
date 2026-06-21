@@ -70,7 +70,7 @@ CAREERS IN MALTA — JOIN CARISMA SLIMMING&apos;S #1 WEIGHT LOSS CLINIC TEAM
             src="/wix/eac6309c7e924921acd0cd838be3c271.jpg"
             alt="Beautician"
             className="relative mx-auto w-full object-cover px-4 sm:px-0"
-            style={{ maxWidth: '735px', aspectRatio: '3 / 2' }}
+            style={{ maxWidth: '735px', aspectRatio: '3 / 2', borderRadius: '16px' }}
           />
         </div>
 
@@ -104,6 +104,7 @@ CAREERS IN MALTA — JOIN CARISMA SLIMMING&apos;S #1 WEIGHT LOSS CLINIC TEAM
               src="/wix/f940f0_b93ac2a5ad5a4d148afac21f35018a88~mv2.png"
               alt="Handshake"
               className="w-full object-cover lg:flex-none lg:w-[883px] lg:h-[585px] lg:-ml-[150px]"
+              style={{ borderRadius: '16px' }}
             />
 
             {/* White panel overlapping the photo's right edge, behind the text (as on live) */}
@@ -162,21 +163,17 @@ WELLNESS &amp; HEALTHCARE PROFESSIONALS WE&apos;RE HIRING FOR
           <div className="flex justify-center" style={{ marginTop: '67px' }}>
             <Link
               href="/consultation"
-              className="group flex items-center justify-center transition-colors hover:brightness-110"
-              style={{ width: '243px', height: '63px', backgroundColor: TAUPE, borderRadius: 0 }}
+              className="btn btn-primary"
+              style={{
+                width: '243px',
+                height: '63px',
+                fontFamily: wideFont,
+                fontWeight: 400,
+                fontSize: '16px',
+                textTransform: 'uppercase',
+              }}
             >
-              <span
-                className="underline-offset-4 group-hover:underline"
-                style={{
-                  color: CREAM,
-                  fontFamily: wideFont,
-                  fontWeight: 400,
-                  fontSize: '16px',
-                  textTransform: 'uppercase',
-                }}
-              >
-                APPLY NOW
-              </span>
+              APPLY NOW
             </Link>
           </div>
         </div>

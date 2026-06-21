@@ -87,11 +87,10 @@ export default function ModalitiesCarousel() {
         <button
           onClick={() => scroll(-1)}
           aria-label="Previous"
-          className="hidden md:flex items-center justify-center absolute z-20"
+          className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
           style={{
             left: '12px',
-            top: '50%',
-            transform: 'translateY(-50%)',
+            top: 'calc(50% - 26px)',
             width: '52px',
             height: '52px',
             backgroundColor: '#ffffff',
@@ -101,7 +100,7 @@ export default function ModalitiesCarousel() {
             lineHeight: 1,
             border: 'none',
             cursor: 'pointer',
-            borderRadius: '2px',
+            borderRadius: '999px',
           }}
         >
           ‹
@@ -126,11 +125,11 @@ export default function ModalitiesCarousel() {
           <Link
             key={card.title}
             href={card.href}
-            className="relative block overflow-hidden flex-shrink-0"
+            className="card group relative block overflow-hidden flex-shrink-0"
             style={{
               width: `${CARD_W}px`,
               height: `${CARD_H}px`,
-              borderRadius: '20px',
+              borderRadius: '16px',
               scrollSnapAlign: 'start',
               textDecoration: 'none',
             }}
@@ -195,9 +194,12 @@ export default function ModalitiesCarousel() {
               >
                 {card.desc}
               </p>
-              {/* EXPLORE — visually a button, functionally part of the card Link */}
+              {/* EXPLORE — visually a button, functionally part of the card Link.
+                  Pill radius; on card hover it inverts to filled white bg with sage
+                  text (#4f7256 on #ffffff = 5.42:1, AA). Motion handled by globals
+                  reduced-motion; only color/bg changes here so it is safe. */}
               <span
-                className="block text-center"
+                className="block text-center transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-[#4f7256] group-hover:border-white"
                 style={{
                   border: '1.5px solid rgba(255,255,255,0.9)',
                   color: '#ffffff',
@@ -206,7 +208,7 @@ export default function ModalitiesCarousel() {
                   letterSpacing: '2px',
                   padding: '14px 0',
                   textTransform: 'uppercase',
-                  borderRadius: '4px',
+                  borderRadius: '999px',
                 }}
               >
                 EXPLORE
@@ -221,11 +223,10 @@ export default function ModalitiesCarousel() {
         <button
           onClick={() => scroll(1)}
           aria-label="Next"
-          className="hidden md:flex items-center justify-center absolute z-20"
+          className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
           style={{
             right: '12px',
-            top: '50%',
-            transform: 'translateY(-50%)',
+            top: 'calc(50% - 26px)',
             width: '52px',
             height: '52px',
             backgroundColor: '#ffffff',
@@ -235,7 +236,7 @@ export default function ModalitiesCarousel() {
             lineHeight: 1,
             border: 'none',
             cursor: 'pointer',
-            borderRadius: '2px',
+            borderRadius: '999px',
           }}
         >
           ›

@@ -88,7 +88,7 @@ export default function BrandBlock() {
               </div>
             );
             return (
-              <div key={doc.name} className="flex flex-col md:flex-row gap-12 items-center" style={{ background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', borderRadius: '28px', padding: '40px' }}>
+              <div key={doc.name} className="flex flex-col md:flex-row gap-12 items-center" style={{ background: 'linear-gradient(148deg, #FFFFFF 0%, #C9D8C1 100%)', borderRadius: '16px', padding: '40px' }}>
                 {photoFirst ? [photo, text] : [text, photo]}
               </div>
             );
@@ -119,7 +119,7 @@ export default function BrandBlock() {
               <h2 className="mb-6 pb-3" style={{ color: GREEN, fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '26px', lineHeight: 1.4, letterSpacing: '1px', borderBottom: '1px solid #E6E1DC' }}>
                 YOUR BIBLE TO SUSTAINABLE WEIGHT LOSS MANAGEMENT
               </h2>
-              <div style={{ border: '1px solid #E6E1DC', borderRadius: '4px', padding: '20px 24px' }}>
+              <div style={{ border: '1px solid #E6E1DC', borderRadius: '16px', padding: '20px 24px' }}>
                 <p style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: '12px', lineHeight: 1.7 }}>
                   Weight loss is often treated as a test of discipline, but discipline rarely holds under stress, busy schedules, or decision fatigue. The Carisma Slimming Guide was created to address what happens after people try, when rigid rules stop working. It presents weight loss management as a structured meal plan system shaped by appetite physiology, behaviour, and real life. The guide covers when to eat, what to eat, how much to eat, and in which order: a practical framework you can return to on busy or low-energy days. Built from clinical experience at our slimming clinic in Malta, it helps you lose weight with consistency, not perfection.
                 </p>
@@ -149,11 +149,17 @@ export default function BrandBlock() {
               </p>
             </div>
           </div>
+          <style>{`
+            [data-brand-cta]:hover { transform: scale(1.04); }
+            @media (prefers-reduced-motion: reduce) {
+              [data-brand-cta]:hover { transform: none; }
+            }
+          `}</style>
           <div className="flex flex-col" style={{ gap: '44px' }}>
             {BRANDS.map((card) => (
               <div key={card.title} className="relative" style={{ height: '287px' }}>
                 {/* Full-width card background (gradient panel is part of the image) */}
-                <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '10px' }} />
+                <img src={card.img} alt={card.title} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block', borderRadius: '16px' }} />
                 {/* Overlaid white logo (+ Google reviews line on the Aesthetics card) */}
                 <div className="absolute flex flex-col justify-center" style={{ left: '64px', top: 0, bottom: 0 }}>
                   <img src={card.logo} alt={card.title} style={{ width: '218px', height: '122px', objectFit: 'contain' }} />
@@ -170,8 +176,9 @@ export default function BrandBlock() {
                   href={FRESHA}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="absolute flex items-center justify-center text-white"
-                  style={{ right: 0, bottom: '-20px', width: '278px', height: '40px', backgroundColor: card.btnColor, fontFamily: '"Novecento Wide", sans-serif', fontSize: '12px', fontWeight: 700, letterSpacing: '0.5px', borderRadius: '5px' }}
+                  data-brand-cta
+                  className="btn absolute text-white"
+                  style={{ right: 0, bottom: '-20px', width: '278px', height: '40px', backgroundColor: card.btnColor, fontFamily: '"Novecento Wide", sans-serif', fontSize: '12px', fontWeight: 700, letterSpacing: '0.5px', borderRadius: '999px' }}
                 >
                   {card.cta}
                 </a>

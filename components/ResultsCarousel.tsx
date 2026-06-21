@@ -45,8 +45,8 @@ function ResultCard({ r }: { r: Result }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div
-      className="flex-shrink-0"
-      style={{ width: 'calc(33.333% - 20px)', minWidth: '280px', background: '#fff', borderRadius: '16px', padding: '20px 10px', margin: '0 10px', boxSizing: 'border-box', scrollSnapAlign: 'start' }}
+      className="card-lift flex-shrink-0"
+      style={{ width: 'calc(33.333% - 20px)', minWidth: '280px', padding: '20px 10px', margin: '0 10px', boxSizing: 'border-box', scrollSnapAlign: 'start' }}
     >
       <img src={r.image} alt={`${r.name} before and after`} style={{ width: '100%', borderRadius: '16px', display: 'block', position: 'relative', zIndex: 1 }} />
       <div

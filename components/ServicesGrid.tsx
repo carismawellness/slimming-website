@@ -35,7 +35,7 @@ export default function ServicesGrid() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <Link key={index} href={service.href}>
-              <div className="bg-white border-2 border-gray-200 rounded-lg p-8 hover:border-[var(--brand-green-text)] hover:shadow-lg transition cursor-pointer h-full">
+              <div className="card p-8 cursor-pointer h-full">
                 <div className="text-5xl mb-4" aria-hidden="true">{service.icon}</div>
                 <h3 className="text-xl font-semibold mb-3">{service.title}</h3>
                 <p className="text-[var(--text-light)] mb-4">{service.description}</p>
@@ -47,7 +47,7 @@ export default function ServicesGrid() {
         <div className="text-center mt-12">
           <Link
             href="/packages"
-            className="bg-[var(--brand-green-fill)] text-white px-8 py-3 rounded-lg font-semibold hover:brightness-90 inline-block"
+            className="btn btn-primary px-8 py-3 font-semibold"
           >
             View All Services
           </Link>

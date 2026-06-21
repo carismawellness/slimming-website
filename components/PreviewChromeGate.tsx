@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import GlobalHeader from './GlobalHeader';
 import GlobalBottom from './GlobalBottom';
 import CookieConsentBanner from './CookieConsentBanner';
+import MobileStickyCTA from './MobileStickyCTA';
 
 // The /preview redesign is a self-contained landing experience with its own
 // header, footer and CTAs — so the shared site chrome is suppressed there.
@@ -17,4 +18,7 @@ export function SiteFooter() {
 }
 export function SiteCookieBanner() {
   return isPreview(usePathname()) ? null : <CookieConsentBanner />;
+}
+export function SiteMobileCTA() {
+  return isPreview(usePathname()) ? null : <MobileStickyCTA />;
 }

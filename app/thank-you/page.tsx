@@ -72,7 +72,7 @@ export default function ThankYouPage() {
               maxWidth: '430px',
               backgroundColor: 'rgba(245, 237, 232, 0.96)',
               padding: '28px 30px',
-              borderRadius: '4px',
+              borderRadius: '16px',
             }}
           >
             <h1

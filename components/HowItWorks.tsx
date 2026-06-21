@@ -71,11 +71,11 @@ export default function HowItWorks() {
         </div>
 
         {/* Panel */}
-        <div style={{ background: panelGradient, borderBottomLeftRadius: '24px', borderBottomRightRadius: '24px', padding: '32px' }}>
+        <div style={{ background: panelGradient, borderBottomLeftRadius: '16px', borderBottomRightRadius: '16px', padding: '32px' }}>
           {active === 0 && (
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               {/* Consultation */}
-              <div className="bg-white rounded-xl p-7">
+              <div className="card p-7">
                 <div className="flex items-center gap-3 mb-5">
                   <img src="/wix/87fc13_d2a17b8db6de4c8c8c41219e3a2c99cb~mv2.png" alt="" style={{ height: '44px', width: 'auto', objectFit: 'contain' }} />
                   <h3 style={{ ...colHead, color: greenText }}>Your medical weight loss consultation</h3>
@@ -96,7 +96,7 @@ export default function HowItWorks() {
                 </p>
               </div>
               {/* Suitable / Not suitable */}
-              <div className="bg-white rounded-xl p-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="card p-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <div className="flex items-center gap-2 mb-5">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={greenText} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Suitable"><polyline points="20 6 9 17 4 12" /></svg>
@@ -130,7 +130,7 @@ export default function HowItWorks() {
           )}
 
           {active === 1 && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center bg-white rounded-xl p-7">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center card p-7">
               <div>
                 <h3 className="mb-4" style={{ ...colHead, color: greenText }}>Body analysis &amp; medical consultation</h3>
                 <p className="mb-4" style={pStyle}>
@@ -143,14 +143,14 @@ export default function HowItWorks() {
                 </ul>
                 <p className="mt-4" style={pStyle}>This also establishes whether a GLP-1 medication (Ozempic or Mounjaro) is clinically appropriate.</p>
               </div>
-              <div className="w-full overflow-hidden rounded-xl" style={{ aspectRatio: '375 / 350' }}>
+              <div className="w-full overflow-hidden" style={{ aspectRatio: '375 / 350', borderRadius: '16px' }}>
                 <img src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.png" alt="Body composition analysis at Carisma" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
             </div>
           )}
 
           {active === 2 && (
-            <div className="bg-white rounded-xl p-7">
+            <div className="card p-7">
               <h3 className="mb-4" style={{ ...colHead, color: greenText }}>Diet &amp; accountability</h3>
               <p style={pStyle}>
                 A personalised meal plan built around your routine and Maltese food — not a template. You get weekly weigh-ins and measurements, one-to-one coaching with a dedicated consultant, supplement guidance and WhatsApp support between sessions, so the plan survives a real, busy week.
@@ -159,7 +159,7 @@ export default function HowItWorks() {
           )}
 
           {active === 3 && (
-            <div className="bg-white rounded-xl p-7">
+            <div className="card p-7">
               <h3 className="mb-4" style={{ ...colHead, color: greenText }}>Movement that fits your life</h3>
               <p style={pStyle}>
                 Realistic training, never punishment. Open gym access for independent sessions, small-group classes for fat loss and strength, and personal training for guidance and momentum — all designed to protect muscle while you lose fat.
@@ -168,7 +168,7 @@ export default function HowItWorks() {
           )}
 
           {active === 4 && (
-            <div className="bg-white rounded-xl p-7">
+            <div className="card p-7">
               <h3 className="mb-4" style={{ ...colHead, color: greenText }}>Targeted treatments</h3>
               <p style={pStyle}>
                 Medical-grade body contouring used to accelerate and refine your results: muscle stimulation (Emsculpt NEO), fat freezing (CoolSculpting), radiofrequency skin tightening (VelaShape) and lymphatic drainage — non-invasive, with no downtime.

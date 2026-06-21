@@ -224,14 +224,11 @@ export default function SlimmingQuizResultsPage({
             return (
               <div
                 key={id}
+                className="card"
                 style={{
                   display: 'grid',
                   gridTemplateColumns: '220px 1fr',
-                  border: '1px solid #DDE8DB',
-                  borderRadius: '12px',
                   overflow: 'hidden',
-                  backgroundColor: '#FFFFFF',
-                  boxShadow: '0 4px 20px rgba(0,0,0,0.05)',
                 }}
               >
                 {/* Image */}
@@ -261,7 +258,7 @@ export default function SlimmingQuizResultsPage({
                         </p>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
                           {[...matchedGoals, ...matchedAreas].map((label) => (
-                            <span key={label} style={{ fontFamily: bodyFont, fontSize: '12px', color: green, backgroundColor: '#EEF3EF', border: '1px solid #C8DDC9', borderRadius: '20px', padding: '3px 10px' }}>
+                            <span key={label} style={{ fontFamily: bodyFont, fontSize: '12px', color: green, backgroundColor: '#EEF3EF', border: '1px solid #C8DDC9', borderRadius: '999px', padding: '3px 10px' }}>
                               {label}
                             </span>
                           ))}
@@ -281,7 +278,8 @@ export default function SlimmingQuizResultsPage({
 
                   <Link
                     href={t.href}
-                    style={{ display: 'block', textAlign: 'center', marginTop: '20px', padding: '13px', backgroundColor: cream, fontFamily: wideFont, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', color: taupe, border: '1px solid #C9D8C1', borderRadius: '6px', textDecoration: 'none' }}
+                    className="btn btn-secondary"
+                    style={{ width: '100%', marginTop: '20px', padding: '13px', fontFamily: wideFont, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none' }}
                   >
                     Learn More
                   </Link>
@@ -299,7 +297,7 @@ export default function SlimmingQuizResultsPage({
           <Link
             href="/consultation"
             className="cta-glow"
-            style={{ display: 'inline-block', padding: '15px 40px', backgroundColor: green, color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', borderRadius: '999px', textDecoration: 'none' }}
+            style={{ padding: '15px 40px', color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none' }}
           >
             Book a Free Consultation
           </Link>

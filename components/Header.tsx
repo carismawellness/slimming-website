@@ -130,7 +130,9 @@ export default function Header() {
         }}>
           <span>{BANNER}</span><span>{BANNER}</span>
         </div>
-        <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}`}</style>
+        <style>{`@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media (max-width:767px){.header-logo{height:27px !important}}
+.header-logo--mobile{height:27px !important}`}</style>
       </div>
 
       {/* Floating glass pill */}
@@ -141,7 +143,7 @@ export default function Header() {
         >
           {/* Logo */}
           <Link href="/" className="flex items-center shrink-0" onClick={() => setOpen(false)}>
-            <img src="/logo.png" alt="Carisma Slimming" style={{ height: '38px', width: 'auto', display: 'block' }} />
+            <img src="/logo.png" alt="Carisma Slimming" className="header-logo" style={{ height: '38px', width: 'auto', display: 'block' }} />
           </Link>
 
           {/* Desktop menu */}
@@ -168,15 +170,18 @@ export default function Header() {
                       backdropFilter: 'blur(22px) saturate(180%)',
                       WebkitBackdropFilter: 'blur(22px) saturate(180%)',
                       border: '1px solid rgba(255,255,255,0.7)',
-                      borderRadius: '18px',
+                      borderRadius: '16px',
                       boxShadow: '0 16px 40px rgba(40,55,44,0.16), inset 0 1px 0 rgba(255,255,255,0.85)',
-                      width: '210px',
-                      padding: '8px 0',
+                      width: '360px',
+                      padding: '10px',
+                      display: 'grid',
+                      gridTemplateColumns: '1fr 1fr',
+                      columnGap: '6px',
                       zIndex: 100,
                     }}>
                       {m.items.map((it) => (
                         <Link key={it.href} href={it.href} className="block hover:bg-black/5 hover:underline"
-                          style={{ padding: '8px 18px', color: DROPDOWN_INK, fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none' }}>
+                          style={{ padding: '9px 14px', borderRadius: '10px', color: DROPDOWN_INK, fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none', transition: 'background 0.3s ease' }}>
                           {it.label}
                         </Link>
                       ))}
@@ -226,7 +231,7 @@ export default function Header() {
           {/* Top row: logo + close */}
           <div className="flex items-center justify-between shrink-0" style={{ padding: '16px clamp(16px,5vw,28px)' }}>
             <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
-              <img src="/logo.png" alt="Carisma Slimming" style={{ height: '38px', width: 'auto', display: 'block' }} />
+              <img src="/logo.png" alt="Carisma Slimming" className="header-logo header-logo--mobile" style={{ height: '38px', width: 'auto', display: 'block' }} />
             </Link>
             <button
               onClick={() => setOpen(false)}

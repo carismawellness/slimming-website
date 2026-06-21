@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Script from 'next/script';
 import Link from 'next/link';
 
@@ -9,6 +9,7 @@ type ConsentState = 'accepted' | 'declined' | null;
 export default function CookieConsentBanner() {
   const [consent, setConsent] = useState<ConsentState>(null);
   const [visible, setVisible] = useState(false);
+  const bannerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const stored = localStorage.getItem('carisma_cookie_consent');
@@ -22,6 +23,30 @@ export default function CookieConsentBanner() {
       setVisible(true);
     }
   }, []);
+
+  // Publish the banner's REAL rendered height to `--cookie-banner-h` so the
+  // mobile sticky CTA can sit exactly above it (it reads var(--cookie-banner-h)).
+  // 0px whenever the banner isn't showing. Reactive to wrap/resize.
+  useEffect(() => {
+    const root = document.documentElement;
+    if (!visible) {
+      root.style.setProperty('--cookie-banner-h', '0px');
+      return;
+    }
+    const el = bannerRef.current;
+    if (!el) return;
+    const measure = () =>
+      root.style.setProperty('--cookie-banner-h', `${el.offsetHeight}px`);
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    window.addEventListener('resize', measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', measure);
+      root.style.setProperty('--cookie-banner-h', '0px');
+    };
+  }, [visible]);
 
   function handleAccept() {
     localStorage.setItem('carisma_cookie_consent', 'accepted');
@@ -71,6 +96,8 @@ export default function CookieConsentBanner() {
 
       {visible && (
         <div
+          ref={bannerRef}
+          id="cookie-consent-banner"
           style={{
             position: 'fixed',
             bottom: 0,
@@ -117,16 +144,18 @@ export default function CookieConsentBanner() {
             <div style={{ display: 'flex', gap: '12px', flexShrink: 0 }}>
               <button
                 onClick={handleDecline}
+                className="btn"
                 style={{
                   background: 'transparent',
-                  border: '1px solid #9B8D83',
-                  color: '#9B8D83',
-                  padding: '10px 20px',
+                  border: '1px solid #B7ABA0',
+                  /* Lightened taupe on #1a1a1a = 7.4:1 AA (was #9B8D83 -> 5.4:1, kept accessible) */
+                  color: '#B7ABA0',
+                  padding: '10px 22px',
                   fontSize: '12px',
                   letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
-                  borderRadius: '2px',
+                  borderRadius: '999px',
                   fontFamily: 'Roboto, sans-serif',
                 }}
               >
@@ -134,18 +163,18 @@ export default function CookieConsentBanner() {
               </button>
               <button
                 onClick={handleAccept}
-                className="focus-on-dark"
+                className="btn focus-on-dark"
                 style={{
                   /* Accessible deep sage: #fff text = 5.42:1 AA (was #8EB093 -> 2.39:1 FAIL) */
                   background: '#4F7256',
                   color: '#fff',
                   border: 'none',
-                  padding: '10px 20px',
+                  padding: '10px 22px',
                   fontSize: '12px',
                   letterSpacing: '1.5px',
                   textTransform: 'uppercase',
                   cursor: 'pointer',
-                  borderRadius: '2px',
+                  borderRadius: '999px',
                   fontFamily: 'Roboto, sans-serif',
                 }}
               >

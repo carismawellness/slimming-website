@@ -14,13 +14,6 @@ const greenDark = '#4f7256';
 // #6f6456 clears AA (>=4.99:1) for title and Read more/less control.
 const taupe = '#6f6456';
 
-const cardCorners = {
-  borderTopLeftRadius: '18px',
-  borderTopRightRadius: '18px',
-  borderBottomLeftRadius: '18px',
-  borderBottomRightRadius: '60px',
-};
-
 type KeyResult = { text: string; source: string };
 type Item = {
   title: string;
@@ -77,8 +70,8 @@ function EvidenceCard({ item }: { item: Item }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <div
-      className="overflow-hidden"
-      style={{ ...cardCorners, background: 'linear-gradient(180deg, #F8F6F2 0%, #EAF0E9 100%)' }}
+      className="card overflow-hidden"
+      style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #EAF0E9 100%)' }}
     >
       <div className="w-full overflow-hidden" style={{ aspectRatio: '381 / 182' }}>
         <img src={item.image} alt={item.title} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />

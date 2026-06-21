@@ -62,7 +62,7 @@ export default function FAQAccordion() {
                   <h3 style={{ color: green, fontFamily: bodyFont, fontSize: '15px', fontWeight: 400, letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.4, margin: 0 }}>
                     {i + 1}. {f.q}
                   </h3>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none', transition: 'transform 0.2s' }}>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="transition-transform duration-300 ease-in-out motion-reduce:transition-none" style={{ flexShrink: 0, transform: isOpen ? 'rotate(180deg)' : 'none' }}>
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </button>

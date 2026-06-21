@@ -28,7 +28,7 @@ export default function PillarsSection() {
         <h2 className="text-4xl font-bold text-center mb-12">Our Comprehensive Approach</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {pillars.map((pillar, index) => (
-            <div key={index} className="bg-white p-8 rounded-lg shadow-md hover:shadow-lg transition">
+            <div key={index} className="card p-8">
               <div className="text-5xl mb-4">{pillar.icon}</div>
               <h3 className="text-xl font-semibold mb-3">{pillar.title}</h3>
               <p className="text-gray-600">{pillar.description}</p>

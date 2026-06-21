@@ -41,7 +41,7 @@ export default function TestimonialsSection() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center mb-12">Real People, Real Results</h2>
 
-        <div className="bg-white rounded-lg shadow-lg p-12">
+        <div className="card-lift bg-white p-12">
           <div
             className="flex items-center justify-center gap-1 mb-4"
             role="img"
@@ -74,13 +74,13 @@ export default function TestimonialsSection() {
           <div className="flex justify-center gap-4">
             <button
               onClick={prevTestimonial}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+              className="btn btn-secondary px-6 py-2"
             >
               ← Previous
             </button>
             <button
               onClick={nextTestimonial}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+              className="btn btn-primary px-6 py-2"
             >
               Next →
             </button>

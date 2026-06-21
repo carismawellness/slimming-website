@@ -72,15 +72,11 @@ export default function Error({
           onClick={reset}
           className="cta-glow"
           style={{
-            display: 'inline-block',
-            color: '#FFFFFF',
-            border: 'none',
             padding: '14px 32px',
             fontFamily: "'Roboto', sans-serif",
             fontSize: '12px',
             letterSpacing: '2px',
             textTransform: 'uppercase',
-            cursor: 'pointer',
           }}
         >
           TRY AGAIN
@@ -88,18 +84,13 @@ export default function Error({
 
         <Link
           href="/"
+          className="btn btn-secondary"
           style={{
-            display: 'inline-block',
-            backgroundColor: 'transparent',
-            color: '#4f7256',
-            border: '1px solid #4f7256',
             padding: '14px 32px',
             fontFamily: "'Roboto', sans-serif",
             fontSize: '12px',
             letterSpacing: '2px',
             textTransform: 'uppercase',
-            textDecoration: 'none',
-            cursor: 'pointer',
           }}
         >
           GO HOME

@@ -145,7 +145,7 @@ export default function ConsultationPage() {
           <p className="mb-5">
             <a
               href="mailto:info@carismaslimming.com"
-              className="uppercase underline transition hover:no-underline"
+              className="uppercase underline transition duration-300 ease-in-out hover:no-underline"
               style={{ color: '#6f6456', fontFamily: '"Novecento Wide", sans-serif', fontSize: '16px' }}
             >
               info@carismaslimming.com
@@ -157,7 +157,7 @@ export default function ConsultationPage() {
               <a
                 href="mailto:info@carismaaesthetics.com?subject=Get%20in%20touch%20with%20us!"
                 aria-label="Email"
-                className="transition hover:opacity-80"
+                className="transition duration-300 ease-in-out hover:opacity-80"
                 style={{ color: GREEN }}
               >
                 <svg width="51" height="37" viewBox="0 0 26 19" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -169,7 +169,7 @@ export default function ConsultationPage() {
               </a>
               <a
                 href="mailto:info@carismaslimming.com"
-                className="underline transition hover:no-underline"
+                className="underline transition duration-300 ease-in-out hover:no-underline"
                 style={{ color: GREEN, fontSize: '15px', fontFamily: 'Roboto, sans-serif' }}
               >
                 info@carismaslimming.com
@@ -181,7 +181,7 @@ export default function ConsultationPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
-                className="transition hover:opacity-80"
+                className="transition duration-300 ease-in-out hover:opacity-80"
                 style={{ color: GREEN }}
               >
                 <svg width="47" height="47" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -200,7 +200,7 @@ export default function ConsultationPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
-                className="transition hover:opacity-80"
+                className="transition duration-300 ease-in-out hover:opacity-80"
                 style={{ color: GREEN }}
               >
                 <svg width="47" height="47" viewBox="0 0 24 24">

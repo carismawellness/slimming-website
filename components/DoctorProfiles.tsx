@@ -29,7 +29,7 @@ export default function DoctorProfiles() {
         <h2 className="text-4xl font-bold text-center mb-12" style={{ color: 'var(--primary-navy)' }}>Our Medical Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {doctors.map((doctor, index) => (
-            <div key={index} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition">
+            <div key={index} className="card overflow-hidden">
               <div
                 className="h-40 flex items-center justify-center"
                 style={{ backgroundColor: 'var(--brand-green-text)' }}

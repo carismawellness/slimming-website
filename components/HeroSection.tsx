@@ -18,19 +18,19 @@ export default function HeroSection() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/consultation"
-                className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 text-center"
+                className="btn btn-primary px-8 py-3 font-semibold text-center"
               >
                 Get Free Consultation
               </Link>
               <a
                 href="tel:+35627802062"
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 text-center"
+                className="btn btn-secondary px-8 py-3 font-semibold text-center"
               >
                 Call: +356 2780 2062
               </a>
             </div>
           </div>
-          <div className="bg-blue-700 rounded-lg h-96 flex items-center justify-center">
+          <div className="card bg-blue-700 h-96 flex items-center justify-center">
             <p className="text-white text-center">Hero Image Placeholder</p>
           </div>
         </div>
