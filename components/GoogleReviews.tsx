@@ -10,6 +10,7 @@ import {
   AGGREGATE,
   GOOGLE_WRITE_REVIEW_URL,
   GOOGLE_PROFILE_URL,
+  FRESHA_PROFILE_URL,
   relativeDate,
   type Review,
 } from '@/lib/reviews';
@@ -33,6 +34,15 @@ function GoogleG({ size = 18 }: { size?: number }) {
       <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.99.66-2.26 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84A11 11 0 0 0 12 23z" />
       <path fill="#FBBC05" d="M5.84 14.1a6.6 6.6 0 0 1 0-4.2V7.06H2.18a11 11 0 0 0 0 9.88l3.66-2.84z" />
       <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84C6.71 7.3 9.14 5.38 12 5.38z" />
+    </svg>
+  );
+}
+
+function FreshaF({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" aria-label="Fresha" role="img">
+      <circle cx="12" cy="12" r="12" fill="#1a0c2e" />
+      <text x="12" y="17" textAnchor="middle" fontFamily="sans-serif" fontSize="14" fontWeight="700" fill="#ffffff">f</text>
     </svg>
   );
 }
@@ -206,20 +216,14 @@ export default function GoogleReviews() {
           <span style={{ fontFamily: SERIF, fontSize: 42, color: DARK_GREEN, lineHeight: 1 }}>{rating}</span>
           <div>
             <Stars rating={5} size={20} />
-            <p style={{ margin: '4px 0 0', fontFamily: BODY, fontSize: 12.5, color: TAUPE_LT }}>
-              <a
-                href={GOOGLE_PROFILE_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 5 }}
-              >
-                {count} reviews on{' '}
-                <span style={{ display: 'inline-flex', alignItems: 'center', gap: 4 }}>
-                  <GoogleG size={14} />
-                  <span style={{ fontFamily: BODY, fontSize: 12.5 }}>
-                    <span style={{ color: '#4285F4' }}>G</span><span style={{ color: '#EA4335' }}>o</span><span style={{ color: '#FBBC05' }}>o</span><span style={{ color: '#4285F4' }}>g</span><span style={{ color: '#34A853' }}>l</span><span style={{ color: '#EA4335' }}>e</span>
-                  </span>
-                </span>
+            <p style={{ margin: '6px 0 0', fontFamily: BODY, fontSize: 12.5, color: TAUPE_LT, display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 12, flexWrap: 'wrap' }}>
+              <span>{count} verified reviews across</span>
+              <a href={FRESHA_PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <FreshaF size={14} /> Fresha
+              </a>
+              <span aria-hidden style={{ color: '#cdd8c8' }}>+</span>
+              <a href={GOOGLE_PROFILE_URL} target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: 4 }}>
+                <GoogleG size={14} /> Google
               </a>
             </p>
           </div>
