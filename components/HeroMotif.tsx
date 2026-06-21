@@ -85,7 +85,7 @@ export default function HeroMotif() {
       const bandBot = H * BAND_BOT;
 
       for (let i = 0; i < LINES; i++) {
-        const f = LINES === 1 ? 1 : i / (LINES - 1);
+        const f = i / (LINES - 1);
         const baseY = bandTop + (bandBot - bandTop) * f;
         const seed = i * 0.6;
 
