@@ -4,6 +4,7 @@ import GoogleReviews from '@/components/GoogleReviews';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
 import BookConsultationButton from '@/components/BookConsultationButton';
+import QuizModal from '@/components/QuizModal';
 import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
@@ -45,22 +46,9 @@ export default function Home() {
         compactHeadline
       />
 
-      {/* Personalised programme quiz (relocated from hero) */}
-      <section id="quiz" className="py-20" aria-labelledby="quiz-heading" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 id="quiz-heading" className="text-center mb-6" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: '22px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>
-            Find Your Personalised Weight Loss Programme
-          </h2>
-          <div style={{ borderRadius: '16px', overflow: 'hidden' }}>
-            <iframe
-              src="https://quiz-slimming.vercel.app"
-              style={{ width: '100%', height: '620px', border: 'none', borderRadius: '16px' }}
-              title="Personalised weight loss programme quiz"
-              aria-label="Personalised weight loss programme quiz"
-            />
-          </div>
-        </div>
-      </section>
+      {/* Personalised programme quiz — opens in a popup modal via the hero's
+          "Take the quiz" CTA (a[href="#quiz"]). The quiz lives in QuizModal. */}
+      <QuizModal />
 
       {/* (1) Media / Press Strip */}
       <section className="py-16" aria-label="As seen in media" style={{ backgroundColor: '#ffffff' }}>
