@@ -103,13 +103,13 @@ export default function HeroMotif() {
             float z = p.z;
             // layered flowing wave — wind moving across a silk field
             float w = 0.0;
-            w += 0.46 * sin(x * 0.50 + z * 0.55 + uTime * 0.48);
-            w += 0.24 * sin(x * 0.92 - z * 0.42 + uTime * 0.34 + aSeed);
-            w += 0.12 * sin(x * 1.85 + z * 1.05 - uTime * 0.62 + aSeed * 1.7);
-            w += 0.06 * sin(x * 3.30 - z * 0.30 + uTime * 0.9);
+            w += 0.34 * sin(x * 0.46 + z * 0.52 + uTime * 0.26);
+            w += 0.17 * sin(x * 0.88 - z * 0.40 + uTime * 0.17 + aSeed);
+            w += 0.075 * sin(x * 1.80 + z * 1.00 - uTime * 0.30 + aSeed * 1.7);
+            w += 0.03 * sin(x * 3.20 - z * 0.28 + uTime * 0.46);
             p.y += w;
-            // gentle parallax sway toward the pointer, stronger up close
-            p.x += uMouse * 0.55 * (1.0 + (z - ${Z_FAR.toFixed(1)}) * 0.02);
+            // barely-there parallax sway toward the pointer, stronger up close
+            p.x += uMouse * 0.30 * (1.0 + (z - ${Z_FAR.toFixed(1)}) * 0.02);
             vDepth = z;
             vWave = w;
             gl_Position = projectionMatrix * modelViewMatrix * vec4(p, 1.0);
@@ -126,10 +126,10 @@ export default function HeroMotif() {
           void main() {
             // atmospheric depth fade: near = visible, far = dissolves
             float depth = clamp((vDepth - uZFar) / (uZNear - uZFar), 0.0, 1.0);
-            float depthFade = smoothstep(0.0, 0.55, depth);
+            float depthFade = smoothstep(0.08, 0.78, depth);
             // crest highlight — tops of the waves catch a little more light
-            float crest = 0.5 + 0.5 * smoothstep(-0.35, 0.55, vWave);
-            float a = depthFade * crest * 0.42 * uIntro;
+            float crest = 0.6 + 0.4 * smoothstep(-0.4, 0.6, vWave);
+            float a = depthFade * crest * 0.24 * uIntro;
             gl_FragColor = vec4(uColor, a);
           }
         `,
@@ -171,8 +171,8 @@ export default function HeroMotif() {
       const render = (now: number) => {
         const t = (now - start) / 1000;
         uniforms.uTime.value = t;
-        uniforms.uIntro.value = Math.min(1, t / 1.4); // graceful fade-in
-        uniforms.uMouse.value += (targetMouse - uniforms.uMouse.value) * 0.04;
+        uniforms.uIntro.value = Math.min(1, t / 2.6); // slow, graceful fade-in
+        uniforms.uMouse.value += (targetMouse - uniforms.uMouse.value) * 0.022;
         if (visible && !document.hidden) renderer.render(scene, camera);
         raf = requestAnimationFrame(render);
       };
