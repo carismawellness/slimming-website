@@ -123,7 +123,7 @@ export default function HeroMotif() {
           }
         `,
         fragmentShader: /* glsl */ `
-          precision mediump float;
+          precision highp float;
           uniform vec3 uColor;
           uniform float uIntro;
           uniform float uZNear;
