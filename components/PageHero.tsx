@@ -64,6 +64,8 @@ export type PageHeroProps = {
   compactHeadline?: boolean;
   /** Render the animated 3D sage wave-field motif (Three.js) behind the hero. */
   motif?: boolean;
+  /** Floating medication wordmark pills over the arch (e.g. ['Ozempic®','Mounjaro®']). */
+  chips?: string[];
 };
 
 function Stars({ size = 14 }: { size?: number }) {
@@ -114,6 +116,7 @@ export default function PageHero({
   background,
   compactHeadline,
   motif,
+  chips,
 }: PageHeroProps) {
   const headlineSize = compactHeadline
     ? 'clamp(23px, 2.7vw, 31px)'
@@ -490,6 +493,31 @@ export default function PageHero({
               {proof?.awardText || `${proof?.statLabel || 'years in wellness'}`}
             </span>
           </div>
+
+          {/* floating: medication wordmark pills (e.g. Ozempic / Mounjaro) */}
+          {chips && chips.length > 0 && chips.map((c, i) => (
+            <div
+              key={c}
+              className="hero-glass hero-float"
+              style={{
+                position: 'absolute',
+                right: i === 0 ? 'clamp(-4px, -0.5vw, 6px)' : 'clamp(-12px, -1.4vw, -2px)',
+                top: i === 0 ? '42%' : '59%',
+                borderRadius: 999,
+                padding: '8px 15px',
+                display: 'flex',
+                alignItems: 'center',
+                gap: 7,
+                zIndex: 3,
+                animationDelay: i === 0 ? '-1.6s' : '-3.4s',
+              }}
+            >
+              <span aria-hidden style={{ width: 7, height: 7, borderRadius: '50%', background: '#8eb093', flexShrink: 0 }} />
+              <span style={{ fontFamily: WIDE, fontSize: 11, letterSpacing: '0.06em', textTransform: 'uppercase', color: SAGE_TEXT, lineHeight: 1, whiteSpace: 'nowrap' }}>
+                {c}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
 

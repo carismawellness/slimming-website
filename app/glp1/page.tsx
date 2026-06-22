@@ -107,6 +107,7 @@ export default function GLP1Page() {
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
         motif
+        chips={['Ozempic®', 'Mounjaro®']}
       />
 
       {/* Medical Weight Loss Results */}
