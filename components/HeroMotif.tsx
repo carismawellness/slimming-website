@@ -3,20 +3,20 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * HeroMotif — "Silk Threads".
+ * HeroMotif — "Woven Threads".
  *
- * A new, interactive take on the line motif. A set of fine sage contour lines
- * lives only in the bottom quarter of the hero. They drift on a slow ambient
- * current, and they gently rise toward the cursor — like running a hand under a
- * silk sheet — with a soft glow that follows the pointer. Edges and the top of
- * the band fade to nothing, so it reads as a quiet, tasteful grounding to the
- * hero rather than a graphic.
+ * A denser, more sophisticated interactive line motif in the lower hero. Many
+ * fine sage threads weave and cross (each with its own amplitude, opacity and
+ * width, so the field reads as layered depth rather than flat parallel stripes),
+ * drifting on a slow current with a vertical travelling wave that rises through
+ * the stack. They gently lift toward the cursor — like a hand under silk — with
+ * a soft glow that follows the pointer. Edge + top fades keep it tasteful.
  *
- * Built on a 2D canvas (not WebGL): crisp anti-aliased strokes, pixel-precise
- * placement in the bottom quarter, and direct screen-space mouse interaction.
+ * Built on a 2D canvas: crisp anti-aliased strokes, precise placement in the
+ * lower band, direct screen-space mouse interaction (no shader / WebGL).
  *
- * Guards: reduced-motion → one static frame (no pointer reaction); DPR-aware;
- * paused offscreen / tab hidden; full teardown on unmount.
+ * Guards: reduced-motion → one static frame; DPR-aware; paused offscreen / tab
+ * hidden; full teardown on unmount.
  */
 export default function HeroMotif() {
   const hostRef = useRef<HTMLDivElement>(null);
@@ -38,15 +38,21 @@ export default function HeroMotif() {
     const coarse =
       window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 760;
 
+    // deterministic per-line variation → layered, non-flat depth
+    const hash = (n: number) => {
+      const s = Math.sin(n * 12.9898) * 43758.5453;
+      return s - Math.floor(s);
+    };
+
     // ── tuning ───────────────────────────────────────────────────────────
     const SAGE = '142, 176, 147';      // #8EB093
-    const LINES = coarse ? 9 : 14;     // contour lines stacked in the band
-    const BAND_TOP = 0.72;             // band occupies the bottom ~quarter
-    const BAND_BOT = 0.99;
-    const BASE_ALPHA = 0.17;           // very subtle
-    const STEP = coarse ? 16 : 9;      // px between sample points
-    const LIFT = 26;                   // px the lines rise toward the cursor
-    const SIGMA = 165;                 // px radius of the cursor's influence
+    const LINES = coarse ? 20 : 34;    // higher density
+    const BAND_TOP = 0.66;             // lower band, with room for vertical travel
+    const BAND_BOT = 1.0;
+    const BASE_ALPHA = 0.15;           // subtle; density supplies the presence
+    const STEP = coarse ? 14 : 8;      // px between sample points
+    const LIFT = 24;                   // px the threads rise toward the cursor
+    const SIGMA = 168;                 // px radius of the cursor's influence
 
     let W = 0, H = 0, dpr = 1;
     const resize = () => {
@@ -59,7 +65,6 @@ export default function HeroMotif() {
     resize();
     window.addEventListener('resize', resize, { passive: true });
 
-    // pointer (smoothed), starts off-screen so lines simply drift until moved
     const m = { tx: -9999, ty: -9999, x: -9999, y: -9999, active: false };
     const onPointer = (e: PointerEvent) => {
       const r = host.getBoundingClientRect();
@@ -77,7 +82,6 @@ export default function HeroMotif() {
 
     const draw = (t: number) => {
       ctx.clearRect(0, 0, W, H);
-      // ease the pointer toward its target for buttery motion
       if (m.tx < -900) { m.x += (-9999 - m.x) * 0.05; m.y += (-9999 - m.y) * 0.05; }
       else { m.x += (m.tx - m.x) * 0.09; m.y += (m.ty - m.y) * 0.09; }
 
@@ -86,34 +90,42 @@ export default function HeroMotif() {
 
       for (let i = 0; i < LINES; i++) {
         const f = i / (LINES - 1);
-        const baseY = bandTop + (bandBot - bandTop) * f;
         const seed = i * 0.6;
+        const h1 = hash(i + 1), h2 = hash(i + 11.3), h3 = hash(i + 27.7);
 
-        // line opacity: fade in from the top of the band, fuller toward bottom
-        const rowFade = 0.45 + 0.55 * f;
-        // a soft glow where the cursor's height is near this line
-        const dyl = baseY - m.y;
-        const glow = m.x > -900 ? Math.exp(-(dyl * dyl) / (2 * 120 * 120)) : 0;
-        const alpha = Math.min(0.4, BASE_ALPHA * rowFade * (1 + glow * 1.1));
+        const ampScale = 0.55 + h1 * 1.05;        // varied amplitude → weaving
+        const depthVar = 0.5 + h2 * 0.7;          // varied opacity → layered depth
+        const lw = 0.7 + h3 * 0.7;                // varied width → near/far feel
 
-        // horizontal edge-fade gradient (transparent → sage → transparent)
+        const baseY = bandTop + (bandBot - bandTop) * f;
+        const vtravel = 9 * Math.sin(t * 0.00018 + seed * 1.7); // slow vertical drift
+        const by = baseY + vtravel;
+
+        // opacity: fade in from the top of the band, fuller toward the bottom
+        const rowFade = 0.32 + 0.68 * f;
+        // soft glow where the cursor's height is near this thread
+        const dyl = by - m.y;
+        const glow = m.x > -900 ? Math.exp(-(dyl * dyl) / (2 * 130 * 130)) : 0;
+        const alpha = Math.min(0.4, BASE_ALPHA * rowFade * depthVar * (1 + glow * 1.2));
+
         const g = ctx.createLinearGradient(0, 0, W, 0);
         g.addColorStop(0.0, `rgba(${SAGE}, 0)`);
-        g.addColorStop(0.14, `rgba(${SAGE}, 1)`);
-        g.addColorStop(0.86, `rgba(${SAGE}, 1)`);
+        g.addColorStop(0.13, `rgba(${SAGE}, 1)`);
+        g.addColorStop(0.87, `rgba(${SAGE}, 1)`);
         g.addColorStop(1.0, `rgba(${SAGE}, 0)`);
 
         ctx.beginPath();
         for (let x = 0; x <= W; x += STEP) {
-          // slow ambient drift — the thread breathes on a gentle current
-          const a1 = 3.2 * Math.sin(x * 0.0042 + t * 0.00040 + seed);
-          const a2 = 1.7 * Math.sin(x * 0.0090 - t * 0.00026 + seed * 1.7);
-          const a3 = 0.9 * Math.sin(x * 0.017 + t * 0.00055 + seed * 0.5);
-          let y = baseY + a1 + a2 + a3;
+          const a1 = 5.0 * ampScale * Math.sin(x * 0.0040 + t * 0.00045 + seed);
+          const a2 = 3.0 * ampScale * Math.sin(x * 0.0085 - t * 0.00030 + seed * 1.7);
+          const a3 = 1.6 * Math.sin(x * 0.016 + t * 0.00060 + seed * 0.5);
+          // vertical travelling wave — couples line index with time so the
+          // pattern rises through the stack (the threads intertwine)
+          const av = 4.2 * Math.sin(x * 0.0060 + i * 0.55 - t * 0.00050);
+          let y = by + a1 + a2 + a3 + av;
 
-          // rise toward the cursor (gaussian falloff) — the silk-sheet lift
           if (m.x > -900) {
-            const dx = x - m.x, dy = baseY - m.y;
+            const dx = x - m.x, dy = by - m.y;
             const d2 = dx * dx + dy * dy;
             y -= LIFT * Math.exp(-d2 / (2 * SIGMA * SIGMA));
           }
@@ -122,7 +134,7 @@ export default function HeroMotif() {
         }
         ctx.strokeStyle = g;
         ctx.globalAlpha = alpha;
-        ctx.lineWidth = 1.1;
+        ctx.lineWidth = lw;
         ctx.stroke();
       }
       ctx.globalAlpha = 1;
@@ -134,11 +146,8 @@ export default function HeroMotif() {
       raf = requestAnimationFrame(loop);
     };
 
-    if (reduced) {
-      draw(0);
-    } else {
-      raf = requestAnimationFrame(loop);
-    }
+    if (reduced) draw(0);
+    else raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
