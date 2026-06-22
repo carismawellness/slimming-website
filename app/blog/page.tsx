@@ -143,7 +143,7 @@ export default function BlogPage() {
             padding: 0 20px 40px !important;
           }
           .blog-hero-label {
-            top: 20px !important;
+            top: 88px !important;
             left: 20px !important;
           }
           .editorial-row2  { grid-template-columns: 1fr !important; }
@@ -158,7 +158,7 @@ export default function BlogPage() {
         }
       `}</style>
 
-      <div style={{ backgroundColor: CREAM, minHeight: '100vh' }}>
+      <div style={{ backgroundColor: CREAM, minHeight: '100vh', backgroundImage: 'linear-gradient(to bottom, rgba(2,28,15,0.055) 0%, transparent 200px)' }}>
 
         {/* ════════════════════════════════════════════════════════════
             1. FEATURED HERO — posts[0]
@@ -204,12 +204,12 @@ export default function BlogPage() {
               }}
             />
 
-            {/* Top-left label */}
+            {/* Top-left label — sits below fixed header (~80px) */}
             <div
               className="blog-hero-label"
               style={{
                 position: 'absolute',
-                top: 32,
+                top: 96,
                 left: 40,
                 color: DECO,
                 fontFamily: WIDE,
@@ -327,6 +327,9 @@ export default function BlogPage() {
           </section>
         )}
 
+        {/* Color bridge — fades from dark hero to cream */}
+        <div aria-hidden="true" style={{ height: 56, background: 'linear-gradient(to bottom, rgba(2,28,15,0.08) 0%, transparent 100%)', marginTop: -2, pointerEvents: 'none' }} />
+
         {/* ════════════════════════════════════════════════════════════
             2. EDITORIAL SECTION HEADER
         ════════════════════════════════════════════════════════════ */}
@@ -334,7 +337,7 @@ export default function BlogPage() {
           className="section-pad"
           style={{
             maxWidth: 1200,
-            margin: '72px auto 48px',
+            margin: '16px auto 48px',
             padding: '0 40px',
             display: 'flex',
             alignItems: 'center',
@@ -561,7 +564,7 @@ export default function BlogPage() {
           aria-label="Blog pagination"
           style={{
             maxWidth: 1200,
-            margin: '80px auto 80px',
+            margin: '80px auto 120px',
             padding: '0 40px',
             display: 'flex',
             alignItems: 'center',
@@ -608,6 +611,9 @@ export default function BlogPage() {
             Next →
           </a>
         </nav>
+
+        {/* Bottom fade — visual close before global footer */}
+        <div aria-hidden="true" style={{ height: 80, background: 'linear-gradient(to bottom, transparent 0%, rgba(2,28,15,0.04) 100%)', pointerEvents: 'none' }} />
 
       </div>
     </>
