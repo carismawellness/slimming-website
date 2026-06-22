@@ -1,62 +1,75 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 
 /**
- * ResultsGuarantee — a calm, premium "results guarantee" section.
+ * ResultsGuarantee — "The Carisma Results Commitment" section.
  *
- * Deliberately minimal: a centred Trajan H2 (carrying the guarantee keyword), a
- * short reassuring eyebrow + subtitle, one confident pledge statement, and the
- * mutual pact presented as two airy, understated columns — "Our promise to you"
- * (the GUARANTEE array) and "Your commitment" (the COMMITMENT array). No WebGL,
- * no frosted panels, no per-item line icons: just whitespace, typography and a
- * single small sage check. One subtle fade/rise scroll-reveal, reduced-motion
- * safe. All copy stays in the server-rendered DOM (SEO / a11y).
+ * A calm, premium, centred "About Us / stats" layout: a small pill eyebrow, a
+ * Trajan H2 (uppercase) with a Roboto subline, a fanned cluster of three image
+ * cards (a prominent upright centre card with two rotated cards behind it), a
+ * row of three percentage stats divided by thin rules, and an on-brand sage
+ * CTA pill that links to /consultation.
+ *
+ * All copy stays in the server-rendered DOM (SEO / a11y). One subtle,
+ * reduced-motion-safe fade/rise reveal cascades heading → images → stats → CTA.
+ * No WebGL, no frosted panels — just whitespace, typography and three photos.
+ *
+ * NOTE: the three stat percentages below (93% / 89% / 96%) are PLACEHOLDER
+ * figures chosen to fit the design. Verify and replace with real client data
+ * before relying on them publicly.
  */
 
+const FOREST = '#024C27'; // deepest brand forest — big numbers / CTA fill
 const INK = '#3c5a40'; // deep sage heading
-const SAGE = '#4f7256'; // accent / check (5.42:1 on white)
+const SAGE = '#4f7256'; // accent / divider / eyebrow text (5.42:1 on white)
 const BODY = '#5a5043'; // taupe-brown body (AA on near-white)
-const META = '#6f6456'; // eyebrow / meta (AA on near-white)
+const META = '#6f6456'; // eyebrow / subline / descriptions (AA on near-white)
 const SERIF = 'Trajan Pro, serif';
 const WIDE = '"Novecento Wide Book","Novecento Wide",sans-serif';
 const ROBOTO = 'Roboto, sans-serif';
 
-// Our side of the pact.
-const GUARANTEE = [
-  'Doctor-led and medically supervised, every step',
-  'Progress measured and verified — never guesswork',
-  'Program extended free until you reach your goal',
+/* The three fanned photos. Centre card sits upright and larger; the two
+   flanking cards are rotated and tucked behind it like a hand of cards. */
+const CARDS = [
+  {
+    src: '/wix/87fc13_6495820e70764a1fa3caddfb20d80fe0~mv2.webp',
+    alt: 'GLP-1 medical weight-loss consultation at Carisma Slimming Malta',
+    role: 'left' as const,
+  },
+  {
+    src: '/wix/87fc13_08e868147da2475ba4b9638849be145e~mv2.jpg',
+    alt: 'Doctor-led weight-loss program and body-composition review at Carisma Slimming Malta',
+    role: 'center' as const,
+  },
+  {
+    src: '/wix/87fc13_d79664fae1184e8e8c947c3d350af498~mv2.jpg',
+    alt: 'Body-sculpting and transformation results at Carisma Slimming Malta',
+    role: 'right' as const,
+  },
 ];
 
-// The client's side — kept verbatim (a real agreement).
-const COMMITMENT = [
-  'Attend all scheduled in-clinic sessions and weekly check-ins',
-  'Follow your personalised food plan consistently and tell us when you struggle',
-  'Complete your agreed physical activities & discuss any pain or obstacles',
-  'Use only the treatments and medications recommended by our medical team',
-  'Inform us of any major health (e.g., heart disease) or medication changes',
-  'Avoid crash diets, extreme restriction or outside weight-loss treatments that could affect your results',
+/* PLACEHOLDER stats — client-sentiment framing, not clinical efficacy claims.
+   Verify the three percentages against real data before publishing. */
+const STATS = [
+  {
+    value: '93%',
+    title: 'Reach Their Goal',
+    desc: 'Clients who hit their target on our doctor-led plan — extended free until you do.',
+  },
+  {
+    value: '89%',
+    title: 'Keep It Off',
+    desc: 'Maintain their results long-term with gentle structure and weekly check-ins.',
+  },
+  {
+    value: '96%',
+    title: 'Would Recommend',
+    desc: 'Clients who would recommend Carisma to a friend or family member.',
+  },
 ];
-
-/* A single small sage check — the only decoration we allow. */
-function Check() {
-  return (
-    <span
-      aria-hidden="true"
-      style={{
-        flexShrink: 0,
-        marginTop: 3,
-        color: SAGE,
-        lineHeight: 0,
-      }}
-    >
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none">
-        <path d="M5 13l4 4L19 7" stroke={SAGE} strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    </span>
-  );
-}
 
 export default function ResultsGuarantee() {
   const rootRef = useRef<HTMLElement>(null);
@@ -106,69 +119,192 @@ export default function ResultsGuarantee() {
         .rg-rise { transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
         .rg--in .rg-rise { opacity: 1; transform: none; }
         .rg-rise.rg-d1 { transition-delay: .08s; }
-        .rg-rise.rg-d2 { transition-delay: .16s; }
-        .rg-rise.rg-d3 { transition-delay: .24s; }
+        .rg-rise.rg-d2 { transition-delay: .18s; }
+        .rg-rise.rg-d3 { transition-delay: .28s; }
+        .rg-rise.rg-d4 { transition-delay: .38s; }
 
-        .rg-pact { display: grid; grid-template-columns: 1fr; gap: clamp(40px,6vw,72px); }
-        @media (min-width: 820px) { .rg-pact { grid-template-columns: 1fr 1fr; } }
+        /* ── Fanned image cluster ── */
+        .rg-fan {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: clamp(300px, 40vw, 440px);
+        }
+        .rg-card {
+          position: absolute;
+          border-radius: 20px;
+          overflow: hidden;
+          background: #fff;
+          box-shadow: 0 24px 60px -20px rgba(2,76,39,0.28), 0 6px 18px -8px rgba(2,76,39,0.18);
+        }
+        .rg-card img { object-fit: cover; }
+        .rg-card--center {
+          width: clamp(220px, 26vw, 300px);
+          height: clamp(280px, 33vw, 380px);
+          z-index: 3;
+        }
+        .rg-card--left {
+          width: clamp(180px, 22vw, 250px);
+          height: clamp(240px, 28vw, 320px);
+          transform: translateX(clamp(-118px, -16vw, -176px)) rotate(-8deg);
+          z-index: 1;
+        }
+        .rg-card--right {
+          width: clamp(180px, 22vw, 250px);
+          height: clamp(240px, 28vw, 320px);
+          transform: translateX(clamp(118px, 16vw, 176px)) rotate(8deg);
+          z-index: 1;
+        }
+        /* On very small screens, tighten the fan to a gentle overlap. */
+        @media (max-width: 460px) {
+          .rg-fan { height: clamp(280px, 78vw, 340px); }
+          .rg-card--center { width: 60vw; height: 74vw; max-height: 320px; }
+          .rg-card--left  { transform: translateX(-32vw) rotate(-7deg); }
+          .rg-card--right { transform: translateX(32vw) rotate(7deg); }
+        }
+
+        /* ── Stats row ── */
+        .rg-stats {
+          display: grid;
+          grid-template-columns: 1fr;
+          gap: 0;
+        }
+        .rg-stat { padding: 24px clamp(16px,3vw,40px); text-align: center; }
+        .rg-stat + .rg-stat { border-top: 1px solid rgba(79,114,86,0.18); }
+        @media (min-width: 760px) {
+          .rg-stats { grid-template-columns: repeat(3, 1fr); }
+          .rg-stat + .rg-stat { border-top: none; border-left: 1px solid rgba(79,114,86,0.22); }
+        }
+
+        /* ── CTA ── */
+        .rg-cta { transition: transform .25s ease, box-shadow .25s ease, background-color .25s ease; }
+        .rg-cta:hover { background-color: #036334 !important; transform: translateY(-2px); }
+        .rg-cta:focus-visible { outline: 3px solid #024C27; outline-offset: 3px; }
 
         @media (prefers-reduced-motion: reduce) {
           .rg-rise { transition: none !important; opacity: 1 !important; transform: none !important; }
+          .rg-cta { transition: none !important; }
+          .rg-cta:hover { transform: none; }
         }
       `}</style>
 
-      <div className="max-w-4xl mx-auto px-6 sm:px-8">
+      <div className="max-w-5xl mx-auto px-6 sm:px-8">
         {/* ── Heading ── */}
-        <div className="rg-rise" style={{ textAlign: 'center', maxWidth: 640, margin: '0 auto' }}>
-          <p style={{ color: META, fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', margin: 0 }}>
-            Our Results-Driven Promise
-          </p>
-          <span aria-hidden="true" style={{ display: 'block', width: 48, height: 1, background: SAGE, opacity: 0.55, margin: '16px auto 20px' }} />
+        <div className="rg-rise" style={{ textAlign: 'center', maxWidth: 680, margin: '0 auto' }}>
+          <span
+            style={{
+              display: 'inline-block',
+              padding: '7px 16px',
+              borderRadius: 999,
+              border: `1px solid ${SAGE}`,
+              background: 'rgba(79,114,86,0.06)',
+              color: SAGE,
+              fontFamily: WIDE,
+              fontSize: 11,
+              letterSpacing: '0.22em',
+              textTransform: 'uppercase',
+            }}
+          >
+            Our Commitment
+          </span>
           <h2
             id="results-heading"
-            style={{ color: INK, fontFamily: SERIF, fontWeight: 400, fontSize: 'clamp(26px,3.6vw,40px)', lineHeight: 1.18, textTransform: 'uppercase', margin: 0 }}
+            style={{
+              color: INK,
+              fontFamily: SERIF,
+              fontWeight: 400,
+              fontSize: 'clamp(27px,3.8vw,42px)',
+              lineHeight: 1.16,
+              textTransform: 'uppercase',
+              margin: '22px 0 0',
+            }}
           >
-            The Carisma Results Guarantee
+            The Carisma Results Commitment
           </h2>
-          <p style={{ color: BODY, fontFamily: ROBOTO, fontSize: 'clamp(15px,1.6vw,17px)', lineHeight: 1.7, margin: '20px auto 0', maxWidth: 560 }}>
-            We only accept clients we genuinely believe we can help — and we stand behind the outcome. Up to{' '}
-            <strong style={{ color: SAGE, fontWeight: 600 }}>1&nbsp;kg a week</strong>, medically supervised and verified. Complete your
-            program and don&rsquo;t reach your target?{' '}
-            <strong style={{ color: SAGE, fontWeight: 600 }}>We extend it, at no extra program fee, until you do.</strong>
+          <p style={{ color: META, fontFamily: ROBOTO, fontSize: 'clamp(16px,1.7vw,19px)', lineHeight: 1.6, margin: '14px auto 0', maxWidth: 520 }}>
+            You keep it. We only accept clients.
           </p>
         </div>
 
-        {/* ── The pact: two understated columns ── */}
-        <div className="rg-pact rg-rise rg-d1" style={{ marginTop: 'clamp(48px,7vw,80px)' }}>
-          {/* Our promise */}
-          <div>
-            <h3 style={{ color: INK, fontFamily: WIDE, fontSize: 12, fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', margin: '0 0 22px' }}>
-              Our promise to you
-            </h3>
-            <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 18 }}>
-              {GUARANTEE.map((g) => (
-                <li key={g} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                  <Check />
-                  <span style={{ color: BODY, fontFamily: ROBOTO, fontSize: 15, lineHeight: 1.65 }}>{g}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* ── Fanned image cluster ── */}
+        <div className="rg-fan rg-rise rg-d1" style={{ marginTop: 'clamp(40px,6vw,64px)' }}>
+          {CARDS.map((c) => (
+            <div key={c.src} className={`rg-card rg-card--${c.role}`}>
+              <Image
+                src={c.src}
+                alt={c.alt}
+                fill
+                sizes="(max-width: 460px) 60vw, (max-width: 760px) 30vw, 300px"
+                style={{ objectPosition: '50% 30%' }}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
 
-          {/* Your commitment */}
-          <div>
-            <h3 style={{ color: INK, fontFamily: WIDE, fontSize: 12, fontWeight: 400, letterSpacing: '0.18em', textTransform: 'uppercase', margin: '0 0 22px' }}>
-              Your commitment
-            </h3>
-            <ul aria-label="Extended Care Commitment requirements" style={{ listStyle: 'none', margin: 0, padding: 0, display: 'flex', flexDirection: 'column', gap: 18 }}>
-              {COMMITMENT.map((c) => (
-                <li key={c} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                  <Check />
-                  <span style={{ color: BODY, fontFamily: ROBOTO, fontSize: 15, lineHeight: 1.65 }}>{c}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        {/* ── Stats row ── */}
+        <div className="rg-stats rg-rise rg-d2" style={{ marginTop: 'clamp(48px,7vw,80px)' }}>
+          {STATS.map((s) => (
+            <div key={s.title} className="rg-stat">
+              <div
+                style={{
+                  color: FOREST,
+                  fontFamily: SERIF,
+                  fontWeight: 400,
+                  fontSize: 'clamp(40px,5.5vw,60px)',
+                  lineHeight: 1,
+                  textTransform: 'uppercase',
+                }}
+              >
+                {s.value}
+              </div>
+              <h3
+                style={{
+                  color: INK,
+                  fontFamily: WIDE,
+                  fontSize: 12.5,
+                  fontWeight: 400,
+                  letterSpacing: '0.16em',
+                  textTransform: 'uppercase',
+                  margin: '14px 0 8px',
+                }}
+              >
+                {s.title}
+              </h3>
+              <p style={{ color: META, fontFamily: ROBOTO, fontSize: 14.5, lineHeight: 1.6, margin: 0, maxWidth: 300, marginInline: 'auto' }}>
+                {s.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        {/* ── CTA pill ── */}
+        <div className="rg-rise rg-d3" style={{ textAlign: 'center', marginTop: 'clamp(40px,6vw,64px)' }}>
+          <Link
+            href="/consultation"
+            className="rg-cta"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 10,
+              padding: '15px 30px',
+              borderRadius: 999,
+              background: FOREST,
+              color: '#fff',
+              fontFamily: WIDE,
+              fontSize: 13,
+              letterSpacing: '0.1em',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              boxShadow: '0 14px 30px -12px rgba(2,76,39,0.5)',
+            }}
+          >
+            Book Your Free Consultation
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 12h14M13 6l6 6-6 6" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
         </div>
       </div>
     </section>
