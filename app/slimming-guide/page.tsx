@@ -9,7 +9,6 @@ import MethodPillars from './MethodPillars';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
 import BookConsultationButton from '@/components/BookConsultationButton';
-import GradientField from '@/components/layers/GradientField';
 import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
@@ -144,111 +143,64 @@ export default function SlimmingGuidePage() {
       {/* Why Diets Fail — editorial redesign */}
       <WhyDietsFail />
 
-      {/* Built To Hold band + What This Is + Method share a wrapper so the tilted
-          paper mockups can overlap section boundaries like on the live site */}
-      <div className="relative overflow-hidden">
-      {/* Built To Hold Band — light on-brand statement band (no dark-green bg). Starts
-          at the sage wash the section above ends on (#F5F8F2) and resolves to white so
-          the "What This Is" section below flows seamlessly. */}
-      <GradientField
-        blob={{ top: '-20%', right: '-4%' }}
-        dots
-        style={{ background: '#ffffff', padding: '64px 0' }}
-      >
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p
-            className="uppercase"
-            style={{ color: GREEN, fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
-          >
-            THIS IS A SYSTEM <strong>BUILT TO HOLD.</strong>
-            <br />
-            <strong>NOT</strong> A QUICK FIX.
-          </p>
-        </div>
-      </GradientField>
-
-      {/* What This Is Section */}
-      <section className="py-24 relative bg-white">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+      {/* What This Is — calm, elegant statement (replaced a loud band + busy overlapping mockups) */}
+      <section className="bg-white" style={{ padding: 'clamp(64px, 10vw, 110px) 0' }}>
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Kicker centered rule>WHAT THIS IS</Kicker>
           <h2
-            className="mb-8 uppercase"
-            style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
+            className="uppercase"
+            style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px, 3.4vw, 32px)', lineHeight: 1.3, margin: '0 0 14px' }}
           >
-            this is a behaviour-based weight loss system, not another diet.
+            A behaviour-based weight loss system, not another diet.
           </h2>
-          <p className="mb-6 text-left" style={{ color: TAUPE, fontSize: '14px' }}>
-            Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use
-            it. The Carisma Slimming Guide is a behaviour system. Built from real clinic practice. Designed for
-            the life you actually have. It complements our{' '}
-            <Link href="/weight-loss" style={{ color: GREEN, textDecoration: 'underline' }}>
-              medical weight loss programme
-            </Link>{' '}
+          <p
+            className="uppercase"
+            style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2.5px', margin: '0 0 40px' }}
+          >
+            Built to hold — not a quick fix.
+          </p>
+          <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 22px' }}>
+            Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use it.
+            The Carisma Slimming Guide is a behaviour system — built from real clinic practice, designed for the
+            life you actually have. It complements our{' '}
+            <Link href="/weight-loss" style={{ color: GREEN, textDecoration: 'underline' }}>medical weight loss programme</Link>{' '}
             and{' '}
-            <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>
-              GLP-1 injections
-            </Link>{' '}
+            <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>GLP-1 injections</Link>{' '}
             for those who want clinical support alongside the habit system.
           </p>
-          <p className="mb-8 text-left" style={{ color: TAUPE, fontSize: '14px' }}>
-            The principle it runs on is this: what you can repeat consistently will always outperform what you
-            can do once brilliantly. Not the perfect week. A structure stable enough to survive the imperfect
-            one.
+          <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 44px' }}>
+            The principle it runs on: what you can repeat consistently will always outperform what you can do once
+            brilliantly. Not the perfect week — a structure stable enough to survive the imperfect one.
           </p>
-          <p
-            className="inline-block uppercase mb-8"
-            style={{
-              color: TAUPE,
-              fontFamily: wideFont,
-              fontSize: '13px',
-              border: '1px solid #8a8073',
-              padding: '12px 20px',
-            }}
-          >
-            Adherence over perfection. Structure over willpower. That is the whole system
-          </p>
-          <p className="mb-8" style={{ color: TAUPE, fontSize: '14px' }}>
-            That is what this guide builds. And when that structure holds, weight loss stops being something you
-            fight for. It becomes a result that follows.
+
+          {/* elegant centered statement (replaces the bordered pill) */}
+          <div className="mx-auto" style={{ maxWidth: '560px', margin: '0 auto 44px' }}>
+            <div className="mx-auto mb-7" style={{ width: '40px', height: '1px', background: GREEN }} />
+            <p
+              className="uppercase"
+              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.5, letterSpacing: '0.04em' }}
+            >
+              Adherence over perfection. Structure over willpower.
+            </p>
+            <div className="mx-auto mt-7" style={{ width: '40px', height: '1px', background: GREEN }} />
+          </div>
+
+          <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 36px' }}>
+            That is what this guide builds. When the structure holds, weight loss stops being something you fight
+            for. It becomes a result that follows.
           </p>
           <a
             href={PRODUCT_URL}
-            className="cta-glow block mx-auto text-center uppercase text-white"
-            style={{
-              borderRadius: '999px',
-              maxWidth: '550px',
-              padding: '12px 24px',
-              fontFamily: wideFont,
-              fontSize: '15px',
-              fontWeight: 700,
-              letterSpacing: '1.5px',
-            }}
+            className="cta-glow inline-block text-center uppercase text-white"
+            style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1.5px', textDecoration: 'none' }}
           >
-            Get Slimming Guide &nbsp;›
+            Get the Slimming Guide &nbsp;›
           </a>
         </div>
       </section>
 
       {/* Method Section — homepage pillars design + scroll-in stagger */}
       <MethodPillars />
-
-      {/* Tilted A4 mockup overlapping the band + What This Is (right edge) */}
-      <img
-        src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.webp"
-        alt=""
-        role="presentation"
-        className="hidden lg:block absolute pointer-events-none"
-        style={{ width: '771px', aspectRatio: '771 / 618', objectFit: 'contain', top: '0px', right: '-305px' }}
-      />
-      {/* Recipe page + guide cover stack overlapping What This Is + Method (left edge) */}
-      <img
-        src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.webp"
-        alt=""
-        role="presentation"
-        className="hidden lg:block absolute pointer-events-none"
-        style={{ width: '771px', aspectRatio: '771 / 708', objectFit: 'contain', top: '330px', left: '-305px' }}
-      />
-      </div>{/* end decorative wrapper */}
 
       {/* Success Outcomes — redesigned card showcase */}
       <OutcomesShowcase />
