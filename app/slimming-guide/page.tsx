@@ -6,6 +6,7 @@ import GuideHero from './GuideHero';
 import WhyDietsFail from './WhyDietsFail';
 import OutcomesShowcase from './OutcomesShowcase';
 import MethodPillars from './MethodPillars';
+import ScrollScaleFeature from './ScrollScaleFeature';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
 import BookConsultationButton from '@/components/BookConsultationButton';
@@ -39,61 +40,6 @@ const jsonLd = [
 
 const PRODUCT_URL =
   'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta';
-
-const methodPillars = [
-  {
-    lead: 'Meal Timing:',
-    rest: 'When to Eat for Steady Energy',
-    paragraphs: [
-      'Timing builds rhythm. Rhythm reduces the number of decisions you have to make each day. The guide walks you through a simple default for your first meal, how to structure eating across the day, and two tracks to choose from based on your morning routine. Safety and practicality, both covered.',
-    ],
-  },
-  {
-    lead: 'Protein First:',
-    rest: 'What to Eat to Build Satiety',
-    paragraphs: [
-      'Protein comes first. Not because carbs are the enemy, but because protein builds satiety from the start of every meal. The guide uses a simple points system, one calorie equals one point, with non-starchy vegetables sitting outside it entirely. No forbidden foods. No obsessive counting.',
-    ],
-  },
-  {
-    lead: 'Portion Guide:',
-    rest: 'How Much to Eat Without Counting',
-    paragraphs: [
-      'Your daily points budget is built around you.',
-      'The guide includes a visual rule that works without scales, without apps, and without measuring anything. One palm. Two palms. Straightforward.',
-    ],
-  },
-  {
-    lead: 'Eating Sequence:',
-    rest: 'The Order That Changes How You Feel',
-    paragraphs: [
-      'Protein first. Then vegetables. Then carbs. That sequence changes how hungry you feel, how steady your energy runs, and how you arrive at your next meal. It works at home. It works at restaurants. It works at family tables where the pasta arrives before anything else.',
-    ],
-  },
-];
-
-const outcomes = [
-  {
-    title: 'Weight Stability',
-    icon: '/wix/87fc13_423d81e5360e4d79b62846fe22c58655~mv2.png',
-    text: 'You stop dreading Monday mornings. You stop stepping on the scale after a difficult weekend and writing off the week. You learn to read the trend, not the moment. One number on one day stops having power over you. You begin to trust the direction, not obsess over the distance.',
-  },
-  {
-    title: 'Appetite Stability',
-    icon: '/wix/f940f0_e7472796f93447e68c2b1d2210b09224~mv2.webp',
-    text: 'You stop arriving at meals desperate. Hunger becomes something predictable, something you can read, something that arrives on schedule rather than ambushing you. You stop making decisions when you are already too hungry to make good ones. That alone changes everything.',
-  },
-  {
-    title: 'Energy Stability',
-    icon: '/wix/f940f0_fffe93587a1d4b73b4ff7af603ebd67a~mv2.webp',
-    text: 'The 3pm crash becomes unfamiliar. You stop needing caffeine to get through the afternoon. Sleep improves without doing anything specific about sleep. Your body regulates. You notice it first in the small things: concentration, mood, the way evenings feel lighter.',
-  },
-  {
-    title: 'Emotional Calm Around Food',
-    icon: '/wix/f940f0_ba9d9802e5184f72ae39ac796ad06084~mv2.webp',
-    text: 'You go to dinner and enjoy it. You come home and do not spiral. You stop the all-or-nothing arithmetic, the mental ledger of what you ate and what it cost you. Food becomes simpler. Less loaded. You leave the table satisfied, not negotiating with yourself.',
-  },
-];
 
 const forYou = [
   "You've tried dieting before, and it didn't stick",
@@ -541,6 +487,9 @@ export default function SlimmingGuidePage() {
           </div>
         </div>
       </section>
+
+      {/* Built for real Maltese life — scroll-scale lifestyle moment */}
+      <ScrollScaleFeature />
 
       {/* Final Call-to-Action Section — light on-brand band (no dark-green bg). Starts on
           the sage wash above and resolves to white so the section below flows. */}
