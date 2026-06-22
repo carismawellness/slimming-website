@@ -196,40 +196,35 @@ export default function SlimmingGuidePage() {
                 brilliantly. Not the perfect week — a structure stable enough to survive the imperfect one.
               </p>
             </div>
-            {/* Right — myth/truth page render */}
+            {/* Right — the guide, richly visualised (book + soft glow) */}
             <div className="flex justify-center">
-              <Image
-                src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.webp"
-                alt="A page from the Carisma Slimming Guide — myth vs truth"
-                width={480}
-                height={360}
-                sizes="(max-width: 768px) 80vw, 420px"
-                style={{ width: '100%', maxWidth: '420px', height: 'auto', transform: 'rotate(3deg)', filter: 'drop-shadow(0 28px 50px rgba(40,60,44,0.18))' }}
-              />
+              <div style={{ position: 'relative', width: '100%', maxWidth: '380px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <span aria-hidden style={{ position: 'absolute', width: '112%', aspectRatio: '1 / 1', borderRadius: '50%', background: 'radial-gradient(circle, rgba(142,176,147,0.30) 0%, rgba(201,216,193,0.16) 46%, rgba(255,255,255,0) 72%)', filter: 'blur(8px)', zIndex: 0 }} />
+                <Image
+                  src="/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.webp"
+                  alt="The Carisma Slimming Guide book"
+                  width={460}
+                  height={575}
+                  sizes="(max-width: 768px) 70vw, 340px"
+                  style={{ position: 'relative', zIndex: 1, width: '100%', maxWidth: '340px', height: 'auto', filter: 'drop-shadow(0 26px 44px rgba(34,56,38,0.30))' }}
+                />
+              </div>
             </div>
           </div>
 
-          {/* statement + CTA, centered below */}
-          <div className="text-center" style={{ marginTop: 'clamp(44px, 7vw, 72px)' }}>
-            <div className="mx-auto" style={{ maxWidth: '560px', marginBottom: '40px' }}>
-              <div className="mx-auto mb-7" style={{ width: '40px', height: '1px', background: GREEN }} />
-              <p
-                className="uppercase"
-                style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.5, letterSpacing: '0.04em' }}
-              >
+          {/* statement + CTA, centered below — tightened */}
+          <div className="text-center" style={{ marginTop: 'clamp(28px, 4vw, 48px)' }}>
+            <div className="mx-auto" style={{ maxWidth: '560px', marginBottom: '26px' }}>
+              <div className="mx-auto mb-5" style={{ width: '40px', height: '1px', background: GREEN }} />
+              <p className="uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.5, letterSpacing: '0.04em' }}>
                 Adherence over perfection. Structure over willpower.
               </p>
-              <div className="mx-auto mt-7" style={{ width: '40px', height: '1px', background: GREEN }} />
+              <div className="mx-auto mt-5" style={{ width: '40px', height: '1px', background: GREEN }} />
             </div>
-            <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, margin: '0 0 32px', maxWidth: '620px', marginLeft: 'auto', marginRight: 'auto' }}>
-              That is what this guide builds. When the structure holds, weight loss stops being something you fight
-              for. It becomes a result that follows.
+            <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, margin: '0 0 24px', maxWidth: '620px', marginLeft: 'auto', marginRight: 'auto' }}>
+              That is what this guide builds. When the structure holds, weight loss stops being something you fight for. It becomes a result that follows.
             </p>
-            <a
-              href={PRODUCT_URL}
-              className="cta-glow inline-block text-center uppercase text-white"
-              style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textDecoration: 'none' }}
-            >
+            <a href={PRODUCT_URL} className="cta-glow inline-block text-center uppercase text-white" style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textDecoration: 'none' }}>
               Get the Slimming Guide &nbsp;›
             </a>
           </div>
