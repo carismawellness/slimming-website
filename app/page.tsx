@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import TreatmentsEditorial from '@/components/TreatmentsEditorial';
+import TreatmentsAccordion from '@/components/TreatmentsAccordion';
 import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
@@ -159,9 +159,9 @@ export default function Home() {
         </div>
       </section>
 
-      {/* (3) Explore Our Treatments — editorial composition */}
+      {/* (3) Explore Our Treatments — image accordion */}
       <section className="py-24" aria-labelledby="modalities-heading" style={{ backgroundColor: '#ffffff' }}>
-        <TreatmentsEditorial />
+        <TreatmentsAccordion />
       </section>
 
       {/* (4) Our Results Guarantee — "The Carisma Pact" + ambient 3D silk */}
