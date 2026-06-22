@@ -164,5 +164,5 @@ export const lipocavitation: PackageContent = {
     },
   ],
 
-  hide: { map: true },
+  hide: {},
 };

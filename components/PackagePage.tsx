@@ -650,6 +650,115 @@ function EvidenceCarousel({
   );
 }
 
+/* ---------- the carisma difference (home-page design + Google Map) ----------
+   A faithful recreation of the HOME PAGE "THE CARISMA DIFFERENCE → WHY MALTA
+   CHOOSES CARISMA SLIMMING" section (app/page.tsx, the `#difference-heading`
+   block). Two-column, items-stretch layout on the rose/sage gradient card:
+     • LEFT  — eyebrow → 110px rule → H2, then two checklist blocks
+               (leftHeading/left + rightHeading/right) with the home page's
+               circle-tick SVG markers, then a single Fresha CTA.
+     • RIGHT — the SAME Google Map embed the home page uses (verbatim src) in a
+               rounded panel, with the "complimentary on-site parking" pill below.
+   The map src is reused EXACTLY from app/page.tsx so it renders identically
+   (Grand Hotel Excelsior, Floriana). On mobile the columns stack (map below the
+   text) via the shared `.fr-2col` rule; the map keeps a sensible min-height and
+   never overflows. The H2 id is passed in so the page keeps a logical, unique
+   heading. Set `showMap={false}` to omit the map (live lipocavitation). */
+const DIFF_MAP_SRC =
+  'https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed';
+
+function DiffCheck() {
+  return (
+    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: 2 }}>
+      <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+      <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function DifferencePanel({
+  eyebrow,
+  heading,
+  headingId,
+  leftHeading,
+  left,
+  rightHeading,
+  right,
+  showMap = true,
+}: {
+  eyebrow: string;
+  heading: React.ReactNode;
+  headingId: string;
+  leftHeading: string;
+  left: string[];
+  rightHeading: string;
+  right: string[];
+  showMap?: boolean;
+}) {
+  const checklistItem: React.CSSProperties = { display: 'flex', gap: 12, alignItems: 'flex-start', color: '#5a4f43', fontFamily: BODY, fontSize: 14, lineHeight: 1.6 };
+  const colHeading: React.CSSProperties = { color: '#000000', fontFamily: WIDE, fontSize: 15, fontWeight: 400, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 18px' };
+  return (
+    <section aria-labelledby={headingId} style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
+      <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: 16, padding: '40px 40px 48px' }}>
+        {/* decorative watermark — same WELL_BG the live commitment cards use */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={WELL_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: '50%', top: 12, transform: 'translateX(-50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          <Eyebrow>{eyebrow}</Eyebrow>
+          <div aria-hidden="true" style={{ width: 110, height: 1, backgroundColor: '#B9A99E', margin: '10px auto 16px' }} />
+          <SectionHeading id={headingId}>{heading}</SectionHeading>
+
+          <div style={{ display: 'grid', gridTemplateColumns: showMap ? '1fr 1fr' : '1fr', gap: 48, marginTop: 40, alignItems: 'stretch' }} className="fr-2col">
+            {/* LEFT — commitment + difference checklists + single CTA */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 36 }}>
+              <div>
+                <h3 style={colHeading}>{leftHeading}</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  {left.map((x) => (
+                    <li key={x} style={checklistItem}><DiffCheck /><span>{x}</span></li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h3 style={colHeading}>{rightHeading}</h3>
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 16 }}>
+                  {right.map((x) => (
+                    <li key={x} style={checklistItem}><DiffCheck /><span>{x}</span></li>
+                  ))}
+                </ul>
+              </div>
+              <div style={{ marginTop: 'auto' }}><CTA variant="blue" /></div>
+            </div>
+
+            {/* RIGHT — Google Map (verbatim home-page embed) + parking pill */}
+            {showMap && (
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <iframe
+                  title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
+                  aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
+                  src={DIFF_MAP_SRC}
+                  width="100%"
+                  height="100%"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  style={{ border: 0, borderRadius: 20, display: 'block', flex: 1, minHeight: 480 }}
+                />
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#E9F0E9', borderRadius: 999, padding: '8px 16px', marginTop: 16, alignSelf: 'flex-start' }}>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={PARKING} alt="" aria-hidden="true" style={{ width: 18, height: 'auto' }} />
+                  <span style={{ color: GREEN_TEXT, fontFamily: WIDE, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 600 }}>
+                    Complimentary on-site parking
+                  </span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ============================================================ */
 export default function PackagePage({ content: c }: { content: PackageContent }) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -853,42 +962,18 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </section>
         )}
 
-        {/* ===== 4c. COMMITMENT PANEL ===== */}
+        {/* ===== 4c. COMMITMENT PANEL — home-page "difference" design + Google Map ===== */}
         {c.commitmentPanel && (
-          <section aria-labelledby="commitment-heading" style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
-            <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 16, padding: '48px 48px 44px' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={WELL_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <Eyebrow>{c.commitmentPanel.eyebrow}</Eyebrow>
-                <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
-                <SectionHeading id="commitment-heading">{c.commitmentPanel.heading}</SectionHeading>
-                <div style={{ display: 'flex', flexDirection: 'column', gap: 36, marginTop: 40, maxWidth: 480 }}>
-                  {[{ h: c.commitmentPanel.leftHeading, items: c.commitmentPanel.left }, { h: c.commitmentPanel.rightHeading, items: c.commitmentPanel.right }].map((col) => (
-                    <div key={col.h}>
-                      {/* P6 — H3 within the section */}
-                      <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>{col.h}</h3>
-                      <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                        {col.items.map((x) => (
-                          <li key={x} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}>
-                            <Dot /><span>{x}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, marginTop: 40, flexWrap: 'wrap' }}>
-                  <CTA variant="blue" />
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: TAUPE, fontFamily: WIDE, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={PARKING} alt="" aria-hidden="true" style={{ width: 22, height: 'auto' }} />
-                    Complimentary on-site parking
-                  </span>
-                </div>
-              </div>
-            </div>
-          </section>
+          <DifferencePanel
+            headingId="commitment-heading"
+            eyebrow={c.commitmentPanel.eyebrow}
+            heading={c.commitmentPanel.heading}
+            leftHeading={c.commitmentPanel.leftHeading}
+            left={c.commitmentPanel.left}
+            rightHeading={c.commitmentPanel.rightHeading}
+            right={c.commitmentPanel.right}
+            showMap={!hidden.map}
+          />
         )}
 
         {/* ===================== 5. ELIGIBILITY ===================== */}
@@ -955,7 +1040,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       <p key={p} style={{ ...body, textAlign: 'center', marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>
                     ))}
                   </div>
-                  <div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 56, alignItems: 'center' }} className="fr-2col">
+                  <div style={{ marginTop: 40, display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 56, alignItems: 'stretch' }} className="fr-2col">
                     {/* PROVEN EFFICACY column */}
                     <div>
                       <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 16px' }}>Proven efficacy</p>
@@ -970,21 +1055,26 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       {c.ptClosing && <p style={{ ...body, fontSize: 14, marginBottom: 22 }}>{c.ptClosing}</p>}
                       {c.ptCardCta && <CTA variant="blue">{c.ptCardCta}</CTA>}
                     </div>
-                    {/* treatment before/after — GLP-1-style asymmetric arch on white */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-                      <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
-                        <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
-                      </div>
+                    {/* treatment before/after — GLP-1-style asymmetric arch on white.
+                        Image stretches to fill the height of the text column
+                        (alignItems:stretch on the grid + height:100% here), so the
+                        two columns stay balanced. The fixed aspect-ratio box is
+                        replaced with a 100%-height container; .fr-pt-img gives it a
+                        sensible fixed height when the columns stack on mobile. */}
+                    <div className="fr-pt-img" style={{ position: 'relative', width: '100%', height: '100%', minHeight: 320, overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
+                      <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                     </div>
                   </div>
                 </>
               ) : (
-                <div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: '0.92fr 1.08fr', gap: 56, alignItems: 'center' }} className="fr-2col">
-                  {/* treatment before/after — GLP-1-style asymmetric arch on white */}
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-                    <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
-                      <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
-                    </div>
+                <div style={{ marginTop: 40, display: 'grid', gridTemplateColumns: '0.92fr 1.08fr', gap: 56, alignItems: 'stretch' }} className="fr-2col">
+                  {/* treatment before/after — GLP-1-style asymmetric arch on white.
+                      Stretches to fill the height of the (taller) text column so the
+                      two columns are balanced: alignItems:stretch on the grid +
+                      height:100% here, replacing the fixed aspect-ratio box.
+                      .fr-pt-img gives it a sensible fixed height once stacked. */}
+                  <div className="fr-pt-img" style={{ position: 'relative', width: '100%', height: '100%', minHeight: 360, overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
+                    <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                   </div>
                   <div>
                     {c.ptTitleStyle === 'serif' ? (
@@ -1115,65 +1205,22 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </section>
         )}
 
-        {/* ===================== 9. WELLNESS CHAIN + MAP ===================== */}
+        {/* ===================== 9. THE CARISMA DIFFERENCE + MAP =====================
+            Home-page "difference" design (two columns, items-stretch, Google Map
+            on the right + parking pill). Fed the existing wellness copy
+            (commitment / whyMalta) so per-page text is preserved. Respects
+            hide.map (live lipocavitation omits the map). */}
         {!hidden.wellness && (
-          <section aria-labelledby="wellness-heading" style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
-            <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(160deg, #f5f2ec 0%, #e7ece2 100%)', borderRadius: 16, padding: '48px 48px 44px' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={WELL_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: '50%', top: '46%', transform: 'translate(-50%, -50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
-              <div style={{ position: 'relative', zIndex: 1 }}>
-                <Eyebrow>the carisma difference</Eyebrow>
-                <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 16px' }} />
-                <SectionHeading id="wellness-heading">Malta&rsquo;s #1 Voted Slimming &amp; Wellness Clinic</SectionHeading>
-
-                <div style={{ display: 'grid', gridTemplateColumns: hidden.map ? '1fr' : '1fr 1fr', gap: 48, marginTop: 40, alignItems: 'start' }} className="fr-2col">
-                  <div>
-                    {/* P6 — H3 under H2 section heading */}
-                    <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>Our Commitment to Your Results</h3>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 30px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-                      {commitment.map((x) => (
-                        <li key={x} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}>
-                          <Dot /><span>{x}</span>
-                        </li>
-                      ))}
-                    </ul>
-                    <h3 style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 18px' }}>Why Women in Malta Choose Carisma</h3>
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
-                      {whyMalta.map((x) => (
-                        <li key={x} style={{ display: 'flex', gap: 10, alignItems: 'flex-start', color: TAUPE, fontFamily: BODY, fontSize: 14.5, lineHeight: 1.55 }}>
-                          <Dot /><span>{x}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  {!hidden.map && (
-                    <div style={{ borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 26px rgba(120,114,104,0.18)' }}>
-                      {/* P1 — iframe needs title */}
-                      <iframe
-                        title={`${c.id} clinic location in Malta`}
-                        src={`https://www.google.com/maps?q=${encodeURIComponent(c.mapQuery)}&output=embed`}
-                        width="100%"
-                        height="360"
-                        loading="lazy"
-                        referrerPolicy="no-referrer-when-downgrade"
-                        style={{ border: 0, display: 'block' }}
-                        aria-label="Google Maps showing clinic location in Malta"
-                      />
-                    </div>
-                  )}
-                </div>
-
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: 24, marginTop: 40, flexWrap: 'wrap' }}>
-                  <CTA variant="blue" />
-                  <span style={{ display: 'inline-flex', alignItems: 'center', gap: 10, color: TAUPE, fontFamily: WIDE, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase' }}>
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={PARKING} alt="" aria-hidden="true" style={{ width: 22, height: 'auto' }} />
-                    Complimentary on-site parking
-                  </span>
-                </div>
-              </div>
-            </div>
-          </section>
+          <DifferencePanel
+            headingId="wellness-heading"
+            eyebrow="the carisma difference"
+            heading={<>Malta&rsquo;s #1 Voted Slimming &amp; Wellness Clinic</>}
+            leftHeading="Our Commitment to Your Results"
+            left={commitment}
+            rightHeading="Why Women in Malta Choose Carisma"
+            right={whyMalta}
+            showMap={!hidden.map}
+          />
         )}
 
         {/* ===================== 10. FAQ ===================== */}
@@ -1297,6 +1344,9 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           @media (max-width: 860px) {
             .fr-hero-grid, .fr-2col, .fr-benefits { grid-template-columns: 1fr !important; }
             .fr-hero-img { order: -1; }
+            /* Stacked: the grid no longer stretches the image to the text height,
+               so give the pt treatment photo a sensible fixed height. */
+            .fr-pt-img { height: 380px !important; }
           }
           @media (max-width: 560px) { .fr-benefits { grid-template-columns: 1fr !important; } }
         `}</style>
