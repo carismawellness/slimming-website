@@ -728,7 +728,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     {/* PROVEN EFFICACY column */}
                     <div>
                       <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 16px' }}>Proven efficacy</p>
-                      {c.ptEfficacyTitle && <p style={{ ...body, marginBottom: 16 }}>{c.ptEfficacyTitle}</p>}
+                      {c.ptEfficacyTitle && c.ptEfficacyTitle.trim().toLowerCase() !== 'proven efficacy' && <p style={{ ...body, marginBottom: 16 }}>{c.ptEfficacyTitle}</p>}
                       <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', display: 'flex', flexDirection: 'column', gap: 13 }}>
                         {c.ptEfficacyBullets.map((b) => (
                           <li key={b} style={{ display: 'flex', gap: 11, alignItems: 'flex-start' }}>
@@ -790,7 +790,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       <p key={p} style={{ ...body, marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>
                     ))}
                     <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase', margin: '20px 0 14px' }}>Proven efficacy</p>
-                    {c.ptEfficacyTitle && <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.7, margin: '0 0 14px' }}>{c.ptEfficacyTitle}</p>}
+                    {c.ptEfficacyTitle && c.ptEfficacyTitle.trim().toLowerCase() !== 'proven efficacy' && <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.7, margin: '0 0 14px' }}>{c.ptEfficacyTitle}</p>}
                     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 13 }}>
                       {c.ptEfficacyBullets.map((b) => (
                         <li key={b} style={{ display: 'flex', gap: 11, alignItems: 'flex-start' }}>
@@ -845,12 +845,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 12px' }}>
                       TOTAL VALUE: {c.dualTotalValue} TODAY: <span style={{ color: TAUPE, fontSize: 18 }}>{c.dualTodayPrice}</span>
                     </p>
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: 4, marginBottom: 16 }}>
-                      {c.dualFineprint.map((f) => (
-                        <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: 0 }}>{f}</p>
-                      ))}
-                    </div>
-                    <div style={{ marginBottom: 14 }}><CTA variant="blue" full>{c.dualCtaLabel ?? 'Claim your spot now'}</CTA></div>
+                    <div style={{ marginTop: 16, marginBottom: 14 }}><CTA variant="blue" full>{c.dualCtaLabel ?? 'Claim your spot now'}</CTA></div>
                     <Stars withGoogle />
                   </div>
                 </div>
