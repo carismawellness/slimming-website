@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
@@ -324,377 +324,256 @@ function ProblemAgitationSection() {
 }
 
 /* ============================================================
-   3. PROGRAM OVERVIEW — scroll-driven sticky-left layout
+   3. PROGRAM OVERVIEW — left-nav tab panel (all steps visible at once)
    ============================================================ */
 function ProgramOverviewSection() {
-  const [activeStep, setActiveStep] = useState(0);
-  const stepRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [active, setActive] = useState(0);
 
-  useEffect(() => {
-    const observers: IntersectionObserver[] = [];
-    stepRefs.current.forEach((el, idx) => {
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([entry]) => { if (entry.isIntersecting) setActiveStep(idx); },
-        { threshold: 0.4 }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
-  const colHead = { color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 700 as const, letterSpacing: '1px', textTransform: 'uppercase' as const };
-  const stepPStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '14px', lineHeight: 1.65 };
-  const stepLiStyle = { color: taupe, fontFamily: bodyFont, fontWeight: 400 as const, fontSize: '14px', lineHeight: 1.65 };
-
-  const consultationSteps = [
-    'Go through your goals, your reasons for changing and your timeline',
-    'Review your health history, medications and past diets',
-    'Look at your current capacity for food changes, movement and clinic visits',
-    'Share real before and after cases that match your age, body type and situation',
-    'Explain exactly how our guarantee works and what support you receive',
-    'Tell you honestly if you are a good candidate for this transformation',
-  ];
-
-  const suitableFor = [
-    'You are 28–60 with 5–20 kg to lose',
-    'Your body has changed with age, hormones or menopause',
-    'You want a medical approach, not another fad diet',
-    'You want to lose weight while still eating real food',
-    'You are willing to follow a clear plan with weekly check-ins',
-    'You are ready to invest time, energy and budget into your health',
-    'Committed to attend all scheduled appointments and sessions',
-  ];
-
-  const notSuitableFor = [
-    'You are pregnant, or breastfeeding',
-    'You want a rapid, extreme "crash diet" style solution',
-    'You are not willing to follow a structured plan',
-    'You cannot commit to weekly check-ins or scheduled appointments',
-    'You want results without changing routines, eating habits, or lifestyle basics',
-    `You are currently dealing with an unmanaged medical condition, or you're on medication that requires medical clearance (we'll screen this in the consultation)`,
-  ];
 
   const steps = [
     {
-      title: 'Complimentary Consultation',
-      icon: '/wix/87fc13_d2a17b8db6de4c8c8c41219e3a2c99cb~mv2.png',
-      content: (
-        <div>
-          <p style={{ ...stepPStyle, marginBottom: '20px' }}>
-            Every program starts with a full in-clinic consultation. This is where we decide together if our guided transformation protocol is the right fit for you. Because we stand behind your results, we are selective about who we can work with.
-          </p>
-          <ol style={{ listStyle: 'none', padding: 0, margin: '0 0 20px' }}>
-            {consultationSteps.map((s, i) => (
-              <li key={s} style={{ ...stepLiStyle, display: 'flex', gap: '12px', alignItems: 'flex-start', padding: '10px 0', borderBottom: i < consultationSteps.length - 1 ? '1px solid rgba(79,114,86,0.08)' : 'none' }}>
-                <span style={{ color: green, fontWeight: 600, flexShrink: 0, minWidth: '20px' }}>{i + 1}.</span>
-                <span>{s}</span>
-              </li>
-            ))}
-          </ol>
-          <p style={{ ...stepPStyle, marginBottom: '32px' }}>
-            If we do not believe we can deliver real, measurable change, we will not enrol you into the program. If we do accept you, it is because we are prepared to stand behind your results.
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
-            <div style={{ background: '#F2F6EF', borderRadius: '12px', padding: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                <Image src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" role="presentation" width={24} height={24} style={{ objectFit: 'contain' }} loading="lazy" />
-                <p style={colHead}>Suitable for</p>
-              </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {suitableFor.map((t) => (
-                  <li key={t} style={{ ...stepLiStyle, display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span style={{ color: green, fontSize: '16px', lineHeight: 1 }}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div style={{ background: '#F8F5F2', borderRadius: '12px', padding: '20px' }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '14px' }}>
-                <Image src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png" alt="" role="presentation" width={22} height={22} style={{ objectFit: 'contain' }} loading="lazy" />
-                <p style={colHead}>Not suitable for</p>
-              </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {notSuitableFor.map((t) => (
-                  <li key={t} style={{ ...stepLiStyle, display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '8px' }}>
-                    <span style={{ color: taupe, fontSize: '16px', lineHeight: 1 }}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-      ),
+      num: '01',
+      title: 'Initial Screening',
+      tagline: 'We only work with people we can genuinely help.',
+      icon: '/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png',
+      bullets: [
+        'Full in-clinic consultation to understand your goals and timeline',
+        'We review past diets, medications, hormones and your health history',
+        'You see real results from cases that match your age and body type',
+        'You are only enrolled if we are confident we can stand behind your results',
+      ],
     },
     {
-      title: 'Body Analysis & Medical Consultation',
+      num: '02',
+      title: 'Body Analysis',
+      tagline: 'A full medical picture before we change anything.',
       icon: '/wix/87fc13_05acf8a406274fbd9b5586bead0d2df5~mv2.png',
-      content: (
-        <div>
-          <p style={{ ...stepPStyle, marginBottom: '16px' }}>
-            Before we change your food or your body, we take time to understand you. If eligible, we set up an appointment with a medical doctor to review your health, hormones, medical history, medications, pregnancies, and menopause. You also meet your slimming consultant for clinical measurements and a body composition scan, looking at fat, muscle, visceral fat, and water &mdash; not just the number on the scale.
-          </p>
-          <p style={{ ...stepPStyle, marginBottom: '16px' }}>
-            We talk through how you feel day to day: energy, cravings, sleep, mood, digestion, and joint pain. Together, we set a clear baseline for your transformation.
-          </p>
-          <p style={{ ...stepPStyle, marginBottom: '10px' }}>What we may check, if it makes sense for you:</p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 16px' }}>
-            {['Blood tests for thyroid, blood sugar and cholesterol', 'Food intolerance testing if symptoms suggest it', 'Blood pressure and other basic checks to ensure your plan is safe'].map((t) => (
-              <li key={t} style={{ ...stepLiStyle, display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '8px' }}>
-                <span style={{ color: green, fontSize: '16px', lineHeight: 1 }}>&bull;</span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-          <p style={{ ...stepPStyle, marginBottom: '16px' }}>These assessments determine your <Link href="/glp1" style={{ color: green, textDecoration: 'underline' }}>GLP-1 (e.g., Ozempic, Mounjaro)</Link> eligibility.</p>
-          <p style={stepPStyle}>
-            Based on your results, we enrol you on your prescription protocol, tailor a program length and treatment mix that is realistic for your starting point and schedule your follow-ups to check in with our doctor and slimming consultant. This is where &ldquo;nothing works for my body&rdquo; starts to become a clear picture and a safe, personalised plan.
-          </p>
-        </div>
-      ),
+      bullets: [
+        'Full body composition scan — fat percentage, muscle mass and visceral fat',
+        'Doctor consultation covering hormones, blood sugar and current medications',
+        'Blood tests for thyroid, cholesterol and food intolerances if indicated',
+        'GLP-1 (Ozempic / Mounjaro) eligibility assessed at this stage',
+      ],
     },
     {
-      title: 'Diet and Accountability',
+      num: '03',
+      title: 'Diet & Accountability',
+      tagline: 'A food plan that works on bad weeks, not just good ones.',
       icon: '/wix/87fc13_b0aad949fa9d47b58f1512dcf2522e3d~mv2.png',
-      content: (
-        <div>
-          <p style={{ ...stepPStyle, marginBottom: '20px' }}>
-            Together we build a personalised food plan that fits school runs, meetings, weekends and Maltese food. We do not hand you a random PDF and wish you luck. Your plan is built on three simple rules:
-          </p>
-          {[
-            ['Mediterranean style, not misery style', 'Plenty of protein, olive oil, veg, beans and whole grains, with room for bread, pasta and social meals in the right portions.'],
-            ['Higher protein to protect muscle and keep you full', 'Enough protein to keep you satisfied, support metabolism and avoid losing muscle while you lose fat.'],
-            ['Flexible structure, not food fear', 'No "good vs bad" foods. We teach portions and timing so you can enjoy hobz biz zejt, pasta, wine or dessert without losing control.'],
-          ].map(([title, desc]) => (
-            <div key={title as string} style={{ marginBottom: '16px', paddingLeft: '14px', borderLeft: '2px solid rgba(79,114,86,0.2)' }}>
-              <p style={{ ...stepPStyle, fontWeight: 700 }}>{title}</p>
-              <p style={stepPStyle}>{desc}</p>
-            </div>
-          ))}
-          <p style={{ ...colHead, marginTop: '24px', marginBottom: '12px' }}>Then we shape it around your life:</p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 20px' }}>
-            {[
-              ['Busy mums', 'Fast family meals, smart leftovers and simple plate formulas'],
-              ['Menopause', 'Blood sugar balance, protein timing and fat loss strategies that support hormones'],
-              ['Bride / event prep', 'A clear 6–12 week plan that tightens your silhouette without banning social events'],
-            ].map(([lead, rest]) => (
-              <li key={lead as string} style={{ ...stepLiStyle, display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '8px' }}>
-                <span style={{ color: green, fontSize: '16px', lineHeight: 1 }}>&bull;</span>
-                <span><strong>{lead}</strong> &ndash; {rest}</span>
-              </li>
-            ))}
-          </ul>
-          <p style={{ ...stepPStyle, marginBottom: '20px' }}>
-            No shakes only, no keto only, no 1,000 calorie days. Your plan has to work on bad weeks, or it does not work at all.
-          </p>
-          <p style={{ ...colHead, marginBottom: '8px' }}>Accountability: how we keep you moving</p>
-          <p style={{ ...stepPStyle, marginBottom: '12px' }}>You are not doing this alone or guessing between visits.</p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {[
-              'Weekly check-ins with weight and measurements so we see what is really happening',
-              'Short written progress updates every week or two with clear next steps',
-              'WhatsApp check-ins so you can message when you are stuck, tempted or confused',
-              'If you go quiet, we follow up first — without judgement — to help you get back on track',
-            ].map((t) => (
-              <li key={t} style={{ ...stepLiStyle, display: 'flex', gap: '8px', alignItems: 'flex-start', marginBottom: '8px' }}>
-                <span style={{ color: green, fontSize: '16px', lineHeight: 1 }}>&bull;</span>
-                <span>{t}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ),
+      bullets: [
+        'Mediterranean-style plan built around Maltese food, family life and social events',
+        'High protein approach to protect muscle and keep hunger under control',
+        'Weekly weigh-ins, measurements and progress reports with a dedicated coach',
+        'WhatsApp check-ins so you have real support between clinic visits',
+      ],
     },
     {
-      title: 'Movement That Fits Your Life',
+      num: '04',
+      title: 'Movement Plan',
+      tagline: 'Exercise designed for your body today, not an ideal version of it.',
       icon: '/wix/87fc13_83de975f116646a795c9db7ebdc3b4be~mv2.png',
-      content: (
-        <div>
-          <p style={{ ...stepPStyle, marginBottom: '16px' }}>
-            Weight loss sticks when movement feels realistic, not punishing. In Step 4, we design a movement plan that meets you exactly where you are today and fits seamlessly into your schedule, fitness level, and preferences.
-          </p>
-          <p style={{ ...stepPStyle, marginBottom: '20px' }}>
-            The goal is simple: build consistency, improve strength, increase basal metabolic rate, and keep you progressing week after week.
-          </p>
-          <p style={{ ...colHead, marginBottom: '16px' }}>Choose the training style that suits you</p>
-          <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-            {[
-              ['Open Gym Access (Independent Training):', 'Train on your own time with a clear plan to follow. Perfect if you like flexibility and want structure without fixed class times.'],
-              ['Group Classes (Fat Loss + Strength):', 'High-energy sessions designed to burn fat, build lean muscle, and keep you accountable. Ideal if you thrive with community and coaching in the room.'],
-              ['Personal Training (Extra Guidance + Motivation):', 'One-to-one sessions for maximum support, form coaching, and personalised progression. Best if you want faster confidence, tighter technique, and strong accountability.'],
-            ].map(([lead, rest]) => (
-              <li key={lead as string} style={{ ...stepLiStyle, display: 'flex', gap: '8px', alignItems: 'flex-start', padding: '14px 0', borderBottom: '1px solid rgba(79,114,86,0.08)' }}>
-                <span style={{ color: green, fontSize: '16px', lineHeight: 1, flexShrink: 0 }}>&bull;</span>
-                <span><strong>{lead}</strong> {rest}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-      ),
+      bullets: [
+        'Choose between gym access, group fat-loss classes or personal training',
+        'Structured plan matched to your current fitness level and schedule',
+        'Focused on building consistency and increasing your metabolic rate',
+        'Progresses week by week as your strength and confidence improve',
+      ],
     },
     {
-      title: 'Body Contouring Treatments',
+      num: '05',
+      title: 'Body Contouring',
+      tagline: 'Clinical treatments to shape and tighten as the weight comes off.',
       icon: '/wix/87fc13_3d8f7ee53e874397bc85784823b4aaeb~mv2.png',
-      content: (
-        <div>
-          <p style={{ ...stepPStyle, marginBottom: '20px' }}>
-            We use internationally renowned technologies to shape, tighten and refine your results &mdash; never cheap gadgets or outdated machines. Our treatments are not the whole plan, but they are powerful tools when used on top of a solid medical, diet and movement strategy. Every device we use is leading in its category, chosen for safety, research and real-world results.
-            {' '}<Link href="/packages" style={{ color: green, textDecoration: 'underline' }}>View all our treatments &rsaquo;</Link>
-          </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '16px' }}>
-            {[
-              {
-                title: 'Muscle stimulation — Emsculpt NEO',
-                icon: '/wix/87fc13_3d8f7ee53e874397bc85784823b4aaeb~mv2.png',
-                desc: 'Emsculpt NEO uses high-intensity electromagnetic pulses to contract your muscles thousands of times in a session, stimulating the effect of 20,000 sit-ups in one 30 minute session.',
-                uses: [
-                  'Build and tone muscle in areas like abdomen and glutes',
-                  'Support posture and core strength as you lose weight',
-                  'Refine shape after you start dropping kilos',
-                ],
-                note: 'You stay dressed, lie down, and feel strong, deep contractions while our team monitors you.',
-              },
-              {
-                title: 'Fat freezing — CoolSculpting',
-                icon: '/wix/87fc13_d170f070d1d64560b77dd6ce085f4221~mv2.png',
-                desc: 'CoolSculpting is the market leading fat freezing technology that targets stubborn pockets of fat that do not respond to diet and exercise. It cools fat cells in a controlled way so your body can gradually clear them over time.',
-                uses: [
-                  'Target areas like lower belly, flanks, bra fat or thighs',
-                  'Help contour the body after your weight starts to come down',
-                  'Support results without surgery or downtime',
-                ],
-                note: 'Every treatment plan is based on your medical assessment and body goals, not a "one area fits all" offer.',
-              },
-              {
-                title: 'Lymphatic drainage',
-                icon: '/wix/87fc13_3933ed261bfe433cbd96167c588de803~mv2.png',
-                desc: 'We offer lymphatic drainage using compressive microvibration technology and specialised massage.',
-                uses: [
-                  'Support circulation and fluid drainage',
-                  'Help with that "puffy, heavy" feeling some women experience in the legs or abdomen',
-                  'Complement fat loss and skin tightening treatments',
-                ],
-                note: '',
-              },
-              {
-                title: 'Skin tightening — VelaShape',
-                icon: '/wix/87fc13_64873b0f01a348d6ac5b28470e897b18~mv2.png',
-                desc: 'VelaShape combines radiofrequency, infrared light, gentle vacuum and massage to heat the deeper layers of the skin and stimulate collagen.',
-                uses: [
-                  'Improve skin texture and mild laxity as the body changes',
-                  'Smooth the look of areas that feel softer or "looser" after weight loss',
-                  'Support circulation and the appearance of cellulite-prone zones',
-                ],
-                note: 'It feels like a warm, deep massage rather than a harsh, painful treatment.',
-              },
-            ].map((t) => (
-              <div key={t.title} style={{ background: '#F2F6EF', borderRadius: '12px', padding: '20px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '12px' }}>
-                  <Image src={t.icon} alt="" role="presentation" width={40} height={40} style={{ height: '40px', width: 'auto', objectFit: 'contain' }} loading="lazy" />
-                  <p style={{ ...colHead, fontSize: '12px' }}>{t.title}</p>
-                </div>
-                <p style={{ ...stepPStyle, fontSize: '13px', marginBottom: '10px' }}>{t.desc}</p>
-                <p style={{ ...colHead, fontSize: '11px', marginBottom: '6px' }}>We use it to:</p>
-                <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 8px' }}>
-                  {t.uses.map((u) => (
-                    <li key={u} style={{ ...stepLiStyle, fontSize: '13px', display: 'flex', gap: '6px', alignItems: 'flex-start', marginBottom: '4px' }}>
-                      <span style={{ color: green, fontSize: '14px', lineHeight: 1 }}>&bull;</span>
-                      <span>{u}</span>
-                    </li>
-                  ))}
-                </ul>
-                {t.note && <p style={{ ...stepPStyle, fontSize: '13px', fontStyle: 'italic' }}>{t.note}</p>}
-              </div>
-            ))}
-          </div>
-        </div>
-      ),
+      bullets: [
+        'Emsculpt NEO: equivalent of 20,000 muscle contractions per 30-minute session',
+        'CoolSculpting: targets stubborn fat pockets that diet alone cannot shift',
+        'VelaShape: radiofrequency and infrared light to firm skin as you slim down',
+        'Lymphatic drainage to reduce puffiness and support circulation',
+      ],
     },
   ];
 
+  const step = steps[active];
+
   return (
-    <section aria-labelledby="program-heading" style={{ background: '#FAFAF7' }}>
+    <section aria-labelledby="program-heading" style={{ background: '#FAFAF7', padding: '0 0 96px' }}>
       {/* Section header */}
-      <div style={{ padding: '80px 24px 48px', textAlign: 'center' }}>
+      <div style={{ padding: '80px 24px 56px', textAlign: 'center' }}>
         <p style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
           How our doctor-led weight loss programme works
         </p>
-        <div style={{ width: '64px', height: '1px', backgroundColor: '#cdd8c8', margin: '0 auto 20px' }} />
-        <h2 id="program-heading" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+        <div style={{ width: '48px', height: '1px', backgroundColor: '#cdd8c8', margin: '0 auto 20px' }} />
+        <h2
+          id="program-heading"
+          style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(20px,3vw,25px)', textTransform: 'uppercase', lineHeight: 1.4 }}
+        >
           Five Steps to Your Transformation
         </h2>
       </div>
 
-      {/* Step progress bar */}
-      <div style={{ position: 'sticky', top: 0, zIndex: 10, background: 'rgba(250,250,247,0.95)', backdropFilter: 'blur(8px)', borderBottom: '1px solid rgba(79,114,86,0.12)', padding: '0 24px' }}>
-        <div style={{ maxWidth: '960px', margin: '0 auto', display: 'flex' }}>
-          {steps.map((s, i) => (
-            <button
-              key={s.title}
-              onClick={() => stepRefs.current[i]?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-              style={{
-                flex: 1, padding: '14px 8px', textAlign: 'center',
-                fontFamily: wideFont, fontSize: '11px', letterSpacing: '1.5px', textTransform: 'uppercase',
-                color: activeStep === i ? green : taupe,
-                borderBottom: activeStep === i ? `2px solid ${green}` : '2px solid transparent',
-                background: 'none', cursor: 'pointer', transition: 'color 0.3s, border-color 0.3s',
-                marginBottom: '-1px',
-              }}
-            >
-              {`0${i + 1}`}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Steps — alternating layout */}
-      {steps.map((step, i) => (
+      {/* Panel */}
+      <div
+        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div
-          key={step.title}
-          ref={(el) => { stepRefs.current[i] = el; }}
+          className="flex flex-col lg:grid overflow-hidden"
           style={{
-            minHeight: '80vh',
-            display: 'flex', alignItems: 'center',
-            borderTop: '1px solid rgba(79,114,86,0.08)',
-            background: i % 2 === 0 ? '#FAFAF7' : '#ffffff',
+            gridTemplateColumns: '240px 1fr',
+            borderRadius: '16px',
+            boxShadow: '0 8px 48px rgba(40,55,44,0.09)',
+            border: '1px solid rgba(79,114,86,0.09)',
           }}
         >
+          {/* ── Left nav (horizontal scroll on mobile, vertical list on desktop) ── */}
           <div
-            className="max-w-6xl mx-auto w-full"
-            style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '72px', alignItems: 'center', padding: '80px 24px' }}
+            className="flex flex-row overflow-x-auto lg:flex-col lg:overflow-x-visible"
+            style={{ background: '#F2F6EF', borderBottom: '1px solid rgba(79,114,86,0.08)' }}
           >
-            {/* Step identity (alternates sides) */}
-            <div style={{ order: i % 2 === 0 ? 0 : 1, textAlign: 'center' }}>
-              <span style={{
-                display: 'block', fontFamily: headingFont,
-                fontSize: 'clamp(80px,12vw,140px)', fontWeight: 400,
-                color: 'rgba(79,114,86,0.07)', lineHeight: 1, marginBottom: '-20px',
-              }}>
-                {String(i + 1).padStart(2, '0')}
-              </span>
-              <Image
-                src={step.icon}
-                alt=""
-                role="presentation"
-                width={80} height={80}
-                style={{ height: '80px', width: 'auto', objectFit: 'contain', margin: '0 auto 20px' }}
-                loading="lazy"
-              />
-              <h3 style={{ color: green, fontFamily: headingFont, fontSize: '22px', fontWeight: 400, textTransform: 'uppercase', lineHeight: 1.3 }}>
-                {step.title}
-              </h3>
-            </div>
+            {steps.map((s, i) => (
+              <button
+                key={s.num}
+                onClick={() => setActive(i)}
+                className="flex-shrink-0 lg:flex-shrink lg:w-full"
+                style={{
+                  padding: '18px 20px',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  alignItems: 'flex-start',
+                  gap: '4px',
+                  background: active === i ? 'rgba(79,114,86,0.06)' : 'none',
+                  cursor: 'pointer',
+                  borderLeft: 'none',
+                  borderBottom: active === i ? `2px solid ${green}` : '2px solid transparent',
+                  transition: 'background 0.2s, border-color 0.2s',
+                  textAlign: 'left',
+                  minWidth: '110px',
+                }}
+              >
+                <span
+                  style={{
+                    fontFamily: headingFont,
+                    fontSize: '13px',
+                    color: active === i ? green : 'rgba(79,114,86,0.28)',
+                    transition: 'color 0.2s',
+                  }}
+                >
+                  {s.num}
+                </span>
+                <span
+                  style={{
+                    fontFamily: wideFont,
+                    fontSize: '9px',
+                    fontWeight: 700,
+                    letterSpacing: '1.5px',
+                    textTransform: 'uppercase',
+                    color: active === i ? green : taupe,
+                    lineHeight: 1.4,
+                    transition: 'color 0.2s',
+                    whiteSpace: 'nowrap',
+                  }}
+                >
+                  {s.title}
+                </span>
+              </button>
+            ))}
+          </div>
 
-            {/* Step content */}
-            <div style={{ order: i % 2 === 0 ? 1 : 0 }}>
-              {step.content}
+          {/* ── Right: active step content ── */}
+          <div
+            style={{
+              background: '#ffffff',
+              padding: 'clamp(32px,5vw,56px) clamp(28px,5vw,56px)',
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              position: 'relative',
+              overflow: 'hidden',
+              minHeight: '400px',
+            }}
+          >
+            {/* Ghost step number */}
+            <span
+              aria-hidden
+              style={{
+                position: 'absolute',
+                right: '-8px',
+                bottom: '-20px',
+                fontFamily: headingFont,
+                fontSize: 'clamp(90px,14vw,140px)',
+                color: 'rgba(79,114,86,0.05)',
+                lineHeight: 1,
+                userSelect: 'none',
+                pointerEvents: 'none',
+              }}
+            >
+              {step.num}
+            </span>
+
+            {/* Step label */}
+            <p style={{ color: taupe, fontFamily: wideFont, fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '10px', position: 'relative' }}>
+              Step {step.num}
+            </p>
+
+            {/* Step title */}
+            <h3
+              style={{
+                color: green,
+                fontFamily: headingFont,
+                fontSize: 'clamp(17px,2.2vw,21px)',
+                fontWeight: 400,
+                textTransform: 'uppercase',
+                lineHeight: 1.3,
+                marginBottom: '10px',
+                position: 'relative',
+              }}
+            >
+              {step.title}
+            </h3>
+
+            {/* Tagline */}
+            <p
+              style={{
+                color: taupe,
+                fontFamily: bodyFont,
+                fontSize: '14px',
+                lineHeight: 1.65,
+                marginBottom: '28px',
+                maxWidth: '440px',
+                position: 'relative',
+              }}
+            >
+              {step.tagline}
+            </p>
+
+            {/* Bullets */}
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', position: 'relative' }}>
+              {step.bullets.map((b, i) => (
+                <li
+                  key={b}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'flex-start',
+                    gap: '14px',
+                    padding: '11px 0',
+                    borderBottom: i < step.bullets.length - 1 ? '1px solid rgba(79,114,86,0.07)' : 'none',
+                  }}
+                >
+                  <svg aria-hidden width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                    <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                    <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  <span style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.65 }}>{b}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* CTA */}
+            <div style={{ position: 'relative' }}>
+              <CTAButton label="Get Your Free Body Analysis" />
             </div>
           </div>
         </div>
-      ))}
+      </div>
     </section>
   );
 }
