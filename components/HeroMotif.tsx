@@ -3,15 +3,14 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * HeroMotif — "Drifting Motes".
+ * HeroMotif — "Constellation".
  *
- * A soft field of sage bokeh dots at varying depths that slowly float upward on
- * a gentle current and drift away from the cursor (a quiet parallax repulsion).
- * Concentrated in the lower hero and fading up so they stay clear of the copy.
- * Soft-edged (a pre-rendered radial sprite) for a luminous, luxurious feel —
- * evokes lightness and air, never busy.
+ * A soft network of sage dots that slowly float upward and connect to their
+ * near neighbours with fading lines — a living lattice (a DNA-like web) that
+ * drifts away from the cursor, the links stretching and snapping as the dots
+ * move. Concentrated in the lower hero and fading up so it clears the copy.
  *
- * Built on a 2D canvas with a cached sprite (cheap, soft, crisp); direct
+ * Built on a 2D canvas with a cached radial sprite for the soft dots; direct
  * screen-space mouse interaction (no shader / WebGL).
  *
  * Guards: reduced-motion → one static frame; DPR-aware; paused offscreen / tab
@@ -42,22 +41,25 @@ export default function HeroMotif() {
       return s - Math.floor(s);
     };
 
-    // ── soft dot sprite (radial sage → transparent) ──────────────────────
-    const SPRITE = 64;
+    // soft dot sprite (radial sage → transparent)
+    const SP = 64;
     const sprite = document.createElement('canvas');
-    sprite.width = sprite.height = SPRITE;
+    sprite.width = sprite.height = SP;
     const sctx = sprite.getContext('2d')!;
-    const grad = sctx.createRadialGradient(SPRITE / 2, SPRITE / 2, 0, SPRITE / 2, SPRITE / 2, SPRITE / 2);
+    const grad = sctx.createRadialGradient(SP / 2, SP / 2, 0, SP / 2, SP / 2, SP / 2);
     grad.addColorStop(0.0, 'rgba(142, 176, 147, 1)');
-    grad.addColorStop(0.45, 'rgba(142, 176, 147, 0.55)');
+    grad.addColorStop(0.45, 'rgba(142, 176, 147, 0.5)');
     grad.addColorStop(1.0, 'rgba(142, 176, 147, 0)');
     sctx.fillStyle = grad;
-    sctx.fillRect(0, 0, SPRITE, SPRITE);
+    sctx.fillRect(0, 0, SP, SP);
 
     // ── tuning ───────────────────────────────────────────────────────────
-    const N = coarse ? 60 : 120;
-    const REPEL_R = 150;     // px radius the cursor pushes dots
-    const REPEL_STR = 46;    // px max push
+    const N = coarse ? 80 : 150;
+    const LINK_R = 122;        // px — connect dots closer than this
+    const LINK_ALPHA = 0.17;   // peak line opacity
+    const REPEL_R = 150;
+    const REPEL_STR = 46;
+    const SAGE = '142, 176, 147';
 
     let W = 0, H = 0, dpr = 1;
     const resize = () => {
@@ -74,14 +76,14 @@ export default function HeroMotif() {
     const build = () => {
       dots.length = 0;
       for (let i = 0; i < N; i++) {
-        const d = hash(i + 3);                 // depth 0..1
+        const d = hash(i + 3);
         dots.push({
           bx: hash(i + 1) * W,
           by: hash(i + 2) * H,
-          r: 2 + d * 5.5,                       // closer = bigger
-          a: 0.10 + d * 0.20,                   // closer = brighter
-          vy: -(3 + d * 8),                     // rise (px/sec); closer = faster
-          sway: 6 + hash(i + 5) * 14,           // horizontal sway amplitude
+          r: 2.2 + d * 5.5,
+          a: 0.18 + d * 0.26,          // a touch more visible
+          vy: -(3 + d * 8),
+          sway: 6 + hash(i + 5) * 14,
           ph: hash(i + 7) * 6.283,
           ox: 0, oy: 0,
         });
@@ -105,6 +107,9 @@ export default function HeroMotif() {
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });
     io.observe(host);
 
+    // per-frame computed positions
+    const X = new Float32Array(N), Y = new Float32Array(N), VF = new Float32Array(N);
+
     let last = 0;
     const draw = (now: number) => {
       const dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016;
@@ -115,16 +120,15 @@ export default function HeroMotif() {
       else { m.x += (m.tx - m.x) * 0.12; m.y += (m.ty - m.y) * 0.12; }
 
       const t = now * 0.001;
-      for (const dot of dots) {
-        // slow upward drift + gentle horizontal sway; wrap around
+
+      // 1) update + resolve positions
+      for (let i = 0; i < N; i++) {
+        const dot = dots[i];
         dot.by += dot.vy * dt;
         if (dot.by < -10) { dot.by = H + 10; dot.bx = hash(dot.ph * 1000 + now * 0.0001) * W; }
-        const swayX = Math.sin(t * 0.25 + dot.ph) * dot.sway;
-
-        let x = dot.bx + swayX;
+        let x = dot.bx + Math.sin(t * 0.25 + dot.ph) * dot.sway;
         const y = dot.by;
 
-        // cursor repulsion (eased so it returns smoothly)
         let txo = 0, tyo = 0;
         if (m.x > -900) {
           const dx = x - m.x, dy = y - m.y;
@@ -136,16 +140,41 @@ export default function HeroMotif() {
         }
         dot.ox += (txo - dot.ox) * 0.12;
         dot.oy += (tyo - dot.oy) * 0.12;
-        x += dot.ox;
-        const yy = y + dot.oy;
 
-        // fade up so dots stay clear of the headline/copy
-        const vFade = Math.max(0, Math.min(1, (y / H - 0.22) / 0.5));
-        const alpha = dot.a * vFade;
-        if (alpha <= 0.002) continue;
+        X[i] = x + dot.ox;
+        Y[i] = y + dot.oy;
+        VF[i] = Math.max(0, Math.min(1, (y / H - 0.22) / 0.5)); // fade up to clear copy
+      }
 
+      // 2) links between near neighbours (drawn under the dots)
+      ctx.lineWidth = 0.9;
+      ctx.strokeStyle = `rgb(${SAGE})`;
+      for (let i = 0; i < N; i++) {
+        if (VF[i] <= 0.01) continue;
+        const xi = X[i], yi = Y[i];
+        for (let j = i + 1; j < N; j++) {
+          if (VF[j] <= 0.01) continue;
+          const dx = xi - X[j], dy = yi - Y[j];
+          if (dx > LINK_R || dx < -LINK_R || dy > LINK_R || dy < -LINK_R) continue;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist >= LINK_R) continue;
+          const a = (1 - dist / LINK_R) * LINK_ALPHA * Math.min(VF[i], VF[j]);
+          if (a <= 0.004) continue;
+          ctx.globalAlpha = a;
+          ctx.beginPath();
+          ctx.moveTo(xi, yi);
+          ctx.lineTo(X[j], Y[j]);
+          ctx.stroke();
+        }
+      }
+
+      // 3) dots on top
+      for (let i = 0; i < N; i++) {
+        const alpha = dots[i].a * VF[i];
+        if (alpha <= 0.003) continue;
+        const r = dots[i].r;
         ctx.globalAlpha = alpha;
-        ctx.drawImage(sprite, x - dot.r, yy - dot.r, dot.r * 2, dot.r * 2);
+        ctx.drawImage(sprite, X[i] - r, Y[i] - r, r * 2, r * 2);
       }
       ctx.globalAlpha = 1;
     };
