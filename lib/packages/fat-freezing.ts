@@ -19,7 +19,7 @@ export const fatFreezing: PackageContent = {
     'Complimentary Parking Validation',
   ],
   heroTotalValue: '€550',
-  heroTodayPrice: '€199 ONLY',
+  heroTodayPrice: '€199 for 3 sessions',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
     '* Includes 3 appointments of fat freezing sessions, scheduled based on your clinical plan; additional areas or appointments charged at extra.',

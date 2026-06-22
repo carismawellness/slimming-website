@@ -19,7 +19,7 @@ export const fatDissolving: PackageContent = {
     'Complimentary Parking Validation',
   ],
   heroTotalValue: '€340',
-  heroTodayPrice: '€149 ONLY',
+  heroTodayPrice: '€149 for 1 session',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
     '* Includes 3 appointments of fat dissolving sessions, scheduled based on your clinical plan; additional areas or appointments charged at extra.',

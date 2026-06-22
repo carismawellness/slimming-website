@@ -975,15 +975,6 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
                         <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                       </div>
-                      {(c.ptImage2 || c.ptImage3) && (
-                        <div style={{ display: 'flex', gap: 18 }}>
-                          {[c.ptImage2, c.ptImage3].filter(Boolean).map((img) => (
-                            <div key={img} style={{ flex: '1 1 0', position: 'relative', aspectRatio: '1 / 1', borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 22px rgba(0,0,0,0.08)' }}>
-                              <Image src={img!} alt="" fill sizes="20vw" style={{ objectFit: 'cover' }} />
-                            </div>
-                          ))}
-                        </div>
-                      )}
                     </div>
                   </div>
                 </>
@@ -994,11 +985,6 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
                       <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                     </div>
-                    {c.ptImage2 && (
-                      <div style={{ position: 'relative', width: c.ptImage2Width ?? '100%', aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: 16, boxShadow: '0 8px 22px rgba(0,0,0,0.08)' }}>
-                        <Image src={c.ptImage2} alt="" fill sizes="(max-width: 860px) 100vw, 35vw" style={{ objectFit: 'cover' }} />
-                      </div>
-                    )}
                   </div>
                   <div>
                     {c.ptTitleStyle === 'serif' ? (

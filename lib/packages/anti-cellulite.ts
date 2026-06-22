@@ -19,7 +19,7 @@ export const antiCellulite: PackageContent = {
     'Complimentary Parking Validation',
   ],
   heroTotalValue: '€625',
-  heroTodayPrice: '€199 ONLY',
+  heroTodayPrice: '€199 for 4 sessions',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
     '* Includes four sessions to be followed over the course of 2-4 weeks',

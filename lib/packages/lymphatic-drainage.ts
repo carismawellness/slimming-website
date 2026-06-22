@@ -19,7 +19,7 @@ export const lymphaticDrainage: PackageContent = {
     'Complimentary Parking Validation',
   ],
   heroTotalValue: '€665',
-  heroTodayPrice: '€299 ONLY',
+  heroTodayPrice: '€299 for 4 sessions',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
     '* Eligibility and treatment recommendations depend on your health history and individual needs. A clear plan will always be discussed during your consultation before starting. Lymphatic drainage is a supportive wellness therapy and may not be suitable for certain medical conditions. Treatment is provided following professional assessment by our medical team.',
