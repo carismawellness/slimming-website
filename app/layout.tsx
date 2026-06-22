@@ -30,13 +30,13 @@ export const metadata: Metadata = {
     siteName: 'Carisma Slimming',
     title: 'Carisma Slimming | #1 Voted Slimming Clinic in Malta',
     description: "Malta's most comprehensive slimming program, led by medically qualified doctors.",
-    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Carisma Slimming Malta' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Carisma Slimming — Lose up to 1kg per week, guaranteed' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Carisma Slimming | #1 Voted Slimming Clinic in Malta',
     description: "Malta's most comprehensive slimming program, led by medically qualified doctors.",
-    images: [{ url: '/background.avif', alt: 'Carisma Slimming Malta' }],
+    images: [{ url: '/og-image.png', alt: 'Carisma Slimming — Lose up to 1kg per week, guaranteed' }],
   },
 };
 
