@@ -116,8 +116,8 @@ export default function BlogPage() {
           cursor: pointer;
         }
         .blog-cta:hover {
-          background: rgba(255,255,255,0.12) !important;
-          border-color: rgba(255,255,255,0.85) !important;
+          background: rgba(255,255,255,0.1) !important;
+          border-color: rgba(255,255,255,0.7) !important;
         }
         .blog-read-link:hover {
           color: ${FOREST} !important;
@@ -128,8 +128,11 @@ export default function BlogPage() {
           .blog-cta      { transition: none !important; }
         }
 
-        /* ── Mobile breakpoints ──────────────────────────────────── */
+        /* ── Hero split responsive ───────────────────────────────── */
         @media (max-width: 900px) {
+          .blog-hero-split { flex-direction: column !important; height: auto !important; min-height: 0 !important; }
+          .blog-hero-left  { width: 100% !important; padding: 88px 28px 44px !important; }
+          .blog-hero-right { height: 46vw !important; min-height: 260px !important; }
           .editorial-split { flex-direction: column !important; }
           .editorial-split > * { width: 100% !important; }
           .editorial-row2  { grid-template-columns: 1fr 1fr !important; }
@@ -137,169 +140,134 @@ export default function BlogPage() {
 
         @media (max-width: 768px) {
           .blog-hero-title {
-            font-size: clamp(20px, 5.5vw, 34px) !important;
+            font-size: clamp(18px, 5vw, 28px) !important;
           }
-          .blog-hero-content {
-            padding: 0 20px 40px !important;
-          }
-          .blog-hero-label {
-            top: 88px !important;
-            left: 20px !important;
-          }
+          .blog-hero-left  { padding: 84px 24px 40px !important; }
           .editorial-row2  { grid-template-columns: 1fr !important; }
           .section-pad     { padding: 0 20px !important; }
           .tail-grid       { grid-template-columns: 1fr !important; }
         }
-
-        @media (max-width: 480px) {
-          .blog-hero-title {
-            font-size: clamp(18px, 6.5vw, 28px) !important;
-          }
-        }
       `}</style>
 
-      <div style={{ backgroundColor: CREAM, minHeight: '100vh', backgroundImage: 'linear-gradient(to bottom, rgba(2,28,15,0.055) 0%, transparent 200px)' }}>
+      <div style={{ backgroundColor: CREAM, minHeight: '100vh' }}>
 
         {/* ════════════════════════════════════════════════════════════
-            1. FEATURED HERO — posts[0]
+            1. FEATURED HERO — split editorial layout
+               Left: brand-controlled forest panel (always beautiful)
+               Right: featured post image (contained, not full-bleed)
         ════════════════════════════════════════════════════════════ */}
         {hero && (
           <section
             aria-label="Featured article"
+            className="blog-hero-split"
             style={{
-              position: 'relative',
+              display: 'flex',
               width: '100%',
-              height: '76vh',
-              minHeight: 520,
+              height: '82vh',
+              minHeight: 560,
               overflow: 'hidden',
-              background: FOREST,
+              marginTop: 80, /* clear fixed header */
             }}
           >
-            {/* Background image */}
-            <img
-              src={hero.cover_image_url}
-              alt={hero.title}
-              className="blog-card-img"
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                opacity: 0.72,
-                transition: 'none',
-              }}
-              fetchPriority="high"
-              loading="eager"
-            />
-
-            {/* Gradient overlay */}
+            {/* ── LEFT PANEL: editorial brand column ── */}
             <div
-              aria-hidden="true"
+              className="blog-hero-left"
               style={{
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(to top, rgba(2,28,15,0.82) 0%, rgba(2,28,15,0.35) 40%, transparent 65%)',
+                width: '52%',
+                flexShrink: 0,
+                background: FOREST,
+                backgroundImage: `
+                  radial-gradient(ellipse at 0% 0%, rgba(79,114,86,0.28) 0%, transparent 55%),
+                  radial-gradient(ellipse at 100% 100%, rgba(2,18,10,0.45) 0%, transparent 55%)
+                `,
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                padding: '56px 56px 64px',
+                position: 'relative',
               }}
-            />
-
-            {/* Top-left label — sits below fixed header (~80px) */}
-            <div
-              className="blog-hero-label"
-              style={{
-                position: 'absolute',
-                top: 96,
-                left: 40,
-                color: DECO,
+            >
+              {/* Masthead */}
+              <p style={{
                 fontFamily: WIDE,
-                fontSize: 11,
+                fontSize: 10,
+                letterSpacing: '5px',
+                textTransform: 'uppercase',
+                color: DECO,
+                margin: '0 0 20px',
+                opacity: 0.8,
+              }}>
+                Carisma Slimming · The Blog
+              </p>
+
+              {/* Decorative rule */}
+              <div style={{ width: 40, height: 1, background: DECO, opacity: 0.35, marginBottom: 28 }} />
+
+              {/* "Featured" label */}
+              <p style={{
+                fontFamily: WIDE,
+                fontSize: 10,
                 letterSpacing: '4px',
                 textTransform: 'uppercase',
-              }}
-            >
-              Carisma Slimming · The Blog
-            </div>
-
-            {/* Bottom content */}
-            <div
-              className="blog-hero-content"
-              style={{
-                position: 'absolute',
-                bottom: 0,
-                left: 0,
-                right: 0,
-                padding: '0 40px 56px',
-                maxWidth: 1200,
-                margin: '0 auto',
-              }}
-            >
-              {/* Featured badge — refined outline style */}
-              <div
-                style={{
-                  display: 'inline-block',
-                  background: 'transparent',
-                  color: DECO,
-                  fontFamily: WIDE,
-                  fontSize: 10,
-                  letterSpacing: '4px',
-                  textTransform: 'uppercase',
-                  marginBottom: 18,
-                  paddingBottom: 6,
-                  borderBottom: `1px solid rgba(142,176,147,0.5)`,
-                }}
-              >
+                color: 'rgba(255,255,255,0.4)',
+                margin: '0 0 14px',
+              }}>
                 Featured Article
-              </div>
+              </p>
 
-              {/* Title */}
+              {/* Article title — elegant and proportional */}
               <h1
                 className="blog-hero-title"
                 style={{
                   fontFamily: SERIF,
                   textTransform: 'uppercase',
-                  fontSize: 'clamp(24px, 3.6vw, 48px)',
+                  fontSize: 'clamp(20px, 2.4vw, 38px)',
                   color: '#fff',
-                  lineHeight: 1.18,
+                  lineHeight: 1.22,
                   letterSpacing: '0.04em',
-                  margin: '0 0 20px',
-                  maxWidth: 780,
+                  margin: '0 0 22px',
+                  maxWidth: 480,
                 }}
               >
                 {hero.title}
               </h1>
 
-              {/* Meta row */}
-              <div
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 16,
-                  color: 'rgba(255,255,255,0.7)',
+              {/* Excerpt */}
+              {hero.excerpt && (
+                <p style={{
                   fontFamily: BODY,
                   fontSize: 14,
-                  marginBottom: 32,
-                  flexWrap: 'wrap',
-                }}
-              >
-                <time dateTime={hero.published_date}>
-                  {formatLong(hero.published_date)}
-                </time>
-                <span
-                  aria-hidden="true"
-                  style={{
-                    width: 4,
-                    height: 4,
-                    borderRadius: '50%',
-                    background: DECO,
-                    display: 'inline-block',
-                    flexShrink: 0,
-                  }}
-                />
+                  color: 'rgba(255,255,255,0.55)',
+                  lineHeight: 1.65,
+                  margin: '0 0 28px',
+                  maxWidth: 420,
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                }}>
+                  {hero.excerpt}
+                </p>
+              )}
+
+              {/* Meta */}
+              <div style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 10,
+                color: 'rgba(255,255,255,0.38)',
+                fontFamily: WIDE,
+                fontSize: 10,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+                marginBottom: 32,
+              }}>
+                <time dateTime={hero.published_date}>{formatLong(hero.published_date)}</time>
+                <span aria-hidden="true">·</span>
                 <span>{hero.minutes_to_read} min read</span>
               </div>
 
-              {/* Read CTA */}
+              {/* Ghost CTA */}
               <a
                 href={`/blog/${hero.slug}`}
                 className="blog-cta"
@@ -309,26 +277,51 @@ export default function BlogPage() {
                   gap: 10,
                   background: 'transparent',
                   color: '#fff',
-                  border: '1px solid rgba(255,255,255,0.55)',
+                  border: '1px solid rgba(255,255,255,0.38)',
                   fontFamily: WIDE,
-                  fontSize: 11,
+                  fontSize: 10,
                   letterSpacing: '3px',
                   textTransform: 'uppercase',
-                  padding: '12px 24px',
+                  padding: '11px 22px',
                   borderRadius: 2,
                   textDecoration: 'none',
                   transition: 'background 200ms ease-out, border-color 200ms ease-out',
                   cursor: 'pointer',
+                  width: 'fit-content',
                 }}
               >
                 Read Article <span aria-hidden="true">→</span>
               </a>
             </div>
+
+            {/* ── RIGHT PANEL: featured image (contained) ── */}
+            <div
+              className="blog-hero-right"
+              style={{
+                flex: 1,
+                overflow: 'hidden',
+                position: 'relative',
+              }}
+            >
+              <img
+                src={hero.cover_image_url}
+                alt={hero.title}
+                className="blog-card-img"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'none' }}
+                fetchPriority="high"
+                loading="eager"
+              />
+              {/* Left-edge depth shadow to blend with panel */}
+              <div aria-hidden="true" style={{
+                position: 'absolute', inset: 0,
+                background: 'linear-gradient(to right, rgba(2,28,15,0.22) 0%, transparent 25%)',
+              }} />
+            </div>
           </section>
         )}
 
-        {/* Color bridge — fades from dark hero to cream */}
-        <div aria-hidden="true" style={{ height: 56, background: 'linear-gradient(to bottom, rgba(2,28,15,0.08) 0%, transparent 100%)', marginTop: -2, pointerEvents: 'none' }} />
+        {/* Color bridge — fades from forest to cream */}
+        <div aria-hidden="true" style={{ height: 48, background: 'linear-gradient(to bottom, rgba(2,28,15,0.06) 0%, transparent 100%)', pointerEvents: 'none' }} />
 
         {/* ════════════════════════════════════════════════════════════
             2. EDITORIAL SECTION HEADER
