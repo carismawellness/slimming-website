@@ -138,7 +138,11 @@ export default function GLP1Page() {
             Medical weight loss is a doctor-supervised approach to losing weight that goes beyond diets and willpower. At our weight loss clinic in Malta, it means a full medical assessment, personalised nutrition planning, body composition monitoring, and, where clinically appropriate, GLP-1 prescription support to regulate appetite and reduce cravings.
           </p>
           <p className="mb-12" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
-            Our doctors prescribe Ozempic (semaglutide) and Mounjaro (tirzepatide) for weight loss as part of a structured programme, not as a standalone prescription. This approach works because it treats the biological, behavioural, and lifestyle factors that make losing weight difficult.
+            Our doctors prescribe Ozempic (semaglutide) and Mounjaro (tirzepatide) for weight loss as part of a structured programme, not as a standalone prescription. This approach works because it treats the biological, behavioural, and lifestyle factors that make losing weight difficult. See how GLP-1 fits into our{' '}
+            <Link href="/weight-loss" style={{ color: '#4f7256', textDecoration: 'underline' }}>
+              full Medical Weight Loss Programme
+            </Link>
+            .
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
@@ -171,7 +175,11 @@ export default function GLP1Page() {
           </div>
 
           <p className="mt-12 text-center mx-auto" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, maxWidth: '720px' }}>
-            That is why our program in Malta combines Ozempic or Mounjaro support (if clinically appropriate) with nutrition structure, strength training guidance, weekly tracking, and a defined maintenance plan.
+            That is why our program in Malta combines Ozempic or Mounjaro support (if clinically appropriate) with nutrition structure, strength training guidance, weekly tracking, and a defined maintenance plan. Explore our{' '}
+            <Link href="/weight-loss" style={{ color: '#4f7256', textDecoration: 'underline' }}>
+              Medical Weight Loss Programme
+            </Link>{' '}
+            to see the full picture.
           </p>
         </div>
       </section>
@@ -316,15 +324,13 @@ export default function GLP1Page() {
             </div>
           </div>
           <div className="flex flex-wrap gap-3 justify-center mt-14">
-            <a
-              href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5084222&oiid=sv%3A26105577&share=true&pId=2708191"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/consultation"
               className="cta-glow inline-block text-center font-bold text-white"
               style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1.4px', textTransform: 'uppercase', padding: '13px 24px' }}
             >
               book your medical consultation
-            </a>
+            </Link>
           </div>
         </div>
       </section>
@@ -346,15 +352,15 @@ export default function GLP1Page() {
           </p>
           <div className="card lg-raised mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)' }}>
             <ul className="space-y-6">
-              {[
+              {([
                 'Doctor-led medical weight loss: full check, body scan, and blood work',
                 'One integrated program: medical support, nutrition, movement, and treatments together',
                 'Real gym included: Technogym facility, semi-private classes, and personal training',
                 'High-touch support: weekly check-ins, progress reports, and WhatsApp follow-up',
-                'Evidence-based devices: Emsculpt NEO, CoolSculpting, and RF skin tightening',
+                <span key="devices">Evidence-based devices: <Link href="/packages/muscle-stimulation" style={{ color: '#4f7256', textDecoration: 'underline' }}>Emsculpt NEO</Link>, <Link href="/packages/fat-freezing" style={{ color: '#4f7256', textDecoration: 'underline' }}>CoolSculpting</Link>, and <Link href="/packages/skin-tightening" style={{ color: '#4f7256', textDecoration: 'underline' }}>RF skin tightening</Link></span>,
                 'Selective entry and measurable weight loss results guaranteed',
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-4">
+              ]).map((t, i) => (
+                <li key={i} className="flex items-start gap-4">
                   <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '29px', height: '28px', objectFit: 'contain', flexShrink: 0 }} />
                   {/* On the #FCFCFA->#D8E7D2 card gradient; #5c5346 clears AA (>=5.85:1) at the darkest stop. */}
                   <span style={{ color: '#5c5346', fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
@@ -653,16 +659,18 @@ export default function GLP1Page() {
                 <div>
                   <h3 className="mb-5" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '1px', textTransform: 'uppercase' }}>Why Malta Chooses Carisma</h3>
                   <ul className="space-y-3">
-                    {[
-                      "Created by the team behind Malta's leading spa and medical aesthetics centres",
-                      'Doctor-led Ozempic and Mounjaro programs, not a beauty salon "diet program"',
-                      'All-in-one approach: medical assessment, nutrition, movement, and treatments',
-                      'High-touch support with weekly check-ins and WhatsApp coaching',
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                        <span style={{ color: '#4f7256' }}>&bull;</span><span>{item}</span>
-                      </li>
-                    ))}
+                    <li className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#4f7256' }}>&bull;</span><span>Created by the team behind Malta&apos;s leading spa and medical aesthetics centres</span>
+                    </li>
+                    <li className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#4f7256' }}>&bull;</span><span>Doctor-led Ozempic and Mounjaro programs, not a beauty salon &ldquo;diet program&rdquo;</span>
+                    </li>
+                    <li className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#4f7256' }}>&bull;</span><span>All-in-one approach: medical assessment, nutrition, movement, and{' '}<Link href="/packages" style={{ color: '#4f7256', textDecoration: 'underline' }}>all treatments</Link></span>
+                    </li>
+                    <li className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
+                      <span style={{ color: '#4f7256' }}>&bull;</span><span>High-touch support with weekly check-ins and WhatsApp coaching</span>
+                    </li>
                   </ul>
                 </div>
               </div>
