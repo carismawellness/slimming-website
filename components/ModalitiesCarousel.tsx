@@ -47,6 +47,20 @@ const CARDS = [
     alt: 'Anti-Cellulite modality',
     src: '/wix/87fc13_5dde946fd77046908ec6b65db211836a~mv2.jpg',
   },
+  {
+    title: 'Lymphatic Drainage',
+    desc: 'Gentle, expert-guided compressive microvibration and massage that stimulates the lymphatic system to reduce fluid, support circulation and ease that puffy, heavy feeling.',
+    href: '/packages/lymphatic-drainage',
+    alt: 'Lymphatic Drainage treatment',
+    src: '/wix/87fc13_597101dd5e634161a957161a595de331~mv2.webp',
+  },
+  {
+    title: 'Lipocavitation',
+    desc: 'Advanced low-frequency ultrasound that breaks down fat cell membranes for natural elimination through your lymphatic system. Non-invasive, no surgery, no downtime.',
+    href: '/packages/lipocavitation',
+    alt: 'Lipocavitation fat reduction treatment',
+    src: '/wix/f940f0_3959a9b1203c41b09ca238cd2c75ee35~mv2.webp',
+  },
 ];
 
 const CARD_W = 349;
@@ -146,7 +160,7 @@ export default function ModalitiesCarousel() {
             className="mc-card group flex-shrink-0"
             style={{
               width: `${CARD_W}px`,
-              height: `${CARD_H}px`,
+              minHeight: `${CARD_H}px`,
               borderRadius: '20px',
               overflow: 'hidden',
               scrollSnapAlign: 'start',
@@ -171,7 +185,7 @@ export default function ModalitiesCarousel() {
               <h3 style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontSize: '18px', fontWeight: 400, textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: 1.25, margin: '0 0 10px' }}>
                 {card.title}
               </h3>
-              <p style={{ color: '#595959', fontFamily: 'Roboto, sans-serif', fontSize: '13.5px', lineHeight: 1.6, margin: '0 0 20px', flex: 1, display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
+              <p style={{ color: '#595959', fontFamily: 'Roboto, sans-serif', fontSize: '13.5px', lineHeight: 1.6, margin: '0 0 20px', flex: 1 }}>
                 {card.desc}
               </p>
               <span
