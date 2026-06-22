@@ -223,7 +223,7 @@ export default function ResultsGuarantee() {
             The Carisma Results Commitment
           </h2>
           <p style={{ color: META, fontFamily: ROBOTO, fontSize: 'clamp(16px,1.7vw,19px)', lineHeight: 1.6, margin: '14px auto 0', maxWidth: 520 }}>
-            You keep it. We only accept clients.
+            Lose up to 1kg a week on a doctor-led, medically supervised plan — and we keep your programme going free until you reach your goal.
           </p>
         </div>
 
@@ -283,21 +283,18 @@ export default function ResultsGuarantee() {
         <div className="rg-rise rg-d3" style={{ textAlign: 'center', marginTop: 'clamp(40px,6vw,64px)' }}>
           <Link
             href="/consultation"
-            className="rg-cta"
+            className="cta-glow"
             style={{
               display: 'inline-flex',
               alignItems: 'center',
               gap: 10,
-              padding: '15px 30px',
-              borderRadius: 999,
-              background: FOREST,
+              padding: '15px 36px',
               color: '#fff',
               fontFamily: WIDE,
               fontSize: 13,
               letterSpacing: '0.1em',
               textTransform: 'uppercase',
               textDecoration: 'none',
-              boxShadow: '0 14px 30px -12px rgba(2,76,39,0.5)',
             }}
           >
             Book Your Free Consultation
