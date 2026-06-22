@@ -97,8 +97,7 @@ export default function PageLoader() {
           position: 'fixed',
           inset: 0,
           zIndex: 9999,
-          /* Warm near-black — not green, not white */
-          background: 'radial-gradient(ellipse at 50% 44%, #17140f 0%, #0e0b09 52%, #090807 100%)',
+          background: '#FAFAF8',
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
@@ -119,7 +118,7 @@ export default function PageLoader() {
             width: 480,
             height: 480,
             borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(210,195,168,0.055) 0%, transparent 62%)',
+            background: 'radial-gradient(circle, rgba(2,76,39,0.04) 0%, transparent 62%)',
             animation: 'lxGlow 6s ease-in-out infinite',
             pointerEvents: 'none',
           }}
@@ -137,8 +136,8 @@ export default function PageLoader() {
             pointerEvents: 'none',
           }}
         >
-          <circle cx="160" cy="160" r="146" stroke="rgba(210,195,168,0.06)" strokeWidth="0.6" fill="none" />
-          <circle cx="160" cy="160" r="120" stroke="rgba(210,195,168,0.04)" strokeWidth="0.5" fill="none" />
+          <circle cx="160" cy="160" r="146" stroke="rgba(2,76,39,0.07)" strokeWidth="0.6" fill="none" />
+          <circle cx="160" cy="160" r="120" stroke="rgba(2,76,39,0.04)" strokeWidth="0.5" fill="none" />
         </svg>
 
         {/* ── Rose SVG — warm champagne, no drop-shadow blur ───────────── */}
@@ -157,13 +156,12 @@ export default function PageLoader() {
             style={{ overflow: 'visible' }}
             aria-hidden
           >
-            {/* Subtle soft-light glow behind petals — pure SVG, no raster blur */}
-            <ellipse cx="48" cy="50" rx="38" ry="32" fill="rgba(210,195,168,0.04)" />
+            <ellipse cx="48" cy="50" rx="38" ry="32" fill="rgba(2,76,39,0.04)" />
             {PETAL_PATHS.map((d, i) => (
               <path
                 key={i}
                 d={d}
-                fill="#C9BBA3"
+                fill="#024C27"
                 style={{
                   transformOrigin: '48px 45px',
                   opacity: 0,
@@ -184,7 +182,7 @@ export default function PageLoader() {
                 fontFamily: 'Trajan Pro, "Trajan Pro Regular", Georgia, serif',
                 fontSize: 'clamp(17px, 3vw, 24px)',
                 letterSpacing: '11px',
-                color: '#EDE8DF',
+                color: '#0d180f',
                 textTransform: 'uppercase',
                 opacity: 0,
                 animation: `lxLetter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 65 + 1180}ms both`,
@@ -200,7 +198,7 @@ export default function PageLoader() {
           style={{
             height: 1,
             width: 0,
-            backgroundColor: 'rgba(210,195,168,0.28)',
+            backgroundColor: 'rgba(2,76,39,0.18)',
             margin: '15px 0',
             animation: 'lxDivider 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1680ms both',
           }}
@@ -213,7 +211,7 @@ export default function PageLoader() {
             fontSize: 9,
             letterSpacing: '5px',
             textTransform: 'uppercase',
-            color: 'rgba(210,195,168,0.4)',
+            color: 'rgba(2,76,39,0.45)',
             opacity: 0,
             animation: 'lxLetter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1780ms both',
           }}
@@ -235,11 +233,11 @@ export default function PageLoader() {
           }}
         >
           {/* Track */}
-          <circle cx="32" cy="32" r="28" stroke="rgba(210,195,168,0.07)" strokeWidth="0.7" fill="none" />
+          <circle cx="32" cy="32" r="28" stroke="rgba(2,76,39,0.08)" strokeWidth="0.7" fill="none" />
           {/* Fill arc */}
           <circle
             cx="32" cy="32" r="28"
-            stroke="rgba(210,195,168,0.38)"
+            stroke="rgba(2,76,39,0.35)"
             strokeWidth="0.7"
             fill="none"
             strokeLinecap="round"
@@ -275,7 +273,7 @@ export default function PageLoader() {
               pointerEvents: 'none',
             }}
           >
-            <path d="M0 17 L0 0 L17 0" stroke="rgba(210,195,168,0.16)" strokeWidth="0.8" fill="none" />
+            <path d="M0 17 L0 0 L17 0" stroke="rgba(2,76,39,0.15)" strokeWidth="0.8" fill="none" />
           </svg>
         ))}
 
