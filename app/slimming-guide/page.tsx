@@ -163,59 +163,76 @@ export default function SlimmingGuidePage() {
       {/* Why Diets Fail — editorial redesign */}
       <WhyDietsFail />
 
-      {/* What This Is — calm, elegant statement (replaced a loud band + busy overlapping mockups) */}
+      {/* What This Is — two-column: calm statement + a 3D page render */}
       <section className="bg-white" style={{ padding: 'clamp(64px, 10vw, 110px) 0' }}>
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <Kicker centered rule>WHAT THIS IS</Kicker>
-          <h2
-            className="uppercase"
-            style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px, 3.4vw, 32px)', lineHeight: 1.3, margin: '0 0 14px' }}
-          >
-            A behaviour-based weight loss system, not another diet.
-          </h2>
-          <p
-            className="uppercase"
-            style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2.5px', margin: '0 0 40px' }}
-          >
-            Built to hold — not a quick fix.
-          </p>
-          <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 22px' }}>
-            Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use it.
-            The Carisma Slimming Guide is a behaviour system — built from real clinic practice, designed for the
-            life you actually have. It complements our{' '}
-            <Link href="/weight-loss" style={{ color: GREEN, textDecoration: 'underline' }}>medical weight loss programme</Link>{' '}
-            and{' '}
-            <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>GLP-1 injections</Link>{' '}
-            for those who want clinical support alongside the habit system.
-          </p>
-          <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 44px' }}>
-            The principle it runs on: what you can repeat consistently will always outperform what you can do once
-            brilliantly. Not the perfect week — a structure stable enough to survive the imperfect one.
-          </p>
-
-          {/* elegant centered statement (replaces the bordered pill) */}
-          <div className="mx-auto" style={{ maxWidth: '560px', margin: '0 auto 44px' }}>
-            <div className="mx-auto mb-7" style={{ width: '40px', height: '1px', background: GREEN }} />
-            <p
-              className="uppercase"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.5, letterSpacing: '0.04em' }}
-            >
-              Adherence over perfection. Structure over willpower.
-            </p>
-            <div className="mx-auto mt-7" style={{ width: '40px', height: '1px', background: GREEN }} />
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ gap: 'clamp(32px, 6vw, 72px)' }}>
+            {/* Left — statement */}
+            <div>
+              <Kicker rule>WHAT THIS IS</Kicker>
+              <h2
+                className="uppercase"
+                style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 31px)', lineHeight: 1.3, margin: '0 0 12px' }}
+              >
+                A behaviour-based weight loss system, not another diet.
+              </h2>
+              <p
+                className="uppercase"
+                style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2.5px', margin: '0 0 28px' }}
+              >
+                Built to hold — not a quick fix.
+              </p>
+              <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 18px' }}>
+                Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use it.
+                The Carisma Slimming Guide is a behaviour system — built from real clinic practice, designed for the
+                life you actually have. It complements our{' '}
+                <Link href="/weight-loss" style={{ color: GREEN, textDecoration: 'underline' }}>medical weight loss programme</Link>{' '}
+                and{' '}
+                <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>GLP-1 injections</Link>{' '}
+                for those who want clinical support alongside the habit system.
+              </p>
+              <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: 0 }}>
+                The principle it runs on: what you can repeat consistently will always outperform what you can do once
+                brilliantly. Not the perfect week — a structure stable enough to survive the imperfect one.
+              </p>
+            </div>
+            {/* Right — myth/truth page render */}
+            <div className="flex justify-center">
+              <Image
+                src="/wix/f940f0_04682b1e57084d5bb6306b1bb52d3534~mv2.webp"
+                alt="A page from the Carisma Slimming Guide — myth vs truth"
+                width={480}
+                height={360}
+                sizes="(max-width: 768px) 80vw, 420px"
+                style={{ width: '100%', maxWidth: '420px', height: 'auto', transform: 'rotate(3deg)', filter: 'drop-shadow(0 28px 50px rgba(40,60,44,0.18))' }}
+              />
+            </div>
           </div>
 
-          <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 36px' }}>
-            That is what this guide builds. When the structure holds, weight loss stops being something you fight
-            for. It becomes a result that follows.
-          </p>
-          <a
-            href={PRODUCT_URL}
-            className="cta-glow inline-block text-center uppercase text-white"
-            style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1.5px', textDecoration: 'none' }}
-          >
-            Get the Slimming Guide &nbsp;›
-          </a>
+          {/* statement + CTA, centered below */}
+          <div className="text-center" style={{ marginTop: 'clamp(44px, 7vw, 72px)' }}>
+            <div className="mx-auto" style={{ maxWidth: '560px', marginBottom: '40px' }}>
+              <div className="mx-auto mb-7" style={{ width: '40px', height: '1px', background: GREEN }} />
+              <p
+                className="uppercase"
+                style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(16px, 2vw, 20px)', lineHeight: 1.5, letterSpacing: '0.04em' }}
+              >
+                Adherence over perfection. Structure over willpower.
+              </p>
+              <div className="mx-auto mt-7" style={{ width: '40px', height: '1px', background: GREEN }} />
+            </div>
+            <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 32px', maxWidth: '620px', marginLeft: 'auto', marginRight: 'auto' }}>
+              That is what this guide builds. When the structure holds, weight loss stops being something you fight
+              for. It becomes a result that follows.
+            </p>
+            <a
+              href={PRODUCT_URL}
+              className="cta-glow inline-block text-center uppercase text-white"
+              style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1.5px', textDecoration: 'none' }}
+            >
+              Get the Slimming Guide &nbsp;›
+            </a>
+          </div>
         </div>
       </section>
 
@@ -305,6 +322,17 @@ export default function SlimmingGuidePage() {
             That is the system. Rhythm, interrupted and resumed. Not perfection. Just the structure, picked back
             up.
           </p>
+          {/* Recipe page render — the actual recipes inside the guide */}
+          <div className="flex justify-center my-10 lg:my-14">
+            <Image
+              src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.webp"
+              alt="A recipe page from the Carisma Slimming Guide — Cottage Cheese, Tomato & Egg Plate"
+              width={750}
+              height={500}
+              sizes="(max-width: 768px) 90vw, 560px"
+              style={{ width: '100%', maxWidth: '560px', height: 'auto', transform: 'rotate(-2deg)', filter: 'drop-shadow(0 30px 55px rgba(40,60,44,0.18))' }}
+            />
+          </div>
           <p className="mb-10 lg:mb-[88px]" style={{ color: TAUPE, fontSize: '15px' }}>
             The guide includes recipes built for real Maltese kitchens. Practical, familiar dishes built within
             the method so they work without adaptation. Nothing aspirational. Nothing that requires ingredients
