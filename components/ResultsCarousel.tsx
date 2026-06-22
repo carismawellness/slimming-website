@@ -7,9 +7,12 @@ const bodyFont = 'Roboto, sans-serif';
 // Accessible brand-family colors (WCAG 2.2 AA/AAA).
 // --brand-green-text: deep sage for sage text/icons/headings on white (5.42:1).
 const green = '#4F7256';
-// Deep taupe ink for body/name/button over the sage gradient panel.
-// Worst gradient stop #C9D8C1 → 5.06:1 (AA), white → 7.54:1 (AAA). Same warm taupe family as #9B8C81.
+// Deep taupe ink for body/quote text on the white section ground (7.54:1, AAA).
 const textColor = '#5C5347';
+// Muted taupe for the quiet, secondary client-name label (#6f6456 = AA on white).
+const nameColor = '#6F6456';
+// Section ground — used by the right-edge scroll-fade overlay so it blends seamlessly.
+const sectionBg = '#FFFFFF';
 
 type Result = { name: string; image: string; quote: string };
 
@@ -44,21 +47,56 @@ const RESULTS: Result[] = [
 function ResultCard({ r }: { r: Result }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div
-      className="card-lift flex-shrink-0"
-      style={{ width: 'calc(33.333% - 20px)', minWidth: '280px', padding: '20px 10px', margin: '0 10px', boxSizing: 'border-box', scrollSnapAlign: 'start' }}
+    // One slide = the photo (the hero) + a minimal caption beneath it.
+    // No outer card, no border, no gradient panel — the rounded image with a soft
+    // drop-shadow sits directly on the section background.
+    <figure
+      className="rc-slide flex-shrink-0"
+      style={{ margin: 0, boxSizing: 'border-box', scrollSnapAlign: 'start' }}
     >
-      <img src={r.image} alt={`${r.name} before and after`} style={{ width: '100%', borderRadius: '16px', display: 'block', position: 'relative', zIndex: 1 }} />
-      <div
-        style={{ background: 'linear-gradient(178deg, #F8F6F2 42%, #C9D8C1 100%)', borderRadius: '16px', padding: '15px', paddingTop: '70px', marginTop: '-91px' }}
-      >
+      <img
+        src={r.image}
+        alt={`${r.name} before and after`}
+        className="rc-photo"
+        style={{
+          width: '100%',
+          borderRadius: '18px',
+          display: 'block',
+          boxShadow: '0 18px 40px rgba(40, 50, 40, 0.16)',
+        }}
+      />
+      {/* Minimal caption: the name is a quiet label, the quote stays secondary/light. */}
+      <figcaption style={{ paddingTop: '18px' }}>
+        <div
+          style={{
+            color: nameColor,
+            fontFamily: bodyFont,
+            fontSize: '11.5px',
+            fontWeight: 500,
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            marginBottom: '8px',
+          }}
+        >
+          {r.name}
+        </div>
         <p
           style={{
             color: textColor,
             fontFamily: bodyFont,
-            fontSize: '14px',
-            marginBottom: '5px',
-            ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden', textOverflow: 'ellipsis' }),
+            fontSize: '13.5px',
+            lineHeight: 1.6,
+            fontWeight: 300,
+            margin: 0,
+            ...(expanded
+              ? {}
+              : {
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }),
           }}
         >
           {r.quote}
@@ -68,15 +106,22 @@ function ResultCard({ r }: { r: Result }) {
           onClick={() => setExpanded((v) => !v)}
           className="rc-focusable"
           aria-expanded={expanded}
-          style={{ color: textColor, fontFamily: bodyFont, fontSize: '14px', textDecoration: 'underline', cursor: 'pointer', background: 'transparent', padding: 0, border: 0 }}
+          style={{
+            color: green,
+            fontFamily: bodyFont,
+            fontSize: '12.5px',
+            textDecoration: 'underline',
+            cursor: 'pointer',
+            background: 'transparent',
+            padding: 0,
+            border: 0,
+            marginTop: '6px',
+          }}
         >
           {expanded ? 'Read less' : 'Read more'}
         </button>
-        <h3 style={{ color: textColor, fontFamily: bodyFont, fontSize: '16px', fontWeight: 500, marginTop: '24px', marginBottom: '5px' }}>
-          {r.name}
-        </h3>
-      </div>
-    </div>
+      </figcaption>
+    </figure>
   );
 }
 
@@ -86,50 +131,117 @@ export default function ResultsCarousel() {
   const scrollBy = (dir: number) => {
     const el = scrollRef.current;
     if (!el) return;
-    el.scrollBy({ left: dir * (el.clientWidth / 3), behavior: 'smooth' });
+    // Scroll by roughly one slide so a fresh photo snaps into view.
+    el.scrollBy({ left: dir * (el.clientWidth * 0.55), behavior: 'smooth' });
   };
 
   return (
     <section className="py-24">
       {/* Focus indicator: 3px deep-sage ring (#4F7256 = 5.42:1 on white, >=3:1 AA UI),
-          offset 2px, never removed. Applied to all interactive controls in this carousel. */}
+          offset 2px, never removed. Applied to all interactive controls in this carousel.
+          Slide sizing (responsive peek) and arrow/track styling live here too. */}
       <style>{`
         .rc-focusable:focus-visible {
           outline: 3px solid #4F7256;
           outline-offset: 2px;
           border-radius: 4px;
         }
+        /* Hide the scrollbar on the track (webkit) — scrollbarWidth: none covers Firefox. */
+        .rc-track::-webkit-scrollbar { display: none; }
+
+        /* Slide width drives the peek of the next slide.
+           Desktop: ~2 slides + a clear peek of a third.
+           Tablet:  ~1.5 slides.
+           Mobile:  1 slide + a peek (~86vw). */
+        .rc-slide { width: 86vw; }
+        @media (min-width: 640px) {
+          .rc-slide { width: 60%; }   /* ~1.5 slides visible */
+        }
+        @media (min-width: 1024px) {
+          .rc-slide { width: 42%; }   /* ~2 slides + peek */
+        }
+
+        .rc-arrow:hover { transform: translateY(-50%) scale(1.05); }
+        .rc-arrow:active { transform: translateY(-50%) scale(0.98); }
       `}</style>
       <div className="mx-auto px-4" style={{ maxWidth: '1170px' }}>
         <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
           Real Medical Weight Loss Results in Malta
         </h2>
-        <div className="mx-auto mt-3 mb-10" style={{ width: '220px', height: '1px', backgroundColor: '#6F6456' }} />
+        <div className="mx-auto mt-3 mb-12" style={{ width: '220px', height: '1px', backgroundColor: '#6F6456' }} />
 
-        <div className="relative" style={{ padding: '0 35px' }}>
+        <div className="relative">
+          {/* Prominent circular arrows — real "there's more" affordances.
+              Vertically centred against the photo row (the caption sits below,
+              so anchoring near the image's vertical middle reads naturally). */}
           <button
             type="button"
             onClick={() => scrollBy(-1)}
-            aria-label="Previous"
-            className="rc-focusable absolute z-10 flex items-center justify-center"
-            style={{ left: '-4px', top: '38%', width: '35px', height: '35px', background: 'transparent', color: green, fontSize: '26px', cursor: 'pointer', border: 0, lineHeight: 1 }}
+            aria-label="Previous results"
+            className="rc-focusable rc-arrow absolute z-20 flex items-center justify-center"
+            style={{
+              left: '-10px',
+              top: '32%',
+              transform: 'translateY(-50%)',
+              width: '50px',
+              height: '50px',
+              borderRadius: '50%',
+              background: '#FFFFFF',
+              color: green,
+              fontSize: '22px',
+              cursor: 'pointer',
+              border: 0,
+              lineHeight: 1,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
+              transition: 'transform 0.18s ease',
+            }}
           >
-            ←
+            <span aria-hidden="true" style={{ marginTop: '-2px' }}>‹</span>
           </button>
           <button
             type="button"
             onClick={() => scrollBy(1)}
-            aria-label="Next"
-            className="rc-focusable absolute z-10 flex items-center justify-center"
-            style={{ right: '-4px', top: '38%', width: '35px', height: '35px', background: 'transparent', color: green, fontSize: '26px', cursor: 'pointer', border: 0, lineHeight: 1 }}
+            aria-label="Next results"
+            className="rc-focusable rc-arrow absolute z-20 flex items-center justify-center"
+            style={{
+              right: '-10px',
+              top: '32%',
+              transform: 'translateY(-50%)',
+              width: '50px',
+              height: '50px',
+              borderRadius: '50%',
+              background: '#FFFFFF',
+              color: green,
+              fontSize: '22px',
+              cursor: 'pointer',
+              border: 0,
+              lineHeight: 1,
+              boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
+              transition: 'transform 0.18s ease',
+            }}
           >
-            →
+            <span aria-hidden="true" style={{ marginTop: '-2px' }}>›</span>
           </button>
+
+          {/* Soft right-edge fade hinting there's more to scroll. Subtle, ~40px,
+              pointer-events: none so it never blocks the arrow or scrolling. */}
+          <div
+            aria-hidden="true"
+            className="absolute z-10"
+            style={{
+              top: 0,
+              right: 0,
+              bottom: 0,
+              width: '48px',
+              pointerEvents: 'none',
+              background: `linear-gradient(to right, rgba(255,255,255,0), ${sectionBg})`,
+            }}
+          />
 
           <div
             ref={scrollRef}
-            className="flex overflow-x-auto"
-            style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none' }}
+            className="rc-track flex overflow-x-auto"
+            style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none', gap: '28px' }}
           >
             {RESULTS.map((r) => (
               <ResultCard key={r.name} r={r} />
