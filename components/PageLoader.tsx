@@ -18,6 +18,22 @@ const PETAL_PATHS: string[] = [
   'M22.1953 8.46668C24.0649 8.58983 24.9997 9.82131 25.8722 11.1451C26.7446 12.469 27.6483 12.8384 28.8635 12.3766C30.2969 11.8532 30.7954 10.9604 30.515 9.32871C30.2345 7.69701 29.0194 6.61947 27.3679 6.5579C25.3736 6.49632 23.7533 7.32757 22.1953 8.46668Z',
 ];
 
+/* Petal shades — deep forest (#024C27) → light sage (#C9D8C1), evolving as the rose blooms */
+const PETAL_COLORS = [
+  '#024C27', // 0 — deep forest
+  '#0D5630', // 1
+  '#1A6038', // 2
+  '#286B42', // 3
+  '#34764B', // 4
+  '#4f7256', // 5 — brand accessible sage
+  '#5E8860', // 6
+  '#6F9E6C', // 7
+  '#82B07A', // 8
+  '#99C090', // 9
+  '#B4CFA9', // 10
+  '#C9D8C1', // 11 — brand light sage (last petal)
+];
+
 /* SVG arc circumference for r=28: 2π×28 ≈ 175.9 */
 const ARC_C = 175.9;
 
@@ -161,7 +177,7 @@ export default function PageLoader() {
               <path
                 key={i}
                 d={d}
-                fill="#024C27"
+                fill={PETAL_COLORS[i]}
                 style={{
                   transformOrigin: '48px 45px',
                   opacity: 0,
