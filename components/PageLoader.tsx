@@ -25,9 +25,6 @@ const PETAL_COLORS = [
   '#AACAAC', '#A2C4A5', '#A8CAA9', '#B2CEB4',
 ];
 
-/* Circumference of progress arc circle (r=28) */
-const ARC_C = 175.9;
-
 /* Session key — loader shows on first visit or hard reload, skips on SPA nav */
 const SESSION_KEY = 'cs_loader_v1';
 
@@ -98,11 +95,6 @@ export default function PageLoader() {
         @keyframes lxLine {
           from { width: 0; opacity: 0; }
           to   { width: 40px; opacity: 1; }
-        }
-        /* Progress arc */
-        @keyframes lxArc {
-          from { stroke-dashoffset: ${ARC_C}; }
-          to   { stroke-dashoffset: 0; }
         }
         /* Orbiting rings */
         @keyframes lxCW  { to { transform: rotate( 360deg); } }
@@ -198,23 +190,7 @@ export default function PageLoader() {
           Slimming
         </div>
 
-        {/* ── Progress arc ─────────────────────────────────────────────── */}
-        <svg viewBox="0 0 64 64" width="48" height="48" aria-hidden style={{
-          position: 'absolute', bottom: 44,
-          opacity: 0, animation: 'lxFade 0.4s ease 200ms both',
-          pointerEvents: 'none',
-        }}>
-          <circle cx="32" cy="32" r="28"
-            stroke="rgba(2,76,39,0.07)" strokeWidth="0.7" fill="none" />
-          <circle cx="32" cy="32" r="28"
-            stroke="rgba(2,76,39,0.32)" strokeWidth="0.7" fill="none"
-            strokeLinecap="round"
-            strokeDasharray={ARC_C} strokeDashoffset={ARC_C}
-            transform="rotate(-90 32 32)"
-            style={{ animation: `lxArc 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 150ms both` }} />
-        </svg>
-
-        {/* ── Corner L-marks ───────────────────────────────────────────── */}
+{/* ── Corner L-marks ───────────────────────────────────────────── */}
         {[
           { top: 28, left: 36, rotate: false },
           { bottom: 28, right: 36, rotate: true },

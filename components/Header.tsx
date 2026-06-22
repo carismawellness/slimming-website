@@ -33,7 +33,6 @@ const MENUS: Menu[] = [
   { label: 'GLP-1 Injections', href: '/glp1' },
   { label: 'Body Contouring', items: PACKAGE_LINKS },
   { label: 'Slimming Guide', href: '/slimming-guide' },
-  { label: 'Blog', href: '/blog' },
 ];
 
 const navLink: React.CSSProperties = {
