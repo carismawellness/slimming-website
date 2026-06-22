@@ -176,7 +176,7 @@ function ProblemAgitationSection() {
     <section aria-labelledby="problem-heading">
 
       {/* ── PART 1: EMPATHY NARRATIVE ───────────────────────────── */}
-      <div style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, #EEF3EA 100%)', padding: '88px 0 0', overflow: 'hidden' }}>
+      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F8F6F2 10%, #EEF3EA 100%)', padding: '88px 0 0', overflow: 'hidden' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
             does this sound familiar?
