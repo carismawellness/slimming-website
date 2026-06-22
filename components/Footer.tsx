@@ -188,7 +188,7 @@ function FooterBase() {
               </div>
 
               {/* Follow us — embedded under the Carisma Slimming column (more room) */}
-              <div style={{ marginTop: '26px' }}>
+              <div className="hidden md:block" style={{ marginTop: '26px' }}>
                 <h4 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '12px' }}>Follow us</h4>
                 <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: BODY, fontSize: '13px', color: TEXT, textDecoration: 'none', display: 'inline-block', marginBottom: '12px', transition: 'color .2s' }}
                   onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = SAGE)}
@@ -247,7 +247,7 @@ function FooterBase() {
           </div>
 
           {/* Slim full-width search bar, directly under "Get in Touch" block */}
-          <div style={{ marginTop: '40px', paddingTop: '32px', borderTop: `1px solid ${HAIR}` }}>
+          <div className="hidden md:block" style={{ marginTop: '40px', paddingTop: '32px', borderTop: `1px solid ${HAIR}` }}>
             <SiteSearch />
           </div>
         </div>
@@ -278,12 +278,14 @@ function FooterBase() {
 export default function Footer() {
   return (
     <footer style={{ background: GRADIENT, position: 'relative', overflow: 'hidden', isolation: 'isolate' }}>
-      <FooterRose />
+      {/* decorative rose hidden on mobile (it overlapped the copyright) */}
+      <div className="hidden md:block"><FooterRose /></div>
       <div style={{ position: 'relative', zIndex: 1 }}>
         <GoogleReviews />
-        <DoctorsSection />
+        {/* heavy/decorative rows hidden on mobile to keep the footer lean */}
+        <div className="hidden md:block"><DoctorsSection /></div>
         <BookSection />
-        <BrandsSection />
+        <div className="hidden md:block"><BrandsSection /></div>
         <FooterBase />
       </div>
     </footer>

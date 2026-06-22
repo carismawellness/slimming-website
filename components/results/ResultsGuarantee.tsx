@@ -107,7 +107,7 @@ export default function ResultsGuarantee() {
       data-armed={armed && !revealed ? '' : undefined}
       className={`rg${revealed ? ' rg--in' : ''}`}
       style={{
-        padding: 'clamp(72px,10vw,128px) 0',
+        padding: 'clamp(46px,10vw,128px) 0',
         background: 'linear-gradient(180deg,#ffffff 0%,#f5f8f2 100%)',
       }}
     >
