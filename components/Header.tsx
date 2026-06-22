@@ -226,11 +226,8 @@ export default function Header() {
         >
           <style>{`@keyframes glassIn{from{opacity:0;transform:scale(1.03)}to{opacity:1;transform:scale(1)}}`}</style>
 
-          {/* Top row: logo + close */}
-          <div className="flex items-center justify-between shrink-0" style={{ padding: '16px clamp(16px,5vw,28px)' }}>
-            <Link href="/" onClick={() => setOpen(false)} className="flex items-center">
-              <Image src="/logo.png" alt="Carisma Slimming" width={510} height={96} className="header-logo header-logo--mobile" style={{ height: '22px', width: 'auto', display: 'block' }} />
-            </Link>
+          {/* Top row: close only (no logo on mobile) */}
+          <div className="flex items-center justify-end shrink-0" style={{ padding: '16px clamp(16px,5vw,28px)' }}>
             <button
               onClick={() => setOpen(false)}
               aria-label="Close menu"
@@ -304,6 +301,36 @@ export default function Header() {
             >
               Free Body Analysis
             </button>
+
+            {/* Compact footer */}
+            <div style={{ marginTop: 32, paddingTop: 24, borderTop: '1px solid rgba(142,176,147,0.28)' }}>
+              <p style={{ fontFamily: '"Novecento Wide", sans-serif', fontSize: 12, letterSpacing: '0.12em', textTransform: 'uppercase', color: GREEN, margin: '0 0 10px' }}>
+                Carisma Slimming
+              </p>
+              <p style={{ fontFamily: 'Roboto, sans-serif', fontSize: 13, lineHeight: 1.6, color: TAUPE, margin: '0 0 6px' }}>
+                Grand Hotel Excelsior, Great Siege Road, Floriana FRN 1810, Malta
+              </p>
+              <a href="mailto:info@carismaslimming.com" style={{ fontFamily: 'Roboto, sans-serif', fontSize: 13, color: GREEN, textDecoration: 'none' }}>
+                info@carismaslimming.com
+              </a>
+              <div className="flex items-center" style={{ gap: 18, marginTop: 16 }}>
+                <a href="https://www.instagram.com/carismaslimming" target="_blank" rel="noopener noreferrer" aria-label="Instagram" style={{ color: GREEN }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6">
+                    <rect x="3" y="3" width="18" height="18" rx="5" />
+                    <circle cx="12" cy="12" r="4" />
+                    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+                  </svg>
+                </a>
+                <a href="https://www.facebook.com/carismaaesthetics/" target="_blank" rel="noopener noreferrer" aria-label="Facebook" style={{ color: GREEN }}>
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M14 9h3V6h-3c-1.7 0-3 1.3-3 3v2H8v3h3v7h3v-7h3l1-3h-4V9c0-.6.4-1 1-1z" />
+                  </svg>
+                </a>
+              </div>
+              <p style={{ fontFamily: 'Roboto, sans-serif', fontSize: 11.5, color: TAUPE, margin: '18px 0 0' }}>
+                © {new Date().getFullYear()} Carisma Slimming. All rights reserved.
+              </p>
+            </div>
           </div>
         </div>
       )}

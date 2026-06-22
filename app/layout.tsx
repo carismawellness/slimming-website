@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SiteHeader, SiteFooter, SiteCookieBanner, SiteMobileCTA } from "@/components/PreviewChromeGate";
+import { SiteHeader, SiteFooter, SiteCookieBanner } from "@/components/PreviewChromeGate";
 import ConsultationModal from "@/components/ConsultationModal";
 import QuizModal from "@/components/QuizModal";
 import Script from "next/script";
@@ -107,12 +107,11 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
         />
       </head>
-      <body className="min-h-full flex flex-col pb-[88px] md:pb-0">
+      <body className="min-h-full flex flex-col">
         <SiteHeader />
         <main className="flex-grow">{children}</main>
         <SiteFooter />
         <SiteCookieBanner />
-        <SiteMobileCTA />
         <ConsultationModal />
         <QuizModal />
         <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />

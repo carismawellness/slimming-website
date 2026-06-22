@@ -93,6 +93,12 @@ export default function ModalitiesCarousel() {
            otherwise the hovered fill (#4f7256) would carry #4f7256 text = invisible. */
         .mc-card:hover .mc-explore { background-color: #4f7256 !important; color: #ffffff !important; }
         .mc-card:hover .mc-explore span { color: #ffffff !important; }
+        /* Mobile: cards fit the viewport (one + a peek) instead of a fixed
+           349px that overflows a phone; tighter side padding. */
+        @media (max-width: 640px) {
+          .mc-track { padding-left: 16px !important; padding-right: 16px !important; }
+          .mc-card { width: 84vw !important; height: auto !important; min-height: 426px; }
+        }
       `}</style>
       {/* Left arrow */}
       {!atStart && (
@@ -122,7 +128,7 @@ export default function ModalitiesCarousel() {
       {/* Scrollable track */}
       <div
         ref={ref}
-        className="flex overflow-x-auto [&::-webkit-scrollbar]:hidden"
+        className="mc-track flex overflow-x-auto [&::-webkit-scrollbar]:hidden"
         style={{
           gap: `${GAP}px`,
           scrollSnapType: 'x mandatory',

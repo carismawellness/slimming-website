@@ -136,10 +136,29 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html, body {
+  overflow-x: hidden;       /* no sideways drift / off-centre on mobile */
+  max-width: 100%;
+}
 body {
   background: var(--white);
   color: var(--text-dark);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+}
+
+/* ---- Mobile heading caps — keep section titles to ~2 lines, never oversized.
+   Overrides inline font-size on phones so headings like "How GLP-1 Works"
+   don't blow up to three heavy lines. ---- */
+@media (max-width: 640px) {
+  h2 {
+    font-size: clamp(19px, 5.4vw, 25px) !important;
+    line-height: 1.24 !important;
+    letter-spacing: 0.02em !important;
+  }
+  h3 {
+    font-size: clamp(14.5px, 4.2vw, 17px) !important;
+    line-height: 1.32 !important;
+  }
 }
 
 /* BRAND RULE: Trajan Pro is a titling-capitals face — mixed/title case renders as
