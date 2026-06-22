@@ -101,8 +101,8 @@ export default function GLP1Page() {
           { label: 'Doctor monitored:', text: 'Full assessment, body scan, blood tests and regular reviews to adjust your plan.' },
           { label: 'Part of a full plan:', text: 'Never medication alone — nutrition, movement and accountability included.' },
         ]}
-        primaryCta={{ text: 'Book Your Consultation', href: '/consultation' }}
-        secondaryCta={{ text: 'Speak to a doctor', href: 'tel:+35627802062' }}
+        primaryCta={{ text: 'Book Your Consultation', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
+        secondaryCta={{ text: 'Speak to a Doctor', href: 'https://www.fresha.com/a/carisma-slimming-floriana-great-siege-road-wxxyuj9p/booking?pId=2708191&modal=employee-profile&employeeId=5084222&back=%2Fa%2Fcarisma-slimming-floriana-great-siege-road-wxxyuj9p&cartId=e54b0560-88a7-4e30-835b-5d10548e729b', external: true }}
         media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/glp1-hero.webp', alt: 'Doctor-led GLP-1 weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
@@ -179,13 +179,13 @@ export default function GLP1Page() {
                 Ozempic and Mounjaro can help regulate appetite. Long-term results come from structure,
                 monitoring, and habits that fit real life, and that is what our program delivers.
               </p>
-              <Link
-                href="/consultation"
+              <a
+                href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                 className="cta-glow inline-block uppercase tracking-wide text-white font-bold text-center"
                 style={{ padding: '14px 20px', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', width: '474px', maxWidth: '100%' }}
               >
                 book your medical consultation
-              </Link>
+              </a>
             </div>
           </div>
         </div>
@@ -281,13 +281,13 @@ export default function GLP1Page() {
             </div>
           </div>
           <div className="flex flex-wrap gap-3 justify-center mt-14">
-            <Link
-              href="/consultation"
+            <a
+              href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
               className="cta-glow inline-block text-center font-bold text-white"
               style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1.4px', textTransform: 'uppercase', padding: '13px 24px' }}
             >
               book your medical consultation
-            </Link>
+            </a>
           </div>
         </div>
       </section>
