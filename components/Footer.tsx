@@ -186,6 +186,24 @@ function FooterBase() {
                   </a>
                 ))}
               </div>
+
+              {/* Follow us — embedded under the Carisma Slimming column (more room) */}
+              <div style={{ marginTop: '26px' }}>
+                <h4 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '12px' }}>Follow us</h4>
+                <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: BODY, fontSize: '13px', color: TEXT, textDecoration: 'none', display: 'inline-block', marginBottom: '12px', transition: 'color .2s' }}
+                  onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = SAGE)}
+                  onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}>
+                  @carismaslimming
+                </a>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '7px', maxWidth: '212px' }}>
+                  {IG_SRCS.map((img, i) => (
+                    <a key={i} href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label={`${img.alt} — Instagram`}
+                      style={{ display: 'block', aspectRatio: '1/1', borderRadius: '10px', overflow: 'hidden', position: 'relative' }}>
+                      <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} sizes="110px" loading="lazy" />
+                    </a>
+                  ))}
+                </div>
+              </div>
             </div>
 
             {/* Nav */}
@@ -224,24 +242,6 @@ function FooterBase() {
                   </li>
                 ))}
               </ul>
-            </div>
-
-            {/* Instagram — small embedded preview */}
-            <div>
-              <h4 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '18px' }}>Follow us</h4>
-              <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: BODY, fontSize: '13px', color: TEXT, textDecoration: 'none', display: 'inline-block', marginBottom: '12px', transition: 'color .2s' }}
-                onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = SAGE)}
-                onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}>
-                @carismaslimming
-              </a>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '6px', maxWidth: '168px' }}>
-                {IG_SRCS.map((img, i) => (
-                  <a key={i} href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label={`${img.alt} — Instagram`}
-                    style={{ display: 'block', aspectRatio: '1/1', borderRadius: '8px', overflow: 'hidden', position: 'relative' }}>
-                    <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} sizes="80px" loading="lazy" />
-                  </a>
-                ))}
-              </div>
             </div>
 
           </div>

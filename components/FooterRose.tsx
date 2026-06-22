@@ -22,7 +22,7 @@ export default function FooterRose() {
       raf = requestAnimationFrame(() => {
         const dx = (e.clientX - window.innerWidth / 2) / (window.innerWidth / 2); // -1..1
         const dy = (e.clientY - window.innerHeight / 2) / (window.innerHeight / 2);
-        el.style.transform = `translate3d(${dx * 20}px, ${dy * 16}px, 0)`;
+        el.style.transform = `translate3d(${dx * 26}px, ${dy * 20}px, 0)`;
       });
     };
     window.addEventListener('mousemove', onMove, { passive: true });
@@ -38,14 +38,14 @@ export default function FooterRose() {
       aria-hidden
       style={{
         position: 'absolute',
-        right: '-5%',
-        bottom: '-12%',
-        width: 'min(50vw, 660px)',
+        right: '-7%',
+        bottom: '-20%',
+        width: 'min(66vw, 900px)',
         aspectRatio: '96 / 90',
         zIndex: 0,
         pointerEvents: 'none',
-        background: '#D9C9AC',
-        opacity: 0.5,
+        background: '#D7C7A6',
+        opacity: 0.42,
         WebkitMaskImage: 'url(/rose-motif.svg)',
         maskImage: 'url(/rose-motif.svg)',
         WebkitMaskRepeat: 'no-repeat',
