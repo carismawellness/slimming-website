@@ -288,38 +288,6 @@ export default function SlimmingGuidePage() {
               />
             </div>
           </div>
-
-          {/* Friday-evening scenario — compact flat callout */}
-          <div className="mx-auto" style={{ maxWidth: '720px', marginTop: 'clamp(36px, 5vw, 56px)', background: '#F5F8F2', border: '1px solid #C9D8C1', borderRadius: '16px', padding: 'clamp(24px, 4vw, 36px)' }}>
-            <p className="uppercase" style={{ color: '#3c5a40', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px', margin: '0 0 12px' }}>
-              Friday evening, Malta
-            </p>
-            <p style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.7, margin: 0 }}>
-              You sit down. You eat protein first when you can. You enjoy the pasta. You enjoy the conversation. You come home. Saturday morning you return at your next meal. No guilt. No compensation. No mental negotiation about what you earned or owe. You simply return.
-            </p>
-          </div>
-
-          {/* Recipes + treatments line */}
-          <p className="text-center mx-auto" style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, maxWidth: '680px', marginTop: 'clamp(32px, 4vw, 48px)' }}>
-            The guide includes recipes built for real Maltese kitchens — practical, familiar dishes that work without adaptation. When you are ready to accelerate results in the clinic, explore our{' '}
-            <Link href="/packages/fat-freezing" style={{ color: GREEN, textDecoration: 'underline' }}>fat freezing</Link>,{' '}
-            <Link href="/packages/anti-cellulite" style={{ color: GREEN, textDecoration: 'underline' }}>anti-cellulite</Link>, and{' '}
-            <Link href="/packages/lymphatic-drainage" style={{ color: GREEN, textDecoration: 'underline' }}>lymphatic drainage</Link>{' '}treatments.
-          </p>
-
-          {/* Closing — culture line + aspirational quote */}
-          <div className="text-center mx-auto" style={{ maxWidth: '760px', marginTop: 'clamp(40px, 6vw, 64px)' }}>
-            <p className="uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '2px', margin: '0 0 22px' }}>
-              We do not fight culture here. We design around it.
-            </p>
-            <div className="mx-auto mb-8" style={{ width: '44px', height: '1px', background: GREEN }} />
-            <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: 'clamp(17px, 2vw, 22px)', lineHeight: 1.65, fontWeight: 300 }}>
-              Most people who come to us have already tried something. A diet that worked for a while. An app they stopped opening. A plan that felt right until life got in the way.
-            </p>
-            <p className="uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(22px, 2.9vw, 30px)', lineHeight: 1.3, marginTop: '24px' }}>
-              This guide was written for what comes after that.
-            </p>
-          </div>
         </div>
       </section>
 
