@@ -216,7 +216,7 @@ function ProblemAgitationSection() {
                 }}
               >
                 <img
-                  src="/wix/87fc13_16e7dbed_consult_668x724.jpg"
+                  src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.webp"
                   alt="Slimming consultation at the Carisma clinic in Malta"
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
