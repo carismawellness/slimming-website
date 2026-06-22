@@ -76,7 +76,8 @@ export const fatFreezing: PackageContent = {
     'Non surgical and non invasive treatment with little to no downtime in most people',
   ],
   ptImage: W + '87fc13_e873e3bf68584964b06a9f7bd9e5d335~mv2.png',
-  ptImage2: W + '87fc13_1105e5fcee694da4a6ed1edeb9fd2bd7~mv2.png',
+  // ptImage2 (the orange fat-reduction image) removed per request.
+  ptImage2: '',
   ptImage2Width: 225,
   ptDecorImage: W + '87fc13_134b655cd7f945a9a2847030229e46a1~mv2.png',
 

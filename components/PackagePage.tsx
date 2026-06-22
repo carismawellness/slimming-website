@@ -21,7 +21,7 @@
      11 Evidence based approach (research cards)
    ============================================================ */
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
@@ -242,9 +242,19 @@ function TestimonialQuoteCard({ t }: { t: Testimonial }) {
   const [expanded, setExpanded] = useState(false);
   return (
     <blockquote className="card-lift" style={{ background: '#fff', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', borderRadius: 16, margin: 0 }}>
-      {/* before/after proof image */}
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={t.image} alt={`${t.name} — before and after body contouring treatment`} style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }} />
+      {/* before/after proof image — the source webp is a two-up composite (before |
+          after). The "BEFORE"/"AFTER" labels are rendered here as DOM overlays,
+          bottom-centred within each image half over a soft dark scrim (white text,
+          AA via the gradient), so they're never clipped by objectFit:cover /
+          overflow:hidden the way edge-baked image labels were. */}
+      <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={t.image} alt={`${t.name} — before and after body contouring treatment`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
+        {/* scrim so white labels stay legible over any photo */}
+        <span aria-hidden="true" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '34%', background: 'linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0))', pointerEvents: 'none' }} />
+        <span aria-hidden="true" className="fr-ba-label" style={{ left: '25%' }}>Before</span>
+        <span aria-hidden="true" className="fr-ba-label" style={{ left: '75%' }}>After</span>
+      </div>
       <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '20px 22px 24px' }}>
         {/* star row — matches weight-loss design */}
         <p aria-hidden="true" style={{ color: GREEN_TEXT, fontFamily: SERIF, fontSize: 13, letterSpacing: '1px', margin: 0 }}>{'★★★★★'}</p>
@@ -274,9 +284,75 @@ function TestimonialQuoteCard({ t }: { t: Testimonial }) {
   );
 }
 
+/* Horizontal scroll-snap carousel with ‹/› arrow navigation — mirrors
+   ModalitiesCarousel (scroll track, scroll-snap, prev/next buttons that scrollBy
+   one card, buttons hidden at start/end, hidden scrollbar). On desktop ~3 cards
+   show; on mobile cards size to the viewport and users swipe (arrows hidden < md).
+   All cards/quotes/names stay in the DOM, so SEO and a11y are preserved. */
+const TESTI_CARD_W = 320;
+const TESTI_GAP = 24;
+const TESTI_PAD = 4; // small inset so the card lift-shadow isn't clipped
+
 function TestimonialsSection({ items }: { items: Testimonial[] }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const sync = () => {
+    const el = ref.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 4);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
+  };
+
+  useEffect(() => {
+    sync();
+    const el = ref.current;
+    if (el) el.addEventListener('scroll', sync, { passive: true });
+    window.addEventListener('resize', sync);
+    return () => {
+      if (el) el.removeEventListener('scroll', sync);
+      window.removeEventListener('resize', sync);
+    };
+  }, []);
+
+  const scroll = (dir: 1 | -1) => {
+    const reduce = typeof window !== 'undefined'
+      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    ref.current?.scrollBy({ left: dir * (TESTI_CARD_W + TESTI_GAP), behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  const arrowStyle: React.CSSProperties = {
+    top: 'calc(50% - 26px)', width: 52, height: 52, backgroundColor: '#ffffff',
+    boxShadow: '0 4px 16px rgba(0,0,0,0.18)', color: '#6f6456', fontSize: 26,
+    lineHeight: 1, border: 'none', cursor: 'pointer', borderRadius: 999,
+  };
+
   return (
     <section aria-labelledby="testimonials-heading" style={{ marginTop: 48 }}>
+      <style>{`
+        /* before/after overlay labels — bottom-centred within each image half */
+        .fr-ba-label {
+          position: absolute;
+          bottom: 10px;
+          transform: translateX(-50%);
+          color: #ffffff;
+          font-family: ${WIDE};
+          font-weight: 700;
+          font-size: 11px;
+          letter-spacing: 1.5px;
+          text-transform: uppercase;
+          text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+          pointer-events: none;
+          white-space: nowrap;
+          z-index: 1;
+        }
+        /* hide the scrollbar but keep the track scrollable (matches ModalitiesCarousel) */
+        .fr-testi-track::-webkit-scrollbar { display: none; }
+        @media (max-width: 640px) {
+          .fr-testi-card { width: 84vw !important; }
+        }
+      `}</style>
       <Eyebrow>Real results from real clients</Eyebrow>
       <div style={{ marginTop: 8 }}>
         {/* H3 — sits inside the H2 "secret" section, preserving heading order */}
@@ -287,10 +363,59 @@ function TestimonialsSection({ items }: { items: Testimonial[] }) {
       <p style={{ ...({ color: TAUPE, fontFamily: BODY, fontSize: 15, lineHeight: 1.7 } as React.CSSProperties), textAlign: 'center', maxWidth: 560, margin: '16px auto 0' }}>
         A small sample of the hundreds of people across Malta who came to us after everything else had stopped working.
       </p>
-      <div className="fr-testi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 40 }}>
-        {items.map((t) => (
-          <TestimonialQuoteCard key={t.name} t={t} />
-        ))}
+
+      <div style={{ position: 'relative', marginTop: 40 }}>
+        {/* Left arrow — desktop only, hidden at start */}
+        {!atStart && (
+          <button
+            type="button"
+            onClick={() => scroll(-1)}
+            aria-label="Previous"
+            className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
+            style={{ ...arrowStyle, left: 12 }}
+          >
+            ‹
+          </button>
+        )}
+
+        {/* Scrollable track */}
+        <div
+          ref={ref}
+          className="fr-testi-track flex overflow-x-auto"
+          style={{
+            gap: TESTI_GAP,
+            scrollSnapType: 'x mandatory',
+            scrollPaddingLeft: TESTI_PAD,
+            scrollbarWidth: 'none',
+            paddingLeft: TESTI_PAD,
+            paddingRight: TESTI_PAD,
+            paddingTop: 6,
+            paddingBottom: 18,
+          }}
+        >
+          {items.map((t) => (
+            <div
+              key={t.name}
+              className="fr-testi-card flex-shrink-0"
+              style={{ width: TESTI_CARD_W, scrollSnapAlign: 'start' }}
+            >
+              <TestimonialQuoteCard t={t} />
+            </div>
+          ))}
+        </div>
+
+        {/* Right arrow — desktop only, hidden at end */}
+        {!atEnd && (
+          <button
+            type="button"
+            onClick={() => scroll(1)}
+            aria-label="Next"
+            className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
+            style={{ ...arrowStyle, right: 12 }}
+          >
+            ›
+          </button>
+        )}
       </div>
     </section>
   );
@@ -379,13 +504,6 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           {!hidden.testimonials && TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
             <div style={{ ...CONTAINER, maxWidth: 1120 }}>
               <TestimonialsSection items={TESTIMONIALS[c.id]} />
-              {/* relocated legal fineprint — subtle footnote, kept in the DOM.
-                  Uses TAUPE (AA-compliant) per the brand a11y rule; de-emphasised via size. */}
-              <div style={{ marginTop: 40 }}>
-                {c.heroFineprint.map((f) => (
-                  <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: '0 auto', maxWidth: 620, textAlign: 'center', opacity: 0.85 }}>{f}</p>
-                ))}
-              </div>
             </div>
           )}
 
@@ -555,7 +673,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             {/* faint decorative motif (was a heavy 0.5-opacity green wash spanning the
                 section — now a barely-there tint so the ground reads clean white). */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={DIFF_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.1, pointerEvents: 'none', zIndex: 0 }} />
+            <img src={DIFF_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.32, pointerEvents: 'none', zIndex: 0 }} />
             <div style={{ ...CONTAINER, position: 'relative', zIndex: 1 }}>
               <Eyebrow>the carisma difference</Eyebrow>
               <div style={{ marginTop: 10 }}>
@@ -1147,12 +1265,11 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           .fr-faqsearch:focus-visible { outline: 3px solid ${GREEN_TEXT}; outline-offset: 2px; }
           /* P7 — prefers-reduced-motion: disable testimonial card hover transitions */
           @media (prefers-reduced-motion: reduce) {
-            .fr-testi-grid * { transition: none !important; animation: none !important; }
+            .fr-testi-track * { transition: none !important; animation: none !important; }
           }
           @media (max-width: 860px) {
             .fr-hero-grid, .fr-2col, .fr-benefits, .fr-evgrid { grid-template-columns: 1fr !important; }
             .fr-evgrid > div { grid-column: auto !important; }
-            .fr-testi-grid { grid-template-columns: 1fr !important; }
             .fr-hero-img { order: -1; }
           }
           @media (max-width: 560px) { .fr-benefits { grid-template-columns: 1fr !important; } }

@@ -2,13 +2,18 @@
  * Body-zone data + figure geometry for the TreatmentBodyMap visualisation.
  *
  * Coordinates are expressed in a normalised "body space" where (0,0) is the
- * top-left of the silhouette's bounding box and (1,1) is the bottom-right.
- * The same coordinates drive BOTH the accessible SVG layer and the decorative
- * Three.js glow layer, so the two are always perfectly aligned regardless of
- * the rendered pixel size.
+ * top-left of the figure's bounding box and (1,1) is the bottom-right. The same
+ * coordinates drive BOTH the accessible SVG layer and the decorative Three.js
+ * glow layer, so the two are always perfectly aligned regardless of the
+ * rendered pixel size.
  *
- * `side: 'L' | 'R' | 'C'` is only used to decide which way a connector/label
- * leans so the editorial labels stay clear of the body.
+ * ── How zones are presented ────────────────────────────────────────────────
+ * The visualisation is a TWO-PANEL layout: a refined line-art figure on one
+ * side and a tidy vertical list of the treatment's target zones on the other.
+ * Each zone carries a NUMBERED pin on the body whose index matches its row in
+ * the list — so there are NO floating labels and NO leader lines crossing text.
+ * `side` is retained for backwards compatibility but is no longer used to place
+ * labels (the list does that job).
  */
 
 export type ZoneSide = 'L' | 'R' | 'C';
@@ -24,40 +29,40 @@ export interface BodyZone {
   y: number;
   /** Relative marker radius in body-space units (~0.05–0.09). */
   r: number;
-  /** Which side the label/connector leans. */
+  /** Legacy hint for which side a label leant; no longer used for layout. */
   side: ZoneSide;
 }
 
 /**
  * Canonical anatomical anchor points, tuned to sit cleanly on the refined
- * front-facing figure drawn below (see BODY_PARTS). Centre line is x = 0.5.
+ * line-art figure drawn below (see BODY_PARTS). Centre line is x = 0.5.
  * y values follow the figure's well-proportioned ~7.5-head layout:
- *   head     ~0.04–0.14
- *   neck     ~0.16
- *   shoulders~0.21
- *   chest    ~0.30
- *   waist    ~0.46
- *   hips     ~0.56
- *   thighs   ~0.70
- *   calves   ~0.86
+ *   head     ~0.05–0.15
+ *   neck     ~0.18
+ *   shoulders~0.23
+ *   chest    ~0.32
+ *   waist    ~0.47
+ *   hips     ~0.57
+ *   thighs   ~0.71
+ *   calves   ~0.87
  */
 const ANCHORS = {
-  jawline: { x: 0.5, y: 0.115, r: 0.05 },
-  doubleChin: { x: 0.5, y: 0.145, r: 0.05 },
-  upperArmL: { x: 0.275, y: 0.33, r: 0.058 },
-  upperArmR: { x: 0.725, y: 0.33, r: 0.058 },
-  armsL: { x: 0.235, y: 0.42, r: 0.06 },
-  armsR: { x: 0.765, y: 0.42, r: 0.06 },
-  back: { x: 0.5, y: 0.36, r: 0.085 },
-  abdomen: { x: 0.5, y: 0.5, r: 0.082 },
-  flankL: { x: 0.395, y: 0.475, r: 0.052 },
-  flankR: { x: 0.605, y: 0.475, r: 0.052 },
-  glutes: { x: 0.5, y: 0.585, r: 0.08 },
-  buttocks: { x: 0.5, y: 0.6, r: 0.08 },
-  thighL: { x: 0.43, y: 0.71, r: 0.062 },
-  thighR: { x: 0.57, y: 0.71, r: 0.062 },
-  legsL: { x: 0.45, y: 0.87, r: 0.05 },
-  legsR: { x: 0.55, y: 0.87, r: 0.05 },
+  jawline: { x: 0.5, y: 0.125, r: 0.05 },
+  doubleChin: { x: 0.5, y: 0.155, r: 0.05 },
+  upperArmL: { x: 0.285, y: 0.34, r: 0.056 },
+  upperArmR: { x: 0.715, y: 0.34, r: 0.056 },
+  armsL: { x: 0.255, y: 0.44, r: 0.058 },
+  armsR: { x: 0.745, y: 0.44, r: 0.058 },
+  back: { x: 0.5, y: 0.37, r: 0.082 },
+  abdomen: { x: 0.5, y: 0.5, r: 0.08 },
+  flankL: { x: 0.4, y: 0.475, r: 0.05 },
+  flankR: { x: 0.6, y: 0.475, r: 0.05 },
+  glutes: { x: 0.5, y: 0.59, r: 0.078 },
+  buttocks: { x: 0.5, y: 0.605, r: 0.078 },
+  thighL: { x: 0.435, y: 0.715, r: 0.06 },
+  thighR: { x: 0.565, y: 0.715, r: 0.06 },
+  legsL: { x: 0.455, y: 0.87, r: 0.048 },
+  legsR: { x: 0.545, y: 0.87, r: 0.048 },
 } as const;
 
 type AnchorKey = keyof typeof ANCHORS;
@@ -129,31 +134,28 @@ export function zonesFor(serviceId: string): BodyZone[] {
 export const BODY_VIEWBOX = '0 0 1000 1000';
 
 /**
- * A refined, well-proportioned front-facing female figure.
+ * A refined, minimal line-art front-facing figure.
  *
- * Rather than a single self-intersecting path (which renders lumpy), the body
- * is composed of a few clean, smooth, closed sub-paths whose silhouettes flow
- * together: a head, a slender neck, a torso that tapers to a waist and curves
- * back out at the hips, two gently-bent arms, and two legs. Proportions follow
- * a tasteful ~7.5-head fashion-illustration canon so it reads as intentional
- * and elegant, not crude.
+ * The figure is deliberately drawn as calm, single-weight OUTLINE strokes — an
+ * elegant medical/editorial line drawing rather than a filled silhouette. Each
+ * anatomical part is its own smooth, closed sub-path (head, neck, torso, two
+ * arms, two legs) built only from cubic/quadratic curves, so every part strokes
+ * cleanly with no self-intersecting seams. Proportions follow a tasteful
+ * ~7.5-head fashion-illustration canon.
  *
- * All sub-paths are authored on the same 0..1000 viewBox as the zone
- * coordinates. `fillRule="evenodd"` lets the negative space between arms and
- * torso read correctly when the whole figure is filled as one shape.
+ * `kind` lets the renderer treat the torso as the "fillable" core (a barely
+ * there ground wash) while limbs read as pure line, which is what gives the
+ * piece its refined, intentional, luxurious feel.
  */
 export interface BodyPart {
   /** Stable id for React keys. */
   id: string;
   /** SVG path data on the 0..1000 viewBox. */
   d: string;
+  /** Whether this part is the central "core" (gets the soft ground wash). */
+  core?: boolean;
 }
 
-/**
- * Smooth, symmetrical sub-paths. Each is a closed silhouette so the figure can
- * be filled with a soft ground and stroked with a hairline outline. Built from
- * quadratic/cubic curves only — no straight-edged "robot" segments.
- */
 export const BODY_PARTS: BodyPart[] = [
   // Head — a soft, slightly oval face.
   {
@@ -169,111 +171,111 @@ export const BODY_PARTS: BodyPart[] = [
   {
     id: 'neck',
     d:
-      'M482 196 ' +
-      'C482 214 482 226 478 238 ' +
-      'C490 244 510 244 522 238 ' +
-      'C518 226 518 214 518 196 ' +
-      'C512 204 488 204 482 196 Z',
+      'M482 198 ' +
+      'C482 216 482 228 478 240 ' +
+      'C490 246 510 246 522 240 ' +
+      'C518 228 518 216 518 198 ' +
+      'C512 206 488 206 482 198 Z',
   },
   // Torso — shoulders → bust → tapered waist → hips. Symmetrical, feminine.
   {
     id: 'torso',
+    core: true,
     d:
-      'M500 230 ' +
+      'M500 232 ' +
       // right shoulder out
-      'C544 230 582 244 612 270 ' +
-      'C628 284 636 304 638 326 ' +
+      'C546 232 584 248 614 274 ' +
+      'C630 288 638 308 640 330 ' +
       // right side: chest down to waist (tapers in)
-      'C636 360 626 396 612 432 ' +
-      'C600 462 590 492 584 520 ' +
+      'C638 364 628 400 614 436 ' +
+      'C602 466 592 496 586 524 ' +
       // waist pinch (right)
-      'C580 540 580 556 586 574 ' +
+      'C582 544 582 560 588 578 ' +
       // hip out (right)
-      'C600 600 612 624 616 654 ' +
+      'C602 604 614 628 618 658 ' +
       // hip bottom curve to centre
-      'C606 672 566 682 500 682 ' +
-      'C434 682 394 672 384 654 ' +
+      'C608 676 568 686 500 686 ' +
+      'C432 686 392 676 382 658 ' +
       // hip out (left)
-      'C388 624 400 600 414 574 ' +
+      'C386 628 398 604 412 578 ' +
       // waist pinch (left)
-      'C420 556 420 540 416 520 ' +
+      'C418 560 418 544 414 524 ' +
       // left side: waist up to chest
-      'C410 492 400 462 388 432 ' +
-      'C374 396 364 360 362 326 ' +
+      'C408 496 398 466 386 436 ' +
+      'C372 400 362 364 360 330 ' +
       // left shoulder
-      'C364 304 372 284 388 270 ' +
-      'C418 244 456 230 500 230 Z',
+      'C362 308 370 288 386 274 ' +
+      'C416 248 454 232 500 232 Z',
   },
   // Right arm (viewer-right) — gently bent, hanging beside the torso.
   {
     id: 'armR',
     d:
-      'M620 286 ' +
-      'C648 300 666 326 676 360 ' +
-      'C686 394 692 432 694 470 ' +
-      'C696 502 694 532 688 560 ' +
-      'C684 578 678 592 670 600 ' +
-      'C660 594 654 580 650 562 ' +
-      'C644 532 642 500 642 468 ' +
-      'C640 432 636 396 628 362 ' +
-      'C622 336 614 314 602 296 ' +
-      'C606 290 613 287 620 286 Z',
+      'M622 288 ' +
+      'C650 302 668 328 678 362 ' +
+      'C688 396 694 434 696 472 ' +
+      'C698 504 696 534 690 562 ' +
+      'C686 580 680 594 672 602 ' +
+      'C662 596 656 582 652 564 ' +
+      'C646 534 644 502 644 470 ' +
+      'C642 434 638 398 630 364 ' +
+      'C624 338 616 316 604 298 ' +
+      'C608 292 615 289 622 288 Z',
   },
   // Left arm (viewer-left) — mirror of the right.
   {
     id: 'armL',
     d:
-      'M380 286 ' +
-      'C352 300 334 326 324 360 ' +
-      'C314 394 308 432 306 470 ' +
-      'C304 502 306 532 312 560 ' +
-      'C316 578 322 592 330 600 ' +
-      'C340 594 346 580 350 562 ' +
-      'C356 532 358 500 358 468 ' +
-      'C360 432 364 396 372 362 ' +
-      'C378 336 386 314 398 296 ' +
-      'C394 290 387 287 380 286 Z',
+      'M378 288 ' +
+      'C350 302 332 328 322 362 ' +
+      'C312 396 306 434 304 472 ' +
+      'C302 504 304 534 310 562 ' +
+      'C314 580 320 594 328 602 ' +
+      'C338 596 344 582 348 564 ' +
+      'C354 534 356 502 356 470 ' +
+      'C358 434 362 398 370 364 ' +
+      'C376 338 384 316 396 298 ' +
+      'C392 292 385 289 378 288 Z',
   },
   // Right leg (viewer-right) — thigh → knee → calf, slim elegant taper.
   {
     id: 'legR',
     d:
-      'M508 664 ' +
-      'C544 664 580 668 600 678 ' +
+      'M508 668 ' +
+      'C544 668 580 672 600 682 ' +
       // outer thigh down
-      'C606 712 606 748 600 784 ' +
-      'C594 820 586 854 578 886 ' +
+      'C606 716 606 752 600 788 ' +
+      'C594 824 586 858 578 890 ' +
       // calf taper to slim ankle
-      'C574 906 570 922 566 934 ' +
-      'C556 936 540 936 530 934 ' +
-      'C526 920 524 902 522 882 ' +
+      'C574 910 570 926 566 938 ' +
+      'C556 940 540 940 530 938 ' +
+      'C526 924 524 906 522 886 ' +
       // inner calf up
-      'C518 850 516 816 514 782 ' +
-      'C512 744 510 706 508 678 ' +
+      'C518 854 516 820 514 786 ' +
+      'C512 748 510 710 508 682 ' +
       // inner thigh to crotch
-      'C506 674 506 668 508 664 Z',
+      'C506 678 506 672 508 668 Z',
   },
   // Left leg (viewer-left) — mirror of the right.
   {
     id: 'legL',
     d:
-      'M492 664 ' +
-      'C456 664 420 668 400 678 ' +
-      'C394 712 394 748 400 784 ' +
-      'C406 820 414 854 422 886 ' +
-      'C426 906 430 922 434 934 ' +
-      'C444 936 460 936 470 934 ' +
-      'C474 920 476 902 478 882 ' +
-      'C482 850 484 816 486 782 ' +
-      'C488 744 490 706 492 678 ' +
-      'C494 674 494 668 492 664 Z',
+      'M492 668 ' +
+      'C456 668 420 672 400 682 ' +
+      'C394 716 394 752 400 788 ' +
+      'C406 824 414 858 422 890 ' +
+      'C426 910 430 926 434 938 ' +
+      'C444 940 460 940 470 938 ' +
+      'C474 924 476 906 478 886 ' +
+      'C482 854 484 820 486 786 ' +
+      'C488 748 490 710 492 682 ' +
+      'C494 678 494 672 492 668 Z',
   },
 ];
 
 /**
  * Legacy single-path export, kept for backwards compatibility. It is the union
  * of all BODY_PARTS path data; rendered with `fill-rule:evenodd` it produces a
- * full filled silhouette. New code should prefer iterating `BODY_PARTS` so each
- * part can be stroked cleanly.
+ * full filled silhouette.
  */
 export const BODY_SILHOUETTE_PATH = BODY_PARTS.map((p) => p.d).join(' ');

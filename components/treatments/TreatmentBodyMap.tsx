@@ -9,47 +9,50 @@ import {
 } from './body-zones';
 
 /**
- * TreatmentBodyMap — an award-winning, premium visualisation of WHERE a
- * body-contouring treatment works best, shown on a front-facing human body and
- * animated with Three.js.
+ * TreatmentBodyMap — a premium, two-panel visualisation of WHERE a
+ * body-contouring treatment works best.
+ *
+ * ── Why this layout (no crossing leader lines) ─────────────────────────────
+ *  The previous version scattered labels around the figure with elbow
+ *  connectors that crossed over the label text. This version eliminates that
+ *  problem at the root: there are NO floating labels and NO connectors on the
+ *  body. Instead it is a TWO-PANEL composition:
+ *    • LEFT  — eyebrow, heading, intro, and a tidy VERTICAL LIST of the
+ *      treatment's target zones. Each row is a real <button> carrying a small
+ *      NUMBER badge and the zone name.
+ *    • RIGHT — a refined line-art figure. Each zone is a soft, numbered PIN
+ *      sitting on the body; the pin's number matches its row number in the
+ *      list. That numeric pairing is what links list ↔ body, so nothing ever
+ *      crosses text. Hover/focus a row to emphasise its pin (and vice-versa).
  *
  * ── Visual approach ────────────────────────────────────────────────────────
- *  • A refined, well-proportioned front-facing female figure is drawn from a
- *    handful of clean, smooth, closed SVG sub-paths (head, neck, torso, two
- *    arms, two legs — see BODY_PARTS). Each part is filled with a soft vertical
- *    gradient ground and stroked with a hairline sage outline, so the figure
- *    reads as an intentional editorial illustration, not a lumpy blob. This SVG
- *    layer is the REAL, crawlable, screen-reader content and the static
- *    fallback.
- *  • The treatment's clinical target zones are drawn on the body as soft,
- *    refined concentric markers (a calm radial halo + a crisp dot ring), not
- *    fuzzy blobs. The animation/depth comes from a decorative, aria-hidden
- *    Three.js (raw `three`, no R3F) overlay: each zone is an additive radial
- *    sprite that gently breathes (pulse) on its own phase, plus a faint ring of
- *    drifting depth particles per zone — giving the calm, luxurious "energy on
- *    skin" feel without a heavy anatomical mesh.
- *  • Editorial labels with thin elbow connectors lean to the outer margins and
- *    are de-collided vertically per side so they never overlap. Hovering or
- *    focusing a zone emphasises it in both layers.
+ *  • The figure is an elegant, single-weight LINE drawing (not a lumpy filled
+ *    blob): hairline sage strokes, the torso carrying only a barely-there
+ *    vertical ground wash. It reads as an intentional editorial / medical
+ *    illustration. This SVG layer is the real, crawlable, screen-reader content
+ *    and the static fallback.
+ *  • Pins are refined concentric markers (soft radial halo + crisp ring +
+ *    centred index number). The animation/depth comes from a decorative,
+ *    aria-hidden Three.js (raw `three`, no R3F) overlay: each zone is an
+ *    additive radial sprite that gently breathes on its own phase plus a faint
+ *    ring of drifting depth particles — a calm "energy on skin" glow.
  *
  * ── Robustness / performance ───────────────────────────────────────────────
- *  • WebGL is lazily initialised ONLY when the section scrolls into view
- *    (IntersectionObserver), and the RAF loop pauses when offscreen or when the
- *    document is hidden.
+ *  • WebGL is lazily initialised ONLY when the section scrolls into view, and
+ *    the RAF loop pauses when offscreen or when the document is hidden.
  *  • devicePixelRatio capped at 2 (1.5 on coarse pointers). All geometries,
  *    materials, textures, the renderer and every listener are disposed on
  *    unmount.
  *  • prefers-reduced-motion OR no-WebGL → the Three.js layer is never created;
- *    the SVG body with statically-marked glowing zones + labels is shown. Never
- *    an empty/broken canvas.
+ *    the SVG figure with statically-marked numbered pins + the zone list is
+ *    shown. Never an empty/broken canvas.
  *
  * ── Accessibility / SEO ────────────────────────────────────────────────────
  *  • The Three.js canvas is `aria-hidden` / decorative.
- *  • The heading, intro, the SVG body and a real, labelled list of every target
- *    zone live in the SSR DOM (the list is visible on mobile and available to
- *    screen readers everywhere), so the zones are crawlable + announced.
- *  • Zone controls are real <button>s — keyboard focusable, with visible focus,
- *    AA-contrast labels.
+ *  • The heading, intro and a real, labelled list of every target zone NAME
+ *    live in the SSR DOM, so the zones are crawlable + announced.
+ *  • Zone rows are real <button>s — keyboard focusable, with visible focus and
+ *    `aria-pressed`, AA-contrast labels.
  */
 
 export interface TreatmentBodyMapProps {
@@ -122,7 +125,7 @@ export default function TreatmentBodyMap({
     activeRef.current = active;
   }, [active]);
 
-  // Whether the decorative WebGL layer is running (false → SVG markers carry).
+  // Whether the decorative WebGL layer is running (false → SVG pins carry).
   const [glowReady, setGlowReady] = useState(false);
 
   /* ── Three.js decorative glow layer ──────────────────────────────────────
@@ -157,7 +160,7 @@ export default function TreatmentBodyMap({
             powerPreference: 'low-power',
           });
         } catch {
-          return; // SVG markers remain visible
+          return; // SVG pins remain visible
         }
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, coarse ? 1.5 : 2));
 
@@ -281,8 +284,6 @@ export default function TreatmentBodyMap({
           w = s.w;
           h = s.h;
           renderer.setSize(w, h, false);
-          // Keep body-space square-ish: aspect handled by host CSS (it matches
-          // the SVG aspect), so the ortho box [0,1]² maps cleanly.
         };
         const ro = new ResizeObserver(onResize);
         ro.observe(host);
@@ -300,7 +301,6 @@ export default function TreatmentBodyMap({
 
         let raf = 0;
         const t0 = performance.now();
-        const tmp = new THREE.Vector3();
         const render = () => {
           raf = requestAnimationFrame(render);
           if (!visible || document.hidden) return;
@@ -345,7 +345,6 @@ export default function TreatmentBodyMap({
             g.pMat.size = g.zone.r * (0.5 + 0.15 * pulse);
           }
 
-          tmp.set(0, 0, 0); // (kept for potential future parallax)
           renderer.render(scene, camera);
         };
         render();
@@ -388,9 +387,11 @@ export default function TreatmentBodyMap({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [serviceId]);
 
-  /* ── Geometry helpers for the SVG label layout ──────────────────────────── */
   const VB = 1000; // viewBox units
-  const labeled = useMemo(() => layoutLabels(zones), [zones]);
+
+  const setOn = (key: string) => setActive(key);
+  const clearOn = (key: string) =>
+    setActive((a) => (a === key ? null : a));
 
   return (
     <section
@@ -400,7 +401,7 @@ export default function TreatmentBodyMap({
     >
       <style>{CSS}</style>
       <div className="tbm__inner">
-        {/* Copy column */}
+        {/* ── Left panel: copy + interactive zone list ─────────────────── */}
         <div className="tbm__copy">
           <p className="tbm__eyebrow">{eyebrow}</p>
           <h2 id="tbm-heading" className="tbm__heading">
@@ -409,49 +410,54 @@ export default function TreatmentBodyMap({
           <span className="tbm__rule" aria-hidden />
           <p className="tbm__intro">{resolvedIntro}</p>
 
-          {/* Real, crawlable, screen-reader list of every target zone. Doubles
-              as keyboard-focusable controls that emphasise a zone on the body. */}
-          <ul className="tbm__zonelist" aria-label="Target areas for this treatment">
-            {zones.map((z) => (
-              <li key={z.key}>
-                <button
-                  type="button"
-                  className={`tbm__chip${active === z.key ? ' is-active' : ''}`}
-                  aria-pressed={active === z.key}
-                  onMouseEnter={() => setActive(z.key)}
-                  onMouseLeave={() => setActive((a) => (a === z.key ? null : a))}
-                  onFocus={() => setActive(z.key)}
-                  onBlur={() => setActive((a) => (a === z.key ? null : a))}
-                >
-                  <span className="tbm__chipDot" aria-hidden />
-                  {z.label}
-                </button>
-              </li>
-            ))}
-          </ul>
+          {/* Real, crawlable, screen-reader list of every target zone. Each row
+              is a keyboard-focusable control whose NUMBER matches the pin on the
+              body — replacing the old leader-line labels entirely. */}
+          <ol className="tbm__zonelist" aria-label="Target areas for this treatment">
+            {zones.map((z, i) => {
+              const isOn = active === z.key;
+              return (
+                <li key={z.key}>
+                  <button
+                    type="button"
+                    className={`tbm__row${isOn ? ' is-active' : ''}`}
+                    aria-pressed={isOn}
+                    onMouseEnter={() => setOn(z.key)}
+                    onMouseLeave={() => clearOn(z.key)}
+                    onFocus={() => setOn(z.key)}
+                    onBlur={() => clearOn(z.key)}
+                  >
+                    <span className="tbm__rowNum" aria-hidden>
+                      {i + 1}
+                    </span>
+                    <span className="tbm__rowText">{z.label}</span>
+                    <span className="tbm__rowTick" aria-hidden />
+                  </button>
+                </li>
+              );
+            })}
+          </ol>
         </div>
 
-        {/* Visualisation column: SVG body + label connectors (SSR/fallback) with
-            the decorative Three.js glow canvas layered on top. */}
+        {/* ── Right panel: line-art figure + numbered pins ──────────────── */}
         <div className="tbm__stage">
           <div className="tbm__bodyWrap">
             <svg
               className="tbm__svg"
               viewBox={BODY_VIEWBOX}
               role="img"
-              aria-label={`Human body outline showing the areas this treatment targets: ${zones
+              aria-label={`Figure showing the areas this treatment targets: ${zones
                 .map((z) => z.label)
                 .join(', ')}.`}
             >
               <defs>
-                {/* Soft vertical ground for the figure body — warm taupe at the
-                    top easing into a faint sage at the base. */}
-                <linearGradient id="tbm-body" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#efe7d7" stopOpacity="0.65" />
-                  <stop offset="100%" stopColor="#d9e2d6" stopOpacity="0.5" />
+                {/* Barely-there vertical ground for the torso core only. */}
+                <linearGradient id="tbm-core" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#efe7d7" stopOpacity="0.5" />
+                  <stop offset="100%" stopColor="#d9e2d6" stopOpacity="0.42" />
                 </linearGradient>
-                {/* Refined zone halo — sage glow that falls off cleanly. */}
-                <radialGradient id="tbm-marker" cx="50%" cy="50%" r="50%">
+                {/* Refined pin halo — sage glow that falls off cleanly. */}
+                <radialGradient id="tbm-pin" cx="50%" cy="50%" r="50%">
                   <stop offset="0%" stopColor={BRIGHT_SAGE} stopOpacity="0.5" />
                   <stop offset="45%" stopColor={SAGE} stopOpacity="0.22" />
                   <stop offset="100%" stopColor={SAGE} stopOpacity="0" />
@@ -463,22 +469,22 @@ export default function TreatmentBodyMap({
                     dy="6"
                     stdDeviation="10"
                     floodColor={DEEP_SAGE}
-                    floodOpacity="0.12"
+                    floodOpacity="0.1"
                   />
                 </filter>
               </defs>
 
-              {/* Refined figure — each anatomical part is its own clean closed
-                  path so it strokes precisely (no self-intersecting seams). */}
+              {/* Refined line-art figure. The torso core carries a faint ground
+                  wash; every part is a clean single-weight outline stroke. */}
               <g className="tbm__body" filter="url(#tbm-soft)">
                 {BODY_PARTS.map((part) => (
                   <path
                     key={part.id}
                     d={part.d}
-                    fill="url(#tbm-body)"
+                    fill={part.core ? 'url(#tbm-core)' : 'none'}
                     stroke={DEEP_SAGE}
                     strokeOpacity={0.5}
-                    strokeWidth={2}
+                    strokeWidth={2.25}
                     strokeLinejoin="round"
                   />
                 ))}
@@ -486,187 +492,67 @@ export default function TreatmentBodyMap({
               {/* faint centre line for editorial structure */}
               <line
                 x1={500}
-                y1={234}
+                y1={236}
                 x2={500}
-                y2={690}
+                y2={694}
                 stroke={DEEP_SAGE}
                 strokeOpacity={0.08}
                 strokeWidth={1}
               />
 
-              {/* Static zone markers — these are the visible mark in the
-                  reduced-motion / no-WebGL fallback, and a calm under-layer when
-                  the glow runs. A soft halo + a crisp hairline ring + a small
-                  centre dot reads as a precise clinical "target", not a blob. */}
-              {zones.map((z) => {
+              {/* Numbered pins — the visible mark in the reduced-motion /
+                  no-WebGL fallback, and a calm under-layer when the glow runs.
+                  A soft halo + a crisp ring + a centred index number reads as a
+                  precise clinical "target". The number ties back to the list. */}
+              {zones.map((z, i) => {
                 const cx = z.x * VB;
                 const cy = z.y * VB;
                 const rr = z.r * VB;
                 const isOn = active === z.key;
                 return (
-                  <g key={z.key} className={isOn ? 'tbm__mk is-on' : 'tbm__mk'}>
+                  <g
+                    key={z.key}
+                    className={isOn ? 'tbm__pin is-on' : 'tbm__pin'}
+                  >
                     <circle
                       cx={cx}
                       cy={cy}
-                      r={rr * (glowReady ? 0.95 : 1.25)}
-                      fill="url(#tbm-marker)"
+                      r={rr * (glowReady ? 1.0 : 1.3)}
+                      fill="url(#tbm-pin)"
                       style={{ opacity: glowReady ? 0.6 : 1 }}
                     />
                     <circle
                       cx={cx}
                       cy={cy}
-                      r={rr * 0.62}
-                      fill="none"
-                      stroke={SAGE}
-                      strokeOpacity={isOn ? 0.9 : 0.55}
-                      strokeWidth={isOn ? 2.5 : 1.75}
-                    />
-                    <circle
-                      cx={cx}
-                      cy={cy}
-                      r={rr * 0.2}
-                      fill={isOn ? FOREST : SAGE}
-                      fillOpacity={isOn ? 1 : 0.85}
-                    />
-                  </g>
-                );
-              })}
-
-              {/* Connectors + labels — a tidy leader line:
-                  marker → elbow (at the row height) → rail dot → uppercase text. */}
-              {labeled.map((l) => {
-                const isOn = active === l.zone.key;
-                return (
-                  <g
-                    key={l.zone.key}
-                    className={isOn ? 'tbm__lab is-on' : 'tbm__lab'}
-                  >
-                    <polyline
-                      points={`${l.anchorX},${l.anchorY} ${l.elbowX},${l.labelY} ${l.labelX},${l.labelY}`}
-                      fill="none"
-                      stroke={SAGE}
-                      strokeOpacity={isOn ? 0.85 : 0.38}
-                      strokeWidth={isOn ? 2 : 1.25}
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <circle
-                      cx={l.labelX}
-                      cy={l.labelY}
-                      r={isOn ? 4 : 3}
-                      fill={isOn ? FOREST : SAGE}
+                      r={rr * 0.66}
+                      fill="#ffffff"
+                      fillOpacity={isOn ? 0.95 : 0.82}
+                      stroke={isOn ? FOREST : SAGE}
+                      strokeOpacity={isOn ? 0.95 : 0.6}
+                      strokeWidth={isOn ? 3 : 2}
                     />
                     <text
-                      x={l.textX}
-                      y={l.labelY}
-                      textAnchor={l.anchor}
-                      dominantBaseline="middle"
-                      className="tbm__labtext"
+                      x={cx}
+                      y={cy}
+                      textAnchor="middle"
+                      dominantBaseline="central"
+                      className="tbm__pinNum"
                       fill={isOn ? FOREST : SAGE_TEXT}
                     >
-                      {l.zone.label}
+                      {i + 1}
                     </text>
                   </g>
                 );
               })}
             </svg>
 
-            {/* Decorative WebGL glow overlay — perfectly aligned to the SVG box. */}
+            {/* Decorative WebGL glow overlay — aligned to the SVG box. */}
             <div ref={canvasHostRef} className="tbm__canvas" aria-hidden />
           </div>
         </div>
       </div>
     </section>
   );
-}
-
-/* ── SVG label layout ──────────────────────────────────────────────────────
-   Push every label to the outer margins, then de-collide them vertically
-   within each side so no two rows overlap — an editorial "leader line" layout.
-   Returns absolute viewBox coordinates. */
-type LabeledZone = {
-  zone: BodyZone;
-  anchorX: number; // marker x (where the connector starts)
-  anchorY: number; // marker y
-  elbowX: number; // where the connector bends to vertical/horizontal margin
-  labelX: number; // dot on the margin rail
-  labelY: number; // de-collided row y
-  textX: number; // text start/end
-  anchor: 'start' | 'end';
-};
-
-const VB_UNITS = 1000;
-const LABEL_LEFT_X = 64;
-const LABEL_RIGHT_X = 936;
-const MIN_ROW_GAP = 64; // min vertical distance between two labels on a side
-const ROW_MIN_Y = 150;
-const ROW_MAX_Y = 950;
-
-/** Spread an ascending list of desired y-positions so neighbours keep MIN_ROW_GAP. */
-function declutter(values: number[]): number[] {
-  const out = values.slice();
-  // forward pass: push each down if too close to the previous
-  for (let i = 1; i < out.length; i++) {
-    if (out[i] - out[i - 1] < MIN_ROW_GAP) out[i] = out[i - 1] + MIN_ROW_GAP;
-  }
-  // clamp to the bottom, then back-pass upward so we stay inside the rail
-  if (out.length) {
-    out[out.length - 1] = Math.min(out[out.length - 1], ROW_MAX_Y);
-    for (let i = out.length - 2; i >= 0; i--) {
-      if (out[i + 1] - out[i] < MIN_ROW_GAP) out[i] = out[i + 1] - MIN_ROW_GAP;
-    }
-    out[0] = Math.max(out[0], ROW_MIN_Y);
-  }
-  return out;
-}
-
-function layoutLabels(zones: BodyZone[]): LabeledZone[] {
-  // Resolve each zone to a hard side (L/R). Centre zones split by x, but if x
-  // is dead-centre, alternate so they don't all stack on one rail.
-  let centreToggle = 0;
-  const enriched = zones.map((z) => {
-    let side: 'L' | 'R';
-    if (z.side === 'L') side = 'L';
-    else if (z.side === 'R') side = 'R';
-    else if (Math.abs(z.x - 0.5) < 0.001) side = centreToggle++ % 2 === 0 ? 'L' : 'R';
-    else side = z.x <= 0.5 ? 'L' : 'R';
-    return {
-      zone: z,
-      side,
-      anchorX: z.x * VB_UNITS,
-      anchorY: z.y * VB_UNITS,
-    };
-  });
-
-  const result: LabeledZone[] = [];
-
-  (['L', 'R'] as const).forEach((side) => {
-    const rows = enriched
-      .filter((e) => e.side === side)
-      .sort((a, b) => a.anchorY - b.anchorY);
-    const spread = declutter(rows.map((r) => r.anchorY));
-    const leftish = side === 'L';
-    const labelX = leftish ? LABEL_LEFT_X : LABEL_RIGHT_X;
-    const textX = leftish ? LABEL_LEFT_X + 14 : LABEL_RIGHT_X - 14;
-    rows.forEach((r, i) => {
-      const labelY = spread[i];
-      // Elbow: step horizontally away from the body, then the connector runs
-      // to the rail dot. Keeps a tidy two-segment leader line.
-      const elbowX = leftish ? labelX + 70 : labelX - 70;
-      result.push({
-        zone: r.zone,
-        anchorX: r.anchorX,
-        anchorY: r.anchorY,
-        elbowX,
-        labelX,
-        labelY,
-        textX,
-        anchor: leftish ? 'start' : 'end',
-      });
-    });
-  });
-
-  return result;
 }
 
 /* ── Reusable soft radial glow texture (canvas → THREE.Texture) ───────────── */
@@ -708,13 +594,13 @@ const CSS = `
 }
 .tbm__inner{
   max-width:1180px;margin:0 auto;
-  display:grid;grid-template-columns:1fr;gap:clamp(28px,5vw,56px);
+  display:grid;grid-template-columns:1fr;gap:clamp(28px,5vw,64px);
   align-items:center;
 }
 @media (min-width:880px){
-  .tbm__inner{grid-template-columns:0.92fr 1.08fr;}
+  .tbm__inner{grid-template-columns:0.95fr 1.05fr;}
 }
-.tbm__copy{max-width:520px;}
+.tbm__copy{max-width:540px;}
 .tbm__eyebrow{
   font-family:${WIDE_FONT};
   text-transform:uppercase;letter-spacing:3px;font-size:12px;
@@ -728,48 +614,74 @@ const CSS = `
 .tbm__rule{display:block;width:84px;height:2px;background:${BRIGHT_SAGE};margin:20px 0;}
 .tbm__intro{
   font-family:Roboto,system-ui,sans-serif;color:${TAUPE_BODY};
-  font-size:clamp(15px,1.6vw,17px);line-height:1.7;margin:0 0 26px;max-width:46ch;
+  font-size:clamp(15px,1.6vw,17px);line-height:1.7;margin:0 0 28px;max-width:46ch;
 }
+
+/* Vertical list of zone rows — replaces the old floating labels. */
 .tbm__zonelist{
-  list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:10px;
+  list-style:none;margin:0;padding:0;
+  display:flex;flex-direction:column;gap:8px;
 }
-.tbm__chip{
-  display:inline-flex;align-items:center;gap:9px;
-  font-family:${WIDE_FONT};text-transform:uppercase;letter-spacing:1px;
-  font-size:12px;color:${SAGE_TEXT};
-  background:rgba(143,176,147,0.12);
-  border:1px solid rgba(79,114,86,0.35);
-  border-radius:999px;padding:9px 15px;cursor:pointer;
-  transition:background .25s ease,border-color .25s ease,color .25s ease,transform .25s ease;
+.tbm__row{
+  --rowbg:rgba(143,176,147,0.08);
+  display:flex;align-items:center;gap:14px;width:100%;
+  text-align:left;cursor:pointer;
+  background:var(--rowbg);
+  border:1px solid rgba(79,114,86,0.22);
+  border-radius:14px;padding:11px 14px;
+  transition:background .25s ease,border-color .25s ease,transform .25s ease,box-shadow .25s ease;
 }
-.tbm__chip:hover,.tbm__chip.is-active{
-  background:${SAGE};color:#fff;border-color:${SAGE};transform:translateY(-1px);
+.tbm__row:hover,.tbm__row.is-active{
+  --rowbg:rgba(2,76,39,0.06);
+  border-color:${SAGE};transform:translateX(3px);
+  box-shadow:0 6px 18px rgba(2,76,39,0.08);
 }
-.tbm__chip:focus-visible{
+.tbm__row:focus-visible{
   outline:2px solid ${FOREST};outline-offset:2px;
 }
-.tbm__chipDot{
-  width:8px;height:8px;border-radius:50%;background:${BRIGHT_SAGE};
-  box-shadow:0 0 0 3px rgba(143,176,147,0.25);flex:none;
+.tbm__rowNum{
+  flex:none;display:inline-flex;align-items:center;justify-content:center;
+  width:30px;height:30px;border-radius:50%;
+  font-family:${WIDE_FONT};font-size:13px;font-weight:600;
+  color:${SAGE_TEXT};
+  background:#fff;border:1.5px solid rgba(79,114,86,0.45);
+  transition:color .25s ease,background .25s ease,border-color .25s ease;
 }
-.tbm__chip.is-active .tbm__chipDot,.tbm__chip:hover .tbm__chipDot{background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,0.3);}
+.tbm__row:hover .tbm__rowNum,.tbm__row.is-active .tbm__rowNum{
+  color:#fff;background:${FOREST};border-color:${FOREST};
+}
+.tbm__rowText{
+  flex:1 1 auto;
+  font-family:${WIDE_FONT};text-transform:uppercase;letter-spacing:1.4px;
+  font-size:13px;color:${SAGE_TEXT};
+  transition:color .25s ease;
+}
+.tbm__row:hover .tbm__rowText,.tbm__row.is-active .tbm__rowText{color:${FOREST};}
+.tbm__rowTick{
+  flex:none;width:8px;height:8px;border-radius:50%;
+  background:${BRIGHT_SAGE};opacity:0;transform:scale(0.6);
+  transition:opacity .25s ease,transform .25s ease;
+}
+.tbm__row:hover .tbm__rowTick,.tbm__row.is-active .tbm__rowTick{
+  opacity:1;transform:scale(1);background:${FOREST};
+}
 
 .tbm__stage{display:flex;justify-content:center;}
 .tbm__bodyWrap{
-  position:relative;width:100%;max-width:540px;aspect-ratio:1/1;
+  position:relative;width:100%;max-width:480px;aspect-ratio:1/1;
 }
 .tbm__svg{position:absolute;inset:0;width:100%;height:100%;display:block;overflow:visible;}
 .tbm__canvas{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;}
 .tbm__body path{transition:stroke-opacity .4s ease;}
-.tbm__labtext{
-  font-family:${WIDE_FONT};text-transform:uppercase;letter-spacing:1.5px;
-  font-size:19px;transition:fill .25s ease;
+.tbm__pinNum{
+  font-family:${WIDE_FONT};font-weight:600;font-size:34px;
+  transition:fill .25s ease;
+  pointer-events:none;
 }
-.tbm__lab .tbm__labtext{font-weight:500;}
-.tbm__lab.is-on .tbm__labtext{font-weight:700;}
-.tbm__mk circle{transition:opacity .3s ease,fill-opacity .3s ease,stroke-opacity .3s ease;}
+.tbm__pin circle{transition:opacity .3s ease,fill-opacity .3s ease,stroke-opacity .3s ease,stroke-width .3s ease;}
 
 @media (prefers-reduced-motion: reduce){
-  .tbm__chip{transition:none;}
+  .tbm__row{transition:none;}
+  .tbm__row:hover,.tbm__row.is-active{transform:none;}
 }
 `;
