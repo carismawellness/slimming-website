@@ -539,47 +539,59 @@ export default function TreatmentBodyMap({
               {/* Numbered pins — the visible mark in the reduced-motion /
                   no-WebGL fallback, and a calm under-layer when the glow runs.
                   A soft halo + a crisp ring + a centred index number reads as a
-                  precise clinical "target". The number ties back to the list. */}
-              {zones.map((z, i) => {
-                const cx = z.x * VB;
-                const cy = z.y * VB;
-                const rr = z.r * VB;
-                const isOn = active === z.key;
-                return (
-                  <g
-                    key={z.key}
-                    className={isOn ? 'tbm__pin is-on' : 'tbm__pin'}
-                  >
-                    <circle
-                      cx={cx}
-                      cy={cy}
-                      r={rr * (glowReady ? 1.0 : 1.3)}
-                      fill="url(#tbm-pin)"
-                      style={{ opacity: glowReady ? 0.6 : 1 }}
-                    />
-                    <circle
-                      cx={cx}
-                      cy={cy}
-                      r={rr * 0.66}
-                      fill="#ffffff"
-                      fillOpacity={isOn ? 0.95 : 0.82}
-                      stroke={isOn ? FOREST : SAGE}
-                      strokeOpacity={isOn ? 0.95 : 0.6}
-                      strokeWidth={isOn ? 3 : 2}
-                    />
-                    <text
-                      x={cx}
-                      y={cy}
-                      textAnchor="middle"
-                      dominantBaseline="central"
-                      className="tbm__pinNum"
-                      fill={isOn ? FOREST : SAGE_TEXT}
+                  precise clinical "target". The number ties back to the list.
+
+                  Z-ORDER FIX: every pin lives in this dedicated layer which is
+                  the LAST child of the SVG, so by SVG paint order it always
+                  renders ABOVE the figure (the <g.tbm__body> group above) — a
+                  pin on a body edge (e.g. muscle-stimulation "3" on the arm)
+                  can never be painted behind the figure stroke. The white
+                  backing disc is fully OPAQUE so the index number always reads
+                  on solid white and is never clipped/washed by the figure
+                  outline, core wash or centre line beneath it. Anchor data is
+                  unchanged. */}
+              <g className="tbm__pins">
+                {zones.map((z, i) => {
+                  const cx = z.x * VB;
+                  const cy = z.y * VB;
+                  const rr = z.r * VB;
+                  const isOn = active === z.key;
+                  return (
+                    <g
+                      key={z.key}
+                      className={isOn ? 'tbm__pin is-on' : 'tbm__pin'}
                     >
-                      {i + 1}
-                    </text>
-                  </g>
-                );
-              })}
+                      <circle
+                        cx={cx}
+                        cy={cy}
+                        r={rr * (glowReady ? 1.0 : 1.3)}
+                        fill="url(#tbm-pin)"
+                        style={{ opacity: glowReady ? 0.6 : 1 }}
+                      />
+                      <circle
+                        cx={cx}
+                        cy={cy}
+                        r={rr * 0.66}
+                        fill="#ffffff"
+                        fillOpacity={1}
+                        stroke={isOn ? FOREST : SAGE}
+                        strokeOpacity={isOn ? 0.95 : 0.6}
+                        strokeWidth={isOn ? 3 : 2}
+                      />
+                      <text
+                        x={cx}
+                        y={cy}
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        className="tbm__pinNum"
+                        fill={isOn ? FOREST : SAGE_TEXT}
+                      >
+                        {i + 1}
+                      </text>
+                    </g>
+                  );
+                })}
+              </g>
             </svg>
 
             {/* Decorative WebGL glow overlay — aligned to the SVG box. */}

@@ -69,7 +69,7 @@ export const fatDissolving: PackageContent = {
     'Our limited-time launch offer is available for selected treatment areas. Once full, standard pricing applies.',
     'Experience targeted fat reduction performed by qualified aesthetic medical professionals now from €199 (regularly €450). In just one session, you begin the process of permanently breaking down stubborn fat for a slimmer, more refined contour.',
   ],
-  ptEfficacyTitle: 'Proven efficacy',
+  ptEfficacyTitle: '',
   ptEfficacyBullets: [
     'Advanced injectable treatments break down stubborn fat in specific areas such as the chin, abdomen, flanks, and thighs.',
     'Results develop progressively over several weeks, ensuring smooth, natural-looking contour improvement without drastic change.',

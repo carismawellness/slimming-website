@@ -66,7 +66,7 @@ export const muscleStimulation: PackageContent = {
     'Builds muscle, burns fat and tightens skin in one 30 minute treatment.',
     'EMSculpt NEO combines high-intensity focused electromagnetic (HIFEM) pulses with radiofrequency heating. The RF gently warms the tissue and fat, while HIFEM drives thousands of powerful muscle contractions that you could never achieve in a normal workout. Over the next weeks your body responds by building muscle fibres, using local fat as fuel and firming the area.',
   ],
-  ptEfficacyTitle: 'Proven efficacy',
+  ptEfficacyTitle: '',
   /* live: these four lines are indented bullet items under "Proven efficacy"
      (the last sentence is split across two bullets on live, after "No needles,") */
   ptEfficacyBullets: [
@@ -75,7 +75,7 @@ export const muscleStimulation: PackageContent = {
     'Results typically start to show from 4–12 weeks after the final session as muscle adapts and fat reduces. No needles,',
     'no surgery and little to no downtime for most people. You lie back while the device does the work, with each treatment lasting about 30 minutes.',
   ],
-  ptImage: W + '87fc13_1a54a17987f64e6fb275b2721b8dc7f4~mv2.png',
+  ptImage: W + '87fc13_d79664fae1184e8e8c947c3d350af498~mv2.jpg',
   ptImage2: W + '87fc13_134b655cd7f945a9a2847030229e46a1~mv2.png',
 
   dualHeading: ['malta’s emsculpt neo muscle', 'sculpting starter protocol'],

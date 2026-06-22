@@ -10,7 +10,7 @@ export const antiCellulite: PackageContent = {
   heroTitle: 'anti-cellulite treatment in malta — cellulift protocol',
   heroSubheading: 'smooth stubborn cellulite and uneven texture with precision',
   heroDescription:
-    'Our cellulite protocol combines three VelaShape vacuum roller sessions with one lymphatic drainage massage to elminate cellulite, uneven texture, and boost circulation:',
+    'Our cellulite protocol combines three VelaShape vacuum roller sessions with one lymphatic drainage massage to reduce the appearance of cellulite, smooth uneven texture, and boost circulation:',
   heroIncludes: [
     '4x Anti Cellulite sessions with the VelaShape (€400)',
     '4x access to spa & fitness facilities (€140)',
@@ -57,13 +57,13 @@ export const antiCellulite: PackageContent = {
   eligEyebrow: 'eligibility criteria',
   eligHeading: 'areas we treat for smoother, cellulite-free skin',
   eligImage: W + '87fc13_2b03ae3db08f45929726527724060704~mv2.jpg',
-  eligIntro: 'Treat visible fat bulges in 3 areas of the body',
-  areas: ['arms', 'BUTTOCKS AND UNDER-BUTT CREASE', 'THIGHS (FRONT, BACK, INNER AND OUTER)'],
+  eligIntro: 'Smooth cellulite-prone areas across the body',
+  areas: ['THIGHS (FRONT, BACK, INNER AND OUTER)', 'BUTTOCKS AND UNDER-BUTT CREASE', 'HIPS'],
 
   ptEyebrow: 'our technology',
   ptHeading: 'internationally renowned, fda-approved modalities',
   ptCardEyebrow: 'velashape iii (cellulift protocol)',
-  ptCardTag: 'muscle strengthening, tone & metabolic support',
+  ptCardTag: 'cellulite smoothing, circulation & skin texture',
   ptParas: [
     'Smooths the appearance of cellulite, improves skin texture and refines contour in one comfortable treatment.',
     'CelluLift uses VelaShape III vacuum roller technology to target the structural causes of visible cellulite. Each session combines radiofrequency, infrared heat, vacuum suction and mechanical rollers to soften fibrous tissue, boost circulation and support lymphatic flow. This multi-action approach helps smooth uneven texture and improve the overall look and feel of the skin.',
@@ -75,11 +75,11 @@ export const antiCellulite: PackageContent = {
   ptEfficacyBullets: [
     'Clinically proven approach: VelaShape technology has been shown in studies to improve the appearance of cellulite and uneven skin texture.',
     'Visible smoothing: Vacuum and mechanical massage encourage blood flow and lymphatic drainage for a lighter, smoother feel.',
-    'Circulation support: Results typically start to show from 4–12 weeks after the final session as muscle adapts and fat reduces.',
+    'Progressive results: Skin texture typically continues to improve in the weeks following the final session as circulation and tissue tone respond.',
     'Non invasive: No needles, no surgery and no downtime for most people.',
     'Comfortable sessions: Feels like a warm, deep mechanical massage, with each treatment lasting around 30 minutes.',
   ],
-  ptImage: W + '87fc13_056fc4bfc20b42c1ad5b0fbaddb94718~mv2.png',
+  ptImage: W + '87fc13_5dde946fd77046908ec6b65db211836a~mv2.jpg', // clean Anti-Cellulite/VelaShape treatment photo (was a thin before/after composite)
   ptImage2: W + '87fc13_8c638b6d5ad142b7914059b0806693c2~mv2.png',
 
   dualHeading: ['malta’s most advanced cellulite', 'smoothing & contouring protocol'],
@@ -118,7 +118,7 @@ export const antiCellulite: PackageContent = {
     { q: '10. Can CelluLift be combined with other treatments?', a: 'Yes. CelluLift is often combined with skin tightening or body contouring treatments to enhance overall results. Your practitioner will advise what combinations are suitable.' },
   ],
 
-  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METODOLOGY', // sic — live typo "METODOLOGY"
+  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METHODOLOGY',
   evidence: [
     {
       img: W + '87fc13_be8c4316bfbb46e9898da45f3e483bb2~mv2.png',
@@ -126,8 +126,8 @@ export const antiCellulite: PackageContent = {
       title: 'mechanical massage & vacuum therapy for cellulite',
       does: 'Mechanical massage combined with vacuum suction mobilises fibrous septae, improves blood flow, and reduces tissue stiffness associated with the dimpled appearance of cellulite.',
       results: [
-        'A clinical study published in Lasers in Surgery and Medicine found that vacuum-assisted massage significantly improved skin smoothness and reduced the appearance of cellulite after a short treatment course, with visible texture improvements reported by both clinicians and patients. Lasers in Surgery and Medicine',
-        'A review of mechanical massage therapies concluded that repeated sessions improved tissue pliability and surface smoothness, particularly in the thighs and buttocks. PMC+1',
+        'A clinical study published in Lasers in Surgery and Medicine found that vacuum-assisted massage significantly improved skin smoothness and reduced the appearance of cellulite after a short treatment course, with visible texture improvements reported by both clinicians and patients.',
+        'A review of mechanical massage therapies concluded that repeated sessions improved tissue pliability and surface smoothness, particularly in the thighs and buttocks.',
       ],
       foot: 'Texture smoothing Tissue mobilisation Progressive results',
     },
@@ -137,8 +137,8 @@ export const antiCellulite: PackageContent = {
       title: 'velashape technology for cellulite appearance',
       does: 'VelaShape combines radiofrequency, infrared heat, vacuum suction, and mechanical rollers to heat tissue, stimulate circulation, and improve skin texture associated with cellulite.',
       results: [
-        'Clinical trials reported in the Journal of Cosmetic and Laser Therapy showed measurable reductions in cellulite severity scores and improvements in skin smoothness after a course of VelaShape treatments.Journal of Cosmetic and Laser Therapy',
-        'Patients demonstrated visible improvement in cellulite appearance without changes in overall body weight, confirming a contouring and texture effect rather than fat loss.PMC+1',
+        'Clinical trials reported in the Journal of Cosmetic and Laser Therapy showed measurable reductions in cellulite severity scores and improvements in skin smoothness after a course of VelaShape treatments.',
+        'Patients demonstrated visible improvement in cellulite appearance without changes in overall body weight, confirming a contouring and texture effect rather than fat loss.',
       ],
       foot: 'Multi-modal treatment Cellulite smoothing Best for mild–moderate cellulite',
     },
@@ -146,21 +146,21 @@ export const antiCellulite: PackageContent = {
       img: W + '87fc13_f1e71bcbbd304341985eb29e68c5e6c4~mv2.png',
       tag: 'Moderate evidence',
       title: 'lymphatic drainage massage & circulation support',
-      does: 'These technologies reshape specific areas that do not change much with diet or gym, such as lower belly, flanks or double chin, while overall weight often stays similar.',
+      does: 'Manual lymphatic drainage stimulates lymph flow and circulation, helping to reduce fluid retention and puffiness that exaggerate the dimpled look of cellulite.',
       results: [
-        'In abdominal cryolipolysis follow up, fat thickness fell by almost half and circumferences dropped by about 1 cm while body weight, total fat mass and lean mass stayed stable, confirming a local contour effect rather than general slimming. PMC+1',
-        'Clinical notes on submental fat reduction with deoxycholic acid highlight that this type of fat often persists even in people who are not overweight and can be resistant to standard weight reduction measures, which is exactly the scenario this package targets. Health Research Authority',
+        'Clinical reviews of manual lymphatic drainage report improved fluid clearance and reduced swelling, supporting a smoother, less congested appearance in cellulite-prone areas such as the thighs and hips.',
+        'Combining lymphatic drainage with vacuum and mechanical massage enhances circulation and tissue mobilisation, complementing the VelaShape sessions for more even skin texture.',
       ],
-      foot: 'Best for people already working on lifestyle Used to smooth specific problem spots that remain after diet and exercise Not a substitute for full weight loss programs',
+      foot: 'Improves circulation Reduces fluid retention Complements VelaShape sessions',
     },
     {
       img: W + '87fc13_24d04796e297434fb9b4f7682f7a9384~mv2.png',
       tag: 'Moderate evidence',
       title: 'safety and tolerability of non-invasive cellulite treatments',
-      does: 'What it does: Vacuum massage, RF, and lymphatic techniques are widely used non-invasive approaches for cellulite smoothing with a strong safety profile when delivered correctly.',
+      does: 'Vacuum massage, RF, and lymphatic techniques are widely used non-invasive approaches for cellulite smoothing with a strong safety profile when delivered correctly.',
       results: [
-        'Large clinical reviews report that side effects are generally mild and temporary, such as redness or tenderness, with no serious adverse events reported when protocols are followed.DA-cleared device data / PMC',
-        'Long-term studies confirm that these treatments do not damage deeper tissues and are suitable for repeated use.JAMA Dermatology',
+        'Large clinical reviews report that side effects are generally mild and temporary, such as redness or tenderness, with no serious adverse events reported when protocols are followed.',
+        'Long-term studies confirm that these treatments do not damage deeper tissues and are suitable for repeated use.',
       ],
       foot: 'Clinically proven Non-surgical Well tolerated',
     },

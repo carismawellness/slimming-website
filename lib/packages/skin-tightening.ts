@@ -54,7 +54,7 @@ export const skinTightening: PackageContent = {
   eligEyebrow: 'eligibility criteria',
   eligHeading: 'areas we treat for firmer, tighter skin',
   eligImage: W + '87fc13_9b8bca36cbde4c16b23d79ab96ac5286~mv2.png',
-  eligIntro: 'Treat visible fat bulges in 7 areas of the body',
+  eligIntro: 'Firm and smooth loose or uneven skin across the most common trouble areas',
   areas: ['TUMMY / ABDOMEN', 'NECK', 'ARMS', 'BUTTOCKS AND UNDER-BUTT CREASE', 'THIGHS (FRONT, BACK, INNER AND OUTER)'],
 
   ptEyebrow: 'our technology',
@@ -62,7 +62,7 @@ export const skinTightening: PackageContent = {
   ptHeading: 'internationally renowned,\nfda-approved modalities',
   ptCardEyebrow: 'velashape iii',
   // live source is mixed case but renders all-caps; serif header branch applies no transform, so type it uppercase
-  ptCardTag: 'MUSCLE STRENGTHENING, TONE & METABOLIC SUPPORT',
+  ptCardTag: 'SKIN TIGHTENING, CELLULITE & CONTOUR SUPPORT',
   ptTitleStyle: 'serif',
   ptLeadBold: true,
   ptParas: [
@@ -77,7 +77,9 @@ export const skinTightening: PackageContent = {
     'Non invasive: No needles, no surgery and no downtime for most people.',
     'Comfortable sessions: Feels like a warm, deep massage with each treatment lasting about 30 minutes.',
   ],
-  ptImage: W + '87fc13_056fc4bfc20b42c1ad5b0fbaddb94718~mv2.png',
+  // VelaShape III treatment photo (clean clinical shot, not a cut-off before/after);
+  // matches the skin-tightening modality image used on the home modalities carousel.
+  ptImage: W + '87fc13_adb56c71648b421998e77dbea4ec5fb8~mv2.jpg',
   // live shows the pear photo (268x268, 87fc13_8c638b6d…) sitting on a white wave
   // backdrop (515x308, 87fc13_134b655c…); the template has a single decorative slot,
   // so render the salient pear (same as live anti-cellulite / lipocavitation).
@@ -90,7 +92,7 @@ export const skinTightening: PackageContent = {
     { icon: W + '87fc13_c4cf7001e0324fbd84551191d2a27bd1~mv2.png', title: 'COLLAGEN-STIMULATING TECHNOLOGY', body: 'Radiofrequency and infrared energy work together with vacuum and mechanical massage to support collagen production and improve skin texture.' },
   ],
   dualIncludes: [
-    '4x Muscle Stimulation sessions with EMSculpt NEO (€400)',
+    '4x Skin tightening sessions with the VelaShape III (€400)',
     '4x access to spa & fitness facilities (€140)',
     'Tanita Body Composition Analysis (€60)',
     '€25 Carisma Aesthetics credit (€25)',
@@ -157,16 +159,8 @@ export const skinTightening: PackageContent = {
       ],
       foot: 'Helps smooth the look of dimpled skin Commonly treated areas include thighs and buttocks Gradual improvement over multiple sessions',
     },
-    {
-      img: W + '87fc13_880b5c63634f410b999a6d5b329e67d8~mv2.png',
-      tag: 'STRONG SAFETY PROFILE',
-      title: 'non-surgical treatment\nwith minimal downtime', // live has an explicit <br> here
-      does: 'Delivers controlled energy and mechanical stimulation without surgery, needles, or incisions. Treatments are designed to be comfortable, allowing most people to return to normal daily activities immediately afterward.',
-      results: [
-        'Clinical reports describe the procedure as well tolerated, with common effects limited to temporary warmth, redness, or mild tenderness in the treated area. Clinical Safety Reviews',
-        'Because the treatment is non-invasive, there is typically no required recovery period, making it suitable for people seeking gradual improvement without downtime. Aesthetic Device Safety Data',
-      ],
-      foot: 'No surgery or needles Most people return to normal activity right away Side effects are usually mild and temporary',
-    },
+    // NOTE: trimmed to 3 cards so the evidence grid fills one equal-height row on
+    // desktop (template uses repeat(3, 1fr)); a 4th card wrapped alone into a
+    // broken second row. Safety/downtime is already covered in benefits + FAQ.
   ],
 };

@@ -88,7 +88,7 @@ export const lymphaticDrainage: PackageContent = {
   ptClosing:
     'If lymphatic drainage is not appropriate for you, we are clear and transparent — and guide you toward alternative therapies that better support your health and goals.',
   ptCardCta: 'Claim your spot now',
-  ptImage: W + '87fc13_69b82cafbcc744d39a475402cf8fd33e~mv2.jpg',
+  ptImage: W + '87fc13_597101dd5e634161a957161a595de331~mv2.webp',
   ptImage2: W + '87fc13_a421b8598a9d4687aed1200322e0dc64~mv2.png',
   ptImage3: W + '87fc13_50cffcdb438440d68ea6b0553bf28e24~mv2.png',
 
@@ -128,7 +128,7 @@ export const lymphaticDrainage: PackageContent = {
 
   faqCtaLabel: 'Claim your spot now',
 
-  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METODOLOGY',
+  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METHODOLOGY',
   evidence: [
     {
       img: W + '87fc13_e7c53ad0e27445729ba68a17dd836565~mv2.png',
@@ -163,19 +163,8 @@ export const lymphaticDrainage: PackageContent = {
       ],
       foot: 'De-bloating support Travel & lifestyle friendly Works best consistently',
     },
-    {
-      img: W + '87fc13_764464d670ba4b96823c473518ceddd4~mv2.png',
-      tag: 'Moderate evidence',
-      title: 'safety profile of professional lymphatic drainage (when screened properly)',
-      does: 'Lymphatic drainage is typically gentle and well-tolerated. With proper screening (e.g., infection, clot risk, heart/kidney conditions), it’s commonly used as a supportive wellness and recovery approach.',
-      results: [
-        'The technique is light-pressure and non-invasive, making it suitable for many people seeking swelling reduction and comfort—provided contraindications are ruled out.Safety guidance',
-        'Most people report it feels relaxing, with common “after effects” being increased urination, lightness, and reduced tightness—especially when well hydrated.Client experience',
-      ],
-      foot: 'Gentle & non-invasive Requires basic screening Comfort-first approach',
-    },
   ],
   evidenceCtaLabel: 'Claim your spot now',
 
-  hide: { testimonials: true },
+  hide: {},
 };

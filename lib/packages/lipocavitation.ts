@@ -76,7 +76,7 @@ export const lipocavitation: PackageContent = {
     'Non-invasive: No needles, no surgery, no anaesthesia and no downtime — you can return to your normal day immediately after each session.',
     'Comfortable sessions: Most clients describe the sensation as a warm, gentle vibration. Each session lasts approximately 30 to 45 minutes.',
   ],
-  ptImage: W + '87fc13_056fc4bfc20b42c1ad5b0fbaddb94718~mv2.png',
+  ptImage: W + 'f940f0_3959a9b1203c41b09ca238cd2c75ee35~mv2.webp',
   ptImage2: W + '87fc13_8c638b6d5ad142b7914059b0806693c2~mv2.png',
 
   dualHeading: ['malta’s targeted fat contouring', 'starter pack'],
@@ -94,6 +94,7 @@ export const lipocavitation: PackageContent = {
   ],
   dualTotalValue: '€625',
   dualTodayPrice: '€199 Only',
+  dualCtaLabel: 'Claim your spot now',
   dualFineprint: [
     '* Includes four sessions to be followed over the course of 2 weeks',
     '** Additional sessions of Velashape III may be booked at €100 per session',
@@ -114,7 +115,8 @@ export const lipocavitation: PackageContent = {
   ],
   faqCtaLabel: 'Claim your spot now',
 
-  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METhODOLOGY',
+  evidenceCtaLabel: 'Claim your spot now',
+  evidenceEyebrow: 'CLINICAL RESEARCH: BASIS OF OUR METHODOLOGY',
   evidence: [
     {
       img: W + '87fc13_d160679a5a4f4729ac97ef7172222e36~mv2.png',

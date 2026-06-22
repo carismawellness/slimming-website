@@ -21,7 +21,7 @@
      11 Evidence based approach (research cards)
    ============================================================ */
 
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import { BOOKING_URL } from '@/lib/services';
@@ -74,6 +74,15 @@ const PRESS = [
 const PRESS_HEADING_DEFAULT = ["malta's trusted clinic for", 'non surgical fat reduction'];
 
 const CONTAINER: React.CSSProperties = { maxWidth: 1040, marginLeft: 'auto', marginRight: 'auto', paddingLeft: 24, paddingRight: 24 };
+
+/* FIX 2 — the template already prints a hardcoded "Proven efficacy" label above
+   the efficacy bullets. Some services' `ptEfficacyBullets[0]` ALSO start with
+   "Proven efficacy" (optionally followed by ":" / "—" / "-"), which renders the
+   words twice. Strip that leading phrase (case-insensitive, with surrounding
+   whitespace) from each bullet before printing. Applied in BOTH render branches. */
+function stripProvenEfficacy(text: string): string {
+  return text.replace(/^\s*proven efficacy\s*[:—-]?\s*/i, '');
+}
 
 /* ---------- shared pieces ---------- */
 function Eyebrow({ children, align = 'center', size = 15 }: { children: React.ReactNode; align?: 'center' | 'left'; size?: number }) {
@@ -419,6 +428,228 @@ function TestimonialsSection({ items }: { items: Testimonial[] }) {
   );
 }
 
+/* ---------- evidence carousel ----------
+   FIX 1 — the evidence cards used to sit in a rigid `repeat(3,1fr)` grid, so a
+   service with 4 cards (muscle-stimulation, anti-cellulite, lipocavitation)
+   orphaned the 4th card alone on a second row — the rejected "3 + odd one out".
+   This is now a horizontal scroll-snap carousel that REUSES the in-file
+   TestimonialsSection / ResultsCarousel pattern: a flex track with
+   `overflow-x:auto`, scroll-snap, a hidden scrollbar, and white circular ‹/›
+   arrows that appear ONLY when the track is actually scrollable (driven by
+   atStart / atEnd / canScroll state). The card design (eyebrow tag pill, image,
+   title, "WHAT IT DOES", body, Read more) and equal heights are unchanged.
+
+   Layout by card count:
+     • Desktop: each card is ~1/3 the row (so exactly 3 fit; a 4th peeks +
+       scrolls). With exactly 3 cards the track isn't scrollable → NO arrows,
+       NO fade, so it looks identical to the old clean 3-up row.
+     • Mobile: cards ~85vw, swipeable, stack/scroll cleanly.
+   All cards are preserved (no trimming) with no orphan on any count.
+   Reduced-motion safe (smooth scroll falls back to auto via the same media
+   rule that disables .fr-testi-track transitions; scrollBy honours it too). */
+function EvidenceCarousel({
+  items,
+  openEv,
+  setOpenEv,
+}: {
+  items: PackageContent['evidence'];
+  openEv: number | null;
+  setOpenEv: (v: number | null) => void;
+}) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(true);
+  const [canScroll, setCanScroll] = useState(false);
+
+  const update = () => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    const scrollable = max > 2;
+    setCanScroll(scrollable);
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft >= max - 2);
+  };
+
+  useEffect(() => {
+    update();
+    const el = scrollRef.current;
+    if (!el) return;
+    el.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    return () => {
+      el.removeEventListener('scroll', update);
+      window.removeEventListener('resize', update);
+    };
+    // Re-measure when the card set changes.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [items.length]);
+
+  const scrollBy = (dir: number) => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const reduce = typeof window !== 'undefined'
+      && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    el.scrollBy({ left: dir * (el.clientWidth * 0.9), behavior: reduce ? 'auto' : 'smooth' });
+  };
+
+  return (
+    <div style={{ position: 'relative', marginTop: 40 }}>
+      <style>{`
+        .fr-ev-track::-webkit-scrollbar { display: none; }
+        .fr-ev-slide { width: 85vw; }
+        @media (min-width: 640px) { .fr-ev-slide { width: 46%; } }
+        /* Desktop: ~1/3 of the row so exactly 3 are visible (gap-aware). */
+        @media (min-width: 1024px) { .fr-ev-slide { width: calc((100% - 48px) / 3); } }
+        .fr-ev-arrow:hover { transform: translateY(-50%) scale(1.05); }
+        .fr-ev-arrow:active { transform: translateY(-50%) scale(0.98); }
+      `}</style>
+
+      {/* White circular ‹/› arrows — rendered ONLY when the track is scrollable
+          (4+ cards on desktop, or any overflow on narrow screens), and each is
+          disabled/hidden at its respective end. A 3-card row never shows them. */}
+      {canScroll && !atStart && (
+        <button
+          type="button"
+          onClick={() => scrollBy(-1)}
+          aria-label="Previous evidence"
+          className="rc-focusable fr-ev-arrow absolute z-20 flex items-center justify-center"
+          style={{
+            left: '-10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: '#FFFFFF',
+            color: GREEN_TEXT,
+            fontSize: '22px',
+            cursor: 'pointer',
+            border: 0,
+            lineHeight: 1,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
+            transition: 'transform 0.18s ease',
+          }}
+        >
+          <span aria-hidden="true" style={{ marginTop: '-2px' }}>‹</span>
+        </button>
+      )}
+      {canScroll && !atEnd && (
+        <button
+          type="button"
+          onClick={() => scrollBy(1)}
+          aria-label="Next evidence"
+          className="rc-focusable fr-ev-arrow absolute z-20 flex items-center justify-center"
+          style={{
+            right: '-10px',
+            top: '50%',
+            transform: 'translateY(-50%)',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: '#FFFFFF',
+            color: GREEN_TEXT,
+            fontSize: '22px',
+            cursor: 'pointer',
+            border: 0,
+            lineHeight: 1,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
+            transition: 'transform 0.18s ease',
+          }}
+        >
+          <span aria-hidden="true" style={{ marginTop: '-2px' }}>›</span>
+        </button>
+      )}
+
+      {/* Soft right-edge fade — only while there's more to scroll to the right. */}
+      {canScroll && !atEnd && (
+        <div
+          aria-hidden="true"
+          className="absolute z-10"
+          style={{
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: '48px',
+            pointerEvents: 'none',
+            background: 'linear-gradient(to right, rgba(255,255,255,0), #FFFFFF)',
+          }}
+        />
+      )}
+
+      <div
+        ref={scrollRef}
+        className="fr-ev-track flex overflow-x-auto"
+        style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none', gap: '24px', alignItems: 'stretch' }}
+      >
+        {items.map((e, i) => {
+          const open = openEv === i;
+          const panelId = `ev-panel-${i}`;
+          const btnId = `ev-btn-${i}`;
+          return (
+            <div
+              key={e.title}
+              className="fr-ev-slide flex-shrink-0"
+              style={{ scrollSnapAlign: 'start', position: 'relative', paddingTop: 16, display: 'flex', flexDirection: 'column' }}
+            >
+              <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
+                <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: '#eef3ea', position: 'relative', height: 186 }}>
+                  {/* P3 — next/image for evidence images */}
+                  <Image src={e.img} alt="" fill sizes="(max-width: 640px) 85vw, (max-width: 1024px) 46vw, 33vw" style={{ objectFit: 'cover' }} />
+                </div>
+                <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 999, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
+              </div>
+              <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 100%)', border: '1px solid #e8e2da', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1, flex: 1, display: 'flex', flexDirection: 'column' }}>
+                {/* P6 — H3 within evidence section */}
+                <h3 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', whiteSpace: 'pre-line', margin: 0 }}>{e.title}</h3>
+                <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
+                <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>What it does</p>
+                <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.6, margin: '0 0 6px', ...(open ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>{e.does}</p>
+                {open && (
+                  <div id={panelId} role="region" aria-labelledby={btnId}>
+                    <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '14px 0 8px' }}>Key results</p>
+                    <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
+                      {e.results.map((r) => (
+                        <li key={r} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
+                          <Dot /><span style={{ color: TAUPE, fontFamily: BODY, fontSize: 13.5, lineHeight: 1.7 }}>{r}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    {e.foot && <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 12.5, lineHeight: 1.6, margin: 0 }}>{e.foot}</p>}
+                  </div>
+                )}
+                <button
+                  id={btnId}
+                  onClick={() => setOpenEv(open ? null : i)}
+                  aria-expanded={open}
+                  aria-controls={panelId}
+                  style={{
+                    marginTop: 'auto',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
+                    color: TAUPE,
+                    fontFamily: BODY,
+                    fontSize: 15,
+                    fontStyle: 'italic',
+                    textDecoration: 'underline',
+                    padding: '8px 0',
+                    display: 'block',
+                    /* P2 — min touch target */
+                    minHeight: '44px',
+                  }}
+                >
+                  {open ? 'Read less' : 'Read more'}
+                </button>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 /* ============================================================ */
 export default function PackagePage({ content: c }: { content: PackageContent }) {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -732,7 +963,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', display: 'flex', flexDirection: 'column', gap: 13 }}>
                         {c.ptEfficacyBullets.map((b) => (
                           <li key={b} style={{ display: 'flex', gap: 11, alignItems: 'flex-start' }}>
-                            <CheckMark size={18} /><span style={{ ...body, fontSize: 14 }}>{b}</span>
+                            <CheckMark size={18} /><span style={{ ...body, fontSize: 14 }}>{stripProvenEfficacy(b)}</span>
                           </li>
                         ))}
                       </ul>
@@ -794,7 +1025,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 13 }}>
                       {c.ptEfficacyBullets.map((b) => (
                         <li key={b} style={{ display: 'flex', gap: 11, alignItems: 'flex-start' }}>
-                          <CheckMark size={18} /><span style={{ ...body, fontSize: 14 }}>{b}</span>
+                          <CheckMark size={18} /><span style={{ ...body, fontSize: 14 }}>{stripProvenEfficacy(b)}</span>
                         </li>
                       ))}
                     </ul>
@@ -1058,69 +1289,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 <SectionHeading id="evidence-heading" size={24}>Evidence-Based Clinical Approach</SectionHeading>
               </div>
 
-              {/* Single clean row on desktop (equal cards, no orphaned/hanging card);
-                  collapses to 1 column on mobile via the .fr-evgrid media rule. */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 40, alignItems: 'stretch' }} className="fr-evgrid">
-                {c.evidence.map((e, i) => {
-                  const open = openEv === i;
-                  const panelId = `ev-panel-${i}`;
-                  const btnId = `ev-btn-${i}`;
-                  return (
-                    <div key={e.title} style={{ position: 'relative', paddingTop: 16, height: '100%', display: 'flex', flexDirection: 'column' }}>
-                      <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
-                        <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: '#eef3ea', position: 'relative', height: 186 }}>
-                          {/* P3 — next/image for evidence images */}
-                          <Image src={e.img} alt="" fill sizes="(max-width: 860px) 90vw, 33vw" style={{ objectFit: 'cover' }} />
-                        </div>
-                        <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 999, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
-                      </div>
-                      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 100%)', border: '1px solid #e8e2da', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1, flex: 1, display: 'flex', flexDirection: 'column' }}>
-                        {/* P6 — H3 within evidence section */}
-                        <h3 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', whiteSpace: 'pre-line', margin: 0 }}>{e.title}</h3>
-                        <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
-                        <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>What it does</p>
-                        <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.6, margin: '0 0 6px', ...(open ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }) }}>{e.does}</p>
-                        {open && (
-                          <div id={panelId} role="region" aria-labelledby={btnId}>
-                            <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', margin: '14px 0 8px' }}>Key results</p>
-                            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: 10 }}>
-                              {e.results.map((r) => (
-                                <li key={r} style={{ display: 'flex', gap: 8, alignItems: 'flex-start' }}>
-                                  <Dot /><span style={{ ...body, fontSize: 13.5 }}>{r}</span>
-                                </li>
-                              ))}
-                            </ul>
-                            {e.foot && <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 12.5, lineHeight: 1.6, margin: 0 }}>{e.foot}</p>}
-                          </div>
-                        )}
-                        <button
-                          id={btnId}
-                          onClick={() => setOpenEv(open ? null : i)}
-                          aria-expanded={open}
-                          aria-controls={panelId}
-                          style={{
-                            marginTop: 'auto',
-                            background: 'none',
-                            border: 'none',
-                            cursor: 'pointer',
-                            color: TAUPE,
-                            fontFamily: BODY,
-                            fontSize: 15,
-                            fontStyle: 'italic',
-                            textDecoration: 'underline',
-                            padding: '8px 0',
-                            display: 'block',
-                            /* P2 — min touch target */
-                            minHeight: '44px',
-                          }}
-                        >
-                          {open ? 'Read less' : 'Read more'}
-                        </button>
-                      </div>
-                    </div>
-                  );
-                })}
-              </div>
+              {/* Scroll-snap carousel (see EvidenceCarousel): 3 cards → clean
+                  3-up row with no arrows; 4+ cards → a 4th peeks and scrolls,
+                  with white ‹/› arrows. No orphaned card on any count. */}
+              <EvidenceCarousel items={c.evidence} openEv={openEv} setOpenEv={setOpenEv} />
 
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}>
                 <CTA variant="blue">{c.evidenceCtaLabel ?? 'Claim your spot now'}</CTA>
@@ -1134,11 +1306,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           .fr-faqsearch:focus-visible { outline: 3px solid ${GREEN_TEXT}; outline-offset: 2px; }
           /* P7 — prefers-reduced-motion: disable testimonial card hover transitions */
           @media (prefers-reduced-motion: reduce) {
-            .fr-testi-track * { transition: none !important; animation: none !important; }
+            .fr-testi-track *, .fr-ev-track * { transition: none !important; animation: none !important; }
           }
           @media (max-width: 860px) {
-            .fr-hero-grid, .fr-2col, .fr-benefits, .fr-evgrid { grid-template-columns: 1fr !important; }
-            .fr-evgrid > div { grid-column: auto !important; }
+            .fr-hero-grid, .fr-2col, .fr-benefits { grid-template-columns: 1fr !important; }
             .fr-hero-img { order: -1; }
           }
           @media (max-width: 560px) { .fr-benefits { grid-template-columns: 1fr !important; } }
