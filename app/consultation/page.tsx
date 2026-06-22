@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import Image from 'next/image';
 import BookConsultationButton from '@/components/BookConsultationButton';
 import GradientField from '@/components/layers/GradientField';
+import HeroMotif from '@/components/HeroMotif';
 import DoctorCards from './_components/DoctorCards';
 
 export const metadata: Metadata = {
@@ -64,6 +65,11 @@ function Check() {
       </svg>
     </span>
   );
+}
+
+/* Section-header rule — 64px sage hairline, centered (design-language §4). */
+function Rule() {
+  return <span aria-hidden style={{ display: 'block', width: 64, height: 1, background: SAGE, margin: '18px auto' }} />;
 }
 
 const TRUST = [
@@ -153,6 +159,9 @@ export default function ConsultationPage() {
               zIndex: 0,
             }}
           />
+
+          {/* animated sage constellation motif (brand signature, reduced-motion-safe) */}
+          <HeroMotif />
 
           <div
             className="consult-hero-grid"
@@ -246,6 +255,9 @@ export default function ConsultationPage() {
                   height: 'min(58vh, 520px)',
                   aspectRatio: '4 / 5',
                   maxWidth: '100%',
+                  overflow: 'hidden',
+                  borderRadius: '210px 210px 22px 22px',
+                  boxShadow: '0 30px 70px -28px rgba(40,55,44,0.45)',
                 }}
               >
                 <Image
@@ -256,13 +268,14 @@ export default function ConsultationPage() {
                   className="object-cover"
                   sizes="(max-width: 900px) 90vw, 420px"
                 />
+                {/* light sage wash (on-brand, replaces dark photo overlay) */}
                 <span
                   aria-hidden
                   style={{
                     position: 'absolute',
                     inset: 0,
                     pointerEvents: 'none',
-                    background: 'linear-gradient(to top, rgba(18,28,20,0.34) 0%, rgba(18,28,20,0.06) 30%, transparent 58%)',
+                    background: 'linear-gradient(to top, rgba(79,114,86,0.18) 0%, rgba(79,114,86,0.04) 34%, transparent 60%)',
                   }}
                 />
               </div>
@@ -330,7 +343,8 @@ export default function ConsultationPage() {
               <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, marginBottom: 12 }}>
                 Simple &amp; reassuring
               </p>
-              <h2 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 34px)', textTransform: 'uppercase', color: SAGE, lineHeight: 1.15 }}>
+              <Rule />
+              <h2 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 34px)', textTransform: 'uppercase', color: '#3c5a40', lineHeight: 1.15 }}>
                 What Happens at Your Consultation
               </h2>
             </header>
@@ -365,13 +379,15 @@ export default function ConsultationPage() {
         </GradientField>
 
         {/* ════════════════ 4 · MEET YOUR DOCTORS ════════════════ */}
-        <section aria-labelledby="doctors-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(64px, 9vw, 96px)', paddingBottom: 'clamp(48px, 7vw, 80px)' }}>
+        {/* starts at section 3's end tint, settles to white → continuous flow */}
+        <section aria-labelledby="doctors-heading" style={{ backgroundImage: 'linear-gradient(180deg, rgba(201, 216, 193, 0.18) 0%, #FFFFFF 28%)', backgroundColor: '#ffffff', paddingTop: 'clamp(64px, 9vw, 96px)', paddingBottom: 'clamp(48px, 7vw, 80px)' }}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <header className="text-center" style={{ marginBottom: 'clamp(36px, 5vw, 56px)' }}>
               <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, marginBottom: 12 }}>
                 Your medical team
               </p>
-              <h2 id="doctors-heading" style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 34px)', textTransform: 'uppercase', color: SAGE, lineHeight: 1.15 }}>
+              <Rule />
+              <h2 id="doctors-heading" style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 34px)', textTransform: 'uppercase', color: '#3c5a40', lineHeight: 1.15 }}>
                 Meet the Doctors Behind Your Plan
               </h2>
               <p style={{ fontFamily: BODY, fontSize: 15, lineHeight: 1.6, color: TAUPE, maxWidth: 600, margin: '14px auto 0' }}>
@@ -384,7 +400,8 @@ export default function ConsultationPage() {
         </section>
 
         {/* ════════════════ 5 · PROOF BAND ════════════════ */}
-        <section aria-labelledby="proof-heading" style={{ backgroundColor: '#ffffff', paddingBottom: 'clamp(64px, 9vw, 96px)' }}>
+        {/* settles from white toward section 6's sage-tinted top → continuous flow */}
+        <section aria-labelledby="proof-heading" style={{ backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 60%, rgba(201, 216, 193, 0.22) 100%)', backgroundColor: '#ffffff', paddingBottom: 'clamp(64px, 9vw, 96px)' }}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg-glass lg-glass--panel" style={{ padding: 'clamp(28px, 4vw, 48px)' }}>
               <header className="text-center" style={{ marginBottom: 'clamp(28px, 4vw, 40px)' }}>
@@ -438,7 +455,8 @@ export default function ConsultationPage() {
             <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, marginBottom: 14 }}>
               Free · Doctor-led · No obligation
             </p>
-            <h2 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(26px, 3.6vw, 40px)', textTransform: 'uppercase', color: SAGE, lineHeight: 1.12, marginBottom: 18 }}>
+            <Rule />
+            <h2 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 'clamp(26px, 3.6vw, 40px)', textTransform: 'uppercase', color: '#3c5a40', lineHeight: 1.12, marginBottom: 18 }}>
               Your Healthier Weight Starts With One Conversation
             </h2>
             <p style={{ fontFamily: BODY, fontSize: 16, lineHeight: 1.6, color: TAUPE, maxWidth: 560, margin: '0 auto 30px' }}>

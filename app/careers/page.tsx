@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import HeroMotif from '@/components/HeroMotif';
 
 export const metadata: Metadata = {
   title: "Join the Team at Carisma Slimming | #1 Award Winning Chain",
@@ -13,16 +14,18 @@ export const metadata: Metadata = {
   },
 };
 
-const headingFont = 'Trajan Pro, serif';
-const wideFont = 'Novecento Wide Book, sans-serif';
-// Darkened taupe (locked accessible palette) so text/icons/fills clear AA on
-// white (5.78:1) and on the CREAM #F6EFE3 band (5.06:1). Was #B0A68F (2.41:1 FAIL).
-const TAUPE = '#6f6456';
-const CREAM = '#F6EFE3';
-const RULE = '#D9E4E4';
+const HEADING = 'Trajan Pro, serif';
+const WIDE = '"Novecento Wide", "Novecento Wide Book", sans-serif';
+const BODY = 'Roboto, sans-serif';
 
-// Live page: four requirement lines separated by two blank lines each,
-// with a decorative pale rule overlaid left of the text every 96px.
+// Locked accessible tokens (DESIGN_LANGUAGE §1)
+const FOREST = '#024C27';   // primary, deep stat headings
+const HEAD_SAGE = '#3c5a40'; // section headings (H2/H3)
+const SAGE = '#4f7256';      // buttons, links, icons, eyebrows
+const BODY_TEXT = '#333333';
+const SECONDARY = '#595959';
+const RULE = '#4f7256';
+
 const REQUIREMENTS = [
   'Want to work in the best 5 star hotels',
   'Are hard working and motivated',
@@ -32,154 +35,235 @@ const REQUIREMENTS = [
 
 export default function CareersPage() {
   return (
-    <main className="w-full overflow-x-hidden" style={{ backgroundColor: '#FFFFFF' }}>
-      {/* HERO — Join the team */}
-      <section className="relative" style={{ paddingTop: '85px' }}>
-        {/* Heading (live DOM is uppercase; Trajan renders it exactly) */}
-        <div className="px-4">
-          <h1
-            className="text-center mx-auto"
-            style={{
-              color: TAUPE,
-              fontFamily: headingFont,
-              fontWeight: 400,
-              fontSize: '35px',
-              lineHeight: '49px',
-              maxWidth: '735px',
-            }}
-          >
-CAREERS IN MALTA — JOIN CARISMA SLIMMING&apos;S #1 WEIGHT LOSS CLINIC TEAM
-          </h1>
-        </div>
-
-        {/* Thin vertical divider (overlaps the cream band top, as on live) */}
-        <div
-          className="relative mx-auto"
-          style={{ width: '1px', height: '83px', backgroundColor: TAUPE, marginTop: '44px', zIndex: 10 }}
+    <main className="w-full overflow-x-hidden">
+      {/* ── HERO — bespoke, with animated HeroMotif behind the copy ───────── */}
+      <section
+        className="relative"
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          paddingTop: 'clamp(120px, 16vh, 168px)',
+          paddingBottom: 'clamp(48px, 8vh, 96px)',
+          // Hero radial sage wash → flows into the white section below
+          background:
+            'radial-gradient(120% 90% at 85% 10%, #eef3ea 0%, #f6f4ef 45%, #ffffff 100%)',
+        }}
+      >
+        {/* soft brand glow bed (decorative) */}
+        <span
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: '-12%',
+            right: '-8%',
+            width: 460,
+            height: 460,
+            borderRadius: '50%',
+            background: 'rgba(142,176,147,0.28)',
+            filter: 'blur(90px)',
+            zIndex: 0,
+          }}
         />
 
-        {/* Photo with full-bleed cream band behind its upper part */}
-        <div className="relative" style={{ marginTop: '74px' }}>
-          <div
-            className="absolute pointer-events-none"
-            style={{
-              left: '50%',
-              transform: 'translateX(-50%)',
-              width: '100vw',
-              top: '-116px',
-              height: '357px',
-              backgroundColor: CREAM,
-            }}
-          />
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/wix/eac6309c7e924921acd0cd838be3c271.jpg"
-            alt="Beautician"
-            className="relative mx-auto w-full object-cover px-4 sm:px-0"
-            style={{ maxWidth: '735px', aspectRatio: '3 / 2', borderRadius: '16px' }}
-          />
-        </div>
+        {/* animated constellation motif (reduced-motion-safe, aria-hidden) */}
+        <HeroMotif />
 
-        {/* Caption — live DOM is lowercase; Trajan Pro renders it as caps/small caps */}
-        <div className="px-4">
+        <div className="relative" style={{ zIndex: 1 }}>
+          {/* eyebrow */}
           <p
-            className="mx-auto"
+            className="text-center"
             style={{
-              color: TAUPE,
-              fontFamily: headingFont,
-              fontWeight: 400,
-              fontSize: '25px',
-              lineHeight: '35px',
-              textAlign: 'justify',
-              maxWidth: '735px',
-              marginTop: '49px',
+              fontFamily: WIDE,
+              fontSize: 12,
+              letterSpacing: '3px',
+              textTransform: 'uppercase',
+              color: SAGE,
+              margin: '0 0 18px',
             }}
           >
-            our company is growing fast, and we are always on the look out for ambitious and talented people.
+            Careers at Carisma Slimming
           </p>
+
+          <div className="px-4">
+            <h1
+              className="text-center mx-auto"
+              style={{
+                color: SAGE,
+                fontFamily: HEADING,
+                fontWeight: 400,
+                fontSize: 'clamp(26px, 3vw, 35px)',
+                lineHeight: 1.25,
+                textTransform: 'uppercase',
+                maxWidth: '760px',
+              }}
+            >
+              CAREERS IN MALTA — JOIN CARISMA SLIMMING&apos;S #1 WEIGHT LOSS CLINIC TEAM
+            </h1>
+          </div>
+
+          {/* 64px centered rule */}
+          <div
+            className="mx-auto"
+            style={{ width: '64px', height: '1px', backgroundColor: RULE, margin: '24px auto' }}
+          />
+
+          {/* Photo in a soft, rounded card with subtle shadow */}
+          <div className="relative px-4" style={{ marginTop: '40px' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/wix/eac6309c7e924921acd0cd838be3c271.jpg"
+              alt="Beautician"
+              loading="lazy"
+              className="relative mx-auto w-full object-cover"
+              style={{
+                maxWidth: '735px',
+                aspectRatio: '3 / 2',
+                borderRadius: '20px',
+                boxShadow: '0 30px 70px -28px rgba(40,55,44,.45)',
+              }}
+            />
+          </div>
+
+          {/* Caption / intro line */}
+          <div className="px-4">
+            <p
+              className="mx-auto text-center"
+              style={{
+                color: SECONDARY,
+                fontFamily: BODY,
+                fontWeight: 400,
+                fontSize: '16px',
+                lineHeight: 1.6,
+                maxWidth: '620px',
+                marginTop: '32px',
+              }}
+            >
+              Our company is growing fast, and we are always on the look out for ambitious and talented people.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* IF YOU... requirements + Apply */}
-      <section style={{ paddingTop: '50px', paddingBottom: '64px' }}>
-        <div className="mx-auto" style={{ maxWidth: '980px' }}>
-          <div className="relative flex flex-col lg:flex-row lg:items-start">
-            {/* Handshake photo — bleeds 150px left of the 980px grid on desktop */}
+      {/* ── ROLES + APPLY — white, flowing on from the hero's white end ───── */}
+      <section
+        style={{
+          paddingTop: 'clamp(40px, 6vh, 72px)',
+          paddingBottom: 'clamp(56px, 9vh, 104px)',
+          background: '#ffffff',
+        }}
+      >
+        <div className="mx-auto px-4" style={{ maxWidth: '1080px' }}>
+          {/* Section header pattern */}
+          <div className="text-center mx-auto" style={{ maxWidth: '720px', marginBottom: '48px' }}>
+            <p
+              style={{
+                fontFamily: WIDE,
+                fontSize: 12,
+                letterSpacing: '3px',
+                textTransform: 'uppercase',
+                color: SAGE,
+                margin: 0,
+              }}
+            >
+              Who we&apos;re hiring
+            </p>
+            <div
+              className="mx-auto"
+              style={{ width: '64px', height: '1px', backgroundColor: RULE, margin: '18px auto' }}
+            />
+            <h2
+              style={{
+                color: HEAD_SAGE,
+                fontFamily: HEADING,
+                fontWeight: 400,
+                fontSize: 'clamp(24px, 3.4vw, 34px)',
+                lineHeight: 1.25,
+                textTransform: 'uppercase',
+              }}
+            >
+              Wellness &amp; Healthcare Professionals We&apos;re Hiring For
+            </h2>
+          </div>
+
+          {/* Two-column: photo + light requirements card */}
+          <div className="grid gap-8 lg:grid-cols-2 lg:items-center">
+            {/* Handshake photo — soft rounded with shadow */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/wix/f940f0_b93ac2a5ad5a4d148afac21f35018a88~mv2.webp"
               alt="Handshake"
-              className="w-full object-cover lg:flex-none lg:w-[883px] lg:h-[585px] lg:-ml-[150px]"
-              style={{ borderRadius: '16px' }}
+              loading="lazy"
+              className="w-full object-cover"
+              style={{
+                borderRadius: '20px',
+                aspectRatio: '3 / 2',
+                boxShadow: '0 10px 30px rgba(60,90,64,.10)',
+              }}
             />
 
-            {/* White panel overlapping the photo's right edge, behind the text (as on live) */}
+            {/* Light on-brand requirements card */}
             <div
-              className="absolute hidden lg:block"
-              style={{ left: '491px', top: '76px', width: '639px', height: '653px', backgroundColor: '#FFFFFF' }}
-            />
-
-            {/* Right column — sits on the white panel on desktop */}
-            <div className="relative z-10 px-4 mt-10 lg:flex-none lg:px-0 lg:mt-[134px] lg:w-[516px] lg:-ml-[186px]">
-              <h2
-                className="lg:pl-[19px]"
-                style={{
-                  color: TAUPE,
-                  fontFamily: wideFont,
-                  fontWeight: 400,
-                  fontSize: '25px',
-                  lineHeight: '35px',
-                  textTransform: 'uppercase',
-                }}
-              >
-WELLNESS &amp; HEALTHCARE PROFESSIONALS WE&apos;RE HIRING FOR
-              </h2>
-
-              <div className="relative" style={{ marginTop: '71px', paddingLeft: '19px' }}>
-                {/* Decorative pale rules, evenly spaced every 96px as on live */}
-                {[0, 96, 192, 288].map((t) => (
-                  <div
-                    key={t}
-                    className="absolute"
-                    style={{ left: 0, top: `${t - 9}px`, width: '5px', height: '49px', backgroundColor: RULE }}
-                  />
-                ))}
+              style={{
+                background: 'linear-gradient(180deg,#F2F6EF,#ffffff)',
+                border: '1px solid #EAE4DB',
+                borderRadius: '20px',
+                padding: 'clamp(28px, 4vw, 40px)',
+                boxShadow: '0 10px 30px rgba(60,90,64,.10)',
+              }}
+            >
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0, display: 'grid', gap: '20px' }}>
                 {REQUIREMENTS.map((line, i) => (
-                  <p
-                    key={i}
-                    style={{
-                      color: TAUPE,
-                      fontFamily: wideFont,
-                      fontWeight: 400,
-                      fontSize: '18px',
-                      lineHeight: '1.8em',
-                      letterSpacing: '3.6px',
-                      textTransform: 'uppercase',
-                      marginBottom: i < REQUIREMENTS.length - 1 ? '65px' : 0,
-                    }}
-                  >
-                    {line}
-                  </p>
+                  <li key={i} style={{ display: 'flex', gap: 14, alignItems: 'flex-start' }}>
+                    <span
+                      aria-hidden
+                      style={{
+                        flexShrink: 0,
+                        width: 26,
+                        height: 26,
+                        borderRadius: '50%',
+                        background: 'rgba(142,176,147,0.20)',
+                        display: 'grid',
+                        placeItems: 'center',
+                        marginTop: 2,
+                      }}
+                    >
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                        <path d="M5 13l4 4L19 7" stroke={SAGE} strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <span
+                      style={{
+                        fontFamily: BODY,
+                        fontSize: '16px',
+                        lineHeight: 1.6,
+                        color: BODY_TEXT,
+                      }}
+                    >
+                      {line}
+                    </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </div>
           </div>
 
-          {/* APPLY NOW — live links to /contact, which is local /consultation */}
-          <div className="flex justify-center" style={{ marginTop: '67px' }}>
-            <Link
-              href="/consultation"
-              className="btn btn-primary"
-              style={{
-                width: '243px',
-                height: '63px',
-                fontFamily: wideFont,
-                fontWeight: 400,
-                fontSize: '16px',
-                textTransform: 'uppercase',
-              }}
-            >
-              APPLY NOW
+          {/* APPLY NOW — .cta-glow primary CTA (links to /consultation) */}
+          <div className="flex justify-center" style={{ marginTop: 'clamp(48px, 7vh, 72px)' }}>
+            <Link href="/consultation" className="cta-glow">
+              <span
+                style={{
+                  display: 'inline-block',
+                  padding: '16px 40px',
+                  fontFamily: WIDE,
+                  fontWeight: 700,
+                  fontSize: '13px',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                  color: '#fff',
+                }}
+              >
+                Apply Now
+              </span>
             </Link>
           </div>
         </div>

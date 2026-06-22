@@ -39,10 +39,14 @@ import { testimonials as TESTIMONIALS, Testimonial } from '@/lib/packages/testim
 /* ---------- palette / fonts (shared with the site) ---------- */
 /* GREEN stays the bright brand sage but is DECORATIVE ONLY (gradient fills,
    image backings) — it is 2.39:1 on white and fails WCAG as text/UI border.
-   GREEN_TEXT is the locked accessible deep-sage (#456849 = 6.31:1 on white)
-   used for ALL sage TEXT, ICONS, LINKS, INPUT, HEADINGS and meaningful borders. */
+   GREEN_TEXT is the locked accessible sage (#4f7256 from globals.css)
+   used for ALL sage TEXT, ICONS, LINKS, INPUT and meaningful borders;
+   HEADING_GREEN (#3c5a40) is the locked dark-sage for section headings. */
 const GREEN = '#8EB093';
-const GREEN_TEXT = '#456849';
+/* Locked accessible sage from globals.css — used for sage TEXT/ICONS/LINKS/borders. */
+const GREEN_TEXT = '#4f7256';
+/* Locked dark-sage for section headings (H2/H3). */
+const HEADING_GREEN = '#3c5a40';
 /* Taupe text darkened to the locked accessible value (5.78:1 on white,
    >=4.5:1 on the #dfe8db sage price panels). */
 const TAUPE = '#6F6456';
@@ -86,7 +90,7 @@ function Eyebrow({ children, align = 'center', size = 15 }: { children: React.Re
 
 function SectionHeading({ children, align = 'center', size = 28, id }: { children: React.ReactNode; align?: 'center' | 'left'; size?: number; id?: string }) {
   return (
-    <h2 id={id} style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: size, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
+    <h2 id={id} style={{ color: HEADING_GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: size, lineHeight: 1.4, letterSpacing: 'normal', textTransform: 'uppercase', textAlign: align, margin: 0 }}>
       {children}
     </h2>
   );
@@ -313,7 +317,17 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         Skip to main content
       </a>
 
-      <div id="pkg-main" style={{ backgroundColor: '#ffffff', fontFamily: BODY }}>
+      {/* Continuous sage wash: the page reads as one evolving gradient
+          (hero ends ~white → soft sage washes → back to white at the footer),
+          so no flat-colour seams or divider bands appear between sections. */}
+      <div
+        id="pkg-main"
+        style={{
+          fontFamily: BODY,
+          background:
+            'linear-gradient(180deg, #ffffff 0%, #f6f4ef 14%, #eef3ea 30%, #f5f8f2 46%, #eef3ea 60%, #f6f4ef 76%, #f5f8f2 88%, #ffffff 100%)',
+        }}
+      >
         {/* ===================== 1. HERO ===================== */}
         <PageHero
           headline={(() => {
@@ -330,6 +344,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             : { type: 'image', src: c.heroImage, alt: c.heroSubheading }}
           proof={{ rating: '4.9', reviews: '800+', awardSrc: BADGE, awardText: '#1 voted clinic\nMalta' }}
           compactHeadline
+          motif
         />
 
         {/* ===== offer band ===== */}
@@ -965,7 +980,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                   return (
                     <div key={e.title} style={{ position: 'relative', paddingTop: 16, gridColumn: centerLast ? '1 / -1' : 'auto', maxWidth: centerLast ? 560 : undefined, justifySelf: centerLast ? 'center' : 'stretch', width: centerLast ? '100%' : undefined }}>
                       <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
-                        <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: GREEN, position: 'relative', height: 186 }}>
+                        <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: '#eef3ea', position: 'relative', height: 186 }}>
                           {/* P3 — next/image for evidence images */}
                           <Image src={e.img} alt="" fill sizes="(max-width: 860px) 90vw, 45vw" style={{ objectFit: 'cover' }} />
                         </div>

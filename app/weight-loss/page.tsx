@@ -6,8 +6,6 @@ import PageHero from '@/components/PageHero';
 import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, faqPage, serviceSchema } from '@/lib/seo/schema';
-import GradientField from '@/components/layers/GradientField';
-import MotifAccent from '@/components/layers/MotifAccent';
 
 /* ============================================================
    Carisma — Medical Weight-Loss Program  (/weight-loss)
@@ -172,6 +170,7 @@ function HeroSection() {
         media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/wix/87fc13_523cfb315801437881171694d92d8d4f~mv2.webp', alt: 'Carisma medical weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
+        motif
       />
   );
 }
@@ -210,7 +209,7 @@ function ProblemAgitationSection() {
             <h2 id="problem-heading" className="mb-7 text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
               Weight Loss After 30 in Malta<br />Without Giving Up the Foods You Love
             </h2>
-            <MotifAccent mode="divider" className="mx-auto mb-7" style={{ width: 'min(220px, 60%)' }} />
+            <div className="mx-auto mb-7" style={{ width: '64px', height: '1px', backgroundColor: green }} />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
               <div className="overflow-hidden mx-auto shadow-md" style={{ width: '334px', maxWidth: '100%', height: '362px', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px' }}>
                 <img
@@ -852,58 +851,58 @@ function OurPromiseSection() {
 
   return (
     <>
-      {/* ── Hero band ─────────────────────────────────────────── */}
-      <section style={{ background: '#024C27', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+      {/* ── Guarantee band — light on-brand panel (no dark-green background) ── */}
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 40%, #F2F6EF 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
         {/* Decorative large watermark number */}
         <span aria-hidden style={{
           position: 'absolute', right: '-2%', top: '4%',
           fontFamily: headingFont, fontSize: 'clamp(180px,26vw,340px)', fontWeight: 400,
-          color: 'rgba(255,255,255,0.04)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
+          color: 'rgba(79,114,86,0.06)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
         }}>1KG</span>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', position: 'relative' }}>
           {/* Badge */}
-          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', border: '1px solid rgba(201,216,193,0.35)', borderRadius: '999px', padding: '8px 20px', marginBottom: '36px' }}>
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9D8C1" strokeWidth="1.8" aria-hidden>
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', border: `1px solid rgba(79,114,86,0.35)`, borderRadius: '999px', padding: '8px 20px', marginBottom: '36px', background: 'rgba(255,255,255,0.6)' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="1.8" aria-hidden>
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
-            <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', color: '#C9D8C1', textTransform: 'uppercase' }}>
+            <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', color: green, textTransform: 'uppercase' }}>
               Medically Guaranteed
             </span>
           </div>
 
           {/* Headline */}
-          <h2 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#ffffff', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
+          <h2 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
             Up to 1KG<br />
-            <em style={{ fontStyle: 'normal', color: '#C9D8C1' }}>Per Week.</em>
+            <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
           </h2>
 
-          <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: 'rgba(255,255,255,0.6)', maxWidth: '520px', margin: '0 auto 16px' }}>
-            If you qualify, follow the programme, and don&rsquo;t reach your target weight — we extend your care at <strong style={{ color: '#ffffff', fontWeight: 600 }}>no extra cost</strong>, until you do.
+          <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: taupe, maxWidth: '520px', margin: '0 auto 16px' }}>
+            If you qualify, follow the programme, and don&rsquo;t reach your target weight — we extend your care at <strong style={{ color: '#024C27', fontWeight: 600 }}>no extra cost</strong>, until you do.
           </p>
-          <p style={{ fontFamily: headingFont, fontSize: '16px', color: 'rgba(201,216,193,0.7)', fontStyle: 'italic', marginBottom: '64px' }}>
+          <p style={{ fontFamily: headingFont, fontSize: '16px', color: green, fontStyle: 'italic', marginBottom: '64px' }}>
             This is our Extended Care Commitment.
           </p>
         </div>
 
         {/* 3 proof pillars */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2px', borderTop: '1px solid rgba(201,216,193,0.12)' }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2px', borderTop: '1px solid rgba(79,114,86,0.18)' }}>
           {[
             { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
             { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
             { num: '3', stat: 'Extended Until Done', sub: 'We keep going at no extra cost until you hit your agreed target weight' },
           ].map((item) => (
-            <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(201,216,193,0.1)', textAlign: 'center' }}>
-              <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: 'rgba(201,216,193,0.5)', textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
-              <p style={{ fontFamily: headingFont, fontSize: '20px', color: '#ffffff', marginBottom: '10px' }}>{item.stat}</p>
-              <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.65, color: 'rgba(255,255,255,0.5)' }}>{item.sub}</p>
+            <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(79,114,86,0.14)', textAlign: 'center' }}>
+              <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: green, textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
+              <p style={{ fontFamily: headingFont, fontSize: '20px', color: '#024C27', marginBottom: '10px', textTransform: 'uppercase' }}>{item.stat}</p>
+              <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.65, color: taupe }}>{item.sub}</p>
             </div>
           ))}
         </div>
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: '#F2F6EF', padding: '72px 0 80px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #f6f9f3 70%, #ffffff 100%)', padding: '72px 0 80px' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'start' }}>
 

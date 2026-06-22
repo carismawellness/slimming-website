@@ -25,13 +25,13 @@ const bodyFont = 'Roboto, sans-serif';
 // Bright brand sage #8EB093 (2.39:1 on white) is DECORATIVE ONLY; for any text/
 // icon/accent/CTA we use the darkened sage variants that clear AA on white and
 // on the page's tinted sage gradient panels.
-const GREEN = '#456849'; // deep sage for serif HEADINGS (large >=24px). 6.31:1 white, >=3:1 on tinted panels
+const GREEN = '#3c5a40'; // locked dark-sage token for serif H2/H3 HEADINGS (DESIGN_LANGUAGE §1). AA on white + tinted panels
 const TAUPE = '#5a5043'; // deep warm taupe for ALL body/secondary/bullet/footer text. 7.89:1 white, >=4.5:1 on #C9D8C1/#B7CBB2 panels
 const CHECK = '#4f7256'; // brand-green-text: icons, accent eyebrows, checkmarks, ratings, CTA fill. 5.42:1 white
 const BLUE = '#4f7256'; // CTA fill (was #6391AB — white text only 3.40:1, failed). Now 5.42:1 vs white text
 
 // Shared focus ring class applied to all interactive elements for WCAG 2.1 AA keyboard navigation
-const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#456849]';
+const focusRing = 'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#024C27]';
 
 function BlueCta({ href, children, ariaLabel }: { href: string; children: React.ReactNode; ariaLabel?: string }) {
   return (
@@ -187,7 +187,17 @@ export default function MedicalWeightLossLpPage() {
   ];
 
   return (
-    <div className="w-full" style={{ backgroundColor: '#ffffff' }}>
+    <div
+      className="w-full"
+      style={{
+        // Continuous sage wash — one evolving gradient under all sections so the
+        // page reads as a single flow (no flat-colour seams between sections).
+        // Starts white (matches the hero's end colour) and drifts through soft
+        // sage washes, exactly as the home page does. DESIGN_LANGUAGE §3.
+        background:
+          'linear-gradient(180deg, #ffffff 0%, #f6f4ef 18%, #eef3ea 40%, #f5f8f2 62%, #eef3ea 82%, #ffffff 100%)',
+      }}
+    >
       {/* Skip to main content — first focusable element for keyboard/screen-reader users */}
       <a
         href="#main-content"
@@ -261,6 +271,7 @@ export default function MedicalWeightLossLpPage() {
         media={{ type: 'video', src: '/wix/87fc13_7d0ed658e1dd4900a3d0623abbbd161b_720p.mp4', poster: '/wix/87fc13_210696e48bd0461ba822880bd7082b56~mv2.webp', alt: 'Medical weight loss programme in Malta — doctor consultation and body assessment' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
+        motif
       />
 
       {/* Real women, real results — testimonial carousel */}
