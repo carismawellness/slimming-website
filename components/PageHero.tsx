@@ -161,7 +161,7 @@ export default function PageHero({
           maxWidth: 1180,
           margin: '0 auto',
           display: 'grid',
-          gap: 'clamp(28px, 4vw, 56px)',
+          gap: 'clamp(20px, 2.8vw, 40px)',
           alignItems: 'center',
         }}
       >
