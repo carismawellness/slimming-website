@@ -85,6 +85,20 @@ export default function GLP1Page() {
   const wideFont = 'Novecento Wide Book, sans-serif';
   const bodyFont = 'Roboto, sans-serif';
 
+  // Tokens used by the "Our Promise" section (copied from weight-loss page)
+  const green = '#4f7256';
+  const taupe = '#6f6456';
+  const freshaUrl =
+    'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191';
+  const promiseConditions = [
+    { label: 'Show up', text: 'Attend all scheduled in-clinic sessions and weekly check-ins' },
+    { label: 'Follow your plan', text: 'Stick to your personalised food plan — tell us if you struggle' },
+    { label: 'Stay active', text: 'Complete your agreed movement plan or discuss any obstacles' },
+    { label: 'Medical only', text: 'Use only the treatments and medications our team recommends' },
+    { label: 'Keep us informed', text: 'Tell us about any health changes, medication or new diagnosis' },
+    { label: 'No shortcuts', text: 'Avoid crash diets or outside weight loss treatments' },
+  ];
+
   return (
     <main className="w-full" style={{ backgroundColor: '#ffffff' }}>
       <JsonLd data={jsonLd} />
@@ -212,7 +226,18 @@ export default function GLP1Page() {
               { label: 'Malta Daily', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', w: 66, h: 42 },
             ].map((logo) => (
               <div key={logo.label} className="flex items-center justify-center">
-                <img src={logo.src} alt={logo.label} style={{ width: `${logo.w}px`, height: `${logo.h}px`, objectFit: 'contain' }} />
+                <img
+                  src={logo.src}
+                  alt={logo.label}
+                  style={{
+                    width: `${logo.w}px`,
+                    height: `${logo.h}px`,
+                    objectFit: 'contain',
+                    mixBlendMode: 'multiply',
+                    filter: 'grayscale(1)',
+                    opacity: 0.65,
+                  }}
+                />
               </div>
             ))}
           </div>
@@ -223,11 +248,11 @@ export default function GLP1Page() {
               <div
                 key={i}
                 className="card lg-raised lg-raised--hover p-8"
-                style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)' }}
+                style={{ backgroundColor: '#ffffff', border: '1px solid #EAE4DB', boxShadow: '0 10px 30px rgba(60,90,64,0.08)' }}
               >
                 <img src={pillarIcons[i]} alt="" style={{ width: '74px', height: '74px', objectFit: 'contain', marginBottom: '20px' }} />
-                {/* Card sits on a #F2F6EF->#C9D8C1 sage gradient; deeper taupe #5c5346 clears AA
-                    (>=5.06:1) even on the brightest #C9D8C1 stop where #6f6456 would be 3.87:1. */}
+                {/* Clean white card resting on the sage gradient section: taupe #5c5346 title
+                    + body clear AA comfortably on solid white. */}
                 <h3 className="mb-3" style={{ color: '#5c5346', fontFamily: wideFont, fontWeight: 600, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase' }}>
                   {pillar.title}
                 </h3>
@@ -376,113 +401,227 @@ export default function GLP1Page() {
         </div>
       </section>
 
-      {/* Our promise — extended care commitment */}
-      <section className="py-24">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
-            Our Promise
-          </p>
-          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
-          <h2 className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: '2px', lineHeight: 1.35, textTransform: 'uppercase' }}>
-            Our weight loss promise: up to 1kg per week<br />measured, verified, committed
+      {/* Our promise — extended care commitment (verbatim from weight-loss page) */}
+      {/* ── Guarantee band — light on-brand panel (no dark-green background) ── */}
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 40%, #F2F6EF 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+        {/* Decorative large watermark number */}
+        <span aria-hidden style={{
+          position: 'absolute', right: '-2%', top: '4%',
+          fontFamily: headingFont, fontSize: 'clamp(180px,26vw,340px)', fontWeight: 400,
+          color: 'rgba(79,114,86,0.06)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
+        }}>1KG</span>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', position: 'relative' }}>
+          {/* Badge */}
+          <div style={{ display: 'inline-flex', alignItems: 'center', gap: '10px', border: `1px solid rgba(79,114,86,0.35)`, borderRadius: '999px', padding: '8px 20px', marginBottom: '36px', background: 'rgba(255,255,255,0.6)' }}>
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={green} strokeWidth="1.8" aria-hidden>
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+            </svg>
+            <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', color: green, textTransform: 'uppercase' }}>
+              Medically Guaranteed
+            </span>
+          </div>
+
+          {/* Headline */}
+          <h2 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
+            Up to 1KG<br />
+            <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div
-              className="card lg-raised p-12 flex items-center"
-              style={{ background: 'linear-gradient(135deg, #F2F6EF 0%, #DCE7D5 100%)', minHeight: '240px' }}
-            >
-              {/* Callout on #F2F6EF->#DCE7D5 sage gradient: deep taupe #5c5346 (>=5.9:1) with
-                  deepest-sage #3d5a42 emphasis (>=6.0:1) replaces the failing pale #A9BFA6/#8EB093. */}
-              <p style={{ color: '#5c5346', fontFamily: wideFont, fontWeight: 400, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase', lineHeight: 1.9, maxWidth: '260px' }}>
-                Only weight loss clinic <strong style={{ color: '#3d5a42', fontWeight: 700 }}>in Malta</strong> to offer an extended <strong style={{ color: '#3d5a42', fontWeight: 700 }}>care commitment</strong>
+
+          <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: taupe, maxWidth: '520px', margin: '0 auto 16px' }}>
+            If you qualify, follow the programme, and don&rsquo;t reach your target weight — we extend your care at <strong style={{ color: '#024C27', fontWeight: 600 }}>no extra cost</strong>, until you do.
+          </p>
+          <p style={{ fontFamily: headingFont, fontSize: '16px', color: green, fontStyle: 'italic', marginBottom: '64px' }}>
+            This is our Extended Care Commitment.
+          </p>
+        </div>
+
+        {/* 3 proof pillars */}
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2px', borderTop: '1px solid rgba(79,114,86,0.18)' }}>
+          {[
+            { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
+            { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
+            { num: '3', stat: 'Extended Until Done', sub: 'We keep going at no extra cost until you hit your agreed target weight' },
+          ].map((item) => (
+            <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(79,114,86,0.14)', textAlign: 'center' }}>
+              <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: green, textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
+              <p style={{ fontFamily: headingFont, fontSize: '20px', color: '#024C27', marginBottom: '10px', textTransform: 'uppercase' }}>{item.stat}</p>
+              <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.65, color: taupe }}>{item.sub}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Conditions section ────────────────────────────────── */}
+      <section style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #f6f9f3 70%, #ffffff 100%)', padding: '72px 0 80px' }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'start' }}>
+
+            {/* Photo + caption */}
+            <div>
+              <div style={{ position: 'relative', height: '460px', borderTopLeftRadius: '16px', borderTopRightRadius: '72px', borderBottomLeftRadius: '72px', borderBottomRightRadius: '16px', overflow: 'hidden', boxShadow: '12px -12px 0 #C9D8C1' }}>
+                <Image
+                  src="/wix/87fc13_aea394ce5ab4485e8613221fa3617b8f~mv2.webp"
+                  alt="Tanita body composition analysis at Carisma Slimming — your measurable baseline"
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  loading="lazy"
+                />
+              </div>
+              <p style={{ fontFamily: bodyFont, fontSize: '12px', color: '#9B8D83', textAlign: 'center', marginTop: '16px', fontStyle: 'italic', letterSpacing: '0.5px' }}>
+                Tanita body composition scan — your measurable baseline at every visit
               </p>
             </div>
+
+            {/* Right: promise + conditions */}
             <div>
-              <p className="mb-5" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
-                We are selective about who joins our programs. We only accept those we genuinely believe we can help reach their healthy weight with Ozempic, Mounjaro, or non-medication pathways.
+              <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '10px' }}>
+                How it works
               </p>
-              <p className="mb-5" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
-                If you qualify and complete your program and do not hit your target weight, we will extend your weight management program at no extra program fee until we achieve your desired result.
+              <div style={{ width: '32px', height: '1px', background: '#C9B8AE', marginBottom: '20px' }} />
+              <h3 style={{ fontFamily: headingFont, fontSize: '22px', fontWeight: 400, color: '#024C27', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: 1.3, marginBottom: '18px' }}>
+                We Only Accept Clients We Genuinely Believe We Can Help
+              </h3>
+              <p style={{ fontFamily: bodyFont, fontSize: '14.5px', lineHeight: 1.8, color: taupe, marginBottom: '32px', borderLeft: '2px solid #C9D8C1', paddingLeft: '16px' }}>
+                If you qualify and complete the programme as agreed — and don&rsquo;t reach your target weight — we extend your weight management programme at no extra fee until we get there together.
               </p>
-              <p className="mb-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
-                *To ensure results remain measurable and medically valid, patients must:
+
+              <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '16px' }}>
+                To receive this guarantee, you agree to:
               </p>
-              <ul className="space-y-2">
-                {[
-                  'Attend all scheduled in clinic sessions and weekly check ins',
-                  'Follow your personalised food plan consistently and tell us when you struggle',
-                  'Complete your agreed physical activities & discuss any pain or obstacles',
-                  'Use only the treatments and medications recommended by our medical team',
-                  'Inform us of any major health (e.g., heart disease) or medication changes',
-                  'Avoid crash diets, extreme restriction or outside weight loss treatments that could affect your results',
-                ].map((t) => (
-                  <li key={t} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                    <span style={{ color: '#6f6456' }}>&bull;</span>
-                    <span>{t}</span>
-                  </li>
+
+              {/* Conditions — full-width stacked list */}
+              <div>
+                {promiseConditions.map((c, i) => (
+                  <div
+                    key={c.label}
+                    style={{
+                      display: 'flex',
+                      gap: '16px',
+                      alignItems: 'flex-start',
+                      padding: '14px 0',
+                      borderBottom: i < promiseConditions.length - 1 ? '1px solid rgba(79,114,86,0.1)' : 'none',
+                    }}
+                  >
+                    <span style={{ fontFamily: headingFont, fontSize: '14px', color: 'rgba(79,114,86,0.25)', flexShrink: 0, minWidth: '24px', paddingTop: '1px' }}>
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <div>
+                      <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: green, display: 'block', marginBottom: '3px' }}>{c.label}</span>
+                      <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.6, color: taupe, margin: 0 }}>{c.text}</p>
+                    </div>
+                  </div>
                 ))}
-              </ul>
+              </div>
+
+              <div style={{ marginTop: '32px' }}>
+                <a
+                  href={freshaUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="cta-glow"
+                  style={{ display: 'flex', width: '100%', alignItems: 'center', justifyContent: 'center', fontFamily: wideFont, fontSize: '12px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase', textDecoration: 'none', color: '#fff', padding: '16px 24px', borderRadius: '999px', minHeight: '52px' }}
+                >
+                  Get Your Free Body Composition Analysis
+                </a>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Safety, side effects & our system */}
-      <section className="py-24">
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="card" style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F8F7F3 35%)', padding: '48px' }}>
-            <h2 className="text-center" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.4 }}>
-              Safety, side effects,<br />and our system
-            </h2>
-            <p className="mt-6 mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
-              As part of our program, we prescribe Ozempic and Mounjaro with strict screening, clear education, and ongoing monitoring. Most side effects are manageable when dosing and nutrition are structured, and follow-ups are consistent.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              <div>
-                <p className="mb-3" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px' }}>Common side effects and how we reduce them:</p>
-                <ul className="space-y-2 mb-7">
-                  {[
-                    { label: 'Nausea', text: 'slow titration, protein-first meals, hydration and electrolytes, injection timing guidance' },
-                    { label: 'Constipation', text: 'tolerance-based fibre targets, fluids, daily movement, magnesium support when appropriate' },
-                    { label: 'Diarrhoea', text: 'simple meal sequencing, trigger-food control, temporary dose stabilisation' },
-                    { label: 'Fatigue', text: 'minimum calorie floors, protein and micronutrient monitoring, strength habits to protect energy' },
-                    { label: 'Reflux', text: 'smaller structured portions, meal timing rules, behavioural guidance' },
-                  ].map((s) => (
-                    <li key={s.label} className="flex items-start gap-2" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
-                      <span style={{ color: '#6f6456' }}>&bull;</span>
-                      <span><strong style={{ color: '#574d40' }}>{s.label}:</strong> {s.text}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="mb-8" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7 }}>
-                  <strong style={{ color: '#574d40' }}>The biggest clinical mistake:</strong> prescribing Ozempic or Mounjaro without a structured clinical system. Medication can quiet appetite, but it does not build muscle, teach eating habits, address emotional drivers, or create long-term maintenance. That is why our program pairs Ozempic or Mounjaro with strength training, protein-first nutrition structure, behavioural coaching, accountability, and a defined maintenance plan.
-                </p>
-                <div className="flex flex-wrap gap-3 items-center">
-                  <a
-                    href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="cta-glow inline-block text-center font-bold text-white"
-                    style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px 24px' }}
+          {/* Section header */}
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
+            Safety &amp; monitoring
+          </p>
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.4, textTransform: 'uppercase' }}>
+            Safety, side effects,<br />and our system
+          </h2>
+          <p className="mt-6 mb-14 text-center mx-auto" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, maxWidth: '720px' }}>
+            As part of our program, we prescribe Ozempic and Mounjaro with strict screening, clear education, and ongoing monitoring. Most side effects are manageable when dosing and nutrition are structured, and follow-ups are consistent.
+          </p>
+
+          {/* Two-column: side-effects management + supporting imagery */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left — common side effects, refined cards */}
+            <div>
+              <h3 className="mb-6" style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
+                Common side effects — and how we manage them
+              </h3>
+              <div className="flex flex-col gap-4">
+                {[
+                  { label: 'Nausea', text: 'slow titration, protein-first meals, hydration and electrolytes, injection timing guidance' },
+                  { label: 'Constipation', text: 'tolerance-based fibre targets, fluids, daily movement, magnesium support when appropriate' },
+                  { label: 'Diarrhoea', text: 'simple meal sequencing, trigger-food control, temporary dose stabilisation' },
+                  { label: 'Fatigue', text: 'minimum calorie floors, protein and micronutrient monitoring, strength habits to protect energy' },
+                  { label: 'Reflux', text: 'smaller structured portions, meal timing rules, behavioural guidance' },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className="flex items-start gap-4"
+                    style={{ backgroundColor: '#ffffff', border: '1px solid #EAE4DB', borderRadius: '14px', padding: '16px 20px', boxShadow: '0 6px 18px rgba(60,90,64,0.05)' }}
                   >
-                    Book your medical consultation
-                  </a>
-                </div>
+                    <span
+                      className="flex items-center justify-center flex-shrink-0"
+                      style={{ width: '34px', height: '34px', borderRadius: '9999px', backgroundColor: '#EAF1E6', marginTop: '1px' }}
+                    >
+                      <svg aria-hidden="true" width="16" height="16" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M4 9.5L7.5 13L14 5.5" stroke="#4f7256" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </span>
+                    <div>
+                      <span style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', display: 'block', marginBottom: '4px' }}>{s.label}</span>
+                      <p style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '13.5px', lineHeight: 1.6, margin: 0 }}>{s.text}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
-              <div className="flex flex-col gap-5">
-                <div className="w-full overflow-hidden" style={{ aspectRatio: '477 / 270', borderRadius: '16px' }}>
-                  <img src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="Ozempic pen for medical weight loss" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+            </div>
+
+            {/* Right — supporting imagery */}
+            <div className="flex flex-col gap-5">
+              <div className="w-full overflow-hidden" style={{ aspectRatio: '477 / 270', borderRadius: '16px', boxShadow: '0 10px 30px rgba(60,90,64,0.08)' }}>
+                <img src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="Ozempic pen for medical weight loss" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              </div>
+              <div className="grid gap-5" style={{ gridTemplateColumns: '176fr 281fr' }}>
+                <div className="w-full overflow-hidden" style={{ aspectRatio: '176 / 168', borderRadius: '16px', boxShadow: '0 10px 30px rgba(60,90,64,0.08)' }}>
+                  <img src="/wix/87fc13_de24c77f8dcf436699a6eeac3645088c~mv2.jpg" alt="Consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
-                <div className="grid gap-5" style={{ gridTemplateColumns: '176fr 281fr' }}>
-                  <div className="w-full overflow-hidden" style={{ aspectRatio: '176 / 168', borderRadius: '16px' }}>
-                    <img src="/wix/87fc13_de24c77f8dcf436699a6eeac3645088c~mv2.jpg" alt="Consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
-                  <div className="w-full overflow-hidden" style={{ aspectRatio: '281 / 168', borderRadius: '16px' }}>
-                    <img src="/wix/87fc13_59abc443a8274e1c90646831cbc819c5~mv2.jpg" alt="Movement assessment with a Carisma practitioner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
-                  </div>
+                <div className="w-full overflow-hidden" style={{ aspectRatio: '281 / 168', borderRadius: '16px', boxShadow: '0 10px 30px rgba(60,90,64,0.08)' }}>
+                  <img src="/wix/87fc13_59abc443a8274e1c90646831cbc819c5~mv2.jpg" alt="Movement assessment with a Carisma practitioner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* The biggest clinical mistake — elegant pull-quote */}
+          <div
+            className="mt-14 mx-auto"
+            style={{ maxWidth: '880px', backgroundColor: '#F6F8F4', borderLeft: '4px solid #4f7256', borderRadius: '0 16px 16px 0', padding: '32px 36px' }}
+          >
+            <p style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', marginBottom: '12px' }}>
+              The biggest clinical mistake
+            </p>
+            <p style={{ color: '#5c5346', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, margin: 0 }}>
+              Prescribing Ozempic or Mounjaro without a structured clinical system. Medication can quiet appetite, but it does not build muscle, teach eating habits, address emotional drivers, or create long-term maintenance. That is why our program pairs Ozempic or Mounjaro with strength training, protein-first nutrition structure, behavioural coaching, accountability, and a defined maintenance plan.
+            </p>
+          </div>
+
+          {/* CTA */}
+          <div className="flex flex-wrap gap-3 justify-center mt-12">
+            <a
+              href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cta-glow inline-block text-center font-bold text-white"
+              style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '13px 24px' }}
+            >
+              Book your medical consultation
+            </a>
           </div>
         </div>
       </section>
