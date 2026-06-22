@@ -2,8 +2,9 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import PageHero from '@/components/PageHero';
-import OutcomeStepper from './OutcomeStepper';
+import GuideHero from './GuideHero';
+import WhyDietsFail from './WhyDietsFail';
+import OutcomesShowcase from './OutcomesShowcase';
 import MethodPillars from './MethodPillars';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
@@ -193,98 +194,10 @@ export default function SlimmingGuidePage() {
     <main className="w-full" style={{ fontFamily: bodyFont, color: TAUPE }}>
       <JsonLd data={jsonLd} />
       <style dangerouslySetInnerHTML={{ __html: localFontCss }} />
-      <PageHero
-        eyebrow="Recipes, meal timing & a structured plan"
-        headline={[
-          { text: 'Weight Loss Guide Malta' },
-          { text: 'Built for Real Maltese Life', em: true },
-        ]}
-        sub="A doctor-backed system you can actually follow — no crash diets, no calorie counting. For only €30."
-        bullets={[
-          { label: 'What to eat —', text: 'and what to swap, using local Maltese ingredients.' },
-          { label: 'When to eat —', text: 'simple meal timing that fits your schedule.' },
-          { text: '30+ recipes built for the Mediterranean kitchen.' },
-        ]}
-        primaryCta={{ text: 'Get the Slimming Guide', href: 'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta', external: true }}
-        media={{ type: 'image', src: '/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.webp', alt: 'The Carisma Slimming Guide', fit: 'contain', bg: 'linear-gradient(160deg, #eef3ea 0%, #dde7d6 100%)' }}
-        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta' }}
-        compactHeadline
-      />
+      <GuideHero />
 
-      {/* Main Narrative / Pain Point Section — gradient flows from hero wash into the
-          sage band below (white → soft sage), no flat seam. */}
-      <section className="py-24" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)' }}>
-        <div className="mx-auto px-4" style={{ maxWidth: '1032px' }}>
-          <div
-            className="card px-6 py-10 sm:px-12 sm:py-12"
-            style={{
-              background: 'linear-gradient(170deg, #F7F4ED 0%, #F0EFE5 55%, #D8E4D6 100%)',
-              borderRadius: '16px',
-            }}
-          >
-            <h2
-              className="text-center mb-10 uppercase"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
-            >
-              why diets fail in malta — and what actually works instead.
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-[338px_1fr] gap-8 items-start">
-              <div className="flex flex-col gap-6">
-                <img
-                  src="/wix/11062b_926c2ba259264b22bed8a16f8021e64b~mv2.jpg"
-                  alt="Woman Eating Pizza"
-                  style={{ width: '338px', maxWidth: '100%', aspectRatio: '338 / 386', objectFit: 'cover', objectPosition: 'center top', borderRadius: '16px' }}
-                />
-              </div>
-              <div style={{ maxWidth: '540px' }}>
-              <p style={{ color: TAUPE, fontSize: '13px' }}>
-                You started on a Monday. You were ready.
-              </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
-                The rules were clear. The commitment felt real.
-              </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
-                By Wednesday, life happened. A dinner you didn&apos;t plan for. A week that ran away from you. A
-                moment where you were tired and hungry and the willpower just wasn&apos;t there.
-              </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
-                So you started again the following Monday.
-              </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
-                Then again. Then again.
-              </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
-                Here is what that pattern actually tells you: not that you lack discipline, but that the system
-                you were following required too much of it. Every single day. Perfect decisions. Perfect
-                portions. Perfect meals. On days that are never perfect.
-              </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
-                You know what happens when a difficult week meets a fragile plan. The plan breaks. And somehow,
-                the story you end up telling yourself is that you broke it.
-              </p>
-              <p style={{ color: TAUPE, fontSize: '13px' }}>
-                You didn&apos;t.
-              </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '13px' }}>
-                Not your effort. Not your intention. Not your character.
-              </p>
-              <p className="mb-2" style={{ color: TAUPE, fontSize: '13px' }}>
-                The plan was fragile. That is where this starts. If you want clinical support alongside
-                the habit system, explore our{' '}
-                <Link href="/weight-loss" style={{ color: GREEN, textDecoration: 'underline' }}>
-                  medical weight loss programme
-                </Link>{' '}
-                or{' '}
-                <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>
-                  GLP-1 weight loss injections
-                </Link>
-                .
-              </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* Why Diets Fail — editorial redesign */}
+      <WhyDietsFail />
 
       {/* Built To Hold band + What This Is + Method share a wrapper so the tilted
           paper mockups can overlap section boundaries like on the live site */}
@@ -392,28 +305,8 @@ export default function SlimmingGuidePage() {
       />
       </div>{/* end decorative wrapper */}
 
-      {/* Success Outcomes Section — STEP 1-4 stepper. Flows white → soft sage so the
-          statement band below starts on the same color (no flat seam). */}
-      <section className="py-24" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center mb-10">
-            <h2
-              className="uppercase pb-2"
-              style={{
-                color: TAUPE,
-                fontFamily: wideFont,
-                fontSize: '16px',
-                fontWeight: 400,
-                letterSpacing: '3.2px',
-                borderBottom: '1px solid #C9C0B8',
-              }}
-            >
-              What sustainable weight loss actually looks like — four outcomes the guide builds.
-            </h2>
-          </div>
-          <OutcomeStepper outcomes={outcomes} />
-        </div>
-      </section>
+      {/* Success Outcomes — redesigned card showcase */}
+      <OutcomesShowcase />
 
       {/* Stabilise Band — light on-brand statement band (no dark-green bg). Starts on
           the sage wash above and resolves to white so the section below flows. */}
