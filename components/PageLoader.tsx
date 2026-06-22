@@ -18,20 +18,23 @@ const PETAL_PATHS: string[] = [
   'M22.1953 8.46668C24.0649 8.58983 24.9997 9.82131 25.8722 11.1451C26.7446 12.469 27.6483 12.8384 28.8635 12.3766C30.2969 11.8532 30.7954 10.9604 30.515 9.32871C30.2345 7.69701 29.0194 6.61947 27.3679 6.5579C25.3736 6.49632 23.7533 7.32757 22.1953 8.46668Z',
 ];
 
+/* SVG arc circumference for r=28: 2π×28 ≈ 175.9 */
+const ARC_C = 175.9;
+
 export default function PageLoader() {
   const [phase, setPhase] = useState<'visible' | 'exiting' | 'done'>('visible');
   const startRef = useRef<number>(0);
 
   useEffect(() => {
     startRef.current = performance.now();
-    const MIN_MS = 2700;
+    const MIN_MS = 2800;
 
     const dismiss = () => {
       const elapsed = performance.now() - startRef.current;
       const wait = Math.max(0, MIN_MS - elapsed);
       setTimeout(() => {
         setPhase('exiting');
-        setTimeout(() => setPhase('done'), 950);
+        setTimeout(() => setPhase('done'), 1100);
       }, wait);
     };
 
@@ -39,7 +42,7 @@ export default function PageLoader() {
       dismiss();
     } else {
       window.addEventListener('load', dismiss, { once: true });
-      const fallback = setTimeout(dismiss, 5000);
+      const fallback = setTimeout(dismiss, 6000);
       return () => {
         window.removeEventListener('load', dismiss);
         clearTimeout(fallback);
@@ -52,203 +55,231 @@ export default function PageLoader() {
   const exiting = phase === 'exiting';
 
   return (
-    <div
-      aria-hidden
-      style={{
-        position: 'fixed',
-        inset: 0,
-        zIndex: 9999,
-        backgroundColor: '#024C27',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        overflow: 'hidden',
-        pointerEvents: exiting ? 'none' : 'all',
-        transform: exiting ? 'translateY(-100%)' : 'translateY(0)',
-        transition: exiting
-          ? 'transform 0.92s cubic-bezier(0.76, 0, 0.24, 1)'
-          : 'none',
-        willChange: 'transform',
-      }}
-    >
-      {/* ── Grain noise overlay ─────────────────────────────────────── */}
-      <svg
-        style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', opacity: 0.055, pointerEvents: 'none' }}
+    <>
+      {/* Keyframes injected once — no external CSS dependency */}
+      <style>{`
+        @keyframes lxPetal {
+          from { opacity: 0; transform: scale(0.82) rotate(-6deg); }
+          to   { opacity: 1; transform: scale(1)    rotate(0deg); }
+        }
+        @keyframes lxLetter {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes lxDivider {
+          from { width: 0px;  opacity: 0; }
+          to   { width: 40px; opacity: 1; }
+        }
+        @keyframes lxGlow {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50%       { opacity: 1;   transform: scale(1.12); }
+        }
+        @keyframes lxFade {
+          from { opacity: 0; }
+          to   { opacity: 1; }
+        }
+        @keyframes lxRing {
+          from { transform: scale(0.72); opacity: 0; }
+          to   { transform: scale(1);    opacity: 1; }
+        }
+        @keyframes lxArc {
+          from { stroke-dashoffset: ${ARC_C}; }
+          to   { stroke-dashoffset: 0; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          * { animation-duration: 0.01ms !important; animation-delay: 0ms !important; }
+        }
+      `}</style>
+
+      <div
         aria-hidden
-      >
-        <filter id="cs-loader-noise">
-          <feTurbulence type="fractalNoise" baseFrequency="0.72" numOctaves="4" stitchTiles="stitch" />
-          <feColorMatrix type="saturate" values="0" />
-        </filter>
-        <rect width="100%" height="100%" filter="url(#cs-loader-noise)" />
-      </svg>
-
-      {/* ── Ambient glow behind rose ────────────────────────────────── */}
-      <div
         style={{
-          position: 'absolute',
-          width: '320px',
-          height: '320px',
-          borderRadius: '50%',
-          background: 'radial-gradient(circle, rgba(201,216,193,0.12) 0%, transparent 70%)',
-          animation: 'csLoaderGlow 4s ease-in-out infinite',
-          animationDelay: '1s',
-        }}
-      />
-
-      {/* ── Thin decorative ring ────────────────────────────────────── */}
-      <div
-        style={{
-          position: 'absolute',
-          width: '200px',
-          height: '200px',
-          borderRadius: '50%',
-          border: '1px solid rgba(201,216,193,0.1)',
-          opacity: 0,
-          animation: 'csLoaderRingExpand 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-          animationDelay: '300ms',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          width: '260px',
-          height: '260px',
-          borderRadius: '50%',
-          border: '1px solid rgba(201,216,193,0.05)',
-          opacity: 0,
-          animation: 'csLoaderRingExpand 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-          animationDelay: '450ms',
-        }}
-      />
-
-      {/* ── Rose SVG ────────────────────────────────────────────────── */}
-      <div style={{ marginBottom: '36px', position: 'relative' }}>
-        <svg
-          width="144"
-          height="135"
-          viewBox="0 0 96 90"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          style={{ overflow: 'visible', filter: 'drop-shadow(0 0 18px rgba(201,216,193,0.18))' }}
-        >
-          {PETAL_PATHS.map((d, i) => (
-            <path
-              key={i}
-              d={d}
-              fill="#C9D8C1"
-              style={{
-                opacity: 0,
-                transformOrigin: '48px 45px',
-                animation: 'csLoaderPetal 0.8s cubic-bezier(0.34, 1.45, 0.64, 1) forwards',
-                animationDelay: `${i * 85 + 200}ms`,
-              }}
-            />
-          ))}
-        </svg>
-      </div>
-
-      {/* ── Wordmark ─────────────────────────────────────────────────── */}
-      <div style={{ display: 'flex', alignItems: 'baseline' }}>
-        {'CARISMA'.split('').map((char, i) => (
-          <span
-            key={i}
-            style={{
-              display: 'inline-block',
-              fontFamily: 'Trajan Pro, serif',
-              fontSize: 'clamp(18px, 3.5vw, 26px)',
-              letterSpacing: '10px',
-              color: '#F8F6F2',
-              textTransform: 'uppercase',
-              opacity: 0,
-              animation: 'csLoaderLetter 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-              animationDelay: `${i * 60 + 1050}ms`,
-            }}
-          >
-            {char}
-          </span>
-        ))}
-      </div>
-
-      {/* ── Divider ──────────────────────────────────────────────────── */}
-      <div
-        style={{
-          height: '1px',
-          width: '0px',
-          backgroundColor: 'rgba(201,216,193,0.35)',
-          margin: '14px 0 14px',
-          animation: 'csLoaderDivider 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-          animationDelay: '1600ms',
-        }}
-      />
-
-      {/* ── Sub-brand ────────────────────────────────────────────────── */}
-      <div
-        style={{
-          fontFamily: 'Novecento Wide Book, sans-serif',
-          fontSize: '9px',
-          letterSpacing: '5px',
-          textTransform: 'uppercase',
-          color: 'rgba(201,216,193,0.5)',
-          opacity: 0,
-          animation: 'csLoaderLetter 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards',
-          animationDelay: '1700ms',
-        }}
-      >
-        Slimming
-      </div>
-
-      {/* ── Progress bar ─────────────────────────────────────────────── */}
-      <div
-        style={{
-          position: 'absolute',
-          bottom: '40px',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          width: '72px',
-          height: '1px',
-          backgroundColor: 'rgba(201,216,193,0.12)',
+          position: 'fixed',
+          inset: 0,
+          zIndex: 9999,
+          /* Warm near-black — not green, not white */
+          background: 'radial-gradient(ellipse at 50% 44%, #17140f 0%, #0e0b09 52%, #090807 100%)',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
           overflow: 'hidden',
-          borderRadius: '1px',
+          pointerEvents: exiting ? 'none' : 'all',
+          opacity: exiting ? 0 : 1,
+          transition: exiting ? 'opacity 1.05s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+          willChange: 'opacity',
         }}
       >
-        <div
-          style={{
-            height: '100%',
-            width: '100%',
-            backgroundColor: '#C9D8C1',
-            transformOrigin: 'left center',
-            transform: 'scaleX(0)',
-            animation: 'csLoaderProgress 2.4s cubic-bezier(0.4, 0, 0.6, 1) forwards',
-            animationDelay: '250ms',
-          }}
-        />
-      </div>
 
-      {/* ── Corner accent marks (top-left / bottom-right) ───────────── */}
-      {[
-        { top: '32px', left: '40px', transform: 'none' },
-        { bottom: '32px', right: '40px', transform: 'rotate(180deg)' },
-      ].map((pos, i) => (
-        <svg
-          key={i}
-          width="20"
-          height="20"
-          viewBox="0 0 20 20"
-          fill="none"
+        {/* ── Ambient glow pulse ───────────────────────────────────────── */}
+        <div
+          aria-hidden
           style={{
             position: 'absolute',
-            ...pos,
-            opacity: 0,
-            animation: 'csLoaderLetter 0.5s ease forwards',
-            animationDelay: `${1800 + i * 100}ms`,
+            width: 480,
+            height: 480,
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(210,195,168,0.055) 0%, transparent 62%)',
+            animation: 'lxGlow 6s ease-in-out infinite',
+            pointerEvents: 'none',
           }}
+        />
+
+        {/* ── Concentric decorative rings (SVG — always crisp) ────────── */}
+        <svg
+          viewBox="0 0 320 320"
+          width="320" height="320"
           aria-hidden
+          style={{
+            position: 'absolute',
+            opacity: 0,
+            animation: 'lxRing 1.8s cubic-bezier(0.22, 1, 0.36, 1) 250ms both',
+            pointerEvents: 'none',
+          }}
         >
-          <path d="M0 20 L0 0 L20 0" stroke="rgba(201,216,193,0.25)" strokeWidth="1" fill="none" />
+          <circle cx="160" cy="160" r="146" stroke="rgba(210,195,168,0.06)" strokeWidth="0.6" fill="none" />
+          <circle cx="160" cy="160" r="120" stroke="rgba(210,195,168,0.04)" strokeWidth="0.5" fill="none" />
         </svg>
-      ))}
-    </div>
+
+        {/* ── Rose SVG — warm champagne, no drop-shadow blur ───────────── */}
+        <div
+          style={{
+            marginBottom: 44,
+            opacity: 0,
+            animation: 'lxFade 0.5s ease 100ms both',
+          }}
+        >
+          <svg
+            viewBox="0 0 96 90"
+            width="132" height="124"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            style={{ overflow: 'visible' }}
+            aria-hidden
+          >
+            {/* Subtle soft-light glow behind petals — pure SVG, no raster blur */}
+            <ellipse cx="48" cy="50" rx="38" ry="32" fill="rgba(210,195,168,0.04)" />
+            {PETAL_PATHS.map((d, i) => (
+              <path
+                key={i}
+                d={d}
+                fill="#C9BBA3"
+                style={{
+                  transformOrigin: '48px 45px',
+                  opacity: 0,
+                  animation: `lxPetal 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 95 + 180}ms both`,
+                }}
+              />
+            ))}
+          </svg>
+        </div>
+
+        {/* ── CARISMA wordmark — letter-by-letter reveal ───────────────── */}
+        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+          {'CARISMA'.split('').map((char, i) => (
+            <span
+              key={i}
+              style={{
+                display: 'inline-block',
+                fontFamily: 'Trajan Pro, "Trajan Pro Regular", Georgia, serif',
+                fontSize: 'clamp(17px, 3vw, 24px)',
+                letterSpacing: '11px',
+                color: '#EDE8DF',
+                textTransform: 'uppercase',
+                opacity: 0,
+                animation: `lxLetter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 65 + 1180}ms both`,
+              }}
+            >
+              {char}
+            </span>
+          ))}
+        </div>
+
+        {/* ── Divider ──────────────────────────────────────────────────── */}
+        <div
+          style={{
+            height: 1,
+            width: 0,
+            backgroundColor: 'rgba(210,195,168,0.28)',
+            margin: '15px 0',
+            animation: 'lxDivider 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1680ms both',
+          }}
+        />
+
+        {/* ── Sub-brand ────────────────────────────────────────────────── */}
+        <div
+          style={{
+            fontFamily: '"Novecento Wide Book", "Novecento Wide", sans-serif',
+            fontSize: 9,
+            letterSpacing: '5px',
+            textTransform: 'uppercase',
+            color: 'rgba(210,195,168,0.4)',
+            opacity: 0,
+            animation: 'lxLetter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1780ms both',
+          }}
+        >
+          Slimming
+        </div>
+
+        {/* ── Circular arc progress — SVG so it scales perfectly ───────── */}
+        <svg
+          viewBox="0 0 64 64"
+          width="56" height="56"
+          aria-hidden
+          style={{
+            position: 'absolute',
+            bottom: 44,
+            opacity: 0,
+            animation: 'lxFade 0.4s ease 350ms both',
+            pointerEvents: 'none',
+          }}
+        >
+          {/* Track */}
+          <circle cx="32" cy="32" r="28" stroke="rgba(210,195,168,0.07)" strokeWidth="0.7" fill="none" />
+          {/* Fill arc */}
+          <circle
+            cx="32" cy="32" r="28"
+            stroke="rgba(210,195,168,0.38)"
+            strokeWidth="0.7"
+            fill="none"
+            strokeLinecap="round"
+            strokeDasharray={ARC_C}
+            strokeDashoffset={ARC_C}
+            transform="rotate(-90 32 32)"
+            style={{
+              animation: `lxArc 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms both`,
+            }}
+          />
+        </svg>
+
+        {/* ── Corner L-marks — SVG lines, pixel-perfect at all sizes ───── */}
+        {[
+          { top: 28, left: 36, rotate: false },
+          { bottom: 28, right: 36, rotate: true },
+        ].map((c, i) => (
+          <svg
+            key={i}
+            viewBox="0 0 18 18"
+            width="18" height="18"
+            fill="none"
+            aria-hidden
+            style={{
+              position: 'absolute',
+              top: c.top ?? undefined,
+              left: c.left ?? undefined,
+              bottom: c.bottom ?? undefined,
+              right: c.right ?? undefined,
+              transform: c.rotate ? 'rotate(180deg)' : 'none',
+              opacity: 0,
+              animation: `lxFade 0.5s ease ${1960 + i * 90}ms both`,
+              pointerEvents: 'none',
+            }}
+          >
+            <path d="M0 17 L0 0 L17 0" stroke="rgba(210,195,168,0.16)" strokeWidth="0.8" fill="none" />
+          </svg>
+        ))}
+
+      </div>
+    </>
   );
 }
