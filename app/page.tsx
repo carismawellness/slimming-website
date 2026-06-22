@@ -34,8 +34,8 @@ export default function Home() {
       {/* Hero Section — fit-to-viewport, arch media + floating proof */}
       <PageHero
         headline={[
-          { text: 'Medical Weight Loss' },
-          { text: 'Doctor-Led Clinic in Malta', em: true },
+          { text: 'Doctor-Led Slimming' },
+          { text: '& Weight Loss in Malta', em: true },
         ]}
         sub="Lose up to 1kg a week with Malta's most comprehensive slimming program — medical weight loss, body contouring and personalised meal plans, all in one doctor-led plan."
         bullets={[
