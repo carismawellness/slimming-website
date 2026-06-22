@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader, SiteFooter, SiteCookieBanner } from "@/components/PreviewChromeGate";
 import ConsultationModal from "@/components/ConsultationModal";
+import GuideOrderModal from "@/components/GuideOrderModal";
 import QuizModal from "@/components/QuizModal";
 import Script from "next/script";
 
@@ -113,6 +114,7 @@ export default function RootLayout({
         <SiteFooter />
         <SiteCookieBanner />
         <ConsultationModal />
+        <GuideOrderModal />
         <QuizModal />
         <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
       </body>
