@@ -18,6 +18,7 @@ import {
 } from '@/lib/seo/schema';
 import { glp1Faqs } from '@/lib/faq/glp1';
 import GradientField from '@/components/layers/GradientField';
+import StepTimeline from '@/components/StepTimeline';
 
 export const metadata: Metadata = {
   title: "GLP-1 Weight Loss Malta | Ozempic & Mounjaro | Carisma",
@@ -46,20 +47,6 @@ const jsonLd = [
 ];
 
 export default function GLP1Page() {
-  const addresses = [
-    'Appetite regulation and feeling full sooner',
-    'Craving reduction and less "food noise"',
-    'Better adherence to your nutrition and movement plan',
-    'Improved blood sugar control and metabolic support',
-  ];
-
-  const cannotDo = [
-    'Build muscle or protect your metabolism on its own',
-    'Teach eating habits or create a repeatable routine',
-    'Address emotional eating triggers or stress-driven cravings',
-    'Create long-term identity change and weight maintenance',
-  ];
-
   const sustainability = [
     'Appetite regulation through Ozempic or Mounjaro to quiet cravings and reduce food noise',
     'A repeatable eating structure you can follow on busy weeks, not just perfect ones',
@@ -135,53 +122,22 @@ export default function GLP1Page() {
           <h2 className="text-center uppercase" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25 }}>
             How GLP-1 treatment<br />works in practice
           </h2>
-          <p className="mt-8 mb-6" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
-            Medical weight loss is a doctor-supervised approach to losing weight that goes beyond diets and willpower. At our weight loss clinic in Malta, it means a full medical assessment, personalised nutrition planning, body composition monitoring, and, where clinically appropriate, GLP-1 prescription support to regulate appetite and reduce cravings.
-          </p>
-          <p className="mb-12" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
-            Our doctors prescribe Ozempic (semaglutide) and Mounjaro (tirzepatide) for weight loss as part of a structured programme, not as a standalone prescription. This approach works because it treats the biological, behavioural, and lifestyle factors that make losing weight difficult. See how GLP-1 fits into our{' '}
-            <Link href="/weight-loss" style={{ color: '#4f7256', textDecoration: 'underline' }}>
-              full Medical Weight Loss Programme
-            </Link>
-            .
-          </p>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="px-2">
-              <h3 className="mb-6" style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                What a medical weight loss program addresses
-              </h3>
-              <ul className="space-y-4">
-                {addresses.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f7256" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><polyline points="20 6 9 17 4 12" /></svg>
-                    <span style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div className="px-2">
-              <h3 className="mb-6" style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
-                What medication alone cannot do:
-              </h3>
-              <ul className="space-y-4">
-                {cannotDo.map((item, i) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4f7256" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '1px' }}><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
-                    <span style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.5 }}>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <p className="mt-12 text-center mx-auto" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, maxWidth: '720px' }}>
-            That is why our program in Malta combines Ozempic or Mounjaro support (if clinically appropriate) with nutrition structure, strength training guidance, weekly tracking, and a defined maintenance plan. Explore our{' '}
+          <p className="mt-8 mb-12 text-center mx-auto" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8, maxWidth: '680px' }}>
+            GLP-1 medication like Ozempic and Mounjaro is one piece &mdash; not the whole plan. Here&rsquo;s how it works inside our doctor-led{' '}
             <Link href="/weight-loss" style={{ color: '#4f7256', textDecoration: 'underline' }}>
               Medical Weight Loss Programme
             </Link>{' '}
-            to see the full picture.
+            in Malta.
           </p>
+
+          <StepTimeline
+            steps={[
+              { title: 'Full Medical Assessment', desc: 'A doctor reviews your health history, body composition and goals to confirm whether GLP-1 (Ozempic or Mounjaro) is clinically right for you.' },
+              { title: 'GLP-1, Prescribed Properly', desc: 'Where appropriate, it’s prescribed inside a structured plan to regulate appetite and quiet food noise — never as a standalone shortcut.' },
+              { title: 'Built Into a Full Plan', desc: 'Medication is paired with personalised nutrition, movement and weekly tracking — the habits and muscle protection medication alone can’t deliver.' },
+              { title: 'Lasting Maintenance', desc: 'We protect your metabolism and plan for life after GLP-1, so the weight stays off and your results hold.' },
+            ]}
+          />
         </div>
       </section>
 
