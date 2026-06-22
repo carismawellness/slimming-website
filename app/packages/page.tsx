@@ -20,11 +20,15 @@ export const metadata: Metadata = {
 
 const HEADING_FONT = '"Trajan Pro", serif';
 const BODY_FONT = '"Novecento Wide", Roboto, sans-serif';
-// Accessible brand-family colors (WCAG AA on white / #F5F2EF / #EFEAE5).
-// GREEN: deep sage #4f7256 — clears AA as text, link, border, and CTA fill.
-// TAUPE: darkened taupe #6f6456 — clears AA.
+// Locked brand tokens (DESIGN_LANGUAGE §1 — all WCAG AA on white / soft sage washes).
+// GREEN: sage #4f7256 — buttons, links, eyebrows, icons.
+// HEADING: dark sage #3c5a40 — section H2/H3.
+// TAUPE: card-body taupe #6f6456 — body copy on light surfaces.
+// BODY_COLOR: secondary #595959 — sub copy.
 const GREEN = '#4f7256';
+const HEADING_COLOR = '#3c5a40';
 const TAUPE = '#6f6456';
+const BODY_COLOR = '#595959';
 
 export default function PackagesPage() {
   const servicesList = getOrderedServices();
@@ -80,6 +84,7 @@ export default function PackagesPage() {
 
         {/* Hero */}
         <PageHero
+          motif
           eyebrow="Carisma Slimming"
           compactHeadline
           headline={[
@@ -98,16 +103,40 @@ export default function PackagesPage() {
           proof={{ rating: '4.9', reviews: '800+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         />
 
-        {/* Packages grid */}
-        <section aria-labelledby="packages-heading" className="py-24">
+        {/* Packages grid — white → soft sage wash so it flows into the CTA section below */}
+        <section
+          aria-labelledby="packages-heading"
+          className="py-24"
+          style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8f2 60%, #f6f4ef 100%)' }}
+        >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2
-              id="packages-heading"
-              className="text-3xl mb-10 text-center leading-tight"
-              style={{ fontFamily: HEADING_FONT, color: TAUPE }}
-            >
-              Our Slimming &amp; Body Contouring Treatment Packages
-            </h2>
+            {/* Section header pattern: eyebrow → 64px rule → Trajan H2 → sub */}
+            <div className="text-center max-w-[620px] mx-auto mb-12">
+              <p
+                className="uppercase"
+                style={{ fontFamily: BODY_FONT, fontSize: 12, letterSpacing: '3px', color: GREEN, margin: 0 }}
+              >
+                Our Protocols
+              </p>
+              <span
+                aria-hidden="true"
+                style={{ display: 'block', width: 64, height: 1, background: GREEN, margin: '18px auto' }}
+              />
+              <h2
+                id="packages-heading"
+                className="leading-tight uppercase"
+                style={{ fontFamily: HEADING_FONT, color: HEADING_COLOR, fontSize: 'clamp(24px, 3.4vw, 34px)' }}
+              >
+                Our Slimming &amp; Body Contouring Treatment Packages
+              </h2>
+              <p
+                className="mt-5"
+                style={{ fontFamily: BODY_FONT, color: BODY_COLOR, fontSize: 16, lineHeight: 1.6 }}
+              >
+                Each package is a focused, doctor-led protocol — choose your goal, and we&rsquo;ll tailor
+                the combination at your free body analysis.
+              </p>
+            </div>
             {/* P5 — mobile-first grid: 1 col → 2 col → 3 col */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
               {servicesList.map((service) => (
@@ -122,24 +151,23 @@ export default function PackagesPage() {
                   <article className="card overflow-hidden h-full flex flex-col transition-all duration-200 ease-in-out group-hover:shadow-lg group-active:scale-[0.99]">
                     {/* P3 — fixed aspect ratio prevents layout shift */}
                     <div
-                      className="flex items-center justify-center text-center px-4 border-b"
+                      className="flex items-center justify-center text-center px-4 transition-transform duration-300 ease-in-out group-hover:scale-[1.05]"
                       style={{
-                        backgroundColor: '#EFEAE5',
-                        borderColor: '#E5DED7',
-                        color: TAUPE,
+                        background: 'linear-gradient(180deg, #F2F6EF 0%, #DEEBEB 100%)',
+                        color: GREEN,
                         aspectRatio: '4 / 3',
                       }}
                       role="presentation"
                     >
-                      <span className="text-sm" style={{ fontFamily: BODY_FONT }}>
-                        [ {service.imagePlaceholder} ]
+                      <span className="text-sm uppercase tracking-wide" style={{ fontFamily: BODY_FONT }}>
+                        {service.imagePlaceholder}
                       </span>
                     </div>
                     <div className="p-6 flex flex-col flex-1">
                       {/* P6 — H3 within card grid (H2 is section heading) */}
                       <h3
-                        className="text-xl mb-1 leading-snug"
-                        style={{ fontFamily: HEADING_FONT, color: TAUPE }}
+                        className="text-xl mb-1 leading-snug uppercase"
+                        style={{ fontFamily: HEADING_FONT, color: HEADING_COLOR }}
                       >
                         {service.treatment}
                       </h3>
@@ -178,19 +206,34 @@ export default function PackagesPage() {
           </div>
         </section>
 
-        {/* Combined CTA */}
-        <section aria-labelledby="cta-heading" className="py-24" style={{ backgroundColor: '#F5F2EF' }}>
+        {/* Combined CTA — starts at the grid's end color (#f6f4ef) and resolves to white (no seam) */}
+        <section
+          aria-labelledby="cta-heading"
+          className="py-24"
+          style={{ background: 'linear-gradient(180deg, #f6f4ef 0%, #ffffff 100%)' }}
+        >
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            {/* Section header pattern */}
+            <p
+              className="uppercase"
+              style={{ fontFamily: BODY_FONT, fontSize: 12, letterSpacing: '3px', color: GREEN, margin: 0 }}
+            >
+              Not Sure Where to Start?
+            </p>
+            <span
+              aria-hidden="true"
+              style={{ display: 'block', width: 64, height: 1, background: GREEN, margin: '18px auto' }}
+            />
             <h2
               id="cta-heading"
-              className="text-3xl mb-6 leading-tight"
-              style={{ fontFamily: HEADING_FONT, color: TAUPE }}
+              className="mb-6 leading-tight uppercase"
+              style={{ fontFamily: HEADING_FONT, color: HEADING_COLOR, fontSize: 'clamp(24px, 3.4vw, 34px)' }}
             >
               Not Sure Which Body Contouring Package Is Right for You?
             </h2>
             <p
               className="mb-8 text-lg leading-relaxed max-w-prose mx-auto"
-              style={{ color: TAUPE, fontFamily: BODY_FONT }}
+              style={{ color: BODY_COLOR, fontFamily: BODY_FONT }}
             >
               Many clients combine multiple treatments as part of their comprehensive transformation
               plan. Our medical team will recommend the ideal combination based on your goals and a
@@ -198,21 +241,23 @@ export default function PackagesPage() {
             </p>
             {/* P2 — min 44×44px touch targets on all CTAs */}
             <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center">
+              {/* Primary — .cta-glow provides the sage gradient + glow halo; no bg override */}
               <a
                 href={BOOKING_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Book a free body composition analysis (opens in new tab)"
-                className="cta-glow text-white px-8 font-bold uppercase tracking-wide inline-flex items-center justify-center min-h-[44px] transition-all duration-200 ease-in-out active:scale-95"
-                style={{ backgroundColor: GREEN, fontFamily: BODY_FONT }}
+                className="cta-glow text-white px-8 font-bold uppercase tracking-wide inline-flex items-center justify-center min-h-[44px]"
+                style={{ fontFamily: BODY_FONT }}
               >
                 Book Free Body Analysis
               </a>
+              {/* Secondary — sage outline */}
               <BookConsultationButton variant="outline" style={{ fontSize: '13px', minHeight: '44px' }} />
               <a
                 href="tel:+35627802062"
                 aria-label="Call us at +356 27802062"
-                className="btn btn-secondary px-8 font-bold uppercase tracking-wide inline-flex items-center justify-center min-h-[44px] transition-all duration-200 ease-in-out active:scale-95"
+                className="btn btn-secondary px-8 font-bold uppercase tracking-wide inline-flex items-center justify-center min-h-[44px]"
                 style={{ fontFamily: BODY_FONT }}
               >
                 Call: +356 27802062

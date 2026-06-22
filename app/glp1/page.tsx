@@ -17,7 +17,6 @@ import {
 } from '@/lib/seo/schema';
 import { glp1Faqs } from '@/lib/faq/glp1';
 import GradientField from '@/components/layers/GradientField';
-import MotifAccent from '@/components/layers/MotifAccent';
 
 export const metadata: Metadata = {
   title: "GLP-1 Weight Loss Malta | Ozempic & Mounjaro | Carisma",
@@ -119,20 +118,21 @@ export default function GLP1Page() {
         media={{ type: 'video', src: '/video/hero-720p.mp4', poster: '/glp1-hero.webp', alt: 'Doctor-led GLP-1 weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/f940f0_c4008d16bc3245f7bc8663f5b60d7a82~mv2.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
+        motif
       />
 
       {/* Medical Weight Loss Results */}
       <ResultsCarousel />
 
       {/* What is Medical Weight Loss */}
-      <section className="py-24">
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 100%)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             What is medical weight loss?
           </p>
-          <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.3 }}>
-            What is medical weight loss?<br />How GLP-1 treatment works in practice
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center uppercase" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25 }}>
+            How GLP-1 treatment<br />works in practice
           </h2>
           <p className="mt-8 mb-6" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.8 }}>
             Medical weight loss is a doctor-supervised approach to losing weight that goes beyond diets and willpower. At our weight loss clinic in Malta, it means a full medical assessment, personalised nutrition planning, body composition monitoring, and, where clinically appropriate, GLP-1 prescription support to regulate appetite and reduce cravings.
@@ -156,7 +156,7 @@ export default function GLP1Page() {
               </ul>
             </div>
             <div className="px-2">
-              <h3 className="mb-6" style={{ color: '#6f6456', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <h3 className="mb-6" style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 What medication alone cannot do:
               </h3>
               <ul className="space-y-4">
@@ -178,11 +178,11 @@ export default function GLP1Page() {
 
 
       {/* Sustainability */}
-      <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12" style={{ maxWidth: '1100px', background: 'linear-gradient(180deg, #D7E2D8 0%, #FBFBF9 38%, #FFFFFF 50%)', borderTopLeftRadius: '16px', borderTopRightRadius: '16px' }}>
+      <section className="py-16" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 100%)' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12" style={{ maxWidth: '1100px' }}>
           <h2
             className="text-center mb-12 uppercase"
-            style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
+            style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25 }}
           >
             Ozempic &amp; Mounjaro alone are not enough.<br />We build sustainable weight loss.
           </h2>
@@ -227,11 +227,11 @@ export default function GLP1Page() {
       </section>
 
       {/* Malta's trusted clinic — press logos + program pillars */}
-      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #eef3ea 0%, #ffffff 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-center"
-            style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', lineHeight: 1.35 }}
+            style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', textTransform: 'uppercase', lineHeight: 1.35 }}
           >
             malta&apos;s trusted clinic for<br />doctor-led, medical weight loss
           </h2>
@@ -277,11 +277,11 @@ export default function GLP1Page() {
       {/* Medical weight loss eligibility */}
       <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '760px' }}>
-          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             medical weight loss eligibility
           </p>
-          <div className="mx-auto mt-2 mb-6" style={{ width: '124px', height: '1px', backgroundColor: '#9B8D83' }} />
-          <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center mb-6" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: '1px', textTransform: 'uppercase', lineHeight: 1.4 }}>
             Who is GLP-1 weight loss right for?
           </h2>
           <p className="mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6 }}>
@@ -302,7 +302,7 @@ export default function GLP1Page() {
               </ul>
             </div>
             <div>
-              <h3 className="mb-5" style={{ color: '#6f6456', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+              <h3 className="mb-5" style={{ color: '#4f7256', fontFamily: wideFont, fontWeight: 600, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase' }}>
                 Unsuitable for:
               </h3>
               <ul className="space-y-5">
@@ -332,11 +332,11 @@ export default function GLP1Page() {
       {/* We are not another diet clinic */}
       <section className="py-24" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             The Carisma Difference
           </p>
-          <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#8EB093' }} />
-          <h2 className="text-center mb-6" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', lineHeight: 1.3 }}>
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center mb-6" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', textTransform: 'uppercase', lineHeight: 1.3 }}>
             Malta&apos;s doctor-led GLP-1 clinic —<br />not another diet programme.
           </h2>
           {/* Centered over a faint sage backgroundImage tint (worst case ~rgb(215,228,216));
@@ -371,11 +371,11 @@ export default function GLP1Page() {
       {/* Led by expertise — Dr Zaid Teebi */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
-            Expert <span style={{ color: '#4f7256' }}>medical weight loss</span> care
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
+            Expert medical weight loss care
           </p>
-          <div className="mx-auto mt-2 mb-6" style={{ width: '170px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4 }}>
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: '1px', lineHeight: 1.4 }}>
             Doctor-supervised weight loss —<br />led by 30 years of clinical expertise.
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -415,11 +415,11 @@ export default function GLP1Page() {
       {/* Our promise — extended care commitment */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             Our Promise
           </p>
-          <div className="mx-auto mt-2 mb-6" style={{ width: '150px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '25px', letterSpacing: '2px', lineHeight: 1.35, textTransform: 'uppercase' }}>
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: '2px', lineHeight: 1.35, textTransform: 'uppercase' }}>
             Our weight loss promise: up to 1kg per week<br />measured, verified, committed
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
@@ -467,7 +467,7 @@ export default function GLP1Page() {
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="card" style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F8F7F3 35%)', padding: '48px' }}>
-            <h2 className="text-center" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.4 }}>
+            <h2 className="text-center" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.4 }}>
               Safety, side effects,<br />and our system
             </h2>
             <p className="mt-6 mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
@@ -526,11 +526,11 @@ export default function GLP1Page() {
       {/* The science behind GLP-1 — video */}
       <section className="py-24">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase', lineHeight: 1.6 }}>
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', lineHeight: 1.6 }}>
             Why weight loss is biological,<br />not just behavioural
           </p>
-          <div className="mx-auto mt-4 mb-6" style={{ width: '120px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-8" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', textTransform: 'uppercase' }}>
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center mb-8" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: '1px', textTransform: 'uppercase' }}>
             The science behind GLP-1
           </h2>
           <p className="mb-5" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
@@ -539,7 +539,7 @@ export default function GLP1Page() {
           <p className="mb-10" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>
             In this video, you will understand how GLP-1 regulates appetite, blood sugar, and metabolic signals, and why modern therapies like Ozempic and Mounjaro are reshaping long-term weight management. When used with medical guidance and structured lifestyle support, Ozempic or Mounjaro becomes a tool within a structured program, not a shortcut.
           </p>
-          <div className="mx-auto" style={{ border: '6px solid #8EB093', maxWidth: '744px', overflow: 'hidden', borderRadius: '16px' }}>
+          <div className="mx-auto" style={{ border: '6px solid #4f7256', maxWidth: '744px', overflow: 'hidden', borderRadius: '16px' }}>
             <div style={{ position: 'relative', width: '100%', paddingTop: '56.25%' }}>
               <iframe
                 src="https://www.youtube.com/embed/9t5m33ccUYA?controls=1&playsinline=1&rel=0"
@@ -556,11 +556,11 @@ export default function GLP1Page() {
       {/* 4 core pillars — programme built to last */}
       <section className="py-24">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <p className="text-center" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', textTransform: 'uppercase' }}>
+          <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             4 core pillars of our methodology
           </p>
-          <div className="mx-auto mt-2 mb-6" style={{ width: '210px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', letterSpacing: '1px', lineHeight: 1.4, textTransform: 'uppercase' }}>
+          <div className="mx-auto mt-[18px] mb-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+          <h2 className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: '1px', lineHeight: 1.4, textTransform: 'uppercase' }}>
             A doctor-led medical weight loss<br />programme built to last
           </h2>
           <div className="card" style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', padding: '28px' }}>
@@ -626,12 +626,11 @@ export default function GLP1Page() {
             blob={{ top: '6%', right: '-5%' }}
             dots
           >
-            <p className="text-center mb-2" style={{ color: '#6f6456', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
+            <p className="text-center mb-2" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
               the carisma difference
             </p>
-            <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-            <MotifAccent mode="divider" className="mx-auto mb-6" />
-            <h2 className="text-center mb-12" style={{ color: '#4f7256', fontFamily: headingFont, fontWeight: 400, fontSize: '28px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+            <div className="mx-auto mb-6 mt-[18px]" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
+            <h2 className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', textTransform: 'uppercase', letterSpacing: '1px' }}>
               Malta&rsquo;s #1 leading wellness chain
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">

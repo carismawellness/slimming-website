@@ -1,22 +1,24 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import HeroMotif from '@/components/HeroMotif';
 
 export const metadata: Metadata = {
   title: "Your Quiz Results | Carisma Slimming",
   robots: { index: false, follow: true },
 };
 
-/* ── Brand tokens ─────────────────────────────────────────────────────── */
+/* ── Brand tokens (locked palette — DESIGN_LANGUAGE §1) ───────────────── */
 const headingFont = 'Trajan Pro, serif';
 const wideFont    = 'Novecento Wide Book, sans-serif';
 const bodyFont    = 'Roboto, sans-serif';
-// Accessible taupe (locked palette TAUPE token): #6f6456 clears AA on white (5.78:1) and cream (5.20:1)
-const taupe       = '#6f6456';
-// taupeLight darkened to the same accessible taupe so muted text also clears AA (was #AFA39D, 2.2-2.5:1 FAIL)
-const taupeLight  = '#6f6456';
-// Deep sage (brand-green-text/fill): #4f7256 clears AA as tag text on #EEF3EF (4.83:1) and as CTA fill under white text (5.42:1). Bright #8EB093 stays decorative only.
+// Headings: dark sage #3c5a40 (H2/H3), deep forest #024C27 for stat values. Both AA on white.
+const headGreen   = '#3c5a40';
+const deepForest  = '#024C27';
+// Sage #4f7256 — buttons/links/icons/eyebrows/tags. AA (5.42:1). #8EB093 stays decorative only.
 const green       = '#4f7256';
-const cream       = '#F0F4EE';
+// Body copy / secondary text (locked neutrals).
+const body        = '#333333';
+const bodyMuted   = '#595959';
 
 /* ── Slimming treatments catalogue ───────────────────────────────────── */
 const TREATMENTS = [
@@ -188,25 +190,52 @@ export default async function SlimmingQuizResultsPage({
     : TREATMENTS.slice(0, 3).map((t) => ({ id: t.id, matchedGoals: [], matchedAreas: [] }));
 
   return (
-    <main style={{ backgroundColor: '#FFFFFF', minHeight: '80vh' }}>
+    <main style={{ minHeight: '80vh', background: '#FFFFFF' }}>
 
-      {/* ── Hero heading ── */}
-      <section style={{ backgroundColor: cream, padding: '60px 24px 48px' }}>
-        <div style={{ maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
-          {firstName && (
-            <p style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '2px', color: taupeLight, textTransform: 'uppercase', marginBottom: '12px' }}>
-              {firstName}, here are your results
-            </p>
-          )}
-          <h1 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '32px', lineHeight: '1.3', color: taupe, textTransform: 'uppercase', marginBottom: '16px' }}>
+      {/* ── Hero heading (bespoke hero with animated HeroMotif behind it) ── */}
+      <section
+        style={{
+          position: 'relative',
+          overflow: 'hidden',
+          padding: 'clamp(96px, 14vh, 132px) 24px 64px',
+          // Hero radial sage wash, flowing down into white so the next section seam matches.
+          background:
+            'radial-gradient(120% 90% at 85% 8%, #eef3ea 0%, #f6f4ef 45%, #ffffff 100%)',
+        }}
+      >
+        {/* soft brand glow bed (decorative) */}
+        <span
+          aria-hidden
+          style={{
+            position: 'absolute',
+            top: '-14%',
+            right: '-6%',
+            width: 420,
+            height: 420,
+            borderRadius: '50%',
+            background: 'rgba(142,176,147,0.26)',
+            filter: 'blur(90px)',
+            zIndex: 0,
+            pointerEvents: 'none',
+          }}
+        />
+
+        {/* animated sage constellation motif — brand signature, reduced-motion safe */}
+        <HeroMotif />
+
+        <div style={{ position: 'relative', zIndex: 1, maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
+          <p style={{ fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', color: green, textTransform: 'uppercase', marginBottom: '14px' }}>
+            {firstName ? `${firstName}, here are your results` : 'Your personalised results'}
+          </p>
+          <h1 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(26px, 3vw, 35px)', lineHeight: 1.2, color: headGreen, textTransform: 'uppercase', margin: '0 0 18px' }}>
             Your Personalised Slimming Plan<br />Just For You
           </h1>
-          <div style={{ width: '80px', height: '1px', backgroundColor: '#C9D8C1', margin: '0 auto 20px' }} />
+          <div style={{ width: '64px', height: '1px', backgroundColor: green, margin: '0 auto 20px' }} />
           {(selectedGoals.length > 0 || selectedAreas.length > 0) && (
-            <p style={{ fontFamily: bodyFont, fontSize: '15px', color: taupeLight, lineHeight: 1.6 }}>
+            <p style={{ fontFamily: bodyFont, fontSize: '16px', color: bodyMuted, lineHeight: 1.6, maxWidth: 620, margin: '0 auto' }}>
               Based on your goals
-              {selectedGoals.length > 0 && <> — <span style={{ color: taupe, fontWeight: 500 }}>{selectedGoals.join(', ')}</span></>}
-              {selectedAreas.length > 0 && <> — and focus areas: <span style={{ color: taupe, fontWeight: 500 }}>{selectedAreas.join(', ')}</span></>}
+              {selectedGoals.length > 0 && <> — <span style={{ color: headGreen, fontWeight: 500 }}>{selectedGoals.join(', ')}</span></>}
+              {selectedAreas.length > 0 && <> — and focus areas: <span style={{ color: headGreen, fontWeight: 500 }}>{selectedAreas.join(', ')}</span></>}
               {' '}— our team has selected the treatments most suited to your needs.
             </p>
           )}
@@ -214,95 +243,113 @@ export default async function SlimmingQuizResultsPage({
       </section>
 
       {/* ── Recommendation cards ── */}
-      <section style={{ maxWidth: '860px', margin: '0 auto', padding: '48px 24px 80px' }}>
-        <h2 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '24px', lineHeight: '1.3', color: taupe, textTransform: 'uppercase', textAlign: 'center', marginBottom: '32px' }}>
-          Recommended Slimming &amp; Body Treatments in Malta
-        </h2>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '32px' }}>
-          {items.map(({ id, matchedGoals, matchedAreas }) => {
-            const t = TREATMENTS.find((x) => x.id === id);
-            if (!t) return null;
+      {/* Gradient flows white → soft sage wash → white, so both seams match (no flat-colour band). */}
+      <section
+        style={{
+          background: 'linear-gradient(180deg, #ffffff 0%, #f5f8f2 46%, #ffffff 100%)',
+          padding: '64px 0 88px',
+        }}
+      >
+        <div style={{ maxWidth: '880px', margin: '0 auto', padding: '0 24px' }}>
+          {/* Section header pattern: eyebrow → 64px rule → Trajan H2 → sub */}
+          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+            <p style={{ fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', color: green, textTransform: 'uppercase', margin: '0 0 16px' }}>
+              Recommended for you
+            </p>
+            <div style={{ width: '64px', height: '1px', backgroundColor: green, margin: '0 auto 18px' }} />
+            <h2 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px, 3.4vw, 34px)', lineHeight: 1.25, color: headGreen, textTransform: 'uppercase', margin: 0 }}>
+              Slimming &amp; Body Treatments in Malta
+            </h2>
+          </div>
 
-            return (
-              <div
-                key={id}
-                className="card"
-                style={{
-                  display: 'grid',
-                  gridTemplateColumns: '220px 1fr',
-                  overflow: 'hidden',
-                }}
-              >
-                {/* Image */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <div style={{ position: 'relative', height: '260px', overflow: 'hidden' }}>
-                  <img
-                    src={t.image}
-                    alt={t.name}
-                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                  />
-                </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
+            {items.map(({ id, matchedGoals, matchedAreas }) => {
+              const t = TREATMENTS.find((x) => x.id === id);
+              if (!t) return null;
 
-                {/* Content */}
-                <div style={{ padding: '28px 28px 24px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                  <div>
-                    <h3 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '20px', color: taupe, textTransform: 'uppercase', marginBottom: '10px' }}>
-                      {t.name}
-                    </h3>
-                    <p style={{ fontFamily: bodyFont, fontSize: '14px', color: taupeLight, lineHeight: 1.6, marginBottom: '18px' }}>
-                      {t.tagline}
-                    </p>
-
-                    {(matchedGoals.length > 0 || matchedAreas.length > 0) && (
-                      <div style={{ marginBottom: '18px' }}>
-                        <p style={{ fontFamily: wideFont, fontSize: '11px', letterSpacing: '1.5px', color: taupe, textTransform: 'uppercase', marginBottom: '8px' }}>
-                          Matched to your goals
-                        </p>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                          {[...matchedGoals, ...matchedAreas].map((label) => (
-                            <span key={label} style={{ fontFamily: bodyFont, fontSize: '12px', color: green, backgroundColor: '#EEF3EF', border: '1px solid #C8DDC9', borderRadius: '999px', padding: '3px 10px' }}>
-                              {label}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    <div style={{ display: 'flex', gap: '20px', flexWrap: 'wrap' }}>
-                      {t.stats.map((s) => (
-                        <div key={s.label} style={{ textAlign: 'center' }}>
-                          <p style={{ fontFamily: wideFont, fontSize: '13px', color: taupe, fontWeight: 600, margin: 0 }}>{s.value}</p>
-                          <p style={{ fontFamily: bodyFont, fontSize: '11px', color: taupeLight, margin: 0 }}>{s.label}</p>
-                        </div>
-                      ))}
-                    </div>
+              return (
+                <div
+                  key={id}
+                  className="card card-lift"
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '240px 1fr',
+                    overflow: 'hidden',
+                    borderRadius: '20px',
+                  }}
+                >
+                  {/* Image (light card — no dark overlay) */}
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <div style={{ position: 'relative', minHeight: '260px', overflow: 'hidden' }}>
+                    <img
+                      src={t.image}
+                      alt={t.name}
+                      loading="lazy"
+                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                    />
                   </div>
 
-                  <Link
-                    href={t.href}
-                    className="btn btn-secondary"
-                    style={{ width: '100%', marginTop: '20px', padding: '13px', fontFamily: wideFont, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none' }}
-                  >
-                    Learn More
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+                  {/* Content */}
+                  <div style={{ padding: '28px 30px 26px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+                    <div>
+                      <h3 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '20px', lineHeight: 1.3, color: headGreen, textTransform: 'uppercase', margin: '0 0 12px' }}>
+                        {t.name}
+                      </h3>
+                      <p style={{ fontFamily: bodyFont, fontSize: '15px', color: bodyMuted, lineHeight: 1.6, margin: '0 0 18px' }}>
+                        {t.tagline}
+                      </p>
 
-        {/* CTA */}
-        <div style={{ textAlign: 'center', marginTop: '52px' }}>
-          <p style={{ fontFamily: bodyFont, fontSize: '15px', color: taupeLight, marginBottom: '20px' }}>
-            Ready to start? Book a free body composition analysis with our medical team.
-          </p>
-          <Link
-            href="/consultation"
-            className="cta-glow"
-            style={{ padding: '15px 40px', color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none' }}
-          >
-            Book a Free Body Analysis
-          </Link>
+                      {(matchedGoals.length > 0 || matchedAreas.length > 0) && (
+                        <div style={{ marginBottom: '20px' }}>
+                          <p style={{ fontFamily: wideFont, fontSize: '11px', letterSpacing: '2px', color: green, textTransform: 'uppercase', margin: '0 0 8px' }}>
+                            Matched to your goals
+                          </p>
+                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                            {[...matchedGoals, ...matchedAreas].map((label) => (
+                              <span key={label} style={{ fontFamily: bodyFont, fontSize: '12px', color: green, backgroundColor: '#EEF3EF', border: '1px solid #C8DDC9', borderRadius: '999px', padding: '4px 12px' }}>
+                                {label}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                        {t.stats.map((s) => (
+                          <div key={s.label} style={{ textAlign: 'center' }}>
+                            <p style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '17px', color: deepForest, margin: 0, lineHeight: 1.2 }}>{s.value}</p>
+                            <p style={{ fontFamily: wideFont, fontSize: '10px', letterSpacing: '1.5px', textTransform: 'uppercase', color: bodyMuted, margin: '4px 0 0' }}>{s.label}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <Link
+                      href={t.href}
+                      className="btn btn-secondary"
+                      style={{ width: '100%', marginTop: '22px', padding: '13px', fontFamily: wideFont, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none', textAlign: 'center' }}
+                    >
+                      Learn More
+                    </Link>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* CTA */}
+          <div style={{ textAlign: 'center', marginTop: '56px' }}>
+            <p style={{ fontFamily: bodyFont, fontSize: '16px', color: bodyMuted, lineHeight: 1.6, maxWidth: 560, margin: '0 auto 22px' }}>
+              Ready to start? Book a free body composition analysis with our medical team.
+            </p>
+            <Link
+              href="/consultation"
+              className="cta-glow"
+              style={{ display: 'inline-block', padding: '15px 40px', color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none' }}
+            >
+              Book a Free Body Analysis
+            </Link>
+          </div>
         </div>
       </section>
     </main>

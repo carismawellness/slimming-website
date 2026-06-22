@@ -143,8 +143,6 @@ const GREEN = '#406042'; // deep brand sage for TEXT/headings on white & light-s
 const GREEN_FILL = '#4f7256'; // CTA/button solid fill — white text clears 5.42:1 (AA)
 const GREEN_SAGE_LIGHT = '#C9E0CC'; // light sage for text over the scrimmed hero (>=4.5:1)
 const TAUPE = '#5f5649'; // darkened taupe for body/muted text — clears AA (>=4.92:1) on white & EVERY light-sage card on this page
-const BLUE = '#356a87'; // darkened brand blue — white CTA text clears 5.89:1 (AA)
-const BAND_END = '#567059'; // darkened lightest stop of dark-green bands so white body text clears AA
 
 function Kicker({ children, centered = false, rule = false }: { children: React.ReactNode; centered?: boolean; rule?: boolean }) {
   return (
@@ -209,8 +207,9 @@ export default function SlimmingGuidePage() {
         compactHeadline
       />
 
-      {/* Main Narrative / Pain Point Section */}
-      <section className="py-24" style={{ backgroundColor: '#FFFFFF' }}>
+      {/* Main Narrative / Pain Point Section — gradient flows from hero wash into the
+          sage band below (white → soft sage), no flat seam. */}
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)' }}>
         <div className="mx-auto px-4" style={{ maxWidth: '1032px' }}>
           <div
             className="card px-6 py-10 sm:px-12 sm:py-12"
@@ -220,7 +219,7 @@ export default function SlimmingGuidePage() {
             }}
           >
             <h2
-              className="text-center mb-10 lowercase"
+              className="text-center mb-10 uppercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
             >
               why diets fail in malta — and what actually works instead.
@@ -277,17 +276,18 @@ export default function SlimmingGuidePage() {
       {/* Built To Hold band + What This Is + Method share a wrapper so the tilted
           paper mockups can overlap section boundaries like on the live site */}
       <div className="relative overflow-hidden">
-      {/* Built To Hold Band — single Layers blob region (Whisper depth on its
-          existing dark-green gradient; no CTA here, so a blob is allowed). */}
+      {/* Built To Hold Band — light on-brand statement band (no dark-green bg). Starts
+          at the sage wash the section above ends on (#F5F8F2) and resolves to white so
+          the "What This Is" section below flows seamlessly. */}
       <GradientField
         blob={{ top: '-20%', right: '-4%' }}
         dots
-        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '57px 0' }}
+        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #D7E2D8 48%, #FFFFFF 100%)', padding: '64px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
             className="uppercase"
-            style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
+            style={{ color: GREEN, fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
           >
             THIS IS A SYSTEM <strong>BUILT TO HOLD.</strong>
             <br />
@@ -301,7 +301,7 @@ export default function SlimmingGuidePage() {
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
           <Kicker centered rule>WHAT THIS IS</Kicker>
           <h2
-            className="mb-8 lowercase"
+            className="mb-8 uppercase"
             style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px' }}
           >
             this is a behaviour-based weight loss system, not another diet.
@@ -336,7 +336,6 @@ export default function SlimmingGuidePage() {
             href={PRODUCT_URL}
             className="cta-glow block mx-auto text-center uppercase text-white"
             style={{
-              backgroundColor: BLUE,
               borderRadius: '999px',
               maxWidth: '550px',
               padding: '12px 24px',
@@ -357,7 +356,7 @@ export default function SlimmingGuidePage() {
           <div className="text-center max-w-3xl mx-auto mb-10">
             <Kicker centered rule>THE METHOD</Kicker>
             <h2
-              className="mb-6 lowercase mx-auto"
+              className="mb-6 uppercase mx-auto"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', maxWidth: '500px' }}
             >
               the four-pillar method: what to eat, when to eat, how much, and in what order.
@@ -418,13 +417,9 @@ export default function SlimmingGuidePage() {
       />
       </div>{/* end decorative wrapper */}
 
-      {/* Single Layers divider — restrained motif marking the Method → Outcomes seam. */}
-      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 pt-6">
-        <MotifAccent mode="divider" />
-      </div>
-
-      {/* Success Outcomes Section — STEP 1-4 stepper */}
-      <section className="py-24 bg-white">
+      {/* Success Outcomes Section — STEP 1-4 stepper. Flows white → soft sage so the
+          statement band below starts on the same color (no flat seam). */}
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col items-center mb-10">
             <h2
@@ -445,14 +440,15 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
-      {/* Stabilise Band */}
+      {/* Stabilise Band — light on-brand statement band (no dark-green bg). Starts on
+          the sage wash above and resolves to white so the section below flows. */}
       <section
-        style={{ background: `linear-gradient(90deg, #3E483E 0%, #4E6B55 55%, ${BAND_END} 100%)`, padding: '57px 0' }}
+        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #D7E2D8 48%, #FFFFFF 100%)', padding: '64px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
             className="uppercase"
-            style={{ color: '#FFFFFF', fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
+            style={{ color: GREEN, fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
           >
             WHEN THESE FOUR FOUNDATIONS <strong>STABILISE</strong>
             <br />
@@ -467,7 +463,7 @@ export default function SlimmingGuidePage() {
           <div className="text-center mb-10">
             <Kicker centered rule>DESIGNED FOR MALTA</Kicker>
             <h2
-              className="lowercase"
+              className="uppercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.5 }}
             >
               a slimming guide designed for maltese culture — festas, family tables, and all.
@@ -566,13 +562,13 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
-      {/* Is This For You Section */}
-      <section className="py-24 bg-white">
+      {/* Is This For You Section — flows white → soft sage into the final CTA band. */}
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <Kicker centered rule>before you start</Kicker>
             <h2
-              className="lowercase"
+              className="uppercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
             >
               is this weight loss guide right for you?
@@ -662,10 +658,11 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
-      {/* Final Call-to-Action Section — full-width dark green band */}
+      {/* Final Call-to-Action Section — light on-brand band (no dark-green bg). Starts on
+          the sage wash above and resolves to white so the section below flows. */}
       <section
         className="py-24 relative overflow-hidden"
-        style={{ background: `linear-gradient(90deg, #3E483E 0%, #57695A 50%, ${BAND_END} 100%)` }}
+        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #D7E2D8 45%, #FFFFFF 100%)' }}
       >
         {/* Single Layers watermark — decorative motif behind CTA content (no blob
             here because this band has a .cta-glow button). */}
@@ -680,18 +677,18 @@ export default function SlimmingGuidePage() {
             <div>
               <h2
                 className="uppercase"
-                style={{ color: '#F4F1E9', fontFamily: headingFont, fontWeight: 400, fontSize: '30px', lineHeight: 1.3 }}
+                style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', lineHeight: 1.3 }}
               >
                 GET THE CARISMA
                 <br />
                 SLIMMING GUIDE — €30
               </h2>
-              <div className="mt-3 mb-6" style={{ width: '180px', height: '1px', backgroundColor: 'rgba(255,255,255,0.6)' }} />
-              <p className="mb-4" style={{ color: '#FFFFFF', fontSize: '14px', maxWidth: '340px' }}>
+              <div className="mt-3 mb-6" style={{ width: '180px', height: '1px', backgroundColor: GREEN_FILL }} />
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '14px', maxWidth: '340px' }}>
                 If you have read this far, you already know something is different here. This is not another plan
                 asking you to be perfect. It is a structure asking you to return.
               </p>
-              <p className="mb-7" style={{ color: '#FFFFFF', fontSize: '14px', maxWidth: '340px' }}>
+              <p className="mb-7" style={{ color: TAUPE, fontSize: '14px', maxWidth: '340px' }}>
                 Choosing this for yourself is not indulgent. It is practical. The structure you have been missing
                 does not appear on its own. This is where it starts.
               </p>
@@ -699,7 +696,6 @@ export default function SlimmingGuidePage() {
                 href={PRODUCT_URL}
                 className="cta-glow block text-center uppercase text-white mb-7"
                 style={{
-                  backgroundColor: GREEN_FILL,
                   borderRadius: '999px',
                   maxWidth: '370px',
                   padding: '11px 24px',
@@ -711,7 +707,7 @@ export default function SlimmingGuidePage() {
               >
                 Get Slimming Guide &nbsp;›
               </a>
-              <GoogleReviewsRow light />
+              <GoogleReviewsRow />
             </div>
             {/* Right — guide mockup (in-flow below lg; large absolute version on desktop) */}
             <div className="flex justify-center lg:hidden">
@@ -752,7 +748,7 @@ export default function SlimmingGuidePage() {
               </p>
             </div>
             <h2
-              className="text-center mb-8 lowercase"
+              className="text-center mb-8 uppercase"
               style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '24px' }}
             >
               why malta chooses carisma slimming — doctor-led, evidence-based, shame-free
@@ -783,7 +779,6 @@ export default function SlimmingGuidePage() {
                   href={PRODUCT_URL}
                   className="cta-glow block text-center uppercase text-white w-full"
                   style={{
-                    backgroundColor: BLUE,
                     borderRadius: '999px',
                     maxWidth: '460px',
                     padding: '11px 24px',
