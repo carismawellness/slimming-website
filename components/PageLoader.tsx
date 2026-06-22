@@ -18,20 +18,22 @@ const PETAL_PATHS: string[] = [
   'M22.1953 8.46668C24.0649 8.58983 24.9997 9.82131 25.8722 11.1451C26.7446 12.469 27.6483 12.8384 28.8635 12.3766C30.2969 11.8532 30.7954 10.9604 30.515 9.32871C30.2345 7.69701 29.0194 6.61947 27.3679 6.5579C25.3736 6.49632 23.7533 7.32757 22.1953 8.46668Z',
 ];
 
-/* Petal shades — deep forest (#024C27) → light sage (#C9D8C1), evolving as the rose blooms */
+/* Petal shades — lighter than the nav-bar logo sage, cycling around the bloom.
+   The shades rotate so adjacent petals shift slightly, giving the rose depth
+   without any dark green. Range: mid-light (#9DC0A2) → airy (#D0E6CF). */
 const PETAL_COLORS = [
-  '#024C27', // 0 — deep forest
-  '#0D5630', // 1
-  '#1A6038', // 2
-  '#286B42', // 3
-  '#34764B', // 4
-  '#4f7256', // 5 — brand accessible sage
-  '#5E8860', // 6
-  '#6F9E6C', // 7
-  '#82B07A', // 8
-  '#99C090', // 9
-  '#B4CFA9', // 10
-  '#C9D8C1', // 11 — brand light sage (last petal)
+  '#A8CAAA', // 0
+  '#B4D2B5', // 1
+  '#BDD8BE', // 2
+  '#C6DEC6', // 3
+  '#CCDECB', // 4 — lightest arc
+  '#C8DCC8', // 5
+  '#C0D8C1', // 6
+  '#B5D1B7', // 7
+  '#AACAAC', // 8
+  '#A2C4A5', // 9
+  '#A8CAA9', // 10
+  '#B2CEB4', // 11
 ];
 
 /* SVG arc circumference for r=28: 2π×28 ≈ 175.9 */
@@ -43,7 +45,7 @@ export default function PageLoader() {
 
   useEffect(() => {
     startRef.current = performance.now();
-    const MIN_MS = 2800;
+    const MIN_MS = 3400;
 
     const dismiss = () => {
       const elapsed = performance.now() - startRef.current;
@@ -94,10 +96,8 @@ export default function PageLoader() {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
-        @keyframes lxRing {
-          from { transform: scale(0.72); opacity: 0; }
-          to   { transform: scale(1);    opacity: 1; }
-        }
+        @keyframes lxOrbitCW  { to { transform: rotate( 360deg); } }
+        @keyframes lxOrbitCCW { to { transform: rotate(-360deg); } }
         @keyframes lxArc {
           from { stroke-dashoffset: ${ARC_C}; }
           to   { stroke-dashoffset: 0; }
@@ -140,20 +140,44 @@ export default function PageLoader() {
           }}
         />
 
-        {/* ── Concentric decorative rings (SVG — always crisp) ────────── */}
+        {/* ── Orbiting rings — depth-of-field: inner=sharp/fast, outer=hazy/slow ── */}
         <svg
-          viewBox="0 0 320 320"
-          width="320" height="320"
+          viewBox="-150 -150 300 300"
+          width="300" height="300"
           aria-hidden
           style={{
             position: 'absolute',
+            overflow: 'visible',
             opacity: 0,
-            animation: 'lxRing 1.8s cubic-bezier(0.22, 1, 0.36, 1) 250ms both',
+            animation: 'lxFade 1.4s ease 700ms both',
             pointerEvents: 'none',
           }}
         >
-          <circle cx="160" cy="160" r="146" stroke="rgba(2,76,39,0.07)" strokeWidth="0.6" fill="none" />
-          <circle cx="160" cy="160" r="120" stroke="rgba(2,76,39,0.04)" strokeWidth="0.5" fill="none" />
+          {/* Ring 1 — innermost, sharpest, fastest, dashed tick motif */}
+          <g style={{ animation: 'lxOrbitCW 22s linear infinite', transformOrigin: '0 0' }}>
+            <circle cx="0" cy="0" r="66"
+              stroke="rgba(160,196,164,0.22)" strokeWidth="0.55" fill="none"
+              strokeDasharray="2.5 9" />
+          </g>
+
+          {/* Ring 2 — slightly blurred, counter-clockwise */}
+          <g style={{ animation: 'lxOrbitCCW 38s linear infinite', transformOrigin: '0 0', filter: 'blur(0.4px)' }}>
+            <circle cx="0" cy="0" r="92"
+              stroke="rgba(160,196,164,0.13)" strokeWidth="0.65" fill="none"
+              strokeDasharray="1.5 18" />
+          </g>
+
+          {/* Ring 3 — softer blur, clockwise, solid */}
+          <g style={{ animation: 'lxOrbitCW 60s linear infinite', transformOrigin: '0 0', filter: 'blur(0.9px)' }}>
+            <circle cx="0" cy="0" r="118"
+              stroke="rgba(160,196,164,0.08)" strokeWidth="0.8" fill="none" />
+          </g>
+
+          {/* Ring 4 — outermost, most out-of-focus, slowest */}
+          <g style={{ animation: 'lxOrbitCCW 90s linear infinite', transformOrigin: '0 0', filter: 'blur(1.8px)' }}>
+            <circle cx="0" cy="0" r="146"
+              stroke="rgba(160,196,164,0.05)" strokeWidth="1.2" fill="none" />
+          </g>
         </svg>
 
         {/* ── Rose SVG — warm champagne, no drop-shadow blur ───────────── */}
@@ -181,7 +205,7 @@ export default function PageLoader() {
                 style={{
                   transformOrigin: '48px 45px',
                   opacity: 0,
-                  animation: `lxPetal 1.1s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 95 + 180}ms both`,
+                  animation: `lxPetal 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 120 + 200}ms both`,
                 }}
               />
             ))}
@@ -201,7 +225,7 @@ export default function PageLoader() {
                 color: '#0d180f',
                 textTransform: 'uppercase',
                 opacity: 0,
-                animation: `lxLetter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 65 + 1180}ms both`,
+                animation: `lxLetter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 65 + 1500}ms both`,
               }}
             >
               {char}
@@ -216,7 +240,7 @@ export default function PageLoader() {
             width: 0,
             backgroundColor: 'rgba(2,76,39,0.18)',
             margin: '15px 0',
-            animation: 'lxDivider 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1680ms both',
+            animation: 'lxDivider 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2050ms both',
           }}
         />
 
@@ -229,7 +253,7 @@ export default function PageLoader() {
             textTransform: 'uppercase',
             color: 'rgba(2,76,39,0.45)',
             opacity: 0,
-            animation: 'lxLetter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 1780ms both',
+            animation: 'lxLetter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2180ms both',
           }}
         >
           Slimming
