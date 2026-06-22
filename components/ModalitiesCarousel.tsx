@@ -178,7 +178,7 @@ export default function ModalitiesCarousel() {
                 src={card.src}
                 alt={card.alt}
                 className="mc-img"
-                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: card.focal ?? 'center', display: 'block' }}
+                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: card.focal ?? 'center' }}
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '24px 26px 26px' }}>
