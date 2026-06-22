@@ -45,7 +45,7 @@ export default function FooterRose() {
         zIndex: 0,
         pointerEvents: 'none',
         background: '#AECBB4',
-        opacity: 0.5,
+        opacity: 0.9,
         WebkitMaskImage: 'url(/rose-motif.svg)',
         maskImage: 'url(/rose-motif.svg)',
         WebkitMaskRepeat: 'no-repeat',
