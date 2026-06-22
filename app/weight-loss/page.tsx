@@ -1265,11 +1265,11 @@ function FAQSection() {
     <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading + search */}
-        <div className="relative mb-10">
+        <div className="mb-10">
           <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '24px', textTransform: 'uppercase', letterSpacing: '1px' }}>
             Frequently Asked Questions About Medical Weight Loss in Malta
           </h2>
-          <div className="mt-6 md:mt-0 md:absolute md:right-0 md:top-1/2 md:-translate-y-1/2 mx-auto" style={{ width: '256px', maxWidth: '100%' }}>
+          <div className="mt-6 mx-auto" style={{ width: '256px', maxWidth: '100%' }}>
             <div className="flex items-center gap-2" style={{ borderBottom: `1px solid ${taupeLight}`, paddingBottom: '6px' }}>
               <input
                 type="text"

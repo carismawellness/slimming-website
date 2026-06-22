@@ -2,12 +2,12 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-// Premium outcomes section that REPLACES the old "STEP 1-4" tab-stepper.
-// Mirrors the homepage / MethodPillars "4 core pillars" design language exactly:
-// same white section ground, sage petal-gradient cards, asymmetric radius, fonts,
-// spacing, and a sequential IntersectionObserver scroll-in stagger.
+// Outcomes section — deliberately a DIFFERENT visual language from the four-pillar
+// petal cards directly above it. An editorial numbered list: large outlined index
+// numerals + hairline dividers on a clean white ground, with a sequential
+// IntersectionObserver scroll-in stagger. No gradient cards.
 // Brand rules: Trajan Pro uppercase headings, Novecento Wide uppercase titles,
-// Roboto body. #024C27 is BANNED as a background. WCAG AA text colours.
+// Roboto body, WCAG AA text colours, #024C27 never used as a background.
 
 type Outcome = { title: string; text: string; icon: string };
 
@@ -40,7 +40,7 @@ const OUTCOMES: Outcome[] = [
 
 export default function OutcomesShowcase() {
   const [shown, setShown] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLOListElement>(null);
 
   useEffect(() => {
     if (typeof IntersectionObserver === 'undefined') {
@@ -60,7 +60,7 @@ export default function OutcomesShowcase() {
           io.disconnect();
         }
       },
-      { threshold: 0.15, rootMargin: '0px 0px -10% 0px' },
+      { threshold: 0.12, rootMargin: '0px 0px -10% 0px' },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -69,28 +69,21 @@ export default function OutcomesShowcase() {
   return (
     <section className="py-24" aria-labelledby="outcomes-heading" style={{ backgroundColor: '#ffffff' }}>
       <style>{`
-        .oc-card {
-          opacity: 0; transform: translateY(34px); will-change: opacity, transform;
+        .oc-row {
+          opacity: 0; transform: translateY(28px); will-change: opacity, transform;
           transition:
-            opacity .7s cubic-bezier(.22,.61,.36,1) var(--d, 0ms),
-            transform .7s cubic-bezier(.22,.61,.36,1) var(--d, 0ms);
+            opacity .75s cubic-bezier(.22,.61,.36,1) var(--d, 0ms),
+            transform .75s cubic-bezier(.22,.61,.36,1) var(--d, 0ms);
         }
-        .oc-card[data-shown='true'] { opacity: 1; transform: none; }
-        @media (prefers-reduced-motion: reduce) { .oc-card { opacity: 1; transform: none; transition: none; } }
+        .oc-row[data-shown='true'] { opacity: 1; transform: none; }
+        @media (prefers-reduced-motion: reduce) { .oc-row { opacity: 1; transform: none; transition: none; } }
       `}</style>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         <p
           className="text-center mb-2"
           aria-hidden="true"
-          style={{
-            color: '#6f6456',
-            fontFamily: 'Novecento Wide Book, sans-serif',
-            fontWeight: 400,
-            fontSize: '16px',
-            letterSpacing: '3.2px',
-            textTransform: 'uppercase',
-          }}
+          style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 400, fontSize: '15px', letterSpacing: '3.2px', textTransform: 'uppercase' }}
         >
           What this builds
         </p>
@@ -98,87 +91,69 @@ export default function OutcomesShowcase() {
         <h2
           id="outcomes-heading"
           className="text-center mb-5"
-          style={{
-            color: '#4f7256',
-            fontFamily: 'Trajan Pro, serif',
-            fontWeight: 400,
-            fontSize: '25px',
-            lineHeight: '1.3',
-            textTransform: 'uppercase',
-          }}
+          style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: 400, fontSize: 'clamp(22px, 3vw, 28px)', lineHeight: 1.3, textTransform: 'uppercase' }}
         >
           What sustainable weight loss actually looks like
         </h2>
         <p
-          className="text-center mx-auto mb-12"
+          className="text-center mx-auto mb-14"
           style={{ color: '#5f5649', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: 1.7, maxWidth: '600px' }}
         >
           Not a number you reach and lose again — four kinds of stability that quietly settle into your days and stay there.
         </p>
 
-        <div ref={ref} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ gap: '28px' }} role="list">
+        <ol ref={ref} className="mx-auto" style={{ listStyle: 'none', margin: 0, padding: 0, maxWidth: '760px' }}>
           {OUTCOMES.map((o, i) => (
-            <div
+            <li
               key={o.title}
-              role="listitem"
-              className="oc-card"
+              className="oc-row"
               data-shown={shown ? 'true' : 'false'}
-              style={
-                {
-                  ['--d' as string]: `${i * 130}ms`,
-                  padding: '28px 24px',
-                  background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)',
-                  borderTopLeftRadius: '18px',
-                  borderTopRightRadius: '90px',
-                  borderBottomLeftRadius: '90px',
-                  borderBottomRightRadius: '18px',
-                  boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
-                  overflow: 'hidden',
-                  display: 'flex',
-                  flexDirection: 'column',
-                } as React.CSSProperties
-              }
+              style={{ ['--d' as string]: `${i * 140}ms` } as React.CSSProperties}
             >
-              <div className="mb-5 flex items-center" style={{ height: '52px', flexShrink: 0 }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={o.icon}
-                  alt=""
-                  aria-hidden="true"
-                  width={44}
-                  height={44}
-                  style={{ width: '44px', height: '44px', objectFit: 'contain', display: 'block' }}
-                />
+              <div
+                className="grid items-start"
+                style={{
+                  gridTemplateColumns: 'clamp(64px, 14vw, 104px) 1fr',
+                  gap: 'clamp(18px, 4vw, 40px)',
+                  padding: 'clamp(26px, 4vw, 38px) 0',
+                  borderTop: i === 0 ? 'none' : '1px solid rgba(60,90,64,0.14)',
+                }}
+              >
+                {/* Left: large outlined index numeral + small icon */}
+                <div className="flex flex-col items-start" style={{ gap: '10px' }}>
+                  <span
+                    aria-hidden="true"
+                    style={{
+                      fontFamily: 'Trajan Pro, serif',
+                      fontSize: 'clamp(38px, 7vw, 64px)',
+                      lineHeight: 0.9,
+                      fontWeight: 400,
+                      color: 'transparent',
+                      WebkitTextStroke: '1px #9bb89e',
+                    }}
+                  >
+                    {String(i + 1).padStart(2, '0')}
+                  </span>
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={o.icon} alt="" aria-hidden="true" width={34} height={34} style={{ width: '34px', height: '34px', objectFit: 'contain', display: 'block', opacity: 0.9 }} />
+                </div>
+
+                {/* Right: title + body */}
+                <div>
+                  <h3
+                    className="uppercase"
+                    style={{ color: '#3c5a40', fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif", fontSize: '15px', fontWeight: 700, letterSpacing: '1.2px', lineHeight: 1.4, margin: '0 0 12px' }}
+                  >
+                    {o.title}
+                  </h3>
+                  <p style={{ color: '#5f5649', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: 1.7, margin: 0 }}>
+                    {o.text}
+                  </p>
+                </div>
               </div>
-              <h3
-                className="mb-3 uppercase"
-                style={{
-                  color: '#3c5a40',
-                  fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif",
-                  fontSize: '13px',
-                  fontWeight: 700,
-                  letterSpacing: '1px',
-                  lineHeight: '1.5',
-                  borderBottom: '1px solid rgba(60,90,64,0.12)',
-                  paddingBottom: '14px',
-                }}
-              >
-                {o.title}
-              </h3>
-              <p
-                style={{
-                  color: '#5f5649',
-                  fontFamily: 'Roboto, sans-serif',
-                  fontSize: '14px',
-                  lineHeight: '1.65',
-                  flex: 1,
-                }}
-              >
-                {o.text}
-              </p>
-            </div>
+            </li>
           ))}
-        </div>
+        </ol>
       </div>
     </section>
   );
