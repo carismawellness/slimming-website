@@ -1,19 +1,32 @@
 import fs from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { breadcrumbList, SITE_URL } from '@/lib/seo/schema';
 import postsIndex from '@/lib/blog/posts-index.json';
+import ReadingProgress from '@/components/blog/ReadingProgress';
+import BlogCard from '@/components/blog/BlogCard';
 
 export const dynamicParams = false;
+
+// ─── Brand Tokens ─────────────────────────────────────────────────────────────
+
+const FOREST = '#024C27';
+const SAGE   = '#4f7256';
+const DECO   = '#8EB093';
+const TEXT   = '#333333';
+const MUTED  = '#595959';
+const HAIR   = '#E5DED7';
+const SERIF  = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
+const BODY   = 'Roboto, sans-serif';
+const WIDE   = '"Novecento Wide Book","Novecento Wide",sans-serif';
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
 interface Post {
   id: string;
-  url: string;
+  url?: string;
   slug: string;
   title: string;
   published_date: string;
@@ -25,7 +38,7 @@ interface Post {
   body_image_urls: string[];
   categories: string[];
   tags: string[];
-  wix_post_id: string;
+  wix_post_id?: string;
 }
 
 interface PostIndexItem {
@@ -39,19 +52,6 @@ interface PostIndexItem {
   tags: string[];
 }
 
-// ─── Constants ────────────────────────────────────────────────────────────────
-
-const HEADING_FONT = '"Trajan Pro", "Times New Roman", serif';
-const BODY_FONT = 'Roboto, "Helvetica Neue", Arial, sans-serif';
-const FOREST = '#024C27';
-const SAGE = '#4f7256';
-const BODY_COLOR = '#333333';
-const CREAM = '#F5F2EF';
-const CREAM_DEEP = '#EFEAE5';
-const BORDER = '#E5DED7';
-const SAGE_LIGHT = '#DCE6DC';
-const SAGE_TINT = '#EAF0EA';
-
 // ─── Helpers ──────────────────────────────────────────────────────────────────
 
 function readPost(slug: string): Post | null {
@@ -63,17 +63,6 @@ function readPost(slug: string): Post | null {
   }
 }
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-GB', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-}
-
-/**
- * Derive which treatment links to show based on keyword matching in title + body.
- */
 function getRelatedLinks(title: string, body: string): { label: string; href: string }[] {
   const haystack = `${title} ${body}`.toLowerCase();
   const links: { label: string; href: string }[] = [];
@@ -93,16 +82,12 @@ function getRelatedLinks(title: string, body: string): { label: string; href: st
   if (/glp-1|ozempic|mounjaro|wegovy|semaglutide|medical weight loss inject/.test(haystack))
     links.push({ label: 'GLP-1 Weight Loss Injections', href: '/glp1' });
 
-  // Always-present links
-  links.push({ label: 'Medical Weight Loss Programme', href: '/weight-loss' });
-  links.push({ label: 'Book a Free Consultation', href: '/consultation' });
-
   return links;
 }
 
 /**
- * Interleave body_image_urls evenly between paragraphs.
- * Returns an array of either a string (paragraph text) or a number (image index).
+ * Interleave body images evenly between paragraphs.
+ * Returns an array of paragraph strings interspersed with image-index markers.
  */
 function buildBodyItems(
   paragraphs: string[],
@@ -116,7 +101,6 @@ function buildBodyItems(
   let imgIdx = 0;
   for (let i = 0; i < paragraphs.length; i++) {
     items.push(paragraphs[i]);
-    // Insert image after every `interval` paragraphs (but not past end)
     if (
       imgIdx < images.length &&
       (i + 1) % (interval || 1) === 0 &&
@@ -129,13 +113,13 @@ function buildBodyItems(
   return items;
 }
 
-// ─── Static params ────────────────────────────────────────────────────────────
+// ─── Static params ─────────────────────────────────────────────────────────────
 
 export async function generateStaticParams() {
   return (postsIndex as PostIndexItem[]).map((p) => ({ slug: p.slug }));
 }
 
-// ─── Metadata ────────────────────────────────────────────────────────────────
+// ─── Metadata ─────────────────────────────────────────────────────────────────
 
 export async function generateMetadata({
   params,
@@ -160,7 +144,7 @@ export async function generateMetadata({
       modifiedTime: post.last_updated,
       authors: ['Carisma Slimming'],
       images: post.cover_image_url
-        ? [{ url: post.cover_image_url, width: 800, height: 500, alt: post.title }]
+        ? [{ url: post.cover_image_url, width: 1200, height: 630, alt: post.title }]
         : [],
     },
     twitter: {
@@ -172,7 +156,7 @@ export async function generateMetadata({
   };
 }
 
-// ─── Page ─────────────────────────────────────────────────────────────────────
+// ─── Page ──────────────────────────────────────────────────────────────────────
 
 export default async function BlogPostPage({
   params,
@@ -185,15 +169,19 @@ export default async function BlogPostPage({
 
   const index = postsIndex as PostIndexItem[];
   const currentIdx = index.findIndex((p) => p.slug === slug);
-  const prevPost = currentIdx < index.length - 1 ? index[currentIdx + 1] : null;
-  const nextPost = currentIdx > 0 ? index[currentIdx - 1] : null;
+
+  // Get 3 nearby posts for "More from the blog"
+  const nearbyPosts: PostIndexItem[] = [];
+  if (currentIdx > 0) nearbyPosts.push(index[currentIdx - 1]);
+  if (currentIdx < index.length - 1) nearbyPosts.push(index[currentIdx + 1]);
+  if (currentIdx > 1 && nearbyPosts.length < 3) nearbyPosts.unshift(index[currentIdx - 2]);
+  if (currentIdx < index.length - 2 && nearbyPosts.length < 3) nearbyPosts.push(index[currentIdx + 2]);
+  const displayPosts = nearbyPosts.slice(0, 3);
 
   const paragraphs = post.body_text.split('\n\n').filter(Boolean);
   const bodyItems = buildBodyItems(paragraphs, post.body_image_urls);
   const relatedLinks = getRelatedLinks(post.title, post.body_text);
-
-  const truncatedTitle =
-    post.title.length > 30 ? `${post.title.slice(0, 30)}…` : post.title;
+  const truncatedTitle = post.title.length > 30 ? `${post.title.slice(0, 30)}…` : post.title;
 
   const articleSchema = {
     '@context': 'https://schema.org',
@@ -223,182 +211,355 @@ export default async function BlogPostPage({
     { name: post.title, url: `${SITE_URL}/blog/${slug}` },
   ]);
 
+  // Pill button shared style (used in Related Treatments)
+  const pillStyle: React.CSSProperties = {
+    fontFamily: WIDE,
+    fontSize: 11,
+    letterSpacing: '2px',
+    textTransform: 'uppercase',
+    padding: '10px 20px',
+    border: '1px solid rgba(142,176,147,0.5)',
+    color: DECO,
+    borderRadius: 2,
+    textDecoration: 'none',
+    cursor: 'pointer',
+    display: 'inline-block',
+  };
+
+  const pillCtaStyle: React.CSSProperties = {
+    ...pillStyle,
+    background: '#fff',
+    color: FOREST,
+    border: '1px solid #fff',
+    fontFamily: WIDE,
+  };
+
   return (
     <>
       <JsonLd data={[articleSchema, breadcrumb]} />
 
+      {/* ── Reading progress bar ───────────────────────────────────────────── */}
+      <ReadingProgress />
+
+      {/* ── Responsive styles ─────────────────────────────────────────────── */}
+      <style>{`
+        .drop-cap::first-letter {
+          font-family: ${SERIF};
+          font-size: 4em;
+          float: left;
+          line-height: 0.85;
+          padding-right: 8px;
+          color: ${FOREST};
+          text-transform: uppercase;
+        }
+
+        .blog-post-hero {
+          height: 65vh;
+          min-height: 400px;
+        }
+
+        .blog-post-hero-title {
+          font-size: clamp(24px, 4vw, 52px);
+        }
+
+        .blog-post-body {
+          max-width: 720px;
+          margin: 0 auto;
+          padding: 60px 40px 80px;
+        }
+
+        .blog-post-figure {
+          margin: 40px -40px;
+        }
+
+        .blog-post-more-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+          .blog-post-hero {
+            height: 50vh;
+            min-height: 300px;
+          }
+
+          .blog-post-hero-title {
+            font-size: clamp(20px, 6vw, 32px);
+          }
+
+          .blog-post-hero-inner {
+            padding: 32px 20px 28px !important;
+          }
+
+          .blog-post-hero-breadcrumb {
+            display: none !important;
+          }
+
+          .blog-post-body {
+            padding: 40px 20px 60px;
+          }
+
+          .blog-post-figure {
+            margin: 32px -20px;
+          }
+
+          .blog-post-more-grid {
+            grid-template-columns: 1fr;
+          }
+
+          .related-treatments-box {
+            padding: 28px 24px !important;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .blog-post-hero-meta {
+            flex-wrap: wrap;
+            gap: 8px !important;
+          }
+        }
+
+        .blog-card-img {
+          transition: transform 400ms ease;
+        }
+        .blog-card:hover .blog-card-img {
+          transform: scale(1.04);
+        }
+      `}</style>
+
+      {/* ── Full-bleed hero ───────────────────────────────────────────────── */}
       <div
         style={{
-          maxWidth: '800px',
-          margin: '0 auto',
-          padding: '24px 20px 64px',
-          fontFamily: BODY_FONT,
+          position: 'relative',
+          width: '100vw',
+          marginLeft: 'calc(-50vw + 50%)',
+          overflow: 'hidden',
         }}
+        className="blog-post-hero"
       >
-        {/* ── Breadcrumb ── */}
-        <nav
-          aria-label="Breadcrumb"
-          style={{
-            fontSize: '13px',
-            color: '#888',
-            marginBottom: '24px',
-            display: 'flex',
-            gap: '6px',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}
-        >
-          <Link href="/" style={{ color: SAGE, textDecoration: 'none' }}>
-            Home
-          </Link>
-          <span aria-hidden="true">›</span>
-          <Link href="/blog" style={{ color: SAGE, textDecoration: 'none' }}>
-            Blog
-          </Link>
-          <span aria-hidden="true">›</span>
-          <span style={{ color: '#555' }}>{truncatedTitle}</span>
-        </nav>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={post.cover_image_url}
+          alt={post.title}
+          style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+          fetchPriority="high"
+        />
 
-        {/* ── Cover image ── */}
-        {post.cover_image_url && (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={post.cover_image_url}
-            alt={post.title}
-            style={{
-              width: '100%',
-              height: '400px',
-              objectFit: 'cover',
-              borderRadius: '8px',
-              marginBottom: '28px',
-              display: 'block',
-            }}
-          />
-        )}
-
-        {/* ── Title ── */}
-        <h1
-          style={{
-            fontFamily: HEADING_FONT,
-            textTransform: 'uppercase',
-            color: FOREST,
-            fontSize: 'clamp(1.5rem, 4vw, 2.1rem)',
-            fontWeight: 700,
-            lineHeight: 1.25,
-            marginBottom: '16px',
-            letterSpacing: '0.03em',
-          }}
-        >
-          {post.title}
-        </h1>
-
-        {/* ── Meta row ── */}
+        {/* Gradient overlay */}
         <div
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            fontSize: '14px',
-            color: '#666',
-            marginBottom: '28px',
-            flexWrap: 'wrap',
+            position: 'absolute',
+            inset: 0,
+            background:
+              'linear-gradient(to top, rgba(2,28,15,0.85) 0%, rgba(2,28,15,0.25) 50%, transparent 80%)',
           }}
-        >
-          <time dateTime={post.published_date}>{formatDate(post.published_date)}</time>
-          <span aria-hidden="true" style={{ color: SAGE }}>
-            ·
-          </span>
-          <span>{post.minutes_to_read} min read</span>
-          {post.categories.length > 0 && (
-            <>
-              <span aria-hidden="true" style={{ color: SAGE }}>
-                ·
-              </span>
-              <span>{post.categories.join(', ')}</span>
-            </>
-          )}
-        </div>
+        />
 
-        {/* ── Excerpt (lead paragraph) ── */}
-        <p
+        {/* Title + meta overlaid at bottom */}
+        <div
+          className="blog-post-hero-inner"
           style={{
-            fontStyle: 'italic',
-            fontSize: '18px',
-            lineHeight: 1.75,
-            color: SAGE,
-            marginBottom: '36px',
-            paddingBottom: '28px',
-            borderBottom: `1px solid ${BORDER}`,
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            padding: '48px 40px 40px',
+            maxWidth: 900,
+            margin: '0 auto',
           }}
         >
-          {post.excerpt}
-        </p>
+          {/* Breadcrumb */}
+          <nav
+            className="blog-post-hero-breadcrumb"
+            aria-label="Breadcrumb"
+            style={{
+              marginBottom: 20,
+              display: 'flex',
+              gap: 8,
+              alignItems: 'center',
+              color: 'rgba(255,255,255,0.6)',
+              fontFamily: WIDE,
+              fontSize: 11,
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+            }}
+          >
+            <a href="/" style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>Home</a>
+            <span>/</span>
+            <a href="/blog" style={{ color: 'inherit', textDecoration: 'none', cursor: 'pointer' }}>Blog</a>
+            <span>/</span>
+            <span style={{ color: 'rgba(255,255,255,0.4)' }}>{truncatedTitle}</span>
+          </nav>
 
-        {/* ── Body ── */}
+          {/* Title */}
+          <h1
+            className="blog-post-hero-title"
+            style={{
+              fontFamily: SERIF,
+              textTransform: 'uppercase',
+              color: '#fff',
+              lineHeight: 1.15,
+              letterSpacing: '0.02em',
+              margin: '0 0 20px',
+              fontWeight: 400,
+            }}
+          >
+            {post.title}
+          </h1>
+
+          {/* Meta row */}
+          <div
+            className="blog-post-hero-meta"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: 16,
+              color: 'rgba(255,255,255,0.7)',
+              fontFamily: WIDE,
+              fontSize: 11,
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+            }}
+          >
+            <span>Carisma Slimming</span>
+            <span
+              style={{
+                width: 3,
+                height: 3,
+                borderRadius: '50%',
+                background: DECO,
+                display: 'inline-block',
+                flexShrink: 0,
+              }}
+            />
+            <time dateTime={post.published_date}>
+              {new Date(post.published_date).toLocaleDateString('en-GB', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric',
+              })}
+            </time>
+            <span
+              style={{
+                width: 3,
+                height: 3,
+                borderRadius: '50%',
+                background: DECO,
+                display: 'inline-block',
+                flexShrink: 0,
+              }}
+            />
+            <span>{post.minutes_to_read} min read</span>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Article body ──────────────────────────────────────────────────── */}
+      <div className="blog-post-body">
+
+        {/* Excerpt / lead pull quote */}
+        {post.excerpt && (
+          <p
+            style={{
+              fontFamily: BODY,
+              fontSize: 20,
+              lineHeight: 1.7,
+              color: SAGE,
+              fontStyle: 'italic',
+              borderLeft: `3px solid ${DECO}`,
+              paddingLeft: 24,
+              margin: '0 0 48px',
+              letterSpacing: '0.01em',
+            }}
+          >
+            {post.excerpt}
+          </p>
+        )}
+
+        {/* Body text + interleaved images */}
         <article>
           {bodyItems.map((item, i) => {
             if (typeof item === 'string') {
+              const firstParagraphIndex = bodyItems.findIndex((b) => typeof b === 'string');
+              if (i === firstParagraphIndex) {
+                return (
+                  <p
+                    key={i}
+                    className="drop-cap"
+                    style={{
+                      fontFamily: BODY,
+                      fontSize: 17,
+                      lineHeight: 1.85,
+                      color: TEXT,
+                      margin: '0 0 28px',
+                    }}
+                  >
+                    {item}
+                  </p>
+                );
+              }
               return (
                 <p
                   key={i}
                   style={{
-                    fontFamily: BODY_FONT,
-                    fontSize: '17px',
-                    lineHeight: 1.8,
-                    color: BODY_COLOR,
-                    marginBottom: '22px',
+                    fontFamily: BODY,
+                    fontSize: 17,
+                    lineHeight: 1.85,
+                    color: TEXT,
+                    margin: '0 0 28px',
                   }}
                 >
                   {item}
                 </p>
               );
             }
+
             // Body image
             const imgSrc = post.body_image_urls[item.imageIndex];
             return (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                key={`img-${item.imageIndex}`}
-                src={imgSrc}
-                alt={`${post.title} — image ${item.imageIndex + 1}`}
-                style={{
-                  width: '100%',
-                  maxWidth: '100%',
-                  height: 'auto',
-                  borderRadius: '8px',
-                  margin: '28px auto',
-                  display: 'block',
-                }}
-              />
+              <figure key={`img-${item.imageIndex}`} className="blog-post-figure" style={{ borderRadius: 4, overflow: 'hidden' }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={imgSrc}
+                  alt={`${post.title} — illustration ${item.imageIndex + 1}`}
+                  style={{
+                    width: '100%',
+                    aspectRatio: '16/9',
+                    objectFit: 'cover',
+                    display: 'block',
+                  }}
+                  loading="lazy"
+                />
+              </figure>
             );
           })}
         </article>
 
-        {/* ── Tags ── */}
+        {/* ── Tags ─────────────────────────────────────────────────────────── */}
         {post.tags.length > 0 && (
           <div
             style={{
+              marginTop: 48,
+              paddingTop: 32,
+              borderTop: `1px solid ${HAIR}`,
               display: 'flex',
               flexWrap: 'wrap',
-              gap: '8px',
-              marginTop: '40px',
-              paddingTop: '24px',
-              borderTop: `1px solid ${BORDER}`,
+              gap: 8,
             }}
           >
             {post.tags.map((tag) => (
               <span
                 key={tag}
                 style={{
-                  background: CREAM_DEEP,
-                  color: SAGE,
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: '999px',
-                  padding: '4px 14px',
-                  fontSize: '12px',
-                  fontWeight: 500,
-                  textTransform: 'uppercase' as const,
-                  letterSpacing: '0.05em',
+                  fontFamily: WIDE,
+                  fontSize: 10,
+                  letterSpacing: '2px',
+                  textTransform: 'uppercase',
+                  padding: '6px 12px',
+                  border: `1px solid ${DECO}`,
+                  color: MUTED,
+                  borderRadius: 2,
                 }}
               >
                 {tag}
@@ -407,149 +568,97 @@ export default async function BlogPostPage({
           </div>
         )}
 
-        {/* ── Related Treatments ── */}
-        <section
-          aria-labelledby="related-treatments-heading"
+        {/* ── Related Treatments ───────────────────────────────────────────── */}
+        <div
+          className="related-treatments-box"
           style={{
-            background: SAGE_TINT,
-            border: `1px solid ${SAGE_LIGHT}`,
-            borderRadius: '12px',
-            padding: '28px',
-            marginTop: '48px',
+            margin: '60px 0',
+            background: FOREST,
+            borderRadius: 8,
+            padding: '40px 48px',
+            color: '#fff',
           }}
         >
-          <h2
-            id="related-treatments-heading"
+          <p
             style={{
-              fontFamily: HEADING_FONT,
+              fontFamily: WIDE,
+              fontSize: 10,
+              letterSpacing: '4px',
               textTransform: 'uppercase',
-              color: FOREST,
-              fontSize: '1rem',
-              fontWeight: 700,
-              letterSpacing: '0.08em',
-              marginBottom: '18px',
+              color: DECO,
+              margin: '0 0 8px',
             }}
           >
-            Explore Related Treatments
-          </h2>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-            {relatedLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                style={{
-                  display: 'inline-block',
-                  background: link.label === 'Book a Free Consultation' ? FOREST : SAGE,
-                  color: '#fff',
-                  borderRadius: '999px',
-                  padding: '8px 20px',
-                  fontSize: '14px',
-                  fontWeight: 600,
-                  textDecoration: 'none',
-                  letterSpacing: '0.02em',
-                  transition: 'opacity 0.15s',
-                }}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-        </section>
-
-        {/* ── Prev / Next navigation ── */}
-        {(prevPost || nextPost) && (
-          <nav
-            aria-label="Post navigation"
+            Explore
+          </p>
+          <h3
             style={{
-              display: 'grid',
-              gridTemplateColumns: prevPost && nextPost ? '1fr 1fr' : '1fr',
-              gap: '16px',
-              marginTop: '48px',
-              paddingTop: '32px',
-              borderTop: `1px solid ${BORDER}`,
+              fontFamily: SERIF,
+              textTransform: 'uppercase',
+              fontSize: 22,
+              color: '#fff',
+              margin: '0 0 24px',
+              fontWeight: 400,
+              letterSpacing: '0.04em',
             }}
           >
-            {prevPost && (
-              <Link
-                href={`/blog/${prevPost.slug}`}
+            Related Treatments
+          </h3>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12 }}>
+            {relatedLinks.map((link) => (
+              <a key={link.href} href={link.href} style={pillStyle}>
+                {link.label}
+              </a>
+            ))}
+            <a href="/weight-loss" style={pillStyle}>Medical Weight Loss</a>
+            <a href="/consultation" style={pillCtaStyle}>Book Free Consultation</a>
+          </div>
+        </div>
+
+        {/* ── More from the blog ───────────────────────────────────────────── */}
+        {displayPosts.length > 0 && (
+          <div style={{ marginTop: 80, paddingTop: 60, borderTop: `1px solid ${HAIR}` }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginBottom: 40 }}>
+              <p
                 style={{
-                  display: 'block',
-                  background: CREAM,
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: '10px',
-                  padding: '16px 20px',
-                  textDecoration: 'none',
-                  textAlign: 'left',
+                  fontFamily: WIDE,
+                  fontSize: 11,
+                  letterSpacing: '4px',
+                  textTransform: 'uppercase',
+                  color: MUTED,
+                  margin: 0,
+                  whiteSpace: 'nowrap',
                 }}
               >
-                <span style={{ display: 'block', fontSize: '11px', color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                  ← Previous
-                </span>
-                <span
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    color: FOREST,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {prevPost.title.length > 60
-                    ? `${prevPost.title.slice(0, 60)}…`
-                    : prevPost.title}
-                </span>
-              </Link>
-            )}
-            {nextPost && (
-              <Link
-                href={`/blog/${nextPost.slug}`}
-                style={{
-                  display: 'block',
-                  background: CREAM,
-                  border: `1px solid ${BORDER}`,
-                  borderRadius: '10px',
-                  padding: '16px 20px',
-                  textDecoration: 'none',
-                  textAlign: 'right',
-                }}
-              >
-                <span style={{ display: 'block', fontSize: '11px', color: '#888', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>
-                  Next →
-                </span>
-                <span
-                  style={{
-                    fontSize: '14px',
-                    fontWeight: 600,
-                    color: FOREST,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {nextPost.title.length > 60
-                    ? `${nextPost.title.slice(0, 60)}…`
-                    : nextPost.title}
-                </span>
-              </Link>
-            )}
-          </nav>
+                More from the blog
+              </p>
+              <div style={{ flex: 1, height: 1, background: HAIR }} />
+            </div>
+
+            <div className="blog-post-more-grid">
+              {displayPosts.map((p) => (
+                <BlogCard key={p.slug} post={p} size="small" />
+              ))}
+            </div>
+          </div>
         )}
 
-        {/* ── Back to Blog ── */}
-        <div style={{ marginTop: '32px', textAlign: 'center' }}>
-          <Link
+        {/* ── Back to blog ─────────────────────────────────────────────────── */}
+        <div style={{ marginTop: 48, textAlign: 'center', paddingBottom: 40 }}>
+          <a
             href="/blog"
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              color: SAGE,
-              fontSize: '14px',
-              fontWeight: 600,
-              textDecoration: 'none',
+              fontFamily: WIDE,
+              fontSize: 11,
+              letterSpacing: '3px',
               textTransform: 'uppercase',
-              letterSpacing: '0.06em',
+              color: SAGE,
+              textDecoration: 'none',
+              cursor: 'pointer',
             }}
           >
-            ← Back to Blog
-          </Link>
+            &larr; Back to All Articles
+          </a>
         </div>
       </div>
     </>

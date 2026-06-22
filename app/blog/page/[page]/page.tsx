@@ -1,11 +1,25 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import postsData from '@/lib/blog/posts-index.json';
+import FadeInUp from '@/components/blog/FadeInUp';
 
 export const dynamicParams = false;
 
 const POSTS_PER_PAGE = 20;
 const TOTAL_PAGES = 20;
+
+// ── Brand tokens ──────────────────────────────────────────────────────────────
+const FOREST = '#024C27';
+const SAGE   = '#4f7256';
+const DECO   = '#8EB093';
+const CREAM  = '#f8f5f0';
+const INK    = '#1a1a1a';
+const TEXT   = '#333333';
+const MUTED  = '#595959';
+const HAIR   = '#E5DED7';
+const SERIF  = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
+const BODY   = 'Roboto, sans-serif';
+const WIDE   = '"Novecento Wide Book","Novecento Wide",sans-serif';
 
 type Post = {
   slug: string;
@@ -49,19 +63,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function formatDate(iso: string): string {
-  return new Date(iso).toLocaleDateString('en-MT', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  });
-}
-
-function truncate(text: string, max = 150): string {
-  if (text.length <= max) return text;
-  return text.slice(0, max).trimEnd() + '…';
-}
-
 export default async function BlogPaginatedPage({ params }: Props) {
   const { page } = await params;
   const pageNum = parseInt(page, 10);
@@ -71,332 +72,318 @@ export default async function BlogPaginatedPage({ params }: Props) {
   const prevHref = pageNum === 2 ? '/blog' : `/blog/page/${pageNum - 1}`;
   const isLastPage = pageNum >= TOTAL_PAGES;
 
+  const linkStyle: React.CSSProperties = {
+    fontFamily: BODY,
+    fontSize: 14,
+    color: SAGE,
+    textDecoration: 'none',
+    cursor: 'pointer',
+  };
+
   return (
-    <div style={{ backgroundColor: '#f8f6f2', minHeight: '100vh' }}>
-      {/* ── Hero / header ─────────────────────────────────────────── */}
+    <div style={{ backgroundColor: CREAM, minHeight: '100vh' }}>
+      <style>{`
+        .blog-card-img { transition: transform 0.4s ease-out; }
+        .blog-card:hover .blog-card-img { transform: scale(1.06); }
+        .blog-card { cursor: pointer; }
+        @media (prefers-reduced-motion: reduce) { .blog-card-img { transition: none !important; } }
+        @media (max-width: 768px) {
+          .blog-grid { grid-template-columns: 1fr !important; padding: 0 20px !important; }
+          .blog-page-header { padding: 0 20px !important; }
+          .blog-pagination { padding: 0 20px !important; }
+        }
+      `}</style>
+
+      {/* ── Compact editorial header (no hero, just a dark banner) ──────── */}
       <section
         style={{
-          backgroundColor: '#024C27',
-          padding: '64px 24px 56px',
+          height: 280,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
           textAlign: 'center',
+          position: 'relative',
+          overflow: 'hidden',
+          background: `linear-gradient(135deg, ${FOREST} 0%, #013a1e 100%)`,
         }}
       >
-        {/* Breadcrumb */}
-        <nav aria-label="Breadcrumb" style={{ marginBottom: '28px' }}>
-          <ol
+        {/* Subtle radial texture overlay */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            background: 'radial-gradient(circle at 20% 50%, rgba(79,114,86,0.15) 0%, transparent 60%)',
+            pointerEvents: 'none',
+          }}
+        />
+
+        <div style={{ position: 'relative', zIndex: 1 }}>
+          {/* Eyebrow */}
+          <p
             style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '8px',
-              listStyle: 'none',
-              margin: 0,
-              padding: 0,
-              fontFamily: 'Novecento Wide Book, sans-serif',
-              fontSize: '12px',
-              letterSpacing: '1.5px',
+              fontFamily: WIDE,
+              fontSize: 11,
+              letterSpacing: '4px',
               textTransform: 'uppercase',
+              color: DECO,
+              margin: '0 0 16px',
             }}
           >
-            <li>
-              <Link href="/" style={{ color: '#C9D8C1', textDecoration: 'none' }}>
-                Home
-              </Link>
-            </li>
-            <li aria-hidden="true" style={{ color: '#4f7256' }}>›</li>
-            <li>
-              <Link href="/blog" style={{ color: '#C9D8C1', textDecoration: 'none' }}>
-                Blog
-              </Link>
-            </li>
-            <li aria-hidden="true" style={{ color: '#4f7256' }}>›</li>
-            <li style={{ color: '#ffffff' }} aria-current="page">
-              Page {pageNum}
-            </li>
-          </ol>
-        </nav>
+            Carisma Slimming · The Blog
+          </p>
 
-        <h1
-          style={{
-            fontFamily: 'Trajan Pro, serif',
-            fontWeight: 400,
-            fontSize: 'clamp(26px, 4vw, 42px)',
-            lineHeight: 1.2,
-            textTransform: 'uppercase',
-            letterSpacing: '2px',
-            color: '#ffffff',
-            margin: '0 0 16px',
-          }}
-        >
-          The Carisma Slimming Blog
-        </h1>
+          {/* Page title */}
+          <h1
+            style={{
+              fontFamily: SERIF,
+              fontWeight: 400,
+              fontSize: 'clamp(32px, 4vw, 52px)',
+              lineHeight: 1.15,
+              textTransform: 'uppercase',
+              letterSpacing: '2px',
+              color: '#ffffff',
+              margin: '0 0 24px',
+            }}
+          >
+            All Articles
+          </h1>
+
+          {/* Breadcrumb */}
+          <nav aria-label="Breadcrumb">
+            <ol
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 8,
+                listStyle: 'none',
+                margin: 0,
+                padding: 0,
+                fontFamily: WIDE,
+                fontSize: 11,
+                letterSpacing: '2px',
+                textTransform: 'uppercase',
+              }}
+            >
+              <li>
+                <Link href="/" style={{ color: DECO, textDecoration: 'none' }}>
+                  Home
+                </Link>
+              </li>
+              <li aria-hidden="true" style={{ color: SAGE }}>›</li>
+              <li>
+                <Link href="/blog" style={{ color: DECO, textDecoration: 'none' }}>
+                  Blog
+                </Link>
+              </li>
+              <li aria-hidden="true" style={{ color: SAGE }}>›</li>
+              <li style={{ color: '#ffffff' }} aria-current="page">
+                Page {pageNum}
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </section>
+
+      {/* ── Section header with horizontal rule ─────────────────────────── */}
+      <div
+        className="blog-page-header"
+        style={{
+          maxWidth: 1200,
+          margin: '64px auto 48px',
+          padding: '0 40px',
+          display: 'flex',
+          alignItems: 'center',
+          gap: 24,
+        }}
+      >
         <p
           style={{
-            fontFamily: 'Roboto, sans-serif',
-            fontSize: '17px',
-            lineHeight: 1.65,
-            color: '#C9D8C1',
-            maxWidth: '620px',
-            margin: '0 auto 8px',
-          }}
-        >
-          Expert advice on weight loss, body contouring, and GLP-1 treatments
-          in Malta — compassionate, evidence-led, and always shame-free.
-        </p>
-        <p
-          style={{
-            fontFamily: 'Novecento Wide Book, sans-serif',
-            fontSize: '12px',
-            letterSpacing: '1.5px',
+            fontFamily: WIDE,
+            fontSize: 11,
+            letterSpacing: '4px',
             textTransform: 'uppercase',
-            color: '#4f7256',
+            color: MUTED,
+            whiteSpace: 'nowrap',
             margin: 0,
           }}
         >
-          Page {pageNum} of {TOTAL_PAGES}
+          Page {pageNum} of 20
         </p>
-      </section>
+        <div style={{ flex: 1, height: 1, background: HAIR }} />
+      </div>
 
-      {/* ── Post grid ─────────────────────────────────────────────── */}
-      <section style={{ maxWidth: '1200px', margin: '0 auto', padding: '56px 24px 48px' }}>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
-            gap: '32px',
-          }}
-        >
-          {pagePosts.map((post) => (
+      {/* ── Post grid ────────────────────────────────────────────────────── */}
+      <div
+        className="blog-grid"
+        style={{
+          maxWidth: 1200,
+          margin: '0 auto',
+          padding: '0 40px',
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gap: 32,
+        }}
+      >
+        {pagePosts.map((post) => (
+          <FadeInUp key={post.slug}>
             <article
-              key={post.slug}
+              className="blog-card"
               style={{
-                backgroundColor: '#ffffff',
-                borderRadius: '16px',
+                position: 'relative',
                 overflow: 'hidden',
-                boxShadow: '0 4px 16px rgba(2,76,39,0.07)',
-                display: 'flex',
-                flexDirection: 'column',
+                borderRadius: 4,
+                background: '#fff',
+                boxShadow: '0 2px 20px rgba(0,0,0,0.06)',
+                cursor: 'pointer',
               }}
             >
-              {/* Cover image */}
-              <Link href={`/blog/${post.slug}`} style={{ display: 'block', flexShrink: 0 }}>
-                <img
-                  src={post.cover_image_url}
-                  alt={post.title}
-                  loading="lazy"
-                  style={{
-                    width: '100%',
-                    height: '200px',
-                    objectFit: 'cover',
-                    display: 'block',
-                  }}
-                />
-              </Link>
-
-              {/* Card body */}
-              <div
-                style={{
-                  padding: '24px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  flex: 1,
-                }}
+              <a
+                href={`/blog/${post.slug}`}
+                style={{ display: 'block', textDecoration: 'none', color: 'inherit' }}
               >
-                {/* Meta row */}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '12px',
-                    marginBottom: '12px',
-                  }}
-                >
-                  <time
-                    dateTime={post.published_date}
+                {/* Cover image */}
+                <div style={{ overflow: 'hidden', aspectRatio: '16/9' }}>
+                  <img
+                    src={post.cover_image_url}
+                    alt={post.title}
+                    loading="lazy"
+                    className="blog-card-img"
                     style={{
-                      fontFamily: 'Roboto, sans-serif',
-                      fontSize: '12px',
-                      color: '#6f6456',
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      display: 'block',
                     }}
-                  >
-                    {formatDate(post.published_date)}
-                  </time>
-                  <span aria-hidden="true" style={{ color: '#C9D8C1', fontSize: '10px' }}>
-                    •
-                  </span>
-                  <span
-                    style={{
-                      fontFamily: 'Roboto, sans-serif',
-                      fontSize: '12px',
-                      color: '#6f6456',
-                    }}
-                  >
-                    {post.minutes_to_read} min read
-                  </span>
+                  />
                 </div>
 
-                {/* Title */}
-                <h2
-                  style={{
-                    fontFamily: 'Trajan Pro, serif',
-                    fontWeight: 400,
-                    fontSize: '15px',
-                    lineHeight: 1.4,
-                    textTransform: 'uppercase',
-                    letterSpacing: '0.5px',
-                    color: '#024C27',
-                    margin: '0 0 10px',
-                  }}
-                >
-                  <Link
-                    href={`/blog/${post.slug}`}
-                    style={{ color: 'inherit', textDecoration: 'none' }}
+                {/* Card body */}
+                <div style={{ padding: '20px 24px 24px' }}>
+                  {/* Meta */}
+                  <p
+                    style={{
+                      fontFamily: WIDE,
+                      fontSize: 10,
+                      letterSpacing: '3px',
+                      textTransform: 'uppercase',
+                      color: SAGE,
+                      marginBottom: 10,
+                      margin: '0 0 10px',
+                    }}
+                  >
+                    {new Date(post.published_date).toLocaleDateString('en-GB', {
+                      month: 'short',
+                      year: 'numeric',
+                    })}{' '}
+                    · {post.minutes_to_read} min
+                  </p>
+
+                  {/* Title */}
+                  <h2
+                    style={{
+                      fontFamily: SERIF,
+                      textTransform: 'uppercase',
+                      fontSize: 17,
+                      color: INK,
+                      lineHeight: 1.3,
+                      margin: '0 0 10px',
+                      fontWeight: 400,
+                    }}
                   >
                     {post.title}
-                  </Link>
-                </h2>
+                  </h2>
 
-                {/* Excerpt */}
-                <p
-                  style={{
-                    fontFamily: 'Roboto, sans-serif',
-                    fontSize: '14px',
-                    lineHeight: 1.65,
-                    color: '#595959',
-                    margin: '0 0 20px',
-                    flex: 1,
-                  }}
-                >
-                  {truncate(post.excerpt, 150)}
-                </p>
-
-                {/* Read more */}
-                <Link
-                  href={`/blog/${post.slug}`}
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    gap: '6px',
-                    fontFamily: 'Novecento Wide Book, sans-serif',
-                    fontSize: '12px',
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                    color: '#4f7256',
-                    textDecoration: 'none',
-                    fontWeight: 700,
-                    alignSelf: 'flex-start',
-                  }}
-                >
-                  Read article
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    aria-hidden="true"
+                  {/* Excerpt */}
+                  <p
+                    style={{
+                      fontFamily: BODY,
+                      fontSize: 14,
+                      color: MUTED,
+                      lineHeight: 1.6,
+                      margin: 0,
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                      overflow: 'hidden',
+                    }}
                   >
-                    <path
-                      d="M3 8h10M9 4l4 4-4 4"
-                      stroke="#4f7256"
-                      strokeWidth="1.8"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </Link>
-              </div>
-            </article>
-          ))}
-        </div>
+                    {post.excerpt}
+                  </p>
 
-        {/* ── Pagination ───────────────────────────────────────────── */}
-        <nav
-          aria-label="Blog pagination"
+                  {/* Read CTA */}
+                  <p
+                    style={{
+                      fontFamily: WIDE,
+                      fontSize: 11,
+                      color: SAGE,
+                      letterSpacing: '1px',
+                      marginTop: 14,
+                      textTransform: 'uppercase',
+                      marginBottom: 0,
+                    }}
+                  >
+                    Read →
+                  </p>
+                </div>
+              </a>
+            </article>
+          </FadeInUp>
+        ))}
+      </div>
+
+      {/* ── Elegant pagination ───────────────────────────────────────────── */}
+      <div
+        className="blog-pagination"
+        style={{
+          maxWidth: 1200,
+          margin: '80px auto',
+          padding: '0 40px',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: 32,
+        }}
+      >
+        {/* Previous */}
+        <a href={prevHref} style={linkStyle}>
+          ← Previous
+        </a>
+
+        {/* Page indicator */}
+        <span
           style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            gap: '16px',
-            paddingTop: '56px',
+            fontFamily: WIDE,
+            fontSize: 11,
+            letterSpacing: '3px',
+            textTransform: 'uppercase',
+            color: INK,
           }}
         >
-          {/* Previous */}
-          <Link
-            href={prevHref}
-            style={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '6px',
-              padding: '10px 20px',
-              borderRadius: '999px',
-              border: '1px solid #024C27',
-              fontFamily: 'Novecento Wide Book, sans-serif',
-              fontSize: '12px',
-              letterSpacing: '1px',
-              textTransform: 'uppercase',
-              color: '#024C27',
-              textDecoration: 'none',
-              fontWeight: 700,
-            }}
-          >
-            ← Previous
-          </Link>
+          Page {pageNum} of 20
+        </span>
 
+        {/* Next */}
+        {isLastPage ? (
           <span
+            aria-disabled="true"
             style={{
-              fontFamily: 'Roboto, sans-serif',
-              fontSize: '14px',
-              color: '#6f6456',
+              fontFamily: BODY,
+              fontSize: 14,
+              color: '#ccc',
+              cursor: 'default',
+              userSelect: 'none',
             }}
           >
-            Page {pageNum} of {TOTAL_PAGES}
+            Next →
           </span>
-
-          {/* Next — disabled on last page */}
-          {isLastPage ? (
-            <span
-              aria-disabled="true"
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '10px 20px',
-                borderRadius: '999px',
-                border: '1px solid #C9D8C1',
-                fontFamily: 'Novecento Wide Book, sans-serif',
-                fontSize: '12px',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                color: '#C9D8C1',
-                cursor: 'not-allowed',
-                userSelect: 'none',
-              }}
-            >
-              Next →
-            </span>
-          ) : (
-            <Link
-              href={`/blog/page/${pageNum + 1}`}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '6px',
-                padding: '10px 20px',
-                borderRadius: '999px',
-                backgroundColor: '#024C27',
-                fontFamily: 'Novecento Wide Book, sans-serif',
-                fontSize: '12px',
-                letterSpacing: '1px',
-                textTransform: 'uppercase',
-                color: '#ffffff',
-                textDecoration: 'none',
-                fontWeight: 700,
-              }}
-            >
-              Next →
-            </Link>
-          )}
-        </nav>
-      </section>
+        ) : (
+          <a href={`/blog/page/${pageNum + 1}`} style={linkStyle}>
+            Next →
+          </a>
+        )}
+      </div>
     </div>
   );
 }
