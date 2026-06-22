@@ -442,7 +442,7 @@ function ProgramOverviewSection() {
                   gap: '4px',
                   background: active === i ? 'rgba(79,114,86,0.06)' : 'none',
                   cursor: 'pointer',
-                  borderLeft: 'none',
+                  borderLeft: active === i ? `3px solid ${green}` : '3px solid transparent',
                   borderBottom: active === i ? `2px solid ${green}` : '2px solid transparent',
                   transition: 'background 0.2s, border-color 0.2s',
                   textAlign: 'left',
