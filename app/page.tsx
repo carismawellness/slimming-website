@@ -4,7 +4,6 @@ import TreatmentsAccordion from '@/components/TreatmentsAccordion';
 import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
-import MotifAccent from '@/components/layers/MotifAccent';
 import ResultsGuarantee from '@/components/results/ResultsGuarantee';
 
 export const metadata: Metadata = {
@@ -167,11 +166,10 @@ export default function Home() {
       {/* (4) Our Results Guarantee — "The Carisma Pact" + ambient 3D silk */}
       <ResultsGuarantee />
 
-      {/* Layers: single section divider between Results-Driven and GLP-1 */}
-      <MotifAccent mode="divider" />
-
-      {/* (5) Medical Weight Loss in Malta (GLP-1) */}
-      <section className="py-32" aria-labelledby="glp1-heading" style={{ background: 'linear-gradient(180deg, #D7E2D8 0%, #FFFFFF 100%)' }}>
+      {/* (5) Medical Weight Loss in Malta (GLP-1) — gradient flows on from ResultsGuarantee
+          (starts at its #f5f8f2 end colour), deepens to sage, then resolves to white for
+          the next section. No divider — one continuous gradient, no hard white band. */}
+      <section className="py-32" aria-labelledby="glp1-heading" style={{ background: 'linear-gradient(180deg, #f5f8f2 0%, #D7E2D8 48%, #FFFFFF 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Eyebrow + heading */}
           <div className="text-center mb-14">
