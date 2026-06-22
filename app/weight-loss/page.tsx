@@ -319,251 +319,99 @@ function ProblemAgitationSection() {
 }
 
 /* ============================================================
-   3. PROGRAM OVERVIEW — left-nav tab panel (all steps visible at once)
+   3. PROGRAM OVERVIEW — split photo + stacked steps (mirrors GLP-1 conditions layout)
    ============================================================ */
 function ProgramOverviewSection() {
-  const [active, setActive] = useState(0);
-
-
   const steps = [
     {
       num: '01',
       title: 'Initial Screening',
-      tagline: 'We only work with people we can genuinely help.',
-      icon: '/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png',
-      bullets: [
-        'Full in-clinic consultation to understand your goals and timeline',
-        'We review past diets, medications, hormones and your health history',
-        'You see real results from cases that match your age and body type',
-        'You are only enrolled if we are confident we can stand behind your results',
-      ],
+      text: 'We review your goals, health history and past diets — we only enrol you if we are confident we can stand behind your results.',
     },
     {
       num: '02',
       title: 'Body Analysis',
-      tagline: 'A full medical picture before we change anything.',
-      icon: '/wix/87fc13_05acf8a406274fbd9b5586bead0d2df5~mv2.png',
-      bullets: [
-        'Full body composition scan — fat percentage, muscle mass and visceral fat',
-        'Doctor consultation covering hormones, blood sugar and current medications',
-        'Blood tests for thyroid, cholesterol and food intolerances if indicated',
-        'GLP-1 (Ozempic / Mounjaro) eligibility assessed at this stage',
-      ],
+      text: 'Full body composition scan covering fat, muscle and visceral fat — plus a doctor consultation on hormones, blood sugar and GLP-1 eligibility.',
     },
     {
       num: '03',
       title: 'Diet & Accountability',
-      tagline: 'A food plan that works on bad weeks, not just good ones.',
-      icon: '/wix/87fc13_b0aad949fa9d47b58f1512dcf2522e3d~mv2.png',
-      bullets: [
-        'Mediterranean-style plan built around Maltese food, family life and social events',
-        'High protein approach to protect muscle and keep hunger under control',
-        'Weekly weigh-ins, measurements and progress reports with a dedicated coach',
-        'WhatsApp check-ins so you have real support between clinic visits',
-      ],
+      text: 'Mediterranean-style plan built around Maltese food. Weekly check-ins with a dedicated coach and WhatsApp support between visits.',
     },
     {
       num: '04',
       title: 'Movement Plan',
-      tagline: 'Exercise designed for your body today, not an ideal version of it.',
-      icon: '/wix/87fc13_83de975f116646a795c9db7ebdc3b4be~mv2.png',
-      bullets: [
-        'Choose between gym access, group fat-loss classes or personal training',
-        'Structured plan matched to your current fitness level and schedule',
-        'Focused on building consistency and increasing your metabolic rate',
-        'Progresses week by week as your strength and confidence improve',
-      ],
+      text: 'Gym access, group classes or personal training — matched to your current fitness and schedule, progressing week by week.',
     },
     {
       num: '05',
       title: 'Body Contouring',
-      tagline: 'Clinical treatments to shape and tighten as the weight comes off.',
-      icon: '/wix/87fc13_3d8f7ee53e874397bc85784823b4aaeb~mv2.png',
-      bullets: [
-        'Emsculpt NEO: equivalent of 20,000 muscle contractions per 30-minute session',
-        'CoolSculpting: targets stubborn fat pockets that diet alone cannot shift',
-        'VelaShape: radiofrequency and infrared light to firm skin as you slim down',
-        'Lymphatic drainage to reduce puffiness and support circulation',
-      ],
+      text: 'Emsculpt NEO, CoolSculpting and VelaShape to tone, target stubborn fat and firm skin as the weight comes off.',
     },
   ];
 
-  const step = steps[active];
-
   return (
-    <section aria-labelledby="program-heading" style={{ background: '#FAFAF7', padding: '0 0 96px' }}>
-      {/* Section header */}
-      <div style={{ padding: '80px 24px 56px', textAlign: 'center' }}>
-        <p style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
-          How our doctor-led weight loss programme works
-        </p>
-        <div style={{ width: '48px', height: '1px', backgroundColor: '#cdd8c8', margin: '0 auto 20px' }} />
-        <h2
-          id="program-heading"
-          style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(20px,3vw,25px)', textTransform: 'uppercase', lineHeight: 1.4 }}
-        >
-          Five Steps to Your Transformation
-        </h2>
-      </div>
+    <section aria-labelledby="program-heading" style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #f6f9f3 70%, #ffffff 100%)', padding: '72px 0 80px' }}>
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 
-      {/* Panel */}
-      <div
-        className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8"
-      >
-        <div
-          className="flex flex-col lg:grid overflow-hidden"
-          style={{
-            gridTemplateColumns: '240px 1fr',
-            borderRadius: '16px',
-            boxShadow: '0 8px 48px rgba(40,55,44,0.09)',
-            border: '1px solid rgba(79,114,86,0.09)',
-          }}
-        >
-          {/* ── Left nav (horizontal scroll on mobile, vertical list on desktop) ── */}
-          <div
-            className="flex flex-row overflow-x-auto lg:flex-col lg:overflow-x-visible"
-            style={{ background: '#F2F6EF', borderBottom: '1px solid rgba(79,114,86,0.08)' }}
-          >
-            {steps.map((s, i) => (
-              <button
-                key={s.num}
-                onClick={() => setActive(i)}
-                className="flex-shrink-0 lg:flex-shrink lg:w-full"
-                style={{
-                  padding: '18px 20px',
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'flex-start',
-                  gap: '4px',
-                  background: active === i ? 'rgba(79,114,86,0.06)' : 'none',
-                  cursor: 'pointer',
-                  borderLeft: active === i ? `3px solid ${green}` : '3px solid transparent',
-                  borderBottom: active === i ? `2px solid ${green}` : '2px solid transparent',
-                  transition: 'background 0.2s, border-color 0.2s',
-                  textAlign: 'left',
-                  minWidth: '110px',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: headingFont,
-                    fontSize: '13px',
-                    color: active === i ? green : 'rgba(79,114,86,0.28)',
-                    transition: 'color 0.2s',
-                  }}
-                >
-                  {s.num}
-                </span>
-                <span
-                  style={{
-                    fontFamily: wideFont,
-                    fontSize: '9px',
-                    fontWeight: 700,
-                    letterSpacing: '1.5px',
-                    textTransform: 'uppercase',
-                    color: active === i ? green : taupe,
-                    lineHeight: 1.4,
-                    transition: 'color 0.2s',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {s.title}
-                </span>
-              </button>
-            ))}
+          {/* Photo — fills the full height of the right content column */}
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ position: 'relative', flex: 1, minHeight: '520px', borderTopLeftRadius: '16px', borderTopRightRadius: '72px', borderBottomLeftRadius: '72px', borderBottomRightRadius: '16px', overflow: 'hidden', boxShadow: '12px -12px 0 #C9D8C1' }}>
+              <Image
+                src="/wix/87fc13_16e7dbed_consult_668x724.jpg"
+                alt="Initial consultation at Carisma Slimming — your doctor-led programme starts here"
+                fill
+                style={{ objectFit: 'cover' }}
+                loading="lazy"
+              />
+            </div>
+            <p style={{ fontFamily: bodyFont, fontSize: '12px', color: '#9B8D83', textAlign: 'center', marginTop: '16px', fontStyle: 'italic', letterSpacing: '0.5px' }}>
+              Your programme is built around you — not a generic plan
+            </p>
           </div>
 
-          {/* ── Right: active step content ── */}
-          <div
-            style={{
-              background: '#ffffff',
-              padding: 'clamp(32px,5vw,56px) clamp(28px,5vw,56px)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              position: 'relative',
-              overflow: 'hidden',
-              minHeight: '400px',
-            }}
-          >
-            {/* Ghost step number */}
-            <span
-              aria-hidden
-              style={{
-                position: 'absolute',
-                right: '-8px',
-                bottom: '-20px',
-                fontFamily: headingFont,
-                fontSize: 'clamp(90px,14vw,140px)',
-                color: 'rgba(79,114,86,0.05)',
-                lineHeight: 1,
-                userSelect: 'none',
-                pointerEvents: 'none',
-              }}
-            >
-              {step.num}
-            </span>
-
-            {/* Step label */}
-            <p style={{ color: taupe, fontFamily: wideFont, fontSize: '10px', letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '10px', position: 'relative' }}>
-              Step {step.num}
+          {/* Right: heading + all 5 steps stacked */}
+          <div>
+            <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '10px' }}>
+              How our doctor-led programme works
             </p>
-
-            {/* Step title */}
-            <h3
-              style={{
-                color: green,
-                fontFamily: headingFont,
-                fontSize: 'clamp(17px,2.2vw,21px)',
-                fontWeight: 400,
-                textTransform: 'uppercase',
-                lineHeight: 1.3,
-                marginBottom: '10px',
-                position: 'relative',
-              }}
+            <div style={{ width: '32px', height: '1px', background: '#C9B8AE', marginBottom: '20px' }} />
+            <h2
+              id="program-heading"
+              style={{ fontFamily: headingFont, fontSize: 'clamp(20px,2.8vw,26px)', fontWeight: 400, color: '#024C27', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: 1.3, marginBottom: '32px' }}
             >
-              {step.title}
-            </h3>
+              Five Steps to Your Transformation
+            </h2>
 
-            {/* Tagline */}
-            <p
-              style={{
-                color: taupe,
-                fontFamily: bodyFont,
-                fontSize: '14px',
-                lineHeight: 1.65,
-                marginBottom: '28px',
-                maxWidth: '440px',
-                position: 'relative',
-              }}
-            >
-              {step.tagline}
-            </p>
-
-            {/* Bullets */}
-            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 32px', position: 'relative' }}>
-              {step.bullets.map((b, i) => (
-                <li
-                  key={b}
+            <div>
+              {steps.map((s, i) => (
+                <div
+                  key={s.num}
                   style={{
                     display: 'flex',
+                    gap: '16px',
                     alignItems: 'flex-start',
-                    gap: '14px',
-                    padding: '11px 0',
-                    borderBottom: i < step.bullets.length - 1 ? '1px solid rgba(79,114,86,0.07)' : 'none',
+                    padding: '14px 0',
+                    borderBottom: i < steps.length - 1 ? '1px solid rgba(79,114,86,0.1)' : 'none',
                   }}
                 >
-                  <svg aria-hidden width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
-                    <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
-                    <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <span style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.65 }}>{b}</span>
-                </li>
+                  <span style={{ fontFamily: headingFont, fontSize: '14px', color: 'rgba(79,114,86,0.25)', flexShrink: 0, minWidth: '24px', paddingTop: '2px' }}>
+                    {s.num}
+                  </span>
+                  <div>
+                    <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '1.5px', textTransform: 'uppercase', color: green, display: 'block', marginBottom: '3px' }}>
+                      {s.title}
+                    </span>
+                    <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.6, color: taupe, margin: 0 }}>
+                      {s.text}
+                    </p>
+                  </div>
+                </div>
               ))}
-            </ul>
+            </div>
 
-            {/* CTA */}
-            <div style={{ position: 'relative' }}>
+            <div style={{ marginTop: '32px' }}>
               <CTAButton label="Get Your Free Body Analysis" />
             </div>
           </div>
