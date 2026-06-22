@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
-import TreatmentsAccordion from '@/components/TreatmentsAccordion';
+import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
@@ -158,9 +158,21 @@ export default function Home() {
         </div>
       </section>
 
-      {/* (3) Explore Our Treatments — image accordion */}
+      {/* (3) Our Treatments — full-card carousel with arrows */}
       <section className="py-24" aria-labelledby="modalities-heading" style={{ backgroundColor: '#ffffff' }}>
-        <TreatmentsAccordion />
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', marginBottom: '48px' }}>
+          <p aria-hidden="true" style={{ color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '14px' }}>
+            Our Treatments
+          </p>
+          <div aria-hidden="true" style={{ width: '64px', height: '1px', background: '#4f7256', margin: '0 auto 18px' }} />
+          <h2 id="modalities-heading" style={{ fontFamily: 'Trajan Pro, serif', color: '#3c5a40', fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '14px' }}>
+            Our Weight Loss &amp; Body Contouring Treatments in Malta
+          </h2>
+          <p style={{ fontFamily: 'Roboto, sans-serif', color: '#595959', fontSize: '16px', lineHeight: 1.6, maxWidth: '620px', margin: '0 auto' }}>
+            Six evidence-led modalities, combined into one doctor-led plan — chosen for your body, never one-size-fits-all.
+          </p>
+        </div>
+        <ModalitiesCarousel />
       </section>
 
       {/* (4) Our Results Guarantee — "The Carisma Pact" + ambient 3D silk */}
