@@ -19,7 +19,6 @@ const WIDE = '"Novecento Wide", "Novecento Wide Book", sans-serif';
 const BODY = 'Roboto, sans-serif';
 
 // Locked accessible tokens (DESIGN_LANGUAGE §1)
-const FOREST = '#024C27';   // primary, deep stat headings
 const HEAD_SAGE = '#3c5a40'; // section headings (H2/H3)
 const SAGE = '#4f7256';      // buttons, links, icons, eyebrows
 const BODY_TEXT = '#333333';

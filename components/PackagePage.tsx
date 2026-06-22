@@ -37,13 +37,10 @@ import {
 import { testimonials as TESTIMONIALS, Testimonial } from '@/lib/packages/testimonials';
 
 /* ---------- palette / fonts (shared with the site) ---------- */
-/* GREEN stays the bright brand sage but is DECORATIVE ONLY (gradient fills,
-   image backings) — it is 2.39:1 on white and fails WCAG as text/UI border.
-   GREEN_TEXT is the locked accessible sage (#4f7256 from globals.css)
-   used for ALL sage TEXT, ICONS, LINKS, INPUT and meaningful borders;
-   HEADING_GREEN (#3c5a40) is the locked dark-sage for section headings. */
-const GREEN = '#8EB093';
-/* Locked accessible sage from globals.css — used for sage TEXT/ICONS/LINKS/borders. */
+/* GREEN_TEXT is the locked accessible sage (#4f7256 from globals.css) used for ALL
+   sage TEXT, ICONS, LINKS and meaningful borders; HEADING_GREEN (#3c5a40) is the
+   locked dark-sage for section headings. Bright sage #8EB093 is decorative-only and
+   is applied via gradients/CSS, never as a token here. */
 const GREEN_TEXT = '#4f7256';
 /* Locked dark-sage for section headings (H2/H3). */
 const HEADING_GREEN = '#3c5a40';
