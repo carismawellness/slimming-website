@@ -51,6 +51,9 @@ export type PageHeroProps = {
   headline: { text: string; em?: boolean }[];
   sub?: string;
   bullets?: HeroBullet[];
+  /** Optional in-hero price/offer block, rendered above the primary CTA.
+   *  Purely additive — omit (or pass an empty object) to render nothing. */
+  offer?: { totalValue?: string; todayPrice?: string; note?: string };
   primaryCta: { text: string; href: string; external?: boolean };
   secondaryCta?: { text: string; href: string; external?: boolean };
   media: HeroMedia;
@@ -103,6 +106,7 @@ export default function PageHero({
   headline,
   sub,
   bullets,
+  offer,
   primaryCta,
   secondaryCta,
   media,
@@ -262,6 +266,61 @@ export default function PageHero({
                 </li>
               ))}
             </ul>
+          )}
+
+          {/* optional in-hero offer / price block — rendered ABOVE the primary CTA.
+              Purely additive: nothing renders unless `offer` carries a value. */}
+          {offer && (offer.totalValue || offer.todayPrice || offer.note) && (
+            <div
+              style={{
+                display: 'inline-flex',
+                flexDirection: 'column',
+                gap: 2,
+                margin: '0 0 16px',
+                padding: '12px 18px',
+                borderRadius: 14,
+                background: 'rgba(255,255,255,0.66)',
+                border: '1px solid rgba(2,76,39,0.14)',
+                backdropFilter: 'blur(6px)',
+                WebkitBackdropFilter: 'blur(6px)',
+                boxShadow: '0 6px 20px rgba(2,76,39,0.07)',
+              }}
+            >
+              {offer.totalValue && (
+                <span
+                  style={{
+                    fontFamily: WIDE,
+                    fontSize: 11,
+                    letterSpacing: '0.12em',
+                    textTransform: 'uppercase',
+                    color: '#6f6456',
+                    textDecoration: 'line-through',
+                    textDecorationColor: 'rgba(111,100,86,0.55)',
+                  }}
+                >
+                  {offer.totalValue}
+                </span>
+              )}
+              {offer.todayPrice && (
+                <span
+                  style={{
+                    fontFamily: HEADING,
+                    fontWeight: 400,
+                    fontSize: 'clamp(24px, 2.6vw, 31px)',
+                    lineHeight: 1.05,
+                    textTransform: 'uppercase',
+                    color: '#024C27',
+                  }}
+                >
+                  {offer.todayPrice}
+                </span>
+              )}
+              {offer.note && (
+                <span style={{ fontFamily: BODY, fontSize: 12, color: '#5a5043', lineHeight: 1.4 }}>
+                  {offer.note}
+                </span>
+              )}
+            </div>
           )}
 
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', marginBottom: 18 }}>

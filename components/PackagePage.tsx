@@ -25,7 +25,6 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
-import GradientField from '@/components/layers/GradientField';
 import { BOOKING_URL } from '@/lib/services';
 import {
   PackageContent,
@@ -335,15 +334,15 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         Skip to main content
       </a>
 
-      {/* Continuous sage wash: the page reads as one evolving gradient
-          (hero ends ~white → soft sage washes → back to white at the footer),
-          so no flat-colour seams or divider bands appear between sections. */}
+      {/* Clean, neutral page ground (white → very light off-white). The former
+          page-wide teal/sage gradient wash has been removed so the template reads
+          premium and minimal — matching the home / weight-loss aesthetic. Section
+          separation comes from whitespace and thin rules, not green gradients. */}
       <div
         id="pkg-main"
         style={{
           fontFamily: BODY,
-          background:
-            'linear-gradient(180deg, #ffffff 0%, #f6f4ef 14%, #eef3ea 30%, #f5f8f2 46%, #eef3ea 60%, #f6f4ef 76%, #f5f8f2 88%, #ffffff 100%)',
+          backgroundColor: '#ffffff',
         }}
       >
         {/* ===================== 1. HERO ===================== */}
@@ -361,75 +360,43 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             ? { type: 'video', src: c.heroVideo, poster: c.heroImage, alt: c.heroSubheading }
             : { type: 'image', src: c.heroImage, alt: c.heroSubheading }}
           proof={{ rating: '4.9', reviews: '800+', awardSrc: BADGE, awardText: '#1 voted clinic\nMalta' }}
+          offer={{ totalValue: c.heroTotalValue, todayPrice: c.heroTodayPrice, note: c.heroPriceNote }}
           compactHeadline
           motif
         />
 
-        {/* ===== price anchor (CRO: value anchor → today's price → note → single CTA) =====
-            Immediately follows the hero so the offer is the first thing seen after the
-            fold. Replaces the old standalone TOTAL VALUE/TODAY band. The legal
-            heroFineprint is relocated here as a subtle, de-emphasised footnote. */}
-        <section aria-label="Package offer details" style={{ paddingTop: 8, paddingBottom: 40 }}>
-          <div style={{ ...CONTAINER, maxWidth: 620 }}>
-            <div
-              style={{
-                background: 'linear-gradient(150deg, #f5f8f2 0%, #e7ece2 100%)',
-                border: '1px solid rgba(95,126,102,0.16)',
-                borderRadius: 18,
-                padding: '26px 30px 22px',
-                textAlign: 'center',
-              }}
-            >
-              {/* value anchor (struck-through, de-emphasised) */}
-              <p style={{ margin: '0 0 4px', fontFamily: WIDE, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', color: TAUPE_LT }}>
-                Total value{' '}
-                <span style={{ textDecoration: 'line-through', textDecorationThickness: 1, color: TAUPE }}>{c.heroTotalValue}</span>
-              </p>
-              {/* today's price — large + prominent */}
-              <p style={{ margin: 0, lineHeight: 1, display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'center', gap: 8 }}>
-                <span style={{ fontFamily: WIDE, fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: GREEN_TEXT }}>Today</span>
-                <span style={{ fontFamily: SERIF, fontWeight: 400, fontSize: 'clamp(34px, 5vw, 46px)', textTransform: 'uppercase', color: HEADING_GREEN }}>{c.heroTodayPrice}</span>
-              </p>
-              {/* small note */}
-              {c.heroPriceNote && (
-                <p style={{ margin: '8px 0 0', fontFamily: BODY, fontSize: 13, color: TAUPE }}>{c.heroPriceNote}</p>
-              )}
-              {/* single CTA */}
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: 18 }}><CTA variant="green" wide>Claim your spot now</CTA></div>
-              <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}><Stars withGoogle size={20} /></div>
-            </div>
-            {/* relocated legal fineprint — subtle footnote, kept in the DOM.
-                Uses TAUPE (AA-compliant) per the brand a11y rule; de-emphasised via size. */}
-            <div style={{ marginTop: 14 }}>
-              {c.heroFineprint.map((f) => (
-                <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 10.5, lineHeight: 1.5, margin: '0 auto', maxWidth: 540, textAlign: 'center', opacity: 0.85 }}>{f}</p>
-              ))}
-            </div>
-          </div>
-        </section>
+        {/* The standalone price band that used to sit here has been removed — the
+            offer (total value → today's price → note) now renders inside the hero
+            via the PageHero `offer` prop above, so it's the first thing seen above
+            the fold without duplicating the price further down the page. */}
 
-        {/* ===================== 2. SECRET (+ before/after testimonials) ===================== */}
-        <section aria-labelledby="secret-heading" style={{ paddingTop: 84, paddingBottom: 84 }}>
-          <div style={{ ...CONTAINER, maxWidth: 1180 }}>
-            <SectionHeading id="secret-heading">
-              {c.secretHeading.map((l, i) => (<span key={i}>{l}{i < c.secretHeading.length - 1 && <br />}</span>))}
-            </SectionHeading>
-            <div style={{ width: 280, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '18px auto 0' }} />
-
-            {!hidden.testimonials && TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
+        {/* ===================== 2. SOCIAL PROOF — before / after ===================== */}
+        {/* The old "secret" heading band has been removed: after the hero the page now
+            goes straight to before/after social proof, then into the explanatory copy
+            block. The legal fineprint disclaimers are kept as a subtle footnote below
+            the proof so nothing legal is lost. */}
+        <section aria-labelledby="testimonials-heading" style={{ paddingTop: 72, paddingBottom: 80 }}>
+          {!hidden.testimonials && TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
+            <div style={{ ...CONTAINER, maxWidth: 1120 }}>
               <TestimonialsSection items={TESTIMONIALS[c.id]} />
-            )}
-          </div>
+              {/* relocated legal fineprint — subtle footnote, kept in the DOM.
+                  Uses TAUPE (AA-compliant) per the brand a11y rule; de-emphasised via size. */}
+              <div style={{ marginTop: 40 }}>
+                {c.heroFineprint.map((f) => (
+                  <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: '0 auto', maxWidth: 620, textAlign: 'center', opacity: 0.85 }}>{f}</p>
+                ))}
+              </div>
+            </div>
+          )}
 
-          <div style={{ ...CONTAINER, marginTop: 84 }}>
-            <GradientField
-              blob={{ top: '6%', right: '-5%' }}
-              dots
-              style={{ maxWidth: 980, marginLeft: 'auto', marginRight: 'auto', borderRadius: 16, background: 'linear-gradient(0deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', padding: '48px 44px' }}
-            >
-              <SectionHeading>{c.secretSubheading}</SectionHeading>
+          {/* explanatory copy block — clean two-column (image + text + CTA) matching
+              the weight-loss / GLP-1 section design: white ground, thin sage rule,
+              asymmetric-arch image, no page-wide gradient wash. */}
+          <div style={{ ...CONTAINER, maxWidth: 1040, marginTop: 64 }}>
+            <div style={{ width: 64, height: 1, backgroundColor: GREEN_TEXT, margin: '0 auto 18px' }} aria-hidden="true" />
+            <SectionHeading>{c.secretSubheading}</SectionHeading>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 36 }} className="fr-2col">
+            <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 40 }} className="fr-2col">
                 {/* P3 — next/image with explicit dimensions + meaningful alt */}
                 <div style={{ position: 'relative', width: '100%', aspectRatio: c.secretImageRatio ?? '394 / 510' }}>
                   <Image
@@ -462,8 +429,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                   )}
                   <CTA variant="blue" full />
                 </div>
-              </div>
-            </GradientField>
+            </div>
           </div>
         </section>
 
@@ -492,7 +458,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               <h2 id="benefits-heading" className="sr-only">Treatment Benefits</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 22 }} className="fr-benefits">
                 {c.benefits.map((b) => (
-                  <div key={b.title} style={{ background: 'linear-gradient(189deg, #F8F6F2 44.74%, rgba(142,176,147,0.4) 100%)', borderRadius: '22px 22px 0 22px', padding: '28px 24px 34px' }}>
+                  <div key={b.title} style={{ background: '#ffffff', border: '1px solid #e8e2da', borderRadius: '22px 22px 0 22px', padding: '28px 24px 34px', boxShadow: '0 4px 18px rgba(120,114,104,0.08)' }}>
                     {/* P1 — decorative benefit icon gets aria-hidden */}
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={b.icon} alt="" aria-hidden="true" style={{ width: 52, height: 52, objectFit: 'contain', marginBottom: 18 }} />
@@ -585,9 +551,11 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===================== 6. DIFFERENCE ===================== */}
         {!hidden.difference && (
-          <section aria-labelledby="difference-heading" style={{ position: 'relative', paddingTop: 72, paddingBottom: 96, overflow: 'hidden' }}>
+          <section aria-labelledby="difference-heading" style={{ position: 'relative', paddingTop: 72, paddingBottom: 96, overflow: 'hidden', backgroundColor: '#ffffff' }}>
+            {/* faint decorative motif (was a heavy 0.5-opacity green wash spanning the
+                section — now a barely-there tint so the ground reads clean white). */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={DIFF_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.5, pointerEvents: 'none', zIndex: 0 }} />
+            <img src={DIFF_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.1, pointerEvents: 'none', zIndex: 0 }} />
             <div style={{ ...CONTAINER, position: 'relative', zIndex: 1 }}>
               <Eyebrow>the carisma difference</Eyebrow>
               <div style={{ marginTop: 10 }}>
@@ -613,50 +581,57 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           </section>
         )}
 
-        {/* ===================== 7. PACKAGE TREATMENTS ===================== */}
+        {/* ===================== 7. MULTIDISCIPLINARY TREATMENT + PROVEN EFFICACY ===================== */}
+        {/* Redesigned to match the weight-loss / GLP-1 aesthetic: clean white ground,
+            centred eyebrow → thin sage rule → serif H2, then a calm two-column block.
+            The treatment BEFORE/AFTER image uses the GLP-1 asymmetric-arch treatment
+            (90px diagonal corners + soft shadow) on a white card — no heavy sage
+            gradient ground, no overlapping decorative image clutter. */}
         {!hidden.packageCard && (
-          <section aria-labelledby="pt-heading" style={{ paddingTop: 48, paddingBottom: 84 }}>
-            <div style={CONTAINER}>
+          <section aria-labelledby="pt-heading" style={{ paddingTop: 64, paddingBottom: 84, backgroundColor: '#ffffff' }}>
+            <div style={{ ...CONTAINER, maxWidth: 1040 }}>
               {c.ptEyebrow && <Eyebrow>{c.ptEyebrow}</Eyebrow>}
-              {c.ptEyebrow && <div aria-hidden="true" style={{ width: 116, height: 1, backgroundColor: TAUPE, margin: '15px auto 0' }} />}
+              <div aria-hidden="true" style={{ width: 64, height: 1, backgroundColor: GREEN_TEXT, margin: c.ptEyebrow ? '18px auto 0' : '0 auto' }} />
               {c.ptHeading && (
-                <div style={{ marginTop: 8 }}>
-                  <SectionHeading id="pt-heading" size={25}>
+                <div style={{ marginTop: 18 }}>
+                  <SectionHeading id="pt-heading" size={26}>
                     <span style={{ whiteSpace: 'pre-line' }}>{c.ptHeading}</span>
                   </SectionHeading>
                 </div>
               )}
 
               {c.ptLayout === 'centered' ? (
-                <div style={{ marginTop: 36, backgroundColor: '#fff', borderRadius: 16, padding: 36, boxShadow: '0 6px 26px rgba(120,114,104,0.14)' }}>
-                  <SectionHeading>{c.ptCardEyebrow}</SectionHeading>
-                  <div style={{ maxWidth: 880, margin: '20px auto 0' }}>
+                <>
+                  {c.ptCardEyebrow && <div style={{ marginTop: 40 }}><SectionHeading size={22}>{c.ptCardEyebrow}</SectionHeading></div>}
+                  <div style={{ maxWidth: 820, margin: '20px auto 0' }}>
                     {c.ptParas.map((p, i) => (
                       <p key={p} style={{ ...body, textAlign: 'center', marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>
                     ))}
                   </div>
-                  <div style={{ marginTop: 26, display: 'grid', gridTemplateColumns: '1.15fr 0.85fr', gap: 40, alignItems: 'start' }} className="fr-2col">
+                  <div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: '1.05fr 0.95fr', gap: 56, alignItems: 'center' }} className="fr-2col">
+                    {/* PROVEN EFFICACY column */}
                     <div>
-                      {c.ptEfficacyTitle && <p style={{ ...body, marginBottom: 14 }}>{c.ptEfficacyTitle}</p>}
-                      <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                      <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 16px' }}>Proven efficacy</p>
+                      {c.ptEfficacyTitle && <p style={{ ...body, marginBottom: 16 }}>{c.ptEfficacyTitle}</p>}
+                      <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 18px', display: 'flex', flexDirection: 'column', gap: 13 }}>
                         {c.ptEfficacyBullets.map((b) => (
-                          <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                            <Dot /><span style={{ ...body, fontSize: 14 }}>{b}</span>
+                          <li key={b} style={{ display: 'flex', gap: 11, alignItems: 'flex-start' }}>
+                            <CheckMark size={18} /><span style={{ ...body, fontSize: 14 }}>{b}</span>
                           </li>
                         ))}
                       </ul>
-                      {c.ptClosing && <p style={{ ...body, fontSize: 14, marginBottom: 20 }}>{c.ptClosing}</p>}
+                      {c.ptClosing && <p style={{ ...body, fontSize: 14, marginBottom: 22 }}>{c.ptClosing}</p>}
                       {c.ptCardCta && <CTA variant="blue">{c.ptCardCta}</CTA>}
                     </div>
+                    {/* treatment before/after — GLP-1-style asymmetric arch on white */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-                      {/* P3 — next/image */}
-                      <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', borderRadius: 16, overflow: 'hidden' }}>
-                        <Image src={c.ptImage} alt={c.ptCardEyebrow ?? 'Treatment demonstration'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
+                      <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
+                        <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} — before and after treatment result` : 'Before and after treatment result'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                       </div>
                       {(c.ptImage2 || c.ptImage3) && (
                         <div style={{ display: 'flex', gap: 18 }}>
                           {[c.ptImage2, c.ptImage3].filter(Boolean).map((img) => (
-                            <div key={img} style={{ flex: '1 1 0', position: 'relative', aspectRatio: '1 / 1', borderRadius: 16, overflow: 'hidden' }}>
+                            <div key={img} style={{ flex: '1 1 0', position: 'relative', aspectRatio: '1 / 1', borderRadius: 16, overflow: 'hidden', boxShadow: '0 8px 22px rgba(0,0,0,0.08)' }}>
                               <Image src={img!} alt="" fill sizes="20vw" style={{ objectFit: 'cover' }} />
                             </div>
                           ))}
@@ -664,29 +639,23 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       )}
                     </div>
                   </div>
-                </div>
+                </>
               ) : (
-                <div style={{ marginTop: 36, background: 'linear-gradient(150deg, #f1f3ee 0%, #e2e9df 100%)', borderRadius: 16, padding: 36, display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 40, alignItems: 'center' }} className="fr-2col">
+                <div style={{ marginTop: 48, display: 'grid', gridTemplateColumns: '0.92fr 1.08fr', gap: 56, alignItems: 'center' }} className="fr-2col">
+                  {/* treatment before/after — GLP-1-style asymmetric arch on white */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
-                    {/* P3 — next/image */}
-                    <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 5', borderRadius: 16, overflow: 'hidden' }}>
+                    <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
                       <Image src={c.ptImage} alt="Before and after treatment result" fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                     </div>
                     {c.ptImage2 && (
-                      <div style={{ position: 'relative' }}>
-                        {c.ptDecorImage && (
-                          // eslint-disable-next-line @next/next/no-img-element
-                          <img src={c.ptDecorImage} alt="" aria-hidden="true" style={{ position: 'absolute', left: -36, bottom: -36, width: 515, maxWidth: '60vw', height: 'auto', pointerEvents: 'none' }} />
-                        )}
-                        <div style={{ position: 'relative', width: c.ptImage2Width ?? '100%', aspectRatio: '4 / 3', borderRadius: 16, overflow: 'hidden' }}>
-                          <Image src={c.ptImage2} alt="" fill sizes="(max-width: 860px) 100vw, 35vw" style={{ objectFit: 'cover' }} />
-                        </div>
+                      <div style={{ position: 'relative', width: c.ptImage2Width ?? '100%', aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: 16, boxShadow: '0 8px 22px rgba(0,0,0,0.08)' }}>
+                        <Image src={c.ptImage2} alt="" fill sizes="(max-width: 860px) 100vw, 35vw" style={{ objectFit: 'cover' }} />
                       </div>
                     )}
                   </div>
                   <div>
                     {c.ptTitleStyle === 'serif' ? (
-                      <div style={{ borderBottom: '1px solid rgba(142,176,147,0.62)', paddingBottom: 14, marginBottom: 16, display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
+                      <div style={{ borderBottom: '1px solid #e8e2da', paddingBottom: 14, marginBottom: 18, display: 'flex', alignItems: 'center', gap: 18, flexWrap: 'wrap' }}>
                         <p style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 18, letterSpacing: 'normal', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
                         {c.ptCardTag && (
                           <>
@@ -696,7 +665,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                         )}
                       </div>
                     ) : (
-                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 14, flexWrap: 'wrap' }}>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: 16, marginBottom: 16, flexWrap: 'wrap' }}>
                         <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 15, letterSpacing: '0.5px', textTransform: 'uppercase', margin: 0 }}>{c.ptCardEyebrow}</p>
                         {c.ptCardTag && <span style={{ color: GREEN_TEXT, fontFamily: WIDE, fontSize: 11, letterSpacing: '1px', textTransform: 'uppercase', border: `1px solid ${GREEN_TEXT}`, borderRadius: 999, padding: '5px 14px', whiteSpace: 'nowrap' }}>{c.ptCardTag}</span>}
                       </div>
@@ -704,16 +673,17 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     {c.ptParas.map((p, i) => (
                       <p key={p} style={{ ...body, marginBottom: 14, fontWeight: i === 0 && c.ptLeadBold ? 700 : 400 }}>{p}</p>
                     ))}
-                    {c.ptEfficacyTitle && <p style={{ color: TAUPE, fontFamily: WIDE, fontWeight: 400, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '4px 0 14px' }}>{c.ptEfficacyTitle}</p>}
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 12 }}>
+                    <p style={{ color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 700, fontSize: 13, letterSpacing: '1px', textTransform: 'uppercase', margin: '20px 0 14px' }}>Proven efficacy</p>
+                    {c.ptEfficacyTitle && <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.7, margin: '0 0 14px' }}>{c.ptEfficacyTitle}</p>}
+                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 13 }}>
                       {c.ptEfficacyBullets.map((b) => (
-                        <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
-                          <Dot /><span style={{ ...body, fontSize: 14 }}>{b}</span>
+                        <li key={b} style={{ display: 'flex', gap: 11, alignItems: 'flex-start' }}>
+                          <CheckMark size={18} /><span style={{ ...body, fontSize: 14 }}>{b}</span>
                         </li>
                       ))}
                     </ul>
                     {c.ptClosing && <p style={{ ...body, fontSize: 14, margin: '16px 0 0' }}>{c.ptClosing}</p>}
-                    {c.ptCardCta && <div style={{ marginTop: 20 }}><CTA variant="blue">{c.ptCardCta}</CTA></div>}
+                    {c.ptCardCta && <div style={{ marginTop: 22 }}><CTA variant="blue">{c.ptCardCta}</CTA></div>}
                   </div>
                 </div>
               )}
@@ -992,7 +962,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                         </div>
                         <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 999, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                       </div>
-                      <div style={{ background: 'linear-gradient(180deg, #F8F6F2 0%, rgba(142,176,147,0.4) 100%)', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
+                      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 100%)', border: '1px solid #e8e2da', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
                         {/* P6 — H3 within evidence section */}
                         <h3 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', whiteSpace: 'pre-line', margin: 0 }}>{e.title}</h3>
                         <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />

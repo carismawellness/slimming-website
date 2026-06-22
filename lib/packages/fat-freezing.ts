@@ -61,7 +61,7 @@ export const fatFreezing: PackageContent = {
 
   ptEyebrow: 'package treatments',
   // \n matches the live 2-line wrap (template renders ptHeading with white-space: pre-line)
-  ptHeading: 'malta’s only mustlidisciplinary\napproach to weightloss',
+  ptHeading: 'malta’s only multidisciplinary\napproach to weight loss',
   ptCardEyebrow: 'coolsculpting',
   ptCardTag: 'targeted-fat reduction',
   ptParas: [
