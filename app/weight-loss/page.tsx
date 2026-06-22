@@ -951,41 +951,110 @@ function TreatmentsSection() {
    5b. THE CARISMA DIFFERENCE — "we are not another diet clinic"
    ============================================================ */
 function CarismaDifferenceSection() {
-  const items = [
+  const commitmentItems = [
     'Doctor led: full medical check and body scan',
     'One integrated program: medical, diet, movement and treatments together',
     'Real gym included: Technogym facility, semi-private classes and PT',
     'High touch support: weekly check ins, progress reports and WhatsApp follow up',
+  ];
+  const differenceItems = [
     'Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening',
     'Selective entry and measurable weight loss results guaranteed',
   ];
   return (
-    <section className="relative py-20" aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
-      {/* Accessibility scrim — the centred sage watermark has darkest pixel #A8C0AD; a 0.7 white veil
-          lifts the effective background to ~#e5ece6 so taupe body clears 4.81:1 and green text 4.51:1 (AA). */}
-      <div aria-hidden="true" className="absolute inset-0" style={{ backgroundColor: 'rgba(255,255,255,0.7)', pointerEvents: 'none' }} />
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', letterSpacing: '3px', textTransform: 'uppercase' }}>
-          the carisma difference
-        </p>
-        <div className="mx-auto mb-6" style={{ width: '110px', height: '1px', backgroundColor: '#d9cfc6' }} />
-        <h2 id="difference-heading" className="text-center mb-6" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.3 }}>
-          Why Carisma Slimming Is Different<br />From Every Other Weight Loss Clinic in Malta
-        </h2>
-        <p className="text-center mx-auto mb-12 max-w-2xl" style={pStyle}>
-          We&apos;re a doctor led transformation program that blends medical insight — including{' '}
-          <Link href="/glp1" style={{ color: green, textDecoration: 'underline' }}>GLP-1 medical weight loss injections</Link>{' '}
-          where clinically appropriate — sustainable nutrition, and modern body tech into one high touch system, so you don&apos;t just lose weight, you step into your strongest form.
-        </p>
-        <div className="mx-auto max-w-xl">
-          <ul className="space-y-6">
-            {items.map((t) => (
-              <li key={t} className="flex items-start gap-4">
-                <Image src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" role="presentation" width={23} height={23} style={{ objectFit: 'contain', flexShrink: 0, marginTop: '2px' }} loading="lazy" />
-                <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
-              </li>
-            ))}
-          </ul>
+    <section className="py-24" aria-labelledby="difference-heading-wl" style={{ backgroundColor: '#ffffff' }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
+          {/* Decorative background watermark */}
+          <Image
+            src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.webp"
+            alt=""
+            role="presentation"
+            width={678}
+            height={630}
+            aria-hidden={true}
+            style={{ position: 'absolute', left: '50%', top: '12px', transform: 'translateX(-50%)', width: '678px', height: '630px', objectFit: 'contain', pointerEvents: 'none', zIndex: 0 }}
+          />
+          <div className="relative" style={{ zIndex: 1 }}>
+            <p className="text-center mb-2" aria-hidden="true" style={{ color: '#5a4f43', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '14px', fontWeight: '600', letterSpacing: '3px', textTransform: 'uppercase' }}>
+              the carisma difference
+            </p>
+            <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
+            <h2 id="difference-heading-wl" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              why malta chooses carisma slimming
+            </h2>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+              {/* Left - commitments + difference list + CTA */}
+              <div className="space-y-12">
+                <div>
+                  <h3 className="mb-6" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    Our Doctor-Led Slimming Commitment
+                  </h3>
+                  <ul className="space-y-4">
+                    {commitmentItems.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                          <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                          <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="mb-6" style={{ color: '#000000', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                    What Makes Our Weight Loss Clinic Different
+                  </h3>
+                  <ul className="space-y-4">
+                    {differenceItems.map((item, idx) => (
+                      <li key={idx} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                          <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                          <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div>
+                  <a
+                    href="https://www.fresha.com/a/carisma-slimming-floriana-great-siege-road-wxxyuj9p/booking?pId=2708191&modal=employee-profile&employeeId=5084222&back=%2Fa%2Fcarisma-slimming-floriana-great-siege-road-wxxyuj9p&cartId=e54b0560-88a7-4e30-835b-5d10548e729b"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="cta-glow inline-flex items-center justify-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
+                    style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', minHeight: '48px', padding: '0 32px' }}
+                    aria-label="Book your free body analysis"
+                  >
+                    Book Your Free Body Analysis
+                  </a>
+                </div>
+              </div>
+              {/* Right - Google Maps embed */}
+              <div className="flex flex-col">
+                <iframe
+                  title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
+                  aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
+                  src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0, borderRadius: '20px', display: 'block', flex: 1, minHeight: '480px' }}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#E9F0E9', borderRadius: '999px', padding: '8px 16px', marginTop: '16px', alignSelf: 'flex-start' }}>
+                  <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="1" y="1" width="16" height="16" rx="4" fill="#C9D8C1" />
+                    <text x="9" y="13" textAnchor="middle" fill="#4f7256" fontSize="10" fontWeight="700" fontFamily="sans-serif">P</text>
+                  </svg>
+                  <span style={{ color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 600 }}>
+                    Complimentary on-site parking
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1135,100 +1204,6 @@ function OurPromiseSection() {
         </div>
       </section>
     </>
-  );
-}
-
-/* ============================================================
-   5d. THE CARISMA DIFFERENCE — wellness chain + map
-   ============================================================ */
-function CarismaWellnessSection() {
-  const commitment = [
-    'Visible inch loss and shape change, not vague promises',
-    'Plans that work with your age, hormones and metabolism',
-    'No crash diets, no banned foods, no endless hours of cardio',
-    'Medical grade technology and treatments delivered by trained professionals',
-  ];
-  const whyMalta = [
-    "Created by the team behind Malta's leading spa and medical aesthetics centres",
-    'Doctor led medical slimming, not a beauty salon "diet program"',
-    'All in one approach: assessment, nutrition, movement and treatments',
-    'High touch support with weekly check ins and WhatsApp coaching',
-  ];
-  return (
-    <section className="py-20" style={{ backgroundColor: '#ffffff' }}>
-      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1090px' }}>
-        <div style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #E6EFE3 100%)', borderRadius: '16px', padding: '48px', boxShadow: '0 18px 40px rgba(0,0,0,0.06)' }}>
-          <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '14px', fontWeight: 600, letterSpacing: '3px', textTransform: 'uppercase' }}>
-            the carisma difference
-          </p>
-          <div className="mx-auto mb-4" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-          <h2 className="text-center mb-12" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-            Malta&rsquo;s #1 Voted Slimming Clinic<br />35+ Years of Wellness Results
-          </h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
-            <div className="space-y-10">
-              <div>
-                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
-                  Our Commitment
-                </h3>
-                <ul className="space-y-3">
-                  {commitment.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.8 }}>
-                      <span style={{ color: green }}>&bull;</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div>
-                <h3 className="mb-5" style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
-                  Why Malta Chooses Carisma
-                </h3>
-                <ul className="space-y-3">
-                  {whyMalta.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.8 }}>
-                      <span style={{ color: green }}>&bull;</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-            <div>
-              <iframe
-                title="Carisma Slimming location"
-                src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
-                width="428"
-                height="359"
-                style={{ border: 0, borderRadius: '16px', display: 'block', maxWidth: '100%' }}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
-          </div>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6 mt-12">
-            <div className="flex flex-wrap gap-3 items-center">
-              <a
-                href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Get your free body analysis (opens in new tab)"
-                className="cta-glow text-center font-bold text-white inline-flex items-center justify-center min-h-[44px] transition-opacity duration-200 hover:opacity-90 active:opacity-80"
-                style={{ fontFamily: wideFont, fontSize: '13px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '14px 40px' }}
-              >
-                Get Your Free Body Analysis &rsaquo;
-              </a>
-            </div>
-            <div className="flex items-center gap-3">
-              <Image src="/wix/87fc13_2b8e2795b62445a5a99d90d5490491eb~mv2.png" alt="" role="presentation" width={34} height={34} style={{ width: '34px', height: 'auto', objectFit: 'contain' }} loading="lazy" />
-              <span style={{ color: taupe, fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1px', textTransform: 'uppercase' }}>
-                Complimentary on-site parking
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   );
 }
 
@@ -1880,7 +1855,6 @@ export default function WeightLossProgramPage() {
       <ProgramOverviewSection />
       <CarismaDifferenceSection />
       <OurPromiseSection />
-      <CarismaWellnessSection />
       <FAQSection />
       <EvidenceApproachSection />
     </main>

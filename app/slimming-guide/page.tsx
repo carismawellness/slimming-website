@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import OutcomeStepper from './OutcomeStepper';
@@ -776,84 +777,94 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Carisma Difference Section */}
-      <section className="py-24 bg-white">
+      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div
-            className="card max-w-5xl mx-auto px-8 py-10 sm:px-14"
-            style={{
-              background: 'linear-gradient(160deg, #F8F6F2 0%, #EFF1EA 55%, #CFDECC 100%)',
-              borderRadius: '16px',
-              boxShadow: '0 6px 16px rgba(0,0,0,0.06)',
-            }}
-          >
-            <div className="text-center mb-3">
-              <p
-                className="uppercase"
-                style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', letterSpacing: '2.4px' }}
-              >
+          <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
+            <Image
+              src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.webp"
+              alt=""
+              role="presentation"
+              width={678}
+              height={630}
+              aria-hidden={true}
+              style={{ position: 'absolute', left: '50%', top: '12px', transform: 'translateX(-50%)', width: '678px', height: '630px', objectFit: 'contain', pointerEvents: 'none', zIndex: 0 }}
+            />
+            <div className="relative" style={{ zIndex: 1 }}>
+              <p className="text-center mb-2" aria-hidden="true" style={{ color: '#5a4f43', fontFamily: wideFont, fontSize: '14px', fontWeight: '600', letterSpacing: '3px', textTransform: 'uppercase' }}>
                 the carisma difference
               </p>
-            </div>
-            <h2
-              className="text-center mb-8 uppercase"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '24px' }}
-            >
-              why malta chooses carisma slimming — doctor-led, evidence-based, shame-free
-            </h2>
-            <h3 className="uppercase mb-4" style={{ color: TAUPE, fontSize: '15px', fontWeight: 700 }}>
-              our commitment to medically-led slimming in Malta
-            </h3>
-            <ul className="space-y-2 list-disc pl-5 mb-8" style={{ maxWidth: '430px' }}>
-              {carismaCommitments.map((item, i) => (
-                <li key={i} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <h3 className="uppercase mb-4" style={{ color: TAUPE, fontSize: '15px', fontWeight: 700 }}>
-              WHY MALTA CHOOSES CARISMA SLIMMING OVER A GENERIC DIET PLAN
-            </h3>
-            <ul className="space-y-2 list-disc pl-5 mb-10" style={{ maxWidth: '430px' }}>
-              {whyCarisma.map((item, i) => (
-                <li key={i} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="flex flex-col gap-3">
-                <a
-                  href={PRODUCT_URL}
-                  className="cta-glow block text-center uppercase text-white w-full"
-                  style={{
-                    borderRadius: '999px',
-                    maxWidth: '460px',
-                    padding: '11px 24px',
-                    fontFamily: wideFont,
-                    fontSize: '13px',
-                    fontWeight: 700,
-                    letterSpacing: '1.5px',
-                  }}
-                >
-                  Get Slimming Guide &nbsp;›
-                </a>
-                <BookConsultationButton variant="filled" style={{ fontSize: '13px', padding: '11px 24px', borderRadius: '999px' }}>
-                  Book Free Body Analysis
-                </BookConsultationButton>
-              </div>
-              <div className="flex items-center gap-3">
-                <img
-                  src="/wix/87fc13_0426ba92e1fa4e9ebce44215146be031~mv2.png"
-                  alt=""
-                  role="presentation"
-                  style={{ width: '20px', height: '23px', objectFit: 'contain' }}
-                />
-                <p
-                  className="uppercase whitespace-nowrap"
-                  style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', fontWeight: 700 }}
-                >
-                  Complimentary on-site parking
-                </p>
+              <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
+              <h2 id="difference-heading-sg" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                why malta chooses carisma slimming
+              </h2>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
+                <div className="space-y-12">
+                  <div>
+                    <h3 className="mb-6" style={{ color: '#000000', fontFamily: wideFont, fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                      Our Doctor-Led Slimming Commitment
+                    </h3>
+                    <ul className="space-y-4">
+                      {carismaCommitments.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                            <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                            <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div>
+                    <h3 className="mb-6" style={{ color: '#000000', fontFamily: wideFont, fontSize: '15px', fontWeight: '400', letterSpacing: '1px', textTransform: 'uppercase' }}>
+                      What Makes Our Slimming Clinic Different
+                    </h3>
+                    <ul className="space-y-4">
+                      {whyCarisma.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
+                            <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
+                            <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+                          </svg>
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="flex flex-col gap-3">
+                    <a
+                      href={PRODUCT_URL}
+                      className="cta-glow inline-flex items-center justify-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
+                      style={{ fontFamily: wideFont, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', minHeight: '48px', padding: '0 32px' }}
+                    >
+                      Get Slimming Guide &nbsp;›
+                    </a>
+                    <BookConsultationButton variant="filled" style={{ fontSize: '13px', padding: '11px 24px', borderRadius: '999px' }}>
+                      Book Free Body Analysis
+                    </BookConsultationButton>
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <iframe
+                    title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
+                    aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
+                    src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0, borderRadius: '20px', display: 'block', flex: 1, minHeight: '480px' }}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  ></iframe>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#E9F0E9', borderRadius: '999px', padding: '8px 16px', marginTop: '16px', alignSelf: 'flex-start' }}>
+                    <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <rect x="1" y="1" width="16" height="16" rx="4" fill="#C9D8C1" />
+                      <text x="9" y="13" textAnchor="middle" fill="#4f7256" fontSize="10" fontWeight="700" fontFamily="sans-serif">P</text>
+                    </svg>
+                    <span style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 600 }}>
+                      Complimentary on-site parking
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
