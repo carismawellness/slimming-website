@@ -21,13 +21,12 @@
      11 Evidence based approach (research cards)
    ============================================================ */
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import GradientField from '@/components/layers/GradientField';
 import { BOOKING_URL } from '@/lib/services';
-import BookConsultationButton from '@/components/BookConsultationButton';
 import {
   PackageContent,
   SHARED_DIFFERENCE_BULLETS,
@@ -133,7 +132,9 @@ function SectionHeading({ children, align = 'center', size = 28, id }: { childre
   );
 }
 
-/* P2 — CTA buttons with min 44px touch targets and accessible labels */
+/* P2 — single, unambiguous CTA → Fresha booking. Min 44px touch target +
+   accessible label. The former secondary "Free Body Analysis" outline button
+   has been removed site-wide so every CTA is one clear action. */
 function CTA({ children = 'Claim your spot now', full = false, wide = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean; wide?: boolean }) {
   return (
     <div style={{ display: 'flex', flexDirection: full ? 'column' : 'row', flexWrap: 'wrap', gap: '10px', alignItems: 'flex-start' }}>
@@ -162,7 +163,6 @@ function CTA({ children = 'Claim your spot now', full = false, wide = false }: {
       >
         {children}
       </a>
-      <BookConsultationButton variant="outline" style={{ fontSize: '13px', padding: '13px 28px', minHeight: '44px' }} />
     </div>
   );
 }
@@ -221,21 +221,30 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
   );
 }
 
-/* ---------- before/after testimonial carousel ---------- */
-function TestimonialCard({ t }: { t: Testimonial }) {
+/* ---------- testimonials — mirrors app/weight-loss/page.tsx TestimonialsSection
+   ("Real results from real clients" / "The change our clients feel first"):
+   a 3-up card-lift grid with star row → quote → name. Adapted to PackagePage's
+   inline-style tokens and fed per-service reviews (testimonials[c.id]). Keeps the
+   before/after photo each body-contouring review carries, as conversion proof.
+   The heading is an H3 because it sits inside the H2 "secret" section. ---------- */
+function TestimonialQuoteCard({ t }: { t: Testimonial }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div className="card-lift" style={{ background: '#fff', padding: '20px 10px', margin: '0 10px', boxSizing: 'border-box' }}>
+    <blockquote className="card-lift" style={{ background: '#fff', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', borderRadius: 16, margin: 0 }}>
+      {/* before/after proof image */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={t.image} alt={`${t.name} — before and after body contouring treatment`} style={{ width: '100%', borderRadius: 16, display: 'block' }} />
-      <div style={{ background: 'linear-gradient(178deg, #F8F6F2 42%, #C9D8C1 100%)', borderRadius: 16, padding: '15px', paddingTop: 70, marginTop: -91 }}>
+      <img src={t.image} alt={`${t.name} — before and after body contouring treatment`} style={{ width: '100%', aspectRatio: '1 / 1', objectFit: 'cover', display: 'block' }} />
+      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '20px 22px 24px' }}>
+        {/* star row — matches weight-loss design */}
+        <p aria-hidden="true" style={{ color: GREEN_TEXT, fontFamily: SERIF, fontSize: 13, letterSpacing: '1px', margin: 0 }}>{'★★★★★'}</p>
+        <span className="sr-only">5 stars</span>
         <p
           style={{
-            color: '#655B4E', fontFamily: BODY, fontSize: 14, lineHeight: 1.5, margin: '0 0 5px',
-            ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical', overflow: 'hidden' }),
+            color: TAUPE, fontFamily: BODY, fontSize: 15, lineHeight: 1.6, fontStyle: 'italic', margin: '12px 0 0', flex: 1,
+            ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }),
           }}
         >
-          {t.quote}
+          &ldquo;{t.quote}&rdquo;
         </p>
         {/* P2 — min touch target on expand button */}
         <button
@@ -243,76 +252,36 @@ function TestimonialCard({ t }: { t: Testimonial }) {
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
           aria-label={expanded ? `Collapse ${t.name}'s review` : `Read full review by ${t.name}`}
-          style={{ background: 'none', border: 'none', padding: '8px 0', cursor: 'pointer', fontSize: 14, textDecoration: 'underline', color: '#655B4E', fontFamily: BODY, minHeight: '44px' }}
+          style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: '8px 0', cursor: 'pointer', fontSize: 13, fontStyle: 'italic', textDecoration: 'underline', color: TAUPE, fontFamily: BODY, minHeight: '44px' }}
         >
           {expanded ? 'Read less' : 'Read more'}
         </button>
-        {/* P6 — H3 for testimonial name (within a section heading hierarchy) */}
-        <h3 style={{ fontSize: 16, fontWeight: 500, color: '#655B4E', margin: '24px 0 5px', fontFamily: BODY }}>{t.name}</h3>
+        {/* P6 — name as cite within the H3 section heading hierarchy */}
+        <cite style={{ fontStyle: 'normal', color: HEADING_GREEN, fontFamily: SERIF, fontSize: 16, fontWeight: 400, textTransform: 'uppercase', marginTop: 6 }}>{t.name}</cite>
       </div>
-    </div>
+    </blockquote>
   );
 }
 
-function TestimonialCarousel({ items }: { items: Testimonial[] }) {
-  const [start, setStart] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const n = items.length;
-  const per = Math.min(3, n);
-  const visible = Array.from({ length: per }, (_, i) => items[(start + i) % n]);
-
-  // P7 — respect prefers-reduced-motion for autoplay
-  useEffect(() => {
-    if (paused) return;
-    const prefersReducedMotion = typeof window !== 'undefined'
-      && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (prefersReducedMotion) return;
-    const id = setInterval(() => setStart((s) => (s + 1) % n), 3000);
-    return () => clearInterval(id);
-  }, [paused, n]);
-
-  const arrow: React.CSSProperties = {
-    position: 'absolute',
-    top: '38%',
-    transform: 'translateY(-50%)',
-    width: 44,   /* P2 — min 44×44 touch target */
-    height: 44,
-    borderRadius: '50%',
-    border: 'none',
-    cursor: 'pointer',
-    background: 'rgba(0,0,0,0)',
-    color: GREEN_TEXT,
-    fontSize: 24,
-    lineHeight: 1,
-    zIndex: 2,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  };
-
+function TestimonialsSection({ items }: { items: Testimonial[] }) {
   return (
-    <div
-      style={{ position: 'relative', padding: '0 44px', marginTop: 36 }}
-      onMouseEnter={() => setPaused(true)}
-      onMouseLeave={() => setPaused(false)}
-    >
-      {/* P2 — icon-only buttons need aria-label */}
-      <button type="button" aria-label="Previous testimonial" onClick={() => setStart((start - 1 + n) % n)} style={{ ...arrow, left: 0 }}>&#8592;</button>
-      <div
-        className="fr-testi"
-        style={{ display: 'flex' }}
-        role="region"
-        aria-label="Client testimonials carousel"
-        aria-live="polite"
-      >
-        {visible.map((t, i) => (
-          <div key={`${start}-${i}`} style={{ flex: '1 1 0', minWidth: 0 }}>
-            <TestimonialCard t={t} />
-          </div>
+    <section aria-labelledby="testimonials-heading" style={{ marginTop: 48 }}>
+      <Eyebrow>Real results from real clients</Eyebrow>
+      <div style={{ marginTop: 8 }}>
+        {/* H3 — sits inside the H2 "secret" section, preserving heading order */}
+        <h3 id="testimonials-heading" style={{ color: HEADING_GREEN, fontFamily: SERIF, fontWeight: 400, fontSize: 28, lineHeight: 1.4, textTransform: 'uppercase', textAlign: 'center', margin: 0 }}>
+          The change our clients feel first
+        </h3>
+      </div>
+      <p style={{ ...({ color: TAUPE, fontFamily: BODY, fontSize: 15, lineHeight: 1.7 } as React.CSSProperties), textAlign: 'center', maxWidth: 560, margin: '16px auto 0' }}>
+        A small sample of the hundreds of people across Malta who came to us after everything else had stopped working.
+      </p>
+      <div className="fr-testi-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 40 }}>
+        {items.map((t) => (
+          <TestimonialQuoteCard key={t.name} t={t} />
         ))}
       </div>
-      <button type="button" aria-label="Next testimonial" onClick={() => setStart((start + 1) % n)} style={{ ...arrow, right: 0 }}>&#8594;</button>
-    </div>
+    </section>
   );
 }
 
@@ -384,22 +353,44 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           motif
         />
 
-        {/* ===== offer band ===== */}
+        {/* ===== price anchor (CRO: value anchor → today's price → note → single CTA) =====
+            Immediately follows the hero so the offer is the first thing seen after the
+            fold. Replaces the old standalone TOTAL VALUE/TODAY band. The legal
+            heroFineprint is relocated here as a subtle, de-emphasised footnote. */}
         <section aria-label="Package offer details" style={{ paddingTop: 8, paddingBottom: 40 }}>
-          <div style={{ ...CONTAINER, maxWidth: 760, textAlign: 'center' }}>
-            {!hidden.heroSubheading && c.heroSubheading && (
-              <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 15, margin: '0 0 14px' }}>{c.heroSubheading}</p>
-            )}
-            <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 16, margin: '0 0 4px' }}>
-              <span style={{ fontWeight: 700 }}>TOTAL VALUE:</span> {c.heroTotalValue}{' '}
-              <span style={{ fontWeight: 700 }}>TODAY:</span> {c.heroTodayPrice}
-            </p>
-            {c.heroPriceNote && <p style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12, margin: '0 0 18px' }}>{c.heroPriceNote}</p>}
-            <div style={{ display: 'inline-block', marginBottom: 16 }}><CTA variant="green" wide>Claim your spot now</CTA></div>
-            <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 16 }}><Stars withGoogle size={22} /></div>
-            <div>
+          <div style={{ ...CONTAINER, maxWidth: 620 }}>
+            <div
+              style={{
+                background: 'linear-gradient(150deg, #f5f8f2 0%, #e7ece2 100%)',
+                border: '1px solid rgba(95,126,102,0.16)',
+                borderRadius: 18,
+                padding: '26px 30px 22px',
+                textAlign: 'center',
+              }}
+            >
+              {/* value anchor (struck-through, de-emphasised) */}
+              <p style={{ margin: '0 0 4px', fontFamily: WIDE, fontSize: 13, letterSpacing: '0.06em', textTransform: 'uppercase', color: TAUPE_LT }}>
+                Total value{' '}
+                <span style={{ textDecoration: 'line-through', textDecorationThickness: 1, color: TAUPE }}>{c.heroTotalValue}</span>
+              </p>
+              {/* today's price — large + prominent */}
+              <p style={{ margin: 0, lineHeight: 1, display: 'flex', flexWrap: 'wrap', alignItems: 'baseline', justifyContent: 'center', gap: 8 }}>
+                <span style={{ fontFamily: WIDE, fontSize: 13, fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: GREEN_TEXT }}>Today</span>
+                <span style={{ fontFamily: SERIF, fontWeight: 400, fontSize: 'clamp(34px, 5vw, 46px)', textTransform: 'uppercase', color: HEADING_GREEN }}>{c.heroTodayPrice}</span>
+              </p>
+              {/* small note */}
+              {c.heroPriceNote && (
+                <p style={{ margin: '8px 0 0', fontFamily: BODY, fontSize: 13, color: TAUPE }}>{c.heroPriceNote}</p>
+              )}
+              {/* single CTA */}
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: 18 }}><CTA variant="green" wide>Claim your spot now</CTA></div>
+              <div style={{ display: 'flex', justifyContent: 'center', marginTop: 16 }}><Stars withGoogle size={20} /></div>
+            </div>
+            {/* relocated legal fineprint — subtle footnote, kept in the DOM.
+                Uses TAUPE (AA-compliant) per the brand a11y rule; de-emphasised via size. */}
+            <div style={{ marginTop: 14 }}>
               {c.heroFineprint.map((f) => (
-                <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 11, lineHeight: 1.5, margin: '0 auto', maxWidth: 460 }}>{f}</p>
+                <p key={f} style={{ color: TAUPE, fontFamily: BODY, fontSize: 10.5, lineHeight: 1.5, margin: '0 auto', maxWidth: 540, textAlign: 'center', opacity: 0.85 }}>{f}</p>
               ))}
             </div>
           </div>
@@ -414,7 +405,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             <div style={{ width: 280, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '18px auto 0' }} />
 
             {!hidden.testimonials && TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
-              <TestimonialCarousel items={TESTIMONIALS[c.id]} />
+              <TestimonialsSection items={TESTIMONIALS[c.id]} />
             )}
           </div>
 
@@ -1218,14 +1209,14 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         <style>{`
           .fr-faqsearch::placeholder { color: ${GREEN_TEXT}; opacity: 1; }
           .fr-faqsearch:focus-visible { outline: 3px solid ${GREEN_TEXT}; outline-offset: 2px; }
-          /* P7 — prefers-reduced-motion: disable the carousel autoplay transition */
+          /* P7 — prefers-reduced-motion: disable testimonial card hover transitions */
           @media (prefers-reduced-motion: reduce) {
-            .fr-testi * { transition: none !important; animation: none !important; }
+            .fr-testi-grid * { transition: none !important; animation: none !important; }
           }
           @media (max-width: 860px) {
             .fr-hero-grid, .fr-2col, .fr-benefits, .fr-evgrid { grid-template-columns: 1fr !important; }
             .fr-evgrid > div { grid-column: auto !important; }
-            .fr-testi { flex-direction: column !important; }
+            .fr-testi-grid { grid-template-columns: 1fr !important; }
             .fr-hero-img { order: -1; }
           }
           @media (max-width: 560px) { .fr-benefits { grid-template-columns: 1fr !important; } }
