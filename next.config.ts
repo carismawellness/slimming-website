@@ -43,7 +43,7 @@ const nextConfig: NextConfig = {
 
       // ── Legacy Wix blog & product pages (wildcard) ────────────────────────
       { source: '/post/:slug*',          destination: '/',                             permanent: true },
-      { source: '/blog/:path*',          destination: '/',                             permanent: true },
+      // NOTE: /blog/:path* redirect removed — real blog pages now exist under app/blog/
       { source: '/product-page/:slug*',  destination: '/packages',                    permanent: true },
       { source: '/store/:path*',         destination: '/packages',                    permanent: true },
 

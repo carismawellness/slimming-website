@@ -62,6 +62,7 @@ const NAV_LINKS = [
   { label: 'Body Contouring Packages', href: '/packages' },
   { label: 'The Slimming Guide', href: '/slimming-guide' },
   { label: 'Book a Consultation', href: '/consultation' },
+  { label: 'Blog', href: '/blog' },
 ];
 
 // ─── Micro helpers ─────────────────────────────────────────────────────────────

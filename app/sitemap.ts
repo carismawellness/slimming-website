@@ -1,10 +1,11 @@
 import { MetadataRoute } from 'next'
+import postsIndex from '@/lib/blog/posts-index.json'
 
 const BASE_URL = 'https://www.carismaslimming.com'
 const LAST_MODIFIED = new Date('2026-06-22')
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  return [
+  const staticUrls: MetadataRoute.Sitemap = [
     {
       url: `${BASE_URL}/`,
       lastModified: LAST_MODIFIED,
@@ -102,4 +103,20 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.3,
     },
   ]
+
+  const blogListing: MetadataRoute.Sitemap[number] = {
+    url: `${BASE_URL}/blog`,
+    lastModified: new Date(),
+    changeFrequency: 'daily',
+    priority: 0.8,
+  }
+
+  const blogPosts: MetadataRoute.Sitemap = (postsIndex as { slug: string; published_date: string }[]).map((p) => ({
+    url: `${BASE_URL}/blog/${p.slug}`,
+    lastModified: new Date(p.published_date),
+    changeFrequency: 'weekly',
+    priority: 0.6,
+  }))
+
+  return [...staticUrls, blogListing, ...blogPosts]
 }
