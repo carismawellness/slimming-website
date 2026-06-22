@@ -89,7 +89,10 @@ export default function ModalitiesCarousel() {
           .mc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(60,90,64,0.16); }
           .mc-card:hover .mc-img { transform: scale(1.05); }
         }
-        .mc-card:hover .mc-explore { background-color: #4f7256; color: #ffffff; }
+        /* color/bg !important so they beat the button's inline color (#4f7256),
+           otherwise the hovered fill (#4f7256) would carry #4f7256 text = invisible. */
+        .mc-card:hover .mc-explore { background-color: #4f7256 !important; color: #ffffff !important; }
+        .mc-card:hover .mc-explore span { color: #ffffff !important; }
       `}</style>
       {/* Left arrow */}
       {!atStart && (
