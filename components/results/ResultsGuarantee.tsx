@@ -223,7 +223,7 @@ export default function ResultsGuarantee() {
             The Carisma Results Commitment
           </h2>
           <p style={{ color: META, fontFamily: ROBOTO, fontSize: 'clamp(16px,1.7vw,19px)', lineHeight: 1.6, margin: '14px auto 0', maxWidth: 520 }}>
-            Lose up to 1kg a week on a doctor-led, medically supervised plan — and we keep your programme going free until you reach your goal.
+            Up to 1kg a week. Measured. Verified. Committed to your weight loss.
           </p>
         </div>
 
