@@ -126,24 +126,10 @@ export default function PageLoader() {
         }}
       >
 
-        {/* ── Ambient glow pulse ───────────────────────────────────────── */}
-        <div
-          aria-hidden
-          style={{
-            position: 'absolute',
-            width: 480,
-            height: 480,
-            borderRadius: '50%',
-            background: 'radial-gradient(circle, rgba(2,76,39,0.04) 0%, transparent 62%)',
-            animation: 'lxGlow 6s ease-in-out infinite',
-            pointerEvents: 'none',
-          }}
-        />
-
-        {/* ── Orbiting rings — depth-of-field: inner=sharp/fast, outer=hazy/slow ── */}
+        {/* ── Orbiting rings — large, well away from the rose ────────────── */}
         <svg
-          viewBox="-150 -150 300 300"
-          width="300" height="300"
+          viewBox="0 0 0 0"
+          width="0" height="0"
           aria-hidden
           style={{
             position: 'absolute',
@@ -153,30 +139,30 @@ export default function PageLoader() {
             pointerEvents: 'none',
           }}
         >
-          {/* Ring 1 — innermost, sharpest, fastest, dashed tick motif */}
-          <g style={{ animation: 'lxOrbitCW 22s linear infinite', transformOrigin: '0 0' }}>
-            <circle cx="0" cy="0" r="66"
-              stroke="rgba(160,196,164,0.22)" strokeWidth="0.55" fill="none"
-              strokeDasharray="2.5 9" />
+          {/* Ring 1 — closest, crisp, dashed tick motif */}
+          <g style={{ animation: 'lxOrbitCW 24s linear infinite', transformOrigin: '0 0' }}>
+            <circle cx="0" cy="0" r="130"
+              stroke="rgba(148,190,154,0.28)" strokeWidth="1.0" fill="none"
+              strokeDasharray="3 14" />
           </g>
 
-          {/* Ring 2 — slightly blurred, counter-clockwise */}
-          <g style={{ animation: 'lxOrbitCCW 38s linear infinite', transformOrigin: '0 0', filter: 'blur(0.4px)' }}>
-            <circle cx="0" cy="0" r="92"
-              stroke="rgba(160,196,164,0.13)" strokeWidth="0.65" fill="none"
-              strokeDasharray="1.5 18" />
+          {/* Ring 2 — counter-clockwise, subtle depth blur */}
+          <g style={{ animation: 'lxOrbitCCW 42s linear infinite', transformOrigin: '0 0', filter: 'blur(0.5px)' }}>
+            <circle cx="0" cy="0" r="190"
+              stroke="rgba(148,190,154,0.16)" strokeWidth="1.4" fill="none"
+              strokeDasharray="2 24" />
           </g>
 
-          {/* Ring 3 — softer blur, clockwise, solid */}
-          <g style={{ animation: 'lxOrbitCW 60s linear infinite', transformOrigin: '0 0', filter: 'blur(0.9px)' }}>
-            <circle cx="0" cy="0" r="118"
-              stroke="rgba(160,196,164,0.08)" strokeWidth="0.8" fill="none" />
+          {/* Ring 3 — large, soft blur, slow CW */}
+          <g style={{ animation: 'lxOrbitCW 68s linear infinite', transformOrigin: '0 0', filter: 'blur(1.2px)' }}>
+            <circle cx="0" cy="0" r="255"
+              stroke="rgba(148,190,154,0.09)" strokeWidth="1.8" fill="none" />
           </g>
 
-          {/* Ring 4 — outermost, most out-of-focus, slowest */}
-          <g style={{ animation: 'lxOrbitCCW 90s linear infinite', transformOrigin: '0 0', filter: 'blur(1.8px)' }}>
-            <circle cx="0" cy="0" r="146"
-              stroke="rgba(160,196,164,0.05)" strokeWidth="1.2" fill="none" />
+          {/* Ring 4 — outermost, hazy depth-of-field, slowest */}
+          <g style={{ animation: 'lxOrbitCCW 100s linear infinite', transformOrigin: '0 0', filter: 'blur(2.5px)' }}>
+            <circle cx="0" cy="0" r="330"
+              stroke="rgba(148,190,154,0.05)" strokeWidth="2.5" fill="none" />
           </g>
         </svg>
 
@@ -196,7 +182,6 @@ export default function PageLoader() {
             style={{ overflow: 'visible' }}
             aria-hidden
           >
-            <ellipse cx="48" cy="50" rx="38" ry="32" fill="rgba(2,76,39,0.04)" />
             {PETAL_PATHS.map((d, i) => (
               <path
                 key={i}
@@ -222,7 +207,7 @@ export default function PageLoader() {
                 fontFamily: 'Trajan Pro, "Trajan Pro Regular", Georgia, serif',
                 fontSize: 'clamp(17px, 3vw, 24px)',
                 letterSpacing: '11px',
-                color: '#0d180f',
+                color: '#4f7256',
                 textTransform: 'uppercase',
                 opacity: 0,
                 animation: `lxLetter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 65 + 1500}ms both`,
