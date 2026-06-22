@@ -2,10 +2,11 @@ import type { Metadata } from 'next';
 import type { ReactNode } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import GuideHero from './GuideHero';
+import PageHero from '@/components/PageHero';
 import WhyDietsFail from './WhyDietsFail';
 import OutcomesShowcase from './OutcomesShowcase';
 import MethodPillars from './MethodPillars';
+import InsideTheGuide from './InsideTheGuide';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
 import BookConsultationButton from '@/components/BookConsultationButton';
@@ -138,7 +139,26 @@ export default function SlimmingGuidePage() {
     <main className="w-full" style={{ fontFamily: bodyFont, color: TAUPE }}>
       <JsonLd data={jsonLd} />
       <style dangerouslySetInnerHTML={{ __html: localFontCss }} />
-      <GuideHero />
+      {/* Hero — homepage PageHero design (light sage gradient, fits 100svh, no scroll) */}
+      <PageHero
+        eyebrow="Recipes, meal timing & a structured plan"
+        headline={[
+          { text: 'The Weight-Loss Guide' },
+          { text: 'Built for Maltese Life', em: true },
+        ]}
+        sub="A doctor-backed system you can actually follow — no crash diets, no calorie counting. For only €30."
+        bullets={[
+          { label: 'What to eat —', text: 'and what to swap, using local Maltese ingredients.' },
+          { label: 'When to eat —', text: 'simple meal timing that fits your schedule.' },
+          { text: '30+ recipes built for the Mediterranean kitchen.' },
+          { text: 'A structure that works around social dinners and busy days.' },
+        ]}
+        primaryCta={{ text: 'Get the Slimming Guide', href: PRODUCT_URL, external: true }}
+        media={{ type: 'image', src: '/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.webp', alt: 'The Carisma Slimming Guide book', fit: 'contain', bg: 'linear-gradient(160deg, #eef3ea 0%, #dde7d6 100%)', aspect: '4 / 5' }}
+        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta', statValue: '30+', statLabel: 'recipes inside' }}
+        compactHeadline
+        motif
+      />
 
       {/* Why Diets Fail — editorial redesign */}
       <WhyDietsFail />
@@ -201,6 +221,9 @@ export default function SlimmingGuidePage() {
 
       {/* Method Section — homepage pillars design + scroll-in stagger */}
       <MethodPillars />
+
+      {/* Inside the Guide — 3D page renders showcase (recipes / method / myth-truth) */}
+      <InsideTheGuide />
 
       {/* Success Outcomes — redesigned card showcase */}
       <OutcomesShowcase />
