@@ -150,12 +150,12 @@ export default function SlimmingGuidePage() {
         bullets={[
           { label: 'What to eat —', text: 'and what to swap, using local Maltese ingredients.' },
           { label: 'When to eat —', text: 'simple meal timing that fits your schedule.' },
-          { text: '30+ recipes built for the Mediterranean kitchen.' },
+          { text: '50+ recipes built for the Mediterranean kitchen.' },
           { text: 'A structure that works around social dinners and busy days.' },
         ]}
         primaryCta={{ text: 'Get the Slimming Guide', href: PRODUCT_URL, external: true }}
         media={{ type: 'image', src: '/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.webp', alt: 'The Carisma Slimming Guide book', fit: 'contain', bg: 'linear-gradient(160deg, #eef3ea 0%, #dde7d6 100%)', aspect: '4 / 5' }}
-        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta', statValue: '30+', statLabel: 'recipes inside' }}
+        proof={{ rating: '4.9', reviews: '800+', awardSrc: '/wix/87fc13_228c6751ef5a4644bdb0b46e7719692f~mv2.png', awardText: '#1 voted clinic\nMalta', statValue: '50+', statLabel: 'recipes inside' }}
         compactHeadline
         motif
       />
@@ -334,7 +334,7 @@ export default function SlimmingGuidePage() {
               style={{ width: '100%', maxWidth: '560px', height: 'auto', transform: 'rotate(-2deg)', filter: 'drop-shadow(0 30px 55px rgba(40,60,44,0.18))' }}
             />
           </div>
-          <p className="mb-10 lg:mb-[88px]" style={{ color: TAUPE, fontSize: '15px' }}>
+          <p className="mb-8 lg:mb-14" style={{ color: TAUPE, fontSize: '15px' }}>
             The guide includes recipes built for real Maltese kitchens. Practical, familiar dishes built within
             the method so they work without adaptation. Nothing aspirational. Nothing that requires ingredients
             you would not already have. When you are ready to accelerate results in the clinic, explore our{' '}
@@ -351,7 +351,7 @@ export default function SlimmingGuidePage() {
             </Link>{' '}
             treatments.
           </p>
-          <div className="flex justify-center mb-12 lg:mb-[185px]">
+          <div className="flex justify-center mb-10 lg:mb-16">
             <p
               className="uppercase"
               style={{
@@ -366,7 +366,7 @@ export default function SlimmingGuidePage() {
             </p>
           </div>
           {/* 'Most people who come to us...' — aspirational pull-quote, no container */}
-          <div className="mt-16 lg:mt-24 text-center mx-auto" style={{ maxWidth: '760px' }}>
+          <div className="mt-10 lg:mt-14 text-center mx-auto" style={{ maxWidth: '760px' }}>
             <div className="mx-auto mb-8" style={{ width: '44px', height: '2px', background: GREEN }} />
             <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: 'clamp(17px, 2vw, 22px)', lineHeight: 1.65, fontWeight: 300 }}>
               Most people who come to us have already tried something. A diet that worked for a while. An app they stopped opening. A plan that felt right until life got in the way.

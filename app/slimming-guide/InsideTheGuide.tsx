@@ -16,7 +16,7 @@ const ITEMS: Item[] = [
     w: 750,
     h: 500,
     rot: '-3deg',
-    label: '30+ Recipes',
+    label: '50+ Recipes',
     caption: 'Real meals built for the Maltese kitchen — with timings, portions and method.',
   },
   {
