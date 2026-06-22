@@ -259,11 +259,6 @@ function ProblemAgitationSection() {
                   </div>
                 ))}
               </div>
-              <div style={{ marginTop: '28px', borderLeft: '2px solid #C9D8C1', paddingLeft: '18px' }}>
-                <p style={{ ...pStyle, fontStyle: 'italic', lineHeight: 1.75 }}>
-                  If you read this and think &lsquo;This is me&rsquo;, your willpower is not the problem. Your biology has changed.
-                </p>
-              </div>
             </div>
           </div>
         </div>
