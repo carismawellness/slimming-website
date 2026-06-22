@@ -32,13 +32,19 @@ export default function ConsultationModal() {
     return () => window.removeEventListener(CONSULT_MODAL_EVENT, open);
   }, []);
 
-  // Intercept every "book-now" Fresha link site-wide — open the lead capture modal instead.
+  // Intercept every consultation/booking CTA site-wide — open the lead capture modal instead.
+  // Catches: fresha.com/book-now links AND any href="/consultation" (Next.js Link or plain <a>).
   useEffect(() => {
     const onBookingClick = (e: MouseEvent) => {
       const anchor = (e.target as Element).closest('a');
       if (!anchor) return;
       const href = anchor.getAttribute('href') || '';
-      if (href.includes('fresha.com/book-now')) {
+      const isBookingLink =
+        href.includes('fresha.com/book-now') ||
+        href === '/consultation' ||
+        href.startsWith('/consultation?') ||
+        href.startsWith('/consultation#');
+      if (isBookingLink) {
         e.preventDefault();
         restoreFocusRef.current = anchor;
         setStep('form');
