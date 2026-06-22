@@ -67,7 +67,7 @@ export default function MethodPillars() {
       `}</style>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <p className="text-center mb-2" aria-hidden="true" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 400, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
+        <p className="text-center mb-2" aria-hidden="true" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 400, fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase' }}>
           The Method
         </p>
         <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />

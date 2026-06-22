@@ -83,7 +83,7 @@ export default function OutcomesShowcase() {
         <p
           className="text-center mb-2"
           aria-hidden="true"
-          style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 400, fontSize: '15px', letterSpacing: '3.2px', textTransform: 'uppercase' }}
+          style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 400, fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase' }}
         >
           What this builds
         </p>
@@ -142,7 +142,7 @@ export default function OutcomesShowcase() {
                 <div>
                   <h3
                     className="uppercase"
-                    style={{ color: '#3c5a40', fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif", fontSize: '15px', fontWeight: 700, letterSpacing: '1.2px', lineHeight: 1.4, margin: '0 0 12px' }}
+                    style={{ color: '#3c5a40', fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif", fontSize: '13px', fontWeight: 700, letterSpacing: '1px', lineHeight: 1.4, margin: '0 0 12px' }}
                   >
                     {o.title}
                   </h3>

@@ -99,11 +99,11 @@ function Kicker({ children, centered = false, rule = false }: { children: ReactN
     <div className={centered ? 'flex flex-col items-center' : ''}>
       <p
         className="uppercase mb-2"
-        style={{ color: TAUPE, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px' }}
+        style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px' }}
       >
         {children}
       </p>
-      {rule && <div className="mb-2" style={{ width: '160px', height: '1px', backgroundColor: '#C9C0B8' }} />}
+      {rule && <div className="mb-2" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />}
     </div>
   );
 }
@@ -126,7 +126,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
       ))}
       <span
         className="ml-2"
-        style={{ color: light ? GREEN_SAGE_LIGHT : GREEN, fontFamily: bodyFont, fontSize: '16px' }}
+        style={{ color: light ? GREEN_SAGE_LIGHT : GREEN, fontFamily: bodyFont, fontSize: '13px' }}
       >
         Over 800+ Reviews
       </span>
@@ -172,17 +172,17 @@ export default function SlimmingGuidePage() {
               <Kicker rule>WHAT THIS IS</Kicker>
               <h2
                 className="uppercase"
-                style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px, 3.2vw, 31px)', lineHeight: 1.3, margin: '0 0 12px' }}
+                style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: 1.3, margin: '0 0 12px' }}
               >
                 A behaviour-based weight loss system, not another diet.
               </h2>
               <p
                 className="uppercase"
-                style={{ color: TAUPE, fontFamily: wideFont, fontSize: '13px', letterSpacing: '2.5px', margin: '0 0 28px' }}
+                style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', margin: '0 0 28px' }}
               >
                 Built to hold — not a quick fix.
               </p>
-              <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 18px' }}>
+              <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, margin: '0 0 18px' }}>
                 Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use it.
                 The Carisma Slimming Guide is a behaviour system — built from real clinic practice, designed for the
                 life you actually have. It complements our{' '}
@@ -191,7 +191,7 @@ export default function SlimmingGuidePage() {
                 <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>GLP-1 injections</Link>{' '}
                 for those who want clinical support alongside the habit system.
               </p>
-              <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: 0 }}>
+              <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, margin: 0 }}>
                 The principle it runs on: what you can repeat consistently will always outperform what you can do once
                 brilliantly. Not the perfect week — a structure stable enough to survive the imperfect one.
               </p>
@@ -221,14 +221,14 @@ export default function SlimmingGuidePage() {
               </p>
               <div className="mx-auto mt-7" style={{ width: '40px', height: '1px', background: GREEN }} />
             </div>
-            <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.8, margin: '0 0 32px', maxWidth: '620px', marginLeft: 'auto', marginRight: 'auto' }}>
+            <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, margin: '0 0 32px', maxWidth: '620px', marginLeft: 'auto', marginRight: 'auto' }}>
               That is what this guide builds. When the structure holds, weight loss stops being something you fight
               for. It becomes a result that follows.
             </p>
             <a
               href={PRODUCT_URL}
               className="cta-glow inline-block text-center uppercase text-white"
-              style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '15px', fontWeight: 700, letterSpacing: '1.5px', textDecoration: 'none' }}
+              style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textDecoration: 'none' }}
             >
               Get the Slimming Guide &nbsp;›
             </a>
@@ -253,7 +253,7 @@ export default function SlimmingGuidePage() {
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
             className="uppercase"
-            style={{ color: GREEN, fontFamily: wideFont, fontSize: '30px', lineHeight: 1.4 }}
+            style={{ color: GREEN, fontFamily: headingFont, fontSize: 'clamp(22px, 2.6vw, 28px)', lineHeight: 1.4, letterSpacing: '0.04em' }}
           >
             WHEN THESE FOUR FOUNDATIONS <strong>STABILISE</strong>
             <br />
@@ -269,7 +269,7 @@ export default function SlimmingGuidePage() {
             <Kicker centered rule>DESIGNED FOR MALTA</Kicker>
             <h2
               className="uppercase"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px', lineHeight: 1.5 }}
+              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: 1.3 }}
             >
               a slimming guide designed for maltese culture — festas, family tables, and all.
             </h2>
@@ -277,15 +277,15 @@ export default function SlimmingGuidePage() {
           <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10 items-start mb-10">
             {/* Left text column */}
             <div>
-              <p style={{ color: TAUPE, fontSize: '14px' }}>
+              <p style={{ color: TAUPE, fontSize: '15px' }}>
                 Maltese life is specific. You know what it looks like.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '14px' }}>
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '15px' }}>
                 Sunday lunch that runs until four. Dinners that start late and finish later. Tables where plates are
                 shared and seconds are expected. Restaurants where the bread arrives before you have time to decide.
                 Weeks that collapse in on themselves before Thursday.
               </p>
-              <p style={{ color: TAUPE, fontSize: '14px' }}>
+              <p style={{ color: TAUPE, fontSize: '15px' }}>
                 This method was not built to fight that. It was built to design around it. The guide does not ask you
                 to decline the dinner. It does not ask you to order a side salad while everyone else eats. It does
                 not ask you to bring your own food, track the restaurant&apos;s macros, or explain yourself to the
@@ -296,8 +296,9 @@ export default function SlimmingGuidePage() {
             <div
               className="card px-8 pt-7 pb-9"
               style={{
-                background: 'linear-gradient(135deg, #F8F6F0 0%, #E9EEE5 40%, #CBDCC9 100%)',
-                borderRadius: '16px 70px 16px 90px',
+                background: '#F5F8F2',
+                borderRadius: '16px',
+                border: '1px solid #C9D8C1',
               }}
             >
               <div className="flex items-center gap-3 mb-4">
@@ -307,11 +308,11 @@ export default function SlimmingGuidePage() {
                   role="presentation"
                   style={{ width: '23px', height: '23px', objectFit: 'contain' }}
                 />
-                <p className="uppercase" style={{ color: TAUPE, fontSize: '18px', fontWeight: 700 }}>
+                <p className="uppercase" style={{ color: '#3c5a40', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px' }}>
                   FRIDAY EVENING, MALTA
                 </p>
               </div>
-              <p style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.45, paddingLeft: '36px' }}>
+              <p style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.6, paddingLeft: '36px' }}>
                 You sit down. You eat protein first when you can. You enjoy the pasta. You enjoy the conversation.
                 You come home. Saturday morning you return at your next meal. No guilt. No compensation. No extra
                 restriction. No mental negotiation about what you earned or owe. You simply return.
@@ -377,101 +378,55 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
-      {/* Is This For You Section — flows white → soft sage into the final CTA band. */}
+      {/* Is This For You — clean editorial two-column comparison (no cards/gradients/shadows) */}
       <section className="py-24" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-14">
             <Kicker centered rule>before you start</Kicker>
-            <h2
-              className="uppercase"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '28px' }}
-            >
+            <h2 className="uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: 1.3 }}>
               is this weight loss guide right for you?
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div
-              className="card p-9"
-              style={{
-                background: 'linear-gradient(180deg, #F7F5F0 0%, #E3EADF 45%, #C9DAC8 100%)',
-                borderRadius: '90px 30px 90px 30px',
-                boxShadow: '0 6px 16px rgba(0,0,0,0.07)',
-              }}
-            >
-              <div className="flex items-center gap-7 mb-5">
-                <h3 className="uppercase" style={{ color: TAUPE, fontSize: '17px', fontWeight: 700 }}>
-                  this weight loss guide is for you if
-                </h3>
-                <img
-                  src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png"
-                  alt=""
-                  role="presentation"
-                  style={{ width: '34px', height: '34px', objectFit: 'contain' }}
-                />
-              </div>
-              <ul className="list-disc pl-5" style={{ maxWidth: '400px' }}>
+          <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto">
+            {/* FOR YOU */}
+            <div className="md:pr-14">
+              <p className="uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', fontWeight: 400, letterSpacing: '2.4px', margin: '0 0 22px' }}>
+                This guide is for you if
+              </p>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                 {forYou.map((item) => (
-                  <li
-                    key={item}
-                    className="uppercase"
-                    style={{ color: GREEN, fontSize: '16px', lineHeight: '30px' }}
-                  >
-                    {item}
+                  <li key={item} className="flex" style={{ gap: '14px', marginBottom: '16px', alignItems: 'flex-start' }}>
+                    <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20" style={{ flex: '0 0 auto', marginTop: '3px' }}>
+                      <circle cx="10" cy="10" r="9" fill="none" stroke={GREEN} strokeWidth="1" opacity="0.5" />
+                      <path d="M5.8 10.2l2.6 2.6 5.4-5.6" fill="none" stroke={GREEN} strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <span style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7, fontWeight: 400 }}>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
-            <div
-              className="card p-9"
-              style={{
-                background: 'linear-gradient(180deg, #F7F5F0 0%, #E3EADF 45%, #C9DAC8 100%)',
-                borderRadius: '90px 30px 90px 30px',
-                boxShadow: '0 6px 16px rgba(0,0,0,0.07)',
-              }}
-            >
-              <div className="flex items-center gap-7 mb-5">
-                <h3 className="uppercase" style={{ color: TAUPE, fontSize: '17px', fontWeight: 700 }}>
-                  this slimming guide is not for you if
-                </h3>
-                <img
-                  src="/wix/87fc13_50f34e909595497794177a54bdb32314~mv2.png"
-                  alt=""
-                  role="presentation"
-                  style={{ width: '34px', height: '34px', objectFit: 'contain' }}
-                />
-              </div>
-              <ul className="list-disc pl-5" style={{ maxWidth: '400px' }}>
+            {/* NOT FOR YOU — hairline divider (left on desktop, top on mobile) */}
+            <div className="md:pl-14 mt-12 pt-12 md:mt-0 md:pt-0 border-t md:border-t-0 md:border-l" style={{ borderColor: '#E3DFD8' }}>
+              <p className="uppercase" style={{ color: TAUPE, fontFamily: wideFont, fontSize: '12px', fontWeight: 400, letterSpacing: '2.4px', margin: '0 0 22px' }}>
+                This guide is not for you if
+              </p>
+              <ul style={{ listStyle: 'none', margin: 0, padding: 0 }}>
                 {notForYou.map((item) => (
-                  <li
-                    key={item}
-                    className="uppercase"
-                    style={{ color: GREEN, fontSize: '16px', lineHeight: '30px' }}
-                  >
-                    {item}
+                  <li key={item} className="flex" style={{ gap: '14px', marginBottom: '16px', alignItems: 'flex-start' }}>
+                    <svg aria-hidden="true" focusable="false" width="20" height="20" viewBox="0 0 20 20" style={{ flex: '0 0 auto', marginTop: '3px' }}>
+                      <circle cx="10" cy="10" r="9" fill="none" stroke={GREEN} strokeWidth="1" opacity="0.45" />
+                      <path d="M6.8 6.8l6.4 6.4M13.2 6.8l-6.4 6.4" fill="none" stroke={GREEN} strokeWidth="1.4" strokeLinecap="round" />
+                    </svg>
+                    <span style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7, fontWeight: 400 }}>{item}</span>
                   </li>
                 ))}
               </ul>
             </div>
           </div>
-          <div className="flex justify-center mt-14 lg:mt-[88px]">
-            <p
-              className="uppercase"
-              style={{
-                color: TAUPE,
-                fontFamily: wideFont,
-                fontSize: '13px',
-                lineHeight: 1.6,
-                maxWidth: '640px',
-                borderLeft: `3px solid ${GREEN}`,
-                paddingLeft: '16px',
-              }}
-            >
-              By the end, you will not have a list of rules to follow. You will have a way of thinking about food
-              that holds, even on the weeks that don&apos;t. Want personalised guidance?{' '}
-              <Link href="/consultation" style={{ color: GREEN, textDecoration: 'underline', textTransform: 'none' }}>
-                Book a free consultation
-              </Link>{' '}
-              and we will build a plan around you.
+          <div className="flex justify-center mt-16 lg:mt-24">
+            <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7, maxWidth: '640px', borderLeft: `2px solid ${GREEN}`, paddingLeft: '20px' }}>
+              By the end, you will not have a list of rules to follow. You will have a way of thinking about food that holds, even on the weeks that don&apos;t. Want personalised guidance?{' '}
+              <Link href="/consultation" style={{ color: GREEN, textDecoration: 'underline' }}>Book a free consultation</Link>{' '}and we will build a plan around you.
             </p>
           </div>
         </div>

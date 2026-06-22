@@ -79,7 +79,7 @@ export default function InsideTheGuide() {
         <p
           className="text-center mb-2"
           aria-hidden="true"
-          style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 400, fontSize: '15px', letterSpacing: '3.2px', textTransform: 'uppercase' }}
+          style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: 400, fontSize: '12px', letterSpacing: '3px', textTransform: 'uppercase' }}
         >
           Inside the guide
         </p>
@@ -114,7 +114,7 @@ export default function InsideTheGuide() {
               </div>
               <h3
                 className="uppercase mb-2"
-                style={{ color: '#3c5a40', fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif", fontSize: '14px', fontWeight: 700, letterSpacing: '1.2px' }}
+                style={{ color: '#3c5a40', fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif", fontSize: '13px', fontWeight: 700, letterSpacing: '1px' }}
               >
                 {it.label}
               </h3>
