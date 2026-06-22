@@ -36,33 +36,36 @@ export interface BodyZone {
 /**
  * Canonical anatomical anchor points, tuned to sit cleanly on the refined
  * line-art figure drawn below (see BODY_PARTS). Centre line is x = 0.5.
- * y values follow the figure's well-proportioned ~7.5-head layout:
- *   head     ~0.05–0.15
- *   neck     ~0.18
- *   shoulders~0.23
- *   chest    ~0.32
- *   waist    ~0.47
- *   hips     ~0.57
- *   thighs   ~0.71
- *   calves   ~0.87
+ * y values follow the figure's well-proportioned layout (head ~12% of height):
+ *   head      ~0.07–0.18
+ *   neck      ~0.205
+ *   shoulders ~0.245
+ *   chest     ~0.33
+ *   waist     ~0.46
+ *   hips      ~0.56
+ *   thighs    ~0.70
+ *   calves    ~0.86
+ *
+ * Anchors are placed to land ON the figure body (within its outline), not on
+ * the surrounding card ground, so each numbered pin reads as a precise target.
  */
 const ANCHORS = {
-  jawline: { x: 0.5, y: 0.125, r: 0.05 },
-  doubleChin: { x: 0.5, y: 0.155, r: 0.05 },
-  upperArmL: { x: 0.285, y: 0.34, r: 0.056 },
-  upperArmR: { x: 0.715, y: 0.34, r: 0.056 },
-  armsL: { x: 0.255, y: 0.44, r: 0.058 },
-  armsR: { x: 0.745, y: 0.44, r: 0.058 },
-  back: { x: 0.5, y: 0.37, r: 0.082 },
-  abdomen: { x: 0.5, y: 0.5, r: 0.08 },
-  flankL: { x: 0.4, y: 0.475, r: 0.05 },
-  flankR: { x: 0.6, y: 0.475, r: 0.05 },
-  glutes: { x: 0.5, y: 0.59, r: 0.078 },
-  buttocks: { x: 0.5, y: 0.605, r: 0.078 },
-  thighL: { x: 0.435, y: 0.715, r: 0.06 },
-  thighR: { x: 0.565, y: 0.715, r: 0.06 },
-  legsL: { x: 0.455, y: 0.87, r: 0.048 },
-  legsR: { x: 0.545, y: 0.87, r: 0.048 },
+  jawline: { x: 0.5, y: 0.14, r: 0.045 },
+  doubleChin: { x: 0.5, y: 0.175, r: 0.045 },
+  upperArmL: { x: 0.345, y: 0.33, r: 0.05 },
+  upperArmR: { x: 0.655, y: 0.33, r: 0.05 },
+  armsL: { x: 0.315, y: 0.43, r: 0.05 },
+  armsR: { x: 0.685, y: 0.43, r: 0.05 },
+  back: { x: 0.5, y: 0.36, r: 0.075 },
+  abdomen: { x: 0.5, y: 0.485, r: 0.075 },
+  flankL: { x: 0.405, y: 0.46, r: 0.046 },
+  flankR: { x: 0.595, y: 0.46, r: 0.046 },
+  glutes: { x: 0.5, y: 0.585, r: 0.072 },
+  buttocks: { x: 0.5, y: 0.6, r: 0.072 },
+  thighL: { x: 0.44, y: 0.7, r: 0.056 },
+  thighR: { x: 0.56, y: 0.7, r: 0.056 },
+  legsL: { x: 0.455, y: 0.85, r: 0.046 },
+  legsR: { x: 0.545, y: 0.85, r: 0.046 },
 } as const;
 
 type AnchorKey = keyof typeof ANCHORS;
@@ -157,119 +160,121 @@ export interface BodyPart {
 }
 
 export const BODY_PARTS: BodyPart[] = [
-  // Head — a soft, slightly oval face.
+  // Head — a soft, gently oval face. Sits high with breathing room above.
   {
     id: 'head',
     d:
-      'M500 70 ' +
-      'C536 70 562 98 562 138 ' +
-      'C562 178 536 208 500 208 ' +
-      'C464 208 438 178 438 138 ' +
-      'C438 98 464 70 500 70 Z',
+      'M500 86 ' +
+      'C534 86 558 116 558 158 ' +
+      'C558 200 534 230 500 230 ' +
+      'C466 230 442 200 442 158 ' +
+      'C442 116 466 86 500 86 Z',
   },
-  // Neck — slender, connecting head to shoulders.
+  // Neck — slender, flowing from jaw into the shoulder line.
   {
     id: 'neck',
     d:
-      'M482 198 ' +
-      'C482 216 482 228 478 240 ' +
-      'C490 246 510 246 522 240 ' +
-      'C518 228 518 216 518 198 ' +
-      'C512 206 488 206 482 198 Z',
+      'M484 222 ' +
+      'C484 240 483 254 479 266 ' +
+      'C490 272 510 272 521 266 ' +
+      'C517 254 516 240 516 222 ' +
+      'C510 230 490 230 484 222 Z',
   },
-  // Torso — shoulders → bust → tapered waist → hips. Symmetrical, feminine.
+  // Torso — one continuous feminine line: shoulders → softly tapered waist →
+  // rounded hips, closing on a gentle curve at the hip base (no flat seam).
   {
     id: 'torso',
     core: true,
     d:
-      'M500 232 ' +
-      // right shoulder out
-      'C546 232 584 248 614 274 ' +
-      'C630 288 638 308 640 330 ' +
-      // right side: chest down to waist (tapers in)
-      'C638 364 628 400 614 436 ' +
-      'C602 466 592 496 586 524 ' +
-      // waist pinch (right)
-      'C582 544 582 560 588 578 ' +
-      // hip out (right)
-      'C602 604 614 628 618 658 ' +
-      // hip bottom curve to centre
-      'C608 676 568 686 500 686 ' +
-      'C432 686 392 676 382 658 ' +
-      // hip out (left)
-      'C386 628 398 604 412 578 ' +
-      // waist pinch (left)
-      'C418 560 418 544 414 524 ' +
-      // left side: waist up to chest
-      'C408 496 398 466 386 436 ' +
-      'C372 400 362 364 360 330 ' +
-      // left shoulder
-      'C362 308 370 288 386 274 ' +
-      'C416 248 454 232 500 232 Z',
+      'M500 256 ' +
+      // right shoulder rises and rolls out
+      'C534 256 562 266 588 286 ' +
+      'C606 300 616 322 620 348 ' +
+      // ribcage easing into the waist (smooth taper in)
+      'C622 384 616 420 604 454 ' +
+      'C596 478 588 502 584 526 ' +
+      // soft waist
+      'C581 544 582 560 586 578 ' +
+      // hip swells out then curves down
+      'C592 604 602 628 608 654 ' +
+      'C612 676 606 696 588 706 ' +
+      // rounded hip base sweeping through centre
+      'C560 718 524 722 500 722 ' +
+      'C476 722 440 718 412 706 ' +
+      'C394 696 388 676 392 654 ' +
+      'C398 628 408 604 414 578 ' +
+      'C418 560 419 544 416 526 ' +
+      'C412 502 404 478 396 454 ' +
+      'C384 420 378 384 380 348 ' +
+      'C384 322 394 300 412 286 ' +
+      'C438 266 466 256 500 256 Z',
   },
-  // Right arm (viewer-right) — gently bent, hanging beside the torso.
+  // Right arm (viewer-right) — a graceful tapered limb, attached at the
+  // shoulder and resting just away from the waist. Open inner contour reads
+  // as a single elegant stroke, not a sliver.
   {
     id: 'armR',
     d:
-      'M622 288 ' +
-      'C650 302 668 328 678 362 ' +
-      'C688 396 694 434 696 472 ' +
-      'C698 504 696 534 690 562 ' +
-      'C686 580 680 594 672 602 ' +
-      'C662 596 656 582 652 564 ' +
-      'C646 534 644 502 644 470 ' +
-      'C642 434 638 398 630 364 ' +
-      'C624 338 616 316 604 298 ' +
-      'C608 292 615 289 622 288 Z',
+      'M598 296 ' +
+      'C626 312 644 340 654 376 ' +
+      'C664 414 668 454 666 494 ' +
+      'C665 528 660 560 650 588 ' +
+      'C645 602 638 612 628 616 ' +
+      'C622 606 619 592 618 574 ' +
+      'C617 540 619 506 622 472 ' +
+      'C624 436 622 400 612 366 ' +
+      'C606 340 597 318 585 302 ' +
+      'C589 298 593 296 598 296 Z',
   },
   // Left arm (viewer-left) — mirror of the right.
   {
     id: 'armL',
     d:
-      'M378 288 ' +
-      'C350 302 332 328 322 362 ' +
-      'C312 396 306 434 304 472 ' +
-      'C302 504 304 534 310 562 ' +
-      'C314 580 320 594 328 602 ' +
-      'C338 596 344 582 348 564 ' +
-      'C354 534 356 502 356 470 ' +
-      'C358 434 362 398 370 364 ' +
-      'C376 338 384 316 396 298 ' +
-      'C392 292 385 289 378 288 Z',
+      'M402 296 ' +
+      'C374 312 356 340 346 376 ' +
+      'C336 414 332 454 334 494 ' +
+      'C335 528 340 560 350 588 ' +
+      'C355 602 362 612 372 616 ' +
+      'C378 606 381 592 382 574 ' +
+      'C383 540 381 506 378 472 ' +
+      'C376 436 378 400 388 366 ' +
+      'C394 340 403 318 415 302 ' +
+      'C411 298 407 296 402 296 Z',
   },
-  // Right leg (viewer-right) — thigh → knee → calf, slim elegant taper.
+  // Right leg (viewer-right) — thigh → knee → slim ankle, joined cleanly to
+  // the hip base and meeting its mirror at the centre line.
   {
     id: 'legR',
     d:
-      'M508 668 ' +
-      'C544 668 580 672 600 682 ' +
-      // outer thigh down
-      'C606 716 606 752 600 788 ' +
-      'C594 824 586 858 578 890 ' +
-      // calf taper to slim ankle
-      'C574 910 570 926 566 938 ' +
-      'C556 940 540 940 530 938 ' +
-      'C526 924 524 906 522 886 ' +
-      // inner calf up
-      'C518 854 516 820 514 786 ' +
-      'C512 748 510 710 508 682 ' +
-      // inner thigh to crotch
-      'C506 678 506 672 508 668 Z',
+      'M500 712 ' +
+      'C530 712 562 716 586 724 ' +
+      // outer thigh tapering down
+      'C594 760 594 800 588 838 ' +
+      'C583 872 575 906 566 936 ' +
+      // calf into a slim ankle
+      'C562 952 558 962 552 968 ' +
+      'C543 970 531 970 522 968 ' +
+      'C518 956 515 940 513 920 ' +
+      // inner calf rising back up
+      'C510 884 509 846 508 808 ' +
+      'C507 770 505 740 503 722 ' +
+      // inner thigh up to centre
+      'C502 718 501 715 500 712 Z',
   },
   // Left leg (viewer-left) — mirror of the right.
   {
     id: 'legL',
     d:
-      'M492 668 ' +
-      'C456 668 420 672 400 682 ' +
-      'C394 716 394 752 400 788 ' +
-      'C406 824 414 858 422 890 ' +
-      'C426 910 430 926 434 938 ' +
-      'C444 940 460 940 470 938 ' +
-      'C474 924 476 906 478 886 ' +
-      'C482 854 484 820 486 786 ' +
-      'C488 748 490 710 492 682 ' +
-      'C494 678 494 672 492 668 Z',
+      'M500 712 ' +
+      'C470 712 438 716 414 724 ' +
+      'C406 760 406 800 412 838 ' +
+      'C417 872 425 906 434 936 ' +
+      'C438 952 442 962 448 968 ' +
+      'C457 970 469 970 478 968 ' +
+      'C482 956 485 940 487 920 ' +
+      'C490 884 491 846 492 808 ' +
+      'C493 770 495 740 497 722 ' +
+      'C498 718 499 715 500 712 Z',
   },
 ];
 

@@ -23,7 +23,6 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import { BOOKING_URL } from '@/lib/services';
 import {
@@ -35,45 +34,6 @@ import {
 } from '@/lib/packages/types';
 import { testimonials as TESTIMONIALS, Testimonial } from '@/lib/packages/testimonials';
 import TreatmentBodyMap from '@/components/treatments/TreatmentBodyMap';
-
-/* ---------- internal linking: related treatments per service ---------- */
-const RELATED_LINKS: Record<string, { href: string; label: string }[]> = {
-  'fat-freezing': [
-    { href: '/packages/fat-dissolving', label: 'Fat Dissolving Injections' },
-    { href: '/packages/skin-tightening', label: 'Skin Tightening' },
-    { href: '/packages/muscle-stimulation', label: 'Muscle Stimulation' },
-  ],
-  'fat-dissolving': [
-    { href: '/packages/fat-freezing', label: 'Fat Freezing' },
-    { href: '/packages/anti-cellulite', label: 'Anti-Cellulite Treatment' },
-    { href: '/packages/lymphatic-drainage', label: 'Lymphatic Drainage' },
-  ],
-  'muscle-stimulation': [
-    { href: '/packages/fat-freezing', label: 'Fat Freezing' },
-    { href: '/packages/skin-tightening', label: 'Skin Tightening' },
-    { href: '/packages/fat-dissolving', label: 'Fat Dissolving Injections' },
-  ],
-  'skin-tightening': [
-    { href: '/packages/anti-cellulite', label: 'Anti-Cellulite Treatment' },
-    { href: '/packages/fat-freezing', label: 'Fat Freezing' },
-    { href: '/packages/muscle-stimulation', label: 'Muscle Stimulation' },
-  ],
-  'lipocavitation': [
-    { href: '/packages/fat-freezing', label: 'Fat Freezing' },
-    { href: '/packages/fat-dissolving', label: 'Fat Dissolving Injections' },
-    { href: '/packages/lymphatic-drainage', label: 'Lymphatic Drainage' },
-  ],
-  'anti-cellulite': [
-    { href: '/packages/skin-tightening', label: 'Skin Tightening' },
-    { href: '/packages/lymphatic-drainage', label: 'Lymphatic Drainage' },
-    { href: '/packages/fat-dissolving', label: 'Fat Dissolving Injections' },
-  ],
-  'lymphatic-drainage': [
-    { href: '/packages/anti-cellulite', label: 'Anti-Cellulite Treatment' },
-    { href: '/packages/fat-dissolving', label: 'Fat Dissolving Injections' },
-    { href: '/packages/skin-tightening', label: 'Skin Tightening' },
-  ],
-};
 
 /* ---------- palette / fonts (shared with the site) ---------- */
 /* GREEN_TEXT is the locked accessible sage (#4f7256 from globals.css) used for ALL
@@ -252,6 +212,12 @@ function TestimonialQuoteCard({ t }: { t: Testimonial }) {
         <img src={t.image} alt={`${t.name} — before and after body contouring treatment`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
         {/* scrim so white labels stay legible over any photo */}
         <span aria-hidden="true" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '34%', background: 'linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0))', pointerEvents: 'none' }} />
+        {/* centred two-up divider — sections the baked before|after composite into a
+            deliberate, premium comparison: a hairline white rule flanked by a soft
+            shadow at the exact 50% seam, reading as a clean Before | After split. */}
+        <span aria-hidden="true" style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 3, transform: 'translateX(-50%)', backgroundColor: 'rgba(255,255,255,0.92)', boxShadow: '0 0 0 1px rgba(0,0,0,0.18)', pointerEvents: 'none', zIndex: 1 }} />
+        {/* crisp inner frame around each half so the comparison feels sectioned */}
+        <span aria-hidden="true" style={{ position: 'absolute', inset: 0, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.45)', pointerEvents: 'none', zIndex: 1 }} />
         <span aria-hidden="true" className="fr-ba-label" style={{ left: '25%' }}>Before</span>
         <span aria-hidden="true" className="fr-ba-label" style={{ left: '75%' }}>After</span>
       </div>
@@ -1065,18 +1031,19 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                 <SectionHeading id="evidence-heading" size={24}>Evidence-Based Clinical Approach</SectionHeading>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: 24, marginTop: 40 }} className="fr-evgrid">
+              {/* Single clean row on desktop (equal cards, no orphaned/hanging card);
+                  collapses to 1 column on mobile via the .fr-evgrid media rule. */}
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 40, alignItems: 'start' }} className="fr-evgrid">
                 {c.evidence.map((e, i) => {
                   const open = openEv === i;
-                  const centerLast = i === c.evidence.length - 1 && c.evidence.length % 2 === 1;
                   const panelId = `ev-panel-${i}`;
                   const btnId = `ev-btn-${i}`;
                   return (
-                    <div key={e.title} style={{ position: 'relative', paddingTop: 16, gridColumn: centerLast ? '1 / -1' : 'auto', maxWidth: centerLast ? 560 : undefined, justifySelf: centerLast ? 'center' : 'stretch', width: centerLast ? '100%' : undefined }}>
+                    <div key={e.title} style={{ position: 'relative', paddingTop: 16 }}>
                       <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
                         <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: '#eef3ea', position: 'relative', height: 186 }}>
                           {/* P3 — next/image for evidence images */}
-                          <Image src={e.img} alt="" fill sizes="(max-width: 860px) 90vw, 45vw" style={{ objectFit: 'cover' }} />
+                          <Image src={e.img} alt="" fill sizes="(max-width: 860px) 90vw, 33vw" style={{ objectFit: 'cover' }} />
                         </div>
                         <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 999, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                       </div>
@@ -1134,131 +1101,6 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             </div>
           </section>
         )}
-
-        {/* ===================== 12. RELATED TREATMENTS + WEIGHT LOSS CROSS-LINKS ===================== */}
-        <section aria-labelledby="related-treatments-heading" style={{ paddingTop: 48, paddingBottom: 72, borderTop: '1px solid #e8e2da' }}>
-          <div style={{ ...CONTAINER, maxWidth: 960 }}>
-
-            {/* Related service links */}
-            {RELATED_LINKS[c.id] && RELATED_LINKS[c.id].length > 0 && (
-              <div style={{ marginBottom: 40 }}>
-                <SectionHeading id="related-treatments-heading" size={20}>
-                  You May Also Be Interested In
-                </SectionHeading>
-                <nav aria-label="Related treatments" style={{ marginTop: 20, display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: 12 }}>
-                  {RELATED_LINKS[c.id].map((rel) => (
-                    <Link
-                      key={rel.href}
-                      href={rel.href}
-                      style={{
-                        display: 'inline-flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        minHeight: 44,
-                        padding: '10px 22px',
-                        border: `1px solid ${GREEN_TEXT}`,
-                        borderRadius: 999,
-                        color: GREEN_TEXT,
-                        fontFamily: WIDE,
-                        fontSize: 13,
-                        letterSpacing: '0.5px',
-                        textTransform: 'uppercase',
-                        textDecoration: 'none',
-                        transition: 'background 0.15s, color 0.15s',
-                      }}
-                    >
-                      {rel.label}
-                    </Link>
-                  ))}
-                </nav>
-              </div>
-            )}
-
-            {/* Medical weight loss cross-links */}
-            <div
-              style={{
-                background: 'linear-gradient(150deg, #f1f3ee 0%, #e3eadf 100%)',
-                borderRadius: 16,
-                padding: '32px 30px',
-                textAlign: 'center',
-              }}
-            >
-              <p
-                style={{
-                  color: TAUPE,
-                  fontFamily: WIDE,
-                  fontSize: 13,
-                  letterSpacing: '0.5px',
-                  textTransform: 'uppercase',
-                  margin: '0 0 10px',
-                  fontWeight: 700,
-                }}
-              >
-                Looking for a more comprehensive approach?
-              </p>
-              <p style={{ color: TAUPE, fontFamily: BODY, fontSize: 14, lineHeight: 1.7, margin: '0 0 20px', maxWidth: 640, marginInline: 'auto' }}>
-                Our body-contouring treatments work best alongside a structured{' '}
-                <Link
-                  href="/weight-loss"
-                  style={{ color: GREEN_TEXT, textDecoration: 'underline', fontWeight: 600 }}
-                >
-                  medical weight loss programme
-                </Link>
-                {' '}or{' '}
-                <Link
-                  href="/glp1"
-                  style={{ color: GREEN_TEXT, textDecoration: 'underline', fontWeight: 600 }}
-                >
-                  GLP-1 medical weight loss injections
-                </Link>
-                . Our doctors combine both for accelerated, lasting results.
-              </p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, justifyContent: 'center', alignItems: 'center' }}>
-                <Link
-                  href="/consultation"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    minHeight: 44,
-                    padding: '12px 28px',
-                    backgroundColor: GREEN_TEXT,
-                    borderRadius: 999,
-                    color: '#fff',
-                    fontFamily: WIDE,
-                    fontSize: 13,
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                    textDecoration: 'none',
-                    fontWeight: 700,
-                  }}
-                >
-                  Book a Free Consultation
-                </Link>
-                <Link
-                  href="/slimming-guide"
-                  style={{
-                    display: 'inline-flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    minHeight: 44,
-                    padding: '11px 28px',
-                    border: `1px solid ${GREEN_TEXT}`,
-                    borderRadius: 999,
-                    color: GREEN_TEXT,
-                    fontFamily: WIDE,
-                    fontSize: 13,
-                    letterSpacing: '1px',
-                    textTransform: 'uppercase',
-                    textDecoration: 'none',
-                  }}
-                >
-                  Download Free Slimming Guide
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
 
         <style>{`
           .fr-faqsearch::placeholder { color: ${GREEN_TEXT}; opacity: 1; }

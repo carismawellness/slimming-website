@@ -451,10 +451,22 @@ export default function TreatmentBodyMap({
                 .join(', ')}.`}
             >
               <defs>
+                {/* Soft framed-card ground that contains the figure. */}
+                <linearGradient id="tbm-card" x1="0" y1="0" x2="0.35" y2="1">
+                  <stop offset="0%" stopColor="#f6f3ea" stopOpacity="0.95" />
+                  <stop offset="55%" stopColor="#eef2ea" stopOpacity="0.92" />
+                  <stop offset="100%" stopColor="#e3ebe2" stopOpacity="0.95" />
+                </linearGradient>
+                {/* Gentle radial vignette behind the figure for quiet depth. */}
+                <radialGradient id="tbm-cardGlow" cx="50%" cy="42%" r="62%">
+                  <stop offset="0%" stopColor="#ffffff" stopOpacity="0.7" />
+                  <stop offset="60%" stopColor="#ffffff" stopOpacity="0" />
+                  <stop offset="100%" stopColor="#ffffff" stopOpacity="0" />
+                </radialGradient>
                 {/* Barely-there vertical ground for the torso core only. */}
                 <linearGradient id="tbm-core" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#efe7d7" stopOpacity="0.5" />
-                  <stop offset="100%" stopColor="#d9e2d6" stopOpacity="0.42" />
+                  <stop offset="0%" stopColor="#efe7d7" stopOpacity="0.55" />
+                  <stop offset="100%" stopColor="#d9e2d6" stopOpacity="0.46" />
                 </linearGradient>
                 {/* Refined pin halo — sage glow that falls off cleanly. */}
                 <radialGradient id="tbm-pin" cx="50%" cy="50%" r="50%">
@@ -474,6 +486,29 @@ export default function TreatmentBodyMap({
                 </filter>
               </defs>
 
+              {/* Framed card ground — a subtle rounded panel that contains the
+                  figure so it reads as an intentional, premium illustration
+                  rather than a shape floating in space. */}
+              <rect
+                x={44}
+                y={44}
+                width={912}
+                height={912}
+                rx={56}
+                fill="url(#tbm-card)"
+                stroke={SAGE}
+                strokeOpacity={0.18}
+                strokeWidth={1.5}
+              />
+              <rect
+                x={44}
+                y={44}
+                width={912}
+                height={912}
+                rx={56}
+                fill="url(#tbm-cardGlow)"
+              />
+
               {/* Refined line-art figure. The torso core carries a faint ground
                   wash; every part is a clean single-weight outline stroke. */}
               <g className="tbm__body" filter="url(#tbm-soft)">
@@ -483,18 +518,19 @@ export default function TreatmentBodyMap({
                     d={part.d}
                     fill={part.core ? 'url(#tbm-core)' : 'none'}
                     stroke={DEEP_SAGE}
-                    strokeOpacity={0.5}
-                    strokeWidth={2.25}
+                    strokeOpacity={0.52}
+                    strokeWidth={2.4}
                     strokeLinejoin="round"
+                    strokeLinecap="round"
                   />
                 ))}
               </g>
               {/* faint centre line for editorial structure */}
               <line
                 x1={500}
-                y1={236}
+                y1={262}
                 x2={500}
-                y2={694}
+                y2={716}
                 stroke={DEEP_SAGE}
                 strokeOpacity={0.08}
                 strokeWidth={1}
