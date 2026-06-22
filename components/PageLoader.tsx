@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 
-/* ─── Rose petal paths from /public/rose-motif.svg ─────────────────────────── */
+/* ─── Rose petal paths ───────────────────────────────────────────────────────── */
 const PETAL_PATHS: string[] = [
   'M49.5 73.4921C49.5 73.4921 58.1002 58.0987 73.649 60.2537C89.1979 62.378 95.2741 69.3667 95.2741 69.3667C95.2741 69.3667 88.9797 67.3963 81.5013 72.3838C74.0229 77.3712 63.1481 83.5594 49.5 73.4921Z',
   'M66.6654 29.4902C66.6654 29.4594 66.6343 29.367 66.6031 29.3363C66.572 29.2439 66.5408 29.1208 66.5097 29.0284C66.385 28.6282 66.2603 28.2279 66.1668 27.8585C65.0762 23.4252 66.0734 19.115 67.0705 16.375C65.6683 16.7137 63.8611 17.2986 61.8357 18.1298C61.6799 18.1914 61.524 18.253 61.3682 18.3146C60.8696 18.5301 60.3399 18.7456 59.8102 18.9919C59.5921 19.0842 59.3428 19.2074 59.0936 19.2997C58.5015 19.5768 57.9094 19.8539 57.2862 20.1618C57.1304 20.2542 56.9747 20.3157 56.8189 20.4081C56.0399 20.8083 55.292 21.2085 54.513 21.6395C54.3884 21.7319 54.2326 21.7935 54.108 21.8858C53.3913 22.3169 52.6434 22.7479 51.9267 23.2405C51.8332 23.3021 51.771 23.3328 51.6775 23.3944C50.8362 23.9486 50.026 24.5335 49.2158 25.1492C49.1847 25.18 49.1535 25.2108 49.1223 25.2416C46.5984 27.1812 44.1991 29.4902 42.1113 32.2918C41.0831 33.6772 40.1794 35.1242 39.3692 36.6328L39.1823 37.033C39.1823 37.033 39.1823 37.033 39.1823 37.0638C38.8395 37.7103 38.528 38.3568 38.2475 39.0033C37.9048 39.8346 37.562 40.6658 37.2504 41.4971C36.9388 42.3899 36.6583 43.2827 36.4402 44.1447C36.409 44.2987 36.3779 44.4218 36.3467 44.5758C36.1598 45.2839 36.004 45.9919 35.9105 46.6692C35.8794 46.7924 35.8794 46.9463 35.8483 47.0695C35.7548 47.7468 35.6613 48.3933 35.6301 49.0091C35.6301 49.1322 35.6301 49.2554 35.6301 49.4093C35.5989 50.025 35.63 50.61 35.6612 51.1641C35.6612 51.3181 35.6924 51.4412 35.6924 51.5952C35.7547 52.0877 35.8171 52.5803 35.9105 53.0421C35.9417 53.1653 35.9729 53.2884 36.004 53.4116C36.1287 53.9042 36.2844 54.366 36.4402 54.797C36.4714 54.8894 36.5025 54.9817 36.5649 55.0433C36.7518 55.5051 37.0011 55.9361 37.2504 56.3671C37.2816 56.4287 37.3439 56.4903 37.3751 56.5518C38.3099 57.968 39.5874 59.1995 41.2389 60.1539L41.2701 60.1847C42.3918 60.8312 43.6693 61.3854 45.1339 61.8472C46.2868 62.1858 47.4086 62.4321 48.468 62.6168C48.4992 62.6168 48.5303 62.6168 48.5303 62.6168C49.3093 62.74 50.026 62.8324 50.7115 62.8939C50.7427 62.8939 50.7427 62.8939 50.7738 62.8939C52.0202 63.0171 53.0173 63.0171 53.6094 63.0171C53.7029 63.0171 53.7963 63.0171 53.8898 63.0171C53.9521 62.9863 54.0457 62.9247 54.1391 62.8631C54.6689 62.5245 55.1985 62.1858 55.7282 61.8472C55.8217 61.7856 55.8841 61.7548 55.9776 61.6932C56.1022 61.6009 56.1956 61.5085 56.3203 61.4469L56.5696 61.2314C57.1305 60.8312 57.6602 60.4002 58.1587 59.9692C58.3145 59.846 58.4392 59.6921 58.595 59.5689C59.4675 58.7993 60.3088 57.9372 61.1189 57.0136C61.1501 56.9828 61.1501 56.9829 61.1812 56.9521C61.1812 56.9521 61.2124 56.9521 61.2124 56.9213C61.3059 56.7981 61.3994 56.7058 61.4929 56.5826C61.4929 56.5826 61.4929 56.5518 61.524 56.5518C61.524 56.5518 61.5241 56.5518 61.5552 56.521C61.6487 56.3979 61.7422 56.2747 61.8357 56.1516C62.1473 55.7514 62.4588 55.3511 62.7704 54.9509C62.9262 54.7354 63.0509 54.5199 63.2067 54.3044C63.4871 53.9042 63.7364 53.5039 63.9857 53.1037C64.1415 52.8574 64.2973 52.5803 64.4219 52.334C64.6712 51.8722 64.9205 51.4412 65.1386 50.9794C65.2321 50.7947 65.3256 50.61 65.419 50.4252C65.6683 49.9019 65.8864 49.3785 66.1046 48.8243C66.1669 48.6704 66.2292 48.4857 66.2915 48.3317C66.4473 47.9315 66.5719 47.5005 66.7277 47.0695C66.8835 46.5769 67.0394 46.0843 67.164 45.5609C68.535 40.4195 68.5038 34.9087 66.8212 29.6134L66.6654 29.4902Z',
@@ -18,41 +18,47 @@ const PETAL_PATHS: string[] = [
   'M22.1953 8.46668C24.0649 8.58983 24.9997 9.82131 25.8722 11.1451C26.7446 12.469 27.6483 12.8384 28.8635 12.3766C30.2969 11.8532 30.7954 10.9604 30.515 9.32871C30.2345 7.69701 29.0194 6.61947 27.3679 6.5579C25.3736 6.49632 23.7533 7.32757 22.1953 8.46668Z',
 ];
 
-/* Petal shades — lighter than the nav-bar logo sage, cycling around the bloom.
-   The shades rotate so adjacent petals shift slightly, giving the rose depth
-   without any dark green. Range: mid-light (#9DC0A2) → airy (#D0E6CF). */
+/* Light sage shades cycling around the bloom */
 const PETAL_COLORS = [
-  '#A8CAAA', // 0
-  '#B4D2B5', // 1
-  '#BDD8BE', // 2
-  '#C6DEC6', // 3
-  '#CCDECB', // 4 — lightest arc
-  '#C8DCC8', // 5
-  '#C0D8C1', // 6
-  '#B5D1B7', // 7
-  '#AACAAC', // 8
-  '#A2C4A5', // 9
-  '#A8CAA9', // 10
-  '#B2CEB4', // 11
+  '#A8CAAA', '#B4D2B5', '#BDD8BE', '#C6DEC6',
+  '#CCDECB', '#C8DCC8', '#C0D8C1', '#B5D1B7',
+  '#AACAAC', '#A2C4A5', '#A8CAA9', '#B2CEB4',
 ];
 
-/* SVG arc circumference for r=28: 2π×28 ≈ 175.9 */
+/* Circumference of progress arc circle (r=28) */
 const ARC_C = 175.9;
+
+/* Session key — loader shows on first visit or hard reload, skips on SPA nav */
+const SESSION_KEY = 'cs_loader_v1';
 
 export default function PageLoader() {
   const [phase, setPhase] = useState<'visible' | 'exiting' | 'done'>('visible');
   const startRef = useRef<number>(0);
 
   useEffect(() => {
+    /* Skip on internal SPA navigation (sessionStorage set + not a hard reload) */
+    const navType = (
+      performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
+    )?.type;
+    const isHardLoad = navType === 'reload' || navType === 'navigate' || !navType;
+    const alreadySeen = sessionStorage.getItem(SESSION_KEY) === '1';
+
+    if (alreadySeen && navType === 'navigate') {
+      /* This is a client-side route change, not a real page load */
+      setPhase('done');
+      return;
+    }
+
+    sessionStorage.setItem(SESSION_KEY, '1');
     startRef.current = performance.now();
-    const MIN_MS = 4200;
+    const MIN_MS = isHardLoad ? 1800 : 1200;
 
     const dismiss = () => {
       const elapsed = performance.now() - startRef.current;
       const wait = Math.max(0, MIN_MS - elapsed);
       setTimeout(() => {
         setPhase('exiting');
-        setTimeout(() => setPhase('done'), 1100);
+        setTimeout(() => setPhase('done'), 700);
       }, wait);
     };
 
@@ -60,7 +66,7 @@ export default function PageLoader() {
       dismiss();
     } else {
       window.addEventListener('load', dismiss, { once: true });
-      const fallback = setTimeout(dismiss, 6000);
+      const fallback = setTimeout(dismiss, 5000);
       return () => {
         window.removeEventListener('load', dismiss);
         clearTimeout(fallback);
@@ -74,34 +80,33 @@ export default function PageLoader() {
 
   return (
     <>
-      {/* Keyframes injected once — no external CSS dependency */}
       <style>{`
-        @keyframes lxPetal {
-          0%   { opacity: 0; transform: scale(0.95); }
-          100% { opacity: 1; transform: scale(1); }
+        /* Rose mark — float up as a complete unit */
+        @keyframes lxRise {
+          from { opacity: 0; transform: translateY(22px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0)   scale(1); }
         }
-        @keyframes lxLetter {
-          from { opacity: 0; transform: translateY(10px); }
+        /* Text / divider / sub-brand */
+        @keyframes lxUp {
+          from { opacity: 0; transform: translateY(12px); }
           to   { opacity: 1; transform: translateY(0); }
-        }
-        @keyframes lxDivider {
-          from { width: 0px;  opacity: 0; }
-          to   { width: 40px; opacity: 1; }
-        }
-        @keyframes lxGlow {
-          0%, 100% { opacity: 0.5; transform: scale(1); }
-          50%       { opacity: 1;   transform: scale(1.12); }
         }
         @keyframes lxFade {
           from { opacity: 0; }
           to   { opacity: 1; }
         }
-        @keyframes lxOrbitCW  { to { transform: rotate( 360deg); } }
-        @keyframes lxOrbitCCW { to { transform: rotate(-360deg); } }
+        @keyframes lxLine {
+          from { width: 0; opacity: 0; }
+          to   { width: 40px; opacity: 1; }
+        }
+        /* Progress arc */
         @keyframes lxArc {
           from { stroke-dashoffset: ${ARC_C}; }
           to   { stroke-dashoffset: 0; }
         }
+        /* Orbiting rings */
+        @keyframes lxCW  { to { transform: rotate( 360deg); } }
+        @keyframes lxCCW { to { transform: rotate(-360deg); } }
         @media (prefers-reduced-motion: reduce) {
           * { animation-duration: 0.01ms !important; animation-delay: 0ms !important; }
         }
@@ -110,195 +115,120 @@ export default function PageLoader() {
       <div
         aria-hidden
         style={{
-          position: 'fixed',
-          inset: 0,
-          zIndex: 9999,
+          position: 'fixed', inset: 0, zIndex: 9999,
           background: '#FAFAF8',
-          display: 'flex',
-          flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
+          display: 'flex', flexDirection: 'column',
+          alignItems: 'center', justifyContent: 'center',
           overflow: 'hidden',
           pointerEvents: exiting ? 'none' : 'all',
           opacity: exiting ? 0 : 1,
-          transition: exiting ? 'opacity 1.05s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+          transition: exiting ? 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
           willChange: 'opacity',
         }}
       >
 
-        {/* ── Orbiting rings — large, well away from the rose ────────────── */}
-        <svg
-          viewBox="0 0 0 0"
-          width="0" height="0"
-          aria-hidden
-          style={{
-            position: 'absolute',
-            overflow: 'visible',
-            opacity: 0,
-            animation: 'lxFade 1.4s ease 700ms both',
-            pointerEvents: 'none',
-          }}
-        >
-          {/* Ring 1 — closest, crisp, dashed tick motif */}
-          <g style={{ animation: 'lxOrbitCW 24s linear infinite', transformOrigin: '0 0' }}>
+        {/* ── Orbiting rings — fade in early, orbit continuously ──────── */}
+        <svg viewBox="0 0 0 0" width="0" height="0" aria-hidden style={{
+          position: 'absolute', overflow: 'visible',
+          opacity: 0, animation: 'lxFade 0.8s ease 300ms both',
+          pointerEvents: 'none',
+        }}>
+          <g style={{ animation: 'lxCW 24s linear infinite', transformOrigin: '0 0' }}>
             <circle cx="0" cy="0" r="130"
-              stroke="rgba(148,190,154,0.28)" strokeWidth="1.0" fill="none"
-              strokeDasharray="3 14" />
+              stroke="rgba(148,190,154,0.28)" strokeWidth="1.0" fill="none" strokeDasharray="3 14" />
           </g>
-
-          {/* Ring 2 — counter-clockwise, subtle depth blur */}
-          <g style={{ animation: 'lxOrbitCCW 42s linear infinite', transformOrigin: '0 0', filter: 'blur(0.5px)' }}>
+          <g style={{ animation: 'lxCCW 42s linear infinite', transformOrigin: '0 0', filter: 'blur(0.5px)' }}>
             <circle cx="0" cy="0" r="190"
-              stroke="rgba(148,190,154,0.16)" strokeWidth="1.4" fill="none"
-              strokeDasharray="2 24" />
+              stroke="rgba(148,190,154,0.16)" strokeWidth="1.4" fill="none" strokeDasharray="2 24" />
           </g>
-
-          {/* Ring 3 — large, soft blur, slow CW */}
-          <g style={{ animation: 'lxOrbitCW 68s linear infinite', transformOrigin: '0 0', filter: 'blur(1.2px)' }}>
+          <g style={{ animation: 'lxCW 68s linear infinite', transformOrigin: '0 0', filter: 'blur(1.2px)' }}>
             <circle cx="0" cy="0" r="255"
               stroke="rgba(148,190,154,0.09)" strokeWidth="1.8" fill="none" />
           </g>
-
-          {/* Ring 4 — outermost, hazy depth-of-field, slowest */}
-          <g style={{ animation: 'lxOrbitCCW 100s linear infinite', transformOrigin: '0 0', filter: 'blur(2.5px)' }}>
+          <g style={{ animation: 'lxCCW 100s linear infinite', transformOrigin: '0 0', filter: 'blur(2.5px)' }}>
             <circle cx="0" cy="0" r="330"
               stroke="rgba(148,190,154,0.05)" strokeWidth="2.5" fill="none" />
           </g>
         </svg>
 
-        {/* ── Rose SVG — warm champagne, no drop-shadow blur ───────────── */}
-        <div
-          style={{
-            marginBottom: 44,
-            opacity: 0,
-            animation: 'lxFade 0.5s ease 100ms both',
-          }}
-        >
-          <svg
-            viewBox="0 0 96 90"
-            width="132" height="124"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            style={{ overflow: 'visible' }}
-            aria-hidden
-          >
+        {/* ── Rose mark — complete logo, rises as one piece ────────────── */}
+        <div style={{
+          marginBottom: 34,
+          opacity: 0,
+          animation: 'lxRise 0.9s cubic-bezier(0.16, 1, 0.3, 1) 80ms both',
+        }}>
+          <svg viewBox="0 0 96 90" width="118" height="111"
+            fill="none" xmlns="http://www.w3.org/2000/svg"
+            style={{ overflow: 'visible' }} aria-hidden>
             {PETAL_PATHS.map((d, i) => (
-              <path
-                key={i}
-                d={d}
-                fill={PETAL_COLORS[i]}
-                style={{
-                  transformOrigin: '48px 45px',
-                  opacity: 0,
-                  animation: `lxPetal 2.2s cubic-bezier(0.16, 1, 0.3, 1) ${i * 170 + 160}ms both`,
-                }}
-              />
+              <path key={i} d={d} fill={PETAL_COLORS[i]} />
             ))}
           </svg>
         </div>
 
-        {/* ── CARISMA wordmark — letter-by-letter reveal ───────────────── */}
-        <div style={{ display: 'flex', alignItems: 'baseline' }}>
-          {'CARISMA'.split('').map((char, i) => (
-            <span
-              key={i}
-              style={{
-                display: 'inline-block',
-                fontFamily: 'Trajan Pro, "Trajan Pro Regular", Georgia, serif',
-                fontSize: 'clamp(17px, 3vw, 24px)',
-                letterSpacing: '11px',
-                color: '#4f7256',
-                textTransform: 'uppercase',
-                opacity: 0,
-                animation: `lxLetter 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${i * 70 + 2100}ms both`,
-              }}
-            >
-              {char}
-            </span>
-          ))}
+        {/* ── CARISMA — single word, no letter-by-letter stagger ──────── */}
+        <div style={{
+          fontFamily: 'Trajan Pro, "Trajan Pro Regular", Georgia, serif',
+          fontSize: 'clamp(16px, 2.8vw, 22px)',
+          letterSpacing: '11px',
+          color: '#4f7256',
+          textTransform: 'uppercase',
+          opacity: 0,
+          animation: 'lxUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 480ms both',
+        }}>
+          CARISMA
         </div>
 
-        {/* ── Divider ──────────────────────────────────────────────────── */}
-        <div
-          style={{
-            height: 1,
-            width: 0,
-            backgroundColor: 'rgba(2,76,39,0.18)',
-            margin: '15px 0',
-            animation: 'lxDivider 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2650ms both',
-          }}
-        />
+        {/* ── Hairline divider ─────────────────────────────────────────── */}
+        <div style={{
+          height: 1, width: 0,
+          backgroundColor: 'rgba(2,76,39,0.18)',
+          margin: '13px 0',
+          animation: 'lxLine 0.5s cubic-bezier(0.16, 1, 0.3, 1) 730ms both',
+        }} />
 
         {/* ── Sub-brand ────────────────────────────────────────────────── */}
-        <div
-          style={{
-            fontFamily: '"Novecento Wide Book", "Novecento Wide", sans-serif',
-            fontSize: 9,
-            letterSpacing: '5px',
-            textTransform: 'uppercase',
-            color: 'rgba(2,76,39,0.45)',
-            opacity: 0,
-            animation: 'lxLetter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2850ms both',
-          }}
-        >
+        <div style={{
+          fontFamily: '"Novecento Wide Book", "Novecento Wide", sans-serif',
+          fontSize: 9, letterSpacing: '5px', textTransform: 'uppercase',
+          color: 'rgba(2,76,39,0.42)',
+          opacity: 0,
+          animation: 'lxFade 0.5s ease 870ms both',
+        }}>
           Slimming
         </div>
 
-        {/* ── Circular arc progress — SVG so it scales perfectly ───────── */}
-        <svg
-          viewBox="0 0 64 64"
-          width="56" height="56"
-          aria-hidden
-          style={{
-            position: 'absolute',
-            bottom: 44,
-            opacity: 0,
-            animation: 'lxFade 0.4s ease 350ms both',
-            pointerEvents: 'none',
-          }}
-        >
-          {/* Track */}
-          <circle cx="32" cy="32" r="28" stroke="rgba(2,76,39,0.08)" strokeWidth="0.7" fill="none" />
-          {/* Fill arc */}
-          <circle
-            cx="32" cy="32" r="28"
-            stroke="rgba(2,76,39,0.35)"
-            strokeWidth="0.7"
-            fill="none"
+        {/* ── Progress arc ─────────────────────────────────────────────── */}
+        <svg viewBox="0 0 64 64" width="48" height="48" aria-hidden style={{
+          position: 'absolute', bottom: 44,
+          opacity: 0, animation: 'lxFade 0.4s ease 200ms both',
+          pointerEvents: 'none',
+        }}>
+          <circle cx="32" cy="32" r="28"
+            stroke="rgba(2,76,39,0.07)" strokeWidth="0.7" fill="none" />
+          <circle cx="32" cy="32" r="28"
+            stroke="rgba(2,76,39,0.32)" strokeWidth="0.7" fill="none"
             strokeLinecap="round"
-            strokeDasharray={ARC_C}
-            strokeDashoffset={ARC_C}
+            strokeDasharray={ARC_C} strokeDashoffset={ARC_C}
             transform="rotate(-90 32 32)"
-            style={{
-              animation: `lxArc 2.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 300ms both`,
-            }}
-          />
+            style={{ animation: `lxArc 1.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 150ms both` }} />
         </svg>
 
-        {/* ── Corner L-marks — SVG lines, pixel-perfect at all sizes ───── */}
+        {/* ── Corner L-marks ───────────────────────────────────────────── */}
         {[
           { top: 28, left: 36, rotate: false },
           { bottom: 28, right: 36, rotate: true },
         ].map((c, i) => (
-          <svg
-            key={i}
-            viewBox="0 0 18 18"
-            width="18" height="18"
-            fill="none"
-            aria-hidden
-            style={{
-              position: 'absolute',
-              top: c.top ?? undefined,
-              left: c.left ?? undefined,
-              bottom: c.bottom ?? undefined,
-              right: c.right ?? undefined,
-              transform: c.rotate ? 'rotate(180deg)' : 'none',
-              opacity: 0,
-              animation: `lxFade 0.5s ease ${1960 + i * 90}ms both`,
-              pointerEvents: 'none',
-            }}
-          >
-            <path d="M0 17 L0 0 L17 0" stroke="rgba(2,76,39,0.15)" strokeWidth="0.8" fill="none" />
+          <svg key={i} viewBox="0 0 18 18" width="18" height="18" fill="none" aria-hidden style={{
+            position: 'absolute',
+            top: c.top ?? undefined, left: c.left ?? undefined,
+            bottom: c.bottom ?? undefined, right: c.right ?? undefined,
+            transform: c.rotate ? 'rotate(180deg)' : 'none',
+            opacity: 0,
+            animation: `lxFade 0.5s ease ${900 + i * 80}ms both`,
+            pointerEvents: 'none',
+          }}>
+            <path d="M0 17 L0 0 L17 0" stroke="rgba(2,76,39,0.14)" strokeWidth="0.8" fill="none" />
           </svg>
         ))}
 
