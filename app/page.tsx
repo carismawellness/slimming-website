@@ -7,6 +7,7 @@ import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
 import GradientField from '@/components/layers/GradientField';
 import ResultsGuarantee from '@/components/results/ResultsGuarantee';
+import MedicalGuaranteeSection from '@/components/MedicalGuaranteeSection';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
@@ -240,6 +241,9 @@ How GLP-1 Works<br />at Our Clinic
           </div>
         </div>
       </section>
+
+      {/* Our Promise — "Up to 1kg/week" medical guarantee (shared component, identical sitewide) */}
+      <MedicalGuaranteeSection />
 
       {/* (6) The Carisma Difference */}
       <section className="py-24" aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff' }}>
