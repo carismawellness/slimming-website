@@ -436,7 +436,7 @@ export default function SlimmingGuidePage() {
       {/* Final Call-to-Action Section — light on-brand band (no dark-green bg). Starts on
           the sage wash above and resolves to white so the section below flows. */}
       <section
-        className="py-24 relative overflow-hidden"
+        className="pt-24 pb-40 relative overflow-hidden"
         style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #FFFFFF 100%)' }}
       >
         {/* Single Layers watermark — decorative motif behind CTA content (no blob
