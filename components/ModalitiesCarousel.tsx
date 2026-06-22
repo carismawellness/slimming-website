@@ -82,6 +82,15 @@ export default function ModalitiesCarousel() {
 
   return (
     <div className="relative">
+      <style>{`
+        .mc-card { transition: transform .35s cubic-bezier(.22,1,.36,1), box-shadow .35s ease; }
+        .mc-img { transition: transform .5s ease; }
+        @media (prefers-reduced-motion: no-preference) {
+          .mc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(60,90,64,0.16); }
+          .mc-card:hover .mc-img { transform: scale(1.05); }
+        }
+        .mc-card:hover .mc-explore { background-color: #4f7256; color: #ffffff; }
+      `}</style>
       {/* Left arrow */}
       {!atStart && (
         <button
@@ -125,93 +134,42 @@ export default function ModalitiesCarousel() {
           <Link
             key={card.title}
             href={card.href}
-            className="card group relative block overflow-hidden flex-shrink-0"
+            className="mc-card group flex-shrink-0"
             style={{
               width: `${CARD_W}px`,
               height: `${CARD_H}px`,
-              borderRadius: '16px',
+              borderRadius: '20px',
+              overflow: 'hidden',
               scrollSnapAlign: 'start',
               textDecoration: 'none',
+              display: 'flex',
+              flexDirection: 'column',
+              background: '#ffffff',
+              border: '1px solid #EAE4DB',
+              boxShadow: '0 10px 30px rgba(60,90,64,0.10)',
             }}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={card.src}
-              alt={card.alt}
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                objectPosition: card.focal ?? 'center',
-              }}
-            />
-            {/* Gradient overlay */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                background:
-                  'linear-gradient(180deg, rgba(60,50,40,0.05) 0%, rgba(60,50,40,0.35) 40%, rgba(40,33,28,0.88) 100%)',
-              }}
-            />
-            {/* Text scrim — guarantees WCAG AA contrast for white text over any photo.
-                Worst case (pure-white image pixel) yields >=6.5:1 at the heading top. */}
-            <div
-              style={{
-                position: 'absolute',
-                inset: 0,
-                pointerEvents: 'none',
-                background:
-                  'linear-gradient(180deg, rgba(20,17,14,0) 0%, rgba(20,17,14,0) 38%, rgba(20,17,14,0.55) 52%, rgba(20,17,14,0.85) 75%, rgba(20,17,14,0.92) 100%)',
-              }}
-            />
-            {/* Text + button */}
-            <div className="absolute inset-x-0 bottom-0" style={{ padding: '0 28px 28px' }}>
-              <h3
-                className="mb-3"
-                style={{
-                  color: '#ffffff',
-                  fontFamily: 'Novecento Wide Book, sans-serif',
-                  fontSize: '18px',
-                  fontWeight: '700',
-                  textTransform: 'uppercase',
-                  letterSpacing: '0.5px',
-                  lineHeight: 1.25,
-                }}
-              >
+            <div style={{ position: 'relative', width: '100%', height: '206px', flexShrink: 0, overflow: 'hidden' }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={card.src}
+                alt={card.alt}
+                className="mc-img"
+                style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: card.focal ?? 'center', display: 'block' }}
+              />
+            </div>
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '24px 26px 26px' }}>
+              <h3 style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontSize: '18px', fontWeight: 400, textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: 1.25, margin: '0 0 10px' }}>
                 {card.title}
               </h3>
-              <p
-                className="mb-6"
-                style={{
-                  color: '#ffffff',
-                  fontFamily: 'Roboto, sans-serif',
-                  fontSize: '13px',
-                  lineHeight: '1.55',
-                }}
-              >
+              <p style={{ color: '#595959', fontFamily: 'Roboto, sans-serif', fontSize: '13.5px', lineHeight: 1.6, margin: '0 0 20px', flex: 1, display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }}>
                 {card.desc}
               </p>
-              {/* EXPLORE — visually a button, functionally part of the card Link.
-                  Pill radius; on card hover it inverts to filled white bg with sage
-                  text (#4f7256 on #ffffff = 5.42:1, AA). Motion handled by globals
-                  reduced-motion; only color/bg changes here so it is safe. */}
               <span
-                className="block text-center transition-colors duration-300 ease-out group-hover:bg-white group-hover:text-[#4f7256] group-hover:border-white"
-                style={{
-                  border: '1.5px solid rgba(255,255,255,0.9)',
-                  color: '#ffffff',
-                  fontFamily: 'Novecento Wide Book, sans-serif',
-                  fontSize: '13px',
-                  letterSpacing: '2px',
-                  padding: '14px 0',
-                  textTransform: 'uppercase',
-                  borderRadius: '999px',
-                }}
+                className="mc-explore"
+                style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', gap: '8px', border: '1.5px solid #4f7256', color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12.5px', letterSpacing: '2px', padding: '13px 0', textTransform: 'uppercase', borderRadius: '999px', transition: 'background-color .3s ease, color .3s ease' }}
               >
-                EXPLORE
+                Explore <span aria-hidden="true">&rarr;</span>
               </span>
             </div>
           </Link>
