@@ -333,24 +333,24 @@ export default function GLP1Page() {
           <p className="text-center mx-auto mb-12" style={{ color: '#5c5346', fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.7, maxWidth: '760px' }}>
             We are a doctor-led medical weight loss clinic in Malta that blends medical insight, sustainable nutrition, and modern body technology into one high-touch system. So you do not just lose weight, you build a stronger, healthier version of yourself.
           </p>
-          <div className="card lg-raised mx-auto max-w-2xl p-10" style={{ background: 'linear-gradient(135deg, #FCFCFA 0%, #D8E7D2 100%)' }}>
-            <ul className="space-y-6">
-              {([
-                'Doctor-led medical weight loss: full check, body scan, and blood work',
-                'One integrated program: medical support, nutrition, movement, and treatments together',
-                'Real gym included: Technogym facility, semi-private classes, and personal training',
-                'High-touch support: weekly check-ins, progress reports, and WhatsApp follow-up',
-                <span key="devices">Evidence-based devices: <Link href="/packages/muscle-stimulation" style={{ color: '#4f7256', textDecoration: 'underline' }}>Emsculpt NEO</Link>, <Link href="/packages/fat-freezing" style={{ color: '#4f7256', textDecoration: 'underline' }}>CoolSculpting</Link>, and <Link href="/packages/skin-tightening" style={{ color: '#4f7256', textDecoration: 'underline' }}>RF skin tightening</Link></span>,
-                'Selective entry and measurable weight loss results guaranteed',
-              ]).map((t, i) => (
-                <li key={i} className="flex items-start gap-4">
-                  <img src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png" alt="" style={{ width: '29px', height: '28px', objectFit: 'contain', flexShrink: 0 }} />
-                  {/* On the #FCFCFA->#D8E7D2 card gradient; #5c5346 clears AA (>=5.85:1) at the darkest stop. */}
-                  <span style={{ color: '#5c5346', fontFamily: wideFont, fontSize: '15px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.5 }}>{t}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          {/* Clean two-column checklist — no container box, modern & airy */}
+          <ul className="mx-auto grid sm:grid-cols-2" style={{ maxWidth: '900px', columnGap: '56px' }}>
+            {([
+              'Doctor-led medical weight loss: full check, body scan, and blood work',
+              'One integrated program: medical support, nutrition, movement, and treatments together',
+              'Real gym included: Technogym facility, semi-private classes, and personal training',
+              'High-touch support: weekly check-ins, progress reports, and WhatsApp follow-up',
+              <span key="devices">Evidence-based devices: <Link href="/packages/muscle-stimulation" style={{ color: '#4f7256', textDecoration: 'underline' }}>Emsculpt NEO</Link>, <Link href="/packages/fat-freezing" style={{ color: '#4f7256', textDecoration: 'underline' }}>CoolSculpting</Link>, and <Link href="/packages/skin-tightening" style={{ color: '#4f7256', textDecoration: 'underline' }}>RF skin tightening</Link></span>,
+              'Selective entry and measurable weight loss results guaranteed',
+            ]).map((t, i) => (
+              <li key={i} className="flex items-start gap-4" style={{ padding: '20px 2px', borderBottom: i < 4 ? '1px solid rgba(79,114,86,0.12)' : 'none' }}>
+                <span aria-hidden style={{ flexShrink: 0, marginTop: '1px', width: '26px', height: '26px', borderRadius: '50%', background: 'rgba(79,114,86,0.1)', display: 'grid', placeItems: 'center' }}>
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#4f7256" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12" /></svg>
+                </span>
+                <span style={{ color: '#5c5346', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px', textTransform: 'uppercase', lineHeight: 1.55 }}>{t}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
