@@ -6,6 +6,7 @@ import ConsultationModal from "@/components/ConsultationModal";
 import GuideOrderModal from "@/components/GuideOrderModal";
 import QuizModal from "@/components/QuizModal";
 import Script from "next/script";
+import PageLoader from "@/components/PageLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -109,6 +110,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        <PageLoader />
         <SiteHeader />
         <main className="flex-grow">{children}</main>
         <SiteFooter />

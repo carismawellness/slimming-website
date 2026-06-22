@@ -534,3 +534,65 @@ p, li, blockquote, figcaption, dd, dt { text-wrap: pretty; }
   .lg-raised, .lg-raised--hover:hover { transition: none; }
 }
 
+
+/* ============================================================
+   PAGE LOADER — keyframe animations
+   All prefixed cs-loader to avoid collisions.
+   ============================================================ */
+
+@keyframes csLoaderPetal {
+  from {
+    opacity: 0;
+    transform: scale(0.35) rotate(18deg);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes csLoaderLetter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+  }
+}
+
+@keyframes csLoaderDivider {
+  from { width: 0px; }
+  to   { width: 52px; }
+}
+
+@keyframes csLoaderProgress {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes csLoaderGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.6; transform: scale(1.15); }
+}
+
+@keyframes csLoaderRingExpand {
+  from { opacity: 0; transform: scale(0.6); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  /* Collapse all loader animations — instant appear + instant exit */
+  [style*="csLoaderPetal"],
+  [style*="csLoaderLetter"],
+  [style*="csLoaderDivider"],
+  [style*="csLoaderProgress"],
+  [style*="csLoaderGlow"],
+  [style*="csLoaderRingExpand"] {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+}
