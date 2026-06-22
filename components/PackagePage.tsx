@@ -35,6 +35,7 @@ import {
   SHARED_WHY_MALTA,
 } from '@/lib/packages/types';
 import { testimonials as TESTIMONIALS, Testimonial } from '@/lib/packages/testimonials';
+import TreatmentBodyMap from '@/components/treatments/TreatmentBodyMap';
 
 /* ---------- internal linking: related treatments per service ---------- */
 const RELATED_LINKS: Record<string, { href: string; label: string }[]> = {
@@ -171,6 +172,17 @@ function CTA({ children = 'Claim your spot now', full = false, wide = false }: {
 function Tick({ size = 18 }: { size?: number }) {
   // eslint-disable-next-line @next/next/no-img-element
   return <img src={CHECK} alt="" aria-hidden="true" style={{ width: size, height: 'auto', flexShrink: 0, marginTop: 3 }} />;
+}
+
+/* Sage SVG tick (#4f7256 — locked accessible token, ~4.3:1 on white, clears the
+   3:1 icon threshold). Used on white grounds where the legacy sage CHECK image
+   would render low-contrast. Decorative, aria-hidden. */
+function CheckMark({ size = 18 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ flexShrink: 0, marginTop: 2 }}>
+      <path d="M20 6L9 17l-5-5" stroke="#4f7256" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
 }
 
 /* Plain round bullet — decorative, aria-hidden */
@@ -568,44 +580,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===================== 5. ELIGIBILITY ===================== */}
         {!hidden.eligibility && c.areas.length > 0 && (
-          <section aria-labelledby="eligibility-heading" style={{ paddingTop: 48, paddingBottom: 84 }}>
-            <div style={CONTAINER}>
-              <Eyebrow>{c.eligEyebrow ?? 'eligibility criteria'}</Eyebrow>
-              <div style={{ width: 90, height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 14px' }} />
-              <SectionHeading id="eligibility-heading">{c.eligHeading}</SectionHeading>
-
-              <div style={{ display: 'grid', gridTemplateColumns: '0.85fr 1.15fr', gap: 44, alignItems: 'center', marginTop: 36 }} className="fr-2col">
-                {/* P3 — next/image with aspect ratio */}
-                <div style={{ position: 'relative', width: '100%', aspectRatio: c.eligImageRatio ?? '1 / 1' }}>
-                  <Image
-                    src={c.eligImage}
-                    alt={c.eligHeading}
-                    fill
-                    sizes="(max-width: 860px) 100vw, 40vw"
-                    style={{ objectFit: 'cover', borderRadius: 16 }}
-                  />
-                </div>
-                <div>
-                  <p style={{ color: TAUPE_DK, fontFamily: WIDE, fontWeight: 700, fontSize: 16, letterSpacing: '0.5px', textTransform: 'uppercase', margin: '0 0 20px', lineHeight: 1.6, maxWidth: 330 }}>{c.eligIntro}</p>
-                  {c.eligListStyle === 'checks' ? (
-                    <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }} aria-label="Eligible treatment areas">
-                      {c.areas.map((a) => (
-                        <li key={a} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                          <Tick size={18} /><span style={{ ...body }}>{a}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  ) : (
-                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 12 }} role="list" aria-label="Eligible treatment areas">
-                      {c.areas.map((a, i) => (
-                        <div key={a} role="listitem" className="card" style={{ gridColumn: i === c.areas.length - 1 && c.areas.length % 2 === 1 ? '1 / -1' : 'auto', padding: '14px 16px', textAlign: 'center', color: TAUPE, fontFamily: WIDE, fontSize: 14, letterSpacing: '0.5px', textTransform: 'uppercase' }}>{a}</div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          </section>
+          <TreatmentBodyMap serviceId={c.id} heading={c.eligHeading} intro={c.eligIntro} />
         )}
 
         {/* ===================== 6. DIFFERENCE ===================== */}
@@ -622,11 +597,14 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               </div>
               <p style={{ ...body, textAlign: 'center', maxWidth: 720, margin: '18px auto 0' }}>{SHARED_DIFFERENCE_INTRO}</p>
 
-              <div style={{ marginTop: 36, marginLeft: 'auto', marginRight: 'auto', maxWidth: 560, background: 'linear-gradient(150deg, #eef2ec 0%, #e0e8df 100%)', borderRadius: 16, padding: '34px 36px' }}>
+              {/* Clean, high-contrast card: white ground, dark-ink uppercase body text
+                  (#5a5043, ~7.3:1 on white), sage SVG tick icons (#4f7256, ~4.3:1 — clears
+                  the 3:1 icon threshold). Replaces the prior muddy sage-on-sage gradient. */}
+              <div style={{ marginTop: 36, marginLeft: 'auto', marginRight: 'auto', maxWidth: 560, background: '#ffffff', border: '1px solid #e8e2da', borderRadius: 16, padding: '34px 36px', boxShadow: '0 6px 26px rgba(120,114,104,0.12)' }}>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 16 }} aria-label="The Carisma difference">
                   {differenceBullets.map((d) => (
                     <li key={d} style={{ display: 'flex', gap: 12, alignItems: 'flex-start' }}>
-                      <Tick size={18} /><span style={{ color: TAUPE, fontFamily: WIDE, fontSize: 12.5, letterSpacing: '0.4px', textTransform: 'uppercase', lineHeight: 1.5 }}>{d}</span>
+                      <CheckMark size={18} /><span style={{ color: '#5a5043', fontFamily: WIDE, fontSize: 12.5, letterSpacing: '0.4px', textTransform: 'uppercase', lineHeight: 1.5 }}>{d}</span>
                     </li>
                   ))}
                 </ul>
@@ -1072,18 +1050,6 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         {/* ===================== 12. RELATED TREATMENTS + WEIGHT LOSS CROSS-LINKS ===================== */}
         <section aria-labelledby="related-treatments-heading" style={{ paddingTop: 48, paddingBottom: 72, borderTop: '1px solid #e8e2da' }}>
           <div style={{ ...CONTAINER, maxWidth: 960 }}>
-
-            {/* Pillar link: all treatments */}
-            <p style={{ textAlign: 'center', color: TAUPE, fontFamily: BODY, fontSize: 14, marginBottom: 36 }}>
-              Explore our{' '}
-              <Link
-                href="/packages"
-                style={{ color: GREEN_TEXT, textDecoration: 'underline', fontWeight: 600 }}
-              >
-                full range of slimming treatments &amp; packages
-              </Link>
-              {' '}to find the right combination for your goals.
-            </p>
 
             {/* Related service links */}
             {RELATED_LINKS[c.id] && RELATED_LINKS[c.id].length > 0 && (
