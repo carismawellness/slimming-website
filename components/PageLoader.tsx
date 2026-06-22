@@ -45,7 +45,7 @@ export default function PageLoader() {
 
   useEffect(() => {
     startRef.current = performance.now();
-    const MIN_MS = 3400;
+    const MIN_MS = 4200;
 
     const dismiss = () => {
       const elapsed = performance.now() - startRef.current;
@@ -77,8 +77,8 @@ export default function PageLoader() {
       {/* Keyframes injected once — no external CSS dependency */}
       <style>{`
         @keyframes lxPetal {
-          from { opacity: 0; transform: scale(0.82) rotate(-6deg); }
-          to   { opacity: 1; transform: scale(1)    rotate(0deg); }
+          0%   { opacity: 0; transform: scale(0.95); }
+          100% { opacity: 1; transform: scale(1); }
         }
         @keyframes lxLetter {
           from { opacity: 0; transform: translateY(10px); }
@@ -190,7 +190,7 @@ export default function PageLoader() {
                 style={{
                   transformOrigin: '48px 45px',
                   opacity: 0,
-                  animation: `lxPetal 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 120 + 200}ms both`,
+                  animation: `lxPetal 2.2s cubic-bezier(0.16, 1, 0.3, 1) ${i * 170 + 160}ms both`,
                 }}
               />
             ))}
@@ -210,7 +210,7 @@ export default function PageLoader() {
                 color: '#4f7256',
                 textTransform: 'uppercase',
                 opacity: 0,
-                animation: `lxLetter 0.75s cubic-bezier(0.25, 0.46, 0.45, 0.94) ${i * 65 + 1500}ms both`,
+                animation: `lxLetter 0.9s cubic-bezier(0.16, 1, 0.3, 1) ${i * 70 + 2100}ms both`,
               }}
             >
               {char}
@@ -225,7 +225,7 @@ export default function PageLoader() {
             width: 0,
             backgroundColor: 'rgba(2,76,39,0.18)',
             margin: '15px 0',
-            animation: 'lxDivider 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2050ms both',
+            animation: 'lxDivider 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2650ms both',
           }}
         />
 
@@ -238,7 +238,7 @@ export default function PageLoader() {
             textTransform: 'uppercase',
             color: 'rgba(2,76,39,0.45)',
             opacity: 0,
-            animation: 'lxLetter 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) 2180ms both',
+            animation: 'lxLetter 0.7s cubic-bezier(0.16, 1, 0.3, 1) 2850ms both',
           }}
         >
           Slimming
