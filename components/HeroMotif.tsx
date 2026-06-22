@@ -56,7 +56,7 @@ export default function HeroMotif() {
     // ── tuning ───────────────────────────────────────────────────────────
     const N = coarse ? 80 : 150;
     const LINK_R = 122;        // px — connect dots closer than this
-    const LINK_ALPHA = 0.17;   // peak line opacity
+    const LINK_ALPHA = 0.34;   // peak line opacity (2x)
     const REPEL_R = 150;
     const REPEL_STR = 46;
     const SAGE = '142, 176, 147';
@@ -81,7 +81,7 @@ export default function HeroMotif() {
           bx: hash(i + 1) * W,
           by: hash(i + 2) * H,
           r: 2.2 + d * 5.5,
-          a: 0.18 + d * 0.26,          // a touch more visible
+          a: 0.36 + d * 0.52,          // 2x more visible
           vy: -(3 + d * 8),
           sway: 6 + hash(i + 5) * 14,
           ph: hash(i + 7) * 6.283,
