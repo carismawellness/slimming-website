@@ -1202,73 +1202,49 @@ function FAQSection() {
 /* ============================================================
    7b. EVIDENCE BASED APPROACH — clinical research cards
    ============================================================ */
-const leafCorners = {
-  borderTopLeftRadius: '18px',
-  borderTopRightRadius: '90px',
-  borderBottomLeftRadius: '90px',
-  borderBottomRightRadius: '18px',
-};
-
-function EvidenceCard({ item }: { item: { title: string; strength: string; image: string; what?: string; results: string[]; chips: string[] } }) {
+function EvidenceCard({ item }: { item: { title: string; strength: string; image: string; what: string; results: string[] } }) {
   const [expanded, setExpanded] = useState(false);
-  const labelStyle = { color: taupe, fontFamily: wideFont, fontSize: '12px', fontWeight: 600 as const, letterSpacing: '1px', textTransform: 'uppercase' as const };
-  const clamp = expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' };
   return (
-    <div className="flex flex-col items-center">
-      {/* Image with badge — overlaps the card below */}
-      <div className="relative z-10 overflow-hidden" style={{ ...leafCorners, width: '381px', maxWidth: '92%', height: '182px', boxShadow: '0 14px 30px rgba(0,0,0,0.12)' }}>
-        <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} loading="lazy" />
-        <span
-          className="absolute"
-          style={{ top: '14px', left: '14px', backgroundColor: '#ffffff', color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '5px 12px', borderRadius: '9999px', boxShadow: '0 4px 12px rgba(0,0,0,0.12)' }}
-        >
+    <div style={{ position: 'relative', paddingTop: '16px', display: 'flex', flexDirection: 'column' }}>
+      {/* Photo with floating badge */}
+      <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
+        <div style={{ border: `2px solid ${green}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: '#eef3ea', position: 'relative', height: '186px' }}>
+          <Image src={item.image} alt={item.title} fill style={{ objectFit: 'cover' }} loading="lazy" />
+        </div>
+        <span style={{ position: 'absolute', top: '-14px', left: '18px', backgroundColor: '#fff', color: green, fontFamily: wideFont, fontWeight: 600, fontSize: '12px', letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: '9999px', border: `2px solid ${green}`, whiteSpace: 'nowrap' }}>
           {item.strength}
         </span>
       </div>
-      {/* Body card */}
-      <div className="w-full -mt-14 px-7 pb-9" style={{ paddingTop: '70px', background: 'linear-gradient(180deg, #FCFCFA 0%, #FCFCFA 58%, #DCE7D9 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '18px', borderBottomLeftRadius: '18px', borderBottomRightRadius: '60px' }}>
-        <h3 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', lineHeight: 1.4 }}>
+      {/* Card body */}
+      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 100%)', border: '1px solid #e8e2da', borderRadius: '16px', marginTop: '-70px', padding: '92px 30px 30px', position: 'relative', zIndex: 1, flex: 1, display: 'flex', flexDirection: 'column' }}>
+        <h3 style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '20px', lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', margin: 0 }}>
           {item.title}
         </h3>
-        <div className="mx-auto mt-3 mb-6" style={{ width: '90px', height: '1px', backgroundColor: taupeLight }} />
-        {item.what && (
-          <>
-            <p className="mb-2" style={labelStyle}>WHAT IT DOES</p>
-            <p style={{ ...pStyle, fontSize: '14px', ...clamp }}>{item.what}</p>
-          </>
-        )}
-        {(expanded || !item.what) && (
-          <>
-            <p className={item.what ? 'mt-4 mb-2' : 'mb-2'} style={labelStyle}>KEY RESULTS</p>
-            {expanded ? (
-              <ul className="space-y-2">
-                {item.results.map((r) => (
-                  <li key={r} className="flex items-start gap-2" style={{ ...liStyle, fontSize: '14px' }}>
-                    <span style={bullet}>&bull;</span>
-                    <span>{r}</span>
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p style={{ ...pStyle, fontSize: '14px', ...clamp }}>{item.results[0]}</p>
-            )}
-          </>
-        )}
-        {expanded && item.chips.length > 0 && (
-          <div className="flex flex-wrap gap-2 mt-5">
-            {item.chips.map((c) => (
-              <span key={c} style={{ backgroundColor: '#ffffff', color: taupe, fontFamily: bodyFont, fontSize: '12px', padding: '5px 12px', borderRadius: '9999px', border: '1px solid #dfe6dc' }}>{c}</span>
-            ))}
+        <div style={{ width: '90px', height: '1px', backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
+        <p style={{ color: taupe, fontFamily: wideFont, fontWeight: 700, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 8px' }}>What it does</p>
+        <p style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.6, margin: '0 0 6px', ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' as const, overflow: 'hidden' }) }}>
+          {item.what}
+        </p>
+        {expanded && (
+          <div>
+            <p style={{ color: taupe, fontFamily: wideFont, fontWeight: 700, fontSize: '12px', letterSpacing: '1px', textTransform: 'uppercase', margin: '14px 0 8px' }}>Key results</p>
+            <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 14px', display: 'flex', flexDirection: 'column', gap: '10px' }}>
+              {item.results.map((r) => (
+                <li key={r} style={{ display: 'flex', gap: '8px', alignItems: 'flex-start' }}>
+                  <span style={{ color: green, flexShrink: 0, marginTop: '4px' }}>•</span>
+                  <span style={{ color: taupe, fontFamily: bodyFont, fontSize: '13.5px', lineHeight: 1.7 }}>{r}</span>
+                </li>
+              ))}
+            </ul>
           </div>
         )}
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
-          className="mt-3 min-h-[44px] px-2 focus-visible:outline-2 focus-visible:outline-offset-2"
-          style={{ color: taupe, fontFamily: bodyFont, fontSize: '13px', fontStyle: 'italic', textDecoration: 'underline', cursor: 'pointer', background: 'transparent' }}
+          style={{ marginTop: 'auto', background: 'none', border: 'none', cursor: 'pointer', color: taupe, fontFamily: bodyFont, fontSize: '15px', fontStyle: 'italic', textDecoration: 'underline', padding: '8px 0', display: 'block', minHeight: '44px' }}
         >
-          {expanded ? 'See Less' : 'See More'}
+          {expanded ? 'Read less' : 'Read more'}
         </button>
       </div>
     </div>
@@ -1278,102 +1254,76 @@ function EvidenceCard({ item }: { item: { title: string; strength: string; image
 function EvidenceApproachSection() {
   const items = [
     {
-      title: 'energy-restricted mediterranean nutrition',
-      strength: 'HIGH-evidence',
+      title: 'Energy-Restricted Mediterranean Nutrition',
+      strength: 'High Evidence',
       image: '/Clams.png',
+      what: 'A daily energy reduction of 500–750 kcal structured around a Mediterranean eating pattern — the most evidence-backed approach to sustainable fat loss.',
       results: [
-        'Major obesity guidelines recommend a daily energy reduction of 500–1000 kcal, targeting 0.5–1 kg per week of weight loss as a safe, sustainable rate PM',
-        'In the PREDIMED-Plus lifestyle trial, older adults with overweight/obesity on an energy-restricted Mediterranean diet lost 3.2 kg at 12 months, versus 0.7 kg in the control group, and 33.7% achieved at least 5% weight loss (vs 11.9% in control). ScienceDirect',
+        'PREDIMED-Plus trial: Mediterranean-style energy-restricted diet produced 3.2 kg loss at 12 months vs 0.7 kg in the control group.',
+        'Major obesity guidelines recommend targeting 0.5–1 kg per week of weight loss as a safe, sustainable rate.',
+        '33.7% of participants achieved at least 5% body weight loss versus 11.9% in the control group.',
       ],
-      chips: ['Daily 500–750 kcal deficit', 'Mediterranean pattern', 'Target 5–10% body-weight loss over first 3–6 months'],
     },
     {
-      title: 'higher-protein, muscle-protective diet',
-      strength: 'HIGH-evidence',
+      title: 'Higher-Protein, Muscle-Protective Diet',
+      strength: 'High Evidence',
       image: '/Cooking.png',
-      what: 'Raises protein within a calorie deficit to preserve lean mass and improve fullness while fat is lost.',
+      what: 'Raising protein intake within a calorie deficit preserves lean muscle mass and improves satiety — so the weight you lose stays off.',
       results: [
-        'SMD 0.75 preservation of muscle mass vs standard protein in meta-analysis. ratePMC+2MDPI+2',
-        'Meta-analysis of 47 trials (n = 3218) found that higher protein intake significantly reduced muscle mass loss during weight-loss programs in adults with overweight/obesity (standardized mean difference 0.75, 95% CI 0.41–1.10).Diabetes Journals+1',
-        'Without structured exercise, people with obesity typically lose around 1–2.5 kg of muscle for every 10 kg of weight lost, highlighting the need for protein support.',
+        'Meta-analysis of 47 trials (n=3218) found higher protein significantly reduced muscle mass loss during weight loss programs (SMD 0.75).',
+        'Without structured protein support, people typically lose 1–2.5 kg of muscle for every 10 kg of weight lost.',
+        'Higher protein diets consistently improve fullness and reduce total calorie intake without calorie counting.',
       ],
-      chips: ['Protein quietly increased toward ≥1.2–1.5 g/kg ideal body weight', 'Focus on lean meats, fish, dairy, legumes', 'Built into all plans'],
     },
     {
-      title: 'diet plus exercise (not diet alone)',
-      strength: 'HIGH-evidence',
+      title: 'Diet Plus Structured Exercise',
+      strength: 'High Evidence',
       image: '/Diet.png',
-      what: 'Combining structured exercise with diet delivers better long-term weight loss and body-composition change than diet alone.',
+      what: 'Combining structured movement with a food plan delivers significantly better long-term results than diet alone — including up to 2 years later.',
       results: [
-        '+1.1 kg extra loss with diet plus exercise vs diet only at long-term follow-up.',
-        'Meta-analysis of long-term trials showed diet-plus-exercise programs produced an additional 1.1 kg of weight loss on average compared with diet alone, including in studies lasting 2 years or more. PMC+1',
-        'Obesity guidelines recommend structured physical activity alongside dietary energy deficit for optimal weight and cardiometabolic outcomes. Gastrojournal+1',
+        'Diet-plus-exercise programs produced an additional 1.1 kg of weight loss on average compared with diet alone at long-term follow-up.',
+        'Obesity guidelines from major societies recommend multi-component programs combining calorie deficit with structured activity.',
+        'Exercise protects metabolic rate during weight loss, reducing the risk of weight regain.',
       ],
-      chips: ['Technogym gym access', 'Mix of resistance, cardio and mobility', 'Individual or semi-private formats'],
     },
     {
-      title: 'cryolipolysis (coolSculpting-type fat freezing)',
-      strength: 'Moderate–high evidence',
+      title: 'Cryolipolysis (CoolSculpting)',
+      strength: 'Moderate–High Evidence',
       image: '/wix/87fc13_6d89e9c129304617a960aa46bb07eed4~mv2.jpg',
-      what: 'Applies controlled cooling to selectively injure subcutaneous fat cells, which are then cleared naturally, reducing local fat thickness.',
+      what: 'Applies controlled cooling to selectively injure subcutaneous fat cells, which are then cleared naturally, reducing local fat thickness in targeted areas.',
       results: [
-        '10–26% reduction in fat layer thickness on ultrasound after treatment series.',
-        'Systematic review of cryolipolysis studies reports average ultrasound-measured fat layer reductions between 10.3% and 25.5%, with caliper reductions up to 28.5%, and only mild, transient side effects in most patients.Superdrug Online Doctor',
-        'Recent prospective data confirm cryolipolysis as a safe and effective method for local abdominal fat reduction, with significant decreases in fat thickness and high satisfaction. Dr.Oracle+1',
+        'Systematic review reports average ultrasound-measured fat layer reductions of 10–26% after a treatment series.',
+        'Caliper reductions up to 28.5% with mild, transient side effects only.',
+        'Prospective data confirm cryolipolysis as safe and effective for local abdominal fat reduction with high satisfaction rates.',
       ],
-      chips: ['1–3 cycles per area', 'Results typically visible from 8–12 weeks', 'Used for stubborn pockets, not overall weight loss'],
     },
     {
-      title: 'hifem + rf body sculpting (emsculpt neo)',
-      strength: 'Emerging high-quality evidence',
+      title: 'HIFEM + RF Body Sculpting (Emsculpt NEO)',
+      strength: 'Emerging High-Quality Evidence',
       image: '/wix/87fc13_d79664fae1184e8e8c947c3d350af498~mv2.jpg',
-      what: 'Combines high-intensity focused electromagnetic pulses with radiofrequency heating to contract muscle and heat fat at the same time.',
+      what: 'Combines high-intensity focused electromagnetic pulses with radiofrequency heating to build muscle and reduce fat simultaneously in a single session.',
       results: [
-        'About 25–30% muscle gain and 25–30% fat reduction in treated areas after a standard course',
-        'Clinical data on HIFEM+RF procedures report average 25–30% increases in muscle mass and 25–30% reductions in subcutaneous fat in treated regions after a series of sessions.Bloomberg School of Public Health+2Pentagon Hospitals+2',
-        'MRI and ultrasound studies show significant improvements in abdominal muscle thickness and fat layer reduction with good safety profiles. PMC+1',
+        'Clinical data reports average 25–30% increases in muscle mass and 25–30% reductions in subcutaneous fat in treated regions.',
+        'MRI and ultrasound studies confirm significant improvements in abdominal muscle thickness and fat layer reduction.',
+        'Works best alongside a calorie deficit and lifestyle change for compounded results.',
       ],
-      chips: ['Typical course 4 sessions, about 1 week apart', 'Visible changes from 4–12 weeks after final session', 'Works best alongside calorie deficit'],
     },
     {
-      title: 'rf, infrared and vacuum massage (velashape-type)',
-      strength: 'Moderate evidence',
-      image: '/wix/87fc13_8e6b2be93835401caee6402885a0fb6c~mv2.jpg',
-      what: 'Uses radiofrequency, infrared light and mechanical massage to improve skin firmness, local circulation and the appearance of cellulite while modestly reducing circumference.',
-      results: [
-        'Mean 0.8 inch (about 2 cm) thigh circumference reduction after 8 weeks in early studies.',
-        'Clinical studies of VelaSmooth/VelaShape systems show that 100% of patients had some cellulite improvement and a mean thigh circumference reduction of about 0.8 inch, with some patients losing more than 2 inches after a treatment seriesWikipedia',
-        'Later VelaShape III trials report statistically significant circumference reductions when combined with other non-invasive body-contouring tools. Diabetes Journals+2felixhospital.com+2',
-      ],
-      chips: ['3–6 sessions per area', 'Best for skin texture and mild contouring', 'Often paired with fat reduction and lifestyle change'],
-    },
-    {
-      title: 'lymphatic drainage and recovery massage',
-      strength: 'Adjunct • Supportive',
-      image: '/ly.png',
-      what: 'Gentle manual techniques support lymph flow and venous return, helping manage swelling, heaviness and recovery after some procedures.',
-      results: [
-        'Improves edema and comfort when combined with compression and exercise in lymphedema care.',
-        'Systematic reviews describe manual lymphatic drainage as a widely used conservative therapy that can improve edema, symptoms and quality of life in people with lymphedema when combined with compression and exercise.PMC+2Gastrojournal+2',
-      ],
-      chips: ['Scheduled around treatment blocks', 'Focus on comfort and fluid balance', 'Not a fat-loss method by itself'],
-    },
-    {
-      title: 'why we combine approaches',
+      title: 'Why We Combine All Approaches',
       strength: 'Synergy',
       image: '/wix/87fc13_440425b61c66444abe7e3062dbfcd290~mv2.jpg',
-      what: 'Targets weight, hormones, muscle, fat and skin together instead of relying on a single tool.',
+      what: 'Targeting weight, hormones, muscle, fat and skin together instead of relying on any single tool consistently outperforms one-dimensional approaches.',
       results: [
-        'Diet plus exercise plus structured support delivers better long-term weight loss than diet alone in trials lasting up to 2 years and beyond.',
-        'Long-term meta-analysis shows combined diet-plus-exercise programs maintain about 1.1 kg more weight loss than diet alone at extended follow-up. PMC+1',
-        'Obesity guidelines from major societies recommend multi-component interventions that combine calorie deficitPMC+1',
+        'Long-term meta-analysis shows combined diet-plus-exercise programs maintain 1.1 kg more weight loss than diet alone at extended follow-up.',
+        'Multi-component interventions recommended by all major obesity guidelines for both fat loss and long-term weight maintenance.',
+        'Pairing treatments with nutrition and exercise creates compounding effects that no single intervention achieves alone.',
       ],
-      chips: [],
     },
   ];
+
   return (
     <section className="py-24" aria-labelledby="evidence-approach-heading" style={{ backgroundColor: '#ffffff' }}>
-      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '970px' }}>
+      <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1100px' }}>
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our methodology
         </p>
@@ -1381,7 +1331,7 @@ function EvidenceApproachSection() {
         <h2 id="evidence-approach-heading" className="text-center mb-14" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', textTransform: 'uppercase', letterSpacing: '1px' }}>
           The Evidence-Based Approach Behind Our Weight Loss Programme
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-9 gap-y-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-12">
           {items.map((item) => (
             <EvidenceCard key={item.title} item={item} />
           ))}
