@@ -268,37 +268,6 @@ function ProblemAgitationSection() {
           </div>
         </div>
 
-        {/* Full-bleed dark statement strip */}
-        <div style={{ marginTop: '80px', backgroundColor: '#024C27', padding: '52px 24px', textAlign: 'center', position: 'relative', overflow: 'hidden' }}>
-          <span
-            aria-hidden
-            style={{
-              position: 'absolute', left: '50%', top: '50%',
-              transform: 'translate(-50%,-50%)',
-              fontFamily: headingFont, fontSize: 'clamp(60px,14vw,160px)',
-              fontWeight: 400, color: 'rgba(255,255,255,0.04)',
-              lineHeight: 1, userSelect: 'none', whiteSpace: 'nowrap', pointerEvents: 'none',
-            }}
-          >
-            NOT YOUR FAULT
-          </span>
-          <p
-            style={{
-              position: 'relative',
-              fontFamily: headingFont,
-              fontSize: 'clamp(18px,3vw,26px)',
-              color: '#ffffff',
-              textTransform: 'uppercase',
-              letterSpacing: '1px',
-              lineHeight: 1.5,
-              maxWidth: '600px',
-              margin: '0 auto',
-            }}
-          >
-            It&rsquo;s not your willpower.<br />
-            <em style={{ fontStyle: 'normal', color: '#C9D8C1' }}>It&rsquo;s your biology &mdash; and it changed.</em>
-          </p>
-        </div>
       </div>
 
       {/* ── PART 2: DIAGNOSTIC — WHY PLANS FAILED ──────────────── */}
@@ -348,33 +317,6 @@ function ProblemAgitationSection() {
             </div>
           </div>
 
-          {/* Impact statement + dark resolution panel */}
-          <div className="mt-16 text-center">
-            <p style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', lineHeight: 1.7, textTransform: 'uppercase', letterSpacing: '0.5px', marginBottom: '32px' }}>
-              So you end up <strong style={{ color: greenDark }}>hungrier</strong>, more <strong style={{ color: greenDark }}>tired</strong> and more <strong style={{ color: greenDark }}>frustrated</strong>,{' '}
-              often with <strong style={{ color: greenDark }}>less muscle</strong> and a <strong style={{ color: greenDark }}>slower metabolism</strong> than when you started.
-            </p>
-            <div
-              className="mx-auto"
-              style={{
-                background: 'linear-gradient(135deg, #024C27 0%, #2d5c38 100%)',
-                borderRadius: '16px',
-                padding: '48px 40px',
-                maxWidth: '680px',
-                position: 'relative',
-                overflow: 'hidden',
-              }}
-            >
-              <span aria-hidden style={{ position: 'absolute', right: '-10px', bottom: '-16px', fontFamily: headingFont, fontSize: '110px', color: 'rgba(255,255,255,0.04)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none' }}>FIX</span>
-              <p style={{ fontFamily: bodyFont, fontSize: '16px', lineHeight: 1.8, color: 'rgba(255,255,255,0.88)', marginBottom: '28px', position: 'relative' }}>
-                <strong style={{ color: '#C9D8C1' }}>Our program is built to reverse exactly that:</strong>{' '}
-                we reset your metabolism for your age, protect muscle, work with your hormones and show you how to lose weight while still eating food you enjoy.
-              </p>
-              <div style={{ position: 'relative' }}>
-                <CTAButton label="GET YOUR FREE BODY ANALYSIS" />
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
