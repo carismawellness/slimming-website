@@ -164,7 +164,7 @@ export default function SlimmingGuidePage() {
       <WhyDietsFail />
 
       {/* What This Is — two-column: calm statement + a 3D page render */}
-      <section className="bg-white" style={{ padding: 'clamp(64px, 10vw, 110px) 0' }}>
+      <section className="bg-white" style={{ padding: 'clamp(56px, 8vw, 88px) 0 clamp(40px, 6vw, 60px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ gap: 'clamp(32px, 6vw, 72px)' }}>
             {/* Left — statement */}
@@ -257,116 +257,66 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
-      {/* Designed for Malta Section */}
-      <section className="py-24 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Designed for Malta — compact, cohesive redesign */}
+      <section className="py-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <Kicker centered rule>DESIGNED FOR MALTA</Kicker>
-            <h2
-              className="uppercase"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: 1.3 }}
-            >
+            <h2 className="uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: 1.3 }}>
               a slimming guide designed for maltese culture — festas, family tables, and all.
             </h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-[320px_1fr] gap-10 items-start mb-10">
-            {/* Left text column */}
+
+          {/* Narrative + recipe render */}
+          <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ gap: 'clamp(28px, 5vw, 56px)' }}>
             <div>
-              <p style={{ color: TAUPE, fontSize: '15px' }}>
-                Maltese life is specific. You know what it looks like.
+              <p className="mb-4" style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7 }}>
+                Maltese life is specific. You know what it looks like. Sunday lunch that runs until four. Dinners that start late and finish later. Tables where plates are shared and seconds are expected. Weeks that collapse in on themselves before Thursday.
               </p>
-              <p className="mb-4" style={{ color: TAUPE, fontSize: '15px' }}>
-                Sunday lunch that runs until four. Dinners that start late and finish later. Tables where plates are
-                shared and seconds are expected. Restaurants where the bread arrives before you have time to decide.
-                Weeks that collapse in on themselves before Thursday.
-              </p>
-              <p style={{ color: TAUPE, fontSize: '15px' }}>
-                This method was not built to fight that. It was built to design around it. The guide does not ask you
-                to decline the dinner. It does not ask you to order a side salad while everyone else eats. It does
-                not ask you to bring your own food, track the restaurant&apos;s macros, or explain yourself to the
-                table.
+              <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7 }}>
+                This method was not built to fight that — it was built to design around it. It does not ask you to decline the dinner, order a side salad while everyone else eats, or explain yourself to the table. That is the system: rhythm, interrupted and resumed. Not perfection — just the structure, picked back up.
               </p>
             </div>
-            {/* Right petal card */}
-            <div
-              className="card px-8 pt-7 pb-9"
-              style={{
-                background: '#F5F8F2',
-                borderRadius: '16px',
-                border: '1px solid #C9D8C1',
-              }}
-            >
-              <div className="flex items-center gap-3 mb-4">
-                <img
-                  src="/wix/87fc13_59346c1121b34e759ebf20eba3054c8c~mv2.png"
-                  alt=""
-                  role="presentation"
-                  style={{ width: '23px', height: '23px', objectFit: 'contain' }}
-                />
-                <p className="uppercase" style={{ color: '#3c5a40', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px' }}>
-                  FRIDAY EVENING, MALTA
-                </p>
-              </div>
-              <p style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.6, paddingLeft: '36px' }}>
-                You sit down. You eat protein first when you can. You enjoy the pasta. You enjoy the conversation.
-                You come home. Saturday morning you return at your next meal. No guilt. No compensation. No extra
-                restriction. No mental negotiation about what you earned or owe. You simply return.
-              </p>
+            <div className="flex justify-center">
+              <Image
+                src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.webp"
+                alt="A recipe page from the Carisma Slimming Guide — Cottage Cheese, Tomato & Egg Plate"
+                width={750}
+                height={500}
+                sizes="(max-width: 768px) 90vw, 460px"
+                style={{ width: '100%', maxWidth: '460px', height: 'auto', transform: 'rotate(-2deg)', filter: 'drop-shadow(0 24px 44px rgba(40,60,44,0.16))' }}
+              />
             </div>
           </div>
-          <p style={{ color: TAUPE, fontSize: '15px' }}>
-            That is the system. Rhythm, interrupted and resumed. Not perfection. Just the structure, picked back
-            up.
-          </p>
-          {/* Recipe page render — the actual recipes inside the guide */}
-          <div className="flex justify-center my-10 lg:my-14">
-            <Image
-              src="/wix/f940f0_ba288e10728a451e8acef9cbbaeaf46a~mv2.webp"
-              alt="A recipe page from the Carisma Slimming Guide — Cottage Cheese, Tomato & Egg Plate"
-              width={750}
-              height={500}
-              sizes="(max-width: 768px) 90vw, 560px"
-              style={{ width: '100%', maxWidth: '560px', height: 'auto', transform: 'rotate(-2deg)', filter: 'drop-shadow(0 30px 55px rgba(40,60,44,0.18))' }}
-            />
-          </div>
-          <p className="mb-8 lg:mb-14" style={{ color: TAUPE, fontSize: '15px' }}>
-            The guide includes recipes built for real Maltese kitchens. Practical, familiar dishes built within
-            the method so they work without adaptation. Nothing aspirational. Nothing that requires ingredients
-            you would not already have. When you are ready to accelerate results in the clinic, explore our{' '}
-            <Link href="/packages/fat-freezing" style={{ color: GREEN, textDecoration: 'underline' }}>
-              fat freezing
-            </Link>
-            ,{' '}
-            <Link href="/packages/anti-cellulite" style={{ color: GREEN, textDecoration: 'underline' }}>
-              anti-cellulite
-            </Link>
-            , and{' '}
-            <Link href="/packages/lymphatic-drainage" style={{ color: GREEN, textDecoration: 'underline' }}>
-              lymphatic drainage
-            </Link>{' '}
-            treatments.
-          </p>
-          <div className="flex justify-center mb-10 lg:mb-16">
-            <p
-              className="uppercase"
-              style={{
-                color: TAUPE,
-                fontFamily: wideFont,
-                fontSize: '15px',
-                borderLeft: `3px solid ${GREEN}`,
-                paddingLeft: '16px',
-              }}
-            >
-              We do not fight culture here. We design around it.
+
+          {/* Friday-evening scenario — compact flat callout */}
+          <div className="mx-auto" style={{ maxWidth: '720px', marginTop: 'clamp(36px, 5vw, 56px)', background: '#F5F8F2', border: '1px solid #C9D8C1', borderRadius: '16px', padding: 'clamp(24px, 4vw, 36px)' }}>
+            <p className="uppercase" style={{ color: '#3c5a40', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px', margin: '0 0 12px' }}>
+              Friday evening, Malta
+            </p>
+            <p style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.7, margin: 0 }}>
+              You sit down. You eat protein first when you can. You enjoy the pasta. You enjoy the conversation. You come home. Saturday morning you return at your next meal. No guilt. No compensation. No mental negotiation about what you earned or owe. You simply return.
             </p>
           </div>
-          {/* 'Most people who come to us...' — aspirational pull-quote, no container */}
-          <div className="mt-10 lg:mt-14 text-center mx-auto" style={{ maxWidth: '760px' }}>
-            <div className="mx-auto mb-8" style={{ width: '44px', height: '2px', background: GREEN }} />
+
+          {/* Recipes + treatments line */}
+          <p className="text-center mx-auto" style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, maxWidth: '680px', marginTop: 'clamp(32px, 4vw, 48px)' }}>
+            The guide includes recipes built for real Maltese kitchens — practical, familiar dishes that work without adaptation. When you are ready to accelerate results in the clinic, explore our{' '}
+            <Link href="/packages/fat-freezing" style={{ color: GREEN, textDecoration: 'underline' }}>fat freezing</Link>,{' '}
+            <Link href="/packages/anti-cellulite" style={{ color: GREEN, textDecoration: 'underline' }}>anti-cellulite</Link>, and{' '}
+            <Link href="/packages/lymphatic-drainage" style={{ color: GREEN, textDecoration: 'underline' }}>lymphatic drainage</Link>{' '}treatments.
+          </p>
+
+          {/* Closing — culture line + aspirational quote */}
+          <div className="text-center mx-auto" style={{ maxWidth: '760px', marginTop: 'clamp(40px, 6vw, 64px)' }}>
+            <p className="uppercase" style={{ color: GREEN, fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '2px', margin: '0 0 22px' }}>
+              We do not fight culture here. We design around it.
+            </p>
+            <div className="mx-auto mb-8" style={{ width: '44px', height: '1px', background: GREEN }} />
             <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: 'clamp(17px, 2vw, 22px)', lineHeight: 1.65, fontWeight: 300 }}>
               Most people who come to us have already tried something. A diet that worked for a while. An app they stopped opening. A plan that felt right until life got in the way.
             </p>
-            <p className="uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(22px, 2.9vw, 32px)', lineHeight: 1.3, marginTop: '26px' }}>
+            <p className="uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(22px, 2.9vw, 30px)', lineHeight: 1.3, marginTop: '24px' }}>
               This guide was written for what comes after that.
             </p>
           </div>
@@ -491,8 +441,8 @@ export default function SlimmingGuidePage() {
               </a>
               <GoogleReviewsRow />
             </div>
-            {/* Right — guide mockup (in-flow below lg; large absolute version on desktop) */}
-            <div className="flex justify-center lg:hidden">
+            {/* Right — guide mockup (in-flow, never collides at any zoom) */}
+            <div className="flex justify-center">
               <img
                 src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.webp"
                 alt="Preview pages from the Carisma Slimming Guide"
@@ -501,13 +451,6 @@ export default function SlimmingGuidePage() {
             </div>
           </div>
         </div>
-        {/* Large scattered-pages mockup pinned to the right half (desktop) */}
-        <img
-          src="/wix/f940f0_05727f0f2b8049c69b8b60ee2cf16360~mv2.webp"
-          alt=""
-          className="hidden lg:block absolute pointer-events-none"
-          style={{ left: '433px', top: '-64px', width: '964px', height: '752px', objectFit: 'contain' }}
-        />
       </section>
 
     </main>

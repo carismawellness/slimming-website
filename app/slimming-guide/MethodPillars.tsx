@@ -54,7 +54,7 @@ export default function MethodPillars() {
   }, []);
 
   return (
-    <section className="py-24" aria-labelledby="method-heading" style={{ backgroundColor: '#ffffff' }}>
+    <section className="pt-12 pb-24" aria-labelledby="method-heading" style={{ backgroundColor: '#ffffff' }}>
       <style>{`
         .mp-card {
           opacity: 0; transform: translateY(34px); will-change: opacity, transform;
