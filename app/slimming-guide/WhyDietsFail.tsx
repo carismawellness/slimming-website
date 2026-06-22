@@ -136,7 +136,7 @@ export default function WhyDietsFail() {
           fontSize: 'clamp(160px, 30vw, 380px)',
           lineHeight: 0.8,
           color: SAGE_LIGHT,
-          opacity: 0.22,
+          opacity: 0.12,
           pointerEvents: 'none',
           userSelect: 'none',
         }}
@@ -177,7 +177,7 @@ export default function WhyDietsFail() {
               fontWeight: 400,
               letterSpacing: '0.015em',
               lineHeight: 1.18,
-              fontSize: 'clamp(1.6rem, 3.6vw, 2.6rem)',
+              fontSize: 'clamp(24px, 3vw, 28px)',
               color: GREEN,
               margin: 0,
             }}
@@ -188,9 +188,9 @@ export default function WhyDietsFail() {
             aria-hidden
             style={{
               width: 92,
-              height: 2,
+              height: 1,
               marginTop: 24,
-              background: `linear-gradient(90deg, ${GREEN_SOFT} 0%, ${SAGE_LIGHT} 100%)`,
+              background: '#C9B8AE',
             }}
           />
         </div>
@@ -220,7 +220,7 @@ export default function WhyDietsFail() {
               aria-hidden
               style={{
                 position: 'absolute',
-                inset: '-14px -14px 18px -14px',
+                inset: '-8px -8px 14px -8px',
                 borderRadius: '180px 180px 24px 24px',
                 background: `linear-gradient(160deg, ${SAGE_LIGHT} 0%, ${CREAM} 100%)`,
                 zIndex: 0,
@@ -232,7 +232,7 @@ export default function WhyDietsFail() {
                 zIndex: 1,
                 borderRadius: '170px 170px 18px 18px',
                 overflow: 'hidden',
-                boxShadow: '0 26px 50px rgba(34, 56, 38, 0.22)',
+                boxShadow: '0 14px 32px rgba(34, 56, 38, 0.12)',
                 aspectRatio: '338 / 420',
               }}
             >
@@ -251,7 +251,7 @@ export default function WhyDietsFail() {
             <p
               style={{
                 fontFamily: BODY,
-                fontSize: 'clamp(1.35rem, 2.4vw, 1.75rem)',
+                fontSize: 'clamp(18px, 2vw, 22px)',
                 lineHeight: 1.4,
                 fontWeight: 300,
                 color: GREEN,
@@ -263,7 +263,7 @@ export default function WhyDietsFail() {
             <p
               style={{
                 fontFamily: BODY,
-                fontSize: 'clamp(1rem, 1.6vw, 1.15rem)',
+                fontSize: '15px',
                 lineHeight: 1.65,
                 color: TAUPE,
                 margin: '0 0 18px',
@@ -274,7 +274,7 @@ export default function WhyDietsFail() {
             <p
               style={{
                 fontFamily: BODY,
-                fontSize: 'clamp(1rem, 1.6vw, 1.15rem)',
+                fontSize: '15px',
                 lineHeight: 1.65,
                 color: TAUPE,
                 margin: 0,
@@ -324,7 +324,7 @@ export default function WhyDietsFail() {
                   border: `1px solid ${SAGE_LIGHT}`,
                   borderRadius: 16,
                   padding: '22px 22px 24px',
-                  boxShadow: '0 8px 22px rgba(34, 56, 38, 0.06)',
+                  boxShadow: 'none',
                 }}
               >
                 <span
@@ -377,7 +377,7 @@ export default function WhyDietsFail() {
           <p
             style={{
               fontFamily: BODY,
-              fontSize: 'clamp(1.02rem, 1.6vw, 1.2rem)',
+              fontSize: '15px',
               lineHeight: 1.7,
               color: TAUPE,
               margin: '0 0 22px',
@@ -393,7 +393,7 @@ export default function WhyDietsFail() {
           <p
             style={{
               fontFamily: BODY,
-              fontSize: 'clamp(1.02rem, 1.6vw, 1.2rem)',
+              fontSize: '15px',
               lineHeight: 1.7,
               color: TAUPE,
               margin: 0,
@@ -409,8 +409,9 @@ export default function WhyDietsFail() {
         <div
           style={{
             marginTop: 'clamp(40px, 6vw, 72px)',
-            background: `linear-gradient(135deg, ${CREAM} 0%, ${SAGE_LIGHT} 100%)`,
-            borderRadius: '24px 80px 24px 80px',
+            background: '#F5F8F2',
+            border: '1px solid #C9D8C1',
+            borderRadius: '16px',
             padding: 'clamp(40px, 6vw, 72px) clamp(28px, 6vw, 80px)',
             position: 'relative',
             overflow: 'hidden',
@@ -441,7 +442,7 @@ export default function WhyDietsFail() {
               fontWeight: 400,
               letterSpacing: '0.02em',
               lineHeight: 1.05,
-              fontSize: 'clamp(2.6rem, 7vw, 4.4rem)',
+              fontSize: 'clamp(28px, 4vw, 40px)',
               color: GREEN,
               margin: 0,
             }}
@@ -452,7 +453,7 @@ export default function WhyDietsFail() {
             style={{
               position: 'relative',
               fontFamily: BODY,
-              fontSize: 'clamp(1.05rem, 1.8vw, 1.35rem)',
+              fontSize: 'clamp(15px, 1.6vw, 17px)',
               lineHeight: 1.55,
               color: TAUPE,
               margin: '20px 0 0',
@@ -477,7 +478,7 @@ export default function WhyDietsFail() {
               fontWeight: 400,
               letterSpacing: '0.015em',
               lineHeight: 1.25,
-              fontSize: 'clamp(1.3rem, 2.6vw, 1.9rem)',
+              fontSize: 'clamp(20px, 2.2vw, 25px)',
               color: GREEN,
               margin: '0 0 20px',
             }}
@@ -487,7 +488,7 @@ export default function WhyDietsFail() {
           <p
             style={{
               fontFamily: BODY,
-              fontSize: 'clamp(1rem, 1.5vw, 1.15rem)',
+              fontSize: '15px',
               lineHeight: 1.7,
               color: TAUPE,
               margin: 0,
