@@ -1,4 +1,6 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
+import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import OutcomeStepper from './OutcomeStepper';
 import { JsonLd } from '@/lib/seo/JsonLd';
@@ -109,17 +111,17 @@ const notForYou = [
   'You believe willpower should be enough',
 ];
 
-const carismaCommitments = [
+const carismaCommitments: ReactNode[] = [
   'Visible inch loss and shape change, not vague promises',
   'Plans that work with your age, hormones and metabolism',
   'No crash diets, no banned foods, no endless hours of cardio',
-  'Medical grade technology and treatments delivered by trained professionals',
+  <>Medical grade technology and <Link href="/packages" style={{ color: '#406042', textDecoration: 'underline' }}>treatments</Link> delivered by trained professionals</>,
 ];
 
-const whyCarisma = [
+const whyCarisma: ReactNode[] = [
   "Created by the team behind Malta's leading spa and medical aesthetics centres",
-  'Doctor led medical slimming, not a beauty salon "diet program"',
-  'All in one approach: assessment, nutrition, movement and treatments',
+  <>Doctor led <Link href="/weight-loss" style={{ color: '#406042', textDecoration: 'underline' }}>medical slimming</Link>, not a beauty salon &quot;diet program&quot;</>,
+  <>All in one approach: assessment, nutrition, movement and <Link href="/packages" style={{ color: '#406042', textDecoration: 'underline' }}>treatments</Link></>,
   'High touch support with weekly check ins and WhatsApp coaching',
 ];
 
@@ -144,7 +146,7 @@ const GREEN_FILL = '#4f7256'; // CTA/button solid fill — white text clears 5.4
 const GREEN_SAGE_LIGHT = '#C9E0CC'; // light sage for text over the scrimmed hero (>=4.5:1)
 const TAUPE = '#5f5649'; // darkened taupe for body/muted text — clears AA (>=4.92:1) on white & EVERY light-sage card on this page
 
-function Kicker({ children, centered = false, rule = false }: { children: React.ReactNode; centered?: boolean; rule?: boolean }) {
+function Kicker({ children, centered = false, rule = false }: { children: ReactNode; centered?: boolean; rule?: boolean }) {
   return (
     <div className={centered ? 'flex flex-col items-center' : ''}>
       <p
@@ -265,7 +267,16 @@ export default function SlimmingGuidePage() {
                 Not your effort. Not your intention. Not your character.
               </p>
               <p className="mb-2" style={{ color: TAUPE, fontSize: '13px' }}>
-                The plan was fragile. That is where this starts.
+                The plan was fragile. That is where this starts. If you want clinical support alongside
+                the habit system, explore our{' '}
+                <Link href="/weight-loss" style={{ color: GREEN, textDecoration: 'underline' }}>
+                  medical weight loss programme
+                </Link>{' '}
+                or{' '}
+                <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>
+                  GLP-1 weight loss injections
+                </Link>
+                .
               </p>
               </div>
             </div>
@@ -309,7 +320,15 @@ export default function SlimmingGuidePage() {
           <p className="mb-6 text-left" style={{ color: TAUPE, fontSize: '14px' }}>
             Not a challenge. Not a 30-day reset. Not a system that requires you to be a different person to use
             it. The Carisma Slimming Guide is a behaviour system. Built from real clinic practice. Designed for
-            the life you actually have.
+            the life you actually have. It complements our{' '}
+            <Link href="/weight-loss" style={{ color: GREEN, textDecoration: 'underline' }}>
+              medical weight loss programme
+            </Link>{' '}
+            and{' '}
+            <Link href="/glp1" style={{ color: GREEN, textDecoration: 'underline' }}>
+              GLP-1 injections
+            </Link>{' '}
+            for those who want clinical support alongside the habit system.
           </p>
           <p className="mb-8 text-left" style={{ color: TAUPE, fontSize: '14px' }}>
             The principle it runs on is this: what you can repeat consistently will always outperform what you
@@ -520,7 +539,19 @@ export default function SlimmingGuidePage() {
           <p className="mb-10 lg:mb-[88px]" style={{ color: TAUPE, fontSize: '15px' }}>
             The guide includes recipes built for real Maltese kitchens. Practical, familiar dishes built within
             the method so they work without adaptation. Nothing aspirational. Nothing that requires ingredients
-            you would not already have.
+            you would not already have. When you are ready to accelerate results in the clinic, explore our{' '}
+            <Link href="/packages/fat-freezing" style={{ color: GREEN, textDecoration: 'underline' }}>
+              fat freezing
+            </Link>
+            ,{' '}
+            <Link href="/packages/anti-cellulite" style={{ color: GREEN, textDecoration: 'underline' }}>
+              anti-cellulite
+            </Link>
+            , and{' '}
+            <Link href="/packages/lymphatic-drainage" style={{ color: GREEN, textDecoration: 'underline' }}>
+              lymphatic drainage
+            </Link>{' '}
+            treatments.
           </p>
           <div className="flex justify-center mb-12 lg:mb-[185px]">
             <p
@@ -652,7 +683,11 @@ export default function SlimmingGuidePage() {
               }}
             >
               By the end, you will not have a list of rules to follow. You will have a way of thinking about food
-              that holds, even on the weeks that don&apos;t.
+              that holds, even on the weeks that don&apos;t. Want personalised guidance?{' '}
+              <Link href="/consultation" style={{ color: GREEN, textDecoration: 'underline', textTransform: 'none' }}>
+                Book a free consultation
+              </Link>{' '}
+              and we will build a plan around you.
             </p>
           </div>
         </div>
@@ -690,7 +725,19 @@ export default function SlimmingGuidePage() {
               </p>
               <p className="mb-7" style={{ color: TAUPE, fontSize: '14px', maxWidth: '340px' }}>
                 Choosing this for yourself is not indulgent. It is practical. The structure you have been missing
-                does not appear on its own. This is where it starts.
+                does not appear on its own. This is where it starts. Pair it with our{' '}
+                <Link href="/packages/fat-dissolving" style={{ color: GREEN, textDecoration: 'underline' }}>
+                  fat dissolving injections
+                </Link>
+                ,{' '}
+                <Link href="/packages/muscle-stimulation" style={{ color: GREEN, textDecoration: 'underline' }}>
+                  muscle stimulation
+                </Link>
+                , or{' '}
+                <Link href="/packages/skin-tightening" style={{ color: GREEN, textDecoration: 'underline' }}>
+                  skin tightening
+                </Link>{' '}
+                treatments for accelerated results.
               </p>
               <a
                 href={PRODUCT_URL}
@@ -757,8 +804,8 @@ export default function SlimmingGuidePage() {
               our commitment to medically-led slimming in Malta
             </h3>
             <ul className="space-y-2 list-disc pl-5 mb-8" style={{ maxWidth: '430px' }}>
-              {carismaCommitments.map((item) => (
-                <li key={item} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
+              {carismaCommitments.map((item, i) => (
+                <li key={i} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
                   {item}
                 </li>
               ))}
@@ -767,8 +814,8 @@ export default function SlimmingGuidePage() {
               WHY MALTA CHOOSES CARISMA SLIMMING OVER A GENERIC DIET PLAN
             </h3>
             <ul className="space-y-2 list-disc pl-5 mb-10" style={{ maxWidth: '430px' }}>
-              {whyCarisma.map((item) => (
-                <li key={item} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
+              {whyCarisma.map((item, i) => (
+                <li key={i} style={{ color: TAUPE, fontSize: '14px', lineHeight: 1.5 }}>
                   {item}
                 </li>
               ))}

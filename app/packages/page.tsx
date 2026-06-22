@@ -134,7 +134,15 @@ export default function PackagesPage() {
                 style={{ fontFamily: BODY_FONT, color: BODY_COLOR, fontSize: 16, lineHeight: 1.6 }}
               >
                 Each package is a focused, doctor-led protocol — choose your goal, and we&rsquo;ll tailor
-                the combination at your free body analysis.
+                the combination at your{' '}
+                <Link
+                  href="/consultation"
+                  style={{ color: GREEN, textDecorationColor: GREEN }}
+                  className="underline underline-offset-2 hover:opacity-75 transition-opacity"
+                >
+                  free body analysis
+                </Link>
+                .
               </p>
             </div>
             {/* P5 — mobile-first grid: 1 col → 2 col → 3 col */}
@@ -235,8 +243,15 @@ export default function PackagesPage() {
               className="mb-8 text-lg leading-relaxed max-w-prose mx-auto"
               style={{ color: BODY_COLOR, fontFamily: BODY_FONT }}
             >
-              Many clients combine multiple treatments as part of their comprehensive transformation
-              plan. Our medical team will recommend the ideal combination based on your goals and a
+              Many clients combine multiple treatments as part of their{' '}
+              <Link
+                href="/weight-loss"
+                style={{ color: GREEN, textDecorationColor: GREEN }}
+                className="underline underline-offset-2 hover:opacity-75 transition-opacity"
+              >
+                comprehensive weight loss programme
+              </Link>
+              . Our medical team will recommend the ideal combination based on your goals and a
               full body assessment.
             </p>
             {/* P2 — min 44×44px touch targets on all CTAs */}
@@ -263,6 +278,29 @@ export default function PackagesPage() {
                 Call: +356 27802062
               </a>
             </div>
+            {/* Contextual links to related programmes */}
+            <p
+              className="mt-8 text-sm leading-relaxed"
+              style={{ color: BODY_COLOR, fontFamily: BODY_FONT }}
+            >
+              Considering medical support?{' '}
+              <Link
+                href="/glp1"
+                style={{ color: GREEN, textDecorationColor: GREEN }}
+                className="underline underline-offset-2 hover:opacity-75 transition-opacity"
+              >
+                Explore our GLP-1 weight loss injections
+              </Link>
+              . Want to learn more first?{' '}
+              <Link
+                href="/slimming-guide"
+                style={{ color: GREEN, textDecorationColor: GREEN }}
+                className="underline underline-offset-2 hover:opacity-75 transition-opacity"
+              >
+                Download our free slimming guide
+              </Link>
+              .
+            </p>
           </div>
         </section>
       </main>

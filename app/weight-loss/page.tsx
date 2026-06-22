@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
@@ -438,7 +439,7 @@ function ProgramOverviewSection() {
                   <li key={t} className="flex items-start gap-2" style={liStyle}><span style={bullet}>&bull;</span><span>{t}</span></li>
                 ))}
               </ul>
-              <p className="mb-4" style={pStyle}>These assesments determine your GLP-1 (e.g., Ozempic, Mounjaro) eligibility.</p>
+              <p className="mb-4" style={pStyle}>These assesments determine your <Link href="/glp1" style={{ color: green, textDecoration: 'underline' }}>GLP-1 (e.g., Ozempic, Mounjaro)</Link> eligibility.</p>
               <p style={pStyle}>
                 Based on your results, we we enroll you on your prescription protocol, tailor a program length and treatment mix that is realistic for your starting point and schedule your follow ups to check-in with our doctor and slimming consultant. This is where &ldquo;nothing works for my body&rdquo; starts to become a clear picture and a safe, personalised plan.
               </p>
@@ -536,6 +537,7 @@ function ProgramOverviewSection() {
                 <h3 className="mb-4" style={stepTitle}>Body Contouring Treatments Included in Your Programme</h3>
                 <p style={pStyle}>
                   We use internationally renowned technologies to shape, tighten and refine your results &mdash; never cheap gadgets or outdated machines. Our treatments are not the whole plan, but they are powerful tools when used on top of a solid medical, diet and movement strategy. Every device we use is leading in its category, chosen for safety, research and real-world results.
+                  {' '}<Link href="/packages" style={{ color: green, textDecoration: 'underline' }}>View all our treatments &rsaquo;</Link>
                 </p>
               </div>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -701,6 +703,7 @@ function TreatmentsSection() {
   const treatments = [
     {
       title: 'Emsculpt NEO — muscle stimulation',
+      href: '/packages/muscle-stimulation',
       image: '/wix/87fc13_a965179046514c2a8ad7bec0b7f44127~mv2.jpg',
       placeholder: 'Emsculpt NEO treatment photo',
       desc: 'High-intensity electromagnetic energy contracts the muscle thousands of times in a single 30-minute session — the equivalent effort of around 20,000 contractions while you simply lie still.',
@@ -713,6 +716,7 @@ function TreatmentsSection() {
     },
     {
       title: 'CoolSculpting — fat freezing',
+      href: '/packages/fat-freezing',
       image: '',
       placeholder: 'CoolSculpting fat-freezing treatment photo',
       desc: 'The market-leading cryolipolysis system targets stubborn pockets that resist diet and exercise, cooling fat cells in a controlled way so the body gradually clears them.',
@@ -725,6 +729,7 @@ function TreatmentsSection() {
     },
     {
       title: 'VelaShape — radiofrequency tightening',
+      href: '/packages/skin-tightening',
       image: '',
       placeholder: 'VelaShape skin-tightening treatment photo',
       desc: 'Radiofrequency, infrared light, gentle vacuum and massage warm the deeper layers of skin to stimulate collagen and refine texture.',
@@ -737,6 +742,7 @@ function TreatmentsSection() {
     },
     {
       title: 'Lymphatic drainage — recovery support',
+      href: '/packages/lymphatic-drainage',
       image: '',
       placeholder: 'Lymphatic drainage treatment photo',
       desc: 'Compressive micro-vibration and specialised massage support circulation and the clearance of fluid as an adjunct to your core plan.',
@@ -772,7 +778,9 @@ function TreatmentsSection() {
                   )}
                 </div>
                 <div className={flip ? 'md:order-1' : ''}>
-                  <h3 className="mb-4" style={{ color: greenDark, fontFamily: headingFont, fontSize: '22px', fontWeight: 400 }}>{t.title}</h3>
+                  <h3 className="mb-4" style={{ color: greenDark, fontFamily: headingFont, fontSize: '22px', fontWeight: 400 }}>
+                    <Link href={t.href} style={{ color: greenDark, textDecoration: 'none' }} className="hover:underline">{t.title}</Link>
+                  </h3>
                   <p className="mb-4" style={pStyle}>{t.desc}</p>
                   <ul className="space-y-2 mb-4">
                     {t.uses.map((u) => (
@@ -819,7 +827,9 @@ function CarismaDifferenceSection() {
           Why Carisma Slimming Is Different<br />From Every Other Weight Loss Clinic in Malta
         </h2>
         <p className="text-center mx-auto mb-12 max-w-2xl" style={pStyle}>
-          We&apos;re a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don&apos;t just lose weight, you step into your strongest form.
+          We&apos;re a doctor led transformation program that blends medical insight — including{' '}
+          <Link href="/glp1" style={{ color: green, textDecoration: 'underline' }}>GLP-1 medical weight loss injections</Link>{' '}
+          where clinically appropriate — sustainable nutrition, and modern body tech into one high touch system, so you don&apos;t just lose weight, you step into your strongest form.
         </p>
         <div className="mx-auto max-w-xl">
           <ul className="space-y-6">
@@ -1212,13 +1222,13 @@ function ResultsSection() {
               <p className="mb-6" style={pStyle}>
                 It covers when to eat, what to eat, how much, and even the order in which to eat it — drawn from years of clinical experience here in Malta.
               </p>
-              <a
+              <Link
                 href="/slimming-guide"
                 className="cta-glow inline-flex items-center justify-center font-bold text-white text-center min-h-[44px] transition-opacity duration-200 hover:opacity-90 active:opacity-80"
                 style={{ padding: '14px 34px', fontFamily: wideFont, fontSize: '14px', letterSpacing: '0.5px' }}
               >
                 READ THE GUIDE
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -1604,7 +1614,8 @@ function FinalCTASection() {
           <Eyebrow>Your next step</Eyebrow>
           <SectionHeading>Book Your Free Body Analysis — Malta&apos;s Doctor-Led Weight Loss Programme</SectionHeading>
           <p className="mt-4 mb-2 max-w-2xl mx-auto" style={pStyle}>
-            We take on a limited number of new clients each month so every plan stays genuinely doctor-led. Book your free, no-obligation assessment and we&apos;ll tell you honestly whether the program is right for you.
+            We take on a limited number of new clients each month so every plan stays genuinely doctor-led.{' '}
+            <Link href="/consultation" style={{ color: green, textDecoration: 'underline' }}>Book your free, no-obligation assessment</Link> and we&apos;ll tell you honestly whether the program is right for you.
           </p>
           <ul className="mt-10 mb-10 space-y-3 inline-block text-left">
             {whyCarisma.map((t) => (

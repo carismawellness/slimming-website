@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
 import BookConsultationButton from '@/components/BookConsultationButton';
 import GradientField from '@/components/layers/GradientField';
 import HeroMotif from '@/components/HeroMotif';
@@ -213,19 +214,24 @@ export default function ConsultationPage() {
               </h1>
 
               <p style={{ fontFamily: BODY, fontSize: 'clamp(14px, 1.1vw, 15.5px)', lineHeight: 1.6, color: TAUPE, maxWidth: 520, margin: '0 0 22px' }}>
-                Meet a medically qualified doctor, get a free Tanita body composition analysis, and leave with a
-                personalised slimming plan built around your body, your health history and your lifestyle.
+                Meet a medically qualified doctor, get a free Tanita body composition analysis, and leave with a{' '}
+                <Link href="/packages" style={{ color: SAGE, textDecoration: 'underline' }}>personalised slimming plan</Link>{' '}
+                built around your body, your health history and your lifestyle.
               </p>
 
               <ul style={{ listStyle: 'none', padding: 0, margin: '0 0 26px', display: 'grid', gap: 9, maxWidth: 540 }}>
                 {[
-                  'Doctor-led medical weight loss assessment — not a salon diet',
-                  'Free Tanita body composition scan: fat, muscle, metabolic age',
-                  'A clear, realistic plan — and zero obligation to continue',
+                  { text: 'Doctor-led medical weight loss assessment — not a salon diet', href: '/weight-loss' as string | null },
+                  { text: 'Free Tanita body composition scan: fat, muscle, metabolic age', href: null },
+                  { text: 'A clear, realistic plan — and zero obligation to continue', href: null },
                 ].map((b) => (
-                  <li key={b} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
+                  <li key={b.text} style={{ display: 'flex', gap: 10, alignItems: 'flex-start' }}>
                     <Check />
-                    <span style={{ fontFamily: BODY, fontSize: 13.5, color: TAUPE, lineHeight: 1.5 }}>{b}</span>
+                    <span style={{ fontFamily: BODY, fontSize: 13.5, color: TAUPE, lineHeight: 1.5 }}>
+                      {b.href ? (
+                        <Link href={b.href} style={{ color: TAUPE, textDecoration: 'underline' }}>{b.text}</Link>
+                      ) : b.text}
+                    </span>
                   </li>
                 ))}
               </ul>
@@ -371,7 +377,15 @@ export default function ConsultationPage() {
                     {s.n}
                   </span>
                   <h3 style={{ fontFamily: HEADING, fontWeight: 400, fontSize: 18, color: SAGE, lineHeight: 1.25 }}>{s.t}</h3>
-                  <p style={{ fontFamily: BODY, fontSize: 14, lineHeight: 1.65, color: TAUPE }}>{s.d}</p>
+                  {s.n === '03' ? (
+                    <p style={{ fontFamily: BODY, fontSize: 14, lineHeight: 1.65, color: TAUPE }}>
+                      You leave with a clear, realistic plan built around your body and lifestyle — including whether{' '}
+                      <Link href="/weight-loss" style={{ color: TAUPE, textDecoration: 'underline' }}>medical weight loss support</Link>{' '}
+                      or <Link href="/glp1" style={{ color: TAUPE, textDecoration: 'underline' }}>GLP-1 injections</Link> are right for you.
+                    </p>
+                  ) : (
+                    <p style={{ fontFamily: BODY, fontSize: 14, lineHeight: 1.65, color: TAUPE }}>{s.d}</p>
+                  )}
                 </li>
               ))}
             </ol>
@@ -392,7 +406,7 @@ export default function ConsultationPage() {
               </h2>
               <p style={{ fontFamily: BODY, fontSize: 15, lineHeight: 1.6, color: TAUPE, maxWidth: 600, margin: '14px auto 0' }}>
                 Your free body composition analysis is led by medically qualified doctors who listen first and build a conservative,
-                evidence-led plan around you.
+                evidence-led <Link href="/packages" style={{ color: TAUPE, textDecoration: 'underline' }}>slimming plan</Link> around you.
               </p>
             </header>
             <DoctorCards />
@@ -461,6 +475,9 @@ export default function ConsultationPage() {
             </h2>
             <p style={{ fontFamily: BODY, fontSize: 16, lineHeight: 1.6, color: TAUPE, maxWidth: 560, margin: '0 auto 30px' }}>
               Book your free body composition analysis today, meet your doctor, and get the honest, personalised plan you deserve.
+              Not ready to book yet?{' '}
+              <Link href="/slimming-guide" style={{ color: SAGE, textDecoration: 'underline' }}>Download our free slimming guide</Link>{' '}
+              first.
             </p>
             <div className="flex justify-center">
               <BookConsultationButton variant="filled" style={{ padding: '17px 40px' }}>
