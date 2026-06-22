@@ -127,9 +127,9 @@ function BookSection() {
 // ─── Section: Sister Brands ───────────────────────────────────────────────────
 function BrandsSection() {
   return (
-    <section aria-labelledby="footer-brands-h" style={{ background: 'transparent', padding: '80px 0' }}>
+    <section aria-labelledby="footer-brands-h" style={{ background: 'transparent', padding: 'clamp(48px, 9vw, 80px) 0' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 5vw, 40px)' }}>
           <Eyebrow>The Carisma Wellness Group</Eyebrow>
           <div style={{ width: '36px', height: '1px', backgroundColor: DECO, margin: '0 auto 24px' }} />
           <h2 id="footer-brands-h" style={{ fontFamily: SERIF, fontSize: 'clamp(20px,3vw,28px)', fontWeight: 400, color: INK, letterSpacing: '1px', textTransform: 'uppercase', marginBottom: '0' }}>
@@ -138,7 +138,7 @@ function BrandsSection() {
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px,1fr))', gap: '20px' }}>
           {BRANDS.map((brand) => (
-            <div key={brand.title} style={{ position: 'relative', height: '272px', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
+            <div key={brand.title} style={{ position: 'relative', height: 'clamp(210px, 54vw, 272px)', borderRadius: '20px', overflow: 'hidden', boxShadow: '0 10px 40px rgba(0,0,0,0.1)' }}>
               <Image src={brand.img} alt={brand.title} fill style={{ objectFit: 'cover' }} sizes="(max-width:768px) 100vw, 50vw" loading="lazy" />
               <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(100deg,rgba(2,20,10,0.75) 0%,rgba(2,20,10,0.25) 60%,transparent 100%)' }} />
               <div style={{ position: 'absolute', inset: 0, padding: '28px 28px 28px 32px', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
@@ -285,7 +285,7 @@ export default function Footer() {
         {/* heavy/decorative rows hidden on mobile to keep the footer lean */}
         <div className="hidden md:block"><DoctorsSection /></div>
         <BookSection />
-        <div className="hidden md:block"><BrandsSection /></div>
+        <BrandsSection />
         <FooterBase />
       </div>
     </footer>
