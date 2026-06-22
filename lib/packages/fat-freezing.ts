@@ -75,7 +75,8 @@ export const fatFreezing: PackageContent = {
     'The fat cells that are removed do not return, so results in that area are long lasting if your weight is stable.',
     'Non surgical and non invasive treatment with little to no downtime in most people',
   ],
-  ptImage: W + '87fc13_e873e3bf68584964b06a9f7bd9e5d335~mv2.png',
+  // CoolSculpting treatment photo (was a too-thin, cut-off before/after image).
+  ptImage: W + '87fc13_6d89e9c129304617a960aa46bb07eed4~mv2.jpg',
   // ptImage2 (the orange fat-reduction image) removed per request.
   ptImage2: '',
   ptImage2Width: 225,

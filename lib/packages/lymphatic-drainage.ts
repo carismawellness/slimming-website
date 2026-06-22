@@ -111,7 +111,7 @@ export const lymphaticDrainage: PackageContent = {
   dualFineprint: [
     '* Eligibility and treatment recommendations depend on your health history and individual needs. A clear plan will always be discussed during your consultation before starting. Lymphatic drainage is a supportive wellness therapy and may not be suitable for certain medical conditions. Treatment is provided following professional assessment by our medical team.',
   ],
-  dualCtaLabel: 'Claim my spot now',
+  dualCtaLabel: 'Claim your spot now',
 
   mapQuery: 'Carisma Slimming, Malta',
 

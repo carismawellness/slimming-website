@@ -128,13 +128,13 @@ export interface PackageContent {
 
   /* ---- 10. FAQ ---- */
   faqs: Faq[];
-  /** label of the centered blue CTA after the FAQ list; default "Claim my spot now". */
+  /** label of the centered blue CTA after the FAQ list; default "Claim your spot now". */
   faqCtaLabel?: string;
 
   /* ---- 11. evidence based approach ---- */
   evidenceEyebrow: string;
   evidence: EvidenceCard[];
-  /** label of the centered blue CTA after the evidence cards; default "Claim my spot now". */
+  /** label of the centered blue CTA after the evidence cards; default "Claim your spot now". */
   evidenceCtaLabel?: string;
 
   /* ---- shared-section overrides (rarely needed) ---- */

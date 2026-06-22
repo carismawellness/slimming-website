@@ -21,7 +21,7 @@
      11 Evidence based approach (research cards)
    ============================================================ */
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
 import { BOOKING_URL } from '@/lib/services';
@@ -198,126 +198,129 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
    inline-style tokens and fed per-service reviews (testimonials[c.id]). Keeps the
    before/after photo each body-contouring review carries, as conversion proof.
    The heading is an H3 because it sits inside the H2 "secret" section. ---------- */
+/* One slide = the full before/after composite (the hero) + a minimal caption
+   beneath it. Mirrors ResultsCarousel's ResultCard EXACTLY: the image renders at
+   width:100% with NO forced aspectRatio and NO objectFit:cover, so the wide
+   baked Before|After composite shows in full and is never cropped. No outer card,
+   no overlay labels, no centre divider — the rounded image with a soft drop-shadow
+   sits directly on the section background. */
 function TestimonialQuoteCard({ t }: { t: Testimonial }) {
   const [expanded, setExpanded] = useState(false);
   return (
-    <blockquote className="card-lift" style={{ background: '#fff', display: 'flex', flexDirection: 'column', padding: 0, overflow: 'hidden', borderRadius: 16, margin: 0 }}>
-      {/* before/after proof image — the source webp is a two-up composite (before |
-          after). The "BEFORE"/"AFTER" labels are rendered here as DOM overlays,
-          bottom-centred within each image half over a soft dark scrim (white text,
-          AA via the gradient), so they're never clipped by objectFit:cover /
-          overflow:hidden the way edge-baked image labels were. */}
-      <div style={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', overflow: 'hidden' }}>
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={t.image} alt={`${t.name} — before and after body contouring treatment`} style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }} />
-        {/* scrim so white labels stay legible over any photo */}
-        <span aria-hidden="true" style={{ position: 'absolute', left: 0, right: 0, bottom: 0, height: '34%', background: 'linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0))', pointerEvents: 'none' }} />
-        {/* centred two-up divider — sections the baked before|after composite into a
-            deliberate, premium comparison: a hairline white rule flanked by a soft
-            shadow at the exact 50% seam, reading as a clean Before | After split. */}
-        <span aria-hidden="true" style={{ position: 'absolute', top: 0, bottom: 0, left: '50%', width: 3, transform: 'translateX(-50%)', backgroundColor: 'rgba(255,255,255,0.92)', boxShadow: '0 0 0 1px rgba(0,0,0,0.18)', pointerEvents: 'none', zIndex: 1 }} />
-        {/* crisp inner frame around each half so the comparison feels sectioned */}
-        <span aria-hidden="true" style={{ position: 'absolute', inset: 0, boxShadow: 'inset 0 0 0 1px rgba(255,255,255,0.45)', pointerEvents: 'none', zIndex: 1 }} />
-        <span aria-hidden="true" className="fr-ba-label" style={{ left: '25%' }}>Before</span>
-        <span aria-hidden="true" className="fr-ba-label" style={{ left: '75%' }}>After</span>
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '20px 22px 24px' }}>
-        {/* star row — matches weight-loss design */}
-        <p aria-hidden="true" style={{ color: GREEN_TEXT, fontFamily: SERIF, fontSize: 13, letterSpacing: '1px', margin: 0 }}>{'★★★★★'}</p>
-        <span className="sr-only">5 stars</span>
-        <p
+    <figure style={{ margin: 0, boxSizing: 'border-box' }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={t.image}
+        alt={`${t.name} before and after body contouring treatment`}
+        style={{
+          width: '100%',
+          borderRadius: '18px',
+          display: 'block',
+          boxShadow: '0 18px 40px rgba(40, 50, 40, 0.16)',
+        }}
+      />
+      {/* Minimal caption: name is a quiet uppercase taupe label, quote stays
+          secondary/light with a 2-line clamp + Read more/less toggle. */}
+      <figcaption style={{ paddingTop: '18px' }}>
+        <div
           style={{
-            color: TAUPE, fontFamily: BODY, fontSize: 15, lineHeight: 1.6, fontStyle: 'italic', margin: '12px 0 0', flex: 1,
-            ...(expanded ? {} : { display: '-webkit-box', WebkitLineClamp: 4, WebkitBoxOrient: 'vertical', overflow: 'hidden' }),
+            color: TAUPE,
+            fontFamily: BODY,
+            fontSize: '11.5px',
+            fontWeight: 500,
+            textTransform: 'uppercase',
+            letterSpacing: '0.12em',
+            marginBottom: '8px',
           }}
         >
-          &ldquo;{t.quote}&rdquo;
+          {t.name}
+        </div>
+        <p
+          style={{
+            color: '#5C5347',
+            fontFamily: BODY,
+            fontSize: '13.5px',
+            lineHeight: 1.6,
+            fontWeight: 300,
+            margin: 0,
+            ...(expanded
+              ? {}
+              : {
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                }),
+          }}
+        >
+          {t.quote}
         </p>
-        {/* P2 — min touch target on expand button */}
         <button
           type="button"
           onClick={() => setExpanded((v) => !v)}
+          className="rc-focusable"
           aria-expanded={expanded}
           aria-label={expanded ? `Collapse ${t.name}'s review` : `Read full review by ${t.name}`}
-          style={{ alignSelf: 'flex-start', background: 'none', border: 'none', padding: '8px 0', cursor: 'pointer', fontSize: 13, fontStyle: 'italic', textDecoration: 'underline', color: TAUPE, fontFamily: BODY, minHeight: '44px' }}
+          style={{
+            color: GREEN_TEXT,
+            fontFamily: BODY,
+            fontSize: '12.5px',
+            textDecoration: 'underline',
+            cursor: 'pointer',
+            background: 'transparent',
+            padding: 0,
+            border: 0,
+            marginTop: '6px',
+          }}
         >
           {expanded ? 'Read less' : 'Read more'}
         </button>
-        {/* P6 — name as cite within the H3 section heading hierarchy */}
-        <cite style={{ fontStyle: 'normal', color: HEADING_GREEN, fontFamily: SERIF, fontSize: 16, fontWeight: 400, textTransform: 'uppercase', marginTop: 6 }}>{t.name}</cite>
-      </div>
-    </blockquote>
+      </figcaption>
+    </figure>
   );
 }
 
-/* Horizontal scroll-snap carousel with ‹/› arrow navigation — mirrors
-   ModalitiesCarousel (scroll track, scroll-snap, prev/next buttons that scrollBy
-   one card, buttons hidden at start/end, hidden scrollbar). On desktop ~3 cards
-   show; on mobile cards size to the viewport and users swipe (arrows hidden < md).
-   All cards/quotes/names stay in the DOM, so SEO and a11y are preserved. */
-const TESTI_CARD_W = 320;
-const TESTI_GAP = 24;
-const TESTI_PAD = 4; // small inset so the card lift-shadow isn't clipped
-
+/* Horizontal scroll-snap carousel that mirrors components/ResultsCarousel EXACTLY
+   (the /glp1 before/after system): a flex scroll track with scroll-snap and a
+   responsive peek (86vw / 60% / 42%), white circular ‹/› arrows, a soft right-edge
+   white fade, hidden scrollbar, and a :focus-visible sage ring. Each slide is the
+   full before/after composite — no crop, no overlay labels, no centre divider.
+   All names/quotes stay in the SSR DOM, so SEO and a11y are preserved.
+   Reduced-motion safe (smooth scroll falls back to auto). */
 function TestimonialsSection({ items }: { items: Testimonial[] }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  const sync = () => {
-    const el = ref.current;
+  const scrollBy = (dir: number) => {
+    const el = scrollRef.current;
     if (!el) return;
-    setAtStart(el.scrollLeft <= 4);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
-  };
-
-  useEffect(() => {
-    sync();
-    const el = ref.current;
-    if (el) el.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
-    return () => {
-      if (el) el.removeEventListener('scroll', sync);
-      window.removeEventListener('resize', sync);
-    };
-  }, []);
-
-  const scroll = (dir: 1 | -1) => {
     const reduce = typeof window !== 'undefined'
       && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    ref.current?.scrollBy({ left: dir * (TESTI_CARD_W + TESTI_GAP), behavior: reduce ? 'auto' : 'smooth' });
-  };
-
-  const arrowStyle: React.CSSProperties = {
-    top: 'calc(50% - 26px)', width: 52, height: 52, backgroundColor: '#ffffff',
-    boxShadow: '0 4px 16px rgba(0,0,0,0.18)', color: '#6f6456', fontSize: 26,
-    lineHeight: 1, border: 'none', cursor: 'pointer', borderRadius: 999,
+    // Scroll by roughly one slide so a fresh photo snaps into view.
+    el.scrollBy({ left: dir * (el.clientWidth * 0.55), behavior: reduce ? 'auto' : 'smooth' });
   };
 
   return (
     <section aria-labelledby="testimonials-heading" style={{ marginTop: 48 }}>
+      {/* Focus indicator: 3px deep-sage ring (#4F7256 on white), offset 2px.
+          Slide sizing (responsive peek), arrow hover and hidden scrollbar live
+          here too — all identical to ResultsCarousel. */}
       <style>{`
-        /* before/after overlay labels — bottom-centred within each image half */
-        .fr-ba-label {
-          position: absolute;
-          bottom: 10px;
-          transform: translateX(-50%);
-          color: #ffffff;
-          font-family: ${WIDE};
-          font-weight: 700;
-          font-size: 11px;
-          letter-spacing: 1.5px;
-          text-transform: uppercase;
-          text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-          pointer-events: none;
-          white-space: nowrap;
-          z-index: 1;
+        .rc-focusable:focus-visible {
+          outline: 3px solid #4F7256;
+          outline-offset: 2px;
+          border-radius: 4px;
         }
-        /* hide the scrollbar but keep the track scrollable (matches ModalitiesCarousel) */
         .fr-testi-track::-webkit-scrollbar { display: none; }
-        @media (max-width: 640px) {
-          .fr-testi-card { width: 84vw !important; }
+        .fr-testi-slide { width: 86vw; }
+        @media (min-width: 640px) {
+          .fr-testi-slide { width: 60%; }
         }
+        @media (min-width: 1024px) {
+          .fr-testi-slide { width: 42%; }
+        }
+        .fr-testi-arrow:hover { transform: translateY(-50%) scale(1.05); }
+        .fr-testi-arrow:active { transform: translateY(-50%) scale(0.98); }
       `}</style>
       <Eyebrow>Real results from real clients</Eyebrow>
       <div style={{ marginTop: 8 }}>
@@ -331,57 +334,86 @@ function TestimonialsSection({ items }: { items: Testimonial[] }) {
       </p>
 
       <div style={{ position: 'relative', marginTop: 40 }}>
-        {/* Left arrow — desktop only, hidden at start */}
-        {!atStart && (
-          <button
-            type="button"
-            onClick={() => scroll(-1)}
-            aria-label="Previous"
-            className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
-            style={{ ...arrowStyle, left: 12 }}
-          >
-            ‹
-          </button>
-        )}
-
-        {/* Scrollable track */}
-        <div
-          ref={ref}
-          className="fr-testi-track flex overflow-x-auto"
+        {/* Prominent circular arrows — anchored near the image's vertical middle
+            (caption sits below). Identical to ResultsCarousel. */}
+        <button
+          type="button"
+          onClick={() => scrollBy(-1)}
+          aria-label="Previous results"
+          className="rc-focusable fr-testi-arrow absolute z-20 flex items-center justify-center"
           style={{
-            gap: TESTI_GAP,
-            scrollSnapType: 'x mandatory',
-            scrollPaddingLeft: TESTI_PAD,
-            scrollbarWidth: 'none',
-            paddingLeft: TESTI_PAD,
-            paddingRight: TESTI_PAD,
-            paddingTop: 6,
-            paddingBottom: 18,
+            left: '-10px',
+            top: '32%',
+            transform: 'translateY(-50%)',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: '#FFFFFF',
+            color: GREEN_TEXT,
+            fontSize: '22px',
+            cursor: 'pointer',
+            border: 0,
+            lineHeight: 1,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
+            transition: 'transform 0.18s ease',
           }}
+        >
+          <span aria-hidden="true" style={{ marginTop: '-2px' }}>‹</span>
+        </button>
+        <button
+          type="button"
+          onClick={() => scrollBy(1)}
+          aria-label="Next results"
+          className="rc-focusable fr-testi-arrow absolute z-20 flex items-center justify-center"
+          style={{
+            right: '-10px',
+            top: '32%',
+            transform: 'translateY(-50%)',
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            background: '#FFFFFF',
+            color: GREEN_TEXT,
+            fontSize: '22px',
+            cursor: 'pointer',
+            border: 0,
+            lineHeight: 1,
+            boxShadow: '0 4px 16px rgba(0,0,0,0.16)',
+            transition: 'transform 0.18s ease',
+          }}
+        >
+          <span aria-hidden="true" style={{ marginTop: '-2px' }}>›</span>
+        </button>
+
+        {/* Soft right-edge fade hinting there's more to scroll. */}
+        <div
+          aria-hidden="true"
+          className="absolute z-10"
+          style={{
+            top: 0,
+            right: 0,
+            bottom: 0,
+            width: '48px',
+            pointerEvents: 'none',
+            background: 'linear-gradient(to right, rgba(255,255,255,0), #FFFFFF)',
+          }}
+        />
+
+        <div
+          ref={scrollRef}
+          className="fr-testi-track flex overflow-x-auto"
+          style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none', gap: '28px' }}
         >
           {items.map((t) => (
             <div
               key={t.name}
-              className="fr-testi-card flex-shrink-0"
-              style={{ width: TESTI_CARD_W, scrollSnapAlign: 'start' }}
+              className="fr-testi-slide flex-shrink-0"
+              style={{ scrollSnapAlign: 'start' }}
             >
               <TestimonialQuoteCard t={t} />
             </div>
           ))}
         </div>
-
-        {/* Right arrow — desktop only, hidden at end */}
-        {!atEnd && (
-          <button
-            type="button"
-            onClick={() => scroll(1)}
-            aria-label="Next"
-            className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
-            style={{ ...arrowStyle, right: 12 }}
-          >
-            ›
-          </button>
-        )}
       </div>
     </section>
   );
@@ -710,7 +742,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                     {/* treatment before/after — GLP-1-style asymmetric arch on white */}
                     <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                       <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
-                        <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} — before and after treatment result` : 'Before and after treatment result'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
+                        <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                       </div>
                       {(c.ptImage2 || c.ptImage3) && (
                         <div style={{ display: 'flex', gap: 18 }}>
@@ -729,7 +761,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                   {/* treatment before/after — GLP-1-style asymmetric arch on white */}
                   <div style={{ display: 'flex', flexDirection: 'column', gap: 18 }}>
                     <div style={{ position: 'relative', width: '100%', aspectRatio: '4 / 5', overflow: 'hidden', borderRadius: '90px 16px 90px 16px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}>
-                      <Image src={c.ptImage} alt="Before and after treatment result" fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
+                      <Image src={c.ptImage} alt={c.ptCardEyebrow ? `${c.ptCardEyebrow} treatment at Carisma Slimming, Malta` : 'Body contouring treatment at Carisma Slimming, Malta'} fill sizes="(max-width: 860px) 100vw, 40vw" style={{ objectFit: 'cover' }} />
                     </div>
                     {c.ptImage2 && (
                       <div style={{ position: 'relative', width: c.ptImage2Width ?? '100%', aspectRatio: '4 / 3', overflow: 'hidden', borderRadius: 16, boxShadow: '0 8px 22px rgba(0,0,0,0.08)' }}>
@@ -1015,7 +1047,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
             {c.faqCtaLabel !== '' && (
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}>
-                <CTA variant="blue">{c.faqCtaLabel ?? 'Claim my spot now'}</CTA>
+                <CTA variant="blue">{c.faqCtaLabel ?? 'Claim your spot now'}</CTA>
               </div>
             )}
           </div>
@@ -1033,13 +1065,13 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
               {/* Single clean row on desktop (equal cards, no orphaned/hanging card);
                   collapses to 1 column on mobile via the .fr-evgrid media rule. */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 40, alignItems: 'start' }} className="fr-evgrid">
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 24, marginTop: 40, alignItems: 'stretch' }} className="fr-evgrid">
                 {c.evidence.map((e, i) => {
                   const open = openEv === i;
                   const panelId = `ev-panel-${i}`;
                   const btnId = `ev-btn-${i}`;
                   return (
-                    <div key={e.title} style={{ position: 'relative', paddingTop: 16 }}>
+                    <div key={e.title} style={{ position: 'relative', paddingTop: 16, height: '100%', display: 'flex', flexDirection: 'column' }}>
                       <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
                         <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: '#eef3ea', position: 'relative', height: 186 }}>
                           {/* P3 — next/image for evidence images */}
@@ -1047,7 +1079,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                         </div>
                         <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 999, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
                       </div>
-                      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 100%)', border: '1px solid #e8e2da', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1 }}>
+                      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 100%)', border: '1px solid #e8e2da', borderRadius: 16, marginTop: -70, padding: '92px 30px 30px', position: 'relative', zIndex: 1, flex: 1, display: 'flex', flexDirection: 'column' }}>
                         {/* P6 — H3 within evidence section */}
                         <h3 style={{ color: GREEN_TEXT, fontFamily: SERIF, fontWeight: 400, fontSize: 20, lineHeight: 1.3, textTransform: 'uppercase', textAlign: 'center', whiteSpace: 'pre-line', margin: 0 }}>{e.title}</h3>
                         <div style={{ width: 90, height: 1, backgroundColor: '#cfc8bf', margin: '16px auto 20px' }} />
@@ -1072,7 +1104,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                           aria-expanded={open}
                           aria-controls={panelId}
                           style={{
-                            marginTop: open ? 14 : 8,
+                            marginTop: 'auto',
                             background: 'none',
                             border: 'none',
                             cursor: 'pointer',
@@ -1096,7 +1128,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
               </div>
 
               <div style={{ display: 'flex', justifyContent: 'center', marginTop: 44 }}>
-                <CTA variant="blue">{c.evidenceCtaLabel ?? 'Claim my spot now'}</CTA>
+                <CTA variant="blue">{c.evidenceCtaLabel ?? 'Claim your spot now'}</CTA>
               </div>
             </div>
           </section>
