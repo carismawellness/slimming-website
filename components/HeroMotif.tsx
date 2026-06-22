@@ -3,17 +3,16 @@
 import { useEffect, useRef } from 'react';
 
 /**
- * HeroMotif — "Woven Threads".
+ * HeroMotif — "Drifting Motes".
  *
- * A denser, more sophisticated interactive line motif in the lower hero. Many
- * fine sage threads weave and cross (each with its own amplitude, opacity and
- * width, so the field reads as layered depth rather than flat parallel stripes),
- * drifting on a slow current with a vertical travelling wave that rises through
- * the stack. They gently lift toward the cursor — like a hand under silk — with
- * a soft glow that follows the pointer. Edge + top fades keep it tasteful.
+ * A soft field of sage bokeh dots at varying depths that slowly float upward on
+ * a gentle current and drift away from the cursor (a quiet parallax repulsion).
+ * Concentrated in the lower hero and fading up so they stay clear of the copy.
+ * Soft-edged (a pre-rendered radial sprite) for a luminous, luxurious feel —
+ * evokes lightness and air, never busy.
  *
- * Built on a 2D canvas: crisp anti-aliased strokes, precise placement in the
- * lower band, direct screen-space mouse interaction (no shader / WebGL).
+ * Built on a 2D canvas with a cached sprite (cheap, soft, crisp); direct
+ * screen-space mouse interaction (no shader / WebGL).
  *
  * Guards: reduced-motion → one static frame; DPR-aware; paused offscreen / tab
  * hidden; full teardown on unmount.
@@ -38,21 +37,27 @@ export default function HeroMotif() {
     const coarse =
       window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 760;
 
-    // deterministic per-line variation → layered, non-flat depth
     const hash = (n: number) => {
       const s = Math.sin(n * 12.9898) * 43758.5453;
       return s - Math.floor(s);
     };
 
+    // ── soft dot sprite (radial sage → transparent) ──────────────────────
+    const SPRITE = 64;
+    const sprite = document.createElement('canvas');
+    sprite.width = sprite.height = SPRITE;
+    const sctx = sprite.getContext('2d')!;
+    const grad = sctx.createRadialGradient(SPRITE / 2, SPRITE / 2, 0, SPRITE / 2, SPRITE / 2, SPRITE / 2);
+    grad.addColorStop(0.0, 'rgba(142, 176, 147, 1)');
+    grad.addColorStop(0.45, 'rgba(142, 176, 147, 0.55)');
+    grad.addColorStop(1.0, 'rgba(142, 176, 147, 0)');
+    sctx.fillStyle = grad;
+    sctx.fillRect(0, 0, SPRITE, SPRITE);
+
     // ── tuning ───────────────────────────────────────────────────────────
-    const SAGE = '142, 176, 147';      // #8EB093
-    const LINES = coarse ? 20 : 34;    // higher density
-    const BAND_TOP = 0.66;             // lower band, with room for vertical travel
-    const BAND_BOT = 1.0;
-    const BASE_ALPHA = 0.15;           // subtle; density supplies the presence
-    const STEP = coarse ? 14 : 8;      // px between sample points
-    const LIFT = 24;                   // px the threads rise toward the cursor
-    const SIGMA = 168;                 // px radius of the cursor's influence
+    const N = coarse ? 60 : 120;
+    const REPEL_R = 150;     // px radius the cursor pushes dots
+    const REPEL_STR = 46;    // px max push
 
     let W = 0, H = 0, dpr = 1;
     const resize = () => {
@@ -63,14 +68,34 @@ export default function HeroMotif() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     };
     resize();
-    window.addEventListener('resize', resize, { passive: true });
 
-    const m = { tx: -9999, ty: -9999, x: -9999, y: -9999, active: false };
+    type Dot = { bx: number; by: number; r: number; a: number; vy: number; sway: number; ph: number; ox: number; oy: number };
+    const dots: Dot[] = [];
+    const build = () => {
+      dots.length = 0;
+      for (let i = 0; i < N; i++) {
+        const d = hash(i + 3);                 // depth 0..1
+        dots.push({
+          bx: hash(i + 1) * W,
+          by: hash(i + 2) * H,
+          r: 2 + d * 5.5,                       // closer = bigger
+          a: 0.10 + d * 0.20,                   // closer = brighter
+          vy: -(3 + d * 8),                     // rise (px/sec); closer = faster
+          sway: 6 + hash(i + 5) * 14,           // horizontal sway amplitude
+          ph: hash(i + 7) * 6.283,
+          ox: 0, oy: 0,
+        });
+      }
+    };
+    build();
+    const onResize = () => { resize(); build(); };
+    window.addEventListener('resize', onResize, { passive: true });
+
+    const m = { tx: -9999, ty: -9999, x: -9999, y: -9999 };
     const onPointer = (e: PointerEvent) => {
       const r = host.getBoundingClientRect();
-      m.tx = e.clientX - r.left;
-      m.ty = e.clientY - r.top;
-      if (!m.active) { m.x = m.tx; m.y = m.ty; m.active = true; }
+      m.tx = e.clientX - r.left; m.ty = e.clientY - r.top;
+      if (m.x < -900) { m.x = m.tx; m.y = m.ty; }
     };
     const onLeave = () => { m.tx = -9999; m.ty = -9999; };
     window.addEventListener('pointermove', onPointer, { passive: true });
@@ -80,62 +105,47 @@ export default function HeroMotif() {
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });
     io.observe(host);
 
-    const draw = (t: number) => {
+    let last = 0;
+    const draw = (now: number) => {
+      const dt = last ? Math.min(0.05, (now - last) / 1000) : 0.016;
+      last = now;
       ctx.clearRect(0, 0, W, H);
+
       if (m.tx < -900) { m.x += (-9999 - m.x) * 0.05; m.y += (-9999 - m.y) * 0.05; }
-      else { m.x += (m.tx - m.x) * 0.09; m.y += (m.ty - m.y) * 0.09; }
+      else { m.x += (m.tx - m.x) * 0.12; m.y += (m.ty - m.y) * 0.12; }
 
-      const bandTop = H * BAND_TOP;
-      const bandBot = H * BAND_BOT;
+      const t = now * 0.001;
+      for (const dot of dots) {
+        // slow upward drift + gentle horizontal sway; wrap around
+        dot.by += dot.vy * dt;
+        if (dot.by < -10) { dot.by = H + 10; dot.bx = hash(dot.ph * 1000 + now * 0.0001) * W; }
+        const swayX = Math.sin(t * 0.25 + dot.ph) * dot.sway;
 
-      for (let i = 0; i < LINES; i++) {
-        const f = i / (LINES - 1);
-        const seed = i * 0.6;
-        const h1 = hash(i + 1), h2 = hash(i + 11.3), h3 = hash(i + 27.7);
+        let x = dot.bx + swayX;
+        const y = dot.by;
 
-        const ampScale = 0.55 + h1 * 1.05;        // varied amplitude → weaving
-        const depthVar = 0.5 + h2 * 0.7;          // varied opacity → layered depth
-        const lw = 0.7 + h3 * 0.7;                // varied width → near/far feel
-
-        const baseY = bandTop + (bandBot - bandTop) * f;
-        const vtravel = 9 * Math.sin(t * 0.00018 + seed * 1.7); // slow vertical drift
-        const by = baseY + vtravel;
-
-        // opacity: fade in from the top of the band, fuller toward the bottom
-        const rowFade = 0.32 + 0.68 * f;
-        // soft glow where the cursor's height is near this thread
-        const dyl = by - m.y;
-        const glow = m.x > -900 ? Math.exp(-(dyl * dyl) / (2 * 130 * 130)) : 0;
-        const alpha = Math.min(0.4, BASE_ALPHA * rowFade * depthVar * (1 + glow * 1.2));
-
-        const g = ctx.createLinearGradient(0, 0, W, 0);
-        g.addColorStop(0.0, `rgba(${SAGE}, 0)`);
-        g.addColorStop(0.13, `rgba(${SAGE}, 1)`);
-        g.addColorStop(0.87, `rgba(${SAGE}, 1)`);
-        g.addColorStop(1.0, `rgba(${SAGE}, 0)`);
-
-        ctx.beginPath();
-        for (let x = 0; x <= W; x += STEP) {
-          const a1 = 5.0 * ampScale * Math.sin(x * 0.0040 + t * 0.00045 + seed);
-          const a2 = 3.0 * ampScale * Math.sin(x * 0.0085 - t * 0.00030 + seed * 1.7);
-          const a3 = 1.6 * Math.sin(x * 0.016 + t * 0.00060 + seed * 0.5);
-          // vertical travelling wave — couples line index with time so the
-          // pattern rises through the stack (the threads intertwine)
-          const av = 4.2 * Math.sin(x * 0.0060 + i * 0.55 - t * 0.00050);
-          let y = by + a1 + a2 + a3 + av;
-
-          if (m.x > -900) {
-            const dx = x - m.x, dy = by - m.y;
-            const d2 = dx * dx + dy * dy;
-            y -= LIFT * Math.exp(-d2 / (2 * SIGMA * SIGMA));
+        // cursor repulsion (eased so it returns smoothly)
+        let txo = 0, tyo = 0;
+        if (m.x > -900) {
+          const dx = x - m.x, dy = y - m.y;
+          const dist = Math.hypot(dx, dy);
+          if (dist < REPEL_R && dist > 0.001) {
+            const force = (1 - dist / REPEL_R) * REPEL_STR;
+            txo = (dx / dist) * force; tyo = (dy / dist) * force;
           }
-
-          if (x === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
         }
-        ctx.strokeStyle = g;
+        dot.ox += (txo - dot.ox) * 0.12;
+        dot.oy += (tyo - dot.oy) * 0.12;
+        x += dot.ox;
+        const yy = y + dot.oy;
+
+        // fade up so dots stay clear of the headline/copy
+        const vFade = Math.max(0, Math.min(1, (y / H - 0.22) / 0.5));
+        const alpha = dot.a * vFade;
+        if (alpha <= 0.002) continue;
+
         ctx.globalAlpha = alpha;
-        ctx.lineWidth = lw;
-        ctx.stroke();
+        ctx.drawImage(sprite, x - dot.r, yy - dot.r, dot.r * 2, dot.r * 2);
       }
       ctx.globalAlpha = 1;
     };
@@ -143,15 +153,16 @@ export default function HeroMotif() {
     let raf = 0;
     const loop = (now: number) => {
       if (visible && !document.hidden) draw(now);
+      else last = 0;
       raf = requestAnimationFrame(loop);
     };
 
-    if (reduced) draw(0);
+    if (reduced) draw(16);
     else raf = requestAnimationFrame(loop);
 
     return () => {
       cancelAnimationFrame(raf);
-      window.removeEventListener('resize', resize);
+      window.removeEventListener('resize', onResize);
       window.removeEventListener('pointermove', onPointer);
       window.removeEventListener('pointerout', onLeave);
       io.disconnect();
