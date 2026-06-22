@@ -22,7 +22,7 @@ export const fatDissolving: PackageContent = {
   heroTodayPrice: '€149 for 1 session',
   heroPriceNote: '€100 for individual sessions',
   heroFineprint: [
-    '* Includes 3 appointments of fat dissolving sessions, scheduled based on your clinical plan; additional areas or appointments charged at extra.',
+    '* Includes 1 fat dissolving session, scheduled based on your clinical plan; additional areas or sessions charged at extra.',
     '** Sessions may be spaced over multiple weeks depending on area and suitability',
     '** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
@@ -67,7 +67,7 @@ export const fatDissolving: PackageContent = {
   ptCardTag: 'targeted-fat reduction',
   ptParas: [
     'Our limited-time launch offer is available for selected treatment areas. Once full, standard pricing applies.',
-    'Experience targeted fat reduction performed by qualified aesthetic medical professionals now from €199 (regularly €450). In just one session, you begin the process of permanently breaking down stubborn fat for a slimmer, more refined contour.',
+    'Experience targeted fat reduction performed by qualified aesthetic medical professionals now €149 (regularly €340). In just one session, you begin the process of permanently breaking down stubborn fat for a slimmer, more refined contour.',
   ],
   ptEfficacyTitle: '',
   ptEfficacyBullets: [
@@ -94,7 +94,7 @@ export const fatDissolving: PackageContent = {
   dualTotalValue: '€340',
   dualTodayPrice: '€149',
   dualFineprint: [
-    '* Includes 3 appointments of fat dissolving sessions, scheduled based on your clinical plan; additional areas or appointments charged at extra.',
+    '* Includes 1 fat dissolving session, scheduled based on your clinical plan; additional areas or sessions charged at extra.',
     '** Sessions may be spaced over multiple weeks depending on area and suitability',
     '** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
@@ -218,9 +218,9 @@ export const fatDissolving: PackageContent = {
     tagline: 'Naturally sculpted. Medically performed.',
     subline: 'A targeted fat-dissolving treatment designed to permanently break down unwanted fat — no surgery, no general anesthesia, minimal downtime.',
     includes: [
-      '3x Lemon Bottle Fat-Dissolving Injection (€450)',
-      '3x access to spa & fitness facilities (€105)',
-      'Tanita Body Composition Analysis (€60)',
+      '1x Lemon Bottle Fat-Dissolving Injection (€150)',
+      'Access to spa & fitness facilities (€105)',
+      'Complimentary Weight Loss Consultation (€60)',
       '€25 Carisma Aesthetics Credit (€25)',
       'Complimentary Parking Validation',
     ],
