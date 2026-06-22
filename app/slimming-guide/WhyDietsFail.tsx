@@ -124,25 +124,6 @@ export default function WhyDietsFail() {
         }
       `}</style>
 
-      {/* Faint oversized brand initial behind the spread — purely decorative. */}
-      <span
-        aria-hidden
-        style={{
-          position: 'absolute',
-          top: 'clamp(8px, 4vw, 40px)',
-          right: 'clamp(-30px, 2vw, 24px)',
-          fontFamily: HEADING,
-          textTransform: 'uppercase',
-          fontSize: 'clamp(160px, 30vw, 380px)',
-          lineHeight: 0.8,
-          color: SAGE_LIGHT,
-          opacity: 0.12,
-          pointerEvents: 'none',
-          userSelect: 'none',
-        }}
-      >
-        C
-      </span>
 
       <div
         ref={ref}

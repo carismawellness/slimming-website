@@ -437,7 +437,7 @@ export default function SlimmingGuidePage() {
           the sage wash above and resolves to white so the section below flows. */}
       <section
         className="py-24 relative overflow-hidden"
-        style={{ background: '#ffffff' }}
+        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #FFFFFF 100%)' }}
       >
         {/* Single Layers watermark — decorative motif behind CTA content (no blob
             here because this band has a .cta-glow button). */}
