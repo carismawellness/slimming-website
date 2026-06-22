@@ -5,11 +5,11 @@ import FadeInUp from '@/components/blog/FadeInUp';
 // ── Brand tokens ──────────────────────────────────────────────────────────────
 const FOREST = '#024C27';
 const SAGE   = '#4f7256';
-const DECO   = '#8EB093';
+const DECO   = '#C9D8C1';
 const CREAM  = '#f8f5f0';
-const INK    = '#1a1a1a';
-const MUTED  = '#595959';
-const HAIR   = '#E5DED7';
+const INK    = '#3c5a40';
+const MUTED  = '#5a4f43';
+const HAIR   = '#C9B8AE';
 const SERIF  = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
 const BODY   = 'Roboto, sans-serif';
 const WIDE   = '"Novecento Wide Book","Novecento Wide",sans-serif';
@@ -68,13 +68,16 @@ function formatShort(iso: string): string {
   });
 }
 
-// ── Inline card shared styles ─────────────────────────────────────────────────
+// ── Inline card shared styles — matches home page pillar card look ────────────
 const cardWrap: React.CSSProperties = {
   position: 'relative',
   overflow: 'hidden',
-  borderRadius: 4,
-  background: '#fff',
-  boxShadow: '0 2px 20px rgba(0,0,0,0.06)',
+  borderTopLeftRadius: 18,
+  borderTopRightRadius: 90,
+  borderBottomLeftRadius: 90,
+  borderBottomRightRadius: 18,
+  background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)',
+  boxShadow: '0 10px 30px rgba(0,0,0,0.06)',
   height: '100%',
   display: 'flex',
   flexDirection: 'column',
@@ -121,8 +124,9 @@ export default function BlogPage() {
           cursor: pointer;
         }
         .blog-cta:hover {
-          background: rgba(255,255,255,0.1) !important;
-          border-color: rgba(255,255,255,0.7) !important;
+          background: rgba(79,114,86,0.08) !important;
+          border-color: #3c5a40 !important;
+          color: #3c5a40 !important;
         }
         .blog-read-link:hover {
           color: ${FOREST} !important;
@@ -174,39 +178,52 @@ export default function BlogPage() {
               marginTop: 80, /* clear fixed header */
             }}
           >
-            {/* ── LEFT PANEL: editorial brand column ── */}
+            {/* ── LEFT PANEL: editorial brand column — home-page palette ── */}
             <div
               className="blog-hero-left"
               style={{
                 width: '52%',
                 flexShrink: 0,
-                background: FOREST,
-                backgroundImage: `
-                  radial-gradient(ellipse at 0% 0%, rgba(79,114,86,0.28) 0%, transparent 55%),
-                  radial-gradient(ellipse at 100% 100%, rgba(2,18,10,0.45) 0%, transparent 55%)
-                `,
+                background: 'linear-gradient(160deg, #F2F6EF 0%, #E4EDE4 60%, #C9D8C1 100%)',
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'flex-end',
                 padding: '56px 56px 64px',
                 position: 'relative',
+                overflow: 'hidden',
               }}
             >
+              {/* Subtle decorative arc — matches home page motif feel */}
+              <div aria-hidden="true" style={{
+                position: 'absolute', top: -120, right: -120,
+                width: 340, height: 340,
+                borderRadius: '50%',
+                border: '1px solid rgba(79,114,86,0.12)',
+                pointerEvents: 'none',
+              }} />
+              <div aria-hidden="true" style={{
+                position: 'absolute', top: -60, right: -60,
+                width: 200, height: 200,
+                borderRadius: '50%',
+                border: '1px solid rgba(79,114,86,0.08)',
+                pointerEvents: 'none',
+              }} />
+
               {/* Masthead */}
               <p style={{
                 fontFamily: WIDE,
                 fontSize: 10,
                 letterSpacing: '5px',
                 textTransform: 'uppercase',
-                color: DECO,
+                color: SAGE,
                 margin: '0 0 20px',
-                opacity: 0.8,
+                opacity: 0.75,
               }}>
                 Carisma Slimming · The Blog
               </p>
 
-              {/* Decorative rule */}
-              <div style={{ width: 40, height: 1, background: DECO, opacity: 0.35, marginBottom: 28 }} />
+              {/* Decorative rule — matches home page hairline style */}
+              <div style={{ width: 90, height: 1, background: HAIR, marginBottom: 28 }} />
 
               {/* "Featured" label */}
               <p style={{
@@ -214,20 +231,21 @@ export default function BlogPage() {
                 fontSize: 10,
                 letterSpacing: '4px',
                 textTransform: 'uppercase',
-                color: 'rgba(255,255,255,0.4)',
+                color: MUTED,
                 margin: '0 0 14px',
+                opacity: 0.7,
               }}>
                 Featured Article
               </p>
 
-              {/* Article title — elegant and proportional */}
+              {/* Article title — Trajan Pro, forest green, matching home h2 style */}
               <h1
                 className="blog-hero-title"
                 style={{
                   fontFamily: SERIF,
                   textTransform: 'uppercase',
-                  fontSize: 'clamp(20px, 2.4vw, 38px)',
-                  color: '#fff',
+                  fontSize: 'clamp(20px, 2.4vw, 36px)',
+                  color: FOREST,
                   lineHeight: 1.22,
                   letterSpacing: '0.04em',
                   margin: '0 0 22px',
@@ -242,7 +260,7 @@ export default function BlogPage() {
                 <p style={{
                   fontFamily: BODY,
                   fontSize: 14,
-                  color: 'rgba(255,255,255,0.55)',
+                  color: MUTED,
                   lineHeight: 1.65,
                   margin: '0 0 28px',
                   maxWidth: 420,
@@ -260,19 +278,20 @@ export default function BlogPage() {
                 display: 'flex',
                 alignItems: 'center',
                 gap: 10,
-                color: 'rgba(255,255,255,0.38)',
+                color: MUTED,
                 fontFamily: WIDE,
                 fontSize: 10,
                 letterSpacing: '2px',
                 textTransform: 'uppercase',
                 marginBottom: 32,
+                opacity: 0.6,
               }}>
                 <time dateTime={hero.published_date}>{formatLong(hero.published_date)}</time>
                 <span aria-hidden="true">·</span>
                 <span>{hero.minutes_to_read} min read</span>
               </div>
 
-              {/* Ghost CTA */}
+              {/* CTA — sage ghost button matching home page accent style */}
               <a
                 href={`/blog/${hero.slug}`}
                 className="blog-cta"
@@ -281,8 +300,8 @@ export default function BlogPage() {
                   alignItems: 'center',
                   gap: 10,
                   background: 'transparent',
-                  color: '#fff',
-                  border: '1px solid rgba(255,255,255,0.38)',
+                  color: SAGE,
+                  border: `1px solid ${SAGE}`,
                   fontFamily: WIDE,
                   fontSize: 10,
                   letterSpacing: '3px',
@@ -290,7 +309,7 @@ export default function BlogPage() {
                   padding: '11px 22px',
                   borderRadius: 2,
                   textDecoration: 'none',
-                  transition: 'background 200ms ease-out, border-color 200ms ease-out',
+                  transition: 'background 200ms ease-out, color 200ms ease-out',
                   cursor: 'pointer',
                   width: 'fit-content',
                 }}
@@ -316,17 +335,17 @@ export default function BlogPage() {
                 fetchPriority="high"
                 loading="eager"
               />
-              {/* Left-edge depth shadow to blend with panel */}
+              {/* Left-edge vignette to blend with sage panel */}
               <div aria-hidden="true" style={{
                 position: 'absolute', inset: 0,
-                background: 'linear-gradient(to right, rgba(2,28,15,0.22) 0%, transparent 25%)',
+                background: 'linear-gradient(to right, rgba(201,216,193,0.18) 0%, transparent 20%)',
               }} />
             </div>
           </section>
         )}
 
-        {/* Color bridge — fades from forest to cream */}
-        <div aria-hidden="true" style={{ height: 48, background: 'linear-gradient(to bottom, rgba(2,28,15,0.06) 0%, transparent 100%)', pointerEvents: 'none' }} />
+        {/* Color bridge — subtle sage tint fades to cream */}
+        <div aria-hidden="true" style={{ height: 40, background: 'linear-gradient(to bottom, rgba(79,114,86,0.05) 0%, transparent 100%)', pointerEvents: 'none' }} />
 
         {/* ════════════════════════════════════════════════════════════
             2. EDITORIAL SECTION HEADER
@@ -611,7 +630,7 @@ export default function BlogPage() {
         </nav>
 
         {/* Bottom fade — visual close before global footer */}
-        <div aria-hidden="true" style={{ height: 80, background: 'linear-gradient(to bottom, transparent 0%, rgba(2,28,15,0.04) 100%)', pointerEvents: 'none' }} />
+        <div aria-hidden="true" style={{ height: 80, background: 'linear-gradient(to bottom, transparent 0%, rgba(79,114,86,0.04) 100%)', pointerEvents: 'none' }} />
 
       </div>
     </>
