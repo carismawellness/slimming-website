@@ -53,7 +53,7 @@ export const muscleStimulation: PackageContent = {
   eligEyebrow: 'eligibility criteria',
   eligHeading: 'areas emsculpt neo can sculpt and tone',
   eligImage: W + '87fc13_e0c78a6ef6974944bb2554e594e809dc~mv2.jpg',
-  eligIntro: 'Treat visible fat bulges in 7 areas of the body',
+  eligIntro: 'Build and define muscle across the most common areas of the body',
   areas: ['ABDOMEN / CORE', 'GLUTES / BUTTOCKS', 'THIGHS (FRONT AND BACK)', 'CALVES', 'UPPER ARMS (BICEPS AND TRICEPS)'],
 
   ptEyebrow: 'our technology',

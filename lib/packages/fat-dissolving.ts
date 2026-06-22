@@ -226,7 +226,7 @@ export const fatDissolving: PackageContent = {
     ],
     totalValue: '€650',
     todayPrice: '€199 ONLY.',
-    buttonLabel: 'Book Your Consultation Now',
+    buttonLabel: 'Claim your spot now',
     cardImage: W + '87fc13_e4992fcc322c43c79922384b826fdc9c~mv2.jpg',
   },
 };

@@ -121,13 +121,13 @@ export const lipocavitation: PackageContent = {
     {
       img: W + '87fc13_d160679a5a4f4729ac97ef7172222e36~mv2.png',
       tag: 'MODERATE EVIDENCE',
-      title: 'radiofrequency & infrared for skin tightening',
-      does: 'Uses a combination of radiofrequency (RF) energy and infrared light to gently heat the deeper layers of the skin. This controlled heating supports collagen remodeling and improved tissue firmness, helping skin appear tighter and smoother over time.',
+      title: 'low-frequency ultrasound cavitation',
+      does: 'Uses low-frequency ultrasound waves to create microscopic pressure changes that disrupt the membranes of fat cells in the targeted area. The released contents are then cleared gradually through the body’s own lymphatic system, leaving surrounding skin and tissue unaffected.',
       results: [
-        'Clinical studies on RF-based body treatments have demonstrated improvements in skin elasticity and visible tightening after a series of sessions, with many patients noticing gradual firming in treated areas. Dermatologic Surgery & Aesthetic Medicine Studies',
-        'Histological research suggests that thermal stimulation from RF can promote collagen remodeling, contributing to progressive tightening effects that continue developing in the weeks following treatment. Peer-Reviewed RF Research',
+        'Clinical studies on ultrasound cavitation for body contouring have reported measurable reductions in the circumference of treated areas after a series of sessions, with results developing gradually between treatments. Aesthetic & Body-Contouring Research',
+        'Reviews of non-invasive cavitation devices note a favourable safety profile with no downtime, positioning it as a supportive option for localised, diet-resistant fat rather than overall weight loss. Peer-Reviewed Cavitation Research',
       ],
-      foot: 'Supports natural collagen remodeling · Gradual improvement in skin firmness · Non-surgical approach to mild skin laxity',
+      foot: 'Targets localised, diet-resistant fat · Gradual circumference reduction · Non-invasive, no downtime',
     },
     {
       img: W + '87fc13_c7f1f5fa97a24c65b42f750c0d47af08~mv2.png',
