@@ -37,11 +37,12 @@ export default function Home() {
           { text: 'Doctor-Led Slimming' },
           { text: '& Weight Loss in Malta', em: true },
         ]}
-        sub="Lose up to 1kg a week with Malta's most comprehensive slimming program — medical weight loss, body contouring and personalised meal plans, all in one doctor-led plan."
+        sub="Lose up to 1kg a week with Malta's most comprehensive slimming program, combining medical weight loss, body contouring & personalised meal plans in one doctor-led plan."
         bullets={[
           { text: 'Medical weight loss assessment with prescription GLP-1 support if appropriate' },
           { text: 'Personalised meal plan with weekly check-ins to keep you consistent' },
-          { text: 'In-clinic treatments to burn fat, tone muscle and tighten skin' },
+          { text: 'In-clinic slimming treatments to burn fat, tone muscles, and tighten skin' },
+          { text: 'Habit-based strength training to lose weight and protect long-term health' },
         ]}
         primaryCta={{ text: 'Get Your Free Body Analysis', href: 'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191', external: true }}
         secondaryCta={{ text: 'Take the quiz', href: '#quiz' }}
