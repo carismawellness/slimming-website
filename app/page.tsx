@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
+import type { ReactNode } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
@@ -19,6 +21,75 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+
+  const pillars: { subheading: string; title: string; icon: string; iconAlt: string; items: ReactNode[] }[] = [
+    {
+      subheading: 'Know your body before starting any program',
+      title: 'Medical weight loss assessment',
+      icon: '/wix/87fc13_e4efa875484546fca9d640d39b9f0100~mv2.png',
+      iconAlt: 'Medical weight loss assessment',
+      items: [
+        'Tanita body composition analysis',
+        'Doctor consultation for weight loss goals',
+        <><Link href="/glp1" className="underline decoration-dotted underline-offset-2">GLP-1 support</Link> if appropriate (Ozempic, Mounjaro)</>,
+        <><Link href="/packages/fat-dissolving" className="underline decoration-dotted underline-offset-2">Fat dissolving injections</Link> for stubborn areas</>,
+        'Blood tests and metabolic screening',
+      ],
+    },
+    {
+      subheading: 'Doctor-prescribed meal plan with a buddy',
+      title: 'Personalised nutrition and accountability',
+      icon: '/wix/87fc13_d751907d21e84894ae37b1b33136d812~mv2.png',
+      iconAlt: 'Doctor-prescribed meal plan',
+      items: [
+        'Meal plan that fits your routine, culture and goals',
+        'Weekly weigh-ins to track your slimming progress',
+        'One-to-one accountability with a weight loss coach',
+        'Supplement support for metabolism and energy',
+        'WhatsApp coaching between sessions',
+      ],
+    },
+    {
+      subheading: 'Realistic movement that fits your life',
+      title: 'Exercise and movement program',
+      icon: '/wix/87fc13_1fdf47007d8a45c18e39603447edbb23~mv2.png',
+      iconAlt: 'Exercise and movement program',
+      items: [
+        'Open gym access at our Grand Hotel Excelsior',
+        'Group classes for fat loss, strength and maintenance',
+        'Personal training for guidance and motivation',
+        'Customised workout plan for your level',
+        'Flexible scheduling to fit your routine',
+      ],
+    },
+    {
+      subheading: 'Clinic-grade treatments that speed up change',
+      title: 'Targeted body contouring treatments',
+      icon: '/wix/87fc13_da70307b66154a24b141dfb4fd26a1bb~mv2.png',
+      iconAlt: 'Body contouring treatments',
+      items: [
+        <><Link href="/packages/muscle-stimulation" className="underline decoration-dotted underline-offset-2">EMSculpt NEO</Link> — build muscle and reduce fat</>,
+        <><Link href="/packages/fat-freezing" className="underline decoration-dotted underline-offset-2">CoolSculpting fat freezing</Link> — permanent fat reduction</>,
+        <><Link href="/packages/skin-tightening" className="underline decoration-dotted underline-offset-2">VelaShape III</Link> — smooth and firm loose skin</>,
+        <><Link href="/packages/lymphatic-drainage" className="underline decoration-dotted underline-offset-2">Lymphatic drainage</Link> to reduce fluid retention</>,
+        'Non-invasive with no downtime required',
+      ],
+    },
+  ];
+
+  const commitmentItems: ReactNode[] = [
+    'Visible inch loss and shape change through a medically supervised slimming program',
+    'Weight loss plans that work with your age, hormones and metabolism',
+    'No crash diets, no banned foods, no endless hours of cardio, just medical guidance and personalised meal plans',
+    <>Medical-grade slimming treatments and <Link href="/packages/fat-freezing" className="underline decoration-dotted underline-offset-2">fat freezing technology</Link> delivered by trained professionals</>,
+  ];
+
+  const differenceItems: ReactNode[] = [
+    "Created by the team behind Malta's leading spa and medical aesthetics centres",
+    'Doctor-led medical weight loss and slimming, not a beauty salon diet program',
+    <>All-in-one approach: medical assessment, personalised meal plans, movement and <Link href="/packages" className="underline decoration-dotted underline-offset-2">body contouring treatments</Link></>,
+    'High-touch support with weekly check-ins, WhatsApp coaching and dedicated accountability',
+  ];
 
   return (
     <div className="w-full">
@@ -63,60 +134,7 @@ export default function Home() {
             malta&rsquo;s only multidisciplinary<br />slimming &amp; weight-loss approach
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ gap: '28px' }} role="list">
-            {[
-              {
-                subheading: 'Know your body before starting any program',
-                title: 'Medical weight loss assessment',
-                icon: '/wix/87fc13_e4efa875484546fca9d640d39b9f0100~mv2.png',
-                iconAlt: 'Medical weight loss assessment',
-                items: [
-                  'Tanita body composition analysis',
-                  'Doctor consultation for weight loss goals',
-                  'GLP-1 support if appropriate (Ozempic, Mounjaro)',
-                  'Fat dissolving injections for stubborn areas',
-                  'Blood tests and metabolic screening',
-                ],
-              },
-              {
-                subheading: 'Doctor-prescribed meal plan with a buddy',
-                title: 'Personalised nutrition and accountability',
-                icon: '/wix/87fc13_d751907d21e84894ae37b1b33136d812~mv2.png',
-                iconAlt: 'Doctor-prescribed meal plan',
-                items: [
-                  'Meal plan that fits your routine, culture and goals',
-                  'Weekly weigh-ins to track your slimming progress',
-                  'One-to-one accountability with a weight loss coach',
-                  'Supplement support for metabolism and energy',
-                  'WhatsApp coaching between sessions',
-                ],
-              },
-              {
-                subheading: 'Realistic movement that fits your life',
-                title: 'Exercise and movement program',
-                icon: '/wix/87fc13_1fdf47007d8a45c18e39603447edbb23~mv2.png',
-                iconAlt: 'Exercise and movement program',
-                items: [
-                  'Open gym access at our Grand Hotel Excelsior',
-                  'Group classes for fat loss, strength and maintenance',
-                  'Personal training for guidance and motivation',
-                  'Customised workout plan for your level',
-                  'Flexible scheduling to fit your routine',
-                ],
-              },
-              {
-                subheading: 'Clinic-grade treatments that speed up change',
-                title: 'Targeted body contouring treatments',
-                icon: '/wix/87fc13_da70307b66154a24b141dfb4fd26a1bb~mv2.png',
-                iconAlt: 'Body contouring treatments',
-                items: [
-                  'EMSculpt NEO — build muscle and reduce fat',
-                  'CoolSculpting fat freezing — permanent fat reduction',
-                  'VelaShape III — smooth and firm loose skin',
-                  'Lymphatic drainage to reduce fluid retention',
-                  'Non-invasive with no downtime required',
-                ],
-              },
-            ].map((pillar) => (
+            {pillars.map((pillar) => (
               <div key={pillar.title} role="listitem" style={{ padding: '28px 24px', background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                 <div className="mb-5 flex items-center" style={{ height: '52px', flexShrink: 0 }}>
                   <Image
@@ -134,8 +152,8 @@ export default function Home() {
                   {pillar.subheading}
                 </p>
                 <ul className="space-y-3" style={{ flex: 1 }}>
-                  {pillar.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '13px', lineHeight: '1.55', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
+                  {pillar.items.map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '13px', lineHeight: '1.55', wordBreak: 'break-word', overflowWrap: 'break-word' }}>
                       <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#3c5a40" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, marginTop: '2px' }} aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
                       <span>{item}</span>
                     </li>
@@ -143,18 +161,6 @@ export default function Home() {
                 </ul>
               </div>
             ))}
-          </div>
-          <div className="flex flex-wrap justify-center items-center gap-3 mt-12">
-            <a
-              href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Get your free body analysis — opens booking page in new tab"
-              className="cta-glow inline-flex items-center justify-center font-bold text-white transition-all duration-200 ease-in-out hover:opacity-90 active:scale-95"
-              style={{ minHeight: '48px', padding: '0 36px', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '11px', letterSpacing: '0.5px', textTransform: 'uppercase' }}
-            >
-              Get Your Free Body Analysis ›
-            </a>
           </div>
         </div>
       </section>
@@ -196,7 +202,7 @@ How GLP-1 Works<br />at Our Clinic
           </div>
           {/* Intro */}
           <p className="text-center mx-auto mb-4" style={{ maxWidth: '680px', color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
-            GLP-1s like Ozempic and Mounjaro quiet your appetite and food noise, so eating less stops feeling like a daily fight. But the results only last inside a structured, doctor-led plan — here&rsquo;s how it works.
+            <Link href="/glp1" className="underline decoration-dotted underline-offset-2">GLP-1s like Ozempic and Mounjaro</Link> quiet your appetite and food noise, so eating less stops feeling like a daily fight. But the results only last inside a structured, doctor-led plan — here&rsquo;s how it works.
           </p>
           <p className="text-center mx-auto mb-12" style={{ maxWidth: '620px', color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', lineHeight: '1.6', textTransform: 'uppercase', letterSpacing: '1px' }}>
             One tool inside your program — never a shortcut, only if it&rsquo;s right for you.
@@ -205,10 +211,10 @@ How GLP-1 Works<br />at Our Clinic
           {/* Vertical step timeline */}
           <StepTimeline
             steps={[
-              { title: 'Medical Assessment', desc: 'A doctor consultation, body scan and bloods to pinpoint what’s driving your weight — and whether GLP-1 is right for you.' },
+              { title: 'Medical Assessment', desc: "A doctor consultation, body scan and bloods to pinpoint what's driving your weight — and whether GLP-1 is right for you." },
               { title: 'Your Personalised Plan', desc: 'If you qualify, your prescription is built into a full plan: nutrition, movement and weekly check-ins. Never medication alone.' },
               { title: 'Doctor-Led Support', desc: 'We track your progress, fine-tune your dose and manage any side effects — so results keep coming, safely.' },
-              { title: 'Lasting Results', desc: 'We plan for life after GLP-1 so the weight stays off. And if it’s not right for you, we’ll guide you to what is.' },
+              { title: 'Lasting Results', desc: "We plan for life after GLP-1 so the weight stays off. And if it's not right for you, we'll guide you to what is." },
             ]}
           />
 
@@ -227,9 +233,9 @@ How GLP-1 Works<br />at Our Clinic
               href="/consultation"
               className="cta-glow"
               style={{ fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', padding: '15px 44px', display: 'inline-block', fontWeight: 700, color: '#ffffff', textDecoration: 'none' }}
-              aria-label="Book my free body analysis"
+              aria-label="Book your free body analysis"
             >
-              Book My Free Body Analysis
+              Book Your Free Body Analysis
             </a>
           </div>
         </div>
@@ -255,7 +261,7 @@ How GLP-1 Works<br />at Our Clinic
               </p>
               <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
               <h2 id="difference-heading" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                why women in malta choose carisma slimming
+                why malta chooses carisma slimming
               </h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
                 {/* Left - commitments */}
@@ -265,13 +271,8 @@ How GLP-1 Works<br />at Our Clinic
                       Our Doctor-Led Slimming Commitment
                     </h3>
                     <ul className="space-y-4">
-                      {[
-                        'Visible inch loss and shape change through a medically supervised slimming program',
-                        'Weight loss plans that work with your age, hormones and metabolism',
-                        'No crash diets, no banned foods, no endless hours of cardio, just medical guidance and personalised meal plans',
-                        'Medical-grade slimming treatments and fat freezing technology delivered by trained professionals',
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                      {commitmentItems.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
                           <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
                             <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
                             <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
@@ -286,13 +287,8 @@ How GLP-1 Works<br />at Our Clinic
                       What Makes Our Weight Loss Clinic Different
                     </h3>
                     <ul className="space-y-4">
-                      {[
-                        "Created by the team behind Malta's leading spa and medical aesthetics centres",
-                        'Doctor-led medical weight loss and slimming, not a beauty salon diet program',
-                        'All-in-one approach: medical assessment, personalised meal plans, movement and body contouring treatments',
-                        'High-touch support with weekly check-ins, WhatsApp coaching and dedicated accountability',
-                      ].map((item) => (
-                        <li key={item} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
+                      {differenceItems.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-3" style={{ color: '#5a4f43', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: '1.6' }}>
                           <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ flexShrink: 0, marginTop: '2px' }}>
                             <circle cx="9" cy="9" r="9" fill="#C9D8C1" />
                             <path d="M5 9.5L7.5 12L13 6.5" stroke="#4f7256" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
