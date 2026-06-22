@@ -116,8 +116,8 @@ export default function BlogPage() {
           cursor: pointer;
         }
         .blog-cta:hover {
-          background: ${SAGE} !important;
-          color: #fff !important;
+          background: rgba(255,255,255,0.12) !important;
+          border-color: rgba(255,255,255,0.85) !important;
         }
         .blog-read-link:hover {
           color: ${FOREST} !important;
@@ -137,7 +137,7 @@ export default function BlogPage() {
 
         @media (max-width: 768px) {
           .blog-hero-title {
-            font-size: clamp(26px, 6vw, 42px) !important;
+            font-size: clamp(20px, 5.5vw, 34px) !important;
           }
           .blog-hero-content {
             padding: 0 20px 40px !important;
@@ -153,7 +153,7 @@ export default function BlogPage() {
 
         @media (max-width: 480px) {
           .blog-hero-title {
-            font-size: clamp(22px, 7vw, 32px) !important;
+            font-size: clamp(18px, 6.5vw, 28px) !important;
           }
         }
       `}</style>
@@ -169,8 +169,8 @@ export default function BlogPage() {
             style={{
               position: 'relative',
               width: '100%',
-              height: '90vh',
-              minHeight: 600,
+              height: '76vh',
+              minHeight: 520,
               overflow: 'hidden',
               background: FOREST,
             }}
@@ -186,7 +186,7 @@ export default function BlogPage() {
                 width: '100%',
                 height: '100%',
                 objectFit: 'cover',
-                opacity: 0.55,
+                opacity: 0.72,
                 transition: 'none',
               }}
               fetchPriority="high"
@@ -200,7 +200,7 @@ export default function BlogPage() {
                 position: 'absolute',
                 inset: 0,
                 background:
-                  'linear-gradient(to top, rgba(2,28,15,0.95) 0%, rgba(2,28,15,0.5) 45%, transparent 75%)',
+                  'linear-gradient(to top, rgba(2,28,15,0.82) 0%, rgba(2,28,15,0.35) 40%, transparent 65%)',
               }}
             />
 
@@ -234,36 +234,36 @@ export default function BlogPage() {
                 margin: '0 auto',
               }}
             >
-              {/* Featured badge */}
+              {/* Featured badge — refined outline style */}
               <div
                 style={{
                   display: 'inline-block',
-                  background: SAGE,
-                  color: '#fff',
+                  background: 'transparent',
+                  color: DECO,
                   fontFamily: WIDE,
                   fontSize: 10,
-                  letterSpacing: '3px',
+                  letterSpacing: '4px',
                   textTransform: 'uppercase',
-                  padding: '4px 12px',
-                  borderRadius: 2,
-                  marginBottom: 20,
+                  marginBottom: 18,
+                  paddingBottom: 6,
+                  borderBottom: `1px solid rgba(142,176,147,0.5)`,
                 }}
               >
-                Featured
+                Featured Article
               </div>
 
-              {/* Giant title */}
+              {/* Title */}
               <h1
                 className="blog-hero-title"
                 style={{
                   fontFamily: SERIF,
                   textTransform: 'uppercase',
-                  fontSize: 'clamp(32px, 5vw, 68px)',
+                  fontSize: 'clamp(24px, 3.6vw, 48px)',
                   color: '#fff',
-                  lineHeight: 1.1,
-                  letterSpacing: '0.02em',
-                  margin: '0 0 24px',
-                  maxWidth: 900,
+                  lineHeight: 1.18,
+                  letterSpacing: '0.04em',
+                  margin: '0 0 20px',
+                  maxWidth: 780,
                 }}
               >
                 {hero.title}
@@ -307,16 +307,17 @@ export default function BlogPage() {
                   display: 'inline-flex',
                   alignItems: 'center',
                   gap: 10,
-                  background: '#fff',
-                  color: FOREST,
+                  background: 'transparent',
+                  color: '#fff',
+                  border: '1px solid rgba(255,255,255,0.55)',
                   fontFamily: WIDE,
-                  fontSize: 12,
-                  letterSpacing: '2px',
+                  fontSize: 11,
+                  letterSpacing: '3px',
                   textTransform: 'uppercase',
-                  padding: '14px 28px',
+                  padding: '12px 24px',
                   borderRadius: 2,
                   textDecoration: 'none',
-                  transition: 'background 200ms ease-out, color 200ms ease-out',
+                  transition: 'background 200ms ease-out, border-color 200ms ease-out',
                   cursor: 'pointer',
                 }}
               >
