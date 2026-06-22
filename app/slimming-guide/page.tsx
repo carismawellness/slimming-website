@@ -4,6 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
 import OutcomeStepper from './OutcomeStepper';
+import MethodPillars from './MethodPillars';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
 import BookConsultationButton from '@/components/BookConsultationButton';
@@ -294,7 +295,7 @@ export default function SlimmingGuidePage() {
       <GradientField
         blob={{ top: '-20%', right: '-4%' }}
         dots
-        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #D7E2D8 48%, #FFFFFF 100%)', padding: '64px 0' }}
+        style={{ background: '#ffffff', padding: '64px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
@@ -370,54 +371,8 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
-      {/* Method Section */}
-      <section className="py-24 relative bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <Kicker centered rule>THE METHOD</Kicker>
-            <h2
-              className="mb-6 uppercase mx-auto"
-              style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '30px', maxWidth: '500px' }}
-            >
-              the four-pillar method: what to eat, when to eat, how much, and in what order.
-            </h2>
-            <p style={{ color: TAUPE, fontSize: '14px' }}>
-              Every plan that has ever failed you asked for too many decisions made under pressure. This method
-              does the opposite. It reduces decisions. Four questions. One clear answer to each. That is the
-              entire structure.
-            </p>
-          </div>
-          <div
-            className="grid grid-cols-1 md:grid-cols-2 mx-auto"
-            style={{ maxWidth: '802px', columnGap: '90px', rowGap: '40px' }}
-          >
-            {methodPillars.map((p) => (
-              <div
-                key={p.lead}
-                className="card px-7 pt-8 pb-7"
-                style={{
-                  background: 'linear-gradient(180deg, #CBDCC9 0%, #FBFBF8 55%)',
-                  borderRadius: '16px',
-                }}
-              >
-                <h3
-                  className="mb-4 uppercase text-center"
-                  style={{ color: GREEN, fontFamily: wideFont, fontSize: '25px' }}
-                >
-                  <span style={{ fontWeight: 700 }}>{p.lead}</span>{' '}
-                  {/* was #FFFFFF (1.04:1 — invisible on light gradient); taupe at 25px large = 4.49:1 */}
-                  <span style={{ fontWeight: 400, color: TAUPE }}>{p.rest}</span>
-                </h3>
-                {p.paragraphs.map((t, i) => (
-                  <p key={i} className={i < p.paragraphs.length - 1 ? 'mb-4' : ''} style={{ color: TAUPE, fontSize: '13px' }}>
-                    {t}
-                  </p>
-                ))}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Method Section — homepage pillars design + scroll-in stagger */}
+      <MethodPillars />
 
       {/* Tilted A4 mockup overlapping the band + What This Is (right edge) */}
       <img
@@ -463,7 +418,7 @@ export default function SlimmingGuidePage() {
       {/* Stabilise Band — light on-brand statement band (no dark-green bg). Starts on
           the sage wash above and resolves to white so the section below flows. */}
       <section
-        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #D7E2D8 48%, #FFFFFF 100%)', padding: '64px 0' }}
+        style={{ background: '#ffffff', padding: '64px 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
@@ -698,7 +653,7 @@ export default function SlimmingGuidePage() {
           the sage wash above and resolves to white so the section below flows. */}
       <section
         className="py-24 relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #D7E2D8 45%, #FFFFFF 100%)' }}
+        style={{ background: '#ffffff' }}
       >
         {/* Single Layers watermark — decorative motif behind CTA content (no blob
             here because this band has a .cta-glow button). */}
