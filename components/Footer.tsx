@@ -12,9 +12,9 @@ import FooterRose from './FooterRose';
 // The whole footer sits on the homepage above-the-fold gradient hue.
 const GRADIENT = 'radial-gradient(120% 90% at 85% 10%, #eef3ea 0%, #f6f4ef 45%, #ffffff 100%)';
 // Colours on the light gradient.
-const INK   = '#1a1a1a';   // headings
-const TEXT  = '#333333';   // body text
-const MUTED = '#595959';   // muted / meta
+const INK   = '#024C27';   // headings
+const TEXT  = '#6F6456';   // body text
+const MUTED = '#6F6456';   // muted / meta
 const SAGE  = '#4f7256';   // links / icons / CTA fill (white text on it = AA)
 const DECO  = '#8EB093';   // decorative-only sage
 const GOLD  = '#8c6d18';   // stars
