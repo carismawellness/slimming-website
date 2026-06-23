@@ -97,6 +97,10 @@ export default function StickyCta({ bookHref, priceLabel, ctaLabel, secondaryHre
         @media (max-width: 600px) {
           .sticky-cta-has-2 .sticky-cta-label { display: none; }
         }
+        @media (max-width: 480px) {
+          .sticky-cta-secondary { padding: 10px 10px !important; font-size: 10px !important; letter-spacing: 0.05em !important; }
+          .sticky-cta-primary   { padding: 10px 12px !important; font-size: 10px !important; letter-spacing: 0.08em !important; }
+        }
         /* Primary CTA hover/active — sage glow bloom (mirrors the site .cta-glow). */
         @media (prefers-reduced-motion: no-preference) {
           .sticky-cta-primary:hover { transform: scale(1.04); }
