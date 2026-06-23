@@ -627,7 +627,7 @@ function CarismaDifferenceSection() {
     'Selective entry and measurable weight loss results guaranteed',
   ];
   return (
-    <section aria-labelledby="difference-heading-wl" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+    <section aria-labelledby="difference-heading-wl" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
           {/* Decorative background watermark */}
@@ -742,7 +742,7 @@ function OurPromiseSection() {
   return (
     <>
       {/* ── Guarantee band — light on-brand panel (no dark-green background) ── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 0, overflow: 'hidden', position: 'relative' }}>
         {/* Decorative large watermark number */}
         <span aria-hidden style={{
           position: 'absolute', right: '-2%', top: '4%',
