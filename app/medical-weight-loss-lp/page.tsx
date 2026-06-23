@@ -730,7 +730,7 @@ export default function MedicalWeightLossLpPage() {
       </section>
 
       {/* Why Malta chooses Carisma */}
-      <section className="py-16" aria-labelledby="why-carisma-heading" style={{ backgroundColor: '#ffffff' }}>
+      <section className="py-16" aria-labelledby="why-carisma-heading" style={{ background: 'linear-gradient(180deg, #eef3ea 0%, #ffffff 20%, #ffffff 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative overflow-hidden" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px' }}>
             <Image

@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 
 export default function Problem() {
   return (
-    <section className="cx-section cx-grain" aria-labelledby="problem-heading" style={{ background: 'linear-gradient(180deg, #fff 0%, var(--cream) 100%)', position: 'relative', overflow: 'hidden' }}>
+    <section className="cx-section cx-grain" aria-labelledby="problem-heading" style={{ background: 'linear-gradient(180deg, #fff 0%, var(--cream) 78%, #ffffff 100%)', position: 'relative', overflow: 'hidden' }}>
       <div aria-hidden className="cx-glow" style={{ width: 380, height: 380, background: 'rgba(201,216,193,0.6)', bottom: -120, left: -100 }} />
       <div className="cx-wrap cx-wrap-tight" style={{ position: 'relative', zIndex: 1 }}>
         <div style={{ display: 'grid', gap: 'clamp(28px,5vw,56px)' }} className="cx-problem-grid">

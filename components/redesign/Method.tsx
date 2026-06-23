@@ -11,7 +11,7 @@ const MethodCanvas = dynamic(() => import('./MethodCanvas'), { ssr: false });
 
 export default function Method() {
   return (
-    <section id="method" className="cx-section cx-method" aria-labelledby="method-heading" style={{ background: 'var(--white)', position: 'relative', overflow: 'hidden' }}>
+    <section id="method" className="cx-section cx-method" aria-labelledby="method-heading" style={{ background: 'linear-gradient(180deg, var(--white) 0%, var(--white) 80%, var(--cream) 100%)', position: 'relative', overflow: 'hidden' }}>
       <MethodCanvas />
 
       <div className="cx-wrap" style={{ position: 'relative', zIndex: 1 }}>

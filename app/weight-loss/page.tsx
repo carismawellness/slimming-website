@@ -177,7 +177,7 @@ function ProblemAgitationSection() {
     <section aria-labelledby="problem-heading">
 
       {/* ── PART 1: EMPATHY NARRATIVE ───────────────────────────── */}
-      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F8F6F2 10%, #EEF3EA 100%)', padding: '88px 0 0', overflow: 'hidden' }}>
+      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F8F6F2 10%, #EEF3EA 80%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
             does this sound familiar?
@@ -474,7 +474,7 @@ function CorePillarsSection() {
   ];
 
   return (
-    <section className="py-24" aria-labelledby="pillars-heading" style={{ backgroundColor: '#ffffff' }}>
+    <section className="py-24" aria-labelledby="pillars-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 80%, #F2F6EF 100%)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           4 core pillars of our methodology

@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 
 export default function Treatments() {
   return (
-    <section id="treatments" className="cx-section" aria-labelledby="treatments-heading" style={{ background: 'linear-gradient(180deg, #fff 0%, var(--cream) 100%)' }}>
+    <section id="treatments" className="cx-section" aria-labelledby="treatments-heading" style={{ background: 'linear-gradient(180deg, #fff 0%, var(--cream) 78%, #ffffff 100%)' }}>
       <div className="cx-wrap">
         <Reveal style={{ textAlign: 'center', maxWidth: 680, marginInline: 'auto', marginBottom: 'clamp(36px,5vw,56px)' }}>
           <p className="cx-eyebrow" style={{ marginBottom: 14 }}>Body contouring treatments</p>

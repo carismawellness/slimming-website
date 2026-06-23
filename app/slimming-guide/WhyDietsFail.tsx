@@ -92,8 +92,9 @@ export default function WhyDietsFail() {
       style={{
         position: 'relative',
         overflow: 'hidden',
-        // Flows from white into the cream wash the surrounding page uses.
-        background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)',
+        // Flows from white into the cream wash, then eases back to white at the
+        // very bottom so it fades smoothly into the white section below (no seam).
+        background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 50%, #F5F8F2 80%, #FFFFFF 100%)',
         padding: 'clamp(72px, 11vh, 128px) 0',
       }}
     >
