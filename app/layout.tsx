@@ -5,6 +5,7 @@ import { SiteHeader, SiteFooter, SiteCookieBanner } from "@/components/PreviewCh
 import ConsultationModal from "@/components/ConsultationModal";
 import GuideOrderModal from "@/components/GuideOrderModal";
 import QuizModal from "@/components/QuizModal";
+import StickyBookingBar from "@/components/StickyBookingBar";
 import Script from "next/script";
 import PageLoader from "@/components/PageLoader";
 
@@ -118,6 +119,7 @@ export default function RootLayout({
         <ConsultationModal />
         <GuideOrderModal />
         <QuizModal />
+        <StickyBookingBar />
         <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
       </body>
     </html>
