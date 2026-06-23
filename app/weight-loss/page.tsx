@@ -412,7 +412,7 @@ function ProgramOverviewSection() {
               ))}
             </div>
 
-            <div style={{ marginTop: '32px' }}>
+            <div style={{ marginTop: '32px', textAlign: 'center' }}>
               <CTAButton label="Get Your Free Body Analysis" />
             </div>
           </div>
