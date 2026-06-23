@@ -189,7 +189,7 @@ function ProblemAgitationSection() {
           >
             Weight Loss After 30 in Malta<br />Without Giving Up the Foods You Love
           </h2>
-          <div className="mx-auto" style={{ width: '48px', height: '1px', backgroundColor: green, marginBottom: '64px' }} />
+          <div className="mx-auto" style={{ width: '48px', height: '1px', backgroundColor: green, marginBottom: 'clamp(20px, 4vw, 64px)' }} />
 
           {/* Two-column: image | intro + numbered confessions */}
           <div className="grid grid-cols-1 lg:grid-cols-2 items-start" style={{ gap: 'clamp(24px, 5vw, 64px)' }}>
