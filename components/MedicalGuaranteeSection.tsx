@@ -63,7 +63,7 @@ export default function MedicalGuaranteeSection() {
         </div>
 
         {/* 3 proof pillars */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2px', borderTop: '1px solid rgba(79,114,86,0.18)' }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: '2px', borderTop: '1px solid rgba(79,114,86,0.18)' }}>
           {[
             { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
             { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
