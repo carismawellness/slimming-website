@@ -192,7 +192,7 @@ function ProblemAgitationSection() {
           <div className="mx-auto" style={{ width: '48px', height: '1px', backgroundColor: green, marginBottom: '64px' }} />
 
           {/* Two-column: image | intro + numbered confessions */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-start" style={{ gap: 'clamp(24px, 5vw, 64px)' }}>
             {/* Image with sage shadow-offset */}
             <div style={{ position: 'relative', display: 'flex', justifyContent: 'center' }}>
               <div
@@ -267,7 +267,7 @@ function ProblemAgitationSection() {
       </div>
 
       {/* ── PART 2: DIAGNOSTIC — WHY PLANS FAILED ──────────────── */}
-      <div style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(32px, 6vw, 88px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
+      <div style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(16px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center" style={{ marginBottom: '64px' }}>
             <p style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
