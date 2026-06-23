@@ -188,7 +188,7 @@ export default function Home() {
 
       {/* (5) Medical Weight Loss in Malta (GLP-1) — fades in from white, deepens to sage
           at midpoint, then fades back to white — no hard edge on either boundary. */}
-      <section aria-labelledby="glp1-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(64px, 10vw, 128px)', background: 'linear-gradient(180deg, #ffffff 0%, #D7E2D8 48%, #ffffff 100%)' }}>
+      <section aria-labelledby="glp1-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(32px, 5vw, 64px)', background: 'linear-gradient(180deg, #ffffff 0%, #D7E2D8 48%, #ffffff 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Eyebrow + heading */}
           <div className="text-center mb-14">
