@@ -267,9 +267,9 @@ function ProblemAgitationSection() {
       </div>
 
       {/* ── PART 2: DIAGNOSTIC — WHY PLANS FAILED ──────────────── */}
-      <div style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(16px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
+      <div style={{ backgroundColor: '#ffffff', paddingTop: '0', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center" style={{ marginBottom: '64px' }}>
+          <div className="text-center" style={{ marginBottom: 'clamp(28px, 5vw, 64px)' }}>
             <p style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
               Why everything else failed
             </p>
