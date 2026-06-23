@@ -179,6 +179,16 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: uppercase;
 }
 
+/* Headings cover most Trajan, but many sections apply Trajan inline via a SERIF /
+   HEADING_FONT constant on non-heading elements (span/div/p) — those escape the
+   rule above and render as ugly two-height title-case. Every such inline value
+   contains the literal "Trajan", so force uniform UPPERCASE on any element whose
+   inline font-family uses it. (.font-script is class-based with no inline
+   "Trajan", so it stays exempt.) */
+[style*="Trajan"] {
+  text-transform: uppercase !important;
+}
+
 /* ---- Brand CTA: soft gradient pill with a blurred glow halo ----
    Apply `cta-glow` to any key call-to-action. Sizing/typography stay on the
    element; this class owns the fill, the glow and the hover. Override the glow
