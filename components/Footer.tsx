@@ -94,7 +94,7 @@ function BookSection() {
   }, []);
 
   return (
-    <section aria-labelledby="footer-guide-h" style={{ background: 'transparent', padding: '80px 0', overflow: 'hidden' }}>
+    <section aria-labelledby="footer-guide-h" style={{ background: 'transparent', paddingTop: 'clamp(40px, 8vw, 80px)', paddingBottom: 'clamp(12px, 3vw, 48px)', overflow: 'hidden' }}>
       <style>{`@media (prefers-reduced-motion: no-preference){@keyframes bookRise{from{opacity:0;transform:translateY(48px) rotate(-4deg)}to{opacity:1;transform:translateY(0) rotate(-4deg)}}.book-r{animation:bookRise 1s cubic-bezier(.16,1,.3,1) forwards}.book-h{opacity:0;transform:translateY(48px) rotate(-4deg)}}@media (prefers-reduced-motion: reduce){.book-r,.book-h{opacity:1;transform:none}}`}</style>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '56px', alignItems: 'center', justifyContent: 'center' }}>
@@ -128,7 +128,7 @@ function BookSection() {
 // ─── Section: Sister Brands ───────────────────────────────────────────────────
 function BrandsSection() {
   return (
-    <section aria-labelledby="footer-brands-h" style={{ background: 'transparent', padding: 'clamp(48px, 9vw, 80px) 0' }}>
+    <section aria-labelledby="footer-brands-h" style={{ background: 'transparent', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(48px, 9vw, 80px)' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div style={{ textAlign: 'center', marginBottom: 'clamp(24px, 5vw, 40px)' }}>
           <Eyebrow>The Carisma Wellness Group</Eyebrow>
