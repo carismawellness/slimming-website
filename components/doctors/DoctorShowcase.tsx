@@ -5,9 +5,9 @@ import Image from 'next/image';
 import { DOCTORS } from '@/lib/doctors';
 
 /* ── Shared design tokens (light gradient footer) ──────────────────────── */
-const INK = '#1a1a1a'; // headings
-const BODY = '#333333'; // body text
-const MUTED = '#595959'; // meta
+const INK = '#024C27'; // headings
+const BODY = '#6F6456'; // body text
+const MUTED = '#6F6456'; // meta
 const SAGE = '#4f7256'; // links / CTA fill (AA on white text)
 const SAGE_SOFT = '#8EB093'; // decorative only
 const HAIRLINE = '#E5DED7';
