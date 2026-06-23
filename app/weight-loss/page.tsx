@@ -802,7 +802,7 @@ function OurPromiseSection() {
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', padding: '72px 0 80px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(24px, 5vw, 72px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'start' }}>
 
@@ -1121,7 +1121,7 @@ function FAQSection() {
     .filter(({ f }) => f.q.toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
-    <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
+    <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading + search */}
         <div className="mb-10">
