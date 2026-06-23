@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 const headingFont = 'Trajan Pro, serif';
 const bodyFont = 'Roboto, sans-serif';
@@ -135,6 +135,42 @@ export default function ResultsCarousel() {
     el.scrollBy({ left: dir * (el.clientWidth * 0.55), behavior: 'smooth' });
   };
 
+  // Infinite seamless loop: the slides are rendered DUPLICATED back-to-back, so
+  // the scrollable width is twice the real content. Whenever the scroll position
+  // crosses into the second copy (>= half), we instantly subtract half a width;
+  // when it reaches the very start (left edge) we jump forward into copy #2. The
+  // jump is exactly one full set of slides, so the visible content is identical —
+  // wrap is invisible. Arrows therefore never hit a dead-end and never disable.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const onScroll = () => {
+      const half = el.scrollWidth / 2;
+      if (half <= 0) return;
+      // Wrap when we cross into the second copy (right) or reach the very start
+      // (left). The jump is exactly one content-set wide, so visuals are identical.
+      if (el.scrollLeft >= half) {
+        el.scrollLeft -= half; // instant, no smooth
+      } else if (el.scrollLeft <= 0) {
+        el.scrollLeft = half - 1; // instant, no smooth — land just inside copy #2
+      }
+    };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Start parked inside the second copy of the loop (just past the first set) so
+  // there's always real content to the LEFT too — the very first ‹ press scrolls
+  // back into the first copy instead of dead-ending at 0 and snapping.
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const id = requestAnimationFrame(() => {
+      if (el.scrollWidth > 0) el.scrollLeft = el.scrollWidth / 2 - 1;
+    });
+    return () => cancelAnimationFrame(id);
+  }, []);
+
   return (
     <section className="py-24">
       {/* Focus indicator: 3px deep-sage ring (#4F7256 = 5.42:1 on white, >=3:1 AA UI),
@@ -243,8 +279,8 @@ export default function ResultsCarousel() {
             className="rc-track flex overflow-x-auto"
             style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none', gap: '28px' }}
           >
-            {RESULTS.map((r) => (
-              <ResultCard key={r.name} r={r} />
+            {[...RESULTS, ...RESULTS].map((r, i) => (
+              <ResultCard key={`${r.name}-${i}`} r={r} />
             ))}
           </div>
         </div>

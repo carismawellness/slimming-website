@@ -50,7 +50,8 @@ export default function DoctorCarousel3DShowcase() {
 
   useEffect(() => { setExpanded(false); }, [active]);
 
-  const go = (i: number) => setActive(Math.min(DOCTORS.length - 1, Math.max(0, i)));
+  // Wrap around the ring so the carousel loops infinitely in both directions.
+  const go = (i: number) => setActive(((i % DOCTORS.length) + DOCTORS.length) % DOCTORS.length);
   const d = DOCTORS[active];
 
   return (
@@ -83,14 +84,14 @@ export default function DoctorCarousel3DShowcase() {
         </div>
 
         <div className="flex items-center justify-center gap-4" style={{ marginTop: 28 }}>
-          <button type="button" aria-label="Previous doctor" onClick={() => go(active - 1)} disabled={active === 0} style={ctrlStyle(active === 0)}>‹</button>
+          <button type="button" aria-label="Previous doctor" onClick={() => go(active - 1)} style={ctrlStyle(false)}>‹</button>
           <div role="tablist" aria-label="Choose a doctor" className="flex items-center gap-2">
             {DOCTORS.map((doc, i) => (
               <button key={doc.name} role="tab" aria-selected={i === active} aria-label={doc.name} onClick={() => go(i)}
                 style={{ width: i === active ? 26 : 10, height: 10, borderRadius: 999, border: 'none', cursor: 'pointer', background: i === active ? GREEN : 'rgba(79,114,86,0.3)', transition: 'all .3s ease' }} />
             ))}
           </div>
-          <button type="button" aria-label="Next doctor" onClick={() => go(active + 1)} disabled={active === DOCTORS.length - 1} style={ctrlStyle(active === DOCTORS.length - 1)}>›</button>
+          <button type="button" aria-label="Next doctor" onClick={() => go(active + 1)} style={ctrlStyle(false)}>›</button>
         </div>
 
         <p className="text-center" style={{ color: TAUPE, fontFamily: 'Roboto, sans-serif', fontSize: 13, marginTop: 18, opacity: 0.7 }}>

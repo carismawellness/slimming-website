@@ -210,8 +210,13 @@ function CoverflowGL({
 
     const setTargets = () => {
       const active = activeRef.current;
+      const LEN = cards.length;
       cards.forEach((c, i) => {
-        const off = i - active;
+        // Shortest signed distance around the ring so card 0 sits just after the
+        // last card (and vice-versa) instead of flying across the whole coverflow.
+        let off = i - active;
+        if (off > LEN / 2) off -= LEN;
+        if (off < -LEN / 2) off += LEN;
         c.target = {
           x: off * SPACING,
           z: -Math.abs(off) * DEPTH,
@@ -319,12 +324,11 @@ function CoverflowGL({
         }
         return;
       }
-      // Drag: advance one step.
+      // Drag: advance one step, wrapping around the ring.
       if (Math.abs(dx) > 40 && startX !== null) {
-        const next = Math.min(
-          CARDS.length - 1,
-          Math.max(0, activeRef.current + (dx < 0 ? 1 : -1))
-        );
+        const LEN = CARDS.length;
+        const dir = dx < 0 ? 1 : -1;
+        const next = ((activeRef.current + dir) % LEN + LEN) % LEN;
         if (next !== activeRef.current) onActiveRef.current(next);
       }
     };
@@ -417,7 +421,7 @@ export default function TreatmentsCarousel3D() {
 
   const go = useCallback(
     (dir: 1 | -1) =>
-      setActive((a) => Math.min(CARDS.length - 1, Math.max(0, a + dir))),
+      setActive((a) => ((a + dir) % CARDS.length + CARDS.length) % CARDS.length),
     []
   );
 
@@ -494,7 +498,6 @@ export default function TreatmentsCarousel3D() {
         <button
           type="button"
           onClick={() => go(-1)}
-          disabled={active === 0}
           aria-label="Previous treatment"
           className="flex items-center justify-center transition-transform duration-300 ease-out hover:scale-[1.05] disabled:opacity-30 disabled:cursor-not-allowed motion-reduce:transition-none motion-reduce:hover:scale-100"
           style={{
@@ -532,7 +535,6 @@ export default function TreatmentsCarousel3D() {
         <button
           type="button"
           onClick={() => go(1)}
-          disabled={active === CARDS.length - 1}
           aria-label="Next treatment"
           className="flex items-center justify-center transition-transform duration-300 ease-out hover:scale-[1.05] disabled:opacity-30 disabled:cursor-not-allowed motion-reduce:transition-none motion-reduce:hover:scale-100"
           style={{

@@ -72,8 +72,13 @@ export default function DoctorCarousel3D({ images, activeIndex, onActiveChange, 
 
     const setTargets = () => {
       const active = activeRef.current;
+      const LEN = cards.length;
       cards.forEach((c, i) => {
-        const off = i - active;
+        // Shortest signed distance around the ring so the carousel wraps
+        // seamlessly (card 0 sits just after the last card, and vice-versa).
+        let off = i - active;
+        if (off > LEN / 2) off -= LEN;
+        if (off < -LEN / 2) off += LEN;
         const t: CardTarget = {
           x: off * SPACING,
           z: -Math.abs(off) * DEPTH,
@@ -119,7 +124,9 @@ export default function DoctorCarousel3D({ images, activeIndex, onActiveChange, 
       const dx = e.clientX - downX;
       downX = null;
       if (Math.abs(dx) < 40) return;
-      const next = Math.min(images.length - 1, Math.max(0, activeRef.current + (dx < 0 ? 1 : -1)));
+      const LEN = images.length;
+      const dir = dx < 0 ? 1 : -1;
+      const next = ((activeRef.current + dir) % LEN + LEN) % LEN;
       if (next !== activeRef.current) onActiveRef.current(next);
     };
     const el = renderer.domElement;

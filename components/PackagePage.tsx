@@ -305,8 +305,14 @@ function TestimonialsSection({ items }: { items: Testimonial[] }) {
     if (!el) return;
     const reduce = typeof window !== 'undefined'
       && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
+    const behavior: ScrollBehavior = reduce ? 'auto' : 'smooth';
+    const maxLeft = el.scrollWidth - el.clientWidth;
+    // Infinite loop: past the end wraps back to the first slide; before the
+    // start wraps to the last — so paging never dead-ends.
+    if (dir > 0 && el.scrollLeft >= maxLeft - 2) { el.scrollTo({ left: 0, behavior }); return; }
+    if (dir < 0 && el.scrollLeft <= 2) { el.scrollTo({ left: maxLeft, behavior }); return; }
     // Scroll by roughly one slide so a fresh photo snaps into view.
-    el.scrollBy({ left: dir * (el.clientWidth * 0.55), behavior: reduce ? 'auto' : 'smooth' });
+    el.scrollBy({ left: dir * (el.clientWidth * 0.55), behavior });
   };
 
   return (
@@ -457,7 +463,6 @@ function EvidenceCarousel({
   setOpenEv: (v: number | null) => void;
 }) {
   const scrollRef = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
   const [atEnd, setAtEnd] = useState(true);
   const [canScroll, setCanScroll] = useState(false);
 
@@ -467,7 +472,6 @@ function EvidenceCarousel({
     const max = el.scrollWidth - el.clientWidth;
     const scrollable = max > 2;
     setCanScroll(scrollable);
-    setAtStart(el.scrollLeft <= 2);
     setAtEnd(el.scrollLeft >= max - 2);
   };
 
@@ -490,7 +494,13 @@ function EvidenceCarousel({
     if (!el) return;
     const reduce = typeof window !== 'undefined'
       && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
-    el.scrollBy({ left: dir * (el.clientWidth * 0.9), behavior: reduce ? 'auto' : 'smooth' });
+    const behavior: ScrollBehavior = reduce ? 'auto' : 'smooth';
+    const max = el.scrollWidth - el.clientWidth;
+    // Infinite loop: past the end wraps to the first card; before the start
+    // wraps to the last — paging never dead-ends.
+    if (dir > 0 && el.scrollLeft >= max - 2) { el.scrollTo({ left: 0, behavior }); return; }
+    if (dir < 0 && el.scrollLeft <= 2) { el.scrollTo({ left: max, behavior }); return; }
+    el.scrollBy({ left: dir * (el.clientWidth * 0.9), behavior });
   };
 
   return (
@@ -506,9 +516,10 @@ function EvidenceCarousel({
       `}</style>
 
       {/* White circular ‹/› arrows — rendered ONLY when the track is scrollable
-          (4+ cards on desktop, or any overflow on narrow screens), and each is
-          disabled/hidden at its respective end. A 3-card row never shows them. */}
-      {canScroll && !atStart && (
+          (4+ cards on desktop, or any overflow on narrow screens). They loop, so
+          both stay visible whenever the track is scrollable. A 3-card row (not
+          scrollable) never shows them. */}
+      {canScroll && (
         <button
           type="button"
           onClick={() => scrollBy(-1)}
@@ -534,7 +545,7 @@ function EvidenceCarousel({
           <span aria-hidden="true" style={{ marginTop: '-2px' }}>‹</span>
         </button>
       )}
-      {canScroll && !atEnd && (
+      {canScroll && (
         <button
           type="button"
           onClick={() => scrollBy(1)}

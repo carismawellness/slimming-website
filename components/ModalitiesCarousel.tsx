@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Link from 'next/link';
 
 const CARDS = [
@@ -70,25 +70,37 @@ const PAD = 40; // left/right breathing room
 
 export default function ModalitiesCarousel() {
   const ref = useRef<HTMLDivElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
 
-  const sync = () => {
+  // Infinite seamless loop: cards are rendered DUPLICATED back-to-back, so the
+  // scrollable width is twice the real content. Whenever the scroll position
+  // crosses into the second copy (>= half) we instantly subtract half a width;
+  // when it reaches the very start we jump forward into copy #2. The jump is
+  // exactly one content-set wide, so the visible cards are identical and the
+  // wrap is invisible. Arrows are always enabled — no dead-end at either edge.
+  useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    setAtStart(el.scrollLeft <= 4);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 4);
-  };
-
-  useEffect(() => {
-    sync();
-    const el = ref.current;
-    if (el) el.addEventListener('scroll', sync, { passive: true });
-    window.addEventListener('resize', sync);
-    return () => {
-      if (el) el.removeEventListener('scroll', sync);
-      window.removeEventListener('resize', sync);
+    const onScroll = () => {
+      const half = el.scrollWidth / 2;
+      if (half <= 0) return;
+      if (el.scrollLeft >= half) {
+        el.scrollLeft -= half;
+      } else if (el.scrollLeft <= 0) {
+        el.scrollLeft = half - 1;
+      }
     };
+    el.addEventListener('scroll', onScroll, { passive: true });
+    return () => el.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // Park inside copy #2 on mount so there's always real content to the LEFT too.
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const id = requestAnimationFrame(() => {
+      if (el.scrollWidth > 0) el.scrollLeft = el.scrollWidth / 2 - 1;
+    });
+    return () => cancelAnimationFrame(id);
   }, []);
 
   const scroll = (dir: 1 | -1) =>
@@ -114,9 +126,8 @@ export default function ModalitiesCarousel() {
           .mc-card { width: 84vw !important; height: auto !important; min-height: 426px; }
         }
       `}</style>
-      {/* Left arrow */}
-      {!atStart && (
-        <button
+      {/* Left arrow — always enabled (infinite loop, no dead-end) */}
+      <button
           onClick={() => scroll(-1)}
           aria-label="Previous"
           className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
@@ -137,7 +148,6 @@ export default function ModalitiesCarousel() {
         >
           ‹
         </button>
-      )}
 
       {/* Scrollable track */}
       <div
@@ -153,9 +163,9 @@ export default function ModalitiesCarousel() {
           paddingRight: `${PAD}px`,
         }}
       >
-        {CARDS.map((card) => (
+        {[...CARDS, ...CARDS].map((card, i) => (
           <Link
-            key={card.title}
+            key={`${card.title}-${i}`}
             href={card.href}
             className="mc-card group flex-shrink-0"
             style={{
@@ -199,9 +209,8 @@ export default function ModalitiesCarousel() {
         ))}
       </div>
 
-      {/* Right arrow */}
-      {!atEnd && (
-        <button
+      {/* Right arrow — always enabled (infinite loop, no dead-end) */}
+      <button
           onClick={() => scroll(1)}
           aria-label="Next"
           className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
@@ -222,7 +231,6 @@ export default function ModalitiesCarousel() {
         >
           ›
         </button>
-      )}
     </div>
   );
 }
