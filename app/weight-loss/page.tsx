@@ -177,7 +177,7 @@ function ProblemAgitationSection() {
     <section aria-labelledby="problem-heading">
 
       {/* ── PART 1: EMPATHY NARRATIVE ───────────────────────────── */}
-      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F8F6F2 10%, #EEF3EA 80%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden' }}>
+      <div style={{ background: 'linear-gradient(180deg, #ffffff 0%, #EEF3EA 50%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
             does this sound familiar?
@@ -352,7 +352,7 @@ function ProgramOverviewSection() {
   ];
 
   return (
-    <section aria-labelledby="program-heading" style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #f6f9f3 70%, #ffffff 100%)', padding: '72px 0 80px' }}>
+    <section aria-labelledby="program-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', padding: '72px 0 80px' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 
@@ -474,7 +474,7 @@ function CorePillarsSection() {
   ];
 
   return (
-    <section className="py-24" aria-labelledby="pillars-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 80%, #F2F6EF 100%)' }}>
+    <section className="py-24" aria-labelledby="pillars-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           4 core pillars of our methodology
@@ -742,7 +742,7 @@ function OurPromiseSection() {
   return (
     <>
       {/* ── Guarantee band — light on-brand panel (no dark-green background) ── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 40%, #F2F6EF 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
         {/* Decorative large watermark number */}
         <span aria-hidden style={{
           position: 'absolute', right: '-2%', top: '4%',
@@ -792,7 +792,7 @@ function OurPromiseSection() {
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #f6f9f3 70%, #ffffff 100%)', padding: '72px 0 80px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', padding: '72px 0 80px' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'start' }}>
 
@@ -969,7 +969,7 @@ function ResultsSection() {
       </div>
 
       {/* Medical team */}
-      <div className="py-16" style={{ backgroundColor: softBg }}>
+      <div className="py-16" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #E8EEE6 50%, #ffffff 100%)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading>The doctors behind your plan</SectionHeading>
           <p className="mt-4 mb-12 text-center max-w-3xl mx-auto" style={pStyle}>
@@ -1384,7 +1384,7 @@ function FinalCTASection() {
       </div>
 
       {/* Brand heritage band */}
-      <div className="py-14" style={{ background: panelGradient }}>
+      <div className="py-14" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #E6EFE3 50%, #ffffff 100%)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p style={{ color: green, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
             Carisma Wellness Group

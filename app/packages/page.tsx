@@ -107,7 +107,7 @@ export default function PackagesPage() {
         <section
           aria-labelledby="packages-heading"
           className="py-24"
-          style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8f2 60%, #f6f4ef 100%)' }}
+          style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8f2 50%, #ffffff 100%)' }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section header pattern: eyebrow → 64px rule → Trajan H2 → sub */}
@@ -218,7 +218,7 @@ export default function PackagesPage() {
         <section
           aria-labelledby="cta-heading"
           className="py-24"
-          style={{ background: 'linear-gradient(180deg, #f6f4ef 0%, #ffffff 100%)' }}
+          style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f6f4ef 50%, #ffffff 100%)' }}
         >
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             {/* Section header pattern */}

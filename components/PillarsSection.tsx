@@ -53,7 +53,7 @@ const pillars = [
 
 export default function PillarsSection() {
   return (
-    <section className="py-16" aria-labelledby="pillars-summary-heading" style={{ backgroundColor: '#F8F6F2' }}>
+    <section className="py-16" aria-labelledby="pillars-summary-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F8F6F2 50%, #ffffff 100%)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2
           id="pillars-summary-heading"

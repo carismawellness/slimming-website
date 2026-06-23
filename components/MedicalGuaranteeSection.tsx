@@ -29,7 +29,7 @@ export default function MedicalGuaranteeSection() {
   return (
     <>
       {/* ── Guarantee band — light on-brand panel ── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 40%, #F2F6EF 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
         {/* Decorative large watermark number */}
         <span aria-hidden style={{
           position: 'absolute', right: '-2%', top: '4%',
@@ -79,7 +79,7 @@ export default function MedicalGuaranteeSection() {
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #f6f9f3 70%, #ffffff 100%)', padding: '72px 0 80px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f6f9f3 50%, #ffffff 100%)', padding: '72px 0 80px' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 

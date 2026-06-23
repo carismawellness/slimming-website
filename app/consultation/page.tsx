@@ -339,7 +339,7 @@ export default function ConsultationPage() {
           dots
           className="relative"
           style={{
-            backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.18) 100%)',
+            backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.18) 50%, #FFFFFF 100%)',
             backgroundColor: '#FFFFFF',
             paddingTop: 'clamp(64px, 9vw, 96px)',
             paddingBottom: 'clamp(64px, 9vw, 96px)',
@@ -395,7 +395,7 @@ export default function ConsultationPage() {
 
         {/* ════════════════ 4 · MEET YOUR DOCTORS ════════════════ */}
         {/* starts at section 3's end tint, settles to white → continuous flow */}
-        <section aria-labelledby="doctors-heading" style={{ backgroundImage: 'linear-gradient(180deg, rgba(201, 216, 193, 0.18) 0%, #FFFFFF 28%)', backgroundColor: '#ffffff', paddingTop: 'clamp(64px, 9vw, 96px)', paddingBottom: 'clamp(48px, 7vw, 80px)' }}>
+        <section aria-labelledby="doctors-heading" style={{ backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.18) 50%, #FFFFFF 100%)', backgroundColor: '#ffffff', paddingTop: 'clamp(64px, 9vw, 96px)', paddingBottom: 'clamp(48px, 7vw, 80px)' }}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <header className="text-center" style={{ marginBottom: 'clamp(36px, 5vw, 56px)' }}>
               <p style={{ fontFamily: WIDE, fontSize: 12, letterSpacing: '0.22em', textTransform: 'uppercase', color: TAUPE, marginBottom: 12 }}>
@@ -416,7 +416,7 @@ export default function ConsultationPage() {
 
         {/* ════════════════ 5 · PROOF BAND ════════════════ */}
         {/* settles from white toward section 6's sage-tinted top → continuous flow */}
-        <section aria-labelledby="proof-heading" style={{ backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, #FFFFFF 60%, rgba(201, 216, 193, 0.22) 100%)', backgroundColor: '#ffffff', paddingBottom: 'clamp(64px, 9vw, 96px)' }}>
+        <section aria-labelledby="proof-heading" style={{ backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.22) 50%, #FFFFFF 100%)', backgroundColor: '#ffffff', paddingBottom: 'clamp(64px, 9vw, 96px)' }}>
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="lg-glass lg-glass--panel" style={{ padding: 'clamp(28px, 4vw, 48px)' }}>
               <header className="text-center" style={{ marginBottom: 'clamp(28px, 4vw, 40px)' }}>
@@ -460,7 +460,7 @@ export default function ConsultationPage() {
           dots
           className="relative"
           style={{
-            backgroundImage: 'linear-gradient(180deg, rgba(201, 216, 193, 0.22) 0%, #FFFFFF 100%)',
+            backgroundImage: 'linear-gradient(180deg, #FFFFFF 0%, rgba(201, 216, 193, 0.22) 50%, #FFFFFF 100%)',
             backgroundColor: '#FFFFFF',
             paddingTop: 'clamp(72px, 10vw, 110px)',
             paddingBottom: 'clamp(72px, 10vw, 110px)',

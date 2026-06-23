@@ -159,7 +159,7 @@ export default function GLP1Page() {
 
 
       {/* Sustainability */}
-      <section className="py-16" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 100%)' }}>
+      <section className="py-16" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12" style={{ maxWidth: '1100px' }}>
           <h2
             className="text-center mb-12 uppercase"
@@ -208,7 +208,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Malta's trusted clinic — press logos + program pillars */}
-      <section className="py-24" style={{ background: 'linear-gradient(180deg, #eef3ea 0%, #ffffff 100%)' }}>
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-center"
@@ -404,7 +404,7 @@ export default function GLP1Page() {
 
       {/* Our promise — extended care commitment (verbatim from weight-loss page) */}
       {/* ── Guarantee band — light on-brand panel (no dark-green background) ── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 40%, #F2F6EF 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
         {/* Decorative large watermark number */}
         <span aria-hidden style={{
           position: 'absolute', right: '-2%', top: '4%',
@@ -454,7 +454,7 @@ export default function GLP1Page() {
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(180deg, #F2F6EF 0%, #f6f9f3 70%, #ffffff 100%)', padding: '72px 0 80px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', padding: '72px 0 80px' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 

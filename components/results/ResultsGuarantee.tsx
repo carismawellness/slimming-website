@@ -109,7 +109,7 @@ export default function ResultsGuarantee() {
       className={`rg${revealed ? ' rg--in' : ''}`}
       style={{
         padding: 'clamp(46px,10vw,128px) 0',
-        background: 'linear-gradient(180deg,#ffffff 0%,#f5f8f2 100%)',
+        background: 'linear-gradient(180deg,#ffffff 0%,#f5f8f2 50%,#ffffff 100%)',
       }}
     >
       <style>{`

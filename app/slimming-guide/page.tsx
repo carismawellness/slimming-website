@@ -293,7 +293,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Is This For You — clean editorial two-column comparison (no cards/gradients/shadows) */}
-      <section className="py-24" style={{ background: 'linear-gradient(180deg, #FFFFFF 0%, #F5F8F2 100%)' }}>
+      <section className="py-24" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <Kicker centered rule>before you start</Kicker>
@@ -351,7 +351,7 @@ export default function SlimmingGuidePage() {
           the sage wash above and resolves to white so the section below flows. */}
       <section
         className="pt-24 pb-40 relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #F5F8F2 0%, #FFFFFF 100%)' }}
+        style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)' }}
       >
         {/* Single Layers watermark — decorative motif behind CTA content (no blob
             here because this band has a .cta-glow button). */}
