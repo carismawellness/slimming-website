@@ -776,16 +776,26 @@ function OurPromiseSection() {
         </div>
 
         {/* 3 proof pillars */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(160px,1fr))', gap: '2px', borderTop: '1px solid rgba(79,114,86,0.18)' }}>
+        <style>{`
+          .proof-pillars { display: grid; grid-template-columns: 1fr; border-top: 1px solid rgba(79,114,86,0.18); }
+          .proof-pillar  { padding: clamp(28px,5vw,40px) 24px; text-align: center; border-bottom: 1px solid rgba(79,114,86,0.12); }
+          .proof-pillar:last-child { border-bottom: none; }
+          @media (min-width: 640px) {
+            .proof-pillars { grid-template-columns: repeat(3,1fr); }
+            .proof-pillar  { border-bottom: none; border-right: 1px solid rgba(79,114,86,0.14); }
+            .proof-pillar:last-child { border-right: none; }
+          }
+        `}</style>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 proof-pillars">
           {[
             { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
             { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
             { num: '3', stat: 'Extended Until Done', sub: 'We keep going at no extra cost until you hit your agreed target weight' },
           ].map((item) => (
-            <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(79,114,86,0.14)', textAlign: 'center' }}>
-              <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: green, textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
-              <p style={{ fontFamily: headingFont, fontSize: '20px', color: '#024C27', marginBottom: '10px', textTransform: 'uppercase' }}>{item.stat}</p>
-              <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.65, color: taupe }}>{item.sub}</p>
+            <div key={item.num} className="proof-pillar">
+              <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: green, textTransform: 'uppercase', marginBottom: '12px' }}>0{item.num}</span>
+              <p style={{ fontFamily: headingFont, fontSize: 'clamp(22px,3vw,26px)', color: '#024C27', marginBottom: '12px', textTransform: 'uppercase', lineHeight: 1.2 }}>{item.stat}</p>
+              <p style={{ fontFamily: bodyFont, fontSize: '14px', lineHeight: 1.7, color: taupe }}>{item.sub}</p>
             </div>
           ))}
         </div>
