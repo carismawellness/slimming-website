@@ -267,7 +267,7 @@ function ProblemAgitationSection() {
       </div>
 
       {/* ── PART 2: DIAGNOSTIC — WHY PLANS FAILED ──────────────── */}
-      <div style={{ backgroundColor: '#ffffff', padding: '88px 0' }}>
+      <div style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(32px, 6vw, 88px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center" style={{ marginBottom: '64px' }}>
             <p style={{ color: taupe, fontFamily: wideFont, fontSize: '12px', letterSpacing: '4px', textTransform: 'uppercase', marginBottom: '14px' }}>
@@ -474,7 +474,7 @@ function CorePillarsSection() {
   ];
 
   return (
-    <section className="py-24" aria-labelledby="pillars-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)' }}>
+    <section aria-labelledby="pillars-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           4 core pillars of our methodology
