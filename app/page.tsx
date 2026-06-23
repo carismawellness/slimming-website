@@ -167,7 +167,7 @@ export default function Home() {
       </section>
 
       {/* (3) Our Treatments — full-card carousel with arrows */}
-      <section aria-labelledby="modalities-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section aria-labelledby="modalities-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', marginBottom: '48px' }}>
           <p aria-hidden="true" style={{ color: '#4f7256', fontFamily: 'Novecento Wide Book, sans-serif', fontSize: '12px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', marginBottom: '14px' }}>
             Our Treatments
