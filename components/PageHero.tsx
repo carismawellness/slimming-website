@@ -38,7 +38,7 @@ export type HeroMedia = {
 };
 export type HeroProof = {
   rating?: string; // e.g. "4.9"
-  reviews?: string; // e.g. "200+"
+  reviews?: string; // e.g. "800+"
   awardSrc?: string;
   awardText?: string; // e.g. "#1 voted clinic\nMalta 2025–26"
   statValue?: string; // e.g. "30+"
