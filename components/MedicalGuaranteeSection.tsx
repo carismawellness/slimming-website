@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import CountUp from '@/components/CountUp';
 
 /**
  * MedicalGuaranteeSection — the canonical "Up to 1kg per week · Medically
@@ -49,7 +50,7 @@ export default function MedicalGuaranteeSection() {
 
           {/* Headline */}
           <h2 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
-            Up to 1KG<br />
+            Up to <CountUp value="1KG" /><br />
             <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
           </h2>
 

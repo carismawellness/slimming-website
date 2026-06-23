@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import CountUp from '@/components/CountUp';
 
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,9 +58,11 @@ export default function TestimonialsSection() {
                 ★
               </span>
             ))}
-            <span className="ml-2 text-base font-semibold" style={{ color: 'var(--text-dark)' }}>
-              {testimonial.rating.toFixed(1)}
-            </span>
+            <CountUp
+              value={testimonial.rating.toFixed(1)}
+              className="ml-2 text-base font-semibold"
+              style={{ color: 'var(--text-dark)' }}
+            />
           </div>
 
           <p className="text-2xl text-gray-700 text-center mb-8 italic">
@@ -88,7 +91,7 @@ export default function TestimonialsSection() {
         </div>
 
         <p className="text-center mt-12 text-gray-600">
-          Over 800+ reviews with 5-star Google rating
+          Over <CountUp value="800+" /> reviews with 5-star Google rating
         </p>
       </div>
     </section>

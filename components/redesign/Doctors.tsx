@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { DOCTORS } from '@/lib/redesign/content';
 import Reveal from './Reveal';
 import Cta from './Cta';
+import CountUp from '@/components/CountUp';
 
 function DoctorCard({ d }: { d: (typeof DOCTORS)[number] }) {
   const [open, setOpen] = useState(false);
@@ -24,7 +25,7 @@ function DoctorCard({ d }: { d: (typeof DOCTORS)[number] }) {
         <span aria-hidden className="cx-doc-tint" />
         {/* experience badge */}
         <span className="cx-pill cx-doc-badge" style={{ position: 'absolute', top: 12, left: 12 }}>
-          {d.exp} experience
+          <CountUp value={d.exp} /> experience
         </span>
       </div>
       <div style={{ padding: '20px 22px 24px' }}>

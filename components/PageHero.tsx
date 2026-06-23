@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import CountUp from '@/components/CountUp';
 import HeroVideoPlayer from './HeroVideoPlayer';
 import HeroMotif from './HeroMotif';
 
@@ -357,7 +358,7 @@ export default function PageHero({
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
             <Stars size={14} />
             <span style={{ fontFamily: BODY, fontSize: 13, color: TAUPE }}>
-              <strong style={{ color: SAGE_TEXT }}>{proof?.rating || '4.9'}</strong> · {proof?.reviews || '800+'} verified client reviews
+              <strong style={{ color: SAGE_TEXT }}><CountUp value={proof?.rating || '4.9'} /></strong> · <CountUp value={proof?.reviews || '800+'} /> verified client reviews
             </span>
           </div>
         </div>
@@ -435,9 +436,7 @@ export default function PageHero({
               zIndex: 3,
             }}
           >
-            <span style={{ fontFamily: HEADING, fontSize: 28, color: SAGE_TEXT, lineHeight: 1 }}>
-              {proof?.statValue || '35+'}
-            </span>
+            <CountUp value={proof?.statValue || '35+'} style={{ fontFamily: HEADING, fontSize: 28, color: SAGE_TEXT, lineHeight: 1 }} />
             <span style={{ fontFamily: WIDE, fontSize: 9.5, letterSpacing: '0.06em', textTransform: 'uppercase', color: TAUPE, lineHeight: 1.3, maxWidth: 84 }}>
               {proof?.statLabel || 'years in business'}
             </span>
@@ -487,7 +486,7 @@ export default function PageHero({
               // eslint-disable-next-line @next/next/no-img-element
               <img src={proof.awardSrc} alt="" aria-hidden style={{ height: 34, width: 'auto' }} />
             ) : (
-              <span style={{ fontFamily: HEADING, fontSize: 22, color: SAGE_TEXT, lineHeight: 1 }}>{proof?.statValue || '30+'}</span>
+              <CountUp value={proof?.statValue || '30+'} style={{ fontFamily: HEADING, fontSize: 22, color: SAGE_TEXT, lineHeight: 1 }} />
             )}
             <span style={{ fontFamily: WIDE, fontSize: 9.5, letterSpacing: '0.06em', textTransform: 'uppercase', color: SAGE_TEXT, lineHeight: 1.35, whiteSpace: 'pre-line' }}>
               {proof?.awardText || `${proof?.statLabel || 'years in wellness'}`}

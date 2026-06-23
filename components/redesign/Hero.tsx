@@ -5,6 +5,7 @@ import { HERO, REVIEWS } from '@/lib/redesign/content';
 import HeroCanvas from './HeroCanvas';
 import Cta from './Cta';
 import { prefersReducedMotion } from './motion';
+import CountUp from '@/components/CountUp';
 
 function Check() {
   return (
@@ -178,7 +179,7 @@ export default function Hero() {
             <div data-hero="proof" style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
               <Stars />
               <span style={{ fontFamily: 'var(--body)', fontSize: 13.5, color: 'var(--taupe)' }}>
-                <strong style={{ color: 'var(--sage-ink)' }}>{REVIEWS.rating.toFixed(1)}</strong> from {REVIEWS.total}+ Google reviews
+                <strong style={{ color: 'var(--sage-ink)' }}><CountUp value={REVIEWS.rating.toFixed(1)} /></strong> from <CountUp value={REVIEWS.total} />+ Google reviews
               </span>
               <span aria-hidden style={{ width: 1, height: 16, background: 'var(--line)' }} />
               <span style={{ fontFamily: 'var(--body)', fontSize: 13.5, color: 'var(--taupe)' }}>Doctor-led · Free body analysis</span>
@@ -214,10 +215,10 @@ export default function Hero() {
 
             {/* rating chip — lifted clear of the native video controls */}
             <div data-hero="chip" className="cx-glass" style={{ position: 'absolute', left: -16, bottom: 92, borderRadius: 16, padding: '12px 16px', display: 'flex', alignItems: 'center', gap: 10 }}>
-              <span className="cx-display" style={{ fontSize: 30, color: 'var(--sage-ink)' }}>{REVIEWS.rating.toFixed(1)}</span>
+              <CountUp value={REVIEWS.rating.toFixed(1)} className="cx-display" style={{ fontSize: 30, color: 'var(--sage-ink)' }} />
               <span style={{ display: 'flex', flexDirection: 'column', lineHeight: 1.2 }}>
                 <Stars size={12} />
-                <span style={{ fontFamily: 'var(--body)', fontSize: 11, color: 'var(--taupe)' }}>{REVIEWS.total}+ reviews</span>
+                <span style={{ fontFamily: 'var(--body)', fontSize: 11, color: 'var(--taupe)' }}><CountUp value={REVIEWS.total} />+ reviews</span>
               </span>
             </div>
 

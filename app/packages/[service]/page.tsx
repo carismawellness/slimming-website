@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import { services, getOrderedServices, BOOKING_URL } from '@/lib/services';
 import { notFound } from 'next/navigation';
 import PackagePage from '@/components/PackagePage';
+import CountUp from '@/components/CountUp';
 import { packageContent } from '@/lib/packages';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import BookConsultationButton from '@/components/BookConsultationButton';
@@ -317,7 +318,7 @@ export default async function ServicePage({ params }: Props) {
                     &#9733;&#9733;&#9733;&#9733;&#9733;
                   </span>
                   <span className="text-xs" style={{ color: TAUPE_LIGHT, fontFamily: BODY_FONT }}>
-                    Over 800+ Reviews
+                    Over <CountUp value="800+" /> Reviews
                   </span>
                 </div>
 

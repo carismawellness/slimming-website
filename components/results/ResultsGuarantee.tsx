@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import CountUp from '@/components/CountUp';
 
 /**
  * ResultsGuarantee — "The Carisma Results Commitment" section.
@@ -257,7 +258,7 @@ export default function ResultsGuarantee() {
                   textTransform: 'uppercase',
                 }}
               >
-                {s.value}
+                <CountUp value={s.value} />
               </div>
               <h3
                 style={{

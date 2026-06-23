@@ -5,6 +5,7 @@ import Reveal from './Reveal';
 import Cta from './Cta';
 import FinalCtaAurora from './FinalCtaAurora';
 import BookConsultationButton from '@/components/BookConsultationButton';
+import CountUp from '@/components/CountUp';
 
 export default function FinalCta() {
   return (
@@ -42,7 +43,7 @@ export default function FinalCta() {
             </div>
             <p style={{ fontFamily: 'var(--body)', fontSize: 13, color: 'var(--taupe)' }}>
               <span aria-label={`Rated ${REVIEWS.rating.toFixed(1)} out of 5 stars`} role="img">★</span>
-              {' '}{REVIEWS.rating.toFixed(1)} from {REVIEWS.total}+ reviews · Doctor-led · Free on-site parking
+              {' '}<CountUp value={REVIEWS.rating.toFixed(1)} /> from <CountUp value={REVIEWS.total} />+ reviews · Doctor-led · Free on-site parking
             </p>
           </div>
         </Reveal>

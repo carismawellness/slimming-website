@@ -1,3 +1,5 @@
+import CountUp from '@/components/CountUp';
+
 export default function DoctorProfiles() {
   const doctors = [
     {
@@ -41,7 +43,7 @@ export default function DoctorProfiles() {
               <div className="p-8">
                 <h3 className="text-2xl font-bold mb-1" style={{ color: 'var(--primary-navy)' }}>{doctor.name}</h3>
                 <p className="font-semibold mb-2" style={{ color: 'var(--brand-green-text)' }}>{doctor.specialty}</p>
-                <p className="text-sm mb-4" style={{ color: 'var(--text-light)' }}>{doctor.experience}</p>
+                <p className="text-sm mb-4" style={{ color: 'var(--text-light)' }}><CountUp value={doctor.experience} /></p>
                 <p style={{ color: 'var(--text-dark)' }}>{doctor.description}</p>
               </div>
             </div>

@@ -4,6 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import PageHero from '@/components/PageHero';
+import CountUp from '@/components/CountUp';
 import { weightLossFaqs, flattenWeightLossAnswer } from '@/lib/faq/weight-loss';
 import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, faqPage, serviceSchema } from '@/lib/seo/schema';
@@ -1389,7 +1390,7 @@ function FinalCTASection() {
             Carisma Wellness Group
           </p>
           <h3 className="mt-2 mb-6" style={{ color: greenDark, fontFamily: headingFont, fontSize: '24px', fontWeight: 400 }}>
-            35+ years in wellness, aesthetics &amp; slimming
+            <CountUp value="35+" /> years in wellness, aesthetics &amp; slimming
           </h3>
           <div className="flex flex-wrap items-center justify-center gap-4">
             <a

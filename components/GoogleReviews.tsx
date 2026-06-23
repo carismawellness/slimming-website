@@ -21,6 +21,7 @@ import {
   FRESHA_PROFILE,
   type FreshaReview,
 } from '@/lib/fresha-reviews';
+import CountUp from '@/components/CountUp';
 
 // ── Brand tokens (light gradient, WCAG AA) ────────────────────────────────
 const INK = '#574e46';      // softened warm charcoal (was #1a1a1a — less loud); AA on light
@@ -288,10 +289,10 @@ export default function GoogleReviews() {
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 10 }}>
           {/* Primary stats — big and bold */}
           <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <span style={{ fontFamily: SERIF, fontSize: 64, color: INK, lineHeight: 1, fontWeight: 400 }}>4.9</span>
+            <CountUp value="4.9" style={{ fontFamily: SERIF, fontSize: 64, color: INK, lineHeight: 1, fontWeight: 400 }} />
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start', gap: 6 }}>
               <Stars rating={5} size={24} />
-              <span style={{ fontFamily: BODY, fontSize: 20, fontWeight: 600, color: INK, letterSpacing: '-0.3px' }}>800+ verified reviews</span>
+              <span style={{ fontFamily: BODY, fontSize: 20, fontWeight: 600, color: INK, letterSpacing: '-0.3px' }}><CountUp value="800+" /> verified reviews</span>
             </div>
           </div>
           {/* Secondary — platform attribution */}

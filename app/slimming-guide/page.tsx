@@ -11,6 +11,7 @@ import { JsonLd } from '@/lib/seo/JsonLd';
 import { SITE_URL, breadcrumbList, medicalWebPage } from '@/lib/seo/schema';
 import BookConsultationButton from '@/components/BookConsultationButton';
 import MotifAccent from '@/components/layers/MotifAccent';
+import CountUp from '@/components/CountUp';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming Guide | Malta's #1 Weight-Loss Clinic",
@@ -128,7 +129,7 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
         className="ml-2"
         style={{ color: light ? GREEN_SAGE_LIGHT : GREEN, fontFamily: bodyFont, fontSize: '13px' }}
       >
-        Over 800+ Reviews
+        Over <CountUp value="800+" /> Reviews
       </span>
     </div>
   );

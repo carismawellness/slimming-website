@@ -2,6 +2,20 @@
 
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
+import CountUp from '@/components/CountUp';
+
+// Splits a label like "50+ Recipes" into an animated stat token ("50+") + the
+// rest of the label (" Recipes"). Labels with no leading number render verbatim.
+function StatLabel({ label }: { label: string }) {
+  const m = label.match(/^(\d[\d.,]*\S*)(.*)$/);
+  if (!m) return <>{label}</>;
+  return (
+    <>
+      <CountUp value={m[1]} />
+      {m[2]}
+    </>
+  );
+}
 
 // "Inside the Guide" — brings the 3D page renders back to make the page feel rich,
 // but as a DELIBERATE 3-up showcase (tilted renders + captions) rather than the
@@ -116,7 +130,7 @@ export default function InsideTheGuide() {
                 className="uppercase mb-2"
                 style={{ color: '#3c5a40', fontFamily: "'Novecento Wide Book', 'Novecento Wide', sans-serif", fontSize: '13px', fontWeight: 700, letterSpacing: '1px' }}
               >
-                {it.label}
+                <StatLabel label={it.label} />
               </h3>
               <p style={{ color: '#5f5649', fontFamily: 'Roboto, sans-serif', fontSize: '14px', lineHeight: 1.6, maxWidth: '300px' }}>
                 {it.caption}

@@ -24,6 +24,7 @@
 import { useState, useRef, useEffect } from 'react';
 import Image from 'next/image';
 import PageHero from '@/components/PageHero';
+import CountUp from '@/components/CountUp';
 import { BOOKING_URL } from '@/lib/services';
 import {
   PackageContent,
@@ -196,7 +197,7 @@ function Stars({ size = 18, withGoogle = false }: { size?: number; withGoogle?: 
       )}
       {/* P1 — meaningful aria-label on star rating */}
       <span style={{ color: GREEN_TEXT, fontSize: size, letterSpacing: 2, lineHeight: 1 }} role="img" aria-label="5 out of 5 stars">{'★'.repeat(5)}</span>
-      <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14 }}>Over 800+ Reviews</span>
+      <span style={{ color: TAUPE, fontFamily: BODY, fontSize: 14 }}>Over <CountUp value="800+" /> Reviews</span>
     </span>
   );
 }
