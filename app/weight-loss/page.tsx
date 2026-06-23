@@ -352,7 +352,7 @@ function ProgramOverviewSection() {
   ];
 
   return (
-    <section aria-labelledby="program-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', padding: '72px 0 80px' }}>
+    <section aria-labelledby="program-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 
@@ -474,7 +474,7 @@ function CorePillarsSection() {
   ];
 
   return (
-    <section aria-labelledby="pillars-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+    <section aria-labelledby="pillars-heading" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           4 core pillars of our methodology
