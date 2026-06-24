@@ -129,7 +129,7 @@ export default function GLP1Page() {
       <ResultsCarousel />
 
       {/* What is Medical Weight Loss */}
-      <section className="py-24" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 100%)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             What is medical weight loss?
@@ -159,8 +159,8 @@ export default function GLP1Page() {
 
 
       {/* Sustainability */}
-      <section className="py-16" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)' }}>
-        <div className="mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-12" style={{ maxWidth: '1100px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+        <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1100px' }}>
           <h2
             className="text-center mb-12 uppercase"
             style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25 }}
