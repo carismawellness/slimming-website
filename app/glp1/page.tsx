@@ -531,7 +531,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Safety, side effects & our system */}
-      <section className="py-24" style={{ backgroundColor: '#ffffff' }}>
+      <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section header */}
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
@@ -627,7 +627,7 @@ export default function GLP1Page() {
       </section>
 
       {/* The science behind GLP-1 — video */}
-      <section className="py-24">
+      <section style={{ paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', lineHeight: 1.6 }}>
             Why weight loss is biological,<br />not just behavioural
@@ -657,7 +657,7 @@ export default function GLP1Page() {
       </section>
 
       {/* 4 core pillars — programme built to last */}
-      <section className="py-24">
+      <section style={{ paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             4 core pillars of our methodology
@@ -721,7 +721,7 @@ export default function GLP1Page() {
       </section>
 
       {/* The Carisma difference — wellness chain + map */}
-      <section className="py-24" aria-labelledby="difference-heading-glp1" style={{ backgroundColor: '#ffffff' }}>
+      <section aria-labelledby="difference-heading-glp1" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
             {/* Decorative background watermark */}
