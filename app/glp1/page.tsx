@@ -218,7 +218,7 @@ export default function GLP1Page() {
           </h2>
 
           {/* Press logos */}
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '20px 12px', marginTop: '40px', marginBottom: '40px', placeItems: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', gap: '20px 12px', marginTop: '40px', marginBottom: '40px' }}>
             {[
               { label: 'Malta Today', src: '/wix/f940f0_8c40f03f50684bf8adc6d9ca0cb2be9e~mv2.jpg', w: 134, h: 42 },
               { label: '89.7 Bay', src: '/wix/f940f0_e6f0bd96c9d04debaa8d8b609cbf68e6~mv2.jpeg', w: 47, h: 42 },
@@ -226,7 +226,7 @@ export default function GLP1Page() {
               { label: 'Times of Malta', src: '/wix/f940f0_2120887ab6ef4957b02ff004e804beaf~mv2.png', w: 47, h: 42 },
               { label: 'Malta Daily', src: '/wix/f940f0_0db6f1508426404eacea3b33b0e9112d~mv2.png', w: 66, h: 42 },
             ].map((logo) => (
-              <div key={logo.label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
+              <div key={logo.label} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: 'calc(33.33% - 8px)', minWidth: '100px' }}>
                 <img
                   src={logo.src}
                   alt={logo.label}
