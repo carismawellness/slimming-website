@@ -159,7 +159,7 @@ export default function GLP1Page() {
 
 
       {/* Sustainability */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1100px' }}>
           <h2
             className="text-center mb-12 uppercase"
@@ -208,7 +208,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Malta's trusted clinic — press logos + program pillars */}
-      <section className="py-24" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-center"
