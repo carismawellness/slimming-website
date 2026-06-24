@@ -49,7 +49,7 @@ export default function MedicalGuaranteeSection() {
           </div>
 
           {/* Headline */}
-          <h3 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
+          <h3 style={{ fontFamily: headingFont, fontSize: 'clamp(34px,5vw,58px)', fontWeight: 400, color: '#024C27', lineHeight: 1, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
             Up to 1KG<br />
             <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
           </h3>
