@@ -181,7 +181,7 @@ export default function DoctorShowcase() {
   return (
     <section
       aria-labelledby="doctors-heading"
-      style={{ background: 'transparent', padding: 'clamp(56px,9vw,104px) 0' }}
+      style={{ background: 'transparent', padding: 'clamp(40px,8vw,96px) 0' }}
     >
       <style>{`
         .doctor-grid {
