@@ -129,7 +129,7 @@ export default function GLP1Page() {
       <ResultsCarousel />
 
       {/* What is Medical Weight Loss */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             What is medical weight loss?
@@ -266,7 +266,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Medical weight loss eligibility */}
-      <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(32px, 6vw, 80px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 80px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '760px' }}>
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             medical weight loss eligibility
@@ -319,7 +319,7 @@ export default function GLP1Page() {
       </section>
 
       {/* We are not another diet clinic */}
-      <section style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             The Carisma Difference
@@ -358,7 +358,7 @@ export default function GLP1Page() {
       <HowItWorks />
 
       {/* Led by expertise — Dr Zaid Teebi */}
-      <section style={{ paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             Expert medical weight loss care
@@ -403,7 +403,7 @@ export default function GLP1Page() {
 
       {/* Our promise — extended care commitment (verbatim from weight-loss page) */}
       {/* ── Guarantee band — light on-brand panel (no dark-green background) ── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 88px)', paddingBottom: '0', overflow: 'hidden', position: 'relative' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 88px)', paddingBottom: '0', overflow: 'hidden', position: 'relative' }}>
         {/* Decorative large watermark number */}
         <span aria-hidden style={{
           position: 'absolute', right: '-2%', top: '4%',
@@ -453,7 +453,7 @@ export default function GLP1Page() {
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 72px)', paddingBottom: 'clamp(40px, 8vw, 80px)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 72px)', paddingBottom: 'clamp(12px, 3vw, 80px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 
@@ -531,7 +531,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Safety, side effects & our system */}
-      <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section header */}
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
@@ -627,7 +627,7 @@ export default function GLP1Page() {
       </section>
 
       {/* The science behind GLP-1 — video */}
-      <section style={{ paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase', lineHeight: 1.6 }}>
             Why weight loss is biological,<br />not just behavioural
@@ -657,7 +657,7 @@ export default function GLP1Page() {
       </section>
 
       {/* 4 core pillars — programme built to last */}
-      <section style={{ paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             4 core pillars of our methodology
@@ -721,7 +721,7 @@ export default function GLP1Page() {
       </section>
 
       {/* The Carisma difference — wellness chain + map */}
-      <section aria-labelledby="difference-heading-glp1" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section aria-labelledby="difference-heading-glp1" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
             {/* Decorative background watermark */}

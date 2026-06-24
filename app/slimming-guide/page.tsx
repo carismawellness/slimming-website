@@ -165,7 +165,7 @@ export default function SlimmingGuidePage() {
       <WhyDietsFail />
 
       {/* What This Is — two-column: calm statement + a 3D page render */}
-      <section className="bg-white" style={{ padding: 'clamp(56px, 8vw, 88px) 0 clamp(40px, 6vw, 60px)' }}>
+      <section className="bg-white" style={{ paddingTop: 'clamp(12px, 3vw, 88px)', paddingBottom: 'clamp(12px, 3vw, 60px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 items-center" style={{ gap: 'clamp(32px, 6vw, 72px)' }}>
             {/* Left — statement */}
@@ -351,7 +351,7 @@ export default function SlimmingGuidePage() {
           the sage wash above and resolves to white so the section below flows. */}
       <section
         className="relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(48px, 10vw, 160px)' }}
+        style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 160px)' }}
       >
         {/* Single Layers watermark — decorative motif behind CTA content (no blob
             here because this band has a .cta-glow button). */}

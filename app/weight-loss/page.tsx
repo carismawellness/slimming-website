@@ -1121,7 +1121,7 @@ function FAQSection() {
     .filter(({ f }) => f.q.toLowerCase().includes(query.trim().toLowerCase()));
 
   return (
-    <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+    <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading + search */}
         <div className="mb-10">
@@ -1333,7 +1333,7 @@ function EvidenceApproachSection() {
   ];
 
   return (
-    <section aria-labelledby="evidence-approach-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+    <section aria-labelledby="evidence-approach-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1100px' }}>
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our methodology
@@ -1428,7 +1428,7 @@ function FinalCTASection() {
       </div>
 
       {/* Contact info — using div to avoid nesting footer inside section which conflicts with outer layout footer */}
-      <div className="py-12" style={{ backgroundColor: '#fff', borderTop: `1px solid #e0e0e0` }}>
+      <div style={{ backgroundColor: '#fff', borderTop: `1px solid #e0e0e0`, paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center" style={{ color: taupe, fontFamily: bodyFont, fontSize: '14px' }}>
           <p className="mb-2">
             <a href={`tel:${phoneNumber.replace(/\s/g, '')}`} aria-label={`Call us at ${phoneNumber}`} style={{ color: slate, fontWeight: 600, textDecoration: 'underline' }}>{phoneNumber}</a>

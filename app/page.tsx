@@ -123,7 +123,7 @@ export default function Home() {
       />
 
       {/* (2) 4 Core Pillars of Our Weight Loss Methodology */}
-      <section aria-labelledby="pillars-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
+      <section aria-labelledby="pillars-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center mb-2" aria-hidden="true" style={{ color: '#6f6456', fontFamily: 'Novecento Wide Book, sans-serif', fontWeight: '400', fontSize: '16px', letterSpacing: '3.2px', textTransform: 'uppercase' }}>
             4 core pillars of our weight loss methodology
@@ -243,9 +243,9 @@ How GLP-1 Works<br />at Our Clinic
       <MedicalGuaranteeSection />
 
       {/* (6) The Carisma Difference */}
-      <section aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section aria-labelledby="difference-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', padding: '40px 40px 48px', overflow: 'hidden' }}>
+          <div className="relative" style={{ background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: '16px', paddingTop: 'clamp(20px, 4vw, 40px)', paddingRight: 'clamp(20px, 4vw, 40px)', paddingBottom: 'clamp(20px, 4vw, 48px)', paddingLeft: 'clamp(20px, 4vw, 40px)', overflow: 'hidden' }}>
             {/* Decorative background watermark (purely presentational) */}
             <Image
               src="/wix/f940f0_9f944ed58e3f4919bf87ef224beb4f94~mv2.webp"
