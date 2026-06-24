@@ -78,8 +78,8 @@ export default function Proof() {
       <style>{`
         .cx-press-cell { padding-inline: 28px; position: relative; }
         .cx-press-cell::after { content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 1px; height: 26px; background: var(--line); }
-        .cx-press-logo { opacity: 0.55; filter: grayscale(1); transition: opacity .4s var(--ease), filter .4s var(--ease); }
-        .cx-press-cell:hover .cx-press-logo { opacity: 0.9; filter: grayscale(0); }
+        .cx-press-logo { opacity: 0.85; transition: opacity .4s var(--ease); }
+        .cx-press-cell:hover .cx-press-logo { opacity: 1; }
 
         /* vertical dividers between stat cells */
         .cx-stat { position: relative; }

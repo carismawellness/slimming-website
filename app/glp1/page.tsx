@@ -235,8 +235,7 @@ export default function GLP1Page() {
                     height: `${logo.h}px`,
                     objectFit: 'contain',
                     mixBlendMode: 'multiply',
-                    filter: 'grayscale(1)',
-                    opacity: 0.65,
+                    opacity: 1,
                   }}
                 />
               </div>
@@ -320,7 +319,7 @@ export default function GLP1Page() {
       </section>
 
       {/* We are not another diet clinic */}
-      <section className="py-24" style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat' }}>
+      <section style={{ backgroundColor: '#ffffff', backgroundImage: 'url(/wix/87fc13_eed9276b67e74ae99994e6bab4bcd409~mv2.webp)', backgroundSize: 'contain', backgroundPosition: 'center', backgroundRepeat: 'no-repeat', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             The Carisma Difference
@@ -359,7 +358,7 @@ export default function GLP1Page() {
       <HowItWorks />
 
       {/* Led by expertise — Dr Zaid Teebi */}
-      <section className="py-24">
+      <section style={{ paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             Expert medical weight loss care
@@ -404,7 +403,7 @@ export default function GLP1Page() {
 
       {/* Our promise — extended care commitment (verbatim from weight-loss page) */}
       {/* ── Guarantee band — light on-brand panel (no dark-green background) ── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', padding: '88px 0 0', overflow: 'hidden', position: 'relative' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 88px)', paddingBottom: '0', overflow: 'hidden', position: 'relative' }}>
         {/* Decorative large watermark number */}
         <span aria-hidden style={{
           position: 'absolute', right: '-2%', top: '4%',
@@ -454,7 +453,7 @@ export default function GLP1Page() {
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', padding: '72px 0 80px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F2F6EF 50%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 72px)', paddingBottom: 'clamp(40px, 8vw, 80px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 
