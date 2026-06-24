@@ -567,7 +567,7 @@ function TreatmentsSection() {
   ];
 
   return (
-    <section className="py-16">
+    <section style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <Eyebrow>Medical-grade, evidence-backed devices</Eyebrow>
         <SectionHeading>Clinical technology that accelerates your results</SectionHeading>
@@ -949,7 +949,7 @@ function ResultsSection() {
   return (
     <section>
       {/* Clinical research evidence grid */}
-      <div className="py-16">
+      <div style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading>The evidence behind the method</SectionHeading>
           <p className="mt-4 mb-12 text-center max-w-3xl mx-auto" style={pStyle}>
@@ -979,7 +979,7 @@ function ResultsSection() {
       </div>
 
       {/* Medical team */}
-      <div className="py-16" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #E8EEE6 50%, #ffffff 100%)' }}>
+      <div style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)', background: 'linear-gradient(180deg, #ffffff 0%, #E8EEE6 50%, #ffffff 100%)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <SectionHeading>The doctors behind your plan</SectionHeading>
           <p className="mt-4 mb-12 text-center max-w-3xl mx-auto" style={pStyle}>
@@ -1012,7 +1012,7 @@ function ResultsSection() {
       </div>
 
       {/* Slimming guide promo */}
-      <div className="py-16">
+      <div style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center p-8 md:p-12" style={{ borderRadius: '16px', background: panelGradient }}>
             <div className="w-full mx-auto" style={{ maxWidth: '360px' }}>
@@ -1070,7 +1070,7 @@ function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-16" aria-labelledby="testimonials-heading">
+    <section aria-labelledby="testimonials-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <Eyebrow>Real results from real clients</Eyebrow>
         <SectionHeading><span id="testimonials-heading">The change our clients feel first</span></SectionHeading>
@@ -1333,7 +1333,7 @@ function EvidenceApproachSection() {
   ];
 
   return (
-    <section className="py-24" aria-labelledby="evidence-approach-heading" style={{ backgroundColor: '#ffffff' }}>
+    <section aria-labelledby="evidence-approach-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '1100px' }}>
         <p className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '16px', fontWeight: 600, letterSpacing: '3.2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our methodology
@@ -1366,7 +1366,7 @@ function FinalCTASection() {
   return (
     <section>
       {/* Why Malta chooses Carisma + final CTA */}
-      <div className="py-16">
+      <div style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Eyebrow>Your next step</Eyebrow>
           <SectionHeading>Book Your Free Body Analysis — Malta&apos;s Doctor-Led Weight Loss Programme</SectionHeading>
@@ -1394,7 +1394,7 @@ function FinalCTASection() {
       </div>
 
       {/* Brand heritage band */}
-      <div className="py-14" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #E6EFE3 50%, #ffffff 100%)' }}>
+      <div style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)', background: 'linear-gradient(180deg, #ffffff 0%, #E6EFE3 50%, #ffffff 100%)' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p style={{ color: green, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase' }}>
             Carisma Wellness Group
