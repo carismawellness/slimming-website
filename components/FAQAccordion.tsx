@@ -23,7 +23,7 @@ export default function FAQAccordion() {
   // (app/glp1/page.tsx via faqPage(FAQS)) to avoid a duplicate FAQPage block.
 
   return (
-    <section className="py-16" style={{ backgroundColor: '#ffffff' }}>
+    <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative mb-10">
           <h2 className="text-center" style={{ color: green, fontFamily: headingFont, fontWeight: 400, fontSize: '22px', textTransform: 'uppercase', letterSpacing: '1px' }}>

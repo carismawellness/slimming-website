@@ -50,7 +50,7 @@ export default function HowItWorks() {
   const colHead = { fontFamily: wideFont, fontSize: '15px', fontWeight: 600 as const, letterSpacing: '1px', textTransform: 'uppercase' as const };
 
   return (
-    <section className="py-24" aria-labelledby="how-it-works-heading">
+    <section aria-labelledby="how-it-works-heading" style={{ paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 id="how-it-works-heading" className="text-center mb-2" style={{ color: taupe, fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
           How our GLP-1 medical weight loss programme works — step by step

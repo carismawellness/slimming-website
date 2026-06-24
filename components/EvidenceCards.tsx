@@ -101,7 +101,7 @@ function EvidenceCard({ item }: { item: Item }) {
 
 export default function EvidenceCards() {
   return (
-    <section className="py-24" aria-labelledby="evidence-heading" style={{ backgroundColor: '#ffffff' }}>
+    <section aria-labelledby="evidence-heading" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <p className="text-center mb-2" aria-hidden="true" style={{ color: green, fontFamily: wideFont, fontSize: '13px', fontWeight: 600, letterSpacing: '2px', textTransform: 'uppercase' }}>
           Clinical research: basis of our medical weight loss methodology

@@ -172,7 +172,7 @@ export default function ResultsCarousel() {
   }, []);
 
   return (
-    <section className="py-24">
+    <section style={{ paddingTop: 'clamp(12px, 3vw, 96px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
       {/* Focus indicator: 3px deep-sage ring (#4F7256 = 5.42:1 on white, >=3:1 AA UI),
           offset 2px, never removed. Applied to all interactive controls in this carousel.
           Slide sizing (responsive peek) and arrow/track styling live here too. */}
