@@ -128,23 +128,23 @@ export default function ConsultationModal() {
         aria-hidden="true"
       />
 
-      {/* Panel — flex column, fits viewport with no internal scroll */}
+      {/* Panel — scrollable so form is never clipped */}
       <div
         ref={panelRef}
-        className="relative z-10 w-full flex flex-col overflow-hidden"
+        className="relative z-10 w-full flex flex-col"
         style={{
           maxWidth: '520px',
           borderRadius: '20px',
           boxShadow: '0 32px 80px rgba(0,0,0,0.28)',
           background: '#fff',
-          height: 'calc(100dvh - 32px)',
-          maxHeight: '780px',
+          maxHeight: 'calc(100dvh - 32px)',
+          overflowY: 'auto',
         }}
       >
-        {/* Header bar — fixed height */}
+        {/* Header bar — sticky so it stays visible while scrolling */}
         <div
           className="flex items-center justify-between px-6 py-3 shrink-0"
-          style={{ background: 'linear-gradient(135deg,#4f7256,#3a5a40)' }}
+          style={{ background: 'linear-gradient(135deg,#4f7256,#3a5a40)', position: 'sticky', top: 0, zIndex: 10 }}
         >
           <p
             style={{
@@ -172,13 +172,13 @@ export default function ConsultationModal() {
           </button>
         </div>
 
-        {/* STEP 1 — GHL contact form stretches to fill remaining height */}
+        {/* STEP 1 — GHL contact form; tall enough so the submit button is never clipped */}
         {step === 'form' && (
-          <div style={{ flex: 1, display: 'flex', flexDirection: 'column', minHeight: 0 }}>
+          <div style={{ flex: 1 }}>
             {hasOpened && (
               <iframe
                 src="https://api.leadconnectorhq.com/widget/form/Z3VHJCJwj5mBGmqcdmpE"
-                style={{ flex: 1, width: '100%', border: 'none', display: 'block', minHeight: 0 }}
+                style={{ width: '100%', border: 'none', display: 'block', minHeight: '660px', height: '660px' }}
                 id="modal-consult-Z3VHJCJwj5mBGmqcdmpE"
                 data-layout="{'id':'INLINE'}"
                 data-form-id="Z3VHJCJwj5mBGmqcdmpE"
