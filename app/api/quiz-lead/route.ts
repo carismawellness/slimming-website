@@ -23,6 +23,10 @@ const GHL_CUSTOM_FIELDS = {
   problemAreas: '48Iwqxn55gjBfGWqBx7D',
   referralSource: 'bqaVYgeCsodjVHdZVMo0',
   consultation: '6FZDpYVVy74Qdg2U7U7s',
+  // Fields the "TO DOs" smart list filters on — set so quiz leads appear there.
+  taskActive: 'BuzYkxUU53nwqxY4C9OW',        // SINGLE_OPTIONS Yes/No
+  newLead: 'ZdyCYGAYPVRA1k2YVMJC',           // NUMERICAL
+  treatmentInterest: 'mA7ZYufJd99naEw3AtlU', // TEXT
 };
 
 type LeadBody = {
@@ -88,6 +92,7 @@ export async function POST(req: Request) {
     source: 'Slimming Quiz (Website)',
     tags: [
       'slimming-quiz-lead',
+      'to-do',
       `timeline:${timeline}`,
       `medication:${medication}`,
       `consultation:${consultation}`,
@@ -98,6 +103,10 @@ export async function POST(req: Request) {
       { id: GHL_CUSTOM_FIELDS.problemAreas, value: problemAreas },
       { id: GHL_CUSTOM_FIELDS.referralSource, value: referral },
       { id: GHL_CUSTOM_FIELDS.consultation, value: consultation },
+      // Make the lead qualify for the "TO DOs" smart list.
+      { id: GHL_CUSTOM_FIELDS.taskActive, value: 'Yes' },
+      { id: GHL_CUSTOM_FIELDS.newLead, value: 1 },
+      { id: GHL_CUSTOM_FIELDS.treatmentInterest, value: goals || 'Weight loss' },
     ],
   };
 
@@ -125,7 +134,7 @@ export async function POST(req: Request) {
         email,
         phone,
         source: 'Slimming Quiz (Website)',
-        tags: ['slimming-quiz-lead'],
+        tags: ['slimming-quiz-lead', 'to-do'],
       });
       contactId = result?.contact?.id || null;
     }
