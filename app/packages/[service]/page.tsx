@@ -68,7 +68,7 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
   },
   'lymphatic-drainage': {
     title: 'Lymphatic Drainage Malta | Detox Treatment | Carisma Slimming',
-    description: 'Professional lymphatic drainage massage in Malta. Reduce bloating, eliminate toxins, support weight loss. Feel lighter from your first session. Book now.',
+    description: 'Professional lymphatic drainage massage in Malta. May help reduce bloating, support natural detoxification, and complement your weight loss journey. Results vary by individual. Book now.',
   },
 };
 

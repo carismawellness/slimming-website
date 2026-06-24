@@ -44,7 +44,7 @@ export default function MedicalGuaranteeSection() {
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
             <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', color: green, textTransform: 'uppercase' }}>
-              Medically Guaranteed
+              Medically Supported
             </span>
           </div>
 
@@ -55,7 +55,7 @@ export default function MedicalGuaranteeSection() {
           </h3>
 
           <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: taupe, maxWidth: '520px', margin: '0 auto 16px' }}>
-            If you qualify, follow the programme, and don&rsquo;t reach your target weight — we extend your care at <strong style={{ color: '#024C27', fontWeight: 600 }}>no extra cost</strong>, until you do.
+            If you qualify and follow your personalised programme, we support you through your journey. Extended care applies when you&rsquo;re meeting your commitments.
           </p>
           <p style={{ fontFamily: headingFont, fontSize: '16px', color: green, fontStyle: 'italic', marginBottom: '64px' }}>
             This is our Extended Care Commitment.
@@ -106,10 +106,10 @@ export default function MedicalGuaranteeSection() {
               </p>
               <div style={{ width: '32px', height: '1px', background: '#C9B8AE', marginBottom: '20px' }} />
               <h3 style={{ fontFamily: headingFont, fontSize: '22px', fontWeight: 400, color: '#024C27', textTransform: 'uppercase', letterSpacing: '0.5px', lineHeight: 1.3, marginBottom: '18px' }}>
-                We Only Accept Clients We Genuinely Believe We Can Help
+                To Maximize Your Success, We Require Your Full Commitment To:
               </h3>
               <p style={{ fontFamily: bodyFont, fontSize: '14.5px', lineHeight: 1.8, color: taupe, marginBottom: '32px', borderLeft: '2px solid #C9D8C1', paddingLeft: '16px' }}>
-                If you qualify and complete the programme as agreed — and don&rsquo;t reach your target weight — we extend your weight management programme at no extra fee until we get there together.
+                When you qualify and follow your personalised programme, we support you with extended care. Results depend on your commitment to the program, your individual response, and adherence to your plan.
               </p>
 
               <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '16px' }}>

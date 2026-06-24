@@ -624,7 +624,7 @@ function CarismaDifferenceSection() {
   ];
   const differenceItems = [
     'Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening',
-    'Selective entry and measurable weight loss results guaranteed',
+    'Selective entry and measurable results when you follow the program',
   ];
   return (
     <section aria-labelledby="difference-heading-wl" style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>

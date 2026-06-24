@@ -69,7 +69,7 @@ export default function Home() {
       iconAlt: 'Body contouring treatments',
       items: [
         <><Link href="/packages/muscle-stimulation" className="underline decoration-dotted underline-offset-2">EMSculpt NEO</Link> — build muscle and reduce fat</>,
-        <><Link href="/packages/fat-freezing" className="underline decoration-dotted underline-offset-2">CoolSculpting fat freezing</Link> — permanent fat reduction</>,
+        <><Link href="/packages/fat-freezing" className="underline decoration-dotted underline-offset-2">CoolSculpting fat freezing</Link> — long-lasting fat reduction</>,
         <><Link href="/packages/skin-tightening" className="underline decoration-dotted underline-offset-2">VelaShape III</Link> — smooth and firm loose skin</>,
         <><Link href="/packages/lymphatic-drainage" className="underline decoration-dotted underline-offset-2">Lymphatic drainage</Link> to reduce fluid retention</>,
         'Non-invasive with no downtime required',
@@ -220,7 +220,7 @@ How GLP-1 Works<br />at Our Clinic
           <div className="mx-auto mt-16" style={{ maxWidth: '620px', paddingLeft: '24px' }}>
             <blockquote style={{ borderLeft: '3px solid #4f7256', paddingLeft: '20px' }}>
               <p style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontSize: '15px', lineHeight: '1.65', fontStyle: 'italic', letterSpacing: '0.3px', margin: 0 }}>
-                To protect quality of care, our guaranteed weight loss transformation programs are limited to a small number of clients each month. Check if you qualify.
+                To protect quality of care, our weight loss transformation programs are limited to a small number of clients each month. Success depends on following your personalised plan. Check if you qualify.
               </p>
             </blockquote>
           </div>

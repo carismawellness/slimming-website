@@ -44,11 +44,11 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://www.carismaslimming.com/blog',
     siteName: 'Carisma Slimming',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Carisma Slimming — Lose up to 1kg per week, guaranteed' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Carisma Slimming — Lose up to 1kg per week when you follow our medically supervised program' }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: [{ url: '/og-image.png', alt: 'Carisma Slimming — Lose up to 1kg per week, guaranteed' }],
+    images: [{ url: '/og-image.png', alt: 'Carisma Slimming — Lose up to 1kg per week when you follow our medically supervised program' }],
   },
 };
 

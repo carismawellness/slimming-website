@@ -54,7 +54,7 @@ const CARDS = [
   },
   {
     title: 'Lipocavitation',
-    desc: 'Advanced low-frequency ultrasound that breaks down fat cell membranes for natural elimination through your lymphatic system. Non-invasive, no surgery, no downtime.',
+    desc: 'Advanced low-frequency ultrasound that may break down fat cell membranes to support natural processes. Non-invasive, no surgery, no downtime. Results vary by individual.',
     href: '/packages/lipocavitation',
     alt: 'Lipocavitation fat reduction treatment',
     src: '/wix/f940f0_3959a9b1203c41b09ca238cd2c75ee35~mv2.webp',

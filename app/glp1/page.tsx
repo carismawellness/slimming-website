@@ -342,7 +342,7 @@ export default function GLP1Page() {
               'Real gym included: Technogym facility, semi-private classes, and personal training',
               'High-touch support: weekly check-ins, progress reports, and WhatsApp follow-up',
               <span key="devices">Evidence-based devices: <Link href="/packages/muscle-stimulation" style={{ color: '#4f7256', textDecoration: 'underline' }}>Emsculpt NEO</Link>, <Link href="/packages/fat-freezing" style={{ color: '#4f7256', textDecoration: 'underline' }}>CoolSculpting</Link>, and <Link href="/packages/skin-tightening" style={{ color: '#4f7256', textDecoration: 'underline' }}>RF skin tightening</Link></span>,
-              'Selective entry and measurable weight loss results guaranteed',
+              'Selective entry and measurable results when you follow the program',
             ]).map((t, i) => (
               <li key={i} className="flex items-start gap-4" style={{ padding: '20px 2px', borderBottom: i < 4 ? '1px solid rgba(79,114,86,0.12)' : 'none' }}>
                 <span aria-hidden style={{ flexShrink: 0, marginTop: '1px', width: '26px', height: '26px', borderRadius: '50%', background: 'rgba(79,114,86,0.1)', display: 'grid', placeItems: 'center' }}>
