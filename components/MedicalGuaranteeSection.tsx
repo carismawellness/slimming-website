@@ -79,7 +79,7 @@ export default function MedicalGuaranteeSection() {
       </section>
 
       {/* ── Conditions section ────────────────────────────────── */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f6f9f3 50%, #ffffff 100%)', padding: '72px 0 12px' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f6f9f3 50%, #ffffff 100%)', padding: 'clamp(40px, 8vw, 72px) 0 12px' }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(280px,1fr))', gap: '56px', alignItems: 'stretch' }}>
 
