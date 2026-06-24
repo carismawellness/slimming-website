@@ -9,7 +9,7 @@ const BRANDS = [
     url: 'https://www.carismaaesthetics.com',
   },
   {
-    color: '#B8943E',
+    color: '#C9AB7C',
     name: 'Spa & Wellness',
     url: 'https://www.carismaspa.com',
   },
