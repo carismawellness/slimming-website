@@ -231,7 +231,7 @@ export default async function ServicePage({ params }: Props) {
           }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12 py-12 md:py-16">
+            <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-8 lg:gap-12" style={{ paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
               {/* Left: copy + offer panel */}
               <div className="flex flex-col justify-center">
                 <p
@@ -356,7 +356,7 @@ export default async function ServicePage({ params }: Props) {
         </section>
 
         {/* Named benefits */}
-        <section aria-labelledby="benefits-heading" className="py-16" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${SAGE_TINT} 50%, #ffffff 100%)` }}>
+        <section aria-labelledby="benefits-heading" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${SAGE_TINT} 50%, #ffffff 100%)`, paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 id="benefits-heading" className="sr-only">Treatment Benefits</h2>
             {/* P5 — responsive grid: 1→2→4 */}
@@ -380,7 +380,7 @@ export default async function ServicePage({ params }: Props) {
 
         {/* Treatable areas */}
         {service.treatableAreas && service.treatableAreas.length > 0 && (
-          <section aria-labelledby="areas-heading" className="py-16">
+          <section aria-labelledby="areas-heading" style={{ paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
             <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
               <h2
                 id="areas-heading"
@@ -406,7 +406,7 @@ export default async function ServicePage({ params }: Props) {
         )}
 
         {/* Packages — P10: per-package CTA */}
-        <section aria-labelledby="packages-section-heading" className="py-16" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${SAGE_TINT} 50%, #ffffff 100%)` }}>
+        <section aria-labelledby="packages-section-heading" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${SAGE_TINT} 50%, #ffffff 100%)`, paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
               id="packages-section-heading"
@@ -490,7 +490,7 @@ export default async function ServicePage({ params }: Props) {
         </section>
 
         {/* Narrative sections */}
-        <section aria-label="Treatment details" className="py-16">
+        <section aria-label="Treatment details" style={{ paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-14">
             {service.narrativeSections.map((sec, i) => (
               <article key={i}>
@@ -507,7 +507,7 @@ export default async function ServicePage({ params }: Props) {
         </section>
 
         {/* Duration */}
-        <section aria-labelledby="duration-heading" className="py-16">
+        <section aria-labelledby="duration-heading" style={{ paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2
               id="duration-heading"
@@ -523,7 +523,7 @@ export default async function ServicePage({ params }: Props) {
         </section>
 
         {/* Media placeholder grid — P3: next/image where src exists; P3: aspect-ratio prevents CLS */}
-        <section aria-labelledby="media-heading" className="py-16" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${CREAM} 50%, #ffffff 100%)` }}>
+        <section aria-labelledby="media-heading" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${CREAM} 50%, #ffffff 100%)`, paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
               id="media-heading"
@@ -565,7 +565,7 @@ export default async function ServicePage({ params }: Props) {
         </section>
 
         {/* CTA section */}
-        <section aria-labelledby="cta-section-heading" className="py-16" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${SAGE_TINT} 50%, #ffffff 100%)` }}>
+        <section aria-labelledby="cta-section-heading" style={{ background: `linear-gradient(180deg, #ffffff 0%, ${SAGE_TINT} 50%, #ffffff 100%)`, paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2
               id="cta-section-heading"
@@ -629,7 +629,7 @@ export default async function ServicePage({ params }: Props) {
         </div>
 
         {/* Explore other packages */}
-        <section aria-labelledby="related-heading" className="py-16 pb-24 sm:pb-16">
+        <section aria-labelledby="related-heading" style={{ paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 64px)' }}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2
               id="related-heading"

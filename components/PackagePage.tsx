@@ -710,7 +710,7 @@ function DifferencePanel({
   const checklistItem: React.CSSProperties = { display: 'flex', gap: 12, alignItems: 'flex-start', color: '#5a4f43', fontFamily: BODY, fontSize: 14, lineHeight: 1.6 };
   const colHeading: React.CSSProperties = { color: '#000000', fontFamily: WIDE, fontSize: 15, fontWeight: 400, letterSpacing: '1px', textTransform: 'uppercase', margin: '0 0 18px' };
   return (
-    <section aria-labelledby={headingId} style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 60, paddingBottom: 84 }}>
+    <section aria-labelledby={headingId} style={{ ...CONTAINER, maxWidth: 1120, paddingTop: 'clamp(12px, 3vw, 60px)', paddingBottom: 'clamp(12px, 3vw, 84px)' }}>
       <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: 16, padding: '40px 40px 48px' }}>
         {/* decorative watermark — same WELL_BG the live commitment cards use */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -850,7 +850,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             goes straight to before/after social proof, then into the explanatory copy
             block. The legal fineprint disclaimers are kept as a subtle footnote below
             the proof so nothing legal is lost. */}
-        <section aria-labelledby="testimonials-heading" style={{ paddingTop: 72, paddingBottom: 80 }}>
+        <section aria-labelledby="testimonials-heading" style={{ paddingTop: 'clamp(12px, 3vw, 72px)', paddingBottom: 'clamp(12px, 3vw, 80px)' }}>
           {!hidden.testimonials && TESTIMONIALS[c.id] && TESTIMONIALS[c.id].length > 0 && (
             <div style={{ ...CONTAINER, maxWidth: 1120 }}>
               <TestimonialsSection items={TESTIMONIALS[c.id]} />
@@ -902,7 +902,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         </section>
 
         {/* ===================== 3. PRESS ===================== */}
-        <section aria-label="Press coverage" style={{ paddingTop: 36, paddingBottom: 72 }}>
+        <section aria-label="Press coverage" style={{ paddingTop: 'clamp(12px, 3vw, 36px)', paddingBottom: 'clamp(12px, 3vw, 72px)' }}>
           <div style={CONTAINER}>
             <SectionHeading>
               {(c.pressHeading ?? PRESS_HEADING_DEFAULT).map((l, i, arr) => (
@@ -921,7 +921,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===================== 4. BENEFITS ===================== */}
         {!hidden.benefits && c.benefits.length > 0 && (
-          <section aria-labelledby="benefits-heading" style={{ paddingTop: 48, paddingBottom: 84 }}>
+          <section aria-labelledby="benefits-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 84px)' }}>
             <div style={{ ...CONTAINER, maxWidth: 1180 }}>
               <h2 id="benefits-heading" className="sr-only">Treatment Benefits</h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 22 }} className="fr-benefits">
@@ -942,7 +942,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===== 4b. VALUE PROPS ===== */}
         {c.valueProps && (
-          <section aria-labelledby="value-props-heading" style={{ paddingTop: 48, paddingBottom: 84 }}>
+          <section aria-labelledby="value-props-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 84px)' }}>
             <div style={CONTAINER}>
               <SectionHeading id="value-props-heading" size={24}>
                 <span style={{ whiteSpace: 'pre-line' }}>{c.valueProps.heading}</span>
@@ -995,7 +995,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===================== 6. DIFFERENCE ===================== */}
         {!hidden.difference && (
-          <section aria-labelledby="difference-heading" style={{ position: 'relative', paddingTop: 72, paddingBottom: 96, overflow: 'hidden', backgroundColor: '#ffffff' }}>
+          <section aria-labelledby="difference-heading" style={{ position: 'relative', paddingTop: 'clamp(12px, 3vw, 72px)', paddingBottom: 'clamp(12px, 3vw, 96px)', overflow: 'hidden', backgroundColor: '#ffffff' }}>
             {/* faint decorative motif (was a heavy 0.5-opacity green wash spanning the
                 section — now a barely-there tint so the ground reads clean white). */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -1032,7 +1032,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             (90px diagonal corners + soft shadow) on a white card — no heavy sage
             gradient ground, no overlapping decorative image clutter. */}
         {!hidden.packageCard && (
-          <section aria-labelledby="pt-heading" style={{ paddingTop: 64, paddingBottom: 84, backgroundColor: '#ffffff' }}>
+          <section aria-labelledby="pt-heading" style={{ paddingTop: 'clamp(12px, 3vw, 64px)', paddingBottom: 'clamp(12px, 3vw, 84px)', backgroundColor: '#ffffff' }}>
             <div style={{ ...CONTAINER, maxWidth: 1040 }}>
               {c.ptEyebrow && <Eyebrow>{c.ptEyebrow}</Eyebrow>}
               <div aria-hidden="true" style={{ width: 64, height: 1, backgroundColor: GREEN_TEXT, margin: c.ptEyebrow ? '18px auto 0' : '0 auto' }} />
@@ -1128,7 +1128,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===================== 8. DUAL / STARTER PACK ===================== */}
         {!hidden.dual && (
-          <section aria-labelledby="dual-heading" style={{ paddingTop: 48, paddingBottom: 84 }}>
+          <section aria-labelledby="dual-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 84px)' }}>
             <div style={CONTAINER}>
               {c.dualEyebrow && <div style={{ marginBottom: 10 }}><Eyebrow>{c.dualEyebrow}</Eyebrow></div>}
               <SectionHeading id="dual-heading" size={25}>
@@ -1175,7 +1175,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===== 8b. OFFER ===== */}
         {c.offer && (
-          <section aria-labelledby="offer-heading" style={{ paddingTop: 48, paddingBottom: 84 }}>
+          <section aria-labelledby="offer-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 84px)' }}>
             <div style={CONTAINER}>
               <SectionHeading id="offer-heading" size={24}>{c.offer.introHeading}</SectionHeading>
               <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 44, alignItems: 'center', marginTop: 36 }} className="fr-2col">
@@ -1236,7 +1236,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
         )}
 
         {/* ===================== 10. FAQ ===================== */}
-        <section aria-labelledby="faq-heading" style={{ paddingTop: 84, paddingBottom: 84 }}>
+        <section aria-labelledby="faq-heading" style={{ paddingTop: 'clamp(12px, 3vw, 84px)', paddingBottom: 'clamp(12px, 3vw, 84px)' }}>
           <div style={{ ...CONTAINER, maxWidth: 960 }}>
             <div className="fr-faqrow" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 24, flexWrap: 'wrap' }}>
               <SectionHeading id="faq-heading" size={28}>Frequently Asked Questions</SectionHeading>
@@ -1326,7 +1326,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
 
         {/* ===================== 11. EVIDENCE ===================== */}
         {!hidden.evidence && c.evidence.length > 0 && (
-          <section aria-labelledby="evidence-heading" style={{ paddingTop: 48, paddingBottom: 96 }}>
+          <section aria-labelledby="evidence-heading" style={{ paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 96px)' }}>
             <div style={{ ...CONTAINER, maxWidth: 1100 }}>
               <Eyebrow>{c.evidenceEyebrow}</Eyebrow>
               <div style={{ width: 320, maxWidth: '60%', height: 1, backgroundColor: '#d9d2ca', margin: '10px auto 0' }} />
