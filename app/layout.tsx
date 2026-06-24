@@ -109,6 +109,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           }}
         />
         {/* End Google Tag Manager */}
+        {/* Klaviyo Onsite — loads the Sign-up Forms configured in the Carisma
+            Slimming Klaviyo account (company X5Mz6K), including the live
+            Mobile/Desktop pop-ups. Display timing, prizes, Name/Email capture
+            and email flows are all managed inside Klaviyo. Only the PUBLIC
+            company id is used here — the private (pk_) key is never shipped to
+            the client. */}
+        <Script
+          id="klaviyo-onsite"
+          src="https://static.klaviyo.com/onsite/js/X5Mz6K/klaviyo.js?company_id=X5Mz6K"
+          strategy="afterInteractive"
+        />
         {/* Hero poster — inline img in PageHero server component is the LCP element;
             this preload fires simultaneously to ensure zero extra RTT */}
         <link rel="preload" as="image" href="/Thumbnail.webp" fetchPriority="high" type="image/webp" />
