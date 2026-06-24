@@ -388,13 +388,13 @@ export default function GLP1Page() {
               <p className="mb-8" style={{ color: '#6f6456', fontFamily: '"Brush Script MT", "Segoe Script", cursive', fontStyle: 'italic', fontSize: '23px', lineHeight: 1.6 }}>
                 Medical weight loss should never be guesswork. Every body tells a story, and our job is to turn it into a plan that lasts&rdquo; &ndash; Dr. Teebi
               </p>
-              <div className="flex flex-wrap gap-3 items-center">
+              <div className="flex flex-wrap gap-3 items-center justify-center md:justify-start">
                 <a
                   href="https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5009163&oiid=sv%3A25969858&share=true&pId=2708191"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cta-glow inline-block text-center font-bold text-white"
-                  style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 20px' }}
+                  className="cta-glow text-center font-bold text-white w-full md:w-auto"
+                  style={{ fontFamily: wideFont, fontSize: '14px', letterSpacing: '1px', textTransform: 'uppercase', padding: '14px 20px', display: 'block', minWidth: '300px', maxWidth: '100%' }}
                 >
                   Book your medical consultation
                 </a>
@@ -440,15 +440,15 @@ export default function GLP1Page() {
         </div>
 
         {/* 3 proof pillars */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: '2px', borderTop: '1px solid rgba(79,114,86,0.18)' }}>
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '2px', borderTop: '1px solid rgba(79,114,86,0.18)' }}>
           {[
             { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
             { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
             { num: '3', stat: 'Extended Support', sub: 'If eligible, your plan is reviewed and extended support may apply at no extra programme fee' },
           ].map((item) => (
-            <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(79,114,86,0.14)', textAlign: 'center' }}>
+            <div key={item.num} style={{ padding: 'clamp(24px, 3vw, 32px) clamp(16px, 3vw, 24px)', borderRight: '1px solid rgba(79,114,86,0.14)', textAlign: 'center' }}>
               <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: green, textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
-              <p style={{ fontFamily: headingFont, fontSize: '20px', color: '#024C27', marginBottom: '10px', textTransform: 'uppercase' }}>{item.stat}</p>
+              <p style={{ fontFamily: headingFont, fontSize: 'clamp(16px, 3vw, 20px)', color: '#024C27', marginBottom: '10px', textTransform: 'uppercase', wordBreak: 'break-word' }}>{item.stat}</p>
               <p style={{ fontFamily: bodyFont, fontSize: '13px', lineHeight: 1.65, color: taupe }}>{item.sub}</p>
             </div>
           ))}
