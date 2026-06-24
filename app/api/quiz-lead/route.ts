@@ -14,6 +14,8 @@ import { NextResponse } from 'next/server';
 
 const GHL_API_URL = 'https://services.leadconnectorhq.com';
 const GHL_LOCATION_ID = 'imWIWDcnmOfijW0lltPq';
+// Quiz-lead follow-up tasks are assigned to this user (Mert Gulen).
+const GHL_TASK_ASSIGNEE = 'NWpthLOZs1NuKdJ7pl0E';
 
 // Custom fields in the Carisma Slimming sub-account.
 const GHL_CUSTOM_FIELDS = {
@@ -149,6 +151,20 @@ export async function POST(req: Request) {
       method: 'POST',
       headers,
       body: JSON.stringify({ body: noteBody }),
+    }).catch(() => null);
+
+    // Create a follow-up to-do so the lead lands in the team's task list.
+    const dueDate = new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString();
+    await fetch(`${GHL_API_URL}/contacts/${contactId}/tasks`, {
+      method: 'POST',
+      headers,
+      body: JSON.stringify({
+        title: `Call Slimming quiz lead - ${firstName} ${surname}`.trim(),
+        body: 'New slimming quiz lead from the website quiz. Their answers (goals, focus areas, timeline, medication, previous attempts, referral, consultation) are in this contact’s Notes. Please follow up.',
+        dueDate,
+        completed: false,
+        assignedTo: GHL_TASK_ASSIGNEE,
+      }),
     }).catch(() => null);
 
     return NextResponse.json({ ok: true, contactId });
