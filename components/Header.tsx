@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import BrandSwitcher from '@/components/BrandSwitcher';
 
 // Accessible brand tokens (see globals.css locked palette).
 // GREEN_FILL: solid sage dark enough that #fff text clears 4.5:1 (used as
@@ -126,10 +127,13 @@ export default function Header() {
           className="flex items-center justify-between"
           style={{ ...pillStyle, minHeight: '52px', padding: '6px 10px 6px 20px' }}
         >
-          {/* Logo */}
-          <Link href="/" className="flex items-center shrink-0" onClick={() => setOpen(false)}>
-            <Image src="/logo.png" alt="Carisma Slimming" width={510} height={96} className="header-logo" style={{ height: '26px', width: 'auto', display: 'block' }} priority />
-          </Link>
+          {/* Logo + brand switcher */}
+          <div className="flex items-center shrink-0">
+            <Link href="/" className="flex items-center" onClick={() => setOpen(false)}>
+              <Image src="/logo.png" alt="Carisma Slimming" width={510} height={96} className="header-logo" style={{ height: '26px', width: 'auto', display: 'block' }} priority />
+            </Link>
+            <BrandSwitcher />
+          </div>
 
           {/* Desktop menu */}
           <div className="hidden md:flex items-center" style={{ gap: '26px' }}>
