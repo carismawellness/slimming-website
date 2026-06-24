@@ -4,17 +4,20 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
+import LazyMap from '@/components/LazyMap';
 import StepTimeline from '@/components/StepTimeline';
 import ResultsGuarantee from '@/components/results/ResultsGuarantee';
 import MedicalGuaranteeSection from '@/components/MedicalGuaranteeSection';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import { medicalBusinessSchema } from '@/lib/seo/schema';
 
 export const metadata: Metadata = {
   title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
-  description: "Lose up to 1kg/week with Malta's most comprehensive slimming program. Fat freezing, body contouring & personalised meal plans from €199. Book your free consultation.",
+  description: "Doctor-led weight loss clinic in Malta with body composition analysis, GLP-1 support where suitable, body contouring and personalised plans.",
   alternates: { canonical: "https://www.carismaslimming.com" },
   openGraph: {
     title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
-    description: "Lose up to 1kg/week with Malta's most comprehensive slimming program. Fat freezing, body contouring & personalised meal plans from €199. Book your free consultation.",
+    description: "Doctor-led slimming in Malta with medical assessment, body composition data, GLP-1 support where suitable and body contouring.",
     url: 'https://www.carismaslimming.com',
     images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Carisma Slimming Malta' }],
   },
@@ -93,6 +96,7 @@ export default function Home() {
 
   return (
     <div className="w-full">
+      <JsonLd data={medicalBusinessSchema()} />
       {/* Skip to main content — WCAG 2.4.1 */}
       <a
         href="#main-content"
@@ -108,7 +112,7 @@ export default function Home() {
           { text: 'Doctor-Led Slimming' },
           { text: '& Weight Loss in Malta', em: true },
         ]}
-        sub="Lose up to 1kg a week with Malta's most comprehensive slimming program, combining medical weight loss, body contouring & personalised meal plans in one doctor-led plan."
+        sub="Doctor-led slimming in Malta, combining medical weight loss, body contouring and personalised meal plans in one structured plan tailored to your body."
         bullets={[
           { text: 'Medical weight loss assessment with prescription GLP-1 support if appropriate' },
           { text: 'Personalised meal plan with weekly check-ins to keep you consistent' },
@@ -129,9 +133,9 @@ export default function Home() {
             4 core pillars of our weight loss methodology
           </p>
           <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />
-          <h3 id="pillars-heading" className="text-center mb-12" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.3', textTransform: 'uppercase' }}>
+          <h2 id="pillars-heading" className="text-center mb-12" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.3', textTransform: 'uppercase' }}>
             malta&rsquo;s only multidisciplinary<br />slimming &amp; weight-loss approach
-          </h3>
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ gap: '28px' }} role="list">
             {pillars.map((pillar) => (
               <div key={pillar.title} role="listitem" style={{ padding: '28px 24px', background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -171,9 +175,9 @@ export default function Home() {
             Our Treatments
           </p>
           <div aria-hidden="true" style={{ width: '64px', height: '1px', background: '#4f7256', margin: '0 auto 18px' }} />
-          <h3 id="modalities-heading" style={{ fontFamily: 'Trajan Pro, serif', color: '#3c5a40', fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '14px' }}>
+          <h2 id="modalities-heading" style={{ fontFamily: 'Trajan Pro, serif', color: '#3c5a40', fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '14px' }}>
             Our Weight Loss &amp; Body Contouring Treatments in Malta
-          </h3>
+          </h2>
           <p style={{ fontFamily: 'Roboto, sans-serif', color: '#595959', fontSize: '16px', lineHeight: 1.6, maxWidth: '620px', margin: '0 auto' }}>
             Six evidence-led modalities, combined into one doctor-led plan — chosen for your body, never one-size-fits-all.
           </p>
@@ -194,9 +198,9 @@ export default function Home() {
               Medical Weight Loss · GLP-1 Program
             </p>
             <div className="mx-auto mb-5" aria-hidden="true" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
-            <h3 id="glp1-heading" style={{ color: '#024C27', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '38px', lineHeight: '1.25', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <h2 id="glp1-heading" style={{ color: '#024C27', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '38px', lineHeight: '1.25', letterSpacing: '2px', textTransform: 'uppercase' }}>
 How GLP-1 Works<br />at Our Clinic
-            </h3>
+            </h2>
           </div>
           {/* Intro */}
           <p className="text-center mx-auto mb-4" style={{ maxWidth: '680px', color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
@@ -239,7 +243,7 @@ How GLP-1 Works<br />at Our Clinic
         </div>
       </section>
 
-      {/* Our Promise — "Up to 1kg/week" medical guarantee (shared component, identical sitewide) */}
+      {/* Our Promise — extended care commitment (shared component, identical sitewide) */}
       <MedicalGuaranteeSection />
 
       {/* (6) The Carisma Difference */}
@@ -261,9 +265,9 @@ How GLP-1 Works<br />at Our Clinic
                 the carisma difference
               </p>
               <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-              <h3 id="difference-heading" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <h2 id="difference-heading" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 why malta chooses carisma slimming
-              </h3>
+              </h2>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
                 {/* Left - commitments */}
                 <div className="space-y-12">
@@ -313,16 +317,11 @@ How GLP-1 Works<br />at Our Clinic
                 </div>
                 {/* Right - map + parking pill */}
                 <div className="flex flex-col">
-                  <iframe
+                  <LazyMap
                     title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
-                    aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
+                    ariaLabel="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
                     src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
-                    width="100%"
-                    height="100%"
-                    style={{ border: 0, borderRadius: '20px', display: 'block', flex: 1, minHeight: '480px' }}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                  ></iframe>
+                  />
                   {/* Parking pill */}
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#E9F0E9', borderRadius: '999px', padding: '8px 16px', marginTop: '16px', alignSelf: 'flex-start' }}>
                     <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">

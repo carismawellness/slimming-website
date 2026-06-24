@@ -36,6 +36,13 @@ export default function HeroMotif() {
     const coarse =
       window.matchMedia('(pointer: coarse)').matches || window.innerWidth < 760;
 
+    // Mobile/touch (and reduced-motion) get ONE static frame — never the rAF
+    // loop. A continuously repainting hero canvas keeps Lighthouse's Speed Index
+    // from ever settling and burns the mobile main thread (the O(N²) link math
+    // runs every frame); cursor-repel is meaningless without a pointer anyway.
+    // Desktop keeps the living, interactive lattice.
+    const staticOnly = reduced || coarse;
+
     const hash = (n: number) => {
       const s = Math.sin(n * 12.9898) * 43758.5453;
       return s - Math.floor(s);
@@ -100,12 +107,17 @@ export default function HeroMotif() {
       if (m.x < -900) { m.x = m.tx; m.y = m.ty; }
     };
     const onLeave = () => { m.tx = -9999; m.ty = -9999; };
-    window.addEventListener('pointermove', onPointer, { passive: true });
-    window.addEventListener('pointerout', onLeave, { passive: true });
+    if (!staticOnly) {
+      window.addEventListener('pointermove', onPointer, { passive: true });
+      window.addEventListener('pointerout', onLeave, { passive: true });
+    }
 
     let visible = true;
-    const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });
-    io.observe(host);
+    let io: IntersectionObserver | null = null;
+    if (!staticOnly) {
+      io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; }, { threshold: 0 });
+      io.observe(host);
+    }
 
     // per-frame computed positions
     const X = new Float32Array(N), Y = new Float32Array(N), VF = new Float32Array(N);
@@ -186,7 +198,7 @@ export default function HeroMotif() {
       raf = requestAnimationFrame(loop);
     };
 
-    if (reduced) draw(16);
+    if (staticOnly) draw(16);
     else raf = requestAnimationFrame(loop);
 
     return () => {
@@ -194,7 +206,7 @@ export default function HeroMotif() {
       window.removeEventListener('resize', onResize);
       window.removeEventListener('pointermove', onPointer);
       window.removeEventListener('pointerout', onLeave);
-      io.disconnect();
+      io?.disconnect();
       if (canvas.parentNode === host) host.removeChild(canvas);
     };
   }, []);

@@ -37,7 +37,6 @@ export default function PageLoader() {
     const navType = (
       performance.getEntriesByType('navigation')[0] as PerformanceNavigationTiming | undefined
     )?.type;
-    const isHardLoad = navType === 'reload' || navType === 'navigate' || !navType;
     const alreadySeen = sessionStorage.getItem(SESSION_KEY) === '1';
 
     if (alreadySeen && navType === 'navigate') {
@@ -47,28 +46,19 @@ export default function PageLoader() {
     }
 
     sessionStorage.setItem(SESSION_KEY, '1');
-    startRef.current = performance.now();
-    const MIN_MS = isHardLoad ? 1800 : 1200;
 
-    const dismiss = () => {
-      const elapsed = performance.now() - startRef.current;
-      const wait = Math.max(0, MIN_MS - elapsed);
-      setTimeout(() => {
-        setPhase('exiting');
-        setTimeout(() => setPhase('done'), 700);
-      }, wait);
-    };
+    /* The page is server-rendered and sits underneath immediately, so this is a
+       brief brand FLASH, not a real load gate. Dismiss on a short timer from
+       mount — NEVER on the window 'load' event, which fires late on mobile and
+       would keep the opaque splash covering the content for seconds, capping LCP
+       and Speed Index. Short hold + fast fade ⇒ content visible by ~0.7s. */
+    const HOLD_MS = 400;
+    startRef.current = window.setTimeout(() => {
+      setPhase('exiting');
+      startRef.current = window.setTimeout(() => setPhase('done'), 300);
+    }, HOLD_MS);
 
-    if (document.readyState === 'complete') {
-      dismiss();
-    } else {
-      window.addEventListener('load', dismiss, { once: true });
-      const fallback = setTimeout(dismiss, 5000);
-      return () => {
-        window.removeEventListener('load', dismiss);
-        clearTimeout(fallback);
-      };
-    }
+    return () => clearTimeout(startRef.current);
   }, []);
 
   if (phase === 'done') return null;
@@ -114,7 +104,7 @@ export default function PageLoader() {
           overflow: 'hidden',
           pointerEvents: exiting ? 'none' : 'all',
           opacity: exiting ? 0 : 1,
-          transition: exiting ? 'opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
+          transition: exiting ? 'opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1)' : 'none',
           willChange: 'opacity',
         }}
       >
