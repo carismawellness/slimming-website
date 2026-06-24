@@ -1,11 +1,10 @@
 import type { NextConfig } from "next";
 
 // ---------------------------------------------------------------------------
-// Rewrites: URL preserved in browser. Use for any URL with active ad traffic,
-// email campaigns, or brand-name search landing pages — UTM params stay intact,
-// ad quality score unaffected, and the page content is immediately visible.
+// Canonical alias redirects: consolidate duplicate URLs into their primary
+// destinations so Google sees one indexable URL per page.
 // ---------------------------------------------------------------------------
-const adRewrites: { source: string; destination: string }[] = [
+const canonicalAliasRedirects: { source: string; destination: string }[] = [
   // ── Active ad landing pages ───────────────────────────────────────────────
   { source: '/medical-weight-loss',  destination: '/weight-loss' },
   { source: '/medical-glp-1-lp',    destination: '/glp1' },
@@ -42,13 +41,6 @@ const adRewrites: { source: string; destination: string }[] = [
   { source: '/faq',                  destination: '/weight-loss' },
 ];
 
-const aliasNoindexHeaders = [
-  {
-    key: 'X-Robots-Tag',
-    value: 'noindex, follow',
-  },
-];
-
 const previewNoindexHeaders = [
   {
     key: 'X-Robots-Tag',
@@ -73,10 +65,6 @@ const nextConfig: NextConfig = {
             },
           ]
         : []),
-      ...adRewrites.map(({ source }) => ({
-        source,
-        headers: aliasNoindexHeaders,
-      })),
       {
         source: '/:all*(png|jpg|jpeg|webp|avif|svg|ico|woff2|mp4)',
         headers: [
@@ -88,11 +76,14 @@ const nextConfig: NextConfig = {
       },
     ];
   },
-  async rewrites() {
-    return adRewrites;
-  },
   async redirects() {
     return [
+      ...canonicalAliasRedirects.map(({ source, destination }) => ({
+        source,
+        destination,
+        permanent: true,
+      })),
+
       // ── URL typo / slug variant fixes ─────────────────────────────────────
       { source: '/glp-1',                destination: '/glp1',             permanent: true },
       { source: '/terms',                destination: '/terms-conditions',  permanent: true },
