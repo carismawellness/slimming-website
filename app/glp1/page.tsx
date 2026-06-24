@@ -669,9 +669,9 @@ export default function GLP1Page() {
           <h2 className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', letterSpacing: '1px', lineHeight: 1.4, textTransform: 'uppercase' }}>
             A doctor-led medical weight loss<br />programme built to last
           </h2>
-          <div className="card" style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', padding: '28px' }}>
+          <div className="card" style={{ background: 'linear-gradient(180deg, #E7EFE4 0%, #F4F6F1 100%)', padding: 'clamp(16px, 4vw, 36px)' }}>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="card bg-white p-8 space-y-7">
+              <div className="card bg-white p-6 sm:p-8 space-y-6 sm:space-y-7">
                 {[
                   { icon: '/wix/87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'Medical eligibility & assessment', body: 'Every journey begins with a full medical consultation to assess Ozempic or Mounjaro suitability, health history, and individual goals before any treatment is considered.' },
                   { icon: '/wix/87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'Appetite & metabolic support', body: 'GLP-1 medication is used to support natural fullness signals and reduce food noise, helping make portion control and consistency feel more manageable.' },
@@ -688,7 +688,7 @@ export default function GLP1Page() {
                   </div>
                 ))}
               </div>
-              <div className="card bg-white p-8">
+              <div className="card bg-white p-6 sm:p-8">
                 <div className="w-full overflow-hidden mb-6" style={{ aspectRatio: '382 / 183', borderRadius: '16px' }}>
                   <img src="/wix/87fc13_56eec505c9f9433db5846a0aeae07c7f~mv2.jpg" alt="Medical consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
                 </div>
