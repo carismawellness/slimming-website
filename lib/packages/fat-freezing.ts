@@ -65,7 +65,7 @@ export const fatFreezing: PackageContent = {
   ptCardEyebrow: 'coolsculpting',
   ptCardTag: 'targeted-fat reduction',
   ptParas: [
-    'Freezes away up to 20%—25% of treated fat permanently via a process called cryolipolysis and naturally eliminates it from the body.',
+    'Uses controlled cooling to reduce a local fat layer over time through a process called cryolipolysis; results vary and suitability is assessed first.',
     'CoolSculpting is an FDA cleared cryolipolysis technology that uses controlled cooling to target only the fat cells under the skin without surgery or needles. The treated fat cells crystallise, die off, and are gradually cleared by your body over the following weeks',
   ],
   ptEfficacyTitle: 'Proven efficacy',

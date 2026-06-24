@@ -91,7 +91,7 @@ export default function PackagesPage() {
             { text: 'Body Contouring Packages' },
             { text: 'in Malta', em: true },
           ]}
-          sub="Doctor-led, non-surgical treatments to freeze, dissolve, tone, tighten and detox — each a focused protocol with spa & fitness access included."
+          sub="Doctor-led, non-surgical treatments to freeze, dissolve, tone, tighten and support fluid retention — each a focused protocol with spa & fitness access included."
           bullets={[
             { text: 'Non-surgical fat freezing, dissolving & cavitation' },
             { text: 'Muscle toning, skin tightening & anti-cellulite' },

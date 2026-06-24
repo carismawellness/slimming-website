@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import postsIndex from '@/lib/blog/posts-index.json'
+import { getBlogSeoPolicy } from '@/lib/blog/seo-policy'
 
 const BASE_URL = 'https://www.carismaslimming.com'
 const LAST_MODIFIED = new Date('2026-06-22')
@@ -104,14 +105,22 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
+  const includedBlogPosts = (postsIndex as { slug: string; title?: string; excerpt?: string; published_date: string }[])
+    .filter((p) => getBlogSeoPolicy(p).index)
+
+  const blogLastModified = includedBlogPosts.reduce((latest, post) => {
+    const published = new Date(post.published_date)
+    return published > latest ? published : latest
+  }, LAST_MODIFIED)
+
   const blogListing: MetadataRoute.Sitemap[number] = {
     url: `${BASE_URL}/blog`,
-    lastModified: new Date(),
+    lastModified: blogLastModified,
     changeFrequency: 'daily',
     priority: 0.8,
   }
 
-  const blogPosts: MetadataRoute.Sitemap = (postsIndex as { slug: string; published_date: string }[]).map((p) => ({
+  const blogPosts: MetadataRoute.Sitemap = includedBlogPosts.map((p) => ({
     url: `${BASE_URL}/blog/${p.slug}`,
     lastModified: new Date(p.published_date),
     changeFrequency: 'weekly',

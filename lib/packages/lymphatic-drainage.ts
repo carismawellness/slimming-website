@@ -6,11 +6,11 @@ export const lymphaticDrainage: PackageContent = {
   id: 'lymphatic-drainage',
   liveUrl: 'https://www.carismaslimming.com/lymphatic-drainage',
 
-  heroEyebrow: 'Expert LED BODY DETOX & CIRCULATION SUPPORT',
-  heroTitle: 'lymphatic drainage massage in malta — medical detox therapy',
+  heroEyebrow: 'Expert LED LYMPHATIC & CIRCULATION SUPPORT',
+  heroTitle: 'lymphatic drainage massage in malta — fluid retention support',
   heroSubheading: '',
   heroDescription:
-    'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate your lymphatic system, helping your body eliminate toxins, reduce fluid retention, and restore natural balance.',
+    'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate lymph flow, support fluid balance, reduce fluid retention, and restore a lighter feeling.',
   heroIncludes: [
     '4x Lymphatic drainage massage (€440)',
     '4x access to spa & fitness facilities (€140)',
@@ -40,18 +40,18 @@ export const lymphaticDrainage: PackageContent = {
     'You’re tired of solutions that don’t address the root cause',
   ],
   secretClosing:
-    'If you’re reading this and thinking, “This sounds like me,” the issue may not be lifestyle or effort. Often, it’s your lymphatic system struggling to drain efficiently. When lymph flow is slow, fluids and toxins can build up in the body.',
+    'If you’re reading this and thinking, “This sounds like me,” the issue may not be lifestyle or effort. Often, it’s your lymphatic system struggling to drain efficiently, which can leave you feeling swollen, heavy, or slow to recover.',
   secretClosingBold: 'lymphatic system',
   secretClosing2: {
     lead: 'Lymphatic Drainage Therapy',
-    text: 'gently stimulates your lymphatic system, supporting natural detoxification, improved circulation, and reduced fluid retention — helping your body feel lighter, more balanced, and refreshed again.',
+    text: 'gently stimulates your lymphatic system, supporting lymph flow, improved circulation, and reduced fluid retention — helping your body feel lighter, more balanced, and refreshed again.',
   },
 
   pressHeading: ['malta’s trusted clinic for', 'medical lymphatic drainage therapy'],
 
   benefits: [
     { icon: W + '87fc13_e504472e668d4f3c916d7c048696cde3~mv2.png', title: 'MEDICALLY GUIDED APPROACH', body: 'Your lymphatic drainage treatment is overseen by medical professionals, with careful assessment of your health history to ensure the therapy is safe, appropriate, and effective for your body.' },
-    { icon: W + '87fc13_cd0cd40707e34315b2ad2d4bb6ca67d4~mv2.png', title: 'LYMPHATIC FLOW & DETOX SUPPORT', body: 'Gentle, targeted techniques are used to stimulate lymph flow, helping reduce fluid retention, support natural detoxification, and relieve feelings of heaviness and congestion.' },
+    { icon: W + '87fc13_cd0cd40707e34315b2ad2d4bb6ca67d4~mv2.png', title: 'LYMPHATIC FLOW & FLUID SUPPORT', body: 'Gentle, targeted techniques are used to stimulate lymph flow, helping reduce fluid retention and relieve feelings of heaviness and congestion.' },
     { icon: W + '87fc13_b4783b8ab4ad480fa01394e449f91d34~mv2.png', title: 'Expert-DESIGNED TREATMENT PLAN', body: 'Your in-person consultation helps determine suitability, treatment frequency, and realistic outcomes — ensuring lymphatic drainage is delivered as part of a structured, personalised wellness plan.' },
     { icon: W + '87fc13_729173bc08764a74bee017b037d95d5b~mv2.png', title: 'SAFE AND CLINICALLY CERTIFIED', body: 'All treatments are performed under clinical standards, using medically approved techniques, with professional supervision to prioritise comfort, safety, and results at every stage.' },
   ],
@@ -59,10 +59,10 @@ export const lymphaticDrainage: PackageContent = {
   eligEyebrow: 'Benefits of lymphatic drainage',
   eligHeading: 'the benefits of lymphatic drainage massage',
   eligImage: W + '87fc13_50cffcdb438440d68ea6b0553bf28e24~mv2.png',
-  eligIntro: 'SUPPORTS DETOXIFICATION, CIRCULATION & FLUID BALANCE',
+  eligIntro: 'SUPPORTS LYMPHATIC FLOW, CIRCULATION & FLUID BALANCE',
   areas: [
     'Helps reduce fluid retention, swelling, and bloating',
-    'Supports lymphatic flow and natural toxin elimination',
+    'Supports lymphatic flow and fluid movement',
     'Designed to promote a lighter, more balanced feeling in the body',
     'Always provided as part of a medically guided wellness approach',
   ],
@@ -75,8 +75,8 @@ export const lymphaticDrainage: PackageContent = {
   ptCardTag: '',
   ptLayout: 'centered',
   ptParas: [
-    'The lymphatic system plays a vital role in fluid balance, detoxification, and immune support. When lymph flow becomes sluggish, fluid and waste can accumulate in the body leading to bloating, swelling, heaviness, and slow recovery.',
-    'Lymphatic Drainage Therapy uses gentle, targeted techniques to stimulate lymph flow, helping the body naturally eliminate excess fluids and toxins while supporting circulation and overall wellbeing.',
+    'The lymphatic system plays a vital role in fluid balance, circulation, and immune support. When lymph flow becomes sluggish, fluid can accumulate in the body leading to bloating, swelling, heaviness, and slow recovery.',
+    'Lymphatic Drainage Therapy uses gentle, targeted techniques to stimulate lymph flow, helping the body move excess fluid while supporting circulation and overall wellbeing.',
   ],
   ptEfficacyTitle: 'At our clinic, lymphatic drainage is used as a therapeutic support, not a cosmetic shortcut:',
   ptEfficacyBullets: [
@@ -96,7 +96,7 @@ export const lymphaticDrainage: PackageContent = {
   dualHeading: ['malta’s medically guided lymphatic drainage starter pack'],
   dualMini: [
     { icon: W + '87fc13_387683ad0f4c499c8cab338b5f800aa0~mv2.png', title: 'ELIGIBILITY & ASSESSMENT', body: 'Every lymphatic drainage journey begins with a professional consultation to assess suitability, health history, and individual concerns before treatment is recommended.' },
-    { icon: W + '87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'LYMPHATIC FLOW & DETOX SUPPORT', body: 'Gentle, targeted lymphatic techniques are used to stimulate lymph flow, helping reduce fluid retention, support detoxification, and improve circulation in a controlled, therapeutic way.' },
+    { icon: W + '87fc13_9011dffd287245ed9d60f5663e21edba~mv2.png', title: 'LYMPHATIC FLOW & FLUID SUPPORT', body: 'Gentle, targeted lymphatic techniques are used to stimulate lymph flow, helping reduce fluid retention and improve circulation in a controlled, therapeutic way.' },
     { icon: W + '87fc13_c4cf7001e0324fbd84551191d2a27bd1~mv2.png', title: 'SAFE, SUPPORTIVE APPROACH', body: 'This is not an aggressive or cosmetic-only treatment. Lymphatic drainage is delivered as part of a structured wellness approach, prioritising comfort, safety, and sustainable results.' },
   ],
   dualIncludes: [
@@ -116,7 +116,7 @@ export const lymphaticDrainage: PackageContent = {
   mapQuery: 'Carisma Slimming, Malta',
 
   faqs: [
-    { q: '1. What is lymphatic drainage therapy?', a: 'Lymphatic drainage therapy is a gentle, non-invasive treatment designed to stimulate the lymphatic system. It helps support the natural movement of lymph fluid in the body, aiding detoxification, reducing fluid retention, and improving circulation and overall wellbeing.' },
+    { q: '1. What is lymphatic drainage therapy?', a: 'Lymphatic drainage therapy is a gentle, non-invasive treatment designed to stimulate the lymphatic system. It helps support the natural movement of lymph fluid in the body, reduce fluid retention, and improve circulation and overall wellbeing.' },
     { q: '2. What concerns can lymphatic drainage help with?', a: 'Lymphatic drainage is commonly used to support bloating, swelling, fluid retention, feelings of heaviness, sluggish circulation, and post-procedure recovery. It may also help promote relaxation and a lighter, more balanced feeling in the body.' },
     { q: '3. Is lymphatic drainage a massage?', a: 'No. While the treatment uses light, manual techniques, medical lymphatic drainage is not a traditional massage. The pressure and movements are specifically designed to stimulate lymph flow rather than muscles, and it is delivered with clinical intent rather than relaxation alone.' },
     { q: '4. How many sessions will I need?', a: 'The number of sessions varies depending on your individual needs, goals, and how your body responds. Some people notice benefits after one session, while others may be advised to follow a short course of treatments for optimal support. This will be discussed during your consultation.' },

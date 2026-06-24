@@ -194,7 +194,7 @@ export const SHARED_DIFFERENCE_BULLETS = [
   'Real gym included: Technogym facility, semi-private classes and PT',
   'High touch support: weekly check ins, progress reports and WhatsApp follow up',
   'Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening',
-  'Selective entry and measurable weight loss results guaranteed',
+  'Selective entry and measurable progress tracked by body composition data',
 ];
 
 export const SHARED_DIFFERENCE_INTRO =

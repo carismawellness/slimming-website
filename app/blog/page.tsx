@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import postsData from '@/lib/blog/posts-index.json';
 import FadeInUp from '@/components/blog/FadeInUp';
+import { getBlogSeoPolicy } from '@/lib/blog/seo-policy';
 
 // ── Brand tokens ──────────────────────────────────────────────────────────────
 const FOREST = '#024C27';
@@ -29,7 +30,8 @@ type Post = {
 const POSTS_PER_PAGE = 20;
 const TOTAL_PAGES    = 20;
 
-const posts = (postsData as Post[]).slice(0, POSTS_PER_PAGE);
+const indexablePosts = (postsData as Post[]).filter((post) => getBlogSeoPolicy(post).index);
+const posts = indexablePosts.slice(0, POSTS_PER_PAGE);
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
 export const metadata: Metadata = {
@@ -44,11 +46,11 @@ export const metadata: Metadata = {
     type: 'website',
     url: 'https://www.carismaslimming.com/blog',
     siteName: 'Carisma Slimming',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Carisma Slimming — Lose up to 1kg per week when you follow our medically supervised program' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Carisma Slimming weight loss and slimming advice Malta' }],
   },
   twitter: {
     card: 'summary_large_image',
-    images: [{ url: '/og-image.png', alt: 'Carisma Slimming — Lose up to 1kg per week when you follow our medically supervised program' }],
+    images: [{ url: '/og-image.png', alt: 'Carisma Slimming weight loss and slimming advice Malta' }],
   },
 };
 
@@ -235,10 +237,10 @@ export default function BlogPage() {
                 margin: '0 0 14px',
                 opacity: 0.7,
               }}>
-                Featured Article
+                Weight Loss &amp; Slimming Blog Malta
               </p>
 
-              {/* Article title — Trajan Pro, forest green, matching home h2 style */}
+              {/* Blog index title — one H1 for the category page */}
               <h1
                 className="blog-hero-title"
                 style={{
@@ -252,8 +254,22 @@ export default function BlogPage() {
                   maxWidth: 480,
                 }}
               >
-                {hero.title}
+                Weight Loss &amp; Slimming Blog Malta
               </h1>
+              <h2
+                style={{
+                  fontFamily: SERIF,
+                  textTransform: 'uppercase',
+                  fontSize: 'clamp(15px, 1.5vw, 22px)',
+                  color: SAGE,
+                  lineHeight: 1.25,
+                  letterSpacing: '0.04em',
+                  margin: '0 0 18px',
+                  maxWidth: 460,
+                }}
+              >
+                Featured: {hero.title}
+              </h2>
 
               {/* Excerpt */}
               {hero.excerpt && (

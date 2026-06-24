@@ -2,8 +2,8 @@ import Image from 'next/image';
 import CountUp from '@/components/CountUp';
 
 /**
- * MedicalGuaranteeSection — the canonical "Up to 1kg per week · Medically
- * Guaranteed" promise/Extended-Care-Commitment block, used identically across
+ * MedicalGuaranteeSection — the canonical measured-progress / extended-care
+ * commitment block, used identically across
  * the site (home, GLP-1, weight-loss, slimming-guide, …) so the design never
  * drifts. Server component, no props — same content everywhere by construction.
  */
@@ -35,7 +35,7 @@ export default function MedicalGuaranteeSection() {
           position: 'absolute', right: '-2%', top: '4%',
           fontFamily: headingFont, fontSize: 'clamp(180px,26vw,340px)', fontWeight: 400,
           color: 'rgba(79,114,86,0.06)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
-        }}>1KG</span>
+        }}>PLAN</span>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', position: 'relative' }}>
           {/* Badge */}
@@ -50,8 +50,8 @@ export default function MedicalGuaranteeSection() {
 
           {/* Headline */}
           <h3 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
-            Up to <CountUp value="1KG" /><br />
-            <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
+            Measured<br />
+            <em style={{ fontStyle: 'normal', color: green }}>Weekly Progress.</em>
           </h3>
 
           <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: taupe, maxWidth: '520px', margin: '0 auto 16px' }}>
@@ -67,7 +67,7 @@ export default function MedicalGuaranteeSection() {
           {[
             { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
             { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
-            { num: '3', stat: 'Extended Until Done', sub: 'We keep going at no extra cost until you hit your agreed target weight' },
+            { num: '3', stat: 'Extended Support', sub: 'If eligible, your plan is reviewed and extended support may apply at no extra programme fee' },
           ].map((item) => (
             <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(79,114,86,0.14)', textAlign: 'center' }}>
               <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: green, textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
@@ -113,7 +113,7 @@ export default function MedicalGuaranteeSection() {
               </p>
 
               <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '16px' }}>
-                To receive this guarantee, you agree to:
+                For extended support, you agree to:
               </p>
 
               {/* Conditions — full-width stacked list */}

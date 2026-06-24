@@ -17,7 +17,6 @@ const TEXT  = '#6F6456';   // body text
 const MUTED = '#6F6456';   // muted / meta
 const SAGE  = '#4f7256';   // links / icons / CTA fill (white text on it = AA)
 const DECO  = '#8EB093';   // decorative-only sage
-const GOLD  = '#8c6d18';   // stars
 const HAIR  = '#E5DED7';   // hairlines
 // NOTE: dark green #024C27 is BANNED as a background anywhere.
 const SERIF = 'Trajan Pro, "Trajan Pro Regular", Georgia, serif';
@@ -87,7 +86,10 @@ function BookSection() {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) { setVisible(true); return; }
+    if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) {
+      const timer = window.setTimeout(() => setVisible(true), 0);
+      return () => window.clearTimeout(timer);
+    }
     const el = ref.current; if (!el) return;
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.unobserve(el); } }, { threshold: 0.1 });
     obs.observe(el); return () => obs.disconnect();
@@ -190,7 +192,7 @@ function FooterBase() {
 
               {/* Follow us — embedded under the Carisma Slimming column (more room) */}
               <div className="hidden md:block" style={{ marginTop: '26px' }}>
-                <h4 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '12px' }}>Follow us</h4>
+                <h3 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '12px' }}>Follow us</h3>
                 <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: BODY, fontSize: '13px', color: TEXT, textDecoration: 'none', display: 'inline-block', marginBottom: '12px', transition: 'color .2s' }}
                   onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = SAGE)}
                   onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}>
@@ -209,7 +211,7 @@ function FooterBase() {
 
             {/* Nav */}
             <div>
-              <h4 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '18px' }}>Explore</h4>
+              <h3 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '18px' }}>Explore</h3>
               <nav aria-label="Footer navigation">
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '11px' }}>
                   {NAV_LINKS.map(({ label, href }) => (
@@ -227,7 +229,7 @@ function FooterBase() {
 
             {/* Contact */}
             <div>
-              <h4 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '18px' }}>Get in touch</h4>
+              <h3 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '18px' }}>Get in touch</h3>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '13px' }}>
                 {[
                   { href: 'tel:+35627802062', label: '+356 27802062', icon: <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.128.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.572 2.81.7A2 2 0 0 1 22 16.92z" /></svg> },

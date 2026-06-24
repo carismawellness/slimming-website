@@ -164,7 +164,7 @@ export default function ResultsGuarantee() {
           >
             Our Commitment
           </span>
-          <h3
+          <h2
             id="results-heading"
             style={{
               color: INK,
@@ -177,9 +177,9 @@ export default function ResultsGuarantee() {
             }}
           >
             The Carisma Results Commitment
-          </h3>
+          </h2>
           <p style={{ color: META, fontFamily: ROBOTO, fontSize: 'clamp(16px,1.7vw,19px)', lineHeight: 1.6, margin: '14px auto 0', maxWidth: 520 }}>
-            Up to 1kg a week. Measured. Verified. Committed to your weight loss.
+            Measured weekly progress, verified with body composition data and supported by a doctor-led plan.
           </p>
         </div>
 

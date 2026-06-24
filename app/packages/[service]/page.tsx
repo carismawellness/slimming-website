@@ -44,7 +44,7 @@ export async function generateStaticParams() {
 const serviceMeta: Record<string, { title: string; description: string }> = {
   'fat-freezing': {
     title: 'CoolSculpting Malta | Fat Freezing Treatment | Carisma Slimming',
-    description: 'Non-surgical fat freezing in Malta with CoolSculpting. Up to 27% fat reduction per session. FDA-cleared. Book your free body analysis at Carisma Slimming.',
+    description: 'Non-surgical fat freezing in Malta with CoolSculpting for stubborn local fat. Suitability is assessed first. Book your free body analysis.',
   },
   'fat-dissolving': {
     title: 'Fat Dissolving Injections Malta | Lemon Bottle | Carisma Slimming',
@@ -52,7 +52,7 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
   },
   'muscle-stimulation': {
     title: 'EMSculpt NEO Malta | Build Muscle & Burn Fat | Carisma Slimming',
-    description: 'EMSculpt NEO in Malta. Build 25% more muscle, reduce 30% fat in 30 minutes. FDA-cleared body sculpting. Book your free consultation at Carisma Slimming.',
+    description: 'EMSculpt NEO in Malta for muscle stimulation and body sculpting, with realistic expectations and no downtime for most clients.',
   },
   'skin-tightening': {
     title: 'VelaShape III Malta | Skin Tightening | Carisma Slimming',
@@ -64,11 +64,11 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
   },
   'anti-cellulite': {
     title: 'Cellulite Treatment Malta | VelaShape III | Carisma Slimming',
-    description: 'Effective cellulite treatment in Malta using VelaShape III technology. Visible results from the first session. Non-invasive, no downtime. Book today.',
+    description: 'Cellulite treatment in Malta using VelaShape III to support smoother-looking skin. Non-invasive, no downtime for most clients.',
   },
   'lymphatic-drainage': {
-    title: 'Lymphatic Drainage Malta | Detox Treatment | Carisma Slimming',
-    description: 'Professional lymphatic drainage massage in Malta. May help reduce bloating, support natural detoxification, and complement your weight loss journey. Results vary by individual. Book now.',
+    title: 'Lymphatic Drainage Malta | Fluid Retention Support | Carisma',
+    description: 'Professional lymphatic drainage massage in Malta to support fluid retention, bloating and post-treatment recovery. Results vary by individual.',
   },
 };
 

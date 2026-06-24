@@ -12,7 +12,6 @@
 
 import {
   SLIMMING_REVIEWS,
-  GOOGLE_PROFILE_URL,
   relativeDate,
   type Review,
 } from '@/lib/reviews';
@@ -59,7 +58,8 @@ function FreshaBadge({ size = 18 }: { size?: number }) {
 
 function Stars({ rating = 5, size = 14 }: { rating?: number; size?: number }) {
   return (
-    <span style={{ display: 'inline-flex', gap: 1 }} aria-label={`${rating} out of 5 stars`}>
+    <span style={{ display: 'inline-flex', gap: 1 }}>
+      <span className="sr-only">{rating} out of 5 stars</span>
       {[0, 1, 2, 3, 4].map((i) => (
         <svg key={i} width={size} height={size} viewBox="0 0 24 24" fill={i < Math.round(rating) ? GOLD : '#e2e2e2'} aria-hidden>
           <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
@@ -131,7 +131,6 @@ function GoogleReviewCard({ r }: { r: Review }) {
       href={r.sourceUrl}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Read ${r.name}'s review on Google`}
       style={CARD_STYLE}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
@@ -177,7 +176,6 @@ function FreshaReviewCard({ r, idx }: { r: FreshaReview; idx: number }) {
       href={FRESHA_PROFILE.url}
       target="_blank"
       rel="noopener noreferrer"
-      aria-label={`Read ${r.name}'s review on Fresha`}
       style={CARD_STYLE}
     >
       <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>

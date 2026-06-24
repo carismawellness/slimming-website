@@ -7,6 +7,7 @@ import { breadcrumbList, SITE_URL } from '@/lib/seo/schema';
 import postsIndex from '@/lib/blog/posts-index.json';
 import ReadingProgress from '@/components/blog/ReadingProgress';
 import BlogCard from '@/components/blog/BlogCard';
+import { getBlogSeoPolicy, truncateMetaDescription } from '@/lib/blog/seo-policy';
 
 export const dynamicParams = false;
 
@@ -131,13 +132,17 @@ export async function generateMetadata({
   if (!post) return {};
 
   const canonical = `${SITE_URL}/blog/${slug}`;
+  const policy = getBlogSeoPolicy(post);
+  const description = truncateMetaDescription(post.excerpt);
+  const title = `${post.title} | Carisma Slimming Malta`;
   return {
-    title: `${post.title} | Carisma Slimming Malta`,
-    description: post.excerpt,
+    title,
+    description,
     alternates: { canonical },
+    robots: policy.index ? { index: true, follow: true } : { index: false, follow: true },
     openGraph: {
-      title: `${post.title} | Carisma Slimming Malta`,
-      description: post.excerpt,
+      title,
+      description,
       url: canonical,
       type: 'article',
       publishedTime: post.published_date,
@@ -149,8 +154,8 @@ export async function generateMetadata({
     },
     twitter: {
       card: 'summary_large_image',
-      title: `${post.title} | Carisma Slimming Malta`,
-      description: post.excerpt,
+      title,
+      description,
       images: post.cover_image_url ? [post.cover_image_url] : [],
     },
   };
@@ -167,7 +172,7 @@ export default async function BlogPostPage({
   const post = readPost(slug);
   if (!post) notFound();
 
-  const index = postsIndex as PostIndexItem[];
+  const index = (postsIndex as PostIndexItem[]).filter((item) => getBlogSeoPolicy(item).index);
   const currentIdx = index.findIndex((p) => p.slug === slug);
 
   // Get 3 nearby posts for "More from the blog"
@@ -188,6 +193,9 @@ export default async function BlogPostPage({
     '@type': 'BlogPosting',
     headline: post.title,
     description: post.excerpt,
+    mainEntityOfPage: `${SITE_URL}/blog/${slug}`,
+    articleSection: getBlogSeoPolicy(post).decision,
+    keywords: post.tags?.length ? post.tags.join(', ') : undefined,
     datePublished: post.published_date,
     dateModified: post.last_updated,
     url: `${SITE_URL}/blog/${slug}`,
@@ -200,6 +208,7 @@ export default async function BlogPostPage({
     },
     publisher: {
       '@type': 'Organization',
+      '@id': `${SITE_URL}/#organization`,
       name: 'Carisma Slimming',
       url: SITE_URL,
     },

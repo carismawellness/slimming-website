@@ -410,7 +410,7 @@ export default function GLP1Page() {
           position: 'absolute', right: '-2%', top: '4%',
           fontFamily: headingFont, fontSize: 'clamp(180px,26vw,340px)', fontWeight: 400,
           color: 'rgba(79,114,86,0.06)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
-        }}>1KG</span>
+        }}>PLAN</span>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', position: 'relative' }}>
           {/* Badge */}
@@ -419,18 +419,18 @@ export default function GLP1Page() {
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
             <span style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', color: green, textTransform: 'uppercase' }}>
-              Medically Guaranteed
+              Medically Supported
             </span>
           </div>
 
           {/* Headline */}
           <h2 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
-            Up to 1KG<br />
-            <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
+            Measured<br />
+            <em style={{ fontStyle: 'normal', color: green }}>Weekly Progress.</em>
           </h2>
 
           <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: taupe, maxWidth: '520px', margin: '0 auto 16px' }}>
-            If you qualify, follow the programme, and don&rsquo;t reach your target weight — we extend your care at <strong style={{ color: '#024C27', fontWeight: 600 }}>no extra cost</strong>, until you do.
+            If you qualify and follow your programme, your progress is reviewed regularly and extended support may apply at <strong style={{ color: '#024C27', fontWeight: 600 }}>no extra programme fee</strong>.
           </p>
           <p style={{ fontFamily: headingFont, fontSize: '16px', color: green, fontStyle: 'italic', marginBottom: '64px' }}>
             This is our Extended Care Commitment.
@@ -442,7 +442,7 @@ export default function GLP1Page() {
           {[
             { num: '1', stat: 'Doctor-Led', sub: 'Every programme is supervised by a qualified medical doctor from day one' },
             { num: '2', stat: 'Clinically Tracked', sub: 'Tanita body composition scans at every visit — real numbers, not guesses' },
-            { num: '3', stat: 'Extended Until Done', sub: 'We keep going at no extra cost until you hit your agreed target weight' },
+            { num: '3', stat: 'Extended Support', sub: 'If eligible, your plan is reviewed and extended support may apply at no extra programme fee' },
           ].map((item) => (
             <div key={item.num} style={{ padding: '32px 24px', borderRight: '1px solid rgba(79,114,86,0.14)', textAlign: 'center' }}>
               <span style={{ display: 'block', fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '2px', color: green, textTransform: 'uppercase', marginBottom: '10px' }}>0{item.num}</span>
@@ -484,11 +484,11 @@ export default function GLP1Page() {
                 We Only Accept Clients We Genuinely Believe We Can Help
               </h3>
               <p style={{ fontFamily: bodyFont, fontSize: '14.5px', lineHeight: 1.8, color: taupe, marginBottom: '32px', borderLeft: '2px solid #C9D8C1', paddingLeft: '16px' }}>
-                If you qualify and complete the programme as agreed — and don&rsquo;t reach your target weight — we extend your weight management programme at no extra fee until we get there together.
+                If you qualify and complete the programme as agreed, your doctor reviews your progress and may extend structured weight-management support at no extra programme fee.
               </p>
 
               <p style={{ fontFamily: wideFont, fontSize: '10px', fontWeight: 700, letterSpacing: '3px', textTransform: 'uppercase', color: '#9B8D83', marginBottom: '16px' }}>
-                To receive this guarantee, you agree to:
+                For extended support, you agree to:
               </p>
 
               {/* Conditions — full-width stacked list */}

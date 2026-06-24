@@ -55,7 +55,7 @@ export const antiCellulite: PackageContent = {
   ],
 
   eligEyebrow: 'eligibility criteria',
-  eligHeading: 'areas we treat for smoother, cellulite-free skin',
+  eligHeading: 'areas we treat for smoother-looking cellulite-prone skin',
   eligImage: W + '87fc13_2b03ae3db08f45929726527724060704~mv2.jpg',
   eligIntro: 'Smooth cellulite-prone areas across the body',
   areas: ['THIGHS (FRONT, BACK, INNER AND OUTER)', 'BUTTOCKS AND UNDER-BUTT CREASE', 'HIPS'],

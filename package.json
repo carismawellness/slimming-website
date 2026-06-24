@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seo:qa": "node scripts/seo-qa.mjs"
   },
   "dependencies": {
     "@types/three": "^0.184.1",

@@ -47,6 +47,19 @@ const adRewrites: { source: string; destination: string }[] = [
 // pages with no active ad spend or significant ongoing traffic.
 // ---------------------------------------------------------------------------
 const nextConfig: NextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/:all*(png|jpg|jpeg|webp|avif|svg|ico|woff2|mp4)',
+        headers: [
+          {
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
+          },
+        ],
+      },
+    ];
+  },
   async rewrites() {
     return adRewrites;
   },

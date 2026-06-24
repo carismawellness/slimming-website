@@ -74,7 +74,7 @@ export const TRUST_BAR = [
 
 export const HERO = {
   eyebrow: 'Doctor-led slimming in Malta',
-  titleTop: 'Lose up to 1kg a week,',
+  titleTop: 'Build measurable weekly progress,',
   titleEm: 'with doctors by your side.',
   sub: "Malta's most comprehensive slimming program — medical weight loss, GLP-1 support where appropriate, personalised meal plans and body contouring, in one doctor-led plan.",
   bullets: [
@@ -168,7 +168,7 @@ export const PILLARS = [
     icon: '/wix/87fc13_da70307b66154a24b141dfb4fd26a1bb~mv2.png',
     items: [
       'EMSculpt NEO — build muscle and reduce fat',
-      'CoolSculpting fat freezing — permanent fat reduction',
+      'CoolSculpting fat freezing — long-lasting local fat reduction',
       'VelaShape III — smooth and firm loose skin',
       'Lymphatic drainage to reduce fluid retention',
       'Non-invasive with no downtime required',
@@ -304,7 +304,7 @@ export const FAQ = [
   },
   {
     q: 'How quickly can I see results?',
-    a: 'With a medically supervised program, many clients work towards up to 1kg a week — measured and verified. Results vary by individual; your doctor will set realistic, healthy expectations for you.',
+    a: 'With a medically supervised program, your doctor sets realistic targets and tracks progress with body composition data. Results vary by individual.',
   },
   {
     q: 'Is this just another diet?',

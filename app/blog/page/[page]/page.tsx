@@ -2,11 +2,11 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import postsData from '@/lib/blog/posts-index.json';
 import FadeInUp from '@/components/blog/FadeInUp';
+import { getBlogSeoPolicy } from '@/lib/blog/seo-policy';
 
 export const dynamicParams = false;
 
 const POSTS_PER_PAGE = 20;
-const TOTAL_PAGES = 20;
 
 // ── Brand tokens ──────────────────────────────────────────────────────────────
 const FOREST = '#024C27';
@@ -32,7 +32,8 @@ type Post = {
   tags: string[];
 };
 
-const posts = postsData as Post[];
+const posts = (postsData as Post[]).filter((post) => getBlogSeoPolicy(post).index);
+const TOTAL_PAGES = Math.max(1, Math.ceil(posts.length / POSTS_PER_PAGE));
 
 type Props = {
   params: Promise<{ page: string }>;
@@ -147,7 +148,7 @@ export default async function BlogPaginatedPage({ params }: Props) {
               margin: '0 0 24px',
             }}
           >
-            All Articles
+            Weight Loss &amp; Slimming Articles
           </h1>
 
           {/* Breadcrumb */}

@@ -10,7 +10,7 @@ export const muscleStimulation: PackageContent = {
   heroTitle: 'muscle stimulation in malta — emsculpt neo body sculpt protocol',
   heroSubheading: 'Stronger, tighter, more defined in 4 focused sessions.',
   heroDescription:
-    'Our 3-1 course with EMSculpt NEO with HIFEM + RF gives you the effect of 20,000 sit ups per session, burns local fat and tightens the skin resulting in 30% Fat reduction, 25% Muscle growth & 29% Muscle strength',
+    'Our EMSculpt NEO course combines HIFEM + RF to stimulate powerful muscle contractions, support local fat reduction and improve firmness, with results varying by body and adherence.',
   heroIncludes: [
     '4x Muscle Stimulation sessions with EMSculpt NEO (€400)',
     '4x access to spa & fitness facilities (€140)',
