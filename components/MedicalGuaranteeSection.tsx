@@ -49,10 +49,10 @@ export default function MedicalGuaranteeSection() {
           </div>
 
           {/* Headline */}
-          <h2 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
+          <h3 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
             Up to <CountUp value="1KG" /><br />
             <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
-          </h2>
+          </h3>
 
           <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: taupe, maxWidth: '520px', margin: '0 auto 16px' }}>
             If you qualify, follow the programme, and don&rsquo;t reach your target weight — we extend your care at <strong style={{ color: '#024C27', fontWeight: 600 }}>no extra cost</strong>, until you do.

@@ -5,7 +5,6 @@ import Link from 'next/link';
 import ModalitiesCarousel from '@/components/ModalitiesCarousel';
 import PageHero from '@/components/PageHero';
 import StepTimeline from '@/components/StepTimeline';
-import GradientField from '@/components/layers/GradientField';
 import ResultsGuarantee from '@/components/results/ResultsGuarantee';
 import MedicalGuaranteeSection from '@/components/MedicalGuaranteeSection';
 
@@ -121,7 +120,6 @@ export default function Home() {
         media={{ type: 'video', src: '/IVana.mp4', poster: '/Thumbnail.webp', alt: 'Carisma Slimming doctor-led weight loss in Malta' }}
         proof={{ rating: '4.9', reviews: '800+', awardSrc: '/Malta.png', awardText: '#1 voted clinic\nMalta 2025–26' }}
         compactHeadline
-        motif
       />
 
       {/* (2) 4 Core Pillars of Our Weight Loss Methodology */}
@@ -131,9 +129,9 @@ export default function Home() {
             4 core pillars of our weight loss methodology
           </p>
           <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '90px', height: '1px', backgroundColor: '#C9B8AE' }} />
-          <h2 id="pillars-heading" className="text-center mb-12" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.3', textTransform: 'uppercase' }}>
+          <h3 id="pillars-heading" className="text-center mb-12" style={{ color: '#4f7256', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '1.3', textTransform: 'uppercase' }}>
             malta&rsquo;s only multidisciplinary<br />slimming &amp; weight-loss approach
-          </h2>
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4" style={{ gap: '28px' }} role="list">
             {pillars.map((pillar) => (
               <div key={pillar.title} role="listitem" style={{ padding: '28px 24px', background: 'linear-gradient(180deg, #F2F6EF 0%, #C9D8C1 100%)', borderTopLeftRadius: '18px', borderTopRightRadius: '90px', borderBottomLeftRadius: '90px', borderBottomRightRadius: '18px', boxShadow: '0 10px 30px rgba(0,0,0,0.06)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
@@ -173,9 +171,9 @@ export default function Home() {
             Our Treatments
           </p>
           <div aria-hidden="true" style={{ width: '64px', height: '1px', background: '#4f7256', margin: '0 auto 18px' }} />
-          <h2 id="modalities-heading" style={{ fontFamily: 'Trajan Pro, serif', color: '#3c5a40', fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '14px' }}>
+          <h3 id="modalities-heading" style={{ fontFamily: 'Trajan Pro, serif', color: '#3c5a40', fontWeight: 400, fontSize: 'clamp(24px,3.4vw,34px)', lineHeight: 1.25, textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '14px' }}>
             Our Weight Loss &amp; Body Contouring Treatments in Malta
-          </h2>
+          </h3>
           <p style={{ fontFamily: 'Roboto, sans-serif', color: '#595959', fontSize: '16px', lineHeight: 1.6, maxWidth: '620px', margin: '0 auto' }}>
             Six evidence-led modalities, combined into one doctor-led plan — chosen for your body, never one-size-fits-all.
           </p>
@@ -196,9 +194,9 @@ export default function Home() {
               Medical Weight Loss · GLP-1 Program
             </p>
             <div className="mx-auto mb-5" aria-hidden="true" style={{ width: '64px', height: '1px', backgroundColor: '#4f7256' }} />
-            <h2 id="glp1-heading" style={{ color: '#024C27', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '38px', lineHeight: '1.25', letterSpacing: '2px', textTransform: 'uppercase' }}>
+            <h3 id="glp1-heading" style={{ color: '#024C27', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '38px', lineHeight: '1.25', letterSpacing: '2px', textTransform: 'uppercase' }}>
 How GLP-1 Works<br />at Our Clinic
-            </h2>
+            </h3>
           </div>
           {/* Intro */}
           <p className="text-center mx-auto mb-4" style={{ maxWidth: '680px', color: '#6f6456', fontFamily: 'Roboto, sans-serif', fontSize: '15px', lineHeight: '1.7' }}>
@@ -263,9 +261,9 @@ How GLP-1 Works<br />at Our Clinic
                 the carisma difference
               </p>
               <div className="mx-auto mb-4" aria-hidden="true" style={{ width: '110px', height: '1px', backgroundColor: '#B9A99E' }} />
-              <h2 id="difference-heading" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
+              <h3 id="difference-heading" className="text-center mb-12" style={{ color: '#3c5a40', fontFamily: 'Trajan Pro, serif', fontWeight: '400', fontSize: '25px', lineHeight: '35px', textTransform: 'uppercase', letterSpacing: '1px' }}>
                 why malta chooses carisma slimming
-              </h2>
+              </h3>
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-stretch">
                 {/* Left - commitments */}
                 <div className="space-y-12">

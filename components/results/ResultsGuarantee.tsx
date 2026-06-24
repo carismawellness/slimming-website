@@ -1,9 +1,5 @@
-'use client';
-
-import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import CountUp from '@/components/CountUp';
 
 /**
  * ResultsGuarantee — "The Carisma Results Commitment" section.
@@ -26,7 +22,6 @@ import CountUp from '@/components/CountUp';
 const FOREST = '#024C27'; // deepest brand forest — big numbers / CTA fill
 const INK = '#3c5a40'; // deep sage heading
 const SAGE = '#4f7256'; // accent / divider / eyebrow text (5.42:1 on white)
-const BODY = '#5a5043'; // taupe-brown body (AA on near-white)
 const META = '#6f6456'; // eyebrow / subline / descriptions (AA on near-white)
 const SERIF = 'Trajan Pro, serif';
 const WIDE = '"Novecento Wide Book","Novecento Wide",sans-serif';
@@ -73,40 +68,10 @@ const STATS = [
 ];
 
 export default function ResultsGuarantee() {
-  const rootRef = useRef<HTMLElement>(null);
-  const [revealed, setRevealed] = useState(false);
-  const [armed, setArmed] = useState(false);
-
-  useEffect(() => {
-    const el = rootRef.current;
-    if (!el) return;
-
-    // Respect reduced motion: reveal immediately, skip the observer & hidden state.
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setRevealed(true);
-      return;
-    }
-
-    setArmed(true);
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setRevealed(true);
-          io.disconnect();
-        }
-      },
-      { threshold: 0.12, rootMargin: '0px 0px -8% 0px' },
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
-
   return (
     <section
-      ref={rootRef}
       aria-labelledby="results-heading"
-      data-armed={armed && !revealed ? '' : undefined}
-      className={`rg${revealed ? ' rg--in' : ''}`}
+      className="rg"
       style={{
         paddingTop: 'clamp(12px,3vw,48px)',
         paddingBottom: 'clamp(12px,3vw,48px)',
@@ -114,17 +79,6 @@ export default function ResultsGuarantee() {
       }}
     >
       <style>{`
-        /* Subtle, reduced-motion-safe fade/rise. The hidden start state only
-           applies once JS has armed the section (data-armed), so SSR / no-JS
-           renders stay fully visible. */
-        .rg[data-armed] .rg-rise { opacity: 0; transform: translateY(14px); }
-        .rg-rise { transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
-        .rg--in .rg-rise { opacity: 1; transform: none; }
-        .rg-rise.rg-d1 { transition-delay: .08s; }
-        .rg-rise.rg-d2 { transition-delay: .18s; }
-        .rg-rise.rg-d3 { transition-delay: .28s; }
-        .rg-rise.rg-d4 { transition-delay: .38s; }
-
         /* ── Fanned image cluster ── */
         .rg-fan {
           position: relative;
@@ -210,7 +164,7 @@ export default function ResultsGuarantee() {
           >
             Our Commitment
           </span>
-          <h2
+          <h3
             id="results-heading"
             style={{
               color: INK,
@@ -223,7 +177,7 @@ export default function ResultsGuarantee() {
             }}
           >
             The Carisma Results Commitment
-          </h2>
+          </h3>
           <p style={{ color: META, fontFamily: ROBOTO, fontSize: 'clamp(16px,1.7vw,19px)', lineHeight: 1.6, margin: '14px auto 0', maxWidth: 520 }}>
             Up to 1kg a week. Measured. Verified. Committed to your weight loss.
           </p>
@@ -259,7 +213,7 @@ export default function ResultsGuarantee() {
                   textTransform: 'uppercase',
                 }}
               >
-                <CountUp value={s.value} />
+                {s.value}
               </div>
               <h3
                 style={{
