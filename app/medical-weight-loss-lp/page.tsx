@@ -714,7 +714,7 @@ export default function MedicalWeightLossLpPage() {
                   </a>
                   <BookConsultationButton variant="outline" style={{ fontSize: '12px', padding: '12px 20px' }} />
                 </div>
-                <div className="flex items-center justify-center gap-2" aria-label="Rated 5 stars — #1 voted clinic in Malta">
+                <div className="flex items-center justify-center gap-2" role="img" aria-label="Rated 5 stars — #1 voted clinic in Malta">
                   <span className="flex items-center gap-1" aria-hidden="true">
                     {[0, 1, 2, 3, 4].map((i) => (
                       <Image key={i} src="/wix/f940f0_b971086dc1d3458fb2622a9d95340fab~mv2.png" alt="" aria-hidden="true" width={18} height={18} style={{ objectFit: 'contain' }} />
