@@ -1,8 +1,17 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
-import { GOALS, AREAS, MEDICATION, type QuizOption } from './quizData';
+import {
+  GOALS,
+  AREAS,
+  TIMELINE,
+  MEDICATION,
+  PREVIOUS_ATTEMPTS,
+  REFERRAL,
+  CONSULTATION,
+  type QuizOption,
+} from './quizData';
 
 /* ── Locked brand tokens ───────────────────────────────────────────────── */
 const SAGE = '#4f7256';        // deep sage — text / fill (5.42:1 on white)
@@ -14,70 +23,148 @@ const HEAD_FONT = "'Trajan Pro', serif";
 const WIDE_FONT = "'Novecento Wide Book', 'Novecento Wide', sans-serif";
 const BODY_FONT = "'Roboto', sans-serif";
 
-type StepId = 'goals' | 'areas' | 'medication' | 'name';
+type StepId =
+  | 'goals'
+  | 'areas'
+  | 'timeline'
+  | 'medication'
+  | 'previousAttempts'
+  | 'referral'
+  | 'consultation'
+  | 'contact';
 
 const STEPS: { id: StepId; title: string; sub: string }[] = [
-  { id: 'goals',      title: 'What would you love to change?',  sub: 'Choose all that apply — we’ll match treatments to every goal.' },
-  { id: 'areas',      title: 'Where would you like to focus?',  sub: 'Optional — pick any areas you’d like to target.' },
-  { id: 'medication', title: 'Open to medical support?',        sub: 'This helps us know whether prescription options fit you.' },
-  { id: 'name',       title: 'Where should we send your plan?', sub: 'Just your first name for a personalised result.' },
+  { id: 'goals',            title: 'What would you love to change?',         sub: 'Choose all that apply — we’ll match treatments to every goal.' },
+  { id: 'areas',            title: 'Where would you like to focus?',         sub: 'Optional — pick any areas you’d like to target.' },
+  { id: 'timeline',         title: 'What’s your timeline for results?',      sub: 'This helps us pace a plan that fits your life.' },
+  { id: 'medication',       title: 'Open to medical support?',               sub: 'This helps us know whether prescription options fit you.' },
+  { id: 'previousAttempts', title: 'Have you tried losing weight before?',   sub: 'No judgement — it just helps us understand what you need.' },
+  { id: 'referral',         title: 'Where did you hear about us?',           sub: 'Last quick one before your results.' },
+  { id: 'consultation',     title: 'Would you like a consultation?',         sub: 'For a limited time we’re offering free virtual consultations with our medical team to discuss your goals and the options available to you.' },
+  { id: 'contact',          title: 'Where should we send your plan?',        sub: 'Enter your details so we can share your results and stay in touch about your personalised plan.' },
 ];
+
+const validEmail = (v: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v.trim());
+const validPhone = (v: string) => v.replace(/\D/g, '').length >= 8;
 
 export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
   const router = useRouter();
   const [stepIdx, setStepIdx] = useState(0);
   const [goals, setGoals] = useState<string[]>([]);
   const [areas, setAreas] = useState<string[]>([]);
-  const [medication, setMedication] = useState<string>('');
-  const [name, setName] = useState<string>('');
+  const [timeline, setTimeline] = useState('');
+  const [medication, setMedication] = useState('');
+  const [previousAttempts, setPreviousAttempts] = useState('');
+  const [referral, setReferral] = useState('');
+  const [consultation, setConsultation] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [surname, setSurname] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('+356 ');
+  const [error, setError] = useState<string | null>(null);
   const [submitting, setSubmitting] = useState(false);
-  const nameInputRef = useRef<HTMLInputElement>(null);
+  const firstFieldRef = useRef<HTMLInputElement>(null);
 
   const step = STEPS[stepIdx];
   const total = STEPS.length;
   const isLast = stepIdx === total - 1;
 
-  // Move focus to the name field when its step opens (skipped for reduced-motion
-  // users only matters visually; focus itself is always helpful for keyboard).
+  // Move focus to the first contact field when that step opens.
   useEffect(() => {
-    if (step.id === 'name') {
-      const id = window.requestAnimationFrame(() => nameInputRef.current?.focus());
+    if (step.id === 'contact') {
+      const id = window.requestAnimationFrame(() => firstFieldRef.current?.focus());
       return () => window.cancelAnimationFrame(id);
     }
   }, [step.id]);
+
+  // Clear any visible error when the step changes.
+  useEffect(() => { setError(null); }, [step.id]);
 
   const toggle = (list: string[], setList: (v: string[]) => void, value: string) =>
     setList(list.includes(value) ? list.filter((v) => v !== value) : [...list, value]);
 
   const stepValid = useMemo(() => {
     switch (step.id) {
-      case 'goals':      return goals.length >= 1;
-      case 'areas':      return true; // optional
-      case 'medication': return medication !== '';
-      case 'name':       return name.trim().length >= 1;
+      case 'goals':            return goals.length >= 1;
+      case 'areas':            return true; // optional
+      case 'timeline':         return timeline !== '';
+      case 'medication':       return medication !== '';
+      case 'previousAttempts': return previousAttempts !== '';
+      case 'referral':         return referral !== '';
+      case 'consultation':     return consultation !== '';
+      case 'contact':
+        return !!firstName.trim() && !!surname.trim() && validEmail(email) && validPhone(phone);
     }
-  }, [step.id, goals, medication, name]);
+  }, [step.id, goals, timeline, medication, previousAttempts, referral, consultation, firstName, surname, email, phone]);
 
   const goNext = () => {
+    if (step.id === 'contact') {
+      if (!firstName.trim() || !surname.trim()) { setError('Please enter your first name and surname.'); return; }
+      if (!validEmail(email)) { setError('Please enter a valid email address.'); return; }
+      if (!validPhone(phone)) { setError('Please enter a valid phone number.'); return; }
+      setError(null);
+      submit();
+      return;
+    }
     if (!stepValid) return;
     if (isLast) { submit(); return; }
     setStepIdx((i) => Math.min(i + 1, total - 1));
   };
   const goBack = () => setStepIdx((i) => Math.max(i - 1, 0));
 
-  const submit = () => {
+  const submit = async () => {
     if (submitting) return;
     setSubmitting(true);
+
+    // Send the full lead to GoHighLevel (create-or-update). We don't block the
+    // results page on it — capture is best-effort but awaited so it has time to fire.
+    try {
+      await fetch('/api/quiz-lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          firstName: firstName.trim(),
+          surname: surname.trim(),
+          email: email.trim(),
+          phone: phone.trim(),
+          goals,
+          areas,
+          timeline,
+          medication,
+          previousAttempts,
+          referral,
+          consultation,
+        }),
+      });
+    } catch {
+      /* never block the user's results on a CRM hiccup */
+    }
+
     // Per the /quiz-results contract: URL-encode each value, join with a LITERAL
     // comma (the results page does param.split(',').map(decodeURIComponent)).
-    // Built manually because URLSearchParams would re-encode the separator commas.
     const qs =
       `goals=${goals.map(encodeURIComponent).join(',')}` +
       (areas.length ? `&areas=${areas.map(encodeURIComponent).join(',')}` : '') +
       `&medication=${encodeURIComponent(medication)}` +
-      `&name=${encodeURIComponent(name.trim())}`;
+      `&name=${encodeURIComponent(firstName.trim())}`;
     router.push(`/quiz-results?${qs}`);
     onClose();
+  };
+
+  const inputStyle: CSSProperties = {
+    width: '100%',
+    padding: '13px 15px',
+    fontFamily: BODY_FONT,
+    fontSize: 16,
+    color: '#1a1a1a',
+    background: '#fff',
+    border: `1.5px solid ${SAGE_BORDER}`,
+    borderRadius: 14,
+    outline: 'none',
+  };
+  const labelStyle: CSSProperties = {
+    display: 'block', fontFamily: WIDE_FONT, fontSize: 11, letterSpacing: '1.5px',
+    color: SAGE, textTransform: 'uppercase', marginBottom: 7,
   };
 
   return (
@@ -93,13 +180,13 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
           <p style={{ fontFamily: WIDE_FONT, fontSize: 11, letterSpacing: '2px', color: SAGE, textTransform: 'uppercase', margin: 0 }}>
             Step {stepIdx + 1} of {total}
           </p>
-          <div style={{ display: 'flex', gap: 6 }} aria-hidden="true">
+          <div style={{ display: 'flex', gap: 5 }} aria-hidden="true">
             {STEPS.map((s, i) => (
               <span
                 key={s.id}
                 style={{
-                  width: i === stepIdx ? 22 : 8,
-                  height: 8,
+                  width: i === stepIdx ? 20 : 7,
+                  height: 7,
                   borderRadius: 999,
                   background: i <= stepIdx ? SAGE : '#DCE4DC',
                   transition: 'width .3s ease, background .3s ease',
@@ -122,7 +209,7 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
         </div>
       </div>
 
-      {/* ── Step body (animated) ── */}
+      {/* ── Step body (animated, scrolls if taller than the panel) ── */}
       <div
         key={step.id}
         className="quiz-step"
@@ -136,69 +223,83 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
         </p>
 
         {step.id === 'goals' && (
-          <OptionGrid
-            options={GOALS}
-            selected={goals}
-            multi
-            onToggle={(v) => toggle(goals, setGoals, v)}
-            groupLabel="Your goals"
-          />
+          <OptionGrid options={GOALS} selected={goals} multi onToggle={(v) => toggle(goals, setGoals, v)} groupLabel="Your goals" />
         )}
 
         {step.id === 'areas' && (
-          <OptionGrid
-            options={AREAS}
-            selected={areas}
-            multi
-            compact
-            onToggle={(v) => toggle(areas, setAreas, v)}
-            groupLabel="Focus areas"
-          />
+          <OptionGrid options={AREAS} selected={areas} multi compact onToggle={(v) => toggle(areas, setAreas, v)} groupLabel="Focus areas" />
+        )}
+
+        {step.id === 'timeline' && (
+          <OptionGrid options={TIMELINE} selected={timeline ? [timeline] : []} multi={false} onToggle={(v) => setTimeline(v)} groupLabel="Timeline" />
         )}
 
         {step.id === 'medication' && (
-          <OptionGrid
-            options={MEDICATION}
-            selected={medication ? [medication] : []}
-            multi={false}
-            onToggle={(v) => setMedication(v)}
-            groupLabel="Medical support preference"
-          />
+          <OptionGrid options={MEDICATION} selected={medication ? [medication] : []} multi={false} onToggle={(v) => setMedication(v)} groupLabel="Medical support preference" />
         )}
 
-        {step.id === 'name' && (
-          <div style={{ marginTop: 4 }}>
-            <label
-              htmlFor="quiz-name"
-              style={{ display: 'block', fontFamily: WIDE_FONT, fontSize: 11, letterSpacing: '1.5px', color: SAGE, textTransform: 'uppercase', marginBottom: 8 }}
-            >
-              First name
-            </label>
-            <input
-              id="quiz-name"
-              ref={nameInputRef}
-              type="text"
-              autoComplete="given-name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              onKeyDown={(e) => { if (e.key === 'Enter' && stepValid) { e.preventDefault(); goNext(); } }}
-              placeholder="e.g. Maria"
-              style={{
-                width: '100%',
-                padding: '14px 16px',
-                fontFamily: BODY_FONT,
-                fontSize: 16,
-                color: '#1a1a1a',
-                background: '#fff',
-                border: `1.5px solid ${SAGE_BORDER}`,
-                borderRadius: 16,
-                outline: 'none',
-              }}
-            />
-            <p style={{ fontFamily: BODY_FONT, fontSize: 12, color: TAUPE, opacity: 0.85, margin: '10px 0 0' }}>
-              No spam — your results appear instantly on the next screen.
+        {step.id === 'previousAttempts' && (
+          <OptionGrid options={PREVIOUS_ATTEMPTS} selected={previousAttempts ? [previousAttempts] : []} multi={false} onToggle={(v) => setPreviousAttempts(v)} groupLabel="Previous attempts" />
+        )}
+
+        {step.id === 'referral' && (
+          <OptionGrid options={REFERRAL} selected={referral ? [referral] : []} multi={false} compact onToggle={(v) => setReferral(v)} groupLabel="Where you heard about us" />
+        )}
+
+        {step.id === 'consultation' && (
+          <OptionGrid options={CONSULTATION} selected={consultation ? [consultation] : []} multi={false} onToggle={(v) => setConsultation(v)} groupLabel="Consultation preference" />
+        )}
+
+        {step.id === 'contact' && (
+          <div style={{ marginTop: 2 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
+              <div>
+                <label htmlFor="quiz-first" style={labelStyle}>First name *</label>
+                <input
+                  id="quiz-first" ref={firstFieldRef} type="text" autoComplete="given-name"
+                  value={firstName} onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="e.g. Maria" style={inputStyle}
+                />
+              </div>
+              <div>
+                <label htmlFor="quiz-surname" style={labelStyle}>Surname *</label>
+                <input
+                  id="quiz-surname" type="text" autoComplete="family-name"
+                  value={surname} onChange={(e) => setSurname(e.target.value)}
+                  placeholder="e.g. Borg" style={inputStyle}
+                />
+              </div>
+            </div>
+
+            <div style={{ marginTop: 12 }}>
+              <label htmlFor="quiz-email" style={labelStyle}>Email *</label>
+              <input
+                id="quiz-email" type="email" autoComplete="email" inputMode="email"
+                value={email} onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@email.com" style={inputStyle}
+              />
+            </div>
+
+            <div style={{ marginTop: 12 }}>
+              <label htmlFor="quiz-phone" style={labelStyle}>Phone *</label>
+              <input
+                id="quiz-phone" type="tel" autoComplete="tel" inputMode="tel"
+                value={phone} onChange={(e) => setPhone(e.target.value)}
+                onKeyDown={(e) => { if (e.key === 'Enter' && stepValid) { e.preventDefault(); goNext(); } }}
+                placeholder="+356 9999 9999" style={inputStyle}
+              />
+            </div>
+
+            <p style={{ fontFamily: BODY_FONT, fontSize: 12, color: TAUPE, opacity: 0.85, margin: '12px 0 0' }}>
+              Your details are kept private and used only to send your results and follow up about your plan.
             </p>
           </div>
+        )}
+
+        {error && (
+          <p role="alert" style={{ fontFamily: BODY_FONT, fontSize: 13, color: '#b3261e', margin: '12px 0 0' }}>
+            {error}
+          </p>
         )}
       </div>
 
@@ -225,26 +326,25 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
           <button
             type="button"
             onClick={goNext}
-            disabled={!stepValid || submitting}
+            disabled={submitting || (step.id !== 'contact' && !stepValid)}
             className="cta-glow quiz-next"
             style={{
               marginLeft: 'auto',
               fontFamily: WIDE_FONT, fontSize: 12.5, letterSpacing: '1px', textTransform: 'uppercase',
               color: '#fff', padding: '14px 28px', border: 'none',
               display: 'inline-flex', alignItems: 'center', gap: 8,
-              opacity: !stepValid || submitting ? 0.45 : 1,
-              cursor: !stepValid || submitting ? 'not-allowed' : 'pointer',
-              filter: !stepValid || submitting ? 'grayscale(0.35)' : 'none',
-              boxShadow: !stepValid || submitting ? 'none' : undefined,
+              opacity: submitting || (step.id !== 'contact' && !stepValid) ? 0.45 : 1,
+              cursor: submitting || (step.id !== 'contact' && !stepValid) ? 'not-allowed' : 'pointer',
+              filter: submitting || (step.id !== 'contact' && !stepValid) ? 'grayscale(0.35)' : 'none',
             }}
           >
-            {isLast ? 'See my results' : 'Continue'}
+            {submitting ? 'Sending…' : isLast ? 'See my results' : 'Continue'}
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
           </button>
         </div>
 
         <p style={{ fontFamily: BODY_FONT, fontSize: 11, color: TAUPE, opacity: 0.7, textAlign: 'center', margin: '12px 0 0' }}>
-          Takes 30 seconds · No obligation · Doctor-reviewed
+          Takes 60 seconds · No obligation · Doctor-reviewed
         </p>
       </div>
 

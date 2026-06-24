@@ -42,3 +42,5 @@ next-env.d.ts
 
 # design QC screenshots (local only)
 /shots
+
+.vercel
