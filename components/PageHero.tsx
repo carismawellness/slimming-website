@@ -547,7 +547,7 @@ export default function PageHero({
         }
         @media (max-width: 899px) {
           .page-hero { align-items: flex-start !important; }
-          .page-hero-media { margin-top: clamp(120px, 20vh, 180px); }
+          .page-hero-media { margin-top: clamp(24px, 5vw, 60px); }
         }
       `}</style>
     </section>
