@@ -99,6 +99,17 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
+        {/* Google Tag Manager */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-KL52M3K8');`,
+          }}
+        />
+        {/* End Google Tag Manager */}
         {/* Hero poster — inline img in PageHero server component is the LCP element;
             this preload fires simultaneously to ensure zero extra RTT */}
         <link rel="preload" as="image" href="/Thumbnail.webp" fetchPriority="high" type="image/webp" />
@@ -111,6 +122,16 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col">
+        {/* Google Tag Manager (noscript) */}
+        <noscript>
+          <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-KL52M3K8"
+            height="0"
+            width="0"
+            style={{ display: "none", visibility: "hidden" }}
+          />
+        </noscript>
+        {/* End Google Tag Manager (noscript) */}
         <PageLoader />
         <SiteHeader />
         <main className="flex-grow">{children}</main>
