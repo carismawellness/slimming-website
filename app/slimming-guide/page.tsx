@@ -14,16 +14,19 @@ import MotifAccent from '@/components/layers/MotifAccent';
 import CountUp from '@/components/CountUp';
 
 export const metadata: Metadata = {
-  title: "Carisma Slimming Guide | Malta's #1 Weight-Loss Clinic",
-  description: "The Carisma Slimming Guide — a doctor-backed behaviour system with Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30.",
+  title: "Weight Loss Guide Malta | Behaviour System + 50+ Recipes | Carisma Slimming",
+  description: "The Carisma Slimming Guide — a doctor-backed behaviour system with 50+ Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30. Designed for sustainable weight loss in Malta.",
   alternates: { canonical: 'https://www.carismaslimming.com/slimming-guide' },
   openGraph: {
-    title: "Carisma Slimming Guide | Malta's #1 Weight-Loss Clinic",
-    description: "The Carisma Slimming Guide — a doctor-backed behaviour system with Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30.",
+    title: "Weight Loss Guide Malta | Behaviour System + 50+ Recipes | Carisma Slimming",
+    description: "The Carisma Slimming Guide — a doctor-backed behaviour system with 50+ Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30.",
     url: 'https://www.carismaslimming.com/slimming-guide',
-    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Carisma Slimming Guide Malta' }],
+    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'The Carisma Slimming Guide — Weight Loss System for Malta' }],
   },
 };
+
+const PRODUCT_URL =
+  'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta';
 
 const jsonLd = [
   breadcrumbList([
@@ -31,15 +34,43 @@ const jsonLd = [
     { name: 'Slimming Guide', url: `${SITE_URL}/slimming-guide` },
   ]),
   medicalWebPage({
-    name: 'Free Slimming Guide Malta — Your Weight Loss Bible',
+    name: 'Weight Loss Guide Malta — Behaviour System + 50+ Recipes',
     description:
-      "The definitive weight loss resource for Malta. Doctor-led advice on diet, exercise, GLP-1 medication and body contouring from Carisma Slimming.",
+      "The definitive weight loss guide for Malta. Doctor-backed behaviour system with 50+ Maltese recipes, meal timing guidance, and portion structure. No calorie counting required.",
     url: `${SITE_URL}/slimming-guide`,
   }),
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: 'Carisma Slimming Guide',
+    description: 'A doctor-backed behaviour-based weight loss guide with 50+ Maltese recipes, meal timing, and portion guidance. Designed for sustainable weight loss without calorie counting.',
+    url: PRODUCT_URL,
+    image: `${SITE_URL}/wix/f940f0_a2ae67089c094ea4a1ed8c7a81f3c315~mv2.webp`,
+    brand: {
+      '@type': 'Brand',
+      name: 'Carisma Slimming',
+    },
+    offers: {
+      '@type': 'Offer',
+      url: PRODUCT_URL,
+      priceCurrency: 'EUR',
+      price: '30',
+      availability: 'https://schema.org/InStock',
+      seller: {
+        '@type': 'Organization',
+        name: 'Carisma Slimming',
+        url: SITE_URL,
+      },
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '4.9',
+      ratingCount: '800',
+      bestRating: '5',
+      worstRating: '1',
+    },
+  },
 ];
-
-const PRODUCT_URL =
-  'https://www.carismaslimming.com/product-page/the-carisma-slimming-weight-loss-guide-malta';
 
 const forYou = [
   "You've tried dieting before, and it didn't stick",
@@ -114,14 +145,14 @@ function GoogleReviewsRow({ light = false }: { light?: boolean }) {
     <div className="flex items-center gap-1.5">
       <img
         src="/wix/87fc13_c507b5f7e86f4eed970b757bc84a8ec4~mv2.png"
-        alt="Google"
+        alt="Google Reviews"
         style={{ width: '23px', height: '23px', objectFit: 'contain' }}
       />
       {[0, 1, 2, 3, 4].map((i) => (
         <img
           key={i}
           src="/wix/87fc13_2de846da7d374b24984ad15221cae0bd~mv2.png"
-          alt=""
+          alt="5 star rating"
           style={{ width: '23px', height: '20px', objectFit: 'contain' }}
         />
       ))}
@@ -144,8 +175,8 @@ export default function SlimmingGuidePage() {
       <PageHero
         eyebrow="Recipes, meal timing & a structured plan"
         headline={[
-          { text: 'The Weight-Loss Guide for Malta' },
-          { text: 'Recipes & Meal Timing', em: true },
+          { text: 'Weight Loss Guide for Malta' },
+          { text: 'Behaviour System + 50+ Recipes', em: true },
         ]}
         sub="A doctor-backed system you can actually follow — no crash diets, no calorie counting. For only €30."
         bullets={[
@@ -225,7 +256,13 @@ export default function SlimmingGuidePage() {
             <p style={{ color: TAUPE, fontSize: '15px', lineHeight: 1.7, margin: '0 0 24px', maxWidth: '620px', marginLeft: 'auto', marginRight: 'auto' }}>
               That is what this guide builds. When the structure holds, weight loss stops being something you fight for. It becomes a result that follows.
             </p>
-            <a href={PRODUCT_URL} className="cta-glow inline-block text-center uppercase text-white" style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textDecoration: 'none' }}>
+            <a
+              href={PRODUCT_URL}
+              className="cta-glow inline-block text-center uppercase text-white"
+              style={{ borderRadius: '999px', padding: '14px 40px', fontFamily: wideFont, fontSize: '13px', fontWeight: 700, letterSpacing: '1px', textDecoration: 'none' }}
+              data-section="what-this-is"
+              data-cta-text="get-the-slimming-guide"
+            >
               Get the Slimming Guide &nbsp;›
             </a>
           </div>
@@ -346,6 +383,54 @@ export default function SlimmingGuidePage() {
         </div>
       </section>
 
+      {/* Blog Cluster Links — editorial band linking to relevant weight loss articles */}
+      <section className="bg-white" style={{ padding: 'clamp(40px, 8vw, 80px) 0' }}>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <Kicker centered>GO DEEPER</Kicker>
+            <h2 className="uppercase" style={{ color: GREEN, fontFamily: headingFont, fontWeight: 400, fontSize: '25px', lineHeight: 1.3 }}>
+              Learn the science behind sustainable weight loss
+            </h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+            {/* Blog Link 1 */}
+            <Link href="/blog" className="group block text-decoration-none hover:opacity-80 transition-opacity">
+              <div style={{ background: '#F5F8F2', padding: '24px', borderRadius: '12px', marginBottom: '16px', minHeight: '160px', display: 'flex', alignItems: 'flex-end' }}>
+                <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.6, fontWeight: 500 }}>
+                  Explore evidence-led articles on GLP-1, fat freezing, muscle stimulation and medical weight loss
+                </p>
+              </div>
+              <p style={{ color: GREEN, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 700, margin: '0' }}>
+                Read the blog &nbsp;›
+              </p>
+            </Link>
+
+            {/* Blog Link 2 */}
+            <Link href="/weight-loss" className="group block text-decoration-none hover:opacity-80 transition-opacity">
+              <div style={{ background: '#F5F8F2', padding: '24px', borderRadius: '12px', marginBottom: '16px', minHeight: '160px', display: 'flex', alignItems: 'flex-end' }}>
+                <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.6, fontWeight: 500 }}>
+                  Discover our medical weight loss programme — behaviour coaching plus clinical support
+                </p>
+              </div>
+              <p style={{ color: GREEN, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 700, margin: '0' }}>
+                Medical Weight Loss &nbsp;›
+              </p>
+            </Link>
+
+            {/* Blog Link 3 */}
+            <Link href="/consultation" className="group block text-decoration-none hover:opacity-80 transition-opacity">
+              <div style={{ background: '#F5F8F2', padding: '24px', borderRadius: '12px', marginBottom: '16px', minHeight: '160px', display: 'flex', alignItems: 'flex-end' }}>
+                <p style={{ color: TAUPE, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.6, fontWeight: 500 }}>
+                  Book a free body composition analysis with one of our doctors to personalise your approach
+                </p>
+              </div>
+              <p style={{ color: GREEN, fontFamily: wideFont, fontSize: '13px', letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 700, margin: '0' }}>
+                Free Consultation &nbsp;›
+              </p>
+            </Link>
+          </div>
+        </div>
+      </section>
 
       {/* Final Call-to-Action Section — light on-brand band (no dark-green bg). Starts on
           the sage wash above and resolves to white so the section below flows. */}
@@ -405,6 +490,8 @@ export default function SlimmingGuidePage() {
                   fontWeight: 700,
                   letterSpacing: '1.5px',
                 }}
+                data-section="final-cta"
+                data-cta-text="get-slimming-guide"
               >
                 Get Slimming Guide &nbsp;›
               </a>
