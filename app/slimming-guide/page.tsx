@@ -244,7 +244,7 @@ export default function SlimmingGuidePage() {
       {/* Stabilise Band — light on-brand statement band (no dark-green bg). Starts on
           the sage wash above and resolves to white so the section below flows. */}
       <section
-        style={{ background: '#ffffff', padding: '64px 0' }}
+        style={{ background: '#ffffff', padding: 'clamp(32px, 6vw, 64px) 0' }}
       >
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <p
@@ -259,7 +259,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Designed for Malta — compact, cohesive redesign */}
-      <section className="py-20 bg-white">
+      <section className="bg-white" style={{ padding: 'clamp(32px, 6vw, 80px) 0' }}>
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10">
             <Kicker centered rule>DESIGNED FOR MALTA</Kicker>
@@ -293,7 +293,7 @@ export default function SlimmingGuidePage() {
       </section>
 
       {/* Is This For You — clean editorial two-column comparison (no cards/gradients/shadows) */}
-      <section className="py-24" style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)', padding: 'clamp(32px, 6vw, 96px) 0' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <Kicker centered rule>before you start</Kicker>
@@ -350,8 +350,8 @@ export default function SlimmingGuidePage() {
       {/* Final Call-to-Action Section — light on-brand band (no dark-green bg). Starts on
           the sage wash above and resolves to white so the section below flows. */}
       <section
-        className="pt-24 pb-40 relative overflow-hidden"
-        style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)' }}
+        className="relative overflow-hidden"
+        style={{ background: 'linear-gradient(180deg, #ffffff 0%, #F5F8F2 50%, #ffffff 100%)', paddingTop: 'clamp(40px, 8vw, 96px)', paddingBottom: 'clamp(48px, 10vw, 160px)' }}
       >
         {/* Single Layers watermark — decorative motif behind CTA content (no blob
             here because this band has a .cta-glow button). */}
