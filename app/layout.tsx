@@ -7,7 +7,6 @@ import GuideOrderModal from "@/components/GuideOrderModal";
 import QuizModal from "@/components/QuizModal";
 import StickyBookingBar from "@/components/StickyBookingBar";
 import Script from "next/script";
-import PageLoader from "@/components/PageLoader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -132,16 +131,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
-        <PageLoader />
         <SiteHeader />
-        <main className="flex-grow">{children}</main>
+        <div className="flex-grow">{children}</div>
         <SiteFooter />
         <SiteCookieBanner />
         <ConsultationModal />
         <GuideOrderModal />
         <QuizModal />
         <StickyBookingBar />
-        <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="afterInteractive" />
+        <Script src="https://link.msgsndr.com/js/form_embed.js" strategy="lazyOnload" />
       </body>
     </html>
   );

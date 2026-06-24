@@ -1,6 +1,4 @@
-'use client';
-
-import { useEffect, useRef } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const CARDS = [
@@ -66,46 +64,9 @@ const CARDS = [
 const CARD_W = 349;
 const CARD_H = 465;
 const GAP = 10;
-const PAD = 40; // left/right breathing room
+const PAD = 40;
 
 export default function ModalitiesCarousel() {
-  const ref = useRef<HTMLDivElement>(null);
-
-  // Infinite seamless loop: cards are rendered DUPLICATED back-to-back, so the
-  // scrollable width is twice the real content. Whenever the scroll position
-  // crosses into the second copy (>= half) we instantly subtract half a width;
-  // when it reaches the very start we jump forward into copy #2. The jump is
-  // exactly one content-set wide, so the visible cards are identical and the
-  // wrap is invisible. Arrows are always enabled — no dead-end at either edge.
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const onScroll = () => {
-      const half = el.scrollWidth / 2;
-      if (half <= 0) return;
-      if (el.scrollLeft >= half) {
-        el.scrollLeft -= half;
-      } else if (el.scrollLeft <= 0) {
-        el.scrollLeft = half - 1;
-      }
-    };
-    el.addEventListener('scroll', onScroll, { passive: true });
-    return () => el.removeEventListener('scroll', onScroll);
-  }, []);
-
-  // Park inside copy #2 on mount so there's always real content to the LEFT too.
-  useEffect(() => {
-    const el = ref.current;
-    if (!el) return;
-    const id = requestAnimationFrame(() => {
-      if (el.scrollWidth > 0) el.scrollLeft = el.scrollWidth / 2 - 1;
-    });
-    return () => cancelAnimationFrame(id);
-  }, []);
-
-  const scroll = (dir: 1 | -1) =>
-    ref.current?.scrollBy({ left: dir * (CARD_W + GAP), behavior: 'smooth' });
-
   return (
     <div className="relative">
       <style>{`
@@ -115,57 +76,28 @@ export default function ModalitiesCarousel() {
           .mc-card:hover { transform: translateY(-6px); box-shadow: 0 18px 44px rgba(60,90,64,0.16); }
           .mc-card:hover .mc-img { transform: scale(1.05); }
         }
-        /* color/bg !important so they beat the button's inline color (#4f7256),
-           otherwise the hovered fill (#4f7256) would carry #4f7256 text = invisible. */
         .mc-card:hover .mc-explore { background-color: #4f7256 !important; color: #ffffff !important; }
         .mc-card:hover .mc-explore span { color: #ffffff !important; }
-        /* Mobile: cards fit the viewport (one + a peek) instead of a fixed
-           349px that overflows a phone; tighter side padding. */
         @media (max-width: 640px) {
           .mc-track { padding-left: 16px !important; padding-right: 16px !important; }
           .mc-card { width: 84vw !important; height: auto !important; min-height: 426px; }
         }
       `}</style>
-      {/* Left arrow — always enabled (infinite loop, no dead-end) */}
-      <button
-          onClick={() => scroll(-1)}
-          aria-label="Previous"
-          className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
-          style={{
-            left: '12px',
-            top: 'calc(50% - 26px)',
-            width: '52px',
-            height: '52px',
-            backgroundColor: '#ffffff',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-            color: '#6f6456',
-            fontSize: '26px',
-            lineHeight: 1,
-            border: 'none',
-            cursor: 'pointer',
-            borderRadius: '999px',
-          }}
-        >
-          ‹
-        </button>
 
-      {/* Scrollable track */}
       <div
-        ref={ref}
         className="mc-track flex overflow-x-auto [&::-webkit-scrollbar]:hidden"
         style={{
           gap: `${GAP}px`,
           scrollSnapType: 'x mandatory',
-          /* scroll-padding-left must match paddingLeft so snap targets are correct */
           scrollPaddingLeft: `${PAD}px`,
           scrollbarWidth: 'none',
           paddingLeft: `${PAD}px`,
           paddingRight: `${PAD}px`,
         }}
       >
-        {[...CARDS, ...CARDS].map((card, i) => (
+        {CARDS.map((card) => (
           <Link
-            key={`${card.title}-${i}`}
+            key={card.title}
             href={card.href}
             className="mc-card group flex-shrink-0"
             style={{
@@ -183,12 +115,14 @@ export default function ModalitiesCarousel() {
             }}
           >
             <div style={{ position: 'relative', width: '100%', height: '206px', flexShrink: 0, overflow: 'hidden' }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
+              <Image
                 src={card.src}
                 alt={card.alt}
+                fill
+                sizes="(max-width: 640px) 84vw, 349px"
+                loading="lazy"
                 className="mc-img"
-                style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: card.focal ?? 'center' }}
+                style={{ objectFit: 'cover', objectPosition: card.focal ?? 'center' }}
               />
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', flex: 1, padding: '24px 26px 26px' }}>
@@ -208,29 +142,6 @@ export default function ModalitiesCarousel() {
           </Link>
         ))}
       </div>
-
-      {/* Right arrow — always enabled (infinite loop, no dead-end) */}
-      <button
-          onClick={() => scroll(1)}
-          aria-label="Next"
-          className="hidden md:flex items-center justify-center absolute z-20 transition-transform duration-300 ease-out hover:scale-[1.04] motion-reduce:transition-none motion-reduce:hover:scale-100"
-          style={{
-            right: '12px',
-            top: 'calc(50% - 26px)',
-            width: '52px',
-            height: '52px',
-            backgroundColor: '#ffffff',
-            boxShadow: '0 4px 16px rgba(0,0,0,0.18)',
-            color: '#6f6456',
-            fontSize: '26px',
-            lineHeight: 1,
-            border: 'none',
-            cursor: 'pointer',
-            borderRadius: '999px',
-          }}
-        >
-          ›
-        </button>
     </div>
   );
 }
