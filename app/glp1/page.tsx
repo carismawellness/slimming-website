@@ -208,7 +208,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Malta's trusted clinic — press logos + program pillars */}
-      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(12px, 3vw, 48px)' }}>
+      <section style={{ background: 'linear-gradient(180deg, #ffffff 0%, #eef3ea 50%, #ffffff 100%)', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: '0' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2
             className="text-center"
@@ -267,7 +267,7 @@ export default function GLP1Page() {
       </section>
 
       {/* Medical weight loss eligibility */}
-      <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(12px, 3vw, 48px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
+      <section style={{ backgroundColor: '#ffffff', paddingTop: 'clamp(32px, 6vw, 80px)', paddingBottom: 'clamp(40px, 8vw, 96px)' }}>
         <div className="mx-auto px-4 sm:px-6 lg:px-8" style={{ maxWidth: '760px' }}>
           <p className="text-center" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '13px', letterSpacing: '3px', textTransform: 'uppercase' }}>
             medical weight loss eligibility
