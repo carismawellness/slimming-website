@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 export const GUIDE_MODAL_EVENT = 'openGuideOrderModal';
 
@@ -41,13 +42,12 @@ export default function GuideOrderModal() {
       const href = anchor.getAttribute('href') || '';
       if (href.includes(GUIDE_HREF_MATCH)) {
         e.preventDefault();
-        // Track CTA click via gtag if available
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'guide_cta_click', {
-            element: anchor.textContent?.trim() || 'unknown',
-            page: window.location.pathname,
-          });
-        }
+        trackEvent('guide_purchase_click', {
+          page_type: 'slimming_guide',
+          cta_label: anchor.textContent?.replace(/\s+/g, ' ').trim() || 'Get the guide',
+          section: 'guide_cta',
+          destination_url: href,
+        });
         open(anchor as HTMLElement);
       }
     };
@@ -86,14 +86,6 @@ export default function GuideOrderModal() {
     setStatus('sending');
     setError('');
 
-    // Track form submission attempt
-    if (typeof window !== 'undefined' && (window as any).gtag) {
-      (window as any).gtag('event', 'guide_form_submit', {
-        email: data.email,
-        page: window.location.pathname,
-      });
-    }
-
     try {
       const res = await fetch('/api/order-guide', {
         method: 'POST',
@@ -103,14 +95,13 @@ export default function GuideOrderModal() {
       const json = await res.json().catch(() => ({ ok: false }));
       if (res.ok && json.ok) {
         setStatus('done');
-        // Track successful submission
-        if (typeof window !== 'undefined' && (window as any).gtag) {
-          (window as any).gtag('event', 'guide_purchase', {
-            value: 30,
-            currency: 'EUR',
-            transaction_id: json.orderId || undefined,
-          });
-        }
+        trackEvent('guide_purchase_submit', {
+          page_type: 'slimming_guide',
+          cta_label: 'Guide order form submitted',
+          section: 'guide_modal',
+          value: 30,
+          currency: 'EUR',
+        });
       } else {
         setStatus('error');
         setError(json.error || 'Something went wrong. Please try again.');

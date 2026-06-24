@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { trackEvent } from '@/lib/analytics';
 
 export const CONSULT_MODAL_EVENT = 'openConsultationModal';
 
@@ -10,6 +11,14 @@ const FRESHA_URL =
   'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5084222&oiid=sv%3A26105577&share=true&pId=2708191';
 
 type Step = 'form' | 'booking';
+
+function pageTypeFor(pathname: string): string {
+  if (pathname.startsWith('/packages/')) return 'package';
+  if (pathname === '/packages') return 'packages';
+  if (pathname === '/glp1') return 'glp1';
+  if (pathname === '/weight-loss') return 'weight_loss';
+  return pathname === '/' ? 'home' : 'page';
+}
 
 export default function ConsultationModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,6 +55,20 @@ export default function ConsultationModal() {
         href.startsWith('/consultation#');
       if (isBookingLink) {
         e.preventDefault();
+        const label = anchor.textContent?.replace(/\s+/g, ' ').trim() || 'Book consultation';
+        const pathname = window.location.pathname;
+        const eventName = pathname.startsWith('/packages/') || pathname === '/packages'
+          ? 'package_cta_click'
+          : label.toLowerCase().includes('body analysis')
+            ? 'body_analysis_click'
+            : 'book_consultation_click';
+        trackEvent(eventName, {
+          page_type: pageTypeFor(pathname),
+          service_slug: pathname.startsWith('/packages/') ? pathname.split('/').pop() : undefined,
+          cta_label: label,
+          section: 'booking_link',
+          destination_url: href,
+        });
         restoreFocusRef.current = anchor;
         setStep('form');
         setIsOpen(true);
@@ -77,7 +100,15 @@ export default function ConsultationModal() {
       if (typeof e.origin !== 'string' || !e.origin.includes('leadconnectorhq')) return;
       const d = e.data;
       const sig = typeof d === 'string' ? d : (d && (d.type || d.event || d.eventName || d.action)) || '';
-      if (/submit|success|complete|thank|confirmed/i.test(String(sig))) setStep('booking');
+      if (/submit|success|complete|thank|confirmed/i.test(String(sig))) {
+        trackEvent('book_consultation_click', {
+          page_type: pageTypeFor(window.location.pathname),
+          cta_label: 'Lead form submitted',
+          section: 'consultation_modal',
+          destination_url: FRESHA_URL,
+        });
+        setStep('booking');
+      }
     };
     window.addEventListener('message', onMsg);
     return () => window.removeEventListener('message', onMsg);

@@ -98,7 +98,7 @@ export const SEARCH_INDEX: SearchEntry[] = [
     title: 'Lymphatic Drainage',
     url: '/packages/lymphatic-drainage',
     description: 'Lymphatic drainage to reduce fluid retention and bloating.',
-    keywords: ['lymphatic drainage', 'lymphatic', 'drainage', 'detox', 'fluid retention', 'bloating', 'water retention', 'massage'],
+    keywords: ['lymphatic drainage', 'lymphatic', 'drainage', 'fluid retention', 'bloating', 'water retention', 'massage'],
   },
   {
     title: 'Careers',

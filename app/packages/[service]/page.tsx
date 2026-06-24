@@ -48,7 +48,7 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
   },
   'fat-dissolving': {
     title: 'Fat Dissolving Injections Malta | Lemon Bottle | Carisma Slimming',
-    description: 'Fat dissolving injections in Malta targeting stubborn areas. Non-surgical, minimal downtime. Visible results in 2-4 weeks. Book your consultation.',
+    description: 'Fat dissolving injections in Malta for small stubborn areas. Non-surgical, minimal downtime, with results developing gradually.',
   },
   'muscle-stimulation': {
     title: 'EMSculpt NEO Malta | Build Muscle & Burn Fat | Carisma Slimming',
@@ -56,11 +56,11 @@ const serviceMeta: Record<string, { title: string; description: string }> = {
   },
   'skin-tightening': {
     title: 'VelaShape III Malta | Skin Tightening | Carisma Slimming',
-    description: 'VelaShape III skin tightening in Malta. Reduce cellulite, contour your body, tighten loose skin. Non-invasive with no downtime. Book your free assessment.',
+    description: 'VelaShape III skin tightening in Malta to support firmer-looking skin and smoother texture. Non-invasive with no downtime for most clients.',
   },
   lipocavitation: {
     title: 'Lipocavitation Malta | Fat Reduction | Carisma Slimming',
-    description: 'Lipocavitation fat reduction in Malta. Non-invasive ultrasound treatment that breaks down stubborn fat cells. No downtime. Book your free assessment today.',
+    description: 'Lipocavitation in Malta using non-invasive ultrasound to support local contour refinement. No downtime for most clients.',
   },
   'anti-cellulite': {
     title: 'Cellulite Treatment Malta | VelaShape III | Carisma Slimming',

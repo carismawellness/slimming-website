@@ -3,15 +3,14 @@
 import { useEffect, useRef, useState } from "react";
 
 /*
-  Animated count-up for highlighted stat / proof numbers.
+  Highlighted stat / proof numbers.
 
   Drop-in: replace a rendered stat figure with <CountUp value="10,000+" /> (or a
   number). It parses a leading prefix (€, ~, etc.), the numeric core (with `,`
   thousands and `.` decimals) and a trailing suffix (%, +, k, x, ★, etc.), then
-  counts the number up from 0 to its value ONCE when the figure scrolls into
-  view — the "numbers move" effect — and renders prefix + formatted + suffix.
+  renders prefix + formatted + suffix.
 
-  - Reduced-motion safe: shows the final value instantly, no animation.
+  - SEO safe: server-rendered HTML shows the final value, never a "0" fallback.
   - tabular-nums so the width doesn't jitter while counting.
   - Non-numeric values (no digits) render verbatim, so it's always safe to wrap.
 */
@@ -39,8 +38,8 @@ export default function CountUp({
   const target = m ? parseFloat(numStr.replace(/,/g, "")) : 0;
 
   const ref = useRef<HTMLSpanElement>(null);
-  const [n, setN] = useState(0);
-  const [done, setDone] = useState(false);
+  const [n, setN] = useState(target);
+  const [done, setDone] = useState(true);
 
   useEffect(() => {
     if (!valid) return;

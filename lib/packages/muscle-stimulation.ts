@@ -7,7 +7,7 @@ export const muscleStimulation: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/muscle-stimulation',
 
   heroEyebrow: 'EMSculpt NEO MALTA',
-  heroTitle: 'muscle stimulation in malta — emsculpt neo body sculpt protocol',
+  heroTitle: 'EMSculpt NEO Muscle Stimulation in Malta',
   heroSubheading: 'Stronger, tighter, more defined in 4 focused sessions.',
   heroDescription:
     'Our EMSculpt NEO course combines HIFEM + RF to stimulate powerful muscle contractions, support local fat reduction and improve firmness, with results varying by body and adherence.',

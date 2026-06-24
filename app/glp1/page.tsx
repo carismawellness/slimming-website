@@ -20,6 +20,7 @@ import {
 import { glp1Faqs } from '@/lib/faq/glp1';
 import GradientField from '@/components/layers/GradientField';
 import StepTimeline from '@/components/StepTimeline';
+import Glp1PageTracker from '@/components/Glp1PageTracker';
 
 export const metadata: Metadata = {
   title: "GLP-1 Weight Loss Malta | Ozempic & Mounjaro | Carisma",
@@ -102,6 +103,7 @@ export default function GLP1Page() {
 
   return (
     <main className="w-full" style={{ backgroundColor: '#ffffff' }}>
+      <Glp1PageTracker />
       <JsonLd data={jsonLd} />
       {/* Hero Section */}
       <PageHero

@@ -7,7 +7,7 @@ export const lymphaticDrainage: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/lymphatic-drainage',
 
   heroEyebrow: 'Expert LED LYMPHATIC & CIRCULATION SUPPORT',
-  heroTitle: 'lymphatic drainage massage in malta — fluid retention support',
+  heroTitle: 'Lymphatic Drainage Massage in Malta',
   heroSubheading: '',
   heroDescription:
     'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate lymph flow, support fluid balance, reduce fluid retention, and restore a lighter feeling.',

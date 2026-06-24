@@ -35,7 +35,7 @@ export const weightLossFaqs: WeightLossFaq[] = [
   {
     q: 'How much weight can I realistically expect to lose, and how quickly will I start seeing changes?',
     paras: [
-      'If you qualify for the program and follow the plan, our clients lose on average around 1 kg per week. This is an average, not a promise. Your results depend on your starting weight, body composition, health, medication, program length and how closely you follow your nutrition, movement and treatment plan.',
+      'If you qualify for the program and follow the plan, many clients see steady weekly progress. Results vary and depend on your starting weight, body composition, health, medication, program length and how closely you follow your nutrition, movement and treatment plan.',
       'Typically, people feel a difference in energy, digestion and how clothes fit within the first 2 to 3 weeks. Visible changes in measurements and shape usually build steadily from weeks 4 to 6 onward. We track progress with body composition scans and measurements so you see changes in fat, muscle and inches, not just a single number on the scale.',
     ],
   },
@@ -86,8 +86,8 @@ export const weightLossFaqs: WeightLossFaq[] = [
   {
     q: 'How does the guarantee work, what does it cost, and are there payment plans available?',
     paras: [
-      'Our measurable results guarantee means we only accept you if we believe we can help. If you complete your program as agreed and your follow up body scan shows no measurable change in key metrics, we will extend your program at no extra program fee.',
-      'For the guarantee to apply you need to attend your agreed sessions and check ins, follow your nutrition and movement plan as best as possible, and inform us of major health or medication changes.',
+      'Our extended support commitment means we only accept you if we believe we can help. If you complete your program as agreed and your follow up body scan shows no measurable change in key metrics, we may extend your structured support at no extra program fee.',
+      'For extended support to apply you need to attend your agreed sessions and check ins, follow your nutrition and movement plan as best as possible, and inform us of major health or medication changes.',
       'Pricing depends on program length and which elements you include, such as treatments and personal training. We are fully transparent about costs before you start and can discuss payment options so you can spread your investment over time.',
     ],
   },

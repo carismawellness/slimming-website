@@ -7,7 +7,7 @@ export const antiCellulite: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/anti-cellulite',
 
   heroEyebrow: 'ADVANCED CELLULITE SMOOTHING',
-  heroTitle: 'anti-cellulite treatment in malta — cellulift protocol',
+  heroTitle: 'Cellulite Treatment in Malta',
   heroSubheading: 'smooth stubborn cellulite and uneven texture with precision',
   heroDescription:
     'Our cellulite protocol combines three VelaShape vacuum roller sessions with one lymphatic drainage massage to reduce the appearance of cellulite, smooth uneven texture, and boost circulation:',

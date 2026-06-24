@@ -35,6 +35,7 @@ import {
 } from '@/lib/packages/types';
 import { testimonials as TESTIMONIALS, Testimonial } from '@/lib/packages/testimonials';
 import TreatmentBodyMap from '@/components/treatments/TreatmentBodyMap';
+import { trackEvent } from '@/lib/analytics';
 
 /* ---------- palette / fonts (shared with the site) ---------- */
 /* GREEN_TEXT is the locked accessible sage (#4f7256 from globals.css) used for ALL
@@ -607,7 +608,7 @@ function EvidenceCarousel({
               <div style={{ position: 'relative', width: '92%', margin: '0 auto', zIndex: 2 }}>
                 <div style={{ border: `2px solid ${GREEN_TEXT}`, borderRadius: '20px 80px', overflow: 'hidden', backgroundColor: '#eef3ea', position: 'relative', height: 186 }}>
                   {/* P3 — next/image for evidence images */}
-                  <Image src={e.img} alt="" fill sizes="(max-width: 640px) 85vw, (max-width: 1024px) 46vw, 33vw" style={{ objectFit: 'cover' }} />
+                  <Image src={e.img} alt={`${e.title} evidence illustration`} fill sizes="(max-width: 640px) 85vw, (max-width: 1024px) 46vw, 33vw" style={{ objectFit: 'cover' }} />
                 </div>
                 <span style={{ position: 'absolute', top: -14, left: 18, backgroundColor: '#fff', color: GREEN_TEXT, fontFamily: WIDE, fontWeight: 600, fontSize: 12, letterSpacing: '0.5px', textTransform: 'uppercase', padding: '7px 18px', borderRadius: 999, border: `2px solid ${GREEN_TEXT}`, whiteSpace: 'nowrap' }}>{e.tag}</span>
               </div>
@@ -783,6 +784,20 @@ export default function PackagePage({ content: c }: { content: PackageContent })
   const whyMalta = c.whyMalta ?? SHARED_WHY_MALTA;
   const hidden = c.hide ?? {};
 
+  useEffect(() => {
+    trackEvent('treatment_page_view', {
+      page_type: 'package',
+      service_slug: c.id,
+      section: 'package_page',
+    });
+    trackEvent('pricing_view', {
+      page_type: 'package',
+      service_slug: c.id,
+      cta_label: c.heroTodayPrice,
+      section: 'hero_offer',
+    });
+  }, [c.id, c.heroTodayPrice]);
+
   return (
     <>
       {/* P1 — Skip-to-main-content: first focusable element */}
@@ -832,8 +847,8 @@ export default function PackagePage({ content: c }: { content: PackageContent })
           bullets={c.heroIncludes.map((t) => ({ text: t }))}
           primaryCta={{ text: 'Claim Your Spot Now', href: BOOKING_URL, external: true }}
           media={c.heroVideo
-            ? { type: 'video', src: c.heroVideo, poster: c.heroImage, alt: c.heroSubheading }
-            : { type: 'image', src: c.heroImage, alt: c.heroSubheading }}
+            ? { type: 'video', src: c.heroVideo, poster: c.heroImage, alt: `${c.heroTitle} treatment at Carisma Slimming in Malta` }
+            : { type: 'image', src: c.heroImage, alt: `${c.heroTitle} treatment at Carisma Slimming in Malta` }}
           proof={{ rating: '4.9', reviews: '800+', awardSrc: BADGE, awardText: '#1 voted clinic\nMalta' }}
           offer={{ totalValue: c.heroTotalValue, todayPrice: c.heroTodayPrice, note: c.heroPriceNote }}
           compactHeadline
@@ -1272,7 +1287,17 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       {/* P1 — aria-expanded + aria-controls for accordion */}
                       <button
                         id={btnId}
-                        onClick={() => setOpenFaq(open ? null : i)}
+                        onClick={() => {
+                          setOpenFaq(open ? null : i);
+                          if (!open) {
+                            trackEvent('faq_open', {
+                              page_type: 'package',
+                              service_slug: c.id,
+                              cta_label: f.q,
+                              section: 'package_faq',
+                            });
+                          }
+                        }}
                         aria-expanded={open}
                         aria-controls={panelId}
                         style={{
@@ -1305,12 +1330,10 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                           &#8964;
                         </span>
                       </button>
-                      {open && (
-                        <div id={panelId} role="region" aria-labelledby={btnId} style={{ padding: '0 4px 22px' }}>
-                          <p style={{ ...body, fontSize: 16, margin: '0 0 16px', maxWidth: 760 }}>{f.a}</p>
-                          <ShareIcons url={c.liveUrl} />
-                        </div>
-                      )}
+                      <div id={panelId} role="region" aria-labelledby={btnId} hidden={!open} style={{ padding: '0 4px 22px' }}>
+                        <p style={{ ...body, fontSize: 16, margin: '0 0 16px', maxWidth: 760 }}>{f.a}</p>
+                        <ShareIcons url={c.liveUrl} />
+                      </div>
                     </div>
                   );
                 })}

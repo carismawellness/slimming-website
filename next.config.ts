@@ -42,13 +42,41 @@ const adRewrites: { source: string; destination: string }[] = [
   { source: '/faq',                  destination: '/weight-loss' },
 ];
 
+const aliasNoindexHeaders = [
+  {
+    key: 'X-Robots-Tag',
+    value: 'noindex, follow',
+  },
+];
+
+const previewNoindexHeaders = [
+  {
+    key: 'X-Robots-Tag',
+    value: 'noindex, nofollow',
+  },
+];
+
 // ---------------------------------------------------------------------------
 // Redirects: browser URL changes (308 permanent). Only for permanently retired
 // pages with no active ad spend or significant ongoing traffic.
 // ---------------------------------------------------------------------------
 const nextConfig: NextConfig = {
   async headers() {
+    const isPreviewDeployment = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production');
+
     return [
+      ...(isPreviewDeployment
+        ? [
+            {
+              source: '/:path*',
+              headers: previewNoindexHeaders,
+            },
+          ]
+        : []),
+      ...adRewrites.map(({ source }) => ({
+        source,
+        headers: aliasNoindexHeaders,
+      })),
       {
         source: '/:all*(png|jpg|jpeg|webp|avif|svg|ico|woff2|mp4)',
         headers: [

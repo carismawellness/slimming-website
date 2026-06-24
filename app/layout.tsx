@@ -6,6 +6,7 @@ import ConsultationModal from "@/components/ConsultationModal";
 import GuideOrderModal from "@/components/GuideOrderModal";
 import QuizModal from "@/components/QuizModal";
 import StickyBookingBar from "@/components/StickyBookingBar";
+import AnalyticsClickTracker from "@/components/AnalyticsClickTracker";
 import { JsonLd } from "@/lib/seo/JsonLd";
 import { organizationSchema, webSiteSchema } from "@/lib/seo/schema";
 
@@ -78,6 +79,7 @@ export default function RootLayout({
         <GuideOrderModal />
         <QuizModal />
         <StickyBookingBar />
+        <AnalyticsClickTracker />
       </body>
     </html>
   );

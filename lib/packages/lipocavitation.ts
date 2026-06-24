@@ -7,7 +7,7 @@ export const lipocavitation: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/lipocavitation-malta',
 
   heroEyebrow: 'non-invasive fat contouring in maltA',
-  heroTitle: 'lipocavitation in malta — ultrasound fat contouring',
+  heroTitle: 'Lipocavitation in Malta',
   heroSubheading: 'stubborn fat, met its match',
   heroDescription:
     "For the belly that doesn't budge. The flanks that ignore every diet. The areas that have resisted everything until now. No surgery, no needles, no downtime.",
@@ -107,7 +107,7 @@ export const lipocavitation: PackageContent = {
     { q: 'How many sessions will I need?', a: 'Most clients complete a course of 6 to 8 sessions, spaced one week apart. Your doctor will recommend a personalised plan at your initial assessment based on your body composition and goals. The starter pack includes 4 sessions, designed to let you see measurable progress before committing to a full course.' },
     { q: 'Does it hurt?', a: 'No. The sensation is typically described as warm and massage-like. There is no pain, no discomfort, and nothing invasive at any point during the treatment.' },
     { q: 'When will I see results?', a: 'Most clients begin to notice a visible reduction in the treated area from around the third or fourth session. Results continue to develop as your body eliminates the broken-down fat between sessions — improvement is gradual and measurable, not instant.' },
-    { q: 'Are the results permanent?', a: 'The fat cells that are disrupted during treatment are permanently broken down and eliminated by your body. However, remaining fat cells can still expand with significant weight gain, so maintaining a balanced diet and active lifestyle supports long-term results.' },
+    { q: 'Are the results long-lasting?', a: 'Lipocavitation results can be long-lasting when supported by a stable weight, balanced diet and regular activity. Remaining fat cells can still expand with significant weight gain, so maintenance habits matter.' },
     { q: 'Which areas can be treated?', a: 'Lipocavitation is effective on the lower belly, flanks, inner and outer thighs, hips, upper arms, and back fat. Your clinician will confirm the most appropriate areas for you at your assessment.' },
     { q: 'Can I combine this with other treatments?', a: 'Yes — many clients combine lipocavitation with VelaShape skin tightening to improve texture and firmness in the same area, or with EMSculpt NEO for simultaneous muscle toning. Your doctor will advise which combination is best suited to your goals.' },
     { q: 'Is there any downtime?', a: 'None at all. You can return to work, exercise, or your normal routine immediately after your session. There is no redness, swelling, or recovery period.' },

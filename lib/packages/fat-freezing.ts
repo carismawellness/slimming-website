@@ -7,7 +7,7 @@ export const fatFreezing: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/fat-reduction',
 
   heroEyebrow: 'COOLSCULPTING IN MALTA',
-  heroTitle: 'fat freezing in malta — coolsculpting fat eraser protocol',
+  heroTitle: 'Fat Freezing in Malta',
   heroSubheading: 'BURN STUBBORN FAT, NO SURGERY.',
   heroDescription:
     'For those who have tried dieting, eating healthier and moving more, but the love handles, stubborn belly fat and double chin still will not budge.',

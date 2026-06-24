@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import SlimmingQuiz from './quiz/SlimmingQuiz';
+import { trackEvent } from '@/lib/analytics';
 
 export const QUIZ_MODAL_EVENT = 'openQuizModal';
 
@@ -30,6 +31,12 @@ export default function QuizModal() {
   useEffect(() => {
     const open = (trigger?: HTMLElement | null) => {
       restoreFocusRef.current = trigger ?? (document.activeElement as HTMLElement | null);
+      trackEvent('quiz_start', {
+        page_type: window.location.pathname === '/glp1' ? 'glp1' : 'quiz',
+        cta_label: trigger?.textContent?.replace(/\s+/g, ' ').trim() || 'Take the quiz',
+        section: 'quiz_modal',
+        destination_url: '#quiz',
+      });
       setIsOpen(true);
       setHasOpened(true);
     };

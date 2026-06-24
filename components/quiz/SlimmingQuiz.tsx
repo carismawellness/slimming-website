@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react';
 import { useRouter } from 'next/navigation';
+import { trackEvent } from '@/lib/analytics';
 import {
   GOALS,
   AREAS,
@@ -139,6 +140,12 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
     } catch {
       /* never block the user's results on a CRM hiccup */
     }
+
+    trackEvent('quiz_complete', {
+      page_type: 'quiz',
+      cta_label: 'See my results',
+      section: 'quiz',
+    });
 
     // Per the /quiz-results contract: URL-encode each value, join with a LITERAL
     // comma (the results page does param.split(',').map(decodeURIComponent)).

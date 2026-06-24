@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { glp1Faqs as FAQS } from '@/lib/faq/glp1';
+import { trackEvent } from '@/lib/analytics';
 
 const headingFont = 'Trajan Pro, serif';
 const wideFont = 'Novecento Wide Book, sans-serif';
@@ -54,7 +55,16 @@ export default function FAQAccordion() {
               <div key={f.q} style={{ borderBottom: '1px solid #e6e6e1' }}>
                 <button
                   type="button"
-                  onClick={() => setOpen(isOpen ? null : i)}
+                  onClick={() => {
+                    setOpen(isOpen ? null : i);
+                    if (!isOpen) {
+                      trackEvent('faq_open', {
+                        page_type: 'glp1',
+                        cta_label: f.q,
+                        section: 'glp1_faq',
+                      });
+                    }
+                  }}
                   className="w-full flex items-center justify-between gap-4 text-left"
                   style={{ padding: '22px 4px', cursor: 'pointer', background: 'transparent' }}
                   aria-expanded={isOpen}
@@ -66,11 +76,9 @@ export default function FAQAccordion() {
                     <polyline points="6 9 12 15 18 9" />
                   </svg>
                 </button>
-                {isOpen && (
-                  <div style={{ padding: '0 4px 24px' }}>
-                    <p style={{ color: taupe, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>{f.a}</p>
-                  </div>
-                )}
+                <div hidden={!isOpen} style={{ padding: '0 4px 24px' }}>
+                  <p style={{ color: taupe, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7 }}>{f.a}</p>
+                </div>
               </div>
             );
           })}

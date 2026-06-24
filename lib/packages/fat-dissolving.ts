@@ -7,7 +7,7 @@ export const fatDissolving: PackageContent = {
   liveUrl: 'https://www.carismaslimming.com/fatdissolving',
 
   heroEyebrow: 'FAT DISSOLVING IN MALTA',
-  heroTitle: 'fat dissolving injections in malta — lemon bottle protocol',
+  heroTitle: 'Fat Dissolving Injections in Malta',
   heroSubheading: 'BURN STUBBORN FAT, NO SURGERY.',
   heroDescription:
     'For those who maintain a healthy lifestyle but still struggle with double chin fullness, soft jawlines, or small pockets of resistant fat that simply won’t shift. Fat dissolving injections are designed to target small, stubborn fat pockets, restoring definition and contour without surgery or downtime.',

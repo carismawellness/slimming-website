@@ -1,6 +1,7 @@
 'use client';
 
 import { CONSULT_MODAL_EVENT } from './ConsultationModal';
+import { trackEvent } from '@/lib/analytics';
 
 type Props = {
   children?: React.ReactNode;
@@ -18,6 +19,13 @@ export default function BookConsultationButton({
   style,
 }: Props) {
   const open = () => {
+    const label = typeof children === 'string' ? children : 'Free Body Analysis';
+    trackEvent(label.toLowerCase().includes('body analysis') ? 'body_analysis_click' : 'book_consultation_click', {
+      page_type: 'consultation',
+      cta_label: label,
+      section: 'book_consultation_button',
+      destination_url: '/consultation',
+    });
     window.dispatchEvent(new Event(CONSULT_MODAL_EVENT));
   };
 

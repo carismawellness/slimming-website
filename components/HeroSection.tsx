@@ -42,7 +42,7 @@ export default function HeroSection() {
               Doctor-Led Slimming &amp; Weight Loss in Malta
             </h1>
             <p className="mb-4" style={{ color: taupe, fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, maxWidth: '52ch' }}>
-              Achieve up to 1kg a week with our comprehensive medical programme — personalised to your body, your hormones, and your life.
+              Build measured weekly progress with our comprehensive medical programme — personalised to your body, your hormones, and your life.
             </p>
             <p className="mb-8" style={{ color: taupe, fontFamily: bodyFont, fontSize: '15px', lineHeight: 1.7, maxWidth: '52ch' }}>
               Medical assessment, personalised nutrition, exercise guidance, and non-invasive body contouring treatments — all in one doctor-led plan.

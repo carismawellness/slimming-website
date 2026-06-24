@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { trackEvent } from "@/lib/analytics";
 
 /*
   Sticky bottom-of-viewport conversion bar for Carisma Slimming.
@@ -43,6 +44,18 @@ export default function StickyCta({ bookHref, priceLabel, ctaLabel, secondaryHre
   // Respect reduced-motion for the enter animation only (visibility still works).
   const [animate, setAnimate] = useState(true);
   const tickingRef = useRef(false);
+
+  const trackStickyClick = (label: string, href: string) => {
+    const pathname = window.location.pathname;
+    const isPackage = pathname.startsWith('/packages/');
+    trackEvent(isPackage || pathname === '/packages' ? 'package_cta_click' : 'book_consultation_click', {
+      page_type: isPackage ? 'package' : pathname === '/glp1' ? 'glp1' : pathname === '/weight-loss' ? 'weight_loss' : 'page',
+      service_slug: isPackage ? pathname.split('/').pop() : undefined,
+      cta_label: label,
+      section: 'sticky_cta',
+      destination_url: href,
+    });
+  };
 
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -158,6 +171,7 @@ export default function StickyCta({ bookHref, priceLabel, ctaLabel, secondaryHre
         {hasSecondary && (
           <a
             href={secondaryHref}
+            onClick={() => trackStickyClick(secondaryLabel as string, secondaryHref as string)}
             {...(/^https?:\/\//.test(secondaryHref as string) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
             aria-label={secondaryLabel}
             className="sticky-cta-secondary"
@@ -190,6 +204,7 @@ export default function StickyCta({ bookHref, priceLabel, ctaLabel, secondaryHre
             internal links stay in-tab for the consultation modal. */}
         <a
           href={bookHref}
+          onClick={() => trackStickyClick(ctaLabel, bookHref)}
           {...(/^https?:\/\//.test(bookHref) ? { target: "_blank", rel: "noopener noreferrer" } : {})}
           aria-label={ctaLabel}
           className="sticky-cta-primary"

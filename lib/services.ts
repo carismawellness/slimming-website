@@ -121,7 +121,7 @@ export const services: Record<string, Service> = {
     title: 'Burn stubborn fat, no surgery.',
     subtitle: 'Fat Eraser Protocol',
     description:
-      'For those who have tried dieting, eating healthier and moving more, but the love handles, stubborn belly fat and double chin still will not budge. CoolSculpting freezes away up to 20%-25% of treated fat permanently via a process called cryolipolysis. It is FDA-cleared, with 17+ million treatments worldwide. Results are visible in 1-3 months, with full results by 3-6 months, and permanent fat cell removal when weight stays stable.',
+      'For those who have tried dieting, eating healthier and moving more, but the love handles, stubborn belly fat and double chin still will not budge. CoolSculpting uses controlled cooling to reduce a local fat layer over time through cryolipolysis. It is FDA-cleared, with 17+ million treatments worldwide. Results are visible in 1-3 months, with full results by 3-6 months, and can be long-lasting when weight stays stable.',
     cardDescription:
       'Target stubborn fat in the belly, flanks, bra area and double chin with market-leading CoolSculpting fat freezing. Non-surgical, minimal downtime.',
     narrativeSections: [
@@ -132,11 +132,11 @@ export const services: Record<string, Service> = {
       },
       {
         heading: 'The Carisma Difference — we are not another diet clinic.',
-        body: "We're a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don't just lose weight, you step into your strongest form.\n\n- Doctor led: full medical check and body scan\n- One integrated program: medical, diet, movement and treatments together\n- Real gym included: Technogym facility, semi-private classes and PT\n- High touch support: weekly check ins, progress reports and WhatsApp follow up\n- Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening\n- Selective entry and measurable weight loss results guaranteed",
+        body: "We're a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don't just lose weight, you step into your strongest form.\n\n- Doctor led: full medical check and body scan\n- One integrated program: medical, diet, movement and treatments together\n- Real gym included: Technogym facility, semi-private classes and PT\n- High touch support: weekly check ins, progress reports and WhatsApp follow up\n- Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening\n- Selective entry and measurable progress tracked with body composition data",
       },
       {
         heading: 'CoolSculpting',
-        body: 'Freezes away up to 20%—25% of treated fat permanently via a process called cryolipolysis and naturally eliminates it from the body.\n\nCoolSculpting is an FDA cleared cryolipolysis technology that uses controlled cooling to target only the fat cells under the skin without surgery or needles. The treated fat cells crystallise, die off, and are gradually cleared by your body over the following weeks\n\n- Backed by clinical research with over 17 million treatments performed worldwide.\n- Results start to appear from 1–3 months, with full contour change often seen by 3–6 months as the body clears the damaged fat cells.\n- The fat cells that are removed do not return, so results in that area are long lasting if your weight is stable.\n- Non surgical and non invasive treatment with little to no downtime in most people',
+        body: 'Uses controlled cooling to reduce a local fat layer over time through a process called cryolipolysis.\n\nCoolSculpting is an FDA cleared cryolipolysis technology that uses controlled cooling to target fat cells under the skin without surgery or needles. Treated fat cells are gradually cleared by your body over the following weeks\n\n- Backed by clinical research with over 17 million treatments performed worldwide.\n- Results start to appear from 1–3 months, with full contour change often seen by 3–6 months as the body clears affected fat cells.\n- Results in that area can be long lasting if your weight is stable.\n- Non surgical and non invasive treatment with little to no downtime in most people',
       },
       {
         heading: 'Trusted Clinic / Social Proof',
@@ -261,28 +261,28 @@ export const services: Record<string, Service> = {
     treatment: 'Fat Dissolving',
     seoTitle: 'Fat Dissolving Injections Malta | Lemon Bottle | Carisma Slimming',
     seoDescription:
-      'Fat dissolving injections in Malta designed to permanently break down stubborn fat cells, restoring definition and contour without surgery or downtime. Available at Carisma Slimming.',
+      'Fat dissolving injections in Malta designed to target small stubborn fat pockets, supporting definition and contour without surgery or downtime. Available at Carisma Slimming.',
     hero: {
       eyebrow:
         "#1 VOTED SLIMMING CLINIC IN MALTA ▫️ MALTA'S MOST COMPREHENSIVE SLIMMING PROGRAM ▫️ MEDICALLY QUALIFIED DOCTORS",
       heading: 'FAT DISSOLVING IN MALTA',
       description:
-        "For those who maintain a healthy lifestyle but still struggle with double chin fullness, soft jawlines, or small pockets of resistant fat that simply won't shift. Fat dissolving injections are designed to permanently break down these stubborn fat cells, restoring definition and contour without surgery or downtime.",
+        "For those who maintain a healthy lifestyle but still struggle with double chin fullness, soft jawlines, or small pockets of resistant fat that simply won't shift. Fat dissolving injections are designed to target these stubborn areas, supporting definition and contour without surgery or downtime.",
     },
     title: 'Fat Dissolving in Malta',
     subtitle: 'Burn stubborn fat, no surgery.',
     description:
-      'For those maintaining a healthy lifestyle but struggling with resistant fat deposits like double chins or soft jawlines. Our injectable Lemon Bottle treatment is designed to permanently break down stubborn fat cells and restore definition without surgical intervention or recovery time. Duration is 20-30 minutes, with 7-14 days of swelling, results visible within 2+ weeks, and permanent results with stable weight. No anaesthetic required.',
+      'For those maintaining a healthy lifestyle but struggling with resistant fat deposits like double chins or soft jawlines. Our injectable Lemon Bottle treatment is designed to target stubborn fat pockets and support definition without surgical intervention or recovery time. Duration is 20-30 minutes, with 7-14 days of swelling, results developing from 2+ weeks, and long-lasting outcomes with stable weight. No anaesthetic required.',
     cardDescription:
-      'Medical-grade Lemon Bottle injections that permanently break down stubborn fat in the double chin, flanks, thighs and other localised areas.',
+      'Medical-grade Lemon Bottle injections that target stubborn fat pockets in the double chin, flanks, thighs and other localised areas.',
     narrativeSections: [
       {
         heading: 'BURN STUBBORN FAT, NO SURGERY.',
-        body: "For those who maintain a healthy lifestyle but still struggle with double chin fullness, soft jawlines, or small pockets of resistant fat that simply won't shift. Fat dissolving injections are designed to permanently break down these stubborn fat cells, restoring definition and contour without surgery or downtime.",
+        body: "For those who maintain a healthy lifestyle but still struggle with double chin fullness, soft jawlines, or small pockets of resistant fat that simply won't shift. Fat dissolving injections are designed to target these stubborn areas, supporting definition and contour without surgery or downtime.",
       },
       {
         heading: "Do you ever feel like certain areas just won't respond — no matter what you try?",
-        body: "You eat better. You move more. Your weight may even be stable. Yet some pockets of fat — under the chin, around the belly, along the flanks — simply refuse to shift. It's frustrating because it's not about effort. It's about stubborn fat cells that don't respond to diet or exercise the way the rest of your body does. Our Fat Dissolving treatment is designed to target and permanently break down these resistant fat deposits — refining and contouring specific areas without surgery or downtime. Results develop gradually over the following weeks, giving you a smoother, more sculpted appearance that still looks completely natural. This isn't about weight loss. It's about precision contouring where it matters most.",
+        body: "You eat better. You move more. Your weight may even be stable. Yet some pockets of fat — under the chin, around the belly, along the flanks — simply refuse to shift. It's frustrating because it's not about effort. It's about stubborn fat cells that don't respond to diet or exercise the way the rest of your body does. Our Fat Dissolving treatment is designed to target these resistant deposits — refining and contouring specific areas without surgery or downtime. Results develop gradually over the following weeks, giving you a smoother, more sculpted appearance that still looks completely natural. This isn't about weight loss. It's about precision contouring where it matters most.",
       },
       {
         heading: 'OUR MEDICAL COMMITMENT',
@@ -318,7 +318,7 @@ export const services: Record<string, Service> = {
       },
       {
         heading: 'FAQ: How long do the results of Fat Dissolving?',
-        body: 'The great thing about our Fat Dissolving is that the results are long-lasting. Once the fat cells under the treated areas are destroyed, they cannot store or accumulate fat again. As long as you maintain a stable weight, your treatments results should be permanent.',
+        body: 'Fat dissolving results can be long-lasting when your weight remains stable. Remaining fat cells can still enlarge with significant weight gain, so balanced nutrition, activity and follow-up guidance help you maintain your contour.',
       },
       {
         heading: 'FAQ: Are there any side effects or risks associated with Fat Dissolving?',
@@ -336,7 +336,7 @@ export const services: Record<string, Service> = {
     namedBenefits: [
       {
         heading: 'INSTANT CONTOUR REFINEMENT',
-        body: 'Notice a visibly sharper, tighter jawline right after your first session.',
+        body: 'Begin a gradual contour-refinement process for a sharper-looking jawline over the following weeks.',
       },
       {
         heading: 'FAT-DISSOLVING PRECISION',
@@ -467,13 +467,13 @@ export const services: Record<string, Service> = {
         "#1 voted slimming clinic in malta ▫️ Malta's most comprehensive slimming program ▫️ Medically qualified doctors",
       heading: 'EMSculpt NEO MALTA - 3 in 1 body sculpt protocol',
       description:
-        'Stronger, tighter, more defined in 4 focused sessions. Our 3-1 course with EMSculpt NEO with HIFEM + RF gives you the effect of 20,000 sit ups per session, burns local fat and tightens the skin resulting in 30% Fat reduction, 25% Muscle growth & 29% Muscle strength',
+        'Stronger, tighter, more defined in 4 focused sessions. Our 3-in-1 EMSculpt NEO course combines HIFEM + RF to stimulate powerful contractions, support local fat reduction and improve firmness, with outcomes varying by body and adherence.',
     },
     title: 'EMSculpt NEO Malta',
     subtitle: '3 in 1 body sculpt protocol',
     tagline: 'Stronger, tighter, more defined in 4 focused sessions.',
     description:
-      'A treatment combining electromagnetic muscle stimulation with radiofrequency technology. The protocol promises 30% Fat reduction, 25% Muscle growth & 29% Muscle strength across four sessions, with each delivering the effect of 20,000 sit ups per session.',
+      'A treatment combining electromagnetic muscle stimulation with radiofrequency technology. Published device studies report changes in fat thickness, muscle growth and strength after a standard course, with each session delivering powerful supramaximal contractions.',
     cardDescription:
       'High-intensity electromagnetic pulses with the effect of 20,000 sit-ups in one 30 minute session. Tones, supports posture and refines shape with no downtime.',
     narrativeSections: [
@@ -483,7 +483,7 @@ export const services: Record<string, Service> = {
       },
       {
         heading: 'The Carisma Difference',
-        body: "We're a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don't just lose weight, you step into your strongest form.\n\n- Doctor led: full medical check and body scan\n- One integrated program: medical, diet, movement and treatments together\n- Real gym included: Technogym facility, semi-private classes and PT\n- High touch support: weekly check ins, progress reports and WhatsApp follow up\n- Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening\n- Selective entry and measurable weight loss results guaranteed",
+        body: "We're a doctor led transformation program that blends medical insight, sustainable nutrition, and modern body tech into one high touch system, so you don't just lose weight, you step into your strongest form.\n\n- Doctor led: full medical check and body scan\n- One integrated program: medical, diet, movement and treatments together\n- Real gym included: Technogym facility, semi-private classes and PT\n- High touch support: weekly check ins, progress reports and WhatsApp follow up\n- Evidence based devices: Emsculpt NEO, coolsculpting and RF skin tightening\n- Selective entry and measurable progress tracked with body composition data",
       },
       {
         heading: 'EMSculpt Neo Technology',
@@ -849,7 +849,7 @@ export const services: Record<string, Service> = {
       },
       {
         heading: 'FAQ — Are the results permanent?',
-        body: 'The fat cells that are disrupted during treatment are permanently broken down and eliminated by your body. However, remaining fat cells can still expand with significant weight gain, so maintaining a balanced diet and active lifestyle supports long-term results.',
+        body: 'The fat cells affected during treatment are gradually processed by your body. Remaining fat cells can still expand with significant weight gain, so maintaining a balanced diet and active lifestyle supports long-term results.',
       },
       {
         heading: 'FAQ — Which areas can be treated?',
@@ -987,12 +987,12 @@ export const services: Record<string, Service> = {
     liveUrl: 'https://www.carismaslimming.com/anti-cellulite',
     treatment: 'Anti Cellulite',
     seoTitle: 'Cellulite Treatment Malta | VelaShape III | Carisma Slimming',
-    seoDescription: 'Effective cellulite treatment in Malta using VelaShape III technology. Visible results from the first session. Non-invasive, no downtime. Book today.',
+    seoDescription: 'Cellulite treatment in Malta using VelaShape III technology to support smoother-looking skin. Non-invasive, no downtime for most clients.',
     hero: {
       eyebrow: 'ADVANCED CELLULITE SMOOTHING',
       heading: 'cellulift & contour protocol',
       description:
-        'Our cellulite protocol combines three VelaShape vacuum roller sessions with one lymphatic drainage massage to eliminate cellulite, uneven texture, and boost circulation',
+        'Our cellulite protocol combines three VelaShape vacuum roller sessions with one lymphatic drainage massage to smooth the appearance of cellulite, uneven texture, and support circulation',
     },
     title: 'Advanced Cellulite Smoothing',
     subtitle: 'CelluLift & contour protocol',
@@ -1011,7 +1011,7 @@ export const services: Record<string, Service> = {
       },
       {
         heading: "malta's trusted clinic for non surgical fat reduction",
-        body: 'Featured in local media including Malta Today, Times Malta, and MT Today. Carisma is positioned as a recognized provider of non-surgical fat reduction in the region. The integrated program includes: Doctor-led medical assessment and body scans; an integrated program combining medical, diet, movement, and treatments; an on-site Technogym facility with semi-private classes and PT; weekly check-ins, progress reports, and WhatsApp support; FDA-approved devices (Emsculpt NEO, CoolSculpting, RF skin tightening); and selective entry with guaranteed measurable results.',
+        body: 'Featured in local media including Malta Today, Times Malta, and MT Today. Carisma is positioned as a recognized provider of non-surgical fat reduction in the region. The integrated program includes: Doctor-led medical assessment and body scans; an integrated program combining medical, diet, movement, and treatments; an on-site Technogym facility with semi-private classes and PT; weekly check-ins, progress reports, and WhatsApp support; FDA-approved devices (Emsculpt NEO, CoolSculpting, RF skin tightening); and selective entry with measurable progress tracking.',
       },
       {
         heading: 'internationally renowned, FDA-approved modalities',
@@ -1141,24 +1141,24 @@ export const services: Record<string, Service> = {
     liveSlug: 'lymphatic-drainage',
     liveUrl: 'https://www.carismaslimming.com/lymphatic-drainage',
     treatment: 'Lymphatic Drainage',
-    seoTitle: 'Lymphatic Drainage Malta | Detox Treatment | Carisma Slimming',
+    seoTitle: 'Lymphatic Drainage Malta | Fluid Support | Carisma Slimming',
     hero: {
       eyebrow:
         "#1 VOTED SLIMMING CLINIC IN MALTA ▫️ MALTA'S MOST COMPREHENSIVE SLIMMING PROGRAM ▫️ MEDICALLY QUALIFIED DOCTORS",
-      heading: 'EXPERT LED BODY DETOX & CIRCULATION SUPPORT',
+      heading: 'EXPERT LED LYMPHATIC & CIRCULATION SUPPORT',
       description:
-        'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate your lymphatic system, helping your body eliminate toxins, reduce fluid retention, and restore natural balance.',
+        'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate lymph flow, support fluid balance, reduce fluid retention, and ease puffiness.',
     },
-    title: 'Expert Led Body Detox & Circulation Support',
+    title: 'Expert Led Lymphatic & Circulation Support',
     subtitle: 'Lymphatic drainage therapy',
     description:
-      'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate your lymphatic system, helping your body eliminate toxins, reduce fluid retention, and restore natural balance. If you wake up swollen, experience recurring bloating, feelings of tightness, and slower recovery rates, it may suggest lymphatic system inefficiency rather than lifestyle failures.',
+      'Our Lymphatic Drainage Therapy is a gentle, expert-guided treatment designed to stimulate lymph flow, support fluid balance, reduce fluid retention, and ease puffiness. If you wake up swollen, experience recurring bloating, feelings of tightness, and slower recovery rates, it may suggest lymphatic flow needs support rather than lifestyle failures.',
     cardDescription:
       'Gentle, expert-guided compressive microvibration and massage that stimulates the lymphatic system to reduce fluid, support circulation and ease that puffy, heavy feeling.',
     narrativeSections: [
       {
         heading: 'WHEN HUNGER, NOT WILLPOWER, IS HOLDING YOU BACK',
-        body: 'You eat well, try to stay active, and take care of yourself yet your body still feels bloated, tight, or sluggish. Swelling comes and goes, your skin feels puffy, and recovery feels slower than it should. You know something feels "off," but it\'s hard to explain and harder to fix on your own.\n\n- You wake up feeling swollen or heavy\n- Bloating or fluid retention comes back repeatedly\n- Your body feels tight, congested, or slow to recover\n- You\'re tired of solutions that don\'t address the root cause\n\nIf you\'re reading this and thinking, "This sounds like me," the issue may not be lifestyle or effort. Often, it\'s your lymphatic system struggling to drain efficiently. When lymph flow is slow, fluids and toxins can build up in the body.\n\nLymphatic Drainage Therapy gently stimulates your lymphatic system, supporting natural detoxification, improved circulation, and reduced fluid retention — helping your body feel lighter, more balanced, and refreshed again.',
+        body: 'You eat well, try to stay active, and take care of yourself yet your body still feels bloated, tight, or sluggish. Swelling comes and goes, your skin feels puffy, and recovery feels slower than it should. You know something feels "off," but it\'s hard to explain and harder to fix on your own.\n\n- You wake up feeling swollen or heavy\n- Bloating or fluid retention comes back repeatedly\n- Your body feels tight, congested, or slow to recover\n- You\'re tired of solutions that don\'t address the root cause\n\nIf you\'re reading this and thinking, "This sounds like me," the issue may not be lifestyle or effort. Often, your lymphatic flow may need support to drain efficiently. When lymph flow is sluggish, fluid can accumulate in the body.\n\nLymphatic Drainage Therapy gently stimulates your lymphatic system, supporting circulation and reduced fluid retention — helping your body feel lighter, more balanced, and refreshed again.',
       },
       {
         heading: 'we are not another diet clinic.',
@@ -1166,15 +1166,15 @@ export const services: Record<string, Service> = {
       },
       {
         heading: 'LYMPHATIC DRAINAGE THERAPY',
-        body: 'The lymphatic system plays a vital role in fluid balance, detoxification, and immune support. When lymph flow becomes sluggish, fluid and waste can accumulate in the body leading to bloating, swelling, heaviness, and slow recovery.\n\nLymphatic Drainage Therapy uses gentle, targeted techniques to stimulate lymph flow, helping the body naturally eliminate excess fluids and toxins while supporting circulation and overall wellbeing.\n\nAt our clinic, lymphatic drainage is used as a therapeutic support, not a cosmetic shortcut:\n\n- You begin with a professional consultation to assess your health history, symptoms, and suitability for treatment.\n- Your practitioner explains how lymphatic drainage works, what results to expect, and how often sessions may be recommended.\n- Treatment is delivered using controlled, medically guided techniques — never aggressively or without assessment.\n- We monitor your response and adjust frequency or approach as needed, ensuring comfort, safety, and effectiveness.\n\nIf lymphatic drainage is not appropriate for you, we are clear and transparent — and guide you toward alternative therapies that better support your health and goals.',
+        body: 'The lymphatic system plays a vital role in fluid balance and immune support. When lymph flow becomes sluggish, fluid and waste products can accumulate in the body leading to bloating, swelling, heaviness, and slow recovery.\n\nLymphatic Drainage Therapy uses gentle, targeted techniques to stimulate lymph flow, helping the body move excess fluid while supporting circulation and overall wellbeing.\n\nAt our clinic, lymphatic drainage is used as a therapeutic support, not a cosmetic shortcut:\n\n- You begin with a professional consultation to assess your health history, symptoms, and suitability for treatment.\n- Your practitioner explains how lymphatic drainage works, what results to expect, and how often sessions may be recommended.\n- Treatment is delivered using controlled, medically guided techniques — never aggressively or without assessment.\n- We monitor your response and adjust frequency or approach as needed, ensuring comfort, safety, and effectiveness.\n\nIf lymphatic drainage is not appropriate for you, we are clear and transparent — and guide you toward alternative therapies that better support your health and goals.',
       },
       {
-        heading: 'SUPPORTS DETOXIFICATION, CIRCULATION & FLUID BALANCE',
-        body: '- Helps reduce fluid retention, swelling, and bloating\n- Supports lymphatic flow and natural toxin elimination\n- Designed to promote a lighter, more balanced feeling in the body\n- Always provided as part of a medically guided wellness approach',
+        heading: 'SUPPORTS LYMPHATIC FLOW, CIRCULATION & FLUID BALANCE',
+        body: '- Helps reduce fluid retention, swelling, and bloating\n- Supports lymphatic flow and fluid movement\n- Designed to promote a lighter, more balanced feeling in the body\n- Always provided as part of a medically guided wellness approach',
       },
       {
         heading: 'FAQ — What is lymphatic drainage therapy?',
-        body: 'Lymphatic drainage therapy is a gentle, non-invasive treatment designed to stimulate the lymphatic system. It helps support the natural movement of lymph fluid in the body, aiding detoxification, reducing fluid retention, and improving circulation and overall wellbeing.',
+        body: 'Lymphatic drainage therapy is a gentle, non-invasive treatment designed to stimulate the lymphatic system. It helps support the natural movement of lymph fluid in the body, reducing fluid retention and improving circulation and overall wellbeing.',
       },
       {
         heading: 'FAQ — What concerns can lymphatic drainage help with?',
@@ -1203,8 +1203,8 @@ export const services: Record<string, Service> = {
         body: 'Your lymphatic drainage treatment is overseen by medical professionals, with careful assessment of your health history to ensure the therapy is safe, appropriate, and effective for your body.',
       },
       {
-        heading: 'LYMPHATIC FLOW & DETOX SUPPORT',
-        body: 'Gentle, targeted techniques are used to stimulate lymph flow, helping reduce fluid retention, support natural detoxification, and relieve feelings of heaviness and congestion.',
+        heading: 'LYMPHATIC FLOW & FLUID SUPPORT',
+        body: 'Gentle, targeted techniques are used to stimulate lymph flow, helping reduce fluid retention and relieve feelings of heaviness and congestion.',
       },
       {
         heading: 'EXPERT-DESIGNED TREATMENT PLAN',
@@ -1217,7 +1217,7 @@ export const services: Record<string, Service> = {
     ],
     benefits: [
       'Reduces fluid retention, swelling, and bloating',
-      'Supports lymphatic flow and toxin elimination',
+      'Supports lymphatic flow and fluid movement',
       'Promotes a lighter, more balanced bodily sensation',
       'Delivered through a medically guided wellness approach',
     ],
