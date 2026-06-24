@@ -35,7 +35,7 @@ export default function MedicalGuaranteeSection() {
           position: 'absolute', right: '-2%', top: '4%',
           fontFamily: headingFont, fontSize: 'clamp(180px,26vw,340px)', fontWeight: 400,
           color: 'rgba(79,114,86,0.06)', lineHeight: 1, userSelect: 'none', pointerEvents: 'none',
-        }}>PLAN</span>
+        }}>1KG</span>
 
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8" style={{ textAlign: 'center', position: 'relative' }}>
           {/* Badge */}
@@ -50,8 +50,8 @@ export default function MedicalGuaranteeSection() {
 
           {/* Headline */}
           <h3 style={{ fontFamily: headingFont, fontSize: 'clamp(48px,8vw,88px)', fontWeight: 400, color: '#024C27', lineHeight: 0.95, textTransform: 'uppercase', marginBottom: '32px', letterSpacing: '-0.5px' }}>
-            Measured<br />
-            <em style={{ fontStyle: 'normal', color: green }}>Weekly Progress.</em>
+            Up to 1KG<br />
+            <em style={{ fontStyle: 'normal', color: green }}>Per Week.</em>
           </h3>
 
           <p style={{ fontFamily: bodyFont, fontSize: '17px', lineHeight: 1.7, color: taupe, maxWidth: '520px', margin: '0 auto 16px' }}>
