@@ -144,8 +144,8 @@ export default function SlimmingGuidePage() {
       <PageHero
         eyebrow="Recipes, meal timing & a structured plan"
         headline={[
-          { text: 'The Weight-Loss Guide' },
-          { text: 'Built for Maltese Life', em: true },
+          { text: 'The Weight-Loss Guide for Malta' },
+          { text: 'Recipes & Meal Timing', em: true },
         ]}
         sub="A doctor-backed system you can actually follow — no crash diets, no calorie counting. For only €30."
         bullets={[

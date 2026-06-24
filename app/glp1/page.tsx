@@ -107,8 +107,8 @@ export default function GLP1Page() {
       <PageHero
         eyebrow="Ultimate weight loss protocol in Malta"
         headline={[
-          { text: 'GLP-1 Weight Loss Injections' },
-          { text: 'in Malta · Doctor-Led', em: true },
+          { text: 'GLP-1 Weight Loss Injections in Malta' },
+          { text: 'Ozempic & Mounjaro Support', em: true },
         ]}
         sub="Full medical assessment, personalised nutrition, body-composition tracking and ongoing doctor supervision — with Ozempic and Mounjaro support where clinically appropriate — to lose fat safely and keep it off."
         bullets={[

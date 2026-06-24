@@ -129,8 +129,8 @@ function HeroSection() {
       <PageHero
         eyebrow="With Malta's most comprehensive, medically guided slimming program"
         headline={[
-          { text: 'Lose Up To 1KG A Week' },
-          { text: 'Doctor-Led & Guaranteed', em: true },
+          { text: 'Medical Weight Loss in Malta' },
+          { text: '1KG Per Week Guaranteed', em: true },
         ]}
         sub="Medical weight loss in Malta — personalised programs combining medical-grade analysis, prescription support, nutrition and body sculpting with weekly check-ins — to help you hit your target weight and keep it off."
         bullets={[
