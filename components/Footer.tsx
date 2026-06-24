@@ -164,7 +164,7 @@ function FooterBase() {
   return (
     <div style={{ background: 'transparent' }}>
       {/* Info grid */}
-      <div style={{ padding: '52px 0 44px', borderBottom: `1px solid ${HAIR}` }}>
+      <div style={{ padding: 'clamp(32px, 6vw, 52px) 0 clamp(28px, 5vw, 44px)', borderBottom: `1px solid ${HAIR}` }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(190px,1fr))', gap: '44px' }}>
 
