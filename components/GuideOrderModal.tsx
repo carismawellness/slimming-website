@@ -33,7 +33,7 @@ export default function GuideOrderModal() {
     return () => window.removeEventListener(GUIDE_MODAL_EVENT, onEvent);
   }, []);
 
-  // Intercept guide-order CTAs sitewide.
+  // Intercept guide-order CTAs sitewide and track the interaction.
   useEffect(() => {
     const onClick = (e: MouseEvent) => {
       const anchor = (e.target as Element)?.closest?.('a');
@@ -41,6 +41,13 @@ export default function GuideOrderModal() {
       const href = anchor.getAttribute('href') || '';
       if (href.includes(GUIDE_HREF_MATCH)) {
         e.preventDefault();
+        // Track CTA click via gtag if available
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'guide_cta_click', {
+            element: anchor.textContent?.trim() || 'unknown',
+            page: window.location.pathname,
+          });
+        }
         open(anchor as HTMLElement);
       }
     };
@@ -78,6 +85,15 @@ export default function GuideOrderModal() {
     };
     setStatus('sending');
     setError('');
+
+    // Track form submission attempt
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+      (window as any).gtag('event', 'guide_form_submit', {
+        email: data.email,
+        page: window.location.pathname,
+      });
+    }
+
     try {
       const res = await fetch('/api/order-guide', {
         method: 'POST',
@@ -87,6 +103,14 @@ export default function GuideOrderModal() {
       const json = await res.json().catch(() => ({ ok: false }));
       if (res.ok && json.ok) {
         setStatus('done');
+        // Track successful submission
+        if (typeof window !== 'undefined' && (window as any).gtag) {
+          (window as any).gtag('event', 'guide_purchase', {
+            value: 30,
+            currency: 'EUR',
+            transaction_id: json.orderId || undefined,
+          });
+        }
       } else {
         setStatus('error');
         setError(json.error || 'Something went wrong. Please try again.');
