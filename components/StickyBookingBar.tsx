@@ -82,20 +82,30 @@ export default function StickyBookingBar() {
     );
   };
 
+  const isPackage =
+    pathname?.startsWith("/packages/") || pathname === "/packages";
+
   return (
-    <div
-      style={{
-        position: "fixed",
-        bottom: "24px",
-        left: "50%",
-        transform: "translateX(-50%)",
-        zIndex: 49,
-      }}
-    >
+    <>
+      <style>{`
+        @media (min-width: 640px) {
+          .sticky-pill-pkg { min-width: 280px; text-align: center; }
+        }
+      `}</style>
+      <div
+        style={{
+          position: "fixed",
+          bottom: "24px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 49,
+        }}
+      >
       <a
         href={cfg.href}
         {...linkProps}
         onClick={trackClick}
+        className={isPackage ? "sticky-pill-pkg" : ""}
         style={{
           display: "block",
           borderRadius: "9999px",
@@ -115,6 +125,7 @@ export default function StickyBookingBar() {
       >
         {cfg.ctaLabel}
       </a>
-    </div>
+      </div>
+    </>
   );
 }
