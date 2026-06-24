@@ -106,7 +106,7 @@ export default function PackagesPage() {
         {/* Packages grid — white → soft sage wash so it flows into the CTA section below */}
         <section
           aria-labelledby="packages-heading"
-          className="py-24"
+          className="py-10 md:py-24"
           style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f5f8f2 50%, #ffffff 100%)' }}
         >
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -217,7 +217,7 @@ export default function PackagesPage() {
         {/* Combined CTA — starts at the grid's end color (#f6f4ef) and resolves to white (no seam) */}
         <section
           aria-labelledby="cta-heading"
-          className="py-24"
+          className="py-10 md:py-24"
           style={{ background: 'linear-gradient(180deg, #ffffff 0%, #f6f4ef 50%, #ffffff 100%)' }}
         >
           <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
