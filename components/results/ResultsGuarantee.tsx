@@ -151,14 +151,10 @@ export default function ResultsGuarantee() {
           <span
             style={{
               display: 'inline-block',
-              padding: '7px 16px',
-              borderRadius: 999,
-              border: `1px solid ${SAGE}`,
-              background: 'rgba(79,114,86,0.06)',
               color: SAGE,
               fontFamily: WIDE,
-              fontSize: 11,
-              letterSpacing: '0.22em',
+              fontSize: 12,
+              letterSpacing: '0.28em',
               textTransform: 'uppercase',
             }}
           >
