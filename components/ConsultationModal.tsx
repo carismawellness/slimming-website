@@ -47,6 +47,10 @@ export default function ConsultationModal() {
     const onBookingClick = (e: MouseEvent) => {
       const anchor = (e.target as Element).closest('a');
       if (!anchor) return;
+      // Opt-out: links that open in a new tab or carry data-direct-booking go
+      // straight through (e.g. the Fresha "choose your time" CTA on /thank-you,
+      // which must book directly and NOT reopen the lead-capture modal).
+      if ((anchor as HTMLAnchorElement).target === '_blank' || anchor.hasAttribute('data-direct-booking')) return;
       const href = anchor.getAttribute('href') || '';
       const isBookingLink =
         href.includes('fresha.com/book-now') ||
@@ -105,9 +109,13 @@ export default function ConsultationModal() {
           page_type: pageTypeFor(window.location.pathname),
           cta_label: 'Lead form submitted',
           section: 'consultation_modal',
-          destination_url: FRESHA_URL,
+          destination_url: '/thank-you',
         });
-        setStep('booking');
+        // Send the visitor to the real /thank-you page: the page-level GTM
+        // pageview trigger fires the Google Ads conversion (gclid cookie is
+        // first-party on this domain), and the Fresha "choose your time"
+        // booking CTA now lives on /thank-you so the booking step isn't lost.
+        window.location.assign('/thank-you');
       }
     };
     window.addEventListener('message', onMsg);

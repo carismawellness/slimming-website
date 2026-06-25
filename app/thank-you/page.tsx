@@ -12,6 +12,52 @@ const taupeLight   = '#6f6456';
 
 const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.webp';
 
+// Fresha "free body composition analysis" booking flow — the second step of the
+// lead funnel, moved here from the consultation modal so leads land on a real
+// /thank-you page (fires the GTM conversion) and can still book their slot.
+// target="_blank" + data-direct-booking → bypasses the site-wide modal interceptor.
+const FRESHA_URL =
+  'https://www.fresha.com/book-now/carisma-aesthetics-q8gqd4z1/services?lid=2843963&eid=5084222&oiid=sv%3A26105577&share=true&pId=2708191';
+
+function ChooseTimeCta() {
+  return (
+    <div style={{ marginTop: '26px' }}>
+      <a
+        href={FRESHA_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-direct-booking
+        className="cta-glow inline-flex items-center justify-center font-bold text-white"
+        style={{
+          fontFamily: wideBookFont,
+          fontSize: '13px',
+          letterSpacing: '0.5px',
+          textTransform: 'uppercase',
+          padding: '16px 40px',
+          borderRadius: '999px',
+          border: 'none',
+          textDecoration: 'none',
+          backgroundColor: '#4f7256',
+          minHeight: '44px',
+        }}
+      >
+        Choose Your Time &rsaquo;
+      </a>
+      <p
+        style={{
+          fontFamily: bodyFont,
+          fontSize: '13px',
+          color: taupe,
+          opacity: 0.8,
+          margin: '12px 0 0',
+        }}
+      >
+        Book your free body composition analysis — limited places each month.
+      </p>
+    </div>
+  );
+}
+
 export const metadata: Metadata = {
   title: "Thank You | Carisma Slimming",
   robots: { index: false, follow: true },
@@ -119,6 +165,7 @@ export default function ThankYouPage() {
                 </p>
               ))}
             </div>
+            <ChooseTimeCta />
           </div>
         </div>
       </section>
@@ -186,6 +233,7 @@ export default function ThankYouPage() {
               </p>
             ))}
           </div>
+          <ChooseTimeCta />
         </div>
       </section>
 
