@@ -32,6 +32,7 @@ declare global {
   interface Window {
     dataLayer?: unknown[];
     gtag?: (...args: unknown[]) => void;
+    fbq?: (...args: unknown[]) => void;
   }
 }
 
@@ -48,6 +49,24 @@ function cleanPayload(payload: EventPayload): EventPayload {
   ) as EventPayload;
 }
 
+// Maps internal event names to Meta standard events.
+// Events that should fire fbq('track', ...) return the Meta event name.
+// Events with no Meta equivalent return null (still tracked via dataLayer/GA4).
+const META_EVENT_MAP: Partial<Record<AnalyticsEventName, string>> = {
+  book_consultation_click: 'Lead',
+  body_analysis_click: 'Lead',
+  quiz_complete: 'Lead',
+  quiz_start: 'ViewContent',
+  guide_purchase_submit: 'Purchase',
+  guide_purchase_click: 'InitiateCheckout',
+  phone_click: 'Contact',
+  whatsapp_click: 'Contact',
+  package_cta_click: 'ViewContent',
+  pricing_view: 'ViewContent',
+  treatment_page_view: 'ViewContent',
+  glp1_page_view: 'ViewContent',
+};
+
 export function trackEvent(event: AnalyticsEventName, payload: EventPayload = {}) {
   if (typeof window === 'undefined') return;
 
@@ -62,5 +81,17 @@ export function trackEvent(event: AnalyticsEventName, payload: EventPayload = {}
 
   if (typeof window.gtag === 'function') {
     window.gtag('event', event, safePayload);
+  }
+
+  const metaEvent = META_EVENT_MAP[event];
+  if (metaEvent && typeof window.fbq === 'function') {
+    if (metaEvent === 'Purchase' && safePayload.value) {
+      window.fbq('track', metaEvent, {
+        value: safePayload.value,
+        currency: safePayload.currency ?? 'EUR',
+      });
+    } else {
+      window.fbq('track', metaEvent);
+    }
   }
 }
