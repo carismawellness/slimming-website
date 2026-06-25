@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import BrandSwitcher from '@/components/BrandSwitcher';
 
 // Accessible brand tokens (see globals.css locked palette).
@@ -60,6 +60,15 @@ export default function Header() {
   const [expanded, setExpanded] = useState<string | null>(null);
   const [pkgHover, setPkgHover] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Hover-intent: open immediately, close on a short delay so the cursor can
+  // travel from the trigger into the panel without the wrapper's onMouseLeave
+  // race-closing the menu (the old no-delay behaviour felt "stuck").
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const cancelClose = () => { if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; } };
+  const openPkg = () => { cancelClose(); setPkgHover(true); };
+  const schedulePkgClose = () => { cancelClose(); closeTimer.current = setTimeout(() => setPkgHover(false), 160); };
+  useEffect(() => cancelClose, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -143,8 +152,8 @@ export default function Header() {
                   key={m.label}
                   className="relative"
                   style={{ display: 'flex', alignItems: 'center' }}
-                  onMouseEnter={() => setPkgHover(true)}
-                  onMouseLeave={() => setPkgHover(false)}
+                  onMouseEnter={openPkg}
+                  onMouseLeave={schedulePkgClose}
                 >
                   <button
                     style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0', display: 'flex', alignItems: 'center', gap: '4px' }}
@@ -157,17 +166,28 @@ export default function Header() {
                     <svg
                       width="10" height="10" viewBox="0 0 24 24" fill="none"
                       stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-                      style={{ transition: 'transform 0.2s ease', transform: pkgHover ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.7 }}
+                      style={{ transition: 'transform 0.25s cubic-bezier(0.22,1,0.36,1)', transform: pkgHover ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.7 }}
                     >
                       <polyline points="6 9 12 15 18 9" />
                     </svg>
                   </button>
-                  {pkgHover && (
-                    <div style={{
+                  {/* Panel is always mounted; open/close is driven by CSS so it
+                      fades + slides in AND out smoothly (no abrupt pop), and a
+                      hover bridge keeps it reachable from the trigger. */}
+                  <div
+                    onMouseEnter={cancelClose}
+                    onMouseLeave={schedulePkgClose}
+                    role="menu"
+                    aria-hidden={!pkgHover}
+                    style={{
                       position: 'absolute',
                       top: 'calc(100% - 4px)',
                       left: '50%',
-                      transform: 'translateX(-50%)',
+                      transform: `translateX(-50%) translateY(${pkgHover ? '0' : '8px'})`,
+                      opacity: pkgHover ? 1 : 0,
+                      visibility: pkgHover ? 'visible' : 'hidden',
+                      pointerEvents: pkgHover ? 'auto' : 'none',
+                      transition: 'opacity 0.2s ease, transform 0.24s cubic-bezier(0.22,1,0.36,1), visibility 0.2s',
                       background: 'rgba(255,255,255,0.82)',
                       backdropFilter: 'blur(22px) saturate(180%)',
                       WebkitBackdropFilter: 'blur(22px) saturate(180%)',
@@ -181,14 +201,15 @@ export default function Header() {
                       columnGap: '6px',
                       zIndex: 100,
                     }}>
+                      {/* Invisible hover bridge over the trigger→panel gap. */}
+                      <span aria-hidden style={{ position: 'absolute', bottom: '100%', left: '-60px', right: '-60px', height: '32px', background: 'transparent' }} />
                       {m.items.map((it) => (
-                        <Link key={it.href} href={it.href} className="block hover:bg-black/5 hover:underline"
+                        <Link key={it.href} href={it.href} tabIndex={pkgHover ? undefined : -1} onClick={() => setPkgHover(false)} className="block hover:bg-black/5 hover:underline"
                           style={{ padding: '9px 14px', borderRadius: '10px', color: DROPDOWN_INK, fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none', transition: 'background 0.3s ease' }}>
                           {it.label}
                         </Link>
                       ))}
                     </div>
-                  )}
                 </div>
               ) : (
                 <Link key={m.label} href={m.href!} style={navLink} className="hover:underline transition">{m.label}</Link>
