@@ -18,6 +18,11 @@ const BRANDS = [
     name: 'Hair Clinic',
     url: 'https://www.carismahairclinic.com',
   },
+  {
+    color: '#C4A882',
+    name: 'Pulse',
+    url: 'https://www.pulsewellness.com',
+  },
 ];
 
 // Rose motif path data from the shared brand wordmark (viewBox 113 0 70 67)
