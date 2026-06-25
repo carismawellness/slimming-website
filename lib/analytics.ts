@@ -90,6 +90,13 @@ export function trackEvent(event: AnalyticsEventName, payload: EventPayload = {}
         value: safePayload.value,
         currency: safePayload.currency ?? 'EUR',
       });
+    } else if (metaEvent === 'Lead') {
+      // Always pass value for Lead events so Meta can optimise for lead quality.
+      // Call sites can override by passing value/currency in the payload.
+      window.fbq('track', metaEvent, {
+        value: safePayload.value ?? 75,
+        currency: safePayload.currency ?? 'EUR',
+      });
     } else {
       window.fbq('track', metaEvent);
     }
