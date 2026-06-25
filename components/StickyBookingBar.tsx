@@ -55,6 +55,11 @@ CONFIG["/weight-loss"] = { href: WEIGHT_LOSS_FRESHA, priceLabel: "Medical Weight
 CONFIG["/glp1"] = { href: WEIGHT_LOSS_FRESHA, priceLabel: "GLP-1 Injections" };
 CONFIG["/medical-weight-loss-lp"] = { href: MEDICAL_LP_FRESHA, priceLabel: "Medical Weight Loss" };
 
+// Default for every other page so the sticky CTA is persistent site-wide.
+// The default CTA opens the consultation modal (same as the header CTA).
+const MODAL_HREF = "__consult-modal__";
+const DEFAULT_CFG: BarConfig = { href: MODAL_HREF, priceLabel: "Free consultation & body analysis" };
+
 const GLASS: React.CSSProperties = {
   backdropFilter: "blur(24px) saturate(200%)",
   WebkitBackdropFilter: "blur(24px) saturate(200%)",
@@ -68,7 +73,7 @@ const SLIMMING_GRADIENT =
 
 export default function StickyBookingBar() {
   const pathname = usePathname();
-  const cfg = pathname ? CONFIG[pathname] : undefined;
+  const cfg = (pathname ? CONFIG[pathname] : undefined) ?? DEFAULT_CFG;
 
   const [pastHero, setPastHero] = useState(false);
   useEffect(() => {
@@ -78,12 +83,20 @@ export default function StickyBookingBar() {
     return () => window.removeEventListener("scroll", check);
   }, []);
 
-  if (!cfg || !pastHero) return null;
+  if (!pastHero) return null;
 
-  const isExternal = cfg.href.startsWith("http");
+  const isModal = cfg.href === MODAL_HREF;
+  const isExternal = !isModal && cfg.href.startsWith("http");
   const linkProps = isExternal
     ? { target: "_blank" as const, rel: "noopener noreferrer" }
     : {};
+  const onCtaClick = (e: React.MouseEvent) => {
+    if (isModal) {
+      e.preventDefault();
+      window.dispatchEvent(new Event("openConsultationModal"));
+    }
+    trackClick();
+  };
 
   const trackClick = () => {
     const isPackage = pathname?.startsWith("/packages/") ?? false;
@@ -139,9 +152,9 @@ export default function StickyBookingBar() {
         </span>
 
         <a
-          href={cfg.href}
+          href={isModal ? "#" : cfg.href}
           {...linkProps}
-          onClick={trackClick}
+          onClick={onCtaClick}
           style={{
             borderRadius: "9999px",
             background: SLIMMING_GRADIENT,
@@ -179,9 +192,9 @@ export default function StickyBookingBar() {
         }}
       >
         <a
-          href={cfg.href}
+          href={isModal ? "#" : cfg.href}
           {...linkProps}
-          onClick={trackClick}
+          onClick={onCtaClick}
           style={{
             display: "block",
             borderRadius: "9999px",

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteHeader, SiteFooter, SiteCookieBanner } from "@/components/PreviewChromeGate";
+import PageLoader from "@/components/PageLoader";
 import ConsultationModal from "@/components/ConsultationModal";
 import GuideOrderModal from "@/components/GuideOrderModal";
 import QuizModal from "@/components/QuizModal";
@@ -71,6 +72,7 @@ export default function RootLayout({
           />
         </noscript>
         {/* End Google Tag Manager (noscript) */}
+        <PageLoader />
         <SiteHeader />
         <div className="flex-grow">{children}</div>
         <SiteFooter />
