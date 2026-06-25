@@ -1,35 +1,21 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import HeroMotif from '@/components/HeroMotif';
+import QuizResultsClient, { type SlimmingRec } from '@/components/quiz/QuizResultsClient';
 
 export const metadata: Metadata = {
-  title: "Your Quiz Results | Carisma Slimming",
+  title: 'Your Personalised Results | Carisma Slimming',
   robots: { index: false, follow: true },
 };
 
-/* ── Brand tokens (locked palette — DESIGN_LANGUAGE §1) ───────────────── */
-const headingFont = 'Trajan Pro, serif';
-const wideFont    = 'Novecento Wide Book, sans-serif';
-const bodyFont    = 'Roboto, sans-serif';
-// Headings: dark sage #3c5a40 (H2/H3), deep forest #024C27 for stat values. Both AA on white.
-const headGreen   = '#3c5a40';
-const deepForest  = '#024C27';
-// Sage #4f7256 — buttons/links/icons/eyebrows/tags. AA (5.42:1). #8EB093 stays decorative only.
-const green       = '#4f7256';
-// Body copy / secondary text (locked neutrals).
-const body        = '#333333';
-const bodyMuted   = '#595959';
-
-/* ── Slimming treatments catalogue ───────────────────────────────────── */
+/* ── Treatment catalogue ──────────────────────────────────────────────── */
 const TREATMENTS = [
   {
     id: 'medical-weight-loss',
     name: 'Medical Weight Loss Program',
-    tagline: 'Doctor-led assessment, prescription support and a personalised plan built around your body and hormones.',
+    tagline: 'Our medical team assesses your metabolic profile, hormonal status and health history to build a bespoke weight loss programme — combining dietary structure, lifestyle coaching and, where appropriate, prescription support.',
     image: '/wix/87fc13_a965179046514c2a8ad7bec0b7f44127~mv2.jpg',
     stats: [
-      { label: 'Led by', value: 'Medical Doctor' },
-      { label: 'Results', value: 'Up to 1kg/week' },
+      { label: 'Supervised by', value: 'Medical Doctor' },
+      { label: 'Weekly loss', value: '0.5–1 kg/week' },
       { label: 'Support', value: 'Weekly check-ins' },
     ],
     href: '/weight-loss',
@@ -37,47 +23,47 @@ const TREATMENTS = [
   {
     id: 'glp1',
     name: 'GLP-1 Prescription (Ozempic / Mounjaro)',
-    tagline: 'Prescription weight loss medication — Ozempic or Mounjaro — prescribed and monitored by our doctors when clinically appropriate.',
+    tagline: 'GLP-1 receptor agonists suppress appetite and slow gastric emptying at the hormonal level — prescribed and monitored by our doctors when clinically appropriate, with up to 15–20% total body weight reduction demonstrated in clinical trials.',
     image: '/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.webp',
     stats: [
+      { label: 'Weight reduction', value: '15–20% TBW' },
       { label: 'Type', value: 'Prescription only' },
-      { label: 'Results', value: 'Clinically proven' },
-      { label: 'Monitored', value: 'By our doctor' },
+      { label: 'Monitored by', value: 'Our doctor' },
     ],
     href: '/glp1',
   },
   {
     id: 'coolsculpting',
     name: 'CoolSculpting — Fat Freezing',
-    tagline: 'The market-leading fat-freezing technology targets stubborn pockets that resist diet and exercise.',
+    tagline: 'CoolSculpting® uses controlled cryolipolysis to permanently destroy stubborn fat cells in targeted areas — diet-resistant pockets that respond poorly to exercise — with 10–26% fat reduction per cycle confirmed by clinical studies.',
     image: '/wix/87fc13_6d89e9c129304617a960aa46bb07eed4~mv2.jpg',
     stats: [
-      { label: 'Downtime', value: 'None' },
       { label: 'Fat reduction', value: '10–26%' },
       { label: 'Results visible', value: '8–12 weeks' },
+      { label: 'Downtime', value: 'None' },
     ],
     href: '/packages',
   },
   {
     id: 'emsculpt-neo',
     name: 'EMSculpt NEO',
-    tagline: 'High-intensity electromagnetic energy builds and tones muscle while simultaneously reducing fat in the treated area.',
+    tagline: 'The only device clinically proven to simultaneously build muscle (+25%) and reduce fat (–25%) in a single session — high-intensity electromagnetic energy forces 20,000 muscle contractions in 30 minutes, reshaping the body from within.',
     image: '/wix/87fc13_d79664fae1184e8e8c947c3d350af498~mv2.jpg',
     stats: [
-      { label: 'Muscle gain', value: '~25–30%' },
-      { label: 'Fat reduction', value: '~25–30%' },
-      { label: 'Sessions', value: '4 sessions' },
+      { label: 'Muscle gain', value: '~25%' },
+      { label: 'Fat reduction', value: '~25%' },
+      { label: 'Sessions', value: '4 x 30 min' },
     ],
     href: '/packages',
   },
   {
     id: 'velashape',
     name: 'VelaShape III — Skin Tightening',
-    tagline: 'Radiofrequency, infrared light and vacuum massage tighten loose skin and smooth cellulite-prone areas.',
+    tagline: 'VelaShape III combines radiofrequency, infrared light and mechanical vacuum massage to heat and remodel the fibrous septae responsible for cellulite, while tightening loose skin and improving lymphatic circulation in treated areas.',
     image: '/wix/87fc13_8e6b2be93835401caee6402885a0fb6c~mv2.jpg',
     stats: [
+      { label: 'Sessions', value: '3–6 treatments' },
       { label: 'Downtime', value: 'None' },
-      { label: 'Results in', value: '3–6 sessions' },
       { label: 'Feels like', value: 'Warm massage' },
     ],
     href: '/packages',
@@ -85,273 +71,206 @@ const TREATMENTS = [
   {
     id: 'lymphatic-drainage',
     name: 'Lymphatic Drainage',
-    tagline: 'Compressive micro-vibration and specialist massage to reduce fluid retention, bloating and that heavy, puffy feeling.',
+    tagline: 'Specialist compressive massage and micro-vibration accelerate lymphatic flow, reducing fluid retention, swelling and that heavy, puffy feeling — particularly effective as an adjunct to a fat loss or post-treatment recovery programme.',
     image: '/wix/87fc13_440425b61c66444abe7e3062dbfcd290~mv2.jpg',
     stats: [
       { label: 'Downtime', value: 'None' },
-      { label: 'Feeling', value: 'Immediate relief' },
-      { label: 'Best with', value: 'Fat loss plan' },
+      { label: 'Effect', value: 'Immediate relief' },
+      { label: 'Best combined with', value: 'Fat loss plan' },
     ],
     href: '/packages',
   },
-];
+] as const;
 
-/* ── Goal → treatment IDs ─────────────────────────────────────────────── */
-const GOAL_TO_TREATMENTS: Record<string, string[]> = {
-  'Lose weight':         ['medical-weight-loss', 'glp1'],
-  'Reduce stubborn fat': ['coolsculpting', 'emsculpt-neo'],
-  'Build muscle & tone': ['emsculpt-neo'],
-  'Tighten loose skin':  ['velashape', 'emsculpt-neo'],
-  'Reduce cellulite':    ['velashape', 'lymphatic-drainage'],
-  'Reduce bloating':     ['lymphatic-drainage', 'medical-weight-loss'],
+/* ── Goal -> treatment clinical weights ───────────────────────────────
+   5 = first-line gold standard  |  4 = strong second-line
+   3 = good moderate-evidence    |  2 = mild/secondary
+   1 = incidental/adjunct only   |  omit = not indicated
+   ──────────────────────────────────────────────────────────────────── */
+const GOAL_WEIGHTS: Record<string, Record<string, number>> = {
+  'Lose weight': {
+    'medical-weight-loss': 5, // comprehensive medical management — gold standard
+    'glp1':                5, // GLP-1 agonists: 15-20% total body weight reduction
+    'lymphatic-drainage':  1, // adjunct support only; does not reduce fat mass
+  },
+  'Reduce stubborn fat': {
+    'coolsculpting':       5, // cryolipolysis: 10-26% fat reduction per cycle
+    'emsculpt-neo':        4, // simultaneous fat reduction + muscle building
+    'medical-weight-loss': 2, // systemic plan assists reduction of overall fat
+  },
+  'Build muscle & tone': {
+    'emsculpt-neo': 5, // only device clinically proven to hypertrophy muscle
+    'velashape':    1, // minor surface toning effect only
+  },
+  'Tighten loose skin': {
+    'velashape':    5, // RF + IR + vacuum: primary evidence-based skin laxity device
+    'emsculpt-neo': 3, // muscle volume beneath skin improves apparent tone
+  },
+  'Reduce cellulite': {
+    'velashape':          5, // RF disrupts fibrous septae + addresses fluid component
+    'lymphatic-drainage': 3, // reduces the fluid and inflammatory component of cellulite
+    'coolsculpting':      1, // mild improvement where fat component dominates
+  },
+  'Reduce bloating': {
+    'lymphatic-drainage':  5, // accelerates lymph flow; reduces fluid retention
+    'medical-weight-loss': 3, // dietary and GI guidance integral to the programme
+    'velashape':           1, // vacuum massage has mild lymphatic drainage benefit
+  },
 };
 
-/* ── Area → treatment IDs ─────────────────────────────────────────────── */
-const AREA_TO_TREATMENTS: Record<string, string[]> = {
-  'Abdomen':      ['coolsculpting', 'emsculpt-neo'],
-  'Love handles': ['coolsculpting'],
-  'Arms':         ['coolsculpting', 'emsculpt-neo'],
-  'Thighs':       ['coolsculpting', 'velashape'],
-  'Double chin':  ['coolsculpting'],
-  'Glutes':       ['emsculpt-neo'],
-  'Knees':        ['velashape'],
-  'Back':         ['coolsculpting'],
+/* ── Area -> treatment clinical weights ───────────────────────────────── */
+const AREA_WEIGHTS: Record<string, Record<string, number>> = {
+  'Abdomen': {
+    'coolsculpting': 5, // most clinical data in the abdominal area
+    'emsculpt-neo':  5, // abdomen is the primary EMSculpt NEO indication
+    'velashape':     3, // skin tightening post fat-loss
+  },
+  'Love handles': {
+    'coolsculpting': 5, // flanks are a classic CoolSculpting applicator area
+    'emsculpt-neo':  3, // flank applicator available
+  },
+  'Arms': {
+    'coolsculpting': 4, // upper arm fat reduction
+    'emsculpt-neo':  4, // arm muscle toning and fat reduction
+    'velashape':     2, // skin tightening on upper arms
+  },
+  'Thighs': {
+    'coolsculpting': 4, // inner and outer thigh fat reduction
+    'velashape':     5, // thighs are the prime VelaShape treatment area
+    'lymphatic-drainage': 2, // thigh fluid and cellulite support
+  },
+  'Double chin': {
+    'coolsculpting': 5, // CoolMini applicator designed specifically for submental area
+  },
+  'Glutes': {
+    'emsculpt-neo': 5, // gluteal toning is a primary EMSculpt use case
+    'velashape':    3, // skin lifting and tightening on glutes
+  },
+  'Knees': {
+    'velashape':     5, // inner knee fat and skin laxity — specific VelaShape indication
+    'coolsculpting': 2, // limited evidence for knee area
+  },
+  'Back': {
+    'coolsculpting': 5, // bra roll and back fat area
+    'emsculpt-neo':  2, // back applicator available
+  },
 };
 
-/* ── Recommendation logic ─────────────────────────────────────────────── */
+/* ── Scoring & normalisation ─────────────────────────────────────────── */
 function getRecommendations(
   goals: string[],
   areas: string[],
   medication: string,
-): { id: string; matchedGoals: string[]; matchedAreas: string[] }[] {
+): SlimmingRec[] {
   const scores = new Map<string, { score: number; goals: Set<string>; areas: Set<string> }>();
 
-  const add = (id: string, score: number, goal?: string, area?: string) => {
+  const add = (id: string, pts: number, goal?: string, area?: string) => {
     if (!scores.has(id)) scores.set(id, { score: 0, goals: new Set(), areas: new Set() });
     const e = scores.get(id)!;
-    e.score += score;
+    e.score += pts;
     if (goal) e.goals.add(goal);
     if (area) e.areas.add(area);
   };
 
+  // Priority multipliers: earlier goals carry more clinical weight
+  const PRIORITY = [1.5, 1.25]; // index 0 -> 1.5x, index 1 -> 1.25x, rest -> 1.0x
+
   goals.forEach((goal, idx) => {
-    (GOAL_TO_TREATMENTS[goal] ?? []).forEach((id, rank) => {
-      add(id, (goals.length - idx) * 3 + (2 - rank), goal);
-    });
+    const weights = GOAL_WEIGHTS[goal] ?? {};
+    const multiplier = PRIORITY[idx] ?? 1.0;
+    for (const [id, weight] of Object.entries(weights)) {
+      add(id, weight * multiplier, goal);
+    }
   });
 
   areas.forEach((area) => {
-    (AREA_TO_TREATMENTS[area] ?? []).forEach((id, rank) => {
-      add(id, 2 - rank, undefined, area);
-    });
+    const weights = AREA_WEIGHTS[area] ?? {};
+    for (const [id, weight] of Object.entries(weights)) {
+      add(id, weight, undefined, area);
+    }
   });
 
-  // If NOT open to medication → deprioritise GLP-1 significantly
+  // Medication preference handling
   if (medication === 'No, I prefer non-medical') {
+    // Patient explicitly opts out of prescription medication
     const e = scores.get('glp1');
     if (e) e.score = -99;
-  }
-
-  // If YES to medication → boost GLP-1
-  if (medication === 'Yes, I am interested') {
+  } else if (medication === 'Yes, I am interested') {
+    // Patient is open to GLP-1 — boost to ensure it surfaces
     const e = scores.get('glp1');
     if (e) e.score += 8;
     else add('glp1', 8);
   }
+  // 'Not sure' -> no adjustment; doctor will discuss in consultation
 
-  return Array.from(scores.entries())
+  const ranked = Array.from(scores.entries())
     .filter(([, e]) => e.score > 0)
     .sort((a, b) => b[1].score - a[1].score)
-    .slice(0, 4)
-    .map(([id, e]) => ({ id, matchedGoals: Array.from(e.goals), matchedAreas: Array.from(e.areas) }));
+    .slice(0, 4);
+
+  const maxScore = ranked[0]?.[1]?.score ?? 1;
+  const hasEnoughSignal = goals.length >= 2;
+
+  const result: SlimmingRec[] = [];
+  for (const [id, e] of ranked) {
+    const treatment = TREATMENTS.find((t) => t.id === id);
+    if (!treatment) continue;
+
+    // Scale 72-100%; guarantee >=97% for top pick when signal is strong
+    let matchPct = Math.round(72 + (e.score / maxScore) * 28);
+    if (result.length === 0 && hasEnoughSignal && matchPct < 97) matchPct = 97;
+
+    result.push({
+      id: treatment.id,
+      name: treatment.name,
+      tagline: treatment.tagline,
+      image: treatment.image,
+      stats: [...treatment.stats],
+      href: treatment.href,
+      matchedGoals: Array.from(e.goals),
+      matchedAreas: Array.from(e.areas),
+      matchPct,
+    });
+  }
+  return result;
 }
 
 /* ── Page ─────────────────────────────────────────────────────────────── */
 export default async function SlimmingQuizResultsPage({
   searchParams,
 }: {
-  // Next.js 16: searchParams is a Promise and must be awaited before use.
   searchParams: Promise<{ goals?: string; areas?: string; medication?: string; name?: string }>;
 }) {
   const sp = await searchParams;
-  const selectedGoals = sp.goals
-    ? sp.goals.split(',').map((g) => decodeURIComponent(g.trim()))
-    : [];
-  const selectedAreas = sp.areas
-    ? sp.areas.split(',').map((a) => decodeURIComponent(a.trim()))
-    : [];
-  const medication = sp.medication ?? '';
-  const firstName  = sp.name ?? '';
 
-  const recs = getRecommendations(selectedGoals, selectedAreas, medication);
+  const goals      = sp.goals    ? sp.goals.split(',').map((g) => decodeURIComponent(g.trim()))    : [];
+  const areas      = sp.areas    ? sp.areas.split(',').map((a) => decodeURIComponent(a.trim()))    : [];
+  const medication = sp.medication ? decodeURIComponent(sp.medication) : '';
+  const firstName  = sp.name ? decodeURIComponent(sp.name) : '';
 
-  const items = recs.length > 0
-    ? recs
-    : TREATMENTS.slice(0, 3).map((t) => ({ id: t.id, matchedGoals: [], matchedAreas: [] }));
+  let recs = getRecommendations(goals, areas, medication);
+
+  /* Fallback: first 3 treatments with 80% match if nothing scored */
+  if (recs.length === 0) {
+    recs = TREATMENTS.slice(0, 3).map((t) => ({
+      id: t.id,
+      name: t.name,
+      tagline: t.tagline,
+      image: t.image,
+      stats: [...t.stats],
+      href: t.href,
+      matchedGoals: [] as string[],
+      matchedAreas: [] as string[],
+      matchPct: 80,
+    }));
+  }
 
   return (
-    <main style={{ minHeight: '80vh', background: '#FFFFFF' }}>
-
-      {/* ── Hero heading (bespoke hero with animated HeroMotif behind it) ── */}
-      <section
-        style={{
-          position: 'relative',
-          overflow: 'hidden',
-          padding: 'clamp(96px, 14vh, 132px) 24px 64px',
-          // Hero radial sage wash, flowing down into white so the next section seam matches.
-          background:
-            'radial-gradient(120% 90% at 85% 8%, #eef3ea 0%, #f6f4ef 45%, #ffffff 100%)',
-        }}
-      >
-        {/* soft brand glow bed (decorative) */}
-        <span
-          aria-hidden
-          style={{
-            position: 'absolute',
-            top: '-14%',
-            right: '-6%',
-            width: 420,
-            height: 420,
-            borderRadius: '50%',
-            background: 'rgba(142,176,147,0.26)',
-            filter: 'blur(90px)',
-            zIndex: 0,
-            pointerEvents: 'none',
-          }}
-        />
-
-        {/* animated sage constellation motif — brand signature, reduced-motion safe */}
-        <HeroMotif />
-
-        <div style={{ position: 'relative', zIndex: 1, maxWidth: '760px', margin: '0 auto', textAlign: 'center' }}>
-          <p style={{ fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', color: green, textTransform: 'uppercase', marginBottom: '14px' }}>
-            {firstName ? `${firstName}, here are your results` : 'Your personalised results'}
-          </p>
-          <h1 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(26px, 3vw, 35px)', lineHeight: 1.2, color: headGreen, textTransform: 'uppercase', margin: '0 0 18px' }}>
-            Your Personalised Slimming Plan<br />Just For You
-          </h1>
-          <div style={{ width: '64px', height: '1px', backgroundColor: green, margin: '0 auto 20px' }} />
-          {(selectedGoals.length > 0 || selectedAreas.length > 0) && (
-            <p style={{ fontFamily: bodyFont, fontSize: '16px', color: bodyMuted, lineHeight: 1.6, maxWidth: 620, margin: '0 auto' }}>
-              Based on your goals
-              {selectedGoals.length > 0 && <> — <span style={{ color: headGreen, fontWeight: 500 }}>{selectedGoals.join(', ')}</span></>}
-              {selectedAreas.length > 0 && <> — and focus areas: <span style={{ color: headGreen, fontWeight: 500 }}>{selectedAreas.join(', ')}</span></>}
-              {' '}— our team has selected the treatments most suited to your needs.
-            </p>
-          )}
-        </div>
-      </section>
-
-      {/* ── Recommendation cards ── */}
-      {/* Gradient flows white → soft sage wash → white, so both seams match (no flat-colour band). */}
-      <section
-        style={{
-          background: 'linear-gradient(180deg, #ffffff 0%, #f5f8f2 46%, #ffffff 100%)',
-          padding: '64px 0 88px',
-        }}
-      >
-        <div style={{ maxWidth: '880px', margin: '0 auto', padding: '0 24px' }}>
-          {/* Section header pattern: eyebrow → 64px rule → Trajan H2 → sub */}
-          <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-            <p style={{ fontFamily: wideFont, fontSize: '12px', letterSpacing: '3px', color: green, textTransform: 'uppercase', margin: '0 0 16px' }}>
-              Recommended for you
-            </p>
-            <div style={{ width: '64px', height: '1px', backgroundColor: green, margin: '0 auto 18px' }} />
-            <h2 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: 'clamp(24px, 3.4vw, 34px)', lineHeight: 1.25, color: headGreen, textTransform: 'uppercase', margin: 0 }}>
-              Slimming &amp; Body Treatments in Malta
-            </h2>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '28px' }}>
-            {items.map(({ id, matchedGoals, matchedAreas }) => {
-              const t = TREATMENTS.find((x) => x.id === id);
-              if (!t) return null;
-
-              return (
-                <div
-                  key={id}
-                  className="card card-lift"
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '240px 1fr',
-                    overflow: 'hidden',
-                    borderRadius: '20px',
-                  }}
-                >
-                  {/* Image (light card — no dark overlay) */}
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <div style={{ position: 'relative', minHeight: '260px', overflow: 'hidden' }}>
-                    <img
-                      src={t.image}
-                      alt={t.name}
-                      loading="lazy"
-                      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
-                    />
-                  </div>
-
-                  {/* Content */}
-                  <div style={{ padding: '28px 30px 26px', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <div>
-                      <h3 style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '20px', lineHeight: 1.3, color: headGreen, textTransform: 'uppercase', margin: '0 0 12px' }}>
-                        {t.name}
-                      </h3>
-                      <p style={{ fontFamily: bodyFont, fontSize: '15px', color: bodyMuted, lineHeight: 1.6, margin: '0 0 18px' }}>
-                        {t.tagline}
-                      </p>
-
-                      {(matchedGoals.length > 0 || matchedAreas.length > 0) && (
-                        <div style={{ marginBottom: '20px' }}>
-                          <p style={{ fontFamily: wideFont, fontSize: '11px', letterSpacing: '2px', color: green, textTransform: 'uppercase', margin: '0 0 8px' }}>
-                            Matched to your goals
-                          </p>
-                          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                            {[...matchedGoals, ...matchedAreas].map((label) => (
-                              <span key={label} style={{ fontFamily: bodyFont, fontSize: '12px', color: green, backgroundColor: '#EEF3EF', border: '1px solid #C8DDC9', borderRadius: '999px', padding: '4px 12px' }}>
-                                {label}
-                              </span>
-                            ))}
-                          </div>
-                        </div>
-                      )}
-
-                      <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
-                        {t.stats.map((s) => (
-                          <div key={s.label} style={{ textAlign: 'center' }}>
-                            <p style={{ fontFamily: headingFont, fontWeight: 400, fontSize: '17px', color: deepForest, margin: 0, lineHeight: 1.2 }}>{s.value}</p>
-                            <p style={{ fontFamily: wideFont, fontSize: '10px', letterSpacing: '1.5px', textTransform: 'uppercase', color: bodyMuted, margin: '4px 0 0' }}>{s.label}</p>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <Link
-                      href={t.href}
-                      className="btn btn-secondary"
-                      style={{ width: '100%', marginTop: '22px', padding: '13px', fontFamily: wideFont, fontSize: '12px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none', textAlign: 'center' }}
-                    >
-                      Learn More
-                    </Link>
-                  </div>
-                </div>
-              );
-            })}
-          </div>
-
-          {/* CTA */}
-          <div style={{ textAlign: 'center', marginTop: '56px' }}>
-            <p style={{ fontFamily: bodyFont, fontSize: '16px', color: bodyMuted, lineHeight: 1.6, maxWidth: 560, margin: '0 auto 22px' }}>
-              Ready to start? Book a free body composition analysis with our medical team.
-            </p>
-            <Link
-              href="/consultation"
-              className="cta-glow"
-              style={{ display: 'inline-block', padding: '15px 40px', color: '#FFFFFF', fontFamily: wideFont, fontSize: '13px', letterSpacing: '1.5px', textTransform: 'uppercase', textDecoration: 'none' }}
-            >
-              Book a Free Body Analysis
-            </Link>
-          </div>
-        </div>
-      </section>
-    </main>
+    <QuizResultsClient
+      firstName={firstName}
+      goals={goals}
+      areas={areas}
+      recs={recs}
+    />
   );
 }
