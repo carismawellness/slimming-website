@@ -14,14 +14,9 @@ const BRANDS = [
     url: 'https://www.carismaspa.com',
   },
   {
-    color: '#6E8FA0',
+    color: '#AFA58F',
     name: 'Hair Clinic',
     url: 'https://www.carismahairclinic.com',
-  },
-  {
-    color: '#C4A882',
-    name: 'Pulse',
-    url: 'https://www.pulsewellness.com',
   },
 ];
 

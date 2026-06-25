@@ -192,9 +192,11 @@ function getRecommendations(
 
   // Medication preference handling
   if (medication === 'No, I prefer non-medical') {
-    // Patient explicitly opts out of prescription medication
-    const e = scores.get('glp1');
-    if (e) e.score = -99;
+    // Patient explicitly opts out of any medical/prescription intervention
+    for (const id of ['glp1', 'medical-weight-loss']) {
+      const e = scores.get(id);
+      if (e) e.score = -99;
+    }
   } else if (medication === 'Yes, I am interested') {
     // Patient is open to GLP-1 — boost to ensure it surfaces
     const e = scores.get('glp1');

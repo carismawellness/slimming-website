@@ -10,7 +10,6 @@ import {
   MEDICATION,
   PREVIOUS_ATTEMPTS,
   REFERRAL,
-  CONSULTATION,
   type QuizOption,
 } from './quizData';
 
@@ -31,17 +30,15 @@ type StepId =
   | 'medication'
   | 'previousAttempts'
   | 'referral'
-  | 'consultation'
   | 'contact';
 
 const STEPS: { id: StepId; title: string; sub: string }[] = [
   { id: 'goals',            title: 'What would you love to change?',         sub: 'Choose all that apply — we’ll match treatments to every goal.' },
   { id: 'areas',            title: 'Where would you like to focus?',         sub: 'Optional — pick any areas you’d like to target.' },
-  { id: 'timeline',         title: 'What’s your timeline for results?',      sub: 'This helps us pace a plan that fits your life.' },
+  { id: 'timeline',         title: 'What’s your timeline for results?',  sub: 'This helps us pace a plan that fits your life.' },
   { id: 'medication',       title: 'Open to medical support?',               sub: 'This helps us know whether prescription options fit you.' },
   { id: 'previousAttempts', title: 'Have you tried losing weight before?',   sub: 'No judgement — it just helps us understand what you need.' },
   { id: 'referral',         title: 'Where did you hear about us?',           sub: 'Last quick one before your results.' },
-  { id: 'consultation',     title: 'Would you like a consultation?',         sub: 'For a limited time we’re offering free virtual consultations with our medical team to discuss your goals and the options available to you.' },
   { id: 'contact',          title: 'Where should we send your plan?',        sub: 'Enter your details so we can share your results and stay in touch about your personalised plan.' },
 ];
 
@@ -57,7 +54,6 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
   const [medication, setMedication] = useState('');
   const [previousAttempts, setPreviousAttempts] = useState('');
   const [referral, setReferral] = useState('');
-  const [consultation, setConsultation] = useState('');
   const [firstName, setFirstName] = useState('');
   const [surname, setSurname] = useState('');
   const [email, setEmail] = useState('');
@@ -92,11 +88,10 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
       case 'medication':       return medication !== '';
       case 'previousAttempts': return previousAttempts !== '';
       case 'referral':         return referral !== '';
-      case 'consultation':     return consultation !== '';
       case 'contact':
         return !!firstName.trim() && !!surname.trim() && validEmail(email) && validPhone(phone);
     }
-  }, [step.id, goals, timeline, medication, previousAttempts, referral, consultation, firstName, surname, email, phone]);
+  }, [step.id, goals, timeline, medication, previousAttempts, referral, firstName, surname, email, phone]);
 
   const goNext = () => {
     if (step.id === 'contact') {
@@ -134,7 +129,6 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
           medication,
           previousAttempts,
           referral,
-          consultation,
         }),
       });
     } catch {
@@ -251,10 +245,6 @@ export default function SlimmingQuiz({ onClose }: { onClose: () => void }) {
 
         {step.id === 'referral' && (
           <OptionGrid options={REFERRAL} selected={referral ? [referral] : []} multi={false} compact onToggle={(v) => setReferral(v)} groupLabel="Where you heard about us" />
-        )}
-
-        {step.id === 'consultation' && (
-          <OptionGrid options={CONSULTATION} selected={consultation ? [consultation] : []} multi={false} onToggle={(v) => setConsultation(v)} groupLabel="Consultation preference" />
         )}
 
         {step.id === 'contact' && (
