@@ -13,6 +13,11 @@ const BRANDS = [
     name: 'Spa & Wellness',
     url: 'https://www.carismaspa.com',
   },
+  {
+    color: '#6E8FA0',
+    name: 'Hair Clinic',
+    url: 'https://www.carismahairclinic.com',
+  },
 ];
 
 // Rose motif path data from the shared brand wordmark (viewBox 113 0 70 67)
