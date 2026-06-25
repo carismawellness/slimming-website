@@ -799,7 +799,7 @@ export default function MedicalWeightLossLpPage() {
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                   ></iframe>
-                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', background: '#E9F0E9', borderRadius: '999px', padding: '8px 16px', marginTop: '16px', alignSelf: 'flex-start' }}>
+                  <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '16px', alignSelf: 'flex-start' }}>
                     <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <rect x="1" y="1" width="16" height="16" rx="4" fill="#C9D8C1" />
                       <text x="9" y="13" textAnchor="middle" fill="#4f7256" fontSize="10" fontWeight="700" fontFamily="sans-serif">P</text>

@@ -756,7 +756,7 @@ function DifferencePanel({
                   referrerPolicy="no-referrer-when-downgrade"
                   style={{ border: 0, borderRadius: 20, display: 'block', flex: 1, minHeight: 480 }}
                 />
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#E9F0E9', borderRadius: 999, padding: '8px 16px', marginTop: 16, alignSelf: 'flex-start' }}>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, marginTop: 16, alignSelf: 'flex-start' }}>
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={PARKING} alt="" aria-hidden="true" style={{ width: 18, height: 'auto' }} />
                   <span style={{ color: GREEN_TEXT, fontFamily: WIDE, fontSize: 12, letterSpacing: '1px', textTransform: 'uppercase', fontWeight: 600 }}>

@@ -527,10 +527,6 @@ export default function PageHero({
         .page-hero-grid { grid-template-columns: 1fr; }
         .hero-pill {
           display: inline-flex; align-items: center; gap: 7px;
-          background: rgba(255,255,255,0.7);
-          border: 1px solid rgba(95,126,102,0.18);
-          border-radius: 999px; padding: 7px 14px;
-          backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
         }
         .hero-outline {
           display: inline-flex; align-items: center;
