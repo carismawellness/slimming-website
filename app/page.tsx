@@ -58,7 +58,7 @@ export default function Home() {
       icon: '/wix/87fc13_1fdf47007d8a45c18e39603447edbb23~mv2.png',
       iconAlt: 'Exercise and movement program',
       items: [
-        'Open gym access at our Grand Hotel Excelsior',
+        "Open gym access at our St Julian's clinic",
         'Group classes for fat loss, strength and maintenance',
         'Personal training for guidance and motivation',
         'Customised workout plan for your level',
@@ -319,9 +319,9 @@ How GLP-1 Works<br />at Our Clinic
                 {/* Right - map + parking pill */}
                 <div className="flex flex-col">
                   <LazyMap
-                    title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
-                    ariaLabel="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
-                    src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
+                    title="Carisma Slimming clinic location — St Julian's, Malta"
+                    ariaLabel="Google Maps showing Carisma Slimming at St Julian's, STJ 3310, Malta"
+                    src="https://maps.google.com/maps?q=St%20Julian%27s%2C%20STJ%203310%2C%20Malta&z=15&output=embed"
                   />
                   {/* Parking pill */}
                   <div style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', marginTop: '16px', alignSelf: 'flex-start' }}>

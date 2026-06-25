@@ -96,7 +96,7 @@ export default function LazyMap({
             <circle cx="12" cy="10" r="3" />
           </svg>
           <span style={{ fontSize: '14px', letterSpacing: '0.04em' }}>
-            Grand Hotel Excelsior, Floriana
+            St Julian's, Malta
           </span>
           <span style={{ fontSize: '12px', opacity: 0.7 }}>Tap to load map</span>
         </span>

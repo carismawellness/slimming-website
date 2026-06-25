@@ -60,8 +60,8 @@ export default function WhyCarisma() {
           <Reveal style={{ display: 'flex', flexDirection: 'column', gap: 14 }}>
             <div className="cx-map-frame" style={{ position: 'relative', borderRadius: 20, overflow: 'hidden', boxShadow: 'var(--shadow-card)', flex: 1, minHeight: 320, border: '1px solid var(--line)' }}>
               <iframe
-                title="Map showing Carisma Slimming location at Grand Hotel Excelsior, Floriana, Malta"
-                aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
+                title="Map showing Carisma Slimming location at St Julian's, Malta"
+                aria-label="Google Maps showing Carisma Slimming at St Julian's, STJ 3310, Malta"
                 src={CONTACT.mapsEmbed}
                 width="100%"
                 height="100%"
@@ -76,7 +76,7 @@ export default function WhyCarisma() {
                   <circle cx="12" cy="10" r="2.4" stroke="#5f7e66" strokeWidth="1.6" />
                 </svg>
                 <span style={{ fontFamily: 'var(--body)', fontSize: 12, color: 'var(--sage-ink)', lineHeight: 1.45, fontWeight: 500 }}>
-                  Grand Hotel Excelsior, Floriana
+                  St Julian's, Malta
                 </span>
               </div>
             </div>
