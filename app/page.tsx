@@ -88,7 +88,7 @@ export default function Home() {
   ];
 
   const differenceItems: ReactNode[] = [
-    "Created by the team behind Malta's leading spa and medical aesthetics centres",
+    <>Created by the team behind Malta&apos;s leading <a href="https://www.carismaspa.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>spa</a> and <a href="https://www.carismaaesthetics.com/" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'underline' }}>medical aesthetics</a> centres.</>,
     'Doctor-led medical weight loss and slimming, not a beauty salon diet program',
     <>All-in-one approach: medical assessment, personalised meal plans, movement and <Link href="/packages" className="underline decoration-dotted underline-offset-2">body contouring treatments</Link></>,
     'High-touch support with weekly check-ins, WhatsApp coaching and dedicated accountability',

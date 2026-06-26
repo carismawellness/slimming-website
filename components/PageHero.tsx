@@ -50,7 +50,7 @@ export type PageHeroProps = {
   eyebrow?: string;
   /** Headline lines. Strings render as plain serif; {em:true} colours the line sage. */
   headline: { text: string; em?: boolean }[];
-  sub?: string;
+  sub?: React.ReactNode;
   bullets?: HeroBullet[];
   /** Optional in-hero price/offer block, rendered above the primary CTA.
    *  Purely additive — omit (or pass an empty object) to render nothing. */
