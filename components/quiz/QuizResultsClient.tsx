@@ -457,7 +457,8 @@ export default function QuizResultsClient({ firstName, goals, areas, recs }: Pro
             }}
           />
 
-          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '28px' }}>
+          {/* 3D AI holographic icon */}
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
             <QuizIcon3D />
           </div>
 

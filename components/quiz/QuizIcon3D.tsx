@@ -3,24 +3,16 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-/* Small 120×120 spinning TorusKnot icon for the quiz results hero.
-   Sage-green palette matching ParticleScene.tsx.
-   Returns null on mobile (pointer: coarse) or prefers-reduced-motion.
+const SIZE = 150;
+const HEX  = '#2AE085'; // electric emerald-sage
 
-   Rotation is time-based (no Date.now(), no Math.random() in rAF loop):
-     Y: 0.48 rad/s  ≈ 0.008 rad/frame @ 60 fps
-     X: 0.24 rad/s  ≈ 0.004 rad/frame @ 60 fps
-*/
 export default function QuizIcon3D() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-
     const canvas = canvasRef.current;
     if (!canvas) return;
-
-    const SIZE = 120;
 
     const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -28,69 +20,123 @@ export default function QuizIcon3D() {
     renderer.setClearColor(0x000000, 0);
 
     const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    camera.position.z = 3.6;
 
-    const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 100);
-    camera.position.z = 3.2;
+    const col = new THREE.Color(HEX);
+    const gc: THREE.BufferGeometry[] = [];
+    const mc: THREE.Material[] = [];
 
-    // Warm ambient light (light sage #C9D8C1)
-    const ambient = new THREE.AmbientLight(0xc9d8c1, 1.2);
-    scene.add(ambient);
+    const body = new THREE.Group();
+    scene.add(body);
 
-    // Primary point light — brand sage highlight
-    const point = new THREE.PointLight(0x8eb093, 3.5, 10);
-    point.position.set(2, 2, 2);
-    scene.add(point);
-
-    // Secondary fill light — deep sage from below
-    const fill = new THREE.PointLight(0x4f7256, 1.8, 8);
-    fill.position.set(-2, -1.5, 1);
-    scene.add(fill);
-
-    // TorusKnot p:2 q:3 — elegant wellness/infinity symbol
-    const geo = new THREE.TorusKnotGeometry(0.55, 0.18, 200, 24, 2, 3);
-    const mat = new THREE.MeshStandardMaterial({
-      color: new THREE.Color('#8EB093'),
-      metalness: 0.3,
-      roughness: 0.4,
-    });
-    const knot = new THREE.Mesh(geo, mat);
-    scene.add(knot);
-
-    let raf = 0;
-
-    const animate = (time: number) => {
-      raf = requestAnimationFrame(animate);
-      // time-based rotation — frame-rate independent, no Date.now()
-      const t = time * 0.001; // convert ms → seconds
-      knot.rotation.y = t * 0.48; // 0.48 rad/s ≈ 0.008 rad/frame @ 60 fps
-      knot.rotation.x = t * 0.24; // 0.24 rad/s ≈ 0.004 rad/frame @ 60 fps
-      renderer.render(scene, camera);
+    const mesh = (geo: THREE.BufferGeometry, mat: THREE.Material, parent: THREE.Object3D = body) => {
+      gc.push(geo); mc.push(mat);
+      const m = new THREE.Mesh(geo, mat);
+      parent.add(m); return m;
     };
 
+    /* ── Pulsing core ─────────────────────────────────────────────────── */
+    const coreMat = new THREE.MeshStandardMaterial({
+      color: col, emissive: col, emissiveIntensity: 3,
+      metalness: 0, roughness: 0,
+    });
+    const core = mesh(new THREE.SphereGeometry(0.17, 24, 24), coreMat);
+
+    /* ── Halo bloom sphere ────────────────────────────────────────────── */
+    mesh(
+      new THREE.SphereGeometry(0.30, 24, 24),
+      new THREE.MeshBasicMaterial({
+        color: col, transparent: true, opacity: 0.12,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      }),
+    );
+
+    /* ── Gyroscope rings ──────────────────────────────────────────────── */
+    const mkRing = (opacity: number, rx = 0, ry = 0): THREE.Mesh => {
+      const geo = new THREE.TorusGeometry(0.72, 0.017, 8, 100);
+      const mat = new THREE.MeshBasicMaterial({
+        color: col, transparent: true, opacity,
+        blending: THREE.AdditiveBlending, depthWrite: false,
+      });
+      gc.push(geo); mc.push(mat);
+      const m = new THREE.Mesh(geo, mat);
+      m.rotation.x = rx; m.rotation.y = ry;
+      body.add(m); return m;
+    };
+
+    const ring1 = mkRing(0.88);
+    const ring2 = mkRing(0.72, Math.PI / 2.5);
+    const ring3 = mkRing(0.55, -Math.PI / 2.5, Math.PI / 6);
+
+    /* ── Wireframe icosahedron ────────────────────────────────────────── */
+    const icoGeo = new THREE.IcosahedronGeometry(0.90, 1);
+    const edgesGeo = new THREE.EdgesGeometry(icoGeo);
+    const edgeMat = new THREE.LineBasicMaterial({
+      color: col, transparent: true, opacity: 0.18,
+      blending: THREE.AdditiveBlending,
+    });
+    gc.push(icoGeo, edgesGeo); mc.push(edgeMat);
+    const wireframe = new THREE.LineSegments(edgesGeo, edgeMat);
+    body.add(wireframe);
+
+    /* ── Orbiting data node ───────────────────────────────────────────── */
+    const dotGeo = new THREE.SphereGeometry(0.045, 8, 8);
+    const dotMat = new THREE.MeshBasicMaterial({
+      color: col, blending: THREE.AdditiveBlending,
+    });
+    gc.push(dotGeo); mc.push(dotMat);
+    const dotPivot = new THREE.Group();
+    dotPivot.rotation.x = Math.PI / 3.5;
+    const dot = new THREE.Mesh(dotGeo, dotMat);
+    dot.position.set(0.72, 0, 0);
+    dotPivot.add(dot);
+    body.add(dotPivot);
+
+    /* ── Lights ───────────────────────────────────────────────────────── */
+    scene.add(new THREE.PointLight(col, 2.2, 4));
+    scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+
+    /* ── Animate ──────────────────────────────────────────────────────── */
+    let raf = 0;
+    const animate = (ms: number) => {
+      raf = requestAnimationFrame(animate);
+      const t = ms * 0.001;
+
+      body.rotation.y = t * 0.14;
+      body.rotation.x = Math.sin(t * 0.28) * 0.18;
+
+      ring1.rotation.z = t * 0.58;
+      ring2.rotation.z = -t * 0.44;
+      ring3.rotation.z = t * 0.32;
+
+      wireframe.rotation.y = -t * 0.22;
+
+      const p = 0.88 + Math.sin(t * 3.2) * 0.12;
+      core.scale.setScalar(p);
+      coreMat.emissiveIntensity = 2.6 + Math.sin(t * 3.2) * 1.2;
+
+      dotPivot.rotation.z = t * 2.0;
+
+      renderer.render(scene, camera);
+    };
     raf = requestAnimationFrame(animate);
 
     return () => {
       cancelAnimationFrame(raf);
-      geo.dispose();
-      mat.dispose();
+      gc.forEach(g => g.dispose());
+      mc.forEach(m => m.dispose());
       renderer.dispose();
     };
   }, []);
 
-  // The canvas is always mounted (SSR-safe: zero size until useEffect runs),
-  // but nothing is rendered into it on mobile/reduced-motion — it stays
-  // transparent (alpha: true + clearColor opacity 0) and invisible.
   return (
     <canvas
       ref={canvasRef}
-      width={120}
-      height={120}
-      style={{
-        display: 'block',
-        width: '120px',
-        height: '120px',
-        pointerEvents: 'none',
-      }}
+      width={SIZE}
+      height={SIZE}
+      style={{ display: 'block', width: `${SIZE}px`, height: `${SIZE}px`, pointerEvents: 'none' }}
+      aria-hidden
     />
   );
 }
