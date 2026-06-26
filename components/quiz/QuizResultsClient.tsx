@@ -10,6 +10,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const ParticleScene = dynamic(() => import('./ParticleScene'), { ssr: false });
+const QuizIcon3D = dynamic(() => import('./QuizIcon3D'), { ssr: false });
 
 /* ── Brand tokens (forest green dark theme) ───────────────────────────── */
 const SERIF   = '"Trajan Pro", Georgia, serif';
@@ -456,6 +457,10 @@ export default function QuizResultsClient({ firstName, goals, areas, recs }: Pro
             }}
           />
 
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '28px' }}>
+            <QuizIcon3D />
+          </div>
+
           {(goals.length > 0 || areas.length > 0) && (
             <p
               ref={subtitleRef}
@@ -556,93 +561,88 @@ export default function QuizResultsClient({ firstName, goals, areas, recs }: Pro
         </div>
       </section>
 
-      {/* ═══ CTA SECTION ════════════════════════════════════════════════ */}
+      {/* ═══ CTA SECTION — flows seamlessly from card section ═══════════ */}
       <section
         style={{
-          background: '#04100a',
-          padding: 'clamp(56px, 8vh, 96px) 24px',
+          background: 'linear-gradient(180deg, #081c0c 0%, #061408 40%, #04100a 100%)',
+          padding: 'clamp(56px, 8vh, 96px) 24px clamp(72px, 10vh, 116px)',
+          position: 'relative',
+          overflow: 'hidden',
         }}
       >
-        <div style={{ maxWidth: '640px', margin: '0 auto' }}>
-          <div
+        {/* Ambient glow — fills the section, no card border */}
+        <div aria-hidden style={{
+          position: 'absolute', top: '0', left: '50%', transform: 'translateX(-50%)',
+          width: '600px', height: '320px', borderRadius: '50%',
+          background: `${SAGE}18`, filter: 'blur(90px)',
+          pointerEvents: 'none',
+        }} />
+
+        <div style={{ maxWidth: '560px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          {/* Sage divider */}
+          <div style={{
+            width: '40px', height: '1px',
+            background: `linear-gradient(90deg, transparent, ${SAGE}, transparent)`,
+            margin: '0 auto 28px',
+          }} />
+          <p style={{
+            fontFamily: WIDE,
+            fontSize: '10px',
+            letterSpacing: '4px',
+            color: SAGE,
+            textTransform: 'uppercase',
+            margin: '0 0 16px',
+          }}>
+            Ready to begin?
+          </p>
+          <h2 style={{
+            fontFamily: SERIF,
+            fontWeight: 400,
+            fontSize: 'clamp(22px, 3vw, 32px)',
+            textTransform: 'uppercase',
+            letterSpacing: '1.5px',
+            color: 'rgba(255,255,255,0.95)',
+            margin: '0 0 14px',
+          }}>
+            Meet Your Medical Team
+          </h2>
+          <p style={{
+            fontFamily: BODY,
+            fontSize: '14px',
+            color: 'rgba(255,255,255,0.40)',
+            lineHeight: 1.75,
+            maxWidth: '420px',
+            margin: '0 auto 32px',
+          }}>
+            Discuss your personalised plan in person, get a free body composition analysis, and take the first real step — completely free, no obligation.
+          </p>
+          <Link
+            href="/consultation"
+            className="cta-glow"
             style={{
-              textAlign: 'center',
-              padding: 'clamp(40px, 6vw, 64px) clamp(24px, 5%, 56px)',
-              borderRadius: '24px',
-              background: `radial-gradient(ellipse 110% 100% at 50% 0%, ${SAGE}22 0%, rgba(4,16,10,0) 70%)`,
-              border: `1px solid ${SAGE}33`,
-              position: 'relative',
-              overflow: 'hidden',
+              display: 'inline-block',
+              padding: '15px 44px',
+              fontFamily: WIDE,
+              fontSize: '12px',
+              letterSpacing: '2px',
+              textTransform: 'uppercase',
+              textDecoration: 'none',
+              color: '#fff',
+              borderRadius: '999px',
             }}
           >
-            <div aria-hidden style={{
-              position: 'absolute', top: '-40px', left: '50%', transform: 'translateX(-50%)',
-              width: '320px', height: '200px', borderRadius: '50%',
-              background: `${SAGE}28`, filter: 'blur(60px)',
-              pointerEvents: 'none',
-            }} />
-
-            <div style={{ position: 'relative', zIndex: 1 }}>
-              <p style={{
-                fontFamily: WIDE,
-                fontSize: '10px',
-                letterSpacing: '4px',
-                color: SAGE,
-                textTransform: 'uppercase',
-                margin: '0 0 16px',
-              }}>
-                Ready to begin?
-              </p>
-              <h2 style={{
-                fontFamily: SERIF,
-                fontWeight: 400,
-                fontSize: 'clamp(22px, 3vw, 32px)',
-                textTransform: 'uppercase',
-                letterSpacing: '1.5px',
-                color: 'rgba(255,255,255,0.95)',
-                margin: '0 0 14px',
-              }}>
-                Book Your Free Body Analysis
-              </h2>
-              <p style={{
-                fontFamily: BODY,
-                fontSize: '14px',
-                color: 'rgba(255,255,255,0.45)',
-                lineHeight: 1.75,
-                maxWidth: '420px',
-                margin: '0 auto 32px',
-              }}>
-                Meet our medical team, discuss your personalised plan and get a free body composition analysis — no obligation.
-              </p>
-              <Link
-                href="/consultation"
-                className="cta-glow"
-                style={{
-                  display: 'inline-block',
-                  padding: '15px 44px',
-                  fontFamily: WIDE,
-                  fontSize: '12px',
-                  letterSpacing: '2px',
-                  textTransform: 'uppercase',
-                  textDecoration: 'none',
-                  color: '#fff',
-                  borderRadius: '999px',
-                }}
-              >
-                Reserve My Spot
-              </Link>
-              <p style={{
-                fontFamily: WIDE,
-                fontSize: '9px',
-                letterSpacing: '1.5px',
-                color: 'rgba(255,255,255,0.22)',
-                textTransform: 'uppercase',
-                margin: '18px 0 0',
-              }}>
-                No obligation · Free of charge · Carisma Slimming, Malta
-              </p>
-            </div>
-          </div>
+            Book Free Consultation
+          </Link>
+          <p style={{
+            fontFamily: WIDE,
+            fontSize: '9px',
+            letterSpacing: '1.5px',
+            color: 'rgba(255,255,255,0.18)',
+            textTransform: 'uppercase',
+            margin: '18px 0 0',
+          }}>
+            No obligation · Free of charge · Carisma Slimming, Malta
+          </p>
         </div>
       </section>
 
