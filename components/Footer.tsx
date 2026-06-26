@@ -44,17 +44,6 @@ const BRANDS = [
   },
 ];
 
-// Small Instagram preview — UNIQUE Carisma Slimming images only (no duplicates,
-// no cross-brand Spa/Aesthetics shots). NOTE: these are site assets, not a live
-// feed — to show the real @carismaslimming posts, wire an Instagram feed
-// integration (Basic Display API token or a widget like Behold/EmbedSocial).
-const IG_SRCS = [
-  { src: '/Thumbnail.png', alt: 'Carisma Slimming clinic treatment' },
-  { src: '/wix/87fc13_16e7dbedc9e84343b51b1f3d4821c6ea~mv2.jpg', alt: 'Weight loss consultation at Carisma Slimming' },
-  { src: '/wix/87fc13_6ac670fc080e4fe4a974d6701eed38a8~mv2_crop.jpg', alt: 'Body contouring treatment' },
-  { src: '/wix/87fc13_56eec505c9f9433db5846a0aeae07c7f~mv2.jpg', alt: 'Carisma Slimming team' },
-];
-
 const NAV_LINKS = [
   { label: 'Medical Weight Loss', href: '/weight-loss' },
   { label: 'GLP-1 Injections', href: '/glp1' },
@@ -188,24 +177,6 @@ function FooterBase() {
                     {icon}
                   </a>
                 ))}
-              </div>
-
-              {/* Follow us — embedded under the Carisma Slimming column (more room) */}
-              <div className="hidden md:block" style={{ marginTop: '26px' }}>
-                <h3 style={{ fontFamily: WIDE, fontSize: '10px', fontWeight: 700, letterSpacing: '2.5px', textTransform: 'uppercase', color: MUTED, marginBottom: '12px' }}>Follow us</h3>
-                <a href={IG_URL} target="_blank" rel="noopener noreferrer" style={{ fontFamily: BODY, fontSize: '13px', color: TEXT, textDecoration: 'none', display: 'inline-block', marginBottom: '12px', transition: 'color .2s' }}
-                  onMouseEnter={e => ((e.currentTarget as HTMLAnchorElement).style.color = SAGE)}
-                  onMouseLeave={e => ((e.currentTarget as HTMLAnchorElement).style.color = TEXT)}>
-                  @carismaslimming
-                </a>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2,1fr)', gap: '7px', maxWidth: '212px' }}>
-                  {IG_SRCS.map((img, i) => (
-                    <a key={i} href={IG_URL} target="_blank" rel="noopener noreferrer" aria-label={`${img.alt} — Instagram`}
-                      style={{ display: 'block', aspectRatio: '1/1', borderRadius: '10px', overflow: 'hidden', position: 'relative' }}>
-                      <Image src={img.src} alt={img.alt} fill style={{ objectFit: 'cover' }} sizes="110px" loading="lazy" />
-                    </a>
-                  ))}
-                </div>
               </div>
             </div>
 
