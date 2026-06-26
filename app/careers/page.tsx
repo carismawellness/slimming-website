@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import HeroMotif from '@/components/HeroMotif';
@@ -108,17 +109,20 @@ export default function CareersPage() {
 
           {/* Photo in a soft, rounded card with subtle shadow */}
           <div className="relative px-4" style={{ marginTop: '40px' }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src="/wix/eac6309c7e924921acd0cd838be3c271.jpg"
               alt="Beautician"
+              width={1500}
+              height={1000}
               loading="lazy"
+              sizes="(max-width: 768px) 100vw, 735px"
               className="relative mx-auto w-full object-cover"
               style={{
                 maxWidth: '735px',
                 aspectRatio: '3 / 2',
                 borderRadius: '20px',
                 boxShadow: '0 30px 70px -28px rgba(40,55,44,.45)',
+                height: 'auto',
               }}
             />
           </div>

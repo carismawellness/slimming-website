@@ -174,7 +174,7 @@ export default function GLP1Page() {
               className="w-full overflow-hidden"
               style={{ aspectRatio: '383 / 526', maxWidth: '420px', borderTopLeftRadius: '120px', borderBottomRightRadius: '120px', borderTopRightRadius: '16px', borderBottomLeftRadius: '16px' }}
             >
-              <img src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.webp" alt="Patient consultation during medical weight loss program" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <Image src="/wix/87fc13_3028fef86af2454fa2fbdbb5dcd55d87~mv2.webp" alt="Patient consultation during medical weight loss program" style={{ width: '100%', height: '100%', objectFit: 'cover' }} width={383} height={526} sizes="(max-width: 768px) 90vw, 420px" />
             </div>
             <div>
               <p className="mb-6" style={{ color: '#6f6456', fontFamily: bodyFont, fontSize: '15px', lineHeight: '1.8' }}>
@@ -375,7 +375,7 @@ export default function GLP1Page() {
               className="w-full overflow-hidden mx-auto"
               style={{ maxWidth: '448px', aspectRatio: '448 / 479', borderTopLeftRadius: '90px', borderTopRightRadius: '16px', borderBottomLeftRadius: '16px', borderBottomRightRadius: '90px', boxShadow: '0 16px 36px rgba(0,0,0,0.12)' }}
             >
-              <img src="/wix/87fc13_130b2a48c11a4658bad12952342d1eb4~mv2.jpeg" alt="Dr Zaid Teebi, lead medical weight loss doctor at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+              <Image src="/wix/87fc13_130b2a48c11a4658bad12952342d1eb4~mv2.jpeg" alt="Dr Zaid Teebi, lead medical weight loss doctor at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} width={448} height={479} sizes="(max-width: 768px) 90vw, 448px" />
             </div>
             <div>
               <h3 className="mb-4" style={{ color: '#4f7256', fontFamily: wideFont, fontSize: '20px', letterSpacing: '1px', textTransform: 'uppercase' }}>Dr Zaid Teebi</h3>
@@ -588,14 +588,14 @@ export default function GLP1Page() {
             {/* Right — supporting imagery */}
             <div className="flex flex-col gap-5">
               <div className="w-full overflow-hidden" style={{ aspectRatio: '477 / 270', borderRadius: '16px', boxShadow: '0 10px 30px rgba(60,90,64,0.08)' }}>
-                <img src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="Ozempic pen for medical weight loss" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                <Image src="/wix/87fc13_82a500af21e740baa567d0184bab958f~mv2.jpg" alt="Ozempic pen for medical weight loss" style={{ width: '100%', height: '100%', objectFit: 'cover' }} width={477} height={270} sizes="(max-width: 768px) 90vw, 477px" />
               </div>
               <div className="grid gap-5" style={{ gridTemplateColumns: '176fr 281fr' }}>
                 <div className="w-full overflow-hidden" style={{ aspectRatio: '176 / 168', borderRadius: '16px', boxShadow: '0 10px 30px rgba(60,90,64,0.08)' }}>
-                  <img src="/wix/87fc13_de24c77f8dcf436699a6eeac3645088c~mv2.jpg" alt="Consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <Image src="/wix/87fc13_de24c77f8dcf436699a6eeac3645088c~mv2.jpg" alt="Consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} width={176} height={168} sizes="(max-width: 768px) 40vw, 200px" />
                 </div>
                 <div className="w-full overflow-hidden" style={{ aspectRatio: '281 / 168', borderRadius: '16px', boxShadow: '0 10px 30px rgba(60,90,64,0.08)' }}>
-                  <img src="/wix/87fc13_59abc443a8274e1c90646831cbc819c5~mv2.jpg" alt="Movement assessment with a Carisma practitioner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <Image src="/wix/87fc13_59abc443a8274e1c90646831cbc819c5~mv2.jpg" alt="Movement assessment with a Carisma practitioner" style={{ width: '100%', height: '100%', objectFit: 'cover' }} width={281} height={168} sizes="(max-width: 768px) 55vw, 300px" />
                 </div>
               </div>
             </div>
