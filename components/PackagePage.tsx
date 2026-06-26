@@ -106,9 +106,9 @@ function SectionHeading({ children, align = 'center', size = 28, id }: { childre
 /* P2 — single, unambiguous CTA → Fresha booking. Min 44px touch target +
    accessible label. The former secondary "Free Body Analysis" outline button
    has been removed site-wide so every CTA is one clear action. */
-function CTA({ children = 'Claim your spot now', full = false, wide = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean; wide?: boolean }) {
+function CTA({ children = 'Claim your spot now', full = false, wide = false, center = false }: { variant?: 'green' | 'blue'; children?: React.ReactNode; full?: boolean; wide?: boolean; center?: boolean }) {
   return (
-    <div style={{ display: 'flex', flexDirection: full ? 'column' : 'row', flexWrap: 'wrap', gap: '10px', alignItems: 'flex-start' }}>
+    <div style={{ display: 'flex', flexDirection: full ? 'column' : 'row', flexWrap: 'wrap', gap: '10px', alignItems: center ? 'center' : 'flex-start', justifyContent: center ? 'center' : undefined }}>
       <a
         href={BOOKING_URL}
         target="_blank"
@@ -910,7 +910,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                       {c.secretClosing2.text}
                     </p>
                   )}
-                  <CTA variant="blue" full />
+                  <CTA variant="blue" full center />
                 </div>
             </div>
           </div>
