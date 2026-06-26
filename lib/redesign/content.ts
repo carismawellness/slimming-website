@@ -48,7 +48,7 @@ export const CONTACT = {
   facebook: 'https://www.facebook.com/carismaaesthetics/',
   address: "St Julian's, STJ 3310, Malta",
   mapsEmbed:
-    "https://maps.google.com/maps?q=St%20Julian%27s%2C%20STJ%203310%2C%20Malta&z=15&output=embed",
+    "https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed",
 } as const;
 
 export const REVIEWS = { rating: 4.7, total: 303 } as const;

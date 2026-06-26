@@ -103,7 +103,7 @@ export const antiCellulite: PackageContent = {
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
 
-  mapQuery: 'Carisma Slimming, Malta',
+  mapQuery: 'Grand Hotel Excelsior, Floriana, Malta',
 
   faqs: [
     { q: '1. What is included in the CelluLift protocol?', a: 'The protocol includes three VelaShape vacuum roller sessions combined with one lymphatic drainage massage, designed to smooth cellulite, improve circulation, and refine skin texture.' },

@@ -678,7 +678,7 @@ function EvidenceCarousel({
    never overflows. The H2 id is passed in so the page keeps a logical, unique
    heading. Set `showMap={false}` to omit the map (live lipocavitation). */
 const DIFF_MAP_SRC =
-  "https://maps.google.com/maps?q=St%20Julian%27s%2C%20STJ%203310%2C%20Malta&z=15&output=embed";
+  "https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed";
 
 function DiffCheck() {
   return (
@@ -747,8 +747,8 @@ function DifferencePanel({
             {showMap && (
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <iframe
-                  title="Carisma Slimming clinic location — St Julian's, Malta"
-                  aria-label="Google Maps showing Carisma Slimming at St Julian's, STJ 3310, Malta"
+                  title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
+                  aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
                   src={DIFF_MAP_SRC}
                   width="100%"
                   height="100%"

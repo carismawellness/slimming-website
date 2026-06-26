@@ -790,9 +790,9 @@ export default function MedicalWeightLossLpPage() {
                 </div>
                 <div className="flex flex-col">
                   <iframe
-                    title="Carisma Slimming clinic location — St Julian's, Malta"
-                    aria-label="Google Maps showing Carisma Slimming at St Julian's, STJ 3310, Malta"
-                    src="https://maps.google.com/maps?q=St%20Julian%27s%2C%20STJ%203310%2C%20Malta&z=15&output=embed"
+                    title="Carisma Slimming clinic location — Grand Hotel Excelsior, Floriana, Malta"
+                    aria-label="Google Maps showing Carisma Slimming at Grand Hotel Excelsior, Floriana, Malta"
+                    src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
                     width="100%"
                     height="100%"
                     style={{ border: 0, borderRadius: '20px', display: 'block', flex: 1, minHeight: '480px' }}

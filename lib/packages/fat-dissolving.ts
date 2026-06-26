@@ -99,7 +99,7 @@ export const fatDissolving: PackageContent = {
     '** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
 
-  mapQuery: 'Carisma Slimming, Malta',
+  mapQuery: 'Grand Hotel Excelsior, Floriana, Malta',
 
   commitment: [
     'Targeted Fat Reduction – Precision treatments designed to reduce stubborn fat safely and effectively.',

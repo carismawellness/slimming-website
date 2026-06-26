@@ -113,7 +113,7 @@ export const lymphaticDrainage: PackageContent = {
   ],
   dualCtaLabel: 'Claim your spot now',
 
-  mapQuery: 'Carisma Slimming, Malta',
+  mapQuery: 'Grand Hotel Excelsior, Floriana, Malta',
 
   faqs: [
     { q: '1. What is lymphatic drainage therapy?', a: 'Lymphatic drainage therapy is a gentle, non-invasive treatment designed to stimulate the lymphatic system. It helps support the natural movement of lymph fluid in the body, reduce fluid retention, and improve circulation and overall wellbeing.' },

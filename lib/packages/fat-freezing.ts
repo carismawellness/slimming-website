@@ -103,7 +103,7 @@ export const fatFreezing: PackageContent = {
     '** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
 
-  mapQuery: 'Carisma Slimming, Malta',
+  mapQuery: 'Grand Hotel Excelsior, Floriana, Malta',
 
   faqs: [
     { q: '1. What is included in the Stubborn Fat Eraser Starter Pack?', a: 'One in person consultation with our doctor, one CoolSculpting fat freezing session, access to spa & fitness facilities, Tanita Body Composition Analysis, €25 Carisma Aesthetics credit for future treatments.' },

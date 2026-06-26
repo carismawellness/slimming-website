@@ -106,7 +106,7 @@ export const skinTightening: PackageContent = {
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
 
-  mapQuery: 'Carisma Slimming, Malta',
+  mapQuery: 'Grand Hotel Excelsior, Floriana, Malta',
 
   // live FAQ CTA reads "claim your spot now" (not the template default "Claim my spot now")
   faqCtaLabel: 'Claim your spot now',

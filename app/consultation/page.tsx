@@ -576,7 +576,7 @@ export default function ConsultationPage() {
               {/* map card */}
               <div className="card overflow-hidden" style={{ lineHeight: 0, minHeight: 320 }}>
                 <iframe
-                  src="https://maps.google.com/maps?q=Carisma%20Slimming%2C%20Malta&z=15&output=embed"
+                  src="https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed"
                   style={{ width: '100%', height: '100%', minHeight: 320, border: 'none', display: 'block' }}
                   loading="lazy"
                   referrerPolicy="no-referrer-when-downgrade"
