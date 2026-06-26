@@ -26,16 +26,16 @@ export const PROVIDER = {
   email: 'info@carismaslimming.com',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: "St Julian's",
-    addressLocality: "St Julian's",
+    streetAddress: 'Grand Hotel Excelsior, Great Siege Road',
+    addressLocality: 'Floriana',
     addressRegion: 'MT',
-    postalCode: 'STJ 3310',
+    postalCode: 'FRN 1810',
     addressCountry: 'MT',
   },
   geo: {
     '@type': 'GeoCoordinates',
-    latitude: 35.8976,
-    longitude: 14.5101,
+    latitude: 35.8968634,
+    longitude: 14.5050961,
   },
   areaServed: { '@type': 'Country', name: 'Malta' },
 } as const;

@@ -46,7 +46,7 @@ export const CONTACT = {
   email: 'info@carismaslimming.com',
   instagram: 'https://www.instagram.com/carismaslimming/',
   facebook: 'https://www.facebook.com/carismaaesthetics/',
-  address: "St Julian's, STJ 3310, Malta",
+  address: "Grand Hotel Excelsior, Great Siege Road, Floriana FRN 1810, Malta",
   mapsEmbed:
     "https://maps.google.com/maps?q=Grand%20Hotel%20Excelsior%2C%20Great%20Siege%20Road%2C%20Floriana%20FRN%201810%2C%20Malta&z=15&output=embed",
 } as const;
@@ -154,7 +154,7 @@ export const PILLARS = [
     tagline: 'Realistic movement that fits your life',
     icon: '/wix/87fc13_1fdf47007d8a45c18e39603447edbb23~mv2.png',
     items: [
-      "Open gym access at our St Julian's clinic",
+      "Open gym access at our Floriana clinic",
       'Group classes for fat loss, strength and maintenance',
       'Personal training for guidance and motivation',
       'Customised workout plan for your level',
@@ -328,7 +328,7 @@ export const FAQ = [
   },
   {
     q: 'Where are you located?',
-    a: "At St Julian's, STJ 3310, Malta — with complimentary on-site parking.",
+    a: "At Grand Hotel Excelsior, Great Siege Road, Floriana FRN 1810, Malta — with complimentary on-site parking.",
   },
 ] as const;
 

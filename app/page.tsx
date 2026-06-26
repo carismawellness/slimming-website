@@ -58,7 +58,7 @@ export default function Home() {
       icon: '/wix/87fc13_1fdf47007d8a45c18e39603447edbb23~mv2.png',
       iconAlt: 'Exercise and movement program',
       items: [
-        "Open gym access at our St Julian's clinic",
+        "Open gym access at our Floriana clinic",
         'Group classes for fat loss, strength and maintenance',
         'Personal training for guidance and motivation',
         'Customised workout plan for your level',
