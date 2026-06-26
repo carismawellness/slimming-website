@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import fs from 'fs';
 import path from 'path';
 import type { Metadata } from 'next';
@@ -347,13 +348,12 @@ export default async function BlogPostPage({
         }}
         className="blog-post-hero"
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={post.cover_image_url}
           alt={post.title}
           style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
           fetchPriority="high"
-        />
+         width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
 
         {/* Gradient overlay */}
         <div
@@ -528,8 +528,7 @@ export default async function BlogPostPage({
             const imgSrc = post.body_image_urls[item.imageIndex];
             return (
               <figure key={`img-${item.imageIndex}`} className="blog-post-figure" style={{ borderRadius: 4, overflow: 'hidden' }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={imgSrc}
                   alt={`${post.title} — illustration ${item.imageIndex + 1}`}
                   style={{
@@ -539,7 +538,7 @@ export default async function BlogPostPage({
                     display: 'block',
                   }}
                   loading="lazy"
-                />
+                 width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
               </figure>
             );
           })}

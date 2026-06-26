@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useState } from 'react';
 import { DOCTORS } from '@/lib/redesign/content';
 import Reveal from './Reveal';
@@ -15,12 +16,12 @@ function DoctorCard({ d }: { d: (typeof DOCTORS)[number] }) {
         className="cx-doc-media"
         style={{ position: 'relative', aspectRatio: '343 / 360', overflow: 'hidden', background: 'var(--sage-mist)' }}
       >
-        <img
+        <Image
           src={d.img}
           alt={`${d.name}, ${d.role} at Carisma Slimming Malta`}
           className="cx-doc-img"
           style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top center', display: 'block' }}
-        />
+         width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
         {/* warm tint that lifts on hover, revealing full colour */}
         <span aria-hidden className="cx-doc-tint" />
         {/* experience badge */}

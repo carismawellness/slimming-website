@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import postsData from '@/lib/blog/posts-index.json';
 import FadeInUp from '@/components/blog/FadeInUp';
@@ -28,9 +29,9 @@ type Post = {
 };
 
 const POSTS_PER_PAGE = 20;
-const TOTAL_PAGES    = 20;
 
 const indexablePosts = (postsData as Post[]).filter((post) => getBlogSeoPolicy(post).index);
+const TOTAL_PAGES    = Math.max(1, Math.ceil(indexablePosts.length / POSTS_PER_PAGE));
 const posts = indexablePosts.slice(0, POSTS_PER_PAGE);
 
 // ── Metadata ──────────────────────────────────────────────────────────────────
@@ -343,14 +344,14 @@ export default function BlogPage() {
                 position: 'relative',
               }}
             >
-              <img
+              <Image
                 src={hero.cover_image_url}
                 alt={hero.title}
                 className="blog-card-img"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'none' }}
                 fetchPriority="high"
                 loading="eager"
-              />
+               width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
               {/* Left-edge vignette to blend with sage panel */}
               <div aria-hidden="true" style={{
                 position: 'absolute', inset: 0,

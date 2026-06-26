@@ -690,7 +690,7 @@ export default function GLP1Page() {
               </div>
               <div className="card bg-white p-6 sm:p-8">
                 <div className="w-full overflow-hidden mb-6" style={{ aspectRatio: '382 / 183', borderRadius: '16px' }}>
-                  <img src="/wix/87fc13_56eec505c9f9433db5846a0aeae07c7f~mv2.jpg" alt="Medical consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+                  <Image src="/wix/87fc13_56eec505c9f9433db5846a0aeae07c7f~mv2.jpg" alt="Medical consultation at Carisma Slimming" style={{ width: '100%', height: '100%', objectFit: 'cover' }}  width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
                 </div>
                 <ul className="space-y-2 mb-6">
                   {['Initial Medical Consultation & Eligibility Review', 'Personalised GLP-1 Treatment Planning', 'Ongoing Medical Monitoring & Reviews', 'Nutrition & Lifestyle Support Integration'].map((t) => (

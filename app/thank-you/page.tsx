@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 const wideFont     = "'Novecento Wide', sans-serif";
@@ -84,8 +85,7 @@ export default function ThankYouPage() {
           backgroundColor: '#F5EDE8',
         }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={HERO_IMG}
           alt=""
           aria-hidden="true"
@@ -99,7 +99,7 @@ export default function ThankYouPage() {
             objectPosition: 'top center',
             pointerEvents: 'none',
           }}
-        />
+         width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
 
         <div
           style={{

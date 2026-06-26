@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import postsData from '@/lib/blog/posts-index.json';
@@ -210,7 +211,7 @@ export default async function BlogPaginatedPage({ params }: Props) {
             margin: 0,
           }}
         >
-          Page {pageNum} of 20
+          Page {pageNum} of {TOTAL_PAGES}
         </p>
         <div style={{ flex: 1, height: 1, background: HAIR }} />
       </div>
@@ -246,7 +247,7 @@ export default async function BlogPaginatedPage({ params }: Props) {
               >
                 {/* Cover image */}
                 <div style={{ overflow: 'hidden', aspectRatio: '16/9' }}>
-                  <img
+                  <Image
                     src={post.cover_image_url}
                     alt={post.title}
                     loading="lazy"
@@ -257,7 +258,7 @@ export default async function BlogPaginatedPage({ params }: Props) {
                       objectFit: 'cover',
                       display: 'block',
                     }}
-                  />
+                   width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
                 </div>
 
                 {/* Card body */}
@@ -362,7 +363,7 @@ export default async function BlogPaginatedPage({ params }: Props) {
             color: INK,
           }}
         >
-          Page {pageNum} of 20
+          Page {pageNum} of {TOTAL_PAGES}
         </span>
 
         {/* Next */}

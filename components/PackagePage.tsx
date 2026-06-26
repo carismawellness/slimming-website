@@ -715,7 +715,7 @@ function DifferencePanel({
       <div style={{ position: 'relative', overflow: 'hidden', background: 'linear-gradient(192deg, #F8F6F2 44.74%, rgba(142, 176, 147, 0.4) 100%)', borderRadius: 16, padding: '40px 40px 48px' }}>
         {/* decorative watermark — same WELL_BG the live commitment cards use */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={WELL_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: '50%', top: 12, transform: 'translateX(-50%)', width: 560, opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
+        <Image src={WELL_BG} alt="" aria-hidden width={560} height={529} sizes="560px" style={{ position: 'absolute', left: '50%', top: 12, transform: 'translateX(-50%)', width: 560, height: 'auto', opacity: 0.28, pointerEvents: 'none', zIndex: 0 }} />
         <div style={{ position: 'relative', zIndex: 1 }}>
           <Eyebrow>{eyebrow}</Eyebrow>
           <div aria-hidden="true" style={{ width: 110, height: 1, backgroundColor: '#B9A99E', margin: '10px auto 16px' }} />
@@ -1014,7 +1014,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             {/* faint decorative motif (was a heavy 0.5-opacity green wash spanning the
                 section — now a barely-there tint so the ground reads clean white). */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={DIFF_BG} alt="" aria-hidden="true" style={{ position: 'absolute', left: 0, top: '40%', width: '100%', opacity: 0.32, pointerEvents: 'none', zIndex: 0 }} />
+            <Image src={DIFF_BG} alt="" aria-hidden width={1600} height={823} sizes="100vw" style={{ position: 'absolute', left: 0, top: '40%', width: '100%', height: 'auto', opacity: 0.32, pointerEvents: 'none', zIndex: 0 }} />
             <div style={{ ...CONTAINER, position: 'relative', zIndex: 1 }}>
               <Eyebrow>the carisma difference</Eyebrow>
               <div style={{ marginTop: 10 }}>

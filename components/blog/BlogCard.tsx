@@ -1,3 +1,4 @@
+import Image from 'next/image';
 // Server component — no 'use client' needed
 import React from 'react';
 
@@ -39,13 +40,13 @@ export default function BlogCard({ post, size = 'medium', index = 0 }: BlogCardP
       <article className="blog-card" style={{ position: 'relative', overflow: 'hidden', borderRadius: 4, background: '#fff', boxShadow: '0 2px 24px rgba(0,0,0,0.07)', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <a href={`/blog/${post.slug}`} style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit', height: '100%' }}>
           <div style={{ overflow: 'hidden', aspectRatio: '4/3', flexShrink: 0 }}>
-            <img
+            <Image
               src={post.cover_image_url}
               alt={post.title}
               className="blog-card-img"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               loading="lazy"
-            />
+             width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
           </div>
           <div style={{ padding: '28px 32px 32px', flex: 1, display: 'flex', flexDirection: 'column' }}>
             <p style={{ fontFamily: WIDE, fontSize: 10, letterSpacing: '3px', textTransform: 'uppercase', color: SAGE, marginBottom: 14, margin: '0 0 14px' }}>
@@ -70,13 +71,13 @@ export default function BlogCard({ post, size = 'medium', index = 0 }: BlogCardP
       <article className="blog-card" style={{ overflow: 'hidden', borderRadius: 4, background: '#fff', boxShadow: '0 2px 20px rgba(0,0,0,0.06)', height: '100%', display: 'flex', flexDirection: 'column' }}>
         <a href={`/blog/${post.slug}`} style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit', height: '100%' }}>
           <div style={{ overflow: 'hidden', aspectRatio: '16/9', flexShrink: 0 }}>
-            <img
+            <Image
               src={post.cover_image_url}
               alt={post.title}
               className="blog-card-img"
               style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
               loading="lazy"
-            />
+             width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
           </div>
           <div style={{ padding: '16px 20px 20px', flex: 1, display: 'flex', flexDirection: 'column' }}>
             <p style={{ fontFamily: WIDE, fontSize: 9, letterSpacing: '2px', textTransform: 'uppercase', color: SAGE, margin: '0 0 10px' }}>
@@ -97,13 +98,13 @@ export default function BlogCard({ post, size = 'medium', index = 0 }: BlogCardP
     <article className="blog-card" style={{ overflow: 'hidden', borderRadius: 4, background: '#fff', boxShadow: '0 2px 20px rgba(0,0,0,0.06)', height: '100%', display: 'flex', flexDirection: 'column' }}>
       <a href={`/blog/${post.slug}`} style={{ display: 'flex', flexDirection: 'column', textDecoration: 'none', color: 'inherit', height: '100%' }}>
         <div style={{ overflow: 'hidden', aspectRatio: '16/9', flexShrink: 0 }}>
-          <img
+          <Image
             src={post.cover_image_url}
             alt={post.title}
             className="blog-card-img"
             style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
             loading="lazy"
-          />
+           width={1200} height={900} sizes="(max-width: 768px) 100vw, 640px" />
         </div>
         <div style={{ padding: '24px 28px 28px', flex: 1, display: 'flex', flexDirection: 'column' }}>
           <p style={{ fontFamily: WIDE, fontSize: 10, letterSpacing: '3px', textTransform: 'uppercase', color: SAGE, margin: '0 0 12px' }}>
