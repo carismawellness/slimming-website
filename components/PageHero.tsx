@@ -385,24 +385,27 @@ export default function PageHero({
               // it in the initial HTML (before JS hydrates). HeroVideoPlayer overlays
               // the play button and, on click, replaces this with the video.
               <div style={{ position: 'relative', width: '100%', height: '100%', borderRadius: 'inherit', overflow: 'hidden' }}>
-                {/* LCP anchor — rendered by server, correct preload injected by next/image */}
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                {/* LCP anchor — next/image fill+priority server-renders the
+                    optimized poster (AVIF/WebP) and injects the correct preload. */}
+                <Image
                   src={media.poster || '/Thumbnail.webp'}
                   alt={media.alt || 'Carisma Slimming Malta'}
-                  fetchPriority="high"
-                  decoding="async"
-                  style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 640px"
+                  style={{ objectFit: media.fit || 'cover' }}
                 />
                 <HeroVideoPlayer src={media.src} poster={media.poster} alt={media.alt} fit={media.fit || 'cover'} />
               </div>
             ) : (
               <>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={media.src}
                   alt={media.alt || 'Carisma Slimming Malta'}
-                  style={{ width: '100%', height: '100%', objectFit: media.fit || 'cover', display: 'block' }}
+                  fill
+                  priority
+                  sizes="(max-width: 1024px) 100vw, 640px"
+                  style={{ objectFit: media.fit || 'cover' }}
                 />
                 {/* subtle bottom scrim so floating cards read cleanly over the photo */}
                 {media.fit !== 'contain' && (
