@@ -53,6 +53,12 @@ const previewNoindexHeaders = [
 // pages with no active ad spend or significant ongoing traffic.
 // ---------------------------------------------------------------------------
 const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'images.pexels.com' },
+      { protocol: 'https', hostname: 'static.wixstatic.com' },
+    ],
+  },
   async headers() {
     const isPreviewDeployment = Boolean(process.env.VERCEL_ENV && process.env.VERCEL_ENV !== 'production');
 
