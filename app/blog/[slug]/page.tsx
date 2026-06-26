@@ -503,9 +503,8 @@ export default async function BlogPostPage({
                       color: TEXT,
                       margin: '0 0 28px',
                     }}
-                  >
-                    {item}
-                  </p>
+                    dangerouslySetInnerHTML={{ __html: item }}
+                  />
                 );
               }
               return (
@@ -518,9 +517,8 @@ export default async function BlogPostPage({
                     color: TEXT,
                     margin: '0 0 28px',
                   }}
-                >
-                  {item}
-                </p>
+                  dangerouslySetInnerHTML={{ __html: item }}
+                />
               );
             }
 
