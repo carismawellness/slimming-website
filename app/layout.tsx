@@ -32,13 +32,13 @@ export const metadata: Metadata = {
     siteName: 'Carisma Slimming',
     title: 'Carisma Slimming | Doctor-Led Weight Loss Clinic Malta',
     description: 'Medical weight loss, GLP-1 support where clinically appropriate, body analysis and body contouring in Malta.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Carisma Slimming doctor-led weight loss clinic in Malta' }],
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Carisma Slimming doctor-led weight loss clinic in Malta' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Carisma Slimming | Doctor-Led Weight Loss Clinic Malta',
     description: 'Medical weight loss, GLP-1 support where suitable, body analysis and body contouring in Malta.',
-    images: [{ url: '/og-image.png', alt: 'Carisma Slimming doctor-led weight loss clinic in Malta' }],
+    images: [{ url: '/opengraph-image', alt: 'Carisma Slimming doctor-led weight loss clinic in Malta' }],
   },
 };
 
