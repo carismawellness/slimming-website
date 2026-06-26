@@ -52,7 +52,7 @@ function ResultCard({ r }: { r: Result }) {
     // drop-shadow sits directly on the section background.
     <figure
       className="rc-slide flex-shrink-0"
-      style={{ margin: 0, boxSizing: 'border-box', scrollSnapAlign: 'start' }}
+      style={{ margin: 0, boxSizing: 'border-box' }}
     >
       <img
         src={r.image}
@@ -136,37 +136,37 @@ export default function ResultsCarousel() {
   };
 
   // Infinite seamless loop: the slides are rendered DUPLICATED back-to-back, so
-  // the scrollable width is twice the real content. Whenever the scroll position
-  // crosses into the second copy (>= half), we instantly subtract half a width;
-  // when it reaches the very start (left edge) we jump forward into copy #2. The
-  // jump is exactly one full set of slides, so the visible content is identical —
-  // wrap is invisible. Arrows therefore never hit a dead-end and never disable.
+  // the scrollable width is twice one content copy (C). We only wrap at the TRUE
+  // scroll extremes — when the track is clamped at the left edge (0) we jump
+  // forward one copy, and when it's clamped at the right edge (max) we jump back
+  // one copy. Because the two copies are identical, a ±C jump shows the exact
+  // same slides, so the wrap is invisible. Wrapping only at the clamped extremes
+  // (never mid-track) means there's no boundary the wrap can oscillate around and
+  // no snap point the arrows can dead-end on.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const onScroll = () => {
-      const half = el.scrollWidth / 2;
-      if (half <= 0) return;
-      // Wrap when we cross into the second copy (right) or reach the very start
-      // (left). The jump is exactly one content-set wide, so visuals are identical.
-      if (el.scrollLeft >= half) {
-        el.scrollLeft -= half; // instant, no smooth
-      } else if (el.scrollLeft <= 0) {
-        el.scrollLeft = half - 1; // instant, no smooth — land just inside copy #2
+      const copy = el.scrollWidth / 2; // width of one content copy
+      if (copy <= 0) return;
+      const max = el.scrollWidth - el.clientWidth;
+      if (el.scrollLeft <= 0) {
+        el.scrollLeft += copy; // hit the left edge → jump forward into copy #2
+      } else if (el.scrollLeft >= max - 1) {
+        el.scrollLeft -= copy; // hit the right edge → jump back into copy #1
       }
     };
     el.addEventListener('scroll', onScroll, { passive: true });
     return () => el.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Start parked inside the second copy of the loop (just past the first set) so
-  // there's always real content to the LEFT too — the very first ‹ press scrolls
-  // back into the first copy instead of dead-ending at 0 and snapping.
+  // Park at the start of copy #2 so there's a full set of slides on BOTH sides —
+  // the first ‹ or › press scrolls into real content instead of dead-ending.
   useEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
     const id = requestAnimationFrame(() => {
-      if (el.scrollWidth > 0) el.scrollLeft = el.scrollWidth / 2 - 1;
+      if (el.scrollWidth > 0) el.scrollLeft = el.scrollWidth / 2;
     });
     return () => cancelAnimationFrame(id);
   }, []);
@@ -277,7 +277,7 @@ export default function ResultsCarousel() {
           <div
             ref={scrollRef}
             className="rc-track flex overflow-x-auto"
-            style={{ scrollSnapType: 'x mandatory', scrollbarWidth: 'none', gap: '28px' }}
+            style={{ scrollbarWidth: 'none', gap: '28px' }}
           >
             {[...RESULTS, ...RESULTS].map((r, i) => (
               <ResultCard key={`${r.name}-${i}`} r={r} />
