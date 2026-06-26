@@ -16,10 +16,18 @@ export const metadata: Metadata = {
   description: "Doctor-led weight loss clinic in Malta with body composition analysis, GLP-1 support where suitable, body contouring and personalised plans.",
   alternates: { canonical: "https://www.carismaslimming.com" },
   openGraph: {
+    type: 'website',
     title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
     description: "Doctor-led slimming in Malta with medical assessment, body composition data, GLP-1 support where suitable and body contouring.",
     url: 'https://www.carismaslimming.com',
-    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Carisma Slimming Malta' }],
+    siteName: 'Carisma Slimming',
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'Carisma Slimming Malta' }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Carisma Slimming | Malta's #1 Weight-Loss Clinic",
+    description: "Doctor-led slimming in Malta with medical assessment, body composition data, GLP-1 support where suitable and body contouring.",
+    images: [{ url: '/opengraph-image', alt: 'Carisma Slimming Malta' }],
   },
 };
 
