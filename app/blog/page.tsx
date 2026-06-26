@@ -3,6 +3,8 @@ import type { Metadata } from 'next';
 import postsData from '@/lib/blog/posts-index.json';
 import FadeInUp from '@/components/blog/FadeInUp';
 import { getBlogSeoPolicy } from '@/lib/blog/seo-policy';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import { breadcrumbList } from '@/lib/seo/schema';
 
 // ── Brand tokens ──────────────────────────────────────────────────────────────
 const FOREST = '#024C27';
@@ -104,8 +106,14 @@ export default function BlogPage() {
   const row2  = posts.slice(3, 6);
   const tail  = posts.slice(6);
 
+  const breadcrumbSchema = breadcrumbList([
+    { name: 'Home', url: 'https://www.carismaslimming.com' },
+    { name: 'Weight Loss Blog', url: 'https://www.carismaslimming.com/blog' },
+  ]);
+
   return (
     <>
+      <JsonLd data={breadcrumbSchema} />
       {/* ── Global page styles ─────────────────────────────────────── */}
       <style>{`
         @keyframes fadeUp {

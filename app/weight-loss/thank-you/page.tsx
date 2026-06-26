@@ -16,6 +16,7 @@ const HERO_IMG = '/wix/3dbfd5_5efd9c160e224eb4974f9d7f6e145e70~mv2.webp';
 export const metadata: Metadata = {
   title: "Thank You | Carisma Slimming",
   robots: { index: false, follow: true },
+  alternates: { canonical: 'https://www.carismaslimming.com/weight-loss/thank-you' },
 };
 
 const nextSteps = [

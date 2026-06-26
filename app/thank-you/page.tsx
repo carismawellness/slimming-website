@@ -62,6 +62,7 @@ function ChooseTimeCta() {
 export const metadata: Metadata = {
   title: "Thank You | Carisma Slimming",
   robots: { index: false, follow: true },
+  alternates: { canonical: 'https://www.carismaslimming.com/thank-you' },
 };
 
 const paragraphs = [
