@@ -1080,7 +1080,7 @@ export default function PackagePage({ content: c }: { content: PackageContent })
                         ))}
                       </ul>
                       {c.ptClosing && <p style={{ ...body, fontSize: 14, marginBottom: 22 }}>{c.ptClosing}</p>}
-                      {c.ptCardCta && <CTA variant="blue">{c.ptCardCta}</CTA>}
+                      {c.ptCardCta && <CTA variant="blue" center>{c.ptCardCta}</CTA>}
                     </div>
                     {/* treatment before/after — GLP-1-style asymmetric arch on white.
                         Image stretches to fill the height of the text column
