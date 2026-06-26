@@ -101,7 +101,7 @@ export const lipocavitation: PackageContent = {
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
 
-  mapQuery: 'Carisma Slimming, Malta',
+  mapQuery: 'Grand Hotel Excelsior, Floriana, Malta',
 
   faqs: [
     { q: 'How many sessions will I need?', a: 'Most clients complete a course of 6 to 8 sessions, spaced one week apart. Your doctor will recommend a personalised plan at your initial assessment based on your body composition and goals. The starter pack includes 4 sessions, designed to let you see measurable progress before committing to a full course.' },

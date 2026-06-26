@@ -99,7 +99,7 @@ export const muscleStimulation: PackageContent = {
     '*** Due to high demand, packages are offered based on availability and may not always be guaranteed. Please inquire for current options.',
   ],
 
-  mapQuery: 'Carisma Slimming, Malta',
+  mapQuery: 'Grand Hotel Excelsior, Floriana, Malta',
 
   faqs: [
     { q: '1. What is included in the EMSculpt Neo Ultimate 3-in-1 Body Sculpt Protocol?', a: 'The protocol includes four EMSculpt Neo sessions combining high-intensity electromagnetic muscle stimulation with radiofrequency. Treatments are planned after an in-person consultation to target specific areas such as the tummy, hips, bum, or thighs.' },
