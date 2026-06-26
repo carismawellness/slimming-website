@@ -1,19 +1,6 @@
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: "Medical Weight Loss Malta — Doctor-Led & Guaranteed | Carisma Slimming",
-  description: "Doctor-led medical weight loss programs in Malta. Personalised slimming plans combining GLP-1 medications, non-invasive treatments and nutritional guidance.",
-  alternates: { canonical: 'https://www.carismaslimming.com/weight-loss' },
-  openGraph: {
-    title: "Medical Weight Loss Malta — Doctor-Led & Guaranteed | Carisma Slimming",
-    description: "Doctor-led medical weight loss programs in Malta. Personalised slimming plans combining GLP-1 medications, non-invasive treatments and nutritional guidance.",
-    url: 'https://www.carismaslimming.com/weight-loss',
-    images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'Medical Weight Loss Malta — Carisma Slimming' }],
-  },
-};
-
-// NOTE: JSON-LD lives on the /weight-loss PAGE (not here) so it does not leak
-// onto the nested /weight-loss/thank-you route, which shares this layout.
+// NOTE: Metadata lives on app/weight-loss/page.tsx (not here) so it does not
+// bleed onto nested routes like /weight-loss/thank-you, which share this layout.
+// JSON-LD also lives on the page for the same reason.
 export default function WeightLossLayout({
   children,
 }: {

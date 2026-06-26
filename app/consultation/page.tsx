@@ -6,6 +6,8 @@ import CountUp from '@/components/CountUp';
 import GradientField from '@/components/layers/GradientField';
 import HeroMotif from '@/components/HeroMotif';
 import DoctorCards from './_components/DoctorCards';
+import { JsonLd } from '@/lib/seo/JsonLd';
+import { SITE_URL, breadcrumbList } from '@/lib/seo/schema';
 
 export const metadata: Metadata = {
   title: "Free Body Composition Analysis Malta | Carisma Slimming",
@@ -117,9 +119,15 @@ const PROOF_QUOTES = [
   },
 ];
 
+const consultationJsonLd = breadcrumbList([
+  { name: 'Home', url: `${SITE_URL}/` },
+  { name: 'Consultation', url: `${SITE_URL}/consultation` },
+]);
+
 export default function ConsultationPage() {
   return (
     <main className="w-full" style={{ color: TAUPE }}>
+      <JsonLd data={consultationJsonLd} />
       {/* Skip-to-main-content link — WCAG 2.4.1 */}
       <a
         href="#consultation-main"

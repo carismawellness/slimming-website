@@ -3,7 +3,7 @@ import postsIndex from '@/lib/blog/posts-index.json'
 import { getBlogSeoPolicy } from '@/lib/blog/seo-policy'
 
 const BASE_URL = 'https://www.carismaslimming.com'
-const LAST_MODIFIED = new Date('2026-06-22')
+const LAST_MODIFIED = new Date()
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const staticUrls: MetadataRoute.Sitemap = [
@@ -127,5 +127,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...staticUrls, blogListing, ...blogPosts]
+  // Add paginated blog listing pages (page 1 is already covered by /blog above)
+  const POSTS_PER_PAGE = 20
+  const totalBlogPages = Math.max(1, Math.ceil(includedBlogPosts.length / POSTS_PER_PAGE))
+  const blogPaginationPages: MetadataRoute.Sitemap = Array.from(
+    { length: totalBlogPages - 1 },
+    (_, i) => ({
+      url: `${BASE_URL}/blog/page/${i + 2}`,
+      lastModified: blogLastModified,
+      changeFrequency: 'daily' as const,
+      priority: 0.5,
+    })
+  )
+
+  return [...staticUrls, blogListing, ...blogPaginationPages, ...blogPosts]
 }

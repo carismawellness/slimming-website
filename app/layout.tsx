@@ -32,7 +32,7 @@ export const metadata: Metadata = {
     siteName: 'Carisma Slimming',
     title: 'Carisma Slimming | Doctor-Led Weight Loss Clinic Malta',
     description: 'Medical weight loss, GLP-1 support where clinically appropriate, body analysis and body contouring in Malta.',
-    images: [{ url: '/og-image.png', width: 1677, height: 936, alt: 'Carisma Slimming doctor-led weight loss clinic in Malta' }],
+    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Carisma Slimming doctor-led weight loss clinic in Malta' }],
   },
   twitter: {
     card: 'summary_large_image',

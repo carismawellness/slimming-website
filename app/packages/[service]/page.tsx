@@ -41,6 +41,8 @@ export async function generateStaticParams() {
   return Object.keys(services).map((service) => ({ service }));
 }
 
+export const dynamicParams = false;
+
 const serviceMeta: Record<string, { title: string; description: string }> = {
   'fat-freezing': {
     title: 'CoolSculpting Malta | Fat Freezing Treatment | Carisma Slimming',

@@ -15,11 +15,11 @@ import CountUp from '@/components/CountUp';
 
 export const metadata: Metadata = {
   title: "Weight Loss Guide Malta | Behaviour System + 50+ Recipes | Carisma Slimming",
-  description: "The Carisma Slimming Guide — a doctor-backed behaviour system with 50+ Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30. Designed for sustainable weight loss in Malta.",
+  description: "Doctor-backed behaviour system for sustainable weight loss in Malta. 50+ Maltese recipes, meal timing & portion guidance. No calorie counting. Only €30.",
   alternates: { canonical: 'https://www.carismaslimming.com/slimming-guide' },
   openGraph: {
     title: "Weight Loss Guide Malta | Behaviour System + 50+ Recipes | Carisma Slimming",
-    description: "The Carisma Slimming Guide — a doctor-backed behaviour system with 50+ Maltese recipes, meal timing, and portion guidance. No calorie counting. Only €30.",
+    description: "Doctor-backed behaviour system for sustainable weight loss in Malta. 50+ Maltese recipes, meal timing & portion guidance. No calorie counting. Only €30.",
     url: 'https://www.carismaslimming.com/slimming-guide',
     images: [{ url: '/background.avif', width: 1200, height: 630, alt: 'The Carisma Slimming Guide — Weight Loss System for Malta' }],
   },
