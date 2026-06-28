@@ -100,11 +100,14 @@ function MenuDropdown({
 
   // Panel horizontal anchoring per group so it opens directly below the trigger
   // and never overflows the viewport edge.
+  // Centre the panel under its trigger in every state. The top-nav items cluster
+  // around the centre logo, so centring keeps each panel on-screen; edge anchoring
+  // clipped a column off the viewport edge. (All branches intentionally identical.)
   const panelAnchor: React.CSSProperties =
     align === 'left'
-      ? { left: 0, transform: `translateX(0) translateY(${open ? '0' : '8px'})` }
+      ? { left: '50%', transform: `translateX(-50%) translateY(${open ? '0' : '8px'})` }
       : align === 'right'
-        ? { right: 0, transform: `translateX(0) translateY(${open ? '0' : '8px'})` }
+        ? { left: '50%', transform: `translateX(-50%) translateY(${open ? '0' : '8px'})` }
         : { left: '50%', transform: `translateX(-50%) translateY(${open ? '0' : '8px'})` };
 
   const triggerStyle: React.CSSProperties = isTopnav
