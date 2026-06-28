@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import BrandSwitcher from '@/components/BrandSwitcher';
 
 // Accessible brand tokens (see globals.css locked palette).
@@ -36,6 +37,17 @@ const MENUS: Menu[] = [
   { label: 'Slimming Guide', href: '/slimming-guide' },
 ];
 
+// Homepage split top-nav (desktop, at scroll-top): the menu labels become simple
+// links flanking the centered vertical brand lockup. A dropdown's top-state
+// destination is its first sub-item href (else '/').
+type SimpleMenu = { label: string; href: string };
+const SIMPLE_MENUS: SimpleMenu[] = MENUS.map((m) => ({
+  label: m.label,
+  href: m.href ?? m.items?.[0]?.href ?? '/',
+}));
+const NAV_LEFT: SimpleMenu[] = SIMPLE_MENUS.slice(0, Math.ceil(SIMPLE_MENUS.length / 2));
+const NAV_RIGHT: SimpleMenu[] = SIMPLE_MENUS.slice(Math.ceil(SIMPLE_MENUS.length / 2));
+
 const navLink: React.CSSProperties = {
   color: TAUPE,
   fontFamily: '"Novecento Wide", sans-serif',
@@ -56,6 +68,8 @@ function PhoneIcon() {
 }
 
 export default function Header() {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
   const [open, setOpen] = useState(false);
   const [expanded, setExpanded] = useState<string | null>(null);
   const [pkgHover, setPkgHover] = useState(false);
@@ -127,10 +141,109 @@ export default function Header() {
     <header className="fixed top-0 inset-x-0 z-50">
       {/* Announcement strip removed per request. Logo sizing rules retained. */}
       <style>{`@media (max-width:767px){.header-logo{height:20px !important}}
-.header-logo--mobile{height:22px !important}`}</style>
+.header-logo--mobile{height:22px !important}
+
+/* ── Homepage split top-nav (scroll-top) — full-width, flanks the vertical lockup ── */
+.cms-topnav {
+  display: none;
+  position: absolute;
+  inset: 0 0 auto 0;
+  padding: 26px clamp(28px, 5vw, 72px) 0;
+  transition: opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
+}
+@media (min-width: 768px) {
+  .cms-topnav--home { display: block; opacity: 1; transform: translateY(0); }
+  .cms-topnav--hidden { opacity: 0; transform: translateY(-18px); pointer-events: none; }
+}
+.cms-topnav__row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  /* Gap between the centered logo and the nearest link on each side —
+     keep links hugging the logo, not pushed to the page margins. */
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  max-width: 1480px;
+  margin: 0 auto;
+}
+.cms-topnav__group { display: flex; align-items: center; gap: clamp(1.25rem, 3.5vw, 3.5rem); }
+/* Both groups hug the centered logo: left group right-aligned, right group left-aligned. */
+.cms-topnav__group--left { justify-content: flex-end; }
+.cms-topnav__group--right { justify-content: flex-start; }
+.cms-topnav__link {
+  color: #024C27;
+  font-family: "Novecento Wide", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  white-space: nowrap;
+  opacity: 0.92;
+  transition: opacity .25s ease, color .25s ease;
+}
+.cms-topnav__link:hover { opacity: 1; color: #8EB093; }
+.cms-topnav__brand { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Mobile centered lockup band (scroll-top, homepage) sitting above the hamburger row */
+.cms-mobilelockup {
+  display: flex;
+  justify-content: center;
+  padding: 14px 0 4px;
+  transition: opacity .45s cubic-bezier(.22,1,.36,1), transform .45s cubic-bezier(.22,1,.36,1);
+}
+@media (min-width: 768px) { .cms-mobilelockup { display: none; } }
+.cms-mobilelockup--hidden { opacity: 0; transform: translateY(-10px); pointer-events: none; height: 0; padding: 0; overflow: hidden; }
+
+/* ── Pill wrapper — the morph target ── */
+.cms-pillwrap {
+  transition: opacity .55s cubic-bezier(.22,1,.36,1), transform .55s cubic-bezier(.22,1,.36,1);
+}
+@media (min-width: 768px) {
+  /* On the homepage at scroll-top the pill is hidden + tucked up; on scroll it "pops" in. */
+  .cms-pillwrap--home { opacity: 0; transform: translateY(-14px) scale(0.96); pointer-events: none; }
+  .cms-pillwrap--shown { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cms-topnav, .cms-pillwrap, .cms-mobilelockup { transition: none; }
+}`}</style>
+
+      {/* ── Homepage split top-nav (desktop, scroll-top) — flanks the centered vertical lockup ── */}
+      {isHome && (
+        <div className={`cms-topnav cms-topnav--home${scrolled ? ' cms-topnav--hidden' : ''}`} aria-hidden={scrolled}>
+          <div className="cms-topnav__row">
+            <nav className="cms-topnav__group cms-topnav__group--left" aria-label="Primary navigation">
+              {NAV_LEFT.map((m) => (
+                <Link key={m.label} href={m.href} className="cms-topnav__link">{m.label}</Link>
+              ))}
+            </nav>
+            <Link href="/" className="cms-topnav__brand" aria-label="Carisma Slimming — home">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src="/logos/carisma-wordmark.svg" alt="Carisma Slimming" style={{ height: '104px', width: 'auto', display: 'block' }} />
+            </Link>
+            <nav className="cms-topnav__group cms-topnav__group--right" aria-label="Secondary navigation">
+              {NAV_RIGHT.map((m) => (
+                <Link key={m.label} href={m.href} className="cms-topnav__link">{m.label}</Link>
+              ))}
+            </nav>
+          </div>
+        </div>
+      )}
+
+      {/* ── Mobile centered vertical lockup (homepage, scroll-top) ── */}
+      {isHome && (
+        <div className={`cms-mobilelockup${scrolled ? ' cms-mobilelockup--hidden' : ''}`} aria-hidden={scrolled}>
+          <Link href="/" aria-label="Carisma Slimming — home" style={{ textDecoration: 'none' }}>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logos/carisma-wordmark.svg" alt="Carisma Slimming" style={{ height: '70px', width: 'auto', display: 'block' }} />
+          </Link>
+        </div>
+      )}
 
       {/* Floating glass pill */}
-      <div style={{ padding: '12px clamp(12px,3vw,28px) 0', maxWidth: '1280px', margin: '0 auto' }}>
+      <div
+        className={isHome ? `cms-pillwrap cms-pillwrap--home${scrolled ? ' cms-pillwrap--shown' : ''}` : undefined}
+        style={{ padding: '12px clamp(12px,3vw,28px) 0', maxWidth: '1280px', margin: '0 auto' }}
+      >
         <nav
           aria-label="Main navigation"
           className="flex items-center justify-between"
