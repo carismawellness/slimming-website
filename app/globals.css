@@ -186,7 +186,7 @@ h1, h2, h3, h4, h5, h6 {
    inline font-family uses it. (.font-script is class-based with no inline
    "Trajan", so it stays exempt.) */
 [style*="Trajan"] {
-  text-transform: uppercase !important;
+  text-transform: lowercase !important;
 }
 
 /* ---- Brand CTA: soft gradient pill with a blurred glow halo ----
