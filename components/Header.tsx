@@ -37,16 +37,12 @@ const MENUS: Menu[] = [
   { label: 'Slimming Guide', href: '/slimming-guide' },
 ];
 
-// Homepage split top-nav (desktop, at scroll-top): the menu labels become simple
-// links flanking the centered vertical brand lockup. A dropdown's top-state
-// destination is its first sub-item href (else '/').
-type SimpleMenu = { label: string; href: string };
-const SIMPLE_MENUS: SimpleMenu[] = MENUS.map((m) => ({
-  label: m.label,
-  href: m.href ?? m.items?.[0]?.href ?? '/',
-}));
-const NAV_LEFT: SimpleMenu[] = SIMPLE_MENUS.slice(0, Math.ceil(SIMPLE_MENUS.length / 2));
-const NAV_RIGHT: SimpleMenu[] = SIMPLE_MENUS.slice(Math.ceil(SIMPLE_MENUS.length / 2));
+// Homepage split top-nav (desktop, at scroll-top): the SAME menus (preserving
+// `.items`) flank the centered vertical brand lockup. Items with a submenu reveal
+// the identical pill dropdown on hover (see MenuDropdown); plain items are links.
+// Split the FULL MENUS array — NOT a flattened simple-link list — so submenus survive.
+const NAV_LEFT: Menu[] = MENUS.slice(0, Math.ceil(MENUS.length / 2));
+const NAV_RIGHT: Menu[] = MENUS.slice(Math.ceil(MENUS.length / 2));
 
 const navLink: React.CSSProperties = {
   color: TAUPE,
@@ -64,6 +60,134 @@ function PhoneIcon() {
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={GREEN} strokeWidth="2">
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.21 12.8a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.11 2h3a2 2 0 0 1 2 1.72c.128.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.572 2.81.7A2 2 0 0 1 22 16.92z" />
     </svg>
+  );
+}
+
+// Shared hover-dropdown used by BOTH the floating pill nav and the homepage split
+// top-nav, so a submenu item (e.g. Body Contouring) reveals the SAME panel + items
+// in either place. The single shared `open` state is fine — only one nav is visible
+// at a time. `align` anchors the panel below the trigger:
+//   'center' → pill (translateX(-50%))
+//   'left'   → top-nav LEFT group: panel left-aligned (left:0) so it can't overflow
+//              the left viewport edge
+//   'right'  → top-nav RIGHT group: panel right-aligned (right:0) so it can't overflow
+//              the right viewport edge
+// `variant` switches only the trigger's look (pill link vs. top-nav link); the panel
+// markup/styling is identical to the original pill dropdown.
+function MenuDropdown({
+  menu,
+  open,
+  onOpen,
+  onScheduleClose,
+  cancelClose,
+  toggle,
+  closeNow,
+  align = 'center',
+  variant = 'pill',
+}: {
+  menu: Menu;
+  open: boolean;
+  onOpen: () => void;
+  onScheduleClose: () => void;
+  cancelClose: () => void;
+  toggle: () => void;
+  closeNow: () => void;
+  align?: 'center' | 'left' | 'right';
+  variant?: 'pill' | 'topnav';
+}) {
+  const items = menu.items ?? [];
+  const isTopnav = variant === 'topnav';
+
+  // Panel horizontal anchoring per group so it opens directly below the trigger
+  // and never overflows the viewport edge.
+  const panelAnchor: React.CSSProperties =
+    align === 'left'
+      ? { left: 0, transform: `translateX(0) translateY(${open ? '0' : '8px'})` }
+      : align === 'right'
+        ? { right: 0, transform: `translateX(0) translateY(${open ? '0' : '8px'})` }
+        : { left: '50%', transform: `translateX(-50%) translateY(${open ? '0' : '8px'})` };
+
+  const triggerStyle: React.CSSProperties = isTopnav
+    ? {
+        background: 'none',
+        border: 'none',
+        cursor: 'pointer',
+        padding: 0,
+        display: 'inline-flex',
+        alignItems: 'center',
+        gap: '5px',
+        color: '#024C27',
+        fontFamily: '"Novecento Wide", sans-serif',
+        fontSize: '12px',
+        fontWeight: 400,
+        letterSpacing: '1.5px',
+        textTransform: 'uppercase',
+        whiteSpace: 'nowrap',
+      }
+    : { ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0', display: 'flex', alignItems: 'center', gap: '4px' };
+
+  return (
+    <div
+      className="relative"
+      style={{ display: 'inline-flex', alignItems: 'center' }}
+      onMouseEnter={onOpen}
+      onMouseLeave={onScheduleClose}
+    >
+      <button
+        type="button"
+        style={triggerStyle}
+        className={isTopnav ? 'cms-topnav__link' : 'hover:underline transition'}
+        aria-haspopup="true"
+        aria-expanded={open}
+        onClick={toggle}
+      >
+        {menu.label}
+        <svg
+          width="10" height="10" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+          style={{ transition: 'transform 0.25s cubic-bezier(0.22,1,0.36,1)', transform: open ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.7 }}
+        >
+          <polyline points="6 9 12 15 18 9" />
+        </svg>
+      </button>
+      {/* Panel is always mounted; open/close is driven by CSS so it fades + slides
+          in AND out smoothly, and a hover bridge keeps it reachable from the trigger. */}
+      <div
+        onMouseEnter={cancelClose}
+        onMouseLeave={onScheduleClose}
+        role="menu"
+        aria-hidden={!open}
+        style={{
+          position: 'absolute',
+          top: isTopnav ? '100%' : 'calc(100% - 4px)',
+          ...panelAnchor,
+          opacity: open ? 1 : 0,
+          visibility: open ? 'visible' : 'hidden',
+          pointerEvents: open ? 'auto' : 'none',
+          transition: 'opacity 0.2s ease, transform 0.24s cubic-bezier(0.22,1,0.36,1), visibility 0.2s',
+          background: 'rgba(255,255,255,0.82)',
+          backdropFilter: 'blur(22px) saturate(180%)',
+          WebkitBackdropFilter: 'blur(22px) saturate(180%)',
+          border: '1px solid rgba(255,255,255,0.7)',
+          borderRadius: '16px',
+          boxShadow: '0 16px 40px rgba(40,55,44,0.16), inset 0 1px 0 rgba(255,255,255,0.85)',
+          width: '360px',
+          padding: '10px',
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          columnGap: '6px',
+          zIndex: 100,
+        }}>
+          {/* Invisible hover bridge over the trigger→panel gap. */}
+          <span aria-hidden style={{ position: 'absolute', bottom: '100%', left: '-60px', right: '-60px', height: '32px', background: 'transparent' }} />
+          {items.map((it) => (
+            <Link key={it.href} href={it.href} tabIndex={open ? undefined : -1} onClick={closeNow} className="block hover:bg-black/5 hover:underline"
+              style={{ padding: '9px 14px', borderRadius: '10px', color: DROPDOWN_INK, fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none', transition: 'background 0.3s ease' }}>
+              {it.label}
+            </Link>
+          ))}
+        </div>
+    </div>
   );
 }
 
@@ -212,18 +336,48 @@ export default function Header() {
         <div className={`cms-topnav cms-topnav--home${scrolled ? ' cms-topnav--hidden' : ''}`} aria-hidden={scrolled}>
           <div className="cms-topnav__row">
             <nav className="cms-topnav__group cms-topnav__group--left" aria-label="Primary navigation">
-              {NAV_LEFT.map((m) => (
-                <Link key={m.label} href={m.href} className="cms-topnav__link">{m.label}</Link>
-              ))}
+              {NAV_LEFT.map((m) =>
+                m.items ? (
+                  <MenuDropdown
+                    key={m.label}
+                    menu={m}
+                    open={pkgHover}
+                    onOpen={openPkg}
+                    onScheduleClose={schedulePkgClose}
+                    cancelClose={cancelClose}
+                    toggle={() => setPkgHover(p => !p)}
+                    closeNow={() => setPkgHover(false)}
+                    align="left"
+                    variant="topnav"
+                  />
+                ) : (
+                  <Link key={m.label} href={m.href!} className="cms-topnav__link">{m.label}</Link>
+                )
+              )}
             </nav>
             <Link href="/" className="cms-topnav__brand" aria-label="Carisma Slimming — home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/logos/carisma-wordmark.svg" alt="Carisma Slimming" style={{ height: '104px', width: 'auto', display: 'block' }} />
             </Link>
             <nav className="cms-topnav__group cms-topnav__group--right" aria-label="Secondary navigation">
-              {NAV_RIGHT.map((m) => (
-                <Link key={m.label} href={m.href} className="cms-topnav__link">{m.label}</Link>
-              ))}
+              {NAV_RIGHT.map((m) =>
+                m.items ? (
+                  <MenuDropdown
+                    key={m.label}
+                    menu={m}
+                    open={pkgHover}
+                    onOpen={openPkg}
+                    onScheduleClose={schedulePkgClose}
+                    cancelClose={cancelClose}
+                    toggle={() => setPkgHover(p => !p)}
+                    closeNow={() => setPkgHover(false)}
+                    align="right"
+                    variant="topnav"
+                  />
+                ) : (
+                  <Link key={m.label} href={m.href!} className="cms-topnav__link">{m.label}</Link>
+                )
+              )}
             </nav>
           </div>
         </div>
@@ -257,73 +411,22 @@ export default function Header() {
             <BrandSwitcher />
           </div>
 
-          {/* Desktop menu */}
+          {/* Desktop menu — reuses the shared MenuDropdown (same as the top-nav). */}
           <div className="hidden md:flex items-center" style={{ gap: '26px' }}>
             {MENUS.map((m) =>
               m.items ? (
-                <div
+                <MenuDropdown
                   key={m.label}
-                  className="relative"
-                  style={{ display: 'flex', alignItems: 'center' }}
-                  onMouseEnter={openPkg}
-                  onMouseLeave={schedulePkgClose}
-                >
-                  <button
-                    style={{ ...navLink, background: 'none', border: 'none', cursor: 'pointer', padding: '20px 0', display: 'flex', alignItems: 'center', gap: '4px' }}
-                    className="hover:underline transition"
-                    aria-haspopup="true"
-                    aria-expanded={pkgHover}
-                    onClick={() => setPkgHover(p => !p)}
-                  >
-                    {m.label}
-                    <svg
-                      width="10" height="10" viewBox="0 0 24 24" fill="none"
-                      stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
-                      style={{ transition: 'transform 0.25s cubic-bezier(0.22,1,0.36,1)', transform: pkgHover ? 'rotate(180deg)' : 'rotate(0deg)', opacity: 0.7 }}
-                    >
-                      <polyline points="6 9 12 15 18 9" />
-                    </svg>
-                  </button>
-                  {/* Panel is always mounted; open/close is driven by CSS so it
-                      fades + slides in AND out smoothly (no abrupt pop), and a
-                      hover bridge keeps it reachable from the trigger. */}
-                  <div
-                    onMouseEnter={cancelClose}
-                    onMouseLeave={schedulePkgClose}
-                    role="menu"
-                    aria-hidden={!pkgHover}
-                    style={{
-                      position: 'absolute',
-                      top: 'calc(100% - 4px)',
-                      left: '50%',
-                      transform: `translateX(-50%) translateY(${pkgHover ? '0' : '8px'})`,
-                      opacity: pkgHover ? 1 : 0,
-                      visibility: pkgHover ? 'visible' : 'hidden',
-                      pointerEvents: pkgHover ? 'auto' : 'none',
-                      transition: 'opacity 0.2s ease, transform 0.24s cubic-bezier(0.22,1,0.36,1), visibility 0.2s',
-                      background: 'rgba(255,255,255,0.82)',
-                      backdropFilter: 'blur(22px) saturate(180%)',
-                      WebkitBackdropFilter: 'blur(22px) saturate(180%)',
-                      border: '1px solid rgba(255,255,255,0.7)',
-                      borderRadius: '16px',
-                      boxShadow: '0 16px 40px rgba(40,55,44,0.16), inset 0 1px 0 rgba(255,255,255,0.85)',
-                      width: '360px',
-                      padding: '10px',
-                      display: 'grid',
-                      gridTemplateColumns: '1fr 1fr',
-                      columnGap: '6px',
-                      zIndex: 100,
-                    }}>
-                      {/* Invisible hover bridge over the trigger→panel gap. */}
-                      <span aria-hidden style={{ position: 'absolute', bottom: '100%', left: '-60px', right: '-60px', height: '32px', background: 'transparent' }} />
-                      {m.items.map((it) => (
-                        <Link key={it.href} href={it.href} tabIndex={pkgHover ? undefined : -1} onClick={() => setPkgHover(false)} className="block hover:bg-black/5 hover:underline"
-                          style={{ padding: '9px 14px', borderRadius: '10px', color: DROPDOWN_INK, fontFamily: 'Roboto, sans-serif', fontSize: '13px', textDecoration: 'none', transition: 'background 0.3s ease' }}>
-                          {it.label}
-                        </Link>
-                      ))}
-                    </div>
-                </div>
+                  menu={m}
+                  open={pkgHover}
+                  onOpen={openPkg}
+                  onScheduleClose={schedulePkgClose}
+                  cancelClose={cancelClose}
+                  toggle={() => setPkgHover(p => !p)}
+                  closeNow={() => setPkgHover(false)}
+                  align="center"
+                  variant="pill"
+                />
               ) : (
                 <Link key={m.label} href={m.href!} style={navLink} className="hover:underline transition">{m.label}</Link>
               )
