@@ -879,9 +879,9 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             <div style={{ width: 64, height: 1, backgroundColor: GREEN_TEXT, margin: '0 auto 18px' }} aria-hidden="true" />
             <SectionHeading>{c.secretSubheading}</SectionHeading>
 
-            <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 40 }} className="fr-2col">
+            <div style={{ display: 'grid', gridTemplateColumns: '0.9fr 1.1fr', gap: 48, alignItems: 'center', marginTop: 40 }} className="fr-2col pp-secret-grid">
                 {/* P3 — next/image with explicit dimensions + meaningful alt */}
-                <div style={{ position: 'relative', width: '100%', aspectRatio: c.secretImageRatio ?? '394 / 510' }}>
+                <div className="pp-secret-media" style={{ position: 'relative', width: '100%', aspectRatio: c.secretImageRatio ?? '394 / 510' }}>
                   <Image
                     src={c.secretImage}
                     alt={c.secretSubheading}
@@ -1382,6 +1382,15 @@ export default function PackagePage({ content: c }: { content: PackageContent })
             /* Stacked: the grid no longer stretches the image to the text height,
                so give the pt treatment photo a sensible fixed height. */
             .fr-pt-img { height: 380px !important; }
+            /* Secret section, stacked: the default 394/510 portrait makes the photo
+               very tall on mobile, and some source images (e.g. lymphatic) have a
+               transparent/empty lower third that renders as blank white above the
+               copy — reading as a large dead gap. Crop to a shorter 4/3 frame biased
+               toward the top (where the subject sits) so the empty bottom is removed,
+               and tighten the stacked gap so the copy follows the image closely. */
+            .pp-secret-media { aspect-ratio: 4 / 3 !important; }
+            .pp-secret-media img { object-position: center 25% !important; }
+            .pp-secret-grid { gap: 24px !important; }
           }
           @media (max-width: 560px) { .fr-benefits { grid-template-columns: 1fr !important; } }
         `}</style>
